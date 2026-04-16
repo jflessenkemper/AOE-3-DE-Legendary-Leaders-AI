@@ -151,6 +151,7 @@ bool civIsRevolution(void)
 {
    string name = kbGetCivName(cMyCiv);
    if (name == "RvltModNapoleonicFrance")  return (true);
+   if (name == "RvltModRevolutionaryFrance") return (true);
    if (name == "RvltModAmericans")         return (true);
    if (name == "RvltModMexicans")          return (true);
    if (name == "RvltModCanadians")         return (true);

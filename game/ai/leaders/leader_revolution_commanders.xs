@@ -37,6 +37,16 @@ void initLegendaryRevolutionCommander(void)
       cvMaxTowers = 8;
       gLegendaryRevolutionDoctrine = 1;
    }
+   else if (rvltName == "RvltModRevolutionaryFrance")
+   {
+      aiEcho("Legendary Leaders: activating Maximilien Robespierre personality.");
+      llSetAggressivePersonality();
+      llSetMilitaryFocus(0.7, -0.2, 0.1);
+      llEnableForwardBaseStyle();
+      btBiasTrade = -0.2;
+      btBiasNative = 0.0;
+      gLegendaryRevolutionDoctrine = 2;
+   }
    else if (rvltName == "RvltModFrenchCanadians")
    {
       aiEcho("Legendary Leaders: activating Louis-Joseph Papineau personality.");

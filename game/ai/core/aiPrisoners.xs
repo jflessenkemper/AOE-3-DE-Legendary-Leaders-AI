@@ -66,7 +66,7 @@ bool llIsEliteProtoForRevolution(int protoUnitID = -1, int playerID = -1)
    {
       return ((protoUnitID == cUnitTypedeRifleman) || (protoUnitID == cUnitTypedeUSCavalry));
    }
-   if (rvltName == "RvltModNapoleonicFrance" || rvltName == "RvltModFrenchCanadians")
+   if (rvltName == "RvltModNapoleonicFrance" || rvltName == "RvltModRevolutionaryFrance" || rvltName == "RvltModFrenchCanadians")
    {
       return ((protoUnitID == cUnitTypeSkirmisher) || (protoUnitID == cUnitTypeCuirassier));
    }

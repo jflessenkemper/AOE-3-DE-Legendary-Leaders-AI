@@ -35,6 +35,15 @@ void initLegendaryRevolutionSupport(void)
       btBiasArt = 0.3;
    }
 
+   if (rvltName == "RvltModRevolutionaryFrance")
+   {
+      btBiasInf = 0.6;
+      btBiasArt = 0.0;
+      btBiasCav = 0.0;
+      btRushBoom = 0.2;
+      btOffenseDefense = 0.4;
+   }
+
    if ((rvltName == "RvltModArgentines") || (rvltName == "RvltModHungarians") ||
        (rvltName == "RvltModTexians") || (rvltName == "RvltModRioGrande") ||
        (rvltName == "RvltModCalifornians"))

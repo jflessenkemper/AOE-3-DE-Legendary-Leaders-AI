@@ -10863,6 +10863,43 @@
 		</Prereqs>
 		<Effects></Effects>
 	</Tech>
+	<Tech name ='LLDisableStockRevolutionsGlobal' type ='Normal'>
+		<DBID>39992</DBID>
+		<ResearchPoints>0.0000</ResearchPoints>
+		<Status>OBTAINABLE</Status>
+		<Flag>Shadow</Flag>
+		<Prereqs>
+			<TechStatus status ='Active'>AAStandardStartingTechs</TechStatus>
+		</Prereqs>
+		<Effects>
+			<Effect type ='TechStatus' status ='unobtainable'>DERevolutionHaiti</Effect>
+			<Effect type ='TechStatus' status ='unobtainable'>DERevolutionEgypt</Effect>
+			<Effect type ='TechStatus' status ='unobtainable'>DERevolutionFinland</Effect>
+			<Effect type ='TechStatus' status ='unobtainable'>DERevolutionRomania</Effect>
+			<Effect type ='TechStatus' status ='unobtainable'>DERevolutionPeru</Effect>
+			<Effect type ='TechStatus' status ='unobtainable'>DERevolutionBrazil</Effect>
+			<Effect type ='TechStatus' status ='unobtainable'>DERevolutionArgentina</Effect>
+			<Effect type ='TechStatus' status ='unobtainable'>DERevolutionUSA</Effect>
+			<Effect type ='TechStatus' status ='unobtainable'>DERevolutionCanadaFrench</Effect>
+			<Effect type ='TechStatus' status ='unobtainable'>DERevolutionCanadaBritish</Effect>
+			<Effect type ='TechStatus' status ='unobtainable'>DERevolutionIndonesia</Effect>
+			<Effect type ='TechStatus' status ='unobtainable'>DERevolutionBarbaryStates</Effect>
+			<Effect type ='TechStatus' status ='unobtainable'>DERevolutionHungaryRussian</Effect>
+			<Effect type ='TechStatus' status ='unobtainable'>DERevolutionHungaryOttoman</Effect>
+			<Effect type ='TechStatus' status ='unobtainable'>DERevolutionHungaryGerman</Effect>
+			<Effect type ='TechStatus' status ='unobtainable'>DERevolutionMexico</Effect>
+			<Effect type ='TechStatus' status ='unobtainable'>DERevolutionColombia</Effect>
+			<Effect type ='TechStatus' status ='unobtainable'>DERevolutionColombiaPortuguese</Effect>
+			<Effect type ='TechStatus' status ='unobtainable'>DERevolutionChile</Effect>
+			<Effect type ='TechStatus' status ='unobtainable'>DERevolutionSouthAfrica</Effect>
+			<Effect type ='TechStatus' status ='unobtainable'>DERevolutionMXBajaCalifornia</Effect>
+			<Effect type ='TechStatus' status ='unobtainable'>DERevolutionMXCalifornia</Effect>
+			<Effect type ='TechStatus' status ='unobtainable'>DERevolutionMXTexas</Effect>
+			<Effect type ='TechStatus' status ='unobtainable'>DERevolutionMXMaya</Effect>
+			<Effect type ='TechStatus' status ='unobtainable'>DEHCFlemishRevolution</Effect>
+			<Effect type ='TechStatus' status ='unobtainable'>DEHCBelgianRevolution</Effect>
+		</Effects>
+	</Tech>
 	<Tech name ='LLMilitarySurrenderOrder' type ='Normal'>
 		<DBID>39991</DBID>
 		<DisplayNameID>400090</DisplayNameID>
