@@ -45,7 +45,7 @@ rule legendaryHumanSurrenderMonitor
 inactive
 minInterval 8
 {
-   float healthThreshold = 0.25;
+   float healthThreshold = 0.10;
    float eliteSupportRadius = 24.0;
 
    int landQueryID = createSimpleUnitQuery(cUnitTypeLogicalTypeLandMilitary, cMyID, cUnitStateAlive);
