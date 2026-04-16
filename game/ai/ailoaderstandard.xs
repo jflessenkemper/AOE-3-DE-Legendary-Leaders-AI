@@ -12,6 +12,7 @@ include "aiHeader.xs";     // Gets global vars, function forward declarations
 include "aiMain.xs";       // The bulk of the AI
 include "leaders\leaderCommon.xs";
 include "leaders\leader_revolution_support.xs";
+include "leaders\leader_revolution_commanders.xs";
 include "leaders\leader_napoleon.xs";
 include "leaders\leader_wellington.xs";
 include "leaders\leader_frederick.xs";
@@ -91,6 +92,10 @@ void preInit(void)
    {
       initLeaderValette();
    }
+   else if (civIsRevolution() == true)
+   {
+      initLegendaryRevolutionCommander();
+   }
 
    if (aiGetGameMode() == cGameModeEconomyMode)
    {
@@ -119,6 +124,7 @@ void postInit(void)
 {
    aiEcho("postInit() starting.");
    enableLegendaryRevolutionSupportRules();
+   enableLegendaryRevolutionCommanderRules();
    enableLeaderNapoleonRules();
    enableLeaderWellingtonRules();
    enableLeaderFrederickRules();
