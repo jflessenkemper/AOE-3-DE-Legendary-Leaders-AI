@@ -1,0 +1,13 @@
+<AI>
+   <version>2</version>
+   <script>aiLoaderStandard</script>
+   <nameID>80806</nameID>
+   <tooltipID>400002</tooltipID>
+   <forcedciv>rvltmodbarbary</forcedciv>
+   <rushboom>1</rushboom>
+   <icon>resources/images/icons/singleplayer/cpai_avatar_barbary_barbarossa.png</icon>
+   <chatset>suleiman</chatset>
+   <playerNames>
+      <nameID>80806<civ>rvltmodbarbary</civ></nameID>
+   </playerNames>
+</AI>

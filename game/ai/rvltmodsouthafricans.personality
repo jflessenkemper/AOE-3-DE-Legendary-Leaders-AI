@@ -1,0 +1,13 @@
+<AI>
+   <version>2</version>
+   <script>aiLoaderStandard</script>
+   <nameID>80813</nameID>
+   <tooltipID>400024</tooltipID>
+   <forcedciv>rvltmodsouthafricans</forcedciv>
+   <rushboom>-1</rushboom>
+   <icon>resources/images/icons/singleplayer/cpai_avatar_south_africans_kruger.png</icon>
+   <chatset>maurice</chatset>
+   <playerNames>
+      <nameID>80813<civ>rvltmodsouthafricans</civ></nameID>
+   </playerNames>
+</AI>

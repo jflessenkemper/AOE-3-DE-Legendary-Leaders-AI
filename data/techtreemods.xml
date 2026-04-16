@@ -10492,7 +10492,7 @@
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
-			<TechStatus status ='Active'>DEHCREVRobespierre</TechStatus>
+			<TechStatus status ='Active'>RvltModAge0NapoleonicFrench</TechStatus>
 			<TechStatus status ='Active'>DEHCREVNapoleonicWarfare</TechStatus>
 		</Prereqs>
 		<Effects>

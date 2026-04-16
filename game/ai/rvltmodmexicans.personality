@@ -1,0 +1,13 @@
+<AI>
+   <version>2</version>
+   <script>aiLoaderStandard</script>
+   <nameID>80830</nameID>
+   <tooltipID>400021</tooltipID>
+   <forcedciv>rvltmodmexicans</forcedciv>
+   <rushboom>0</rushboom>
+   <icon>resources/images/icons/singleplayer/cpai_avatar_mexicans_hidalgo.png</icon>
+   <chatset>hidalgo</chatset>
+   <playerNames>
+      <nameID>80830<civ>rvltmodmexicans</civ></nameID>
+   </playerNames>
+</AI>

@@ -1,0 +1,13 @@
+<AI>
+   <version>2</version>
+   <script>aiLoaderStandard</script>
+   <nameID>125353</nameID>
+   <tooltipID>400020</tooltipID>
+   <forcedciv>rvltmodnapoleonicfrance</forcedciv>
+   <rushboom>1</rushboom>
+   <icon>resources/images/icons/singleplayer/cpai_avatar_napoleonic_france.png</icon>
+   <chatset>napoleon</chatset>
+   <playerNames>
+      <nameID>125353<civ>rvltmodnapoleonicfrance</civ></nameID>
+   </playerNames>
+</AI>

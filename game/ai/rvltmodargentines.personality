@@ -1,0 +1,13 @@
+<AI>
+   <version>2</version>
+   <script>aiLoaderStandard</script>
+   <nameID>80833</nameID>
+   <tooltipID>400001</tooltipID>
+   <forcedciv>rvltmodargentines</forcedciv>
+   <rushboom>1</rushboom>
+   <icon>resources/images/icons/singleplayer/cpai_avatar_argentines_san_martin.png</icon>
+   <chatset>isabella</chatset>
+   <playerNames>
+      <nameID>80833<civ>rvltmodargentines</civ></nameID>
+   </playerNames>
+</AI>

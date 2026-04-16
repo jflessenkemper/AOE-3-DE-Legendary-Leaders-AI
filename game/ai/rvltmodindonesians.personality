@@ -1,0 +1,13 @@
+<AI>
+   <version>2</version>
+   <script>aiLoaderStandard</script>
+   <nameID>80811</nameID>
+   <tooltipID>400016</tooltipID>
+   <forcedciv>rvltmodindonesians</forcedciv>
+   <rushboom>-1</rushboom>
+   <icon>resources/images/icons/singleplayer/cpai_avatar_indonesians_diponegoro.png</icon>
+   <chatset>maurice</chatset>
+   <playerNames>
+      <nameID>80811<civ>rvltmodindonesians</civ></nameID>
+   </playerNames>
+</AI>

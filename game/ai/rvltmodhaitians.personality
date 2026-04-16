@@ -1,0 +1,13 @@
+<AI>
+   <version>2</version>
+   <script>aiLoaderStandard</script>
+   <nameID>80828</nameID>
+   <tooltipID>400014</tooltipID>
+   <forcedciv>rvltmodhaitians</forcedciv>
+   <rushboom>1</rushboom>
+   <icon>resources/images/icons/singleplayer/cpai_avatar_haitians_louverture.png</icon>
+   <chatset>napoleon</chatset>
+   <playerNames>
+      <nameID>80828<civ>rvltmodhaitians</civ></nameID>
+   </playerNames>
+</AI>

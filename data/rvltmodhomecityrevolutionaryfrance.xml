@@ -1,5 +1,5 @@
 <homecity>
-  <civ>RvltModNapoleonicFrance</civ>
+  <civ>RvltModRevolutionaryFrance</civ>
   <name>$$36885$$</name>
   <heroname>$$43031$$</heroname>
   <gatherpointunit>HomeCityGatherFlag</gatherpointunit>
@@ -42,6 +42,41 @@
     </maximum>
   </coffers>
   <cards>
+    <card>
+      <name>DEHCREVCantinieres</name>
+      <maxcount>1</maxcount>
+      <level>0</level>
+      <bindtotech>DEHCREVCantinieres</bindtotech>
+      <age>0</age>
+    </card>
+    <card>
+      <name>DEHCREVGuillotine</name>
+      <maxcount>1</maxcount>
+      <level>0</level>
+      <bindtotech>DEHCREVGuillotine</bindtotech>
+      <age>0</age>
+    </card>
+    <card>
+      <name>DEHCREVRobespierre</name>
+      <maxcount>1</maxcount>
+      <level>0</level>
+      <bindtotech>DEHCREVRobespierre</bindtotech>
+      <age>0</age>
+    </card>
+    <card>
+      <name>DEHCREVCultSupremeBeing</name>
+      <maxcount>1</maxcount>
+      <level>0</level>
+      <bindtotech>DEHCREVCultSupremeBeing</bindtotech>
+      <age>1</age>
+    </card>
+    <card>
+      <name>DEHCREVBastilleStorming</name>
+      <maxcount>1</maxcount>
+      <level>0</level>
+      <bindtotech>DEHCREVBastilleStorming</bindtotech>
+      <age>1</age>
+    </card>
     <card>
       <name>HCShipFoodCrates1</name>
       <maxcount>-1</maxcount>
@@ -338,14 +373,6 @@
       <infiniteinlastage>1</infiniteinlastage>
     </card>
     <card>
-      <name>DEHCREVHundredDays</name>
-      <maxcount>1</maxcount>
-      <level>0</level>
-      <prereqtech>XPRevolution</prereqtech>
-      <bindtotech>DEHCREVHundredDays</bindtotech>
-      <age>2</age>
-    </card>
-    <card>
       <name>HCShipSkirmishers1</name>
       <maxcount>1</maxcount>
       <level>0</level>
@@ -545,21 +572,6 @@
       <age>3</age>
     </card>
     <card>
-      <name>DEHCREVImperialOldGuard</name>
-      <maxcount>1</maxcount>
-      <level>0</level>
-      <age>3</age>
-      <bindtotech>DEHCREVImperialOldGuard</bindtotech>
-    </card>
-    <card>
-      <name>DEHCREVGenieTroops</name>
-      <maxcount>1</maxcount>
-      <level>0</level>
-      <prereqtech>XPRevolution</prereqtech>
-      <bindtotech>DEHCREVGenieTroops</bindtotech>
-      <age>2</age>
-    </card>
-    <card>
       <name>HCShipFalconets1</name>
       <maxcount>-1</maxcount>
       <level>0</level>
@@ -644,24 +656,6 @@
       <prereqtech>XPRevolution</prereqtech>
       <age>3</age>
       <displayunitcount>1</displayunitcount>
-    </card>
-    <card>
-      <name>DEHCREVGrandBattery</name>
-      <maxcount>1</maxcount>
-      <level>0</level>
-      <prereqtech>XPRevolution</prereqtech>
-      <bindtotech>DEHCREVGrandBattery</bindtotech>
-      <age>3</age>
-      <displayunitcount>6</displayunitcount>
-      <infiniteinlastage>1</infiniteinlastage>
-    </card>
-    <card>
-      <name>DEHCREVFlyingBattery</name>
-      <maxcount>1</maxcount>
-      <level>0</level>
-      <prereqtech>XPRevolution</prereqtech>
-      <bindtotech>DEHCREVFlyingBattery</bindtotech>
-      <age>2</age>
     </card>
     <card>
       <name>HCShipCannons1</name>
@@ -911,22 +905,6 @@
       <level>40</level>
       <prereqtech>-1</prereqtech>
       <age>2</age>
-    </card>
-    <card>
-      <name>DEHCREVNapoleonicWarfare</name>
-      <maxcount>1</maxcount>
-      <level>1</level>
-      <prereqtech>XPRevolution</prereqtech>
-      <bindtotech>DEHCREVNapoleonicWarfare</bindtotech>
-      <age>1</age>
-    </card>
-    <card>
-      <name>DEHCREVContinentalBlockade</name>
-      <maxcount>1</maxcount>
-      <level>0</level>
-      <prereqtech>XPRevolution</prereqtech>
-      <bindtotech>DEHCREVContinentalBlockade</bindtotech>
-      <age>4</age>
     </card>
     <card>
       <name>HCFishMarket</name>
@@ -1266,32 +1244,6 @@
       <infiniteinlastage>1</infiniteinlastage>
     </card>
     <card>
-      <name>DEHCREVRustamsRegiment</name>
-      <maxcount>1</maxcount>
-      <level>0</level>
-      <prereqtech>XPRevolution</prereqtech>
-      <bindtotech>DEHCREVRustamsRegiment</bindtotech>
-      <age>3</age>
-      <displayunitcount>10</displayunitcount>
-      <infiniteinlastage>1</infiniteinlastage>
-    </card>
-    <card>
-      <name>DEHCREVMercsBosniaksRepeat</name>
-      <maxcount>-1</maxcount>
-      <level>0</level>
-      <prereqtech>XPRevolution</prereqtech>
-      <age>3</age>
-      <displayunitcount>7</displayunitcount>
-    </card>
-    <card>
-      <name>DEHCREVMercsMountedRiflemenRepeat</name>
-      <maxcount>-1</maxcount>
-      <level>0</level>
-      <prereqtech>XPRevolution</prereqtech>
-      <age>3</age>
-      <displayunitcount>7</displayunitcount>
-    </card>
-    <card>
       <name>HCMercenaryLoyalty</name>
       <maxcount>1</maxcount>
       <level>25</level>
@@ -1322,13 +1274,6 @@
       <level>0</level>
       <prereqtech>-1</prereqtech>
       <age>1</age>
-    </card>
-    <card>
-      <name>DEHCREVSisterRepublics</name>
-      <maxcount>1</maxcount>
-      <level>0</level>
-      <bindtotech>DEHCREVSisterRepublics</bindtotech>
-      <age>2</age>
     </card>
     <card>
       <name>DEHCWittelsbachAllies1</name>
@@ -1639,6 +1584,11 @@
     <displaynamestringid>24970</displaynamestringid>
     <rolloverstringid>25536</rolloverstringid>
     <obtainabletechs>
+      <tech x="0.7" y="1.0">DEHCREVCantinieres</tech>
+      <tech x="0.7" y="2.0">DEHCREVRobespierre</tech>
+      <tech x="0.7" y="3.0">DEHCREVCultSupremeBeing</tech>
+      <tech x="0.7" y="7.0">DEHCREVBastilleStorming</tech>
+      <tech x="0.7" y="7.0">DEHCREVGuillotine</tech>
       <tech x="1.6" y="1.0">HCShipFoodCrates1</tech>
       <tech x="2.3" y="1.0">HCShipWoodCrates1</tech>
       <tech x="3.0" y="1.0">HCShipCoinCrates1</tech>
@@ -1664,6 +1614,11 @@
       <tech x="6.4" y="5.0">DEHCShipBalloonsFrench</tech>
     </obtainabletechs>
     <activetechs>
+      <tech x="0.7" y="1.0">DEHCREVCantinieres</tech>
+      <tech x="0.7" y="2.0">DEHCREVRobespierre</tech>
+      <tech x="0.7" y="3.0">DEHCREVCultSupremeBeing</tech>
+      <tech x="0.7" y="7.0">DEHCREVBastilleStorming</tech>
+      <tech x="0.7" y="7.0">DEHCREVGuillotine</tech>
       <tech x="1.6" y="1.0">HCShipFoodCrates1</tech>
       <tech x="2.3" y="1.0">HCShipWoodCrates1</tech>
       <tech x="3.0" y="1.0">HCShipCoinCrates1</tech>
@@ -1719,7 +1674,6 @@
       <tech x="7.2" y="7.0">DEHCREVShipmentRevolutionaries</tech>
       <tech x="7.2" y="7.0">HCREVShipColonialMilitiaFrench</tech>
       <tech x="7.2" y="7.0">DEHCREVClientStates</tech>
-      <tech x="7.2" y="7.0">DEHCREVHundredDays</tech>
       <tech x="0.7" y="7.0">HCXPTirailleurs</tech>
       <tech x="1.8" y="1.0">HCShipSkirmishers1</tech>
       <tech x="1.8" y="2.0">HCShipSkirmishers2</tech>
@@ -1747,12 +1701,8 @@
       <tech x="5.7" y="4.0">HCHandCavalryHitpointsFrench</tech>
       <tech x="5.7" y="5.0">HCCavalryCombatFrench</tech>
       <tech x="5.7" y="5.0">DEHCREVHorseHunters</tech>
-      <tech x="5.7" y="5.0">DEHCREVImperialOldGuard</tech>
-      <tech x="5.7" y="5.0">DEHCREVGenieTroops</tech>
-      <tech x="5.7" y="5.0">DEHCREVGrandBattery</tech>
       <tech x="5.7" y="5.0">DEHCREVShipHorseArtillery3</tech>
       <tech x="5.7" y="5.0">HCShipCannonsRepeat</tech>
-      <tech x="5.7" y="5.0">DEHCREVFlyingBattery</tech>
       <tech x="6.6" y="1.0">HCShipFalconets1</tech>
       <tech x="6.6" y="2.0">HCShipFalconets2</tech>
       <tech x="6.6" y="3.0">HCShipFalconets3</tech>
@@ -1775,7 +1725,6 @@
       <tech x="7.2" y="7.0">DEHCREVShipmentRevolutionaries</tech>
       <tech x="7.2" y="7.0">HCREVShipColonialMilitiaFrench</tech>
       <tech x="7.2" y="7.0">DEHCREVClientStates</tech>
-      <tech x="7.2" y="7.0">DEHCREVHundredDays</tech>
       <tech x="0.7" y="7.0">HCXPTirailleurs</tech>
       <tech x="1.8" y="1.0">HCShipSkirmishers1</tech>
       <tech x="1.8" y="2.0">HCShipSkirmishers2</tech>
@@ -1803,12 +1752,8 @@
       <tech x="5.7" y="4.0">HCHandCavalryHitpointsFrench</tech>
       <tech x="5.7" y="5.0">HCCavalryCombatFrench</tech>
       <tech x="5.7" y="5.0">DEHCREVHorseHunters</tech>
-      <tech x="5.7" y="5.0">DEHCREVImperialOldGuard</tech>
-      <tech x="5.7" y="5.0">DEHCREVGenieTroops</tech>
-      <tech x="5.7" y="5.0">DEHCREVGrandBattery</tech>
       <tech x="5.7" y="5.0">DEHCREVShipHorseArtillery3</tech>
       <tech x="5.7" y="5.0">HCShipCannonsRepeat</tech>
-      <tech x="5.7" y="5.0">DEHCREVFlyingBattery</tech>
       <tech x="6.6" y="1.0">HCShipFalconets1</tech>
       <tech x="6.6" y="2.0">HCShipFalconets2</tech>
       <tech x="6.6" y="3.0">HCShipFalconets3</tech>
@@ -1868,8 +1813,6 @@
       <tech x="6.5" y="3.0">HCAdvancedDock</tech>
       <tech x="7.2" y="1.0">HCUnlockFactory</tech>
       <tech x="7.2" y="3.0">HCRobberBarons</tech>
-      <tech x="7.2" y="3.0">DEHCREVNapoleonicWarfare</tech>
-      <tech x="7.2" y="3.0">DEHCREVContinentalBlockade</tech>
     </obtainabletechs>
     <activetechs>
       <tech x="0.7" y="1.0">HCNativeLore</tech>
@@ -1899,8 +1842,6 @@
       <tech x="6.5" y="3.0">HCAdvancedDock</tech>
       <tech x="7.2" y="1.0">HCUnlockFactory</tech>
       <tech x="7.2" y="3.0">HCRobberBarons</tech>
-      <tech x="7.2" y="3.0">DEHCREVNapoleonicWarfare</tech>
-      <tech x="7.2" y="3.0">DEHCREVContinentalBlockade</tech>
     </activetechs>
     <validunits>
     </validunits>
@@ -1995,7 +1936,6 @@
       <tech x="2.1" y="5.0">HCCoastalDefensesTeam</tech>
       <tech x="2.8" y="1.0">HCAdmirality</tech>
       <tech x="3.5" y="1.0">DEHCTheaters</tech>
-      <tech x="3.4" y="4.0">DEHCREVSisterRepublics</tech>
       <tech x="3.4" y="4.0">DEHCWittelsbachAllies1</tech>
       <tech x="3.4" y="5.0">DEHCWittelsbachAllies2</tech>
       <tech x="3.4" y="7.0">DEHCWittelsbachAlliesRepeat</tech>
@@ -2010,9 +1950,6 @@
       <tech x="5.8" y="4.0">DEHCMercsZouaves</tech>
       <tech x="4.4" y="5.0">HCMercsHolyRoman</tech>
       <tech x="5.1" y="5.0">HCMercsMediterranean</tech>
-      <tech x="5.1" y="5.0">DEHCREVRustamsRegiment</tech>
-      <tech x="5.1" y="5.0">DEHCREVMercsBosniaksRepeat</tech>
-      <tech x="5.1" y="5.0">DEHCREVMercsMountedRiflemenRepeat</tech>
       <tech x="5.8" y="5.0">HCMercenaryLoyalty</tech>
       <tech x="6.5" y="1.0">HCPrivateers</tech>
       <tech x="6.5" y="3.0">HCPrivateers2</tech>
@@ -2031,7 +1968,6 @@
       <tech x="2.1" y="5.0">HCCoastalDefensesTeam</tech>
       <tech x="2.8" y="1.0">HCAdmirality</tech>
       <tech x="3.5" y="1.0">DEHCTheaters</tech>
-      <tech x="3.4" y="4.0">DEHCREVSisterRepublics</tech>
       <tech x="3.4" y="4.0">DEHCWittelsbachAllies1</tech>
       <tech x="3.4" y="5.0">DEHCWittelsbachAllies2</tech>
       <tech x="3.4" y="7.0">DEHCWittelsbachAlliesRepeat</tech>
@@ -2046,9 +1982,6 @@
       <tech x="5.8" y="4.0">DEHCMercsZouaves</tech>
       <tech x="4.4" y="5.0">HCMercsHolyRoman</tech>
       <tech x="5.1" y="5.0">HCMercsMediterranean</tech>
-      <tech x="5.1" y="5.0">DEHCREVRustamsRegiment</tech>
-      <tech x="5.1" y="5.0">DEHCREVMercsBosniaksRepeat</tech>
-      <tech x="5.1" y="5.0">DEHCREVMercsMountedRiflemenRepeat</tech>
       <tech x="5.8" y="5.0">HCMercenaryLoyalty</tech>
       <tech x="6.5" y="1.0">HCPrivateers</tech>
       <tech x="6.5" y="3.0">HCPrivateers2</tech>

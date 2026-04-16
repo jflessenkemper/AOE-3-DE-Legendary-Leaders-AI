@@ -1,0 +1,13 @@
+<AI>
+   <version>2</version>
+   <script>aiLoaderStandard</script>
+   <nameID>80832</nameID>
+   <tooltipID>400018</tooltipID>
+   <forcedciv>rvltmodperuvians</forcedciv>
+   <rushboom>-1</rushboom>
+   <icon>resources/images/icons/singleplayer/cpai_avatar_peruvians_santa_cruz.png</icon>
+   <chatset>isabella</chatset>
+   <playerNames>
+      <nameID>80832<civ>rvltmodperuvians</civ></nameID>
+   </playerNames>
+</AI>
