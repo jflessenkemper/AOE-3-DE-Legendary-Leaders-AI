@@ -1,0 +1,130 @@
+<protounitsounddef>
+  <protounit name="deSteamer">
+    <soundtype name="Select">
+      <civlogic>
+        <choice name="DEAmericans">
+          <soundset name="DEAmericanGalleonSelect">
+          </soundset>
+        </choice>
+        <choice name="DEMexicans">
+          <techlogic>
+            <choice name="none">
+              <soundset name="DEMexicanSteamerSelect">
+              </soundset>
+            </choice>
+            <choice name="DEHCREVMXTexasNavy">
+              <soundset name="DEAmericanGalleonSelect">
+              </soundset>
+            </choice>
+          </techlogic>
+        </choice>
+        <choice name="Spanish">
+          <soundset name="SpanishGalleonSelect">
+          </soundset>
+        </choice>
+		
+        <choice name="RvltModBajaCalifornians">
+          <soundset name="DEMexicanSteamerSelect">
+          </soundset>
+        </choice>
+        <choice name="RvltModCalifornians">
+          <soundset name="DEMexicanSteamerSelect">
+          </soundset>
+        </choice>
+        <choice name="RvltModCentralAmericans">
+          <soundset name="DEMexicanSteamerSelect">
+          </soundset>
+        </choice>
+        <choice name="RvltModColumbians">
+          <soundset name="SpanishGalleonSelect">
+          </soundset>
+        </choice>
+        <choice name="RvltModMayans">
+          <soundset name="DEMexicanSteamerSelect">
+          </soundset>
+        </choice>
+        <choice name="RvltModRioGrande">
+          <soundset name="DEMexicanSteamerSelect">
+          </soundset>
+        </choice>
+        <choice name="RvltModTexians">
+          <soundset name="DEAmericanGalleonSelect">
+          </soundset>
+        </choice>
+        <choice name="RvltModYucatan">
+          <soundset name="DEMexicanSteamerSelect">
+          </soundset>
+        </choice>
+      </civlogic>
+    </soundtype>
+    <soundtype name="Acknowledge">
+      <civlogic>
+        <choice name="DEAmericans">
+          <soundset name="DEAmericanGalleonAcknowledge">
+          </soundset>
+        </choice>
+        <choice name="DEMexicans">
+          <techlogic>
+            <choice name="none">
+              <soundset name="DEMexicanSteamerAcknowledge">
+              </soundset>
+            </choice>
+            <choice name="DEHCREVMXTexasNavy">
+              <soundset name="DEAmericanGalleonAcknowledge">
+              </soundset>
+            </choice>
+          </techlogic>
+        </choice>
+        <choice name="Spanish">
+          <soundset name="SpanishGalleonAcknowledge">
+          </soundset>
+        </choice>
+		
+        <choice name="RvltModBajaCalifornians">
+          <soundset name="DEMexicanSteamerAcknowledge">
+          </soundset>
+        </choice>
+        <choice name="RvltModCalifornians">
+          <soundset name="DEMexicanSteamerAcknowledge">
+          </soundset>
+        </choice>
+        <choice name="RvltModCentralAmericans">
+          <soundset name="DEMexicanSteamerAcknowledge">
+          </soundset>
+        </choice>
+        <choice name="RvltModColumbians">
+          <soundset name="SpanishGalleonAcknowledge">
+          </soundset>
+        </choice>
+        <choice name="RvltModMayans">
+          <soundset name="DEMexicanSteamerAcknowledge">
+          </soundset>
+        </choice>
+        <choice name="RvltModRioGrande">
+          <soundset name="DEMexicanSteamerAcknowledge">
+          </soundset>
+        </choice>
+        <choice name="RvltModTexians">
+          <soundset name="DEAmericanGalleonAcknowledge">
+          </soundset>
+        </choice>
+        <choice name="RvltModYucatan">
+          <soundset name="DEMexicanSteamerAcknowledge">
+          </soundset>
+        </choice>
+      </civlogic>
+    </soundtype>
+    <soundtype name="Death">
+      <soundset name="ShipDeath">
+      </soundset>
+    </soundtype>
+    <soundtype name="Creation">
+      <soundset name="ShipBirth">
+      </soundset>
+    </soundtype>
+    <soundtype name="Exists">
+      <soundset name="AmbienceShip">
+      </soundset>
+    </soundtype>
+  </protounit>
+</protounitsounddef>

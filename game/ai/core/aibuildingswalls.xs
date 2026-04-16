@@ -1,0 +1,488 @@
+//==============================================================================
+// RULE enhancedWalls
+//==============================================================================
+rule enhancedWalls
+inactive
+minInterval 10
+{
+   vector myBaseLoc = kbBaseGetLocation(cMyID, kbBaseGetMainID(cMyID));
+   vector mainBaseCenter = kbAreaGetCenter(kbAreaGetIDByPosition(myBaseLoc));
+   vector mainBaseFront = kbBaseGetFrontVector(cMyID, kbBaseGetMainID(cMyID));
+   float woodAmount = kbResourceGet(cResourceWood);
+
+   //buildSquareWall(mainBaseCenter, kbBaseGetMainID(cMyID), 100, 9);
+
+   if (gWallBuildingSuccess == true) {
+      xsDisableSelf();
+   }
+}
+//==============================================================================
+// RULE delayWallsNew
+//==============================================================================
+rule delayWallsNew
+inactive
+minInterval 10
+{
+   int wallPlanID=aiPlanCreate("WallInBase", cPlanBuildWall);
+   float wallRadius = 75.0;
+   if (gIslandMap == true) {
+      wallRadius = 95.0;
+   }
+
+   if (kbGetAge() < cAge4) {
+      return;
+   }
+
+   if (wallPlanID != -1)
+   {
+      aiPlanSetVariableInt(wallPlanID, cBuildWallPlanWallType, 0, cBuildWallPlanWallTypeRing);
+      aiPlanAddUnitType(wallPlanID, gEconUnit, 0, 1, 2);
+      aiPlanSetVariableVector(wallPlanID, cBuildWallPlanWallRingCenterPoint, 0, kbBaseGetLocation(cMyID, kbBaseGetMainID(cMyID)));
+      aiPlanSetVariableFloat(wallPlanID, cBuildWallPlanWallRingRadius, 0.0, wallRadius);
+      aiPlanSetVariableInt(wallPlanID, cBuildWallPlanNumberOfGates, 0, 15);
+      //aiPlanSetVariableInt(wallPlanID, cBuildWallPlanPieceRotations, 0, 1);
+      aiPlanSetBaseID(wallPlanID, kbBaseGetMainID(cMyID));
+      aiPlanSetEscrowID(wallPlanID, cEconomyEscrowID);
+      aiPlanSetDesiredPriority(wallPlanID, 60);
+      aiPlanSetActive(wallPlanID, true);
+      //Enable our wall gap rule, too.
+      xsEnableRule("fillInWallGapsNew");
+      aiEcho("Enabling Wall Plan for Base ID: "+kbBaseGetMainID(cMyID));
+   } 
+   xsDisableSelf();
+}
+//==============================================================================
+// RULE fillInWallGapsNew
+//==============================================================================
+rule fillInWallGapsNew
+  minInterval 51
+  inactive
+{
+   float wallRadius = 75.0; //kbGetMapXSize() / 7.0;
+   if (gIslandMap == true) {
+      wallRadius = 95.0;
+   }
+
+  if(aiPlanGetIDByTypeAndVariableType(cPlanBuildWall, cBuildWallPlanWallType, cBuildWallPlanWallTypeRing, true) >= 1)
+      return;
+
+   int wallPlanID=aiPlanCreate("fillInWallGapsNew", cPlanBuildWall);
+   if (wallPlanID != -1)
+   {
+         aiPlanSetVariableInt(wallPlanID, cBuildWallPlanWallType, 0, cBuildWallPlanWallTypeRing);
+         aiPlanAddUnitType(wallPlanID, gEconUnit, 0, 1, 2);
+         aiPlanSetVariableVector(wallPlanID, cBuildWallPlanWallRingCenterPoint, 0, kbBaseGetLocation(cMyID, kbBaseGetMainID(cMyID)));
+         aiPlanSetVariableFloat(wallPlanID, cBuildWallPlanWallRingRadius, 0.0, wallRadius);
+         aiPlanSetVariableInt(wallPlanID, cBuildWallPlanNumberOfGates, 0, 15);
+         aiPlanSetBaseID(wallPlanID, kbBaseGetMainID(cMyID));
+         aiPlanSetEscrowID(wallPlanID, cEconomyEscrowID);
+         aiPlanSetDesiredPriority(wallPlanID, 65);
+         aiPlanSetActive(wallPlanID, true);
+   }
+}
+//==============================================================================
+// RULE bastionUpgradeMonitor
+// Make sure we research bastion so our walls are stronger.
+//==============================================================================
+rule bastionUpgradeMonitor
+inactive
+minInterval 90
+{
+   int upgradePlanID = -1;
+   int myWallId = getUnit(cUnitTypeAbstractWall, cMyID);
+
+   if ((kbTechGetStatus(cTechBastion) == cTechStatusActive))
+   {
+      xsDisableSelf();
+      return;
+   }
+
+   researchSimpleTechByCondition(cTechBastion, 
+   []() -> bool { return (kbTechGetStatus(cTechBastion) == cTechStatusObtainable); },
+   cUnitTypeAbstractWall, myWallId, 70);
+}
+//==============================================================================
+// factoryWall
+// Wall-in the first factory we find.
+//==============================================================================
+rule factoryWall
+inactive
+minInterval 10
+{
+   int factoriesQuery = createSimpleUnitQuery(cUnitTypeFactory, cMyID, cUnitStateABQ);
+   int factoriesFound = kbUnitQueryExecute(factoriesQuery);
+
+   if (factoriesFound > 0) {
+      vector factoryPos = kbUnitGetPosition(kbUnitQueryGetResult(factoriesQuery, 0));
+      kbUnitQueryDestroy(factoriesQuery);
+
+      int wallPlanID = aiPlanCreate("Factory Wall", cPlanBuildWall);
+      int numberOfGates = 4;
+      float baseWallRadius = 12.0;
+      vector baseWallCenter = factoryPos; // Set the center to the factory position
+
+      if (wallPlanID != -1)
+      {
+         aiPlanSetVariableInt(wallPlanID, cBuildWallPlanWallType, 0, cBuildWallPlanWallTypeRing);
+         aiPlanAddUnitType(wallPlanID, cUnitTypeAbstractVillager, 1, 1, 1);
+         aiPlanSetVariableVector(wallPlanID, cBuildWallPlanWallRingCenterPoint, 0, baseWallCenter);
+         aiPlanSetVariableInt(wallPlanID, cBuildPlanLocationPreference, 0, cBuildingPlacementPreferenceFront);
+         aiPlanSetVariableFloat(wallPlanID, cBuildWallPlanWallRingRadius, 0, baseWallRadius);
+         aiPlanSetVariableInt(wallPlanID, cBuildWallPlanNumberOfGates, 0, numberOfGates);
+         aiPlanSetBaseID(wallPlanID, kbBaseGetMainID(cMyID));
+         aiPlanSetEscrowID(wallPlanID, cEconomyEscrowID);
+         aiPlanSetDesiredPriority(wallPlanID, 75);
+         aiPlanSetActive(wallPlanID, true);
+         debugBuildings("Enabling Factory Wall Plan for Base ID: " + kbBaseGetMainID(cMyID));
+         xsDisableSelf();
+      }
+   }
+}
+//==============================================================================
+// RULE rebuildLostForts
+// Make sure we maintain the maximum number of forts.
+//==============================================================================
+rule rebuildLostForts
+minInterval 10
+inactive
+{
+   aiEcho("Fort Limit: "+kbGetBuildLimit(cMyID, gFortUnit)+"Forts We Have: "
+   +kbUnitCount(cMyID, gFortUnit, cUnitStateABQ)+"");
+if (kbGetBuildLimit(cMyID, gFortUnit) > kbUnitCount(cMyID, gFortUnit, cUnitStateABQ)) {
+		aiEcho("I need to rebuild forts now!");
+      // Nobody is making a fort, let's start a plan.
+      if (gFortRebuildPlan == -1) {
+         gFortRebuildPlan = aiPlanCreate("Fortress Build Plan", cPlanBuild);
+         int heroQuery = createSimpleUnitQuery(cUnitTypeHero, cMyID, cUnitStateAlive);
+         int numberHeroesFound = kbUnitQueryExecute(heroQuery);
+         int heroPlanID = -1;
+         int heroID = -1;
+         int unitID = -1;
+
+         if (numberHeroesFound < 1) {
+            return;
+         }
+
+         aiPlanSetVariableInt(gFortRebuildPlan, cBuildPlanBuildingTypeID, 0, gFortUnit);
+         // Priority.
+         aiPlanSetDesiredPriority(gFortRebuildPlan, 100);
+         aiPlanSetDesiredResourcePriority(gFortRebuildPlan, 100);
+         // Mil vs. Econ.
+         aiPlanSetMilitary(gFortRebuildPlan, true);
+         aiPlanSetEconomy(gFortRebuildPlan, false);
+         // Escrow.
+         aiPlanSetEscrowID(gFortRebuildPlan, cMilitaryEscrowID);
+         // Builders.
+         for (int n = 0; n < numberHeroesFound; n++)
+         {
+            unitID = kbUnitQueryGetResult(heroQuery, n);
+            if (unitID < 0)
+            {
+               continue;
+            }
+            // if (kbProtoUnitCanTrain(kbUnitGetProtoUnitID(unitID), cUnitTypeTradingPost) == false)
+            // {
+            //    continue;
+            // }
+            heroPlanID = kbUnitGetPlanID(heroID);
+            if ((heroPlanID < 0))
+            {
+               heroID = unitID;
+               break;
+            }
+         }
+         if (heroID != -1) // We have found a suitable Hero, so we will add him to the plan.
+         {
+            debugBuildings("We are adding 1 " + kbGetProtoUnitName(kbUnitGetProtoUnitID(heroID)) + " with ID: " +
+               heroID + " to our Fort build plan.");
+            aiPlanAddUnitType(gFortRebuildPlan, cUnitTypeHero, 1, 1, 1);
+            aiPlanAddUnit(gFortRebuildPlan, heroID);
+            aiPlanSetNoMoreUnits(gFortRebuildPlan, true);
+            int forwardBaseFortQuery = createSimpleUnitQuery(gFortUnit, cMyID, cUnitStateABQ);
+            kbUnitQuerySetMaximumDistance(forwardBaseFortQuery, 50.0);
+            kbUnitQuerySetPosition(forwardBaseFortQuery, gForwardBaseLocation);
+            if (kbUnitQueryExecute(forwardBaseFortQuery) < 1) {
+               aiPlanSetVariableVector(gFortRebuildPlan, cBuildPlanCenterPosition, 0, gForwardBaseLocation);
+               aiPlanSetVariableFloat(gFortRebuildPlan, cBuildPlanCenterPositionDistance, 0, 30.0);
+            }
+         } else {
+            aiPlanDestroy(gFortRebuildPlan);
+            return;
+         }
+      
+         aiPlanSetActive(gFortRebuildPlan);
+         aiEcho("Fort building activated!");
+         aiEcho("**** STARTING FORT PLAN, plan ID "+gFortRebuildPlan);
+      }
+	} else {
+      aiPlanDestroy(gFortRebuildPlan);
+      gFortRebuildPlan = -1;
+   }
+
+   // Start training at the forward base...
+   if (kbBaseGetActive(cMyID, gIslandBaseID) == true) {
+      updateSecondaryBaseMilitaryTrainPlans(gIslandBaseID);
+   } else {
+      updateSecondaryBaseMilitaryTrainPlans(gForwardBaseID);
+   }
+
+	return;
+}
+//==============================================================================
+// RULE fortUpgradeMonitor
+// Make sure we upgrade those forts!
+//==============================================================================
+rule fortUpgradeMonitor
+inactive
+minInterval 90
+{
+   int upgradePlanID = -1;
+   int myFortId = getUnit(cUnitTypeFortFrontier, cMyID);
+
+   if ((kbTechGetStatus(cTechRevetment) == cTechStatusActive) && (kbTechGetStatus(cTechStarFort) == cTechStatusActive))
+   {
+      xsDisableSelf();
+      return;
+   }
+
+   researchSimpleTechByCondition(cTechRevetment, 
+   []() -> bool { return (kbTechGetStatus(cTechRevetment) == cTechStatusObtainable); },
+   cUnitTypeFortFrontier, myFortId, 60);
+   researchSimpleTechByCondition(cTechStarFort, 
+   []() -> bool { return (kbTechGetStatus(cTechStarFort) == cTechStatusObtainable); },
+   cUnitTypeFortFrontier, myFortId, 60);
+}
+//==============================================================================
+// forwardBaseWall
+// Wall-in the forward base.
+//==============================================================================
+rule forwardBaseWall
+inactive
+minInterval 10
+{
+   if (gForwardBaseState == cForwardBaseStateNone || gForwardBaseID == -1)
+   {
+      return;
+   } else if (distance(kbBaseGetLocation(cMyID, kbBaseGetMainID(cMyID)), 
+               kbBaseGetLocation(cMyID, gForwardBaseID)) < 20.0) {
+      xsDisableSelf();
+   }
+   
+   int wallPlanID = aiPlanCreate("Forward base wall", cPlanBuildWall);
+   int numberOfGates = 4;
+   float baseWallRadius = 27.0;
+   vector baseWallCenter = gForwardBaseLocation;
+
+   //(gForwardBaseLocation, gForwardBaseID, 95, 4);
+   //buildPentagonWall(gForwardBaseLocation, gForwardBaseID, 95, 5);
+   //buildPentagonWall(gForwardBaseLocation, -1, 95, 5);
+
+   if (wallPlanID != -1)
+   {
+      aiPlanSetVariableInt(wallPlanID, cBuildWallPlanWallType, 0, cBuildWallPlanWallTypeRing);
+      aiPlanAddUnitType(wallPlanID, cUnitTypeAbstractVillager, 1, 1, 1);
+      aiPlanSetVariableVector(wallPlanID, cBuildWallPlanWallRingCenterPoint, 0, baseWallCenter);
+      aiPlanSetVariableInt(wallPlanID, cBuildPlanLocationPreference, 0, cBuildingPlacementPreferenceFront);
+      aiPlanSetVariableFloat(wallPlanID, cBuildWallPlanWallRingRadius, 0, baseWallRadius);
+      aiPlanSetVariableInt(wallPlanID, cBuildWallPlanNumberOfGates, 0, numberOfGates);
+      aiPlanSetBaseID(wallPlanID, kbBaseGetMainID(cMyID));
+      aiPlanSetEscrowID(wallPlanID, cMilitaryEscrowID);
+      aiPlanSetDesiredPriority(wallPlanID, 75);
+      aiPlanSetActive(wallPlanID, true);
+      //sendStatement(cPlayerRelationAllyExcludingSelf, cAICommPromptToAllyWhenIWallIn);
+      debugBuildings("Enabling Wall Plan for Base ID: " + kbBaseGetMainID(cMyID));
+   }
+   xsEnableRule("forwardBaseStables");
+   xsEnableRule("forwardBaseTowers");
+   xsDisableSelf();
+}
+//==============================================================================
+// forwardBaseStables
+// Build stables and barracks at the forward base.
+//==============================================================================
+rule forwardBaseStables
+inactive
+minInterval 10
+{
+   int forwardBaseStablesVal = kbUnitQueryExecute(createSimpleUnitQuery(cUnitTypeAbstractStables, cMyID, 
+   cUnitStateABQ, gForwardBaseLocation, 40.0));
+   int forwardBaseBarracksVal = kbUnitQueryExecute(createSimpleUnitQuery(cUnitTypeBarracks, cMyID, 
+   cUnitStateABQ, gForwardBaseLocation, 40.0));
+   aiEcho("Stables: "+forwardBaseStablesVal+" Base State: "+gForwardBaseState+"");
+   if (gForwardBaseState == cForwardBaseStateNone)
+   {
+      return;
+   } 
+   
+   if (gForwardBaseState == cForwardBaseStateActive && forwardBaseStablesVal < 1
+      && aiPlanGetActive(gForwardBaseStablesPlan) == false) {
+      aiPlanDestroy(gForwardBaseStablesPlan);
+      gForwardBaseStablesPlan = createSpacedLocationBuildPlan(cUnitTypeStable, 1, 45, true, cMilitaryEscrowID, gForwardBaseLocation, 1);
+      aiEcho("Stables Plan created!");
+   } else if (gForwardBaseState == cForwardBaseStateActive && forwardBaseStablesVal > 0) {
+      // Start training at the forward base...
+      if (kbBaseGetActive(cMyID, gIslandBaseID) == true) {
+         updateSecondaryBaseMilitaryTrainPlans(gIslandBaseID);
+      } else {
+         updateSecondaryBaseMilitaryTrainPlans(gForwardBaseID);
+      }
+   }
+   if (gForwardBaseState == cForwardBaseStateActive && forwardBaseBarracksVal < 1
+      && aiPlanGetActive(gForwardBaseBarracksPlan) == false) {
+      aiPlanDestroy(gForwardBaseBarracksPlan);
+      gForwardBaseBarracksPlan = createSpacedLocationBuildPlan(cUnitTypeBarracks, 1, 45, true, cMilitaryEscrowID, gForwardBaseLocation, 1);
+      aiEcho("Barracks Plan created!");
+   } else if (gForwardBaseState == cForwardBaseStateActive && forwardBaseBarracksVal > 0) {
+      // Start training at the forward base...
+      if (kbBaseGetActive(cMyID, gIslandBaseID) == true) {
+         updateSecondaryBaseMilitaryTrainPlans(gIslandBaseID);
+      } else {
+         updateSecondaryBaseMilitaryTrainPlans(gForwardBaseID);
+      }
+   }
+}
+//==============================================================================
+// forwardBaseTowers
+// Build three towers at the forward base if we can.
+//==============================================================================
+rule forwardBaseTowers
+inactive
+minInterval 10
+{
+   int forwardBaseTowersVal = kbUnitQueryExecute(createSimpleUnitQuery(gTowerUnit, cMyID, cUnitStateABQ, 
+   gForwardBaseLocation, 40.0));
+   int additionalTowersAvailable = kbGetBuildLimit(cMyID, gTowerUnit) - kbUnitQueryExecute(createSimpleUnitQuery(gTowerUnit, cMyID, cUnitStateABQ));
+   if (gForwardBaseState == cForwardBaseStateNone)
+   {
+      return;
+   }
+
+   if (additionalTowersAvailable > 3) {
+      additionalTowersAvailable = 3;
+   }
+
+   if (gForwardBaseState == cForwardBaseStateActive && forwardBaseTowersVal < 1) {
+      createSpacedLocationBuildPlan(gTowerUnit, 2, 50, true, cMilitaryEscrowID, gForwardBaseLocation, 1);
+   }
+}
+//==============================================================================
+// maxFortManager
+// Maintain the maximum number of forts at all times.
+//==============================================================================
+// rule maxFortManager
+// inactive
+// minInterval 40
+// {
+//    static int fortPlan = -1;
+//    int villagerPlan = -1;
+//    int limit = 0;
+
+//    limit = kbGetBuildLimit(cMyID, gFortUnit);
+//    if (limit < 1)
+//       return;
+
+//    if (fortPlan < 0)
+//    {
+//       fortPlan = createSimpleMaintainPlan(gFortUnit, limit, true, -1, 1);
+//       aiPlanSetDesiredPriority(fortPlan, 85);
+//       //aiPlanSetVariableInt(missionaryPlan, cTrainPlanBuildFromType, 0, cUnitTypeChurch);
+//       aiEcho("Fort maintain plan!");
+//    }
+//    else
+//    {
+//       aiPlanSetVariableInt(fortPlan, cTrainPlanNumberToMaintain, 0, limit);
+//    }
+// }
+//==============================================================================
+// maxTowerManager
+// Maintain the maximum number of towers at all times.
+//==============================================================================
+rule maxTowerManager
+inactive
+minInterval 10
+{
+   int limit = kbGetBuildLimit(cMyID, gTowerUnit);
+   int unitQuery = createSimpleUnitQuery(gTowerUnit, cMyID, cUnitStateABQ);
+   int numberFound = kbUnitQueryExecute(unitQuery);
+   int age = kbGetAge();
+//aiPlanGetIDByTypeAndVariableType(cPlanBuild, cBuildPlanBuildingTypeID, gTowerUnit) < 0
+   if (numberFound < limit && age >= cAge4)
+   {
+      createSimpleBuildPlan(gTowerUnit, 1, 75, false, cMilitaryEscrowID, kbBaseGetMainID(cMyID), 1);
+   }
+   updateWantedTowers();
+}
+//==============================================================================
+// establishTradePostsWithNatives
+// Double-check to make sure we are trying to maintain native alliances.
+//==============================================================================
+rule establishTradePostsWithNatives
+inactive
+minInterval 10
+{
+   int unitQuery = createSimpleUnitQuery(cUnitTypeSocket, cPlayerRelationAny, cUnitStateAny);
+   int numberFound = kbUnitQueryExecute(unitQuery);
+   vector mainBaseVec = kbBaseGetLocation(cMyID, kbBaseGetMainID(cMyID));
+   int mainBaseGroupId = kbAreaGroupGetIDByPosition(mainBaseVec);
+   vector unitLocation = cInvalidVector;
+   int unitLocationId = -1;
+   int unitLocationGroupId = -1;
+   int unitID = -1;
+
+   for (i = 0; < numberFound) {
+      unitID = kbUnitQueryGetResult(unitQuery, i);
+      unitLocation = kbUnitGetPosition(unitID);
+      unitLocationId = kbAreaGetIDByPosition(unitLocation);
+      unitLocationGroupId = kbAreaGroupGetIDByPosition(unitLocation);
+      if (getUnitByLocation(cUnitTypeTradingPost, cPlayerRelationAny, cUnitStateABQ, unitLocation, 10.0) > 0)
+      {
+         continue;
+      } else if (kbAreAreaGroupsPassableByLand(mainBaseGroupId, unitLocationGroupId) == true) {
+         unitLocation = kbUnitGetPosition(unitID);
+      }
+   }
+   
+   if (unitLocation != cInvalidVector && aiPlanGetActive(gTradePostBuildingPlan) == false) {
+      aiPlanDestroy(gTradePostBuildingPlan);
+      gTradePostBuildingPlan = aiPlanCreate("Trading Post Build Plan", cPlanBuild);
+      aiPlanSetVariableInt(gTradePostBuildingPlan, cBuildPlanBuildingTypeID, 0, cUnitTypeTradingPost);
+      aiPlanSetVariableInt(gTradePostBuildingPlan, cBuildPlanSocketID, 0, unitID);
+
+      int villagerQuery = createSimpleUnitQuery(cUnitTypeAbstractVillager, cMyID, cUnitStateAlive);
+      aiPlanAddUnitType(gTradePostBuildingPlan, cUnitTypeAbstractVillager, 1, 1, 1);
+      aiPlanAddUnit(gTradePostBuildingPlan, kbUnitQueryGetResult(villagerQuery, 0));
+      aiPlanSetDesiredPriority(gTradePostBuildingPlan, 60);
+      aiPlanSetActive(gTradePostBuildingPlan);
+   }
+}
+//==============================================================================
+// lakotaTeePeeManager
+// Maintain the maximum number of teepees at all times.
+//==============================================================================
+rule lakotaTeePeeManager
+active
+minInterval 10
+{
+   if (cMyCiv != cCivXPSioux)
+   {
+      xsDisableSelf();
+      return;
+   }
+   int limit = kbGetBuildLimit(cMyID, cUnitTypeTeepee);
+   int unitQuery = createSimpleUnitQuery(cUnitTypeTeepee, cMyID, cUnitStateABQ);
+   int numberFound = kbUnitQueryExecute(unitQuery);
+   int age = kbGetAge();
+
+   if (age == cAge1) {
+      limit = 1;
+   } else if (age == cAge2) {
+      limit = 3;
+   } else if (age == cAge3) {
+      limit = 7;
+   }
+
+   if (numberFound < limit && aiPlanGetIDByTypeAndVariableType(cPlanBuild, cBuildPlanBuildingTypeID, cUnitTypeTeepee) < 0)
+   {
+      createSimpleBuildPlan(cUnitTypeTeepee, 1, 75, false, cEconomyEscrowID, kbBaseGetMainID(cMyID), 1);
+   }
+}

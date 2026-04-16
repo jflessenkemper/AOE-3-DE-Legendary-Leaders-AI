@@ -1,0 +1,23 @@
+Prince Henry the Navigator
+Filename: art/ui/leaders/henry.jpg
+Prompt: Prince Henry the Navigator, early 15th century Portuguese royal patron of exploration, Age of Empires III Definitive Edition portrait style, classical oil painting, chest-up three-quarter view, intelligent reserved face, neatly trimmed dark hair, period Portuguese noble attire with crimson and deep blue fabrics, subtle gold embroidery, maritime charts and astrolabe hinted in shadowed background, dramatic warm side light, realistic historical palette, clean readable silhouette, no text, no watermark.
+
+Maurice of Nassau
+Filename: art/ui/leaders/maurice.jpg
+Prompt: Maurice of Nassau, late 16th to early 17th century Dutch stadtholder, AoE3 DE portrait style, military reformer and disciplined commander, polished oil painting, black Dutch doublet with orange sash details, lace collar, cool analytical expression, map table and pike-and-shot battlefield smoke hinted behind him, restrained Dutch Republic palette, crisp directional lighting, painterly realism, no text, no watermark.
+
+George Washington
+Filename: art/ui/leaders/washington.jpg
+Prompt: George Washington during the American Revolutionary War, Age of Empires III DE campaign portrait style, dignified stern expression, blue Continental Army coat with buff facings, powdered hair, subtle battlefield haze and American flag drapery in dark background, oil painted realism, heroic but restrained, strong facial readability at small size, no text, no watermark.
+
+Miguel Hidalgo
+Filename: art/ui/leaders/hidalgo.jpg
+Prompt: Miguel Hidalgo y Costilla, Mexican independence leader, AoE3 DE portrait style, historical oil painting, older face with determined eyes, clerical black attire with revolutionary sash accents, warm lantern and firelit uprising atmosphere, church bell and insurgent banner faint in background, high historical fidelity, dramatic lighting, painterly realism, no text, no watermark.
+
+Giuseppe Garibaldi
+Filename: art/ui/leaders/garibaldi.png
+Prompt: Giuseppe Garibaldi, red-shirted Italian patriot and guerrilla commander, Age of Empires III Definitive Edition portrait style, chest-up oil painting, weathered determined face, red shirt under military cloak, dark hat suggested nearby, Mediterranean golden light, smoke and tricolor hints in background, energetic yet disciplined pose, no text, no watermark.
+
+Jean Parisot de Valette
+Filename: art/ui/leaders/valette.jpg
+Prompt: Jean Parisot de Valette, Grand Master of the Knights of Malta during the Great Siege, AoE3 DE portrait style, severe older face, white-and-red Hospitaller robes with armor accents, fortress walls and sea haze subtly behind, dramatic contrast lighting, resolute siege commander presence, classical oil painting finish, no text, no watermark.

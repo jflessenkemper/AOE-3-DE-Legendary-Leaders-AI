@@ -1,0 +1,19 @@
+<!-- <Chatset name="Elizabeth">
+    <Tag type="AiChat" name="ToAllyWhenIGatherNugget" priority="Background">
+        <Sentence>
+            <String>This new world is filled with riches!</String>
+            <Sound>chats\ELIZ0000.mp3</Sound>
+            <StringID>38301</StringID>
+        </Sentence>
+        <Sentence>
+            <String>We can fill the British Museum with samples of these new wonders.</String>
+            <Sound>chats\ELIZ0005.mp3</Sound>
+            <StringID>38302</StringID>
+        </Sentence>
+        <Sentence>
+            <String>A brave land to hold such discoveries!</String>
+            <Sound>chats\ELIZ0010.mp3</Sound>
+            <StringID>38303</StringID>
+        </Sentence>
+    </Tag>
+</Chatset> -->

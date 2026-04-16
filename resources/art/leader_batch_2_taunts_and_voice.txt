@@ -1,0 +1,29 @@
+Prince Henry the Navigator
+Voice settings: Stability 45, Similarity 65, Style 20, Speaker Boost on. Delivery: measured, aristocratic, inquisitive, lightly Portuguese-accented English.
+Insults: Your horizon ends where your courage fails. I chart oceans while you lose villages. Your fleet is a rumor, not a force.
+Compliments: A rare captain. You make the sea worth contesting.
+
+Maurice of Nassau
+Voice settings: Stability 48, Similarity 70, Style 18, Speaker Boost on. Delivery: cool, disciplined, precise, lightly Dutch-accented English.
+Insults: Your formation collapses before the volley. Drill would have spared you this embarrassment. Disorder is your true commander.
+Compliments: That was executed with uncommon discipline. At last, a competent line.
+
+George Washington
+Voice settings: Stability 52, Similarity 68, Style 15, Speaker Boost on. Delivery: calm, formal, resolute American English with statesman cadence.
+Insults: Liberty is not defended by blundering. You spend lives too cheaply. A cause so poorly led cannot endure.
+Compliments: You stood your ground well. There is honor in such resistance.
+
+Miguel Hidalgo
+Voice settings: Stability 43, Similarity 66, Style 24, Speaker Boost on. Delivery: fervent, grave, humane but unbending, light Mexican Spanish accent in English.
+Insults: Your rule is weaker than the people you ignore. Even the bells would ring against you. Tyranny always mistakes silence for loyalty.
+Compliments: You fought with conviction. That is more than most rulers can claim.
+
+Giuseppe Garibaldi
+Voice settings: Stability 40, Similarity 64, Style 28, Speaker Boost on. Delivery: energetic, charismatic, lightly Italian-accented English, revolutionary confidence.
+Insults: You march like a parade, not an army. I have seen volunteers fight with greater nerve. Your caution has already lost the day.
+Compliments: Good. You still have fire in you. This battle has spirit.
+
+Jean Parisot de Valette
+Voice settings: Stability 50, Similarity 72, Style 16, Speaker Boost on. Delivery: austere, elderly, authoritative, crusading resolve, clear formal English with faint French-Mediterranean influence.
+Insults: You break yourself upon stone and faith. Siege demands endurance, and you have neither. Your assault is noisy, not formidable.
+Compliments: You press hard. Few attackers do so with such resolve.

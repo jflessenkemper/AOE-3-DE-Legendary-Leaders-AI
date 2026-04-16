@@ -1,0 +1,29 @@
+{
+  "name": "Legendary Leaders AI",
+  "description": "Ultra-complex historical leader personalities for every AoE3 DE civilization. Built on Enhanced AI with fully integrated Playable Revolutions — all revolutionary nations are playable from the lobby dropdown. Each leader features historically researched playstyle, custom player colors, and in-character taunts.",
+  "author": "Legendary Leaders Team",
+  "version": "0.1.0",
+  "date": "2026-04-16",
+  "url": "",
+  "gameVersion": "100.15.x",
+  "bigFileVersion": 9,
+  "status": "working",
+  "modules": [
+    {
+      "type": "game",
+      "sourcePath": "game"
+    },
+    {
+      "type": "data",
+      "sourcePath": "data"
+    },
+    {
+      "type": "art",
+      "sourcePath": "art"
+    },
+    {
+      "type": "sound",
+      "sourcePath": "sound"
+    }
+  ]
+}

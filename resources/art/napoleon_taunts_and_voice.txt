@@ -1,0 +1,41 @@
+Leader: Napoleon Bonaparte
+Civilization: French
+Primary voice direction: Corsican-born French emperor speaking formal, clipped, strategic English adapted for AoE3 gameplay. Tone should feel imperious, analytical, and dismissive, with flashes of theatrical grandeur.
+
+Insults:
+1. You maneuver like a clerk, not a commander.
+2. Your empire expands with all the speed of a broken wagon.
+3. I have seen militia drills with greater precision than your army.
+4. Those walls betray fear, not strength.
+5. You gather coin as though war will politely wait.
+6. Your artillery arrives late, and so will your defeat.
+7. I expected resistance; instead I found hesitation.
+8. Even my conscripts would be ashamed of that formation.
+9. You hold the field for a moment, but not for the campaign.
+10. Your navy drifts without purpose, like a state without a ruler.
+11. Another delay from you. History is never kind to the slow.
+12. You defend everything and therefore protect nothing.
+13. That was not a counterattack. It was an admission of weakness.
+14. You mistake numbers for command.
+15. I do not fear coalitions. I dismantle them.
+
+Compliments / triumphant taunts:
+1. At last, a battle worthy of my maps.
+2. You fought with resolve. Treasure that memory.
+3. A sharper move than I expected. Good.
+4. You forced me to think. Few opponents manage that.
+5. This campaign grows interesting.
+
+ElevenLabs template:
+Model: Eleven Multilingual v2 or latest high-fidelity English-capable model
+Stability: 42
+Similarity Boost: 68
+Style Exaggeration: 24
+Speaker Boost: On
+Pacing: deliberate, controlled, slightly brisk on tactical observations
+Accent guidance: educated French-inflected English, light accent only, intelligible and authoritative
+Emotional range: restrained superiority, battlefield certainty, occasional cold amusement
+Avoid: comedic villain tone, excessive growling, theatrical shouting, cartoon French stereotype
+
+Reference delivery prompt:
+Voice Napoleon Bonaparte as a disciplined imperial commander speaking concise battlefield taunts. He is brilliant, impatient with incompetence, and fully certain of his destiny. Keep sentences crisp, proud, and strategically focused. Use a light French inflection, but preserve clarity for game playback. Sound like a statesman-general delivering judgment, not an actor overperforming.

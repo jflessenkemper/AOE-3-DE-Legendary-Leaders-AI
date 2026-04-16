@@ -1,0 +1,9 @@
+Filename: art/ui/leaders/napoleon.jpg
+Historical source currently staged as a JPG portrait. Retain this prompt only if you later want a repainted bespoke UI version.
+Style target: Age of Empires III Definitive Edition campaign portrait, classical oil painting, dramatic directional lighting, high historical fidelity, strong readable silhouette, polished painterly texture, neutral transparent or very dark unobtrusive background.
+
+Prompt:
+Napoleon Bonaparte, circa 1805, chest-up three-quarter portrait in the visual style of Age of Empires III Definitive Edition leader art. He is in a dark blue French imperial military coat with gold embroidery, white waistcoat, high stiff collar, and bicorne hat tucked under one arm or implied nearby. Clean-shaven face, pale complexion, sharp intense eyes, dark brown hair combed forward, composed but calculating expression. Pose should project supreme confidence, disciplined ambition, and battlefield genius rather than theatrical rage. Lighting is warm from one side with subtle cool rim light on the opposite edge, emphasizing facial planes and gold trim. Add faint hints of an imperial map table, artillery smoke, and tricolor drapery in the blurred background without distracting from the face. Painterly realism, no cartoon exaggeration, no modern lens effects, no text, no watermark, no frame. Preserve strong contrast and readability at small UI sizes.
+
+Negative prompt:
+photorealistic photo, anime, exaggerated grin, fantasy armor, medals from wrong era, modern uniform, extra hands, text, watermark, low detail, flat lighting, oversaturated colors, noisy background
