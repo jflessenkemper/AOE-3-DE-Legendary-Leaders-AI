@@ -1,8 +1,7 @@
 //==============================================================================
 /* leader_napoleon.xs
 
-   Napoleon Bonaparte - French master personality.
-   This is the first fully custom Legendary Leaders template.
+   Napoleon Bonaparte - Napoleonic France master personality.
 */
 //==============================================================================
 

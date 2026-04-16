@@ -5,7 +5,7 @@
    <tooltipID>400019</tooltipID>
    <forcedciv>rvltmodamericans</forcedciv>
    <rushboom>0</rushboom>
-   <icon>resources/images/icons/singleplayer/cpai_avatar_americans_washington.png</icon>
+   <icon>resources/images/icons/singleplayer/cpai_avatar_americans_jefferson.png</icon>
    <chatset>washington</chatset>
    <playerNames>
       <nameID>80829<civ>rvltmodamericans</civ></nameID>

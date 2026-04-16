@@ -68,15 +68,15 @@
     {
       "civId": "French",
       "nation": "French",
-      "leaderKey": "napoleon_french",
-      "leaderName": "Napoleon Bonaparte",
-      "articleUrl": "https://en.wikipedia.org/wiki/Napoleon",
-      "portraitLocalFile": "art/ui/leaders/napoleon.jpg",
-      "smallPortraitFile": "resources/images/icons/singleplayer/cpai_avatar_french_napoleon.png",
-      "voice": { "stability": 0.42, "similarityBoost": 0.68, "style": 0.24, "useSpeakerBoost": true },
-      "voicePrompt": "Disciplined imperial commander, concise battlefield judgment, light French inflection, authoritative rather than theatrical.",
-      "insults": ["You maneuver like a clerk, not a commander.", "Those walls betray fear, not strength."],
-      "compliments": ["At last, a battle worthy of my maps.", "You forced me to think. Few opponents manage that."]
+      "leaderKey": "louis_xviii",
+      "leaderName": "Louis XVIII",
+      "articleUrl": "https://en.wikipedia.org/wiki/Louis_XVIII",
+      "portraitLocalFile": "art/ui/leaders/louis_xviii.jpg",
+      "smallPortraitFile": "resources/images/icons/singleplayer/cpai_avatar_french_bourbon.png",
+      "voice": { "stability": 0.5, "similarityBoost": 0.67, "style": 0.15, "useSpeakerBoost": true },
+      "voicePrompt": "Restoration Bourbon monarch, formal and guarded, aristocratic French cadence in English, cautious authority rather than martial swagger.",
+      "insults": ["You rush like a mob, not an army.", "Your ambition outruns your discipline."],
+      "compliments": ["You kept better order than I expected.", "That defense had some royal composure."]
     },
     {
       "civId": "Germans",

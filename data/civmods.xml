@@ -634,7 +634,7 @@
 			<PortraitTextureCoords>0.4375 0.00390625 0.830078125 0.392578125</PortraitTextureCoords>
 			<SmallPortraitTexture>ui\singleplayer\cpai_avatar_british</SmallPortraitTexture>
 			<SmallPortraitTextureCoords>0 0 1 1</SmallPortraitTextureCoords>
-			<SmallPortraitTextureWPF>resources/images/icons/singleplayer/cpai_avatar_americans_washington.png</SmallPortraitTextureWPF>
+			<SmallPortraitTextureWPF>resources/images/icons/singleplayer/cpai_avatar_americans_jefferson.png</SmallPortraitTextureWPF>
 		</MatchmakingTextures>
 		<UnitRegen>
 			<UnitType>Hero</UnitType>

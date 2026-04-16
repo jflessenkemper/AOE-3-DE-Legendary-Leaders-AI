@@ -15,6 +15,22 @@ Use the `download_url` values directly. They are Commons `Special:Redirect/file/
 - rationale: strongest late-imperial administrative portrait and already a featured Commons file.
 - license: public domain, PD-Art.
 
+### Napoleon (Napoleonic France)
+- local_file: `art/ui/leaders/napoleon_imperial.jpg`
+- commons_file: `Napoleon_in_Coronation_Robes_by_François_Gérard.jpg`
+- source_page: https://commons.wikimedia.org/wiki/File:Napoleon_in_Coronation_Robes_by_Fran%C3%A7ois_G%C3%A9rard.jpg
+- download_url: https://commons.wikimedia.org/wiki/Special:Redirect/file/Napoleon_in_Coronation_Robes_by_Fran%C3%A7ois_G%C3%A9rard.jpg
+- rationale: distinct full-regalia emperor portrait for the Napoleonic France revolution civ.
+- license: public domain, PD-Art.
+
+### Louis XVIII
+- local_file: `art/ui/leaders/louis_xviii.jpg`
+- commons_file: `Louis_XVIII_in_1814.jpg`
+- source_page: https://commons.wikimedia.org/wiki/File:Louis_XVIII_in_1814.jpg
+- download_url: https://commons.wikimedia.org/wiki/Special:Redirect/file/Louis_XVIII_in_1814.jpg
+- rationale: Bourbon restoration portrait used to separate Royal France from Napoleon visually and thematically.
+- license: public domain, PD-Art.
+
 ### Wellington
 - local_file: `art/ui/leaders/wellington.jpg`
 - commons_file: `Francisco_Goya_-_Portrait_of_the_Duke_of_Wellington.jpg`
@@ -78,6 +94,22 @@ Use the `download_url` values directly. They are Commons `Special:Redirect/file/
 - source_page: https://commons.wikimedia.org/wiki/File:George_Washington_1795_(cropped_1).jpg
 - download_url: https://commons.wikimedia.org/wiki/Special:Redirect/file/George_Washington_1795_(cropped_1).jpg
 - rationale: strongest head-and-shoulders leadership portrait for UI readability.
+- license: public domain, PD-Art.
+
+### Thomas Jefferson
+- local_file: `art/ui/leaders/jefferson.jpg`
+- commons_file: `Thomas_Jefferson_1805_Portrait_3x4_Crop.jpg`
+- source_page: https://commons.wikimedia.org/wiki/File:Thomas_Jefferson_1805_Portrait_3x4_Crop.jpg
+- download_url: https://commons.wikimedia.org/wiki/Special:Redirect/file/Thomas_Jefferson_1805_Portrait_3x4_Crop.jpg
+- rationale: replaces the Washington portrait for Revolutionary America while keeping a historically canonical statesman likeness.
+- license: public domain, PD-Art.
+
+### Maximilien Robespierre
+- local_file: `art/ui/leaders/robespierre.png`
+- commons_file: `Maximilien_de_Robespierre_by_Adélaïde_Labille-Guiard.png`
+- source_page: https://commons.wikimedia.org/wiki/File:Maximilien_de_Robespierre_by_Ad%C3%A9la%C3%AFde_Labille-Guiard.png
+- download_url: https://commons.wikimedia.org/wiki/Special:Redirect/file/Maximilien_de_Robespierre_by_Ad%C3%A9la%C3%AFde_Labille-Guiard.png
+- rationale: aligns Revolutionary France's in-game portrait with its existing Robespierre-themed AI personality.
 - license: public domain, PD-Art.
 
 ### Miguel Hidalgo
