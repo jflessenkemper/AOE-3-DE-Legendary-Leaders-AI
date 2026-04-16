@@ -260,35 +260,11 @@ bool llHasNearbyEliteSupport(int unitID = -1, float radius = 24.0)
 
 float llGetSurrenderHealthThreshold(void)
 {
-   switch (gLLPrisonerDoctrine)
-   {
-      case cLLPrisonerDoctrineForcedLabor:
-         return (0.42);
-      case cLLPrisonerDoctrineExecution:
-         return (0.32);
-      case cLLPrisonerDoctrineIntegration:
-         return (0.54);
-      case cLLPrisonerDoctrineExchange:
-         return (0.60);
-   }
-
-   return (0.46);
+   return (0.25);
 }
 
 float llGetSurrenderEliteSupportRadius(void)
 {
-   switch (gLLPrisonerDoctrine)
-   {
-      case cLLPrisonerDoctrineForcedLabor:
-         return (22.0);
-      case cLLPrisonerDoctrineExecution:
-         return (30.0);
-      case cLLPrisonerDoctrineIntegration:
-         return (18.0);
-      case cLLPrisonerDoctrineExchange:
-         return (16.0);
-   }
-
    return (24.0);
 }
 
@@ -784,6 +760,7 @@ void llEnablePrisonerSystem(void)
    xsEnableRule("legendaryNavalPrisonGuard");
    xsEnableRule("legendaryAISurrenderMonitor");
    xsEnableRule("legendaryAISurrenderMove");
+   xsEnableRule("legendaryEliteGuardMonitor");
    debugLegendaryLeaders("prisoner system enabled with doctrine " + llGetPrisonerDoctrineName());
 }
 

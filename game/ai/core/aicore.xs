@@ -98,6 +98,7 @@ include "core\aiSetup.xs";
 include "core\aiBuildingsWalls.xs";
 include "core\aiChatsNew.xs";
 include "core\aiPrisoners.xs";
+include "core\aiEliteTactics.xs";
 include "core\aiMiscNew.xs";
 include "core\aiNavalVillagersUtilities.xs";
 include "core\aiNavalVillagers.xs";

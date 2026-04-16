@@ -6,11 +6,158 @@
 */
 //==============================================================================
 
+include "aiHeader.xs";
+include "core\aiGlobals.xs";
+include "core\aiUtilities.xs";
+include "core\aiPrisoners.xs";
+
 extern float gTSFactorDistance = -200.0;  // negative is good
 extern float gTSFactorPoint = 10.0;			// positive is good
 extern float gTSFactorTimeToDone = 0.0;	// positive is good
 extern float gTSFactorBase = 100.0;			// positive is good
 extern float gTSFactorDanger = -10.0;		// negative is good
+
+vector llGetHumanSurrenderDestination(int unitID = -1)
+{
+   if (unitID < 0)
+   {
+      return (cInvalidVector);
+   }
+
+   int enemyQueryID = createSimpleUnitQuery(cUnitTypeLogicalTypeLandMilitary, cPlayerRelationEnemyNotGaia,
+      cUnitStateAlive, kbUnitGetPosition(unitID), 36.0);
+   if (kbUnitQueryExecute(enemyQueryID) > 0)
+   {
+      return (kbUnitGetPosition(kbUnitQueryGetResult(enemyQueryID, 0)));
+   }
+
+   int tcQueryID = createSimpleUnitQuery(cUnitTypeTownCenter, cPlayerRelationEnemyNotGaia, cUnitStateAlive,
+      kbUnitGetPosition(unitID), 300.0);
+   if (kbUnitQueryExecute(tcQueryID) > 0)
+   {
+      return (kbUnitGetPosition(kbUnitQueryGetResult(tcQueryID, 0)));
+   }
+
+   return (cInvalidVector);
+}
+
+rule legendaryHumanSurrenderMonitor
+inactive
+minInterval 8
+{
+   float healthThreshold = 0.25;
+   float eliteSupportRadius = 24.0;
+
+   int landQueryID = createSimpleUnitQuery(cUnitTypeLogicalTypeLandMilitary, cMyID, cUnitStateAlive);
+   int landCount = kbUnitQueryExecute(landQueryID);
+   for (int i = 0; < landCount)
+   {
+      int unitID = kbUnitQueryGetResult(landQueryID, i);
+      if (llGetTrackedSurrenderIndex(unitID) >= 0)
+      {
+         continue;
+      }
+
+      if (llCanUnitSurrender(unitID, healthThreshold, eliteSupportRadius) == false)
+      {
+         continue;
+      }
+
+      if (llHasEnemyPressureForSurrender(unitID) == false)
+      {
+         continue;
+      }
+
+      llTrackSurrenderingUnit(unitID);
+   }
+
+   int navalQueryID = createSimpleUnitQuery(cUnitTypeAbstractWarShip, cMyID, cUnitStateAlive);
+   int navalCount = kbUnitQueryExecute(navalQueryID);
+   for (int i = 0; < navalCount)
+   {
+      int unitID = kbUnitQueryGetResult(navalQueryID, i);
+      if (llGetTrackedSurrenderIndex(unitID) >= 0)
+      {
+         continue;
+      }
+
+      if (llCanUnitSurrender(unitID, healthThreshold, eliteSupportRadius) == false)
+      {
+         continue;
+      }
+
+      if (llHasEnemyPressureForSurrender(unitID) == false)
+      {
+         continue;
+      }
+
+      llTrackSurrenderingUnit(unitID);
+   }
+}
+
+rule legendaryHumanSurrenderMove
+inactive
+minInterval 2
+{
+   if (gLLSurrenderUnitIDs < 0)
+   {
+      return;
+   }
+
+   for (int i = 0; < cLLMaxSurrenderUnits)
+   {
+      int unitID = xsArrayGetInt(gLLSurrenderUnitIDs, i);
+      if (unitID < 0)
+      {
+         continue;
+      }
+
+      if (kbUnitGetHealth(unitID) <= 0.0)
+      {
+         llClearTrackedSurrenderIndex(i);
+         continue;
+      }
+
+      int surrenderTime = xsArrayGetInt(gLLSurrenderTimes, i);
+      int trackedDuration = xsGetTime() - surrenderTime;
+      if (surrenderTime < 0)
+      {
+         trackedDuration = xsGetTime() - ((-1 * surrenderTime) - 1);
+      }
+
+      if (trackedDuration > cLLMaxSurrenderLifetime)
+      {
+         llClearTrackedSurrenderIndex(i);
+         continue;
+      }
+
+      vector destination = llGetHumanSurrenderDestination(unitID);
+      if (destination == cInvalidVector)
+      {
+         continue;
+      }
+
+      if (distance(kbUnitGetPosition(unitID), destination) < cLLSurrenderArrivalRadius)
+      {
+         if (surrenderTime >= 0)
+         {
+            xsArraySetInt(gLLSurrenderTimes, i, (-1 * surrenderTime) - 1);
+         }
+
+         llReleaseSurrenderingUnit(unitID);
+         aiTaskUnitMove(unitID, destination);
+         continue;
+      }
+
+      if (surrenderTime < 0)
+      {
+         xsArraySetInt(gLLSurrenderTimes, i, (-1 * surrenderTime) - 1);
+      }
+
+      llReleaseSurrenderingUnit(unitID);
+      aiTaskUnitMove(unitID, destination);
+   }
+}
 
 //==============================================================================
 // main
@@ -31,6 +178,10 @@ void main(void)
    kbSetTargetSelectorFactor(cTSFactorTimeToDone, gTSFactorTimeToDone);
    kbSetTargetSelectorFactor(cTSFactorBase, gTSFactorBase);
    kbSetTargetSelectorFactor(cTSFactorDanger, gTSFactorDanger);
+
+   llEnsureSurrenderArrays();
+   xsEnableRule("legendaryHumanSurrenderMonitor");
+   xsEnableRule("legendaryHumanSurrenderMove");
 }
 
 
