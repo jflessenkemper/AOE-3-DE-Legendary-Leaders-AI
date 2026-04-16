@@ -120,6 +120,7 @@ minInterval 15
          aiPlanAddUnitType(gNavyEnhancedAttackPlan, cUnitTypeAbstractWarShip, 1, 10, 200); 
          aiPlanSetInitialPosition(gNavyEnhancedAttackPlan, gNavyVec);
          aiEcho("***** LAUNCHING NAVAL ATTACK, plan ID is " + gNavyEnhancedAttackPlan); 
+         llSendLegendaryLeaderInsultLine(getNavalTargetPlayerId(), 150000);
          aiPlanSetActive(gNavyEnhancedAttackPlan, true);
       }
    }   

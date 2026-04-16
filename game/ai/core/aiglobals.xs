@@ -534,3 +534,4 @@ extern const bool cDebugHCCards = false;
 extern const bool cDebugChats = false;
 extern const bool cDebugSetup = false;
 extern const bool cDebugCore = false;
+extern const bool cDebugLegendaryLeaders = true;

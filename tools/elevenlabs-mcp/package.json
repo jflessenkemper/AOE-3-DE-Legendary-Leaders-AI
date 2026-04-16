@@ -7,6 +7,8 @@
   "scripts": {
     "start": "node src/index.mjs",
     "check": "node --check src/index.mjs",
+    "generate:readme-audio": "node src/generate-readme-audio-section.mjs",
+    "generate:tts": "node src/generate-revolution-tts.mjs",
     "generate:leader-tts": "node src/generate-revolution-tts.mjs",
     "generate:revolution-tts": "node src/generate-revolution-tts.mjs"
   },

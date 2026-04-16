@@ -10667,14 +10667,7 @@
 		<Prereqs>
 			<TechStatus status ='Active'>AAStandardStartingTechs</TechStatus>
 		</Prereqs>
-		<Effects>
-			<Effect type ='CommandAdd' tech ='LLMilitarySurrenderOrder' page ='0' column ='6'>
-				<Target type ='ProtoUnit'>AbstractInfantry</Target></Effect>
-			<Effect type ='CommandAdd' tech ='LLMilitarySurrenderOrder' page ='0' column ='6'>
-				<Target type ='ProtoUnit'>AbstractCavalry</Target></Effect>
-			<Effect type ='CommandAdd' tech ='LLMilitarySurrenderOrder' page ='0' column ='6'>
-				<Target type ='ProtoUnit'>AbstractArtillery</Target></Effect>
-		</Effects>
+		<Effects></Effects>
 	</Tech>
 	<Tech name ='LLMilitarySurrenderOrder' type ='Normal'>
 		<DBID>39991</DBID>

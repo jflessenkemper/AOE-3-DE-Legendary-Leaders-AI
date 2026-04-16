@@ -76,6 +76,7 @@ void enhancedInit(void)
    //xsEnableRule("giveAdviceAndComments");
    xsEnableRule("boringChatter");
    xsEnableRule("manyPlayersComment");
+   enableLegendaryLeaderQuoteRules();
    // Set the healing unit type.
    setHealingUnitType();
    xsEnableRule("healInjuredUnits");

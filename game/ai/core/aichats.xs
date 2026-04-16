@@ -33,6 +33,7 @@ void sendStatement(int playerIDorRelation = -1, int commPromptID = -1, vector ve
          {
             aiCommsSendStatementWithVector(playerID, commPromptID, vec);
          }
+         llMaybeFollowStatementWithQuote(playerID, commPromptID);
       }
       else // It's a player relation.
       {
@@ -97,6 +98,7 @@ void sendStatement(int playerIDorRelation = -1, int commPromptID = -1, vector ve
                   aiCommsSendStatementWithVector(player, commPromptID, vec);
                   debugChats("Sending AI Chat to player: " + player + ", commPromptID: " + commPromptID + ", vector: " + vec);
                }
+               llMaybeFollowStatementWithQuote(player, commPromptID);
             }
          }
       }

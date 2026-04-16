@@ -1439,6 +1439,9 @@ minInterval 15
          {
             sendStatement(cPlayerRelationAllyExcludingSelf, cAICommPromptToAllyIWillAttackEnemySettlers, targetBaseLocation);
          }
+
+         llSendLegendaryLeaderComplimentLine(cPlayerRelationAllyExcludingSelf, 120000);
+         llSendLegendaryLeaderInsultLine(targetPlayer, 120000);
       }
 
       aiPlanSetBaseID(planID, mainBaseID);
@@ -2942,6 +2945,7 @@ minInterval 10
             if ((enemyPlayerUnitCount > (2 * gGoodArmyPop)) && (enemyPlayerUnitCount > (3 * armySize)))
             { // Enemy army is big, and we're badly outnumbered.
                sendStatement(enemyPlayerID, cAICommPromptToEnemyISpotHisArmyMyBaseOverrun, kbBaseGetLocation(cMyID, gDefenseReflexBaseID));
+               llSendLegendaryLeaderInsultLine(enemyPlayerID, 120000);
                debugMilitary("Sending OVERRUN prompt to player " + enemyPlayerID + ", he has " + enemyPlayerUnitCount + " units.");
                debugMilitary("I have " + armySize + " units, and " + gGoodArmyPop + " is a good army size.");
                return;
@@ -2949,6 +2953,7 @@ minInterval 10
             if (enemyPlayerUnitCount > (2 * gGoodArmyPop))
             { // Big army, but I'm still in the fight.
                sendStatement(enemyPlayerID, cAICommPromptToEnemyISpotHisArmyMyBaseLarge, kbBaseGetLocation(cMyID, gDefenseReflexBaseID));
+               llSendLegendaryLeaderInsultLine(enemyPlayerID, 120000);
                debugMilitary("Sending LARGE ARMY prompt to player " + enemyPlayerID + ", he has " + enemyPlayerUnitCount + " units.");
                debugMilitary("I have " + armySize + " units, and " + gGoodArmyPop + " is a good army size.");
                return;
@@ -2957,6 +2962,7 @@ minInterval 10
             {
                // Moderate size.
                sendStatement(enemyPlayerID, cAICommPromptToEnemyISpotHisArmyMyBaseMedium, kbBaseGetLocation(cMyID, gDefenseReflexBaseID));
+               llSendLegendaryLeaderInsultLine(enemyPlayerID, 120000);
                debugMilitary("Sending MEDIUM ARMY prompt to player " + enemyPlayerID + ", he has " + enemyPlayerUnitCount + " units.");
                debugMilitary("I have " + armySize + " units, and " + gGoodArmyPop + " is a good army size.");
                return;
@@ -2964,6 +2970,7 @@ minInterval 10
             if ((enemyPlayerUnitCount < gGoodArmyPop) && (enemyPlayerUnitCount < armySize))
             { // Small, and under control.
                sendStatement(enemyPlayerID, cAICommPromptToEnemyISpotHisArmyMyBaseSmall, kbBaseGetLocation(cMyID, gDefenseReflexBaseID));
+               llSendLegendaryLeaderInsultLine(enemyPlayerID, 120000);
                debugMilitary("Sending SMALL ARMY prompt to player " + enemyPlayerID + ", he has " + enemyPlayerUnitCount + " units.");
                debugMilitary("I have " + armySize + " units, and " + gGoodArmyPop + " is a good army size.");
                return;

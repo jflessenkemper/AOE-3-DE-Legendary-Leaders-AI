@@ -86,6 +86,8 @@ minInterval 50
       {
          sendStatement(cPlayerRelationAllyExcludingSelf, cAICommPromptToAllyLull);
          sendStatement(cPlayerRelationEnemyNotGaia, cAICommPromptToEnemyLull);
+         llSendLegendaryLeaderComplimentLine(cPlayerRelationAllyExcludingSelf, interval);
+         llSendLegendaryLeaderInsultLine(cPlayerRelationEnemyNotGaia, interval);
          xsSetRuleMinIntervalSelf(interval);
       }
    }

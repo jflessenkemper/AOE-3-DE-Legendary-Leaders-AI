@@ -265,6 +265,7 @@ void initLegendaryRevolutionCommander(void)
    }
 
    llEnablePrisonerSystem();
+   debugLegendaryLeaders("revolution commander initialized for " + rvltName + " with doctrine bucket " + gLegendaryRevolutionDoctrine);
    gLegendaryRevolutionCommanderEnabled = true;
 }
 

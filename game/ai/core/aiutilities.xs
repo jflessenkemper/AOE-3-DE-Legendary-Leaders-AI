@@ -90,6 +90,14 @@ void debugCore (string message = "")
    }
 }
 
+void debugLegendaryLeaders (string message = "")
+{
+   if (cDebugLegendaryLeaders == true)
+   {
+      aiEcho("Legendary Leaders: " + message);
+   }
+}
+
 //==============================================================================
 // Civilization checks.
 //==============================================================================
