@@ -258,6 +258,40 @@ bool llHasNearbyEliteSupport(int unitID = -1, float radius = 24.0)
    return (false);
 }
 
+float llGetSurrenderHealthThreshold(void)
+{
+   switch (gLLPrisonerDoctrine)
+   {
+      case cLLPrisonerDoctrineForcedLabor:
+         return (0.42);
+      case cLLPrisonerDoctrineExecution:
+         return (0.32);
+      case cLLPrisonerDoctrineIntegration:
+         return (0.54);
+      case cLLPrisonerDoctrineExchange:
+         return (0.60);
+   }
+
+   return (0.46);
+}
+
+float llGetSurrenderEliteSupportRadius(void)
+{
+   switch (gLLPrisonerDoctrine)
+   {
+      case cLLPrisonerDoctrineForcedLabor:
+         return (22.0);
+      case cLLPrisonerDoctrineExecution:
+         return (30.0);
+      case cLLPrisonerDoctrineIntegration:
+         return (18.0);
+      case cLLPrisonerDoctrineExchange:
+         return (16.0);
+   }
+
+   return (24.0);
+}
+
 bool llCanUnitSurrender(int unitID = -1, float healthThreshold = 0.50, float eliteSupportRadius = 24.0)
 {
    if (unitID < 0)
@@ -966,6 +1000,9 @@ minInterval 8
       return;
    }
 
+   float healthThreshold = llGetSurrenderHealthThreshold();
+   float eliteSupportRadius = llGetSurrenderEliteSupportRadius();
+
    int landQueryID = createSimpleUnitQuery(cUnitTypeLogicalTypeLandMilitary, cMyID, cUnitStateAlive);
    int landCount = kbUnitQueryExecute(landQueryID);
    for (int i = 0; < landCount)
@@ -976,7 +1013,7 @@ minInterval 8
          continue;
       }
 
-      if (llCanUnitSurrender(unitID) == false)
+      if (llCanUnitSurrender(unitID, healthThreshold, eliteSupportRadius) == false)
       {
          continue;
       }
@@ -1007,7 +1044,7 @@ minInterval 8
          continue;
       }
 
-      if (llCanUnitSurrender(unitID) == false)
+      if (llCanUnitSurrender(unitID, healthThreshold, eliteSupportRadius) == false)
       {
          continue;
       }
