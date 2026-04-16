@@ -7,7 +7,7 @@
 		<Culture>WesternEurope</Culture>
 		<SettlerProtoName>Settler</SettlerProtoName>
 		<DisplayNameID>125353</DisplayNameID>
-		<RolloverNameID>400020</RolloverNameID>
+		<RolloverNameID>490002</RolloverNameID>
 		<AlliedID>26446</AlliedID>
 		<AlliedOtherID>26445</AlliedOtherID>
 		<UnAlliedID>26444</UnAlliedID>
@@ -276,7 +276,7 @@
 		<UnAlliedID>26444</UnAlliedID>
 		<AgeTech>
 			<Age>Age0</Age>
-			<Tech>RvltModAge0NapoleonicFrench</Tech>
+			<Tech>RvltModAge0RevolutionaryFrench</Tech>
 		</AgeTech>
 		<AgeTech>
 			<Age>Age1</Age>
@@ -355,9 +355,9 @@
 		<RandomStartingUnits>0</RandomStartingUnits>
 		<HomeCityFilename>rvltmodhomecityrevolutionaryfrance.xml</HomeCityFilename>
 		<HomeCityFlagTexture>objects\flags\french_revolution_ne</HomeCityFlagTexture>
-		<PostgameFlagIconWPF>resources/images/icons/flags/postgame_flag_french_revolution_ne.png</PostgameFlagIconWPF>
-		<HomeCityFlagIconWPF>resources/images/icons/flags/Flag_French_Revolution_NE.png</HomeCityFlagIconWPF>
-		<HomeCityFlagButtonWPF>resources/images/icons/flags/flag_hc_french_revolution_ne.png</HomeCityFlagButtonWPF>
+		<PostgameFlagIconWPF>resources/images/icons/flags/postgame_flag_revolutionary_france.png</PostgameFlagIconWPF>
+		<HomeCityFlagIconWPF>resources/images/icons/flags/Flag_Revolutionary_France.png</HomeCityFlagIconWPF>
+		<HomeCityFlagButtonWPF>resources/images/icons/flags/flag_hc_revolutionary_france.png</HomeCityFlagButtonWPF>
 		<MatchmakingTextures>
 			<BannerTexture>ui\eso\civ_flags_quick_launch</BannerTexture>
 			<BannerTextureCoords>0 0.125 0.78125 0.25</BannerTextureCoords>
@@ -365,7 +365,7 @@
 			<PortraitTextureCoords>0.005859375 0.00390625 0.396484375 0.392578125</PortraitTextureCoords>
 			<SmallPortraitTexture>ui\singleplayer\cpai_avatar_french</SmallPortraitTexture>
 			<SmallPortraitTextureCoords>0 0 1 1</SmallPortraitTextureCoords>
-			<SmallPortraitTextureWPF>resources/images/icons/singleplayer/cpai_avatar_napoleonic_france.png</SmallPortraitTextureWPF>
+			<SmallPortraitTextureWPF>resources/images/icons/singleplayer/cpai_avatar_revolutionary_france.png</SmallPortraitTextureWPF>
 		</MatchmakingTextures>
 		<UnitRegen>
 			<UnitType>Hero</UnitType>
