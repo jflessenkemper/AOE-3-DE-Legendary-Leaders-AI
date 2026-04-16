@@ -4,8 +4,6 @@
 
 **Legendary Leaders AI** is a standalone Age of Empires III: Definitive Edition mod that combines the base civilizations with the playable revolution roster. Each nation is mapped to a themed leader personality and a clear battlefield identity.
 
-*French note:* **Revolutionary France and Napoleonic France now use separate selectable civs.** Royal France remains the base French civ, while the two revolution-era French paths now have their own nation slots and card pools.
-
 ## 🏳️ Surrender
 
 Surrender is currently an *AI-driven battlefield mechanic*, not a player button: damaged non-elite units can give up when elite support is gone, and they then move into the existing prison flow instead of instantly switching sides. If we add a proper surrender button later, the clean implementation is a dedicated tech or UI command that calls this same prison-transfer logic rather than creating a second surrender system.
