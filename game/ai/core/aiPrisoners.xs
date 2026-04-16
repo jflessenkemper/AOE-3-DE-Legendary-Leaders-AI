@@ -34,10 +34,18 @@ extern vector gLLEnemyPrisonLocation = cInvalidVector;
 extern vector gLLNavalPrisonLocation = cInvalidVector;
 extern int gLLSurrenderUnitIDs = -1;
 extern int gLLSurrenderTimes = -1;
+extern int gLLSurrenderStates = -1;
+extern int gLLSurrenderCaptors = -1;
+extern int gLLSurrenderOriginalOwners = -1;
 
 int cLLMaxSurrenderUnits = 64;
 int cLLMaxSurrenderLifetime = 90000;
 float cLLSurrenderArrivalRadius = 18.0;
+float cLLPrisonHoldRadius = 10.0;
+float cLLPrisonReclaimRadius = 12.0;
+
+int cLLSurrenderStateTransit = 0;
+int cLLSurrenderStateImprisoned = 1;
 
 string llGetPlayerCivName(int playerID = -1)
 {
@@ -64,76 +72,81 @@ bool llIsEliteProtoForRevolution(int protoUnitID = -1, int playerID = -1)
 
    if (rvltName == "RvltModAmericans")
    {
-      return ((protoUnitID == cUnitTypedeRifleman) || (protoUnitID == cUnitTypedeUSCavalry));
+         return ((protoUnitID == cUnitTypexpGatlingGun) || (protoUnitID == cUnitTypeRocket));
    }
    if (rvltName == "RvltModNapoleonicFrance" || rvltName == "RvltModRevolutionaryFrance" || rvltName == "RvltModFrenchCanadians")
    {
-      return ((protoUnitID == cUnitTypeSkirmisher) || (protoUnitID == cUnitTypeCuirassier));
+         return ((protoUnitID == cUnitTypeSkirmisher) || (protoUnitID == cUnitTypeCuirassier));
    }
    if (rvltName == "RvltModCanadians")
    {
-      return ((protoUnitID == cUnitTypeMusketeer) || (protoUnitID == cUnitTypeHussar));
+         return ((protoUnitID == cUnitTypeMusketeer) || (protoUnitID == cUnitTypeHussar));
    }
    if (rvltName == "RvltModBrazil")
    {
-      return ((protoUnitID == cUnitTypeMusketeer) || (protoUnitID == cUnitTypeDragoon) ||
-              (protoUnitID == cUnitTypeCrossbowman) || (protoUnitID == cUnitTypePikeman) ||
-              (protoUnitID == cUnitTypedeREVJagunco));
+         return ((protoUnitID == cUnitTypeMusketeer) || (protoUnitID == cUnitTypeDragoon) ||
+            (protoUnitID == cUnitTypeCrossbowman) || (protoUnitID == cUnitTypePikeman));
    }
    if (rvltName == "RvltModArgentina" || rvltName == "RvltModArgentines" ||
        rvltName == "RvltModPeruvians")
    {
-      return ((protoUnitID == cUnitTypePikeman) || (protoUnitID == cUnitTypeRodelero) ||
-              (protoUnitID == cUnitTypeLancer) || (protoUnitID == cUnitTypedeREVGranadero));
+         return ((protoUnitID == cUnitTypePikeman) || (protoUnitID == cUnitTypeRodelero) ||
+            (protoUnitID == cUnitTypeLancer));
    }
    if (rvltName == "RvltModChileans")
    {
-      return ((protoUnitID == cUnitTypePikeman) || (protoUnitID == cUnitTypeRodelero) ||
-              (protoUnitID == cUnitTypeLancer) || (protoUnitID == cUnitTypeHussar));
+         return ((protoUnitID == cUnitTypePikeman) || (protoUnitID == cUnitTypeRodelero) ||
+            (protoUnitID == cUnitTypeLancer) || (protoUnitID == cUnitTypeHussar));
    }
    if (rvltName == "RvltModColumbians")
    {
-      return ((protoUnitID == cUnitTypePikeman) || (protoUnitID == cUnitTypeRodelero) ||
-            (protoUnitID == cUnitTypeLancer) || (protoUnitID == cUnitTypedeREVLlanero));
+         return ((protoUnitID == cUnitTypePikeman) || (protoUnitID == cUnitTypeRodelero) ||
+            (protoUnitID == cUnitTypeLancer));
    }
    if (rvltName == "RvltModMexicans")
    {
-      return ((protoUnitID == cUnitTypePikeman) || (protoUnitID == cUnitTypeRodelero) ||
-              (protoUnitID == cUnitTypedeSoldado) || (protoUnitID == cUnitTypedeChinaco));
+         return ((protoUnitID == cUnitTypePikeman) || (protoUnitID == cUnitTypeRodelero) ||
+            (protoUnitID == cUnitTypedeChinaco));
    }
    if (rvltName == "RvltModCalifornians" || rvltName == "RvltModCentralAmericans" ||
        rvltName == "RvltModBajaCalifornians" || rvltName == "RvltModYucatan" ||
        rvltName == "RvltModRioGrande")
    {
-      return ((protoUnitID == cUnitTypedeChinaco) || (protoUnitID == cUnitTypedeSalteador) ||
-              (protoUnitID == cUnitTypedeREVCalifornio));
+         return ((protoUnitID == cUnitTypedeChinaco) || (protoUnitID == cUnitTypedeSalteador));
    }
    if (rvltName == "RvltModTexians")
    {
-      return ((protoUnitID == cUnitTypedeChinaco) || (protoUnitID == cUnitTypedeStateMilitia));
+         return ((protoUnitID == cUnitTypedeChinaco) || (protoUnitID == cUnitTypedeStateMilitia));
    }
    if (rvltName == "RvltModFinnish")
    {
-      return ((protoUnitID == cUnitTypePikeman) || (protoUnitID == cUnitTypedeFinnishRider) ||
-              (protoUnitID == cUnitTypeGrenadier));
+         return ((protoUnitID == cUnitTypePikeman) || (protoUnitID == cUnitTypedeFinnishRider) ||
+            (protoUnitID == cUnitTypeGrenadier));
    }
    if (rvltName == "RvltModHungarians")
    {
-      return (protoUnitID == cUnitTypeHussar);
+         return (protoUnitID == cUnitTypeHussar);
    }
    if (rvltName == "RvltModIndonesians" || rvltName == "RvltModSouthAfricans")
    {
-      return ((protoUnitID == cUnitTypeHalberdier) || (protoUnitID == cUnitTypeRuyter) ||
-              (protoUnitID == cUnitTypedeREVJavaSpearman));
+         return ((protoUnitID == cUnitTypeHalberdier) || (protoUnitID == cUnitTypeRuyter));
    }
    if (rvltName == "RvltModEgyptians")
    {
-      return ((protoUnitID == cUnitTypeGrenadier) || (protoUnitID == cUnitTypeHussar));
+         return ((protoUnitID == cUnitTypeGrenadier) || (protoUnitID == cUnitTypeHussar));
    }
    if (rvltName == "RvltModBarbary")
    {
       return ((protoUnitID == cUnitTypedeREVBarbaryWarrior) || (protoUnitID == cUnitTypedeBarbaryCavalry) ||
-              (protoUnitID == cUnitTypedeBedouinHorseArcher));
+            (protoUnitID == cUnitTypedeBedouinHorseArcher));
+   }
+   if (rvltName == "RvltModHaitians")
+   {
+      return (protoUnitID == cUnitTypexpColonialMilitia);
+   }
+   if (rvltName == "RvltModRomanians")
+   {
+      return ((protoUnitID == cUnitTypexpColonialMilitia) || (protoUnitID == cUnitTypeDragoon));
    }
    if (rvltName == "RvltModMayans")
    {
@@ -260,7 +273,7 @@ bool llHasNearbyEliteSupport(int unitID = -1, float radius = 24.0)
 
 float llGetSurrenderHealthThreshold(void)
 {
-   return (0.25);
+   return (0.10);
 }
 
 float llGetSurrenderEliteSupportRadius(void)
@@ -307,6 +320,21 @@ void llEnsureSurrenderArrays(void)
    {
       gLLSurrenderTimes = xsArrayCreateInt(cLLMaxSurrenderUnits, -1, "Legendary surrender times");
    }
+
+   if (gLLSurrenderStates < 0)
+   {
+      gLLSurrenderStates = xsArrayCreateInt(cLLMaxSurrenderUnits, cLLSurrenderStateTransit, "Legendary surrender states");
+   }
+
+   if (gLLSurrenderCaptors < 0)
+   {
+      gLLSurrenderCaptors = xsArrayCreateInt(cLLMaxSurrenderUnits, -1, "Legendary surrender captors");
+   }
+
+   if (gLLSurrenderOriginalOwners < 0)
+   {
+      gLLSurrenderOriginalOwners = xsArrayCreateInt(cLLMaxSurrenderUnits, -1, "Legendary surrender owners");
+   }
 }
 
 int llGetTrackedSurrenderIndex(int unitID = -1)
@@ -336,6 +364,198 @@ void llClearTrackedSurrenderIndex(int index = -1)
 
    xsArraySetInt(gLLSurrenderUnitIDs, index, -1);
    xsArraySetInt(gLLSurrenderTimes, index, -1);
+   if (gLLSurrenderStates >= 0)
+   {
+      xsArraySetInt(gLLSurrenderStates, index, cLLSurrenderStateTransit);
+   }
+   if (gLLSurrenderCaptors >= 0)
+   {
+      xsArraySetInt(gLLSurrenderCaptors, index, -1);
+   }
+   if (gLLSurrenderOriginalOwners >= 0)
+   {
+      xsArraySetInt(gLLSurrenderOriginalOwners, index, -1);
+   }
+}
+
+int llGetCapturingPlayerForUnit(int unitID = -1)
+{
+   if (unitID < 0)
+   {
+      return (-1);
+   }
+
+   vector unitLocation = kbUnitGetPosition(unitID);
+   int threatTypeID = cUnitTypeLogicalTypeLandMilitary;
+   float threatRadius = 28.0;
+   if (kbUnitIsType(unitID, cUnitTypeAbstractWarShip) == true)
+   {
+      threatTypeID = cUnitTypeAbstractWarShip;
+      threatRadius = 36.0;
+   }
+
+   int closestPlayer = -1;
+   float closestDistance = 100000.0;
+   for (int player = 1; player < cNumberPlayers; player++)
+   {
+      if (kbIsPlayerEnemy(player) == false)
+      {
+         continue;
+      }
+
+      int enemyUnitID = getClosestUnitByLocation(threatTypeID, player, cUnitStateAlive, unitLocation, threatRadius);
+      if (enemyUnitID < 0)
+      {
+         continue;
+      }
+
+      float enemyDistance = distance(unitLocation, kbUnitGetPosition(enemyUnitID));
+      if (enemyDistance < closestDistance)
+      {
+         closestDistance = enemyDistance;
+         closestPlayer = player;
+      }
+   }
+
+   if (closestPlayer >= 0)
+   {
+      return (closestPlayer);
+   }
+
+   int hatedPlayerID = aiGetMostHatedPlayerID();
+   if (hatedPlayerID >= 0)
+   {
+      return (hatedPlayerID);
+   }
+
+   return (-1);
+}
+
+int llFindBestHCGatherUnitForPlayer(int playerID = -1)
+{
+   if (playerID < 0)
+   {
+      return (-1);
+   }
+
+   int baseID = kbBaseGetMainID(playerID);
+   if (baseID < 0)
+   {
+      return (getUnit(cUnitTypeTownCenter, playerID, cUnitStateAlive));
+   }
+
+   vector loc = kbBaseGetLocation(playerID, baseID);
+   float dist = kbBaseGetDistance(playerID, baseID);
+   int unitID = getUnitByLocation(cUnitTypeAbstractTownCenter, playerID, cUnitStateAlive, loc, dist);
+   if (unitID < 0)
+   {
+      unitID = getUnitByLocation(cUnitTypeHCGatherPointPri1, playerID, cUnitStateAlive, loc, dist);
+   }
+   if (unitID < 0)
+   {
+      unitID = getUnitByLocation(cUnitTypeHCGatherPointPri2, playerID, cUnitStateAlive, loc, dist);
+   }
+   if (unitID < 0)
+   {
+      unitID = getUnitByLocation(cUnitTypeHCGatherPointPri3, playerID, cUnitStateAlive, loc, dist);
+   }
+   if (unitID < 0)
+   {
+      unitID = getUnit(cUnitTypeTownCenter, playerID, cUnitStateAlive);
+   }
+
+   return (unitID);
+}
+
+vector llGetShipmentGatherLocationForPlayer(int playerID = -1)
+{
+   int gatherUnitID = llFindBestHCGatherUnitForPlayer(playerID);
+   if (gatherUnitID >= 0)
+   {
+      return (kbUnitGetPosition(gatherUnitID));
+   }
+
+   return (cInvalidVector);
+}
+
+vector llGetPrisonAnchorLocationForPlayer(int playerID = -1)
+{
+   if (playerID < 0)
+   {
+      return (cInvalidVector);
+   }
+
+   vector prisonAnchor = llGetShipmentGatherLocationForPlayer(playerID);
+   if (prisonAnchor == cInvalidVector)
+   {
+      int mainBaseID = kbBaseGetMainID(playerID);
+      prisonAnchor = kbBaseGetLocation(playerID, mainBaseID);
+   }
+
+   return (prisonAnchor);
+}
+
+vector llGetPrisonHoldingPoint(int captorPlayerID = -1, int slot = 0)
+{
+   vector prisonAnchor = llGetPrisonAnchorLocationForPlayer(captorPlayerID);
+   if (prisonAnchor == cInvalidVector)
+   {
+      return (cInvalidVector);
+   }
+
+   int ringIndex = slot % 6;
+   float offsetX = 0.0;
+   float offsetZ = 0.0;
+   switch (ringIndex)
+   {
+      case 0: offsetX = 4.0; break;
+      case 1: offsetX = -4.0; break;
+      case 2: offsetZ = 4.0; break;
+      case 3: offsetZ = -4.0; break;
+      case 4: offsetX = 3.0; offsetZ = 3.0; break;
+      case 5: offsetX = -3.0; offsetZ = -3.0; break;
+   }
+
+   return (xsVectorSet(xsVectorGetX(prisonAnchor) + offsetX, 0.0, xsVectorGetZ(prisonAnchor) + offsetZ));
+}
+
+vector llGetReturnLocationForPlayer(int playerID = -1)
+{
+   if (playerID < 0)
+   {
+      return (cInvalidVector);
+   }
+
+   int mainBaseID = kbBaseGetMainID(playerID);
+   if (mainBaseID >= 0)
+   {
+      vector gatherPoint = kbBaseGetMilitaryGatherPoint(playerID, mainBaseID);
+      if (gatherPoint != cInvalidVector)
+      {
+         return (gatherPoint);
+      }
+
+      return (kbBaseGetLocation(playerID, mainBaseID));
+   }
+
+   int townCenterID = getUnit(cUnitTypeTownCenter, playerID, cUnitStateAlive);
+   if (townCenterID >= 0)
+   {
+      return (kbUnitGetPosition(townCenterID));
+   }
+
+   return (cInvalidVector);
+}
+
+bool llHasFriendlyExplorerNearby(int playerID = -1, vector location = cInvalidVector, float radius = 12.0)
+{
+   if ((playerID < 0) || (location == cInvalidVector))
+   {
+      return (false);
+   }
+
+   int heroQueryID = createSimpleUnitQuery(cUnitTypeHero, playerID, cUnitStateAlive, location, radius);
+   return (kbUnitQueryExecute(heroQueryID) > 0);
 }
 
 bool llTrackSurrenderingUnit(int unitID = -1)
@@ -356,6 +576,9 @@ bool llTrackSurrenderingUnit(int unitID = -1)
 
       xsArraySetInt(gLLSurrenderUnitIDs, i, unitID);
       xsArraySetInt(gLLSurrenderTimes, i, xsGetTime());
+      xsArraySetInt(gLLSurrenderStates, i, cLLSurrenderStateTransit);
+      xsArraySetInt(gLLSurrenderCaptors, i, llGetCapturingPlayerForUnit(unitID));
+      xsArraySetInt(gLLSurrenderOriginalOwners, i, kbUnitGetPlayerID(unitID));
       return (true);
    }
 
@@ -494,6 +717,12 @@ vector llGetSurrenderDestination(int unitID = -1)
       }
    }
 
+   vector enemyShipmentLocation = llGetShipmentGatherLocationForPlayer(enemyPlayerID);
+   if (enemyShipmentLocation != cInvalidVector)
+   {
+      return (enemyShipmentLocation);
+   }
+
    int enemyBaseID = kbBaseGetMainID(enemyPlayerID);
    if (enemyBaseID >= 0)
    {
@@ -537,6 +766,9 @@ int llGetPrisonerCount(vector location = cInvalidVector, float radius = 60.0)
    {
       prisonerCount = prisonerCount + getUnitCountByLocation(cUnitTypeAbstractVillager, 0, cUnitStateAlive, location, radius);
    }
+
+   prisonerCount = prisonerCount + getUnitCountByLocation(cUnitTypeLogicalTypeLandMilitary, cPlayerRelationEnemy, cUnitStateAlive, location, radius);
+   prisonerCount = prisonerCount + getUnitCountByLocation(cUnitTypeAbstractVillager, cPlayerRelationEnemy, cUnitStateAlive, location, radius);
 
    return (prisonerCount);
 }
@@ -611,6 +843,26 @@ vector llFindEnemyPrisonLocation(void)
 {
    gLLEnemyPrisonPlayerID = -1;
 
+   if ((gLLSurrenderUnitIDs >= 0) && (gLLSurrenderStates >= 0) && (gLLSurrenderCaptors >= 0))
+   {
+      for (int i = 0; < cLLMaxSurrenderUnits)
+      {
+         if (xsArrayGetInt(gLLSurrenderStates, i) != cLLSurrenderStateImprisoned)
+         {
+            continue;
+         }
+
+         int captorPlayerID = xsArrayGetInt(gLLSurrenderCaptors, i);
+         if (captorPlayerID < 0)
+         {
+            continue;
+         }
+
+         gLLEnemyPrisonPlayerID = captorPlayerID;
+         return (llGetPrisonAnchorLocationForPlayer(captorPlayerID));
+      }
+   }
+
    for (int player = 1; player < cNumberPlayers; player++)
    {
       if (kbIsPlayerEnemy(player) == false)
@@ -677,19 +929,7 @@ void llSetPrisonerDoctrine(int doctrine = 0, float escortFraction = 0.30, float 
 
 vector llGetPrisonAnchorLocation(void)
 {
-   int mainBaseID = kbBaseGetMainID(cMyID);
-   vector prisonAnchor = kbBaseGetLocation(cMyID, mainBaseID);
-   int townCenterID = getClosestUnitByLocation(cUnitTypeTownCenter, cMyID, cUnitStateAlive, prisonAnchor, 45.0);
-
-   if (townCenterID >= 0)
-   {
-      prisonAnchor = kbUnitGetPosition(townCenterID);
-   }
-
-   prisonAnchor = xsVectorSet(xsVectorGetX(prisonAnchor) + gLLPrisonBuildDistance, 0.0,
-      xsVectorGetZ(prisonAnchor) + gLLPrisonBuildDistance);
-
-   return (prisonAnchor);
+   return (llGetPrisonAnchorLocationForPlayer(cMyID));
 }
 
 int llGetPrisonGuardCap(void)
@@ -778,9 +1018,13 @@ minInterval 10
       return;
    }
 
-   int mainBaseID = kbBaseGetMainID(cMyID);
-   vector mainBaseLocation = kbBaseGetLocation(cMyID, mainBaseID);
-   int prisonerCount = llGetPrisonerCount(mainBaseLocation, gLLPrisonDetectionRadius);
+   if (gLLPrisonLocation == cInvalidVector)
+   {
+      gLLPrisonLocation = llGetPrisonAnchorLocation();
+      debugMilitary("Legendary Prison: established " + llGetPrisonerDoctrineName() + " prison anchor.");
+   }
+
+   int prisonerCount = llGetPrisonerCount(gLLPrisonLocation, cLLPrisonHoldRadius);
 
    if (prisonerCount <= 0)
    {
@@ -794,12 +1038,6 @@ minInterval 10
    }
 
    gLLPrisonLastSeenTime = xsGetTime();
-
-   if (gLLPrisonLocation == cInvalidVector)
-   {
-      gLLPrisonLocation = llGetPrisonAnchorLocation();
-      debugMilitary("Legendary Prison: established " + llGetPrisonerDoctrineName() + " prison anchor.");
-   }
 
    if ((gLLPrisonStructureType >= 0) &&
        (getUnitCountByLocation(gLLPrisonStructureType, cMyID, cUnitStateABQ, gLLPrisonLocation, 30.0) < 1) &&
@@ -1063,10 +1301,9 @@ minInterval 2
 
       int surrenderTime = xsArrayGetInt(gLLSurrenderTimes, i);
       int trackedDuration = xsGetTime() - surrenderTime;
-      if (surrenderTime < 0)
-      {
-         trackedDuration = xsGetTime() - ((-1 * surrenderTime) - 1);
-      }
+      int surrenderState = xsArrayGetInt(gLLSurrenderStates, i);
+      int captorPlayerID = xsArrayGetInt(gLLSurrenderCaptors, i);
+      int originalOwnerID = xsArrayGetInt(gLLSurrenderOriginalOwners, i);
 
       if (trackedDuration > cLLMaxSurrenderLifetime)
       {
@@ -1075,18 +1312,34 @@ minInterval 2
          continue;
       }
 
-      vector destination = llGetSurrenderDestination(unitID);
-      if (destination == cInvalidVector)
+      if (captorPlayerID < 0)
       {
-         continue;
+         captorPlayerID = llGetCapturingPlayerForUnit(unitID);
+         xsArraySetInt(gLLSurrenderCaptors, i, captorPlayerID);
       }
 
-      if (distance(kbUnitGetPosition(unitID), destination) < cLLSurrenderArrivalRadius)
+      vector destination = llGetPrisonHoldingPoint(captorPlayerID, i);
+      if (destination == cInvalidVector)
       {
-         if (surrenderTime >= 0)
+         destination = llGetSurrenderDestination(unitID);
+         if (destination == cInvalidVector)
          {
-            debugLegendaryLeaders("AI surrendering unit " + unitID + " reached the enemy anchor area.");
-            xsArraySetInt(gLLSurrenderTimes, i, (-1 * surrenderTime) - 1);
+            continue;
+         }
+      }
+
+      if (surrenderState == cLLSurrenderStateImprisoned)
+      {
+         if ((originalOwnerID >= 0) && (llHasFriendlyExplorerNearby(originalOwnerID, kbUnitGetPosition(unitID), cLLPrisonReclaimRadius) == true))
+         {
+            vector returnLocation = llGetReturnLocationForPlayer(originalOwnerID);
+            llClearTrackedSurrenderIndex(i);
+            debugLegendaryLeaders("AI prisoner " + unitID + " reclaimed by explorer for player " + originalOwnerID + ".");
+            if (returnLocation != cInvalidVector)
+            {
+               aiTaskUnitMove(unitID, returnLocation);
+            }
+            continue;
          }
 
          llReleaseSurrenderingUnit(unitID);
@@ -1094,9 +1347,13 @@ minInterval 2
          continue;
       }
 
-      if (surrenderTime < 0)
+      if (distance(kbUnitGetPosition(unitID), destination) < cLLSurrenderArrivalRadius)
       {
-         xsArraySetInt(gLLSurrenderTimes, i, (-1 * surrenderTime) - 1);
+         debugLegendaryLeaders("AI surrendering unit " + unitID + " reached prison custody for player " + captorPlayerID + ".");
+         xsArraySetInt(gLLSurrenderStates, i, cLLSurrenderStateImprisoned);
+         llReleaseSurrenderingUnit(unitID);
+         aiTaskUnitMove(unitID, destination);
+         continue;
       }
 
       llReleaseSurrenderingUnit(unitID);

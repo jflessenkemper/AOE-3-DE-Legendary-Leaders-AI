@@ -24,6 +24,16 @@ vector llGetHumanSurrenderDestination(int unitID = -1)
       return (cInvalidVector);
    }
 
+   int enemyPlayerID = llGetCapturingPlayerForUnit(unitID);
+   if (enemyPlayerID >= 0)
+   {
+      vector enemyShipmentLocation = llGetShipmentGatherLocationForPlayer(enemyPlayerID);
+      if (enemyShipmentLocation != cInvalidVector)
+      {
+         return (enemyShipmentLocation);
+      }
+   }
+
    int enemyQueryID = createSimpleUnitQuery(cUnitTypeLogicalTypeLandMilitary, cPlayerRelationEnemyNotGaia,
       cUnitStateAlive, kbUnitGetPosition(unitID), 36.0);
    if (kbUnitQueryExecute(enemyQueryID) > 0)
@@ -120,10 +130,9 @@ minInterval 2
 
       int surrenderTime = xsArrayGetInt(gLLSurrenderTimes, i);
       int trackedDuration = xsGetTime() - surrenderTime;
-      if (surrenderTime < 0)
-      {
-         trackedDuration = xsGetTime() - ((-1 * surrenderTime) - 1);
-      }
+      int surrenderState = xsArrayGetInt(gLLSurrenderStates, i);
+      int captorPlayerID = xsArrayGetInt(gLLSurrenderCaptors, i);
+      int originalOwnerID = xsArrayGetInt(gLLSurrenderOriginalOwners, i);
 
       if (trackedDuration > cLLMaxSurrenderLifetime)
       {
@@ -131,17 +140,33 @@ minInterval 2
          continue;
       }
 
-      vector destination = llGetHumanSurrenderDestination(unitID);
-      if (destination == cInvalidVector)
+      if (captorPlayerID < 0)
       {
-         continue;
+         captorPlayerID = llGetCapturingPlayerForUnit(unitID);
+         xsArraySetInt(gLLSurrenderCaptors, i, captorPlayerID);
       }
 
-      if (distance(kbUnitGetPosition(unitID), destination) < cLLSurrenderArrivalRadius)
+      vector destination = llGetPrisonHoldingPoint(captorPlayerID, i);
+      if (destination == cInvalidVector)
       {
-         if (surrenderTime >= 0)
+         destination = llGetHumanSurrenderDestination(unitID);
+         if (destination == cInvalidVector)
          {
-            xsArraySetInt(gLLSurrenderTimes, i, (-1 * surrenderTime) - 1);
+            continue;
+         }
+      }
+
+      if (surrenderState == cLLSurrenderStateImprisoned)
+      {
+         if ((originalOwnerID >= 0) && (llHasFriendlyExplorerNearby(originalOwnerID, kbUnitGetPosition(unitID), cLLPrisonReclaimRadius) == true))
+         {
+            vector returnLocation = llGetReturnLocationForPlayer(originalOwnerID);
+            llClearTrackedSurrenderIndex(i);
+            if (returnLocation != cInvalidVector)
+            {
+               aiTaskUnitMove(unitID, returnLocation);
+            }
+            continue;
          }
 
          llReleaseSurrenderingUnit(unitID);
@@ -149,9 +174,12 @@ minInterval 2
          continue;
       }
 
-      if (surrenderTime < 0)
+      if (distance(kbUnitGetPosition(unitID), destination) < cLLSurrenderArrivalRadius)
       {
-         xsArraySetInt(gLLSurrenderTimes, i, (-1 * surrenderTime) - 1);
+         xsArraySetInt(gLLSurrenderStates, i, cLLSurrenderStateImprisoned);
+         llReleaseSurrenderingUnit(unitID);
+         aiTaskUnitMove(unitID, destination);
+         continue;
       }
 
       llReleaseSurrenderingUnit(unitID);
