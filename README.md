@@ -23,18 +23,53 @@ Each leader features a multi-layered personality that governs:
 
 See the locked source manifest in [resources/art/historical_portrait_sources.md](resources/art/historical_portrait_sources.md).
 
-- Napoleon Bonaparte: [art/ui/leaders/napoleon.jpg](art/ui/leaders/napoleon.jpg)
-- Duke of Wellington: [art/ui/leaders/wellington.jpg](art/ui/leaders/wellington.jpg)
-- Frederick the Great: [art/ui/leaders/frederick.jpg](art/ui/leaders/frederick.jpg)
-- Catherine the Great: [art/ui/leaders/catherine.jpg](art/ui/leaders/catherine.jpg)
-- Isabella I of Castile: [art/ui/leaders/isabella.jpg](art/ui/leaders/isabella.jpg)
-- Suleiman: [art/ui/leaders/suleiman.jpg](art/ui/leaders/suleiman.jpg)
-- Prince Henry the Navigator: [art/ui/leaders/henry.jpg](art/ui/leaders/henry.jpg)
-- Maurice of Nassau: [art/ui/leaders/maurice.jpg](art/ui/leaders/maurice.jpg)
-- George Washington: [art/ui/leaders/washington.jpg](art/ui/leaders/washington.jpg)
-- Miguel Hidalgo: [art/ui/leaders/hidalgo.jpg](art/ui/leaders/hidalgo.jpg)
-- Giuseppe Garibaldi: [art/ui/leaders/garibaldi.png](art/ui/leaders/garibaldi.png)
-- Jean Parisot de Valette: [art/ui/leaders/valette.jpg](art/ui/leaders/valette.jpg)
+### Napoleon Bonaparte
+
+![Napoleon Bonaparte](art/ui/leaders/napoleon.jpg)
+
+### Duke of Wellington
+
+![Duke of Wellington](art/ui/leaders/wellington.jpg)
+
+### Frederick the Great
+
+![Frederick the Great](art/ui/leaders/frederick.jpg)
+
+### Catherine the Great
+
+![Catherine the Great](art/ui/leaders/catherine.jpg)
+
+### Isabella I of Castile
+
+![Isabella I of Castile](art/ui/leaders/isabella.jpg)
+
+### Suleiman
+
+![Suleiman](art/ui/leaders/suleiman.jpg)
+
+### Prince Henry the Navigator
+
+![Prince Henry the Navigator](art/ui/leaders/henry.jpg)
+
+### Maurice of Nassau
+
+![Maurice of Nassau](art/ui/leaders/maurice.jpg)
+
+### George Washington
+
+![George Washington](art/ui/leaders/washington.jpg)
+
+### Miguel Hidalgo
+
+![Miguel Hidalgo](art/ui/leaders/hidalgo.jpg)
+
+### Giuseppe Garibaldi
+
+![Giuseppe Garibaldi](art/ui/leaders/garibaldi.png)
+
+### Jean Parisot de Valette
+
+![Jean Parisot de Valette](art/ui/leaders/valette.jpg)
 
 Perfect for immersive long Treaty Diplomacy Free-For-All games where the AIs build massive, believable empires and fight like their legendary commanders would have.
 
