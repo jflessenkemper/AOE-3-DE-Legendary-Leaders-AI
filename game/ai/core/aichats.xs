@@ -103,6 +103,55 @@ void sendStatement(int playerIDorRelation = -1, int commPromptID = -1, vector ve
    }
 }
 
+void sendChatLine(int playerIDorRelation = -1, string message = "")
+{
+   if ((cvOkToTaunt == false) || (message == ""))
+   {
+      return;
+   }
+
+   if (playerIDorRelation < 100)
+   {
+      aiChat(playerIDorRelation, message);
+      return;
+   }
+
+   for (int player = 1; player < cNumberPlayers; player++)
+   {
+      bool send = false;
+
+      switch (playerIDorRelation)
+      {
+         case cPlayerRelationAny:
+         {
+            send = (player != cMyID);
+            break;
+         }
+         case cPlayerRelationAllyExcludingSelf:
+         case cPlayerRelationAlly:
+         {
+            send = kbIsPlayerAlly(player);
+            if (player == cMyID)
+            {
+               send = false;
+            }
+            break;
+         }
+         case cPlayerRelationEnemy:
+         case cPlayerRelationEnemyNotGaia:
+         {
+            send = kbIsPlayerEnemy(player);
+            break;
+         }
+      }
+
+      if (send == true)
+      {
+         aiChat(player, message);
+      }
+   }
+}
+
 //==============================================================================
 // IKnowWhereYouLive
 // Send a menacing chat when we discover the enemy player's location.

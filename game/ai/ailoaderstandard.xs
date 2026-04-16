@@ -25,6 +25,16 @@ include "leaders\leader_washington.xs";
 include "leaders\leader_hidalgo.xs";
 include "leaders\leader_garibaldi.xs";
 include "leaders\leader_valette.xs";
+include "leaders\leader_montezuma.xs";
+include "leaders\leader_kangxi.xs";
+include "leaders\leader_menelik.xs";
+include "leaders\leader_hiawatha.xs";
+include "leaders\leader_usman.xs";
+include "leaders\leader_pachacuti.xs";
+include "leaders\leader_shivaji.xs";
+include "leaders\leader_tokugawa.xs";
+include "leaders\leader_crazy_horse.xs";
+include "leaders\leader_gustavus.xs";
 
 
 
@@ -92,6 +102,46 @@ void preInit(void)
    {
       initLeaderValette();
    }
+   else if (cMyCiv == cCivXPAztec)
+   {
+      initLeaderMontezuma();
+   }
+   else if (cMyCiv == cCivChinese)
+   {
+      initLeaderKangxi();
+   }
+   else if (cMyCiv == cCivDEEthiopians)
+   {
+      initLeaderMenelik();
+   }
+   else if (cMyCiv == cCivXPIroquois)
+   {
+      initLeaderHiawatha();
+   }
+   else if (cMyCiv == cCivDEHausa)
+   {
+      initLeaderUsman();
+   }
+   else if (cMyCiv == cCivDEInca)
+   {
+      initLeaderPachacuti();
+   }
+   else if (cMyCiv == cCivIndians)
+   {
+      initLeaderShivaji();
+   }
+   else if (cMyCiv == cCivJapanese)
+   {
+      initLeaderTokugawa();
+   }
+   else if (cMyCiv == cCivXPSioux)
+   {
+      initLeaderCrazyHorse();
+   }
+   else if (cMyCiv == cCivDESwedish)
+   {
+      initLeaderGustavus();
+   }
    else if (civIsRevolution() == true)
    {
       initLegendaryRevolutionCommander();
@@ -137,6 +187,16 @@ void postInit(void)
    enableLeaderHidalgoRules();
    enableLeaderGaribaldiRules();
    enableLeaderValetteRules();
+   enableLeaderMontezumaRules();
+   enableLeaderKangxiRules();
+   enableLeaderMenelikRules();
+   enableLeaderHiawathaRules();
+   enableLeaderUsmanRules();
+   enableLeaderPachacutiRules();
+   enableLeaderShivajiRules();
+   enableLeaderTokugawaRules();
+   enableLeaderCrazyHorseRules();
+   enableLeaderGustavusRules();
 }
 
 

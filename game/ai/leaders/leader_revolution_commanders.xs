@@ -235,6 +235,36 @@ void initLegendaryRevolutionCommander(void)
       return;
    }
 
+   if (gLegendaryRevolutionDoctrine == 1)
+   {
+      llSetPrisonerDoctrine(cLLPrisonerDoctrineStrictImprisonment, 0.24, 58.0);
+   }
+   else if (gLegendaryRevolutionDoctrine == 2)
+   {
+      llSetPrisonerDoctrine(cLLPrisonerDoctrineExecution, 0.38, 72.0);
+   }
+   else if (gLegendaryRevolutionDoctrine == 3)
+   {
+      llSetPrisonerDoctrine(cLLPrisonerDoctrineIntegration, 0.34, 66.0);
+   }
+   else if (gLegendaryRevolutionDoctrine == 4)
+   {
+      llSetPrisonerDoctrine(cLLPrisonerDoctrineForcedLabor, 0.30, 68.0);
+   }
+   else if (gLegendaryRevolutionDoctrine == 5)
+   {
+      llSetPrisonerDoctrine(cLLPrisonerDoctrineExchange, 0.20, 54.0);
+   }
+   else if (gLegendaryRevolutionDoctrine == 6)
+   {
+      llSetPrisonerDoctrine(cLLPrisonerDoctrineStrictImprisonment, 0.22, 60.0);
+   }
+   else if (gLegendaryRevolutionDoctrine == 7)
+   {
+      llSetPrisonerDoctrine(cLLPrisonerDoctrineExchange, 0.24, 58.0);
+   }
+
+   llEnablePrisonerSystem();
    gLegendaryRevolutionCommanderEnabled = true;
 }
 

@@ -14,6 +14,8 @@ void initLeaderFrederick(void)
    btBiasTrade = -0.2;
    llSetMilitaryFocus(0.5, 0.4, 0.2);
    cvMaxTowers = 3;
+   llSetPrisonerDoctrine(cLLPrisonerDoctrineStrictImprisonment, 0.28, 62.0);
+   llEnablePrisonerSystem();
    gFrederickRulesEnabled = true;
 }
 

@@ -15,6 +15,8 @@ void initLeaderWellington(void)
    llSetMilitaryFocus(0.7, -0.2, 0.2);
    llEnableDeepDefenseStyle();
    cvOkToBuildForts = true;
+   llSetPrisonerDoctrine(cLLPrisonerDoctrineStrictImprisonment, 0.25, 58.0);
+   llEnablePrisonerSystem();
    gWellingtonRulesEnabled = true;
 }
 

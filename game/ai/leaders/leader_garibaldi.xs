@@ -15,6 +15,8 @@ void initLeaderGaribaldi(void)
    btBiasNative = 0.1;
    llSetMilitaryFocus(0.4, 0.4, 0.0);
    cvMaxTowers = 2;
+   llSetPrisonerDoctrine(cLLPrisonerDoctrineIntegration, 0.30, 64.0);
+   llEnablePrisonerSystem();
    gGaribaldiRulesEnabled = true;
 }
 

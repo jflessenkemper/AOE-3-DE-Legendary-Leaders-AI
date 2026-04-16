@@ -15,6 +15,8 @@ void initLeaderHidalgo(void)
    btBiasNative = 0.0;
    llSetMilitaryFocus(0.6, -0.1, 0.2);
    cvMaxTowers = 3;
+   llSetPrisonerDoctrine(cLLPrisonerDoctrineIntegration, 0.33, 68.0);
+   llEnablePrisonerSystem();
    gHidalgoRulesEnabled = true;
 }
 

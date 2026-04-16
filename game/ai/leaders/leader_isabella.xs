@@ -15,6 +15,8 @@ void initLeaderIsabella(void)
    btBiasNative = -0.3;
    llSetMilitaryFocus(0.5, 0.1, 0.2);
    cvMaxTowers = 4;
+   llSetPrisonerDoctrine(cLLPrisonerDoctrineExecution, 0.40, 74.0);
+   llEnablePrisonerSystem();
    gIsabellaRulesEnabled = true;
 }
 

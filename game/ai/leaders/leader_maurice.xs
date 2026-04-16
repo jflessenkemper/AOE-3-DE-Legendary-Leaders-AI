@@ -15,6 +15,8 @@ void initLeaderMaurice(void)
    btBiasNative = -0.2;
    llSetMilitaryFocus(0.5, 0.0, 0.2);
    cvMaxTowers = 5;
+   llSetPrisonerDoctrine(cLLPrisonerDoctrineStrictImprisonment, 0.22, 56.0);
+   llEnablePrisonerSystem();
    gMauriceRulesEnabled = true;
 }
 

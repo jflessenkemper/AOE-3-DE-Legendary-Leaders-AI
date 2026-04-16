@@ -15,6 +15,8 @@ void initLeaderHenry(void)
    btBiasNative = 0.1;
    llSetMilitaryFocus(0.2, 0.1, 0.4);
    cvOkToTrainNavy = true;
+   llSetPrisonerDoctrine(cLLPrisonerDoctrineExchange, 0.20, 54.0);
+   llEnablePrisonerSystem();
    gHenryRulesEnabled = true;
 }
 

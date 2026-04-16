@@ -16,6 +16,8 @@ void initLeaderValette(void)
    llSetMilitaryFocus(0.6, -0.2, 0.3);
    cvMaxTowers = 8;
    cvOkToBuildForts = true;
+   llSetPrisonerDoctrine(cLLPrisonerDoctrineStrictImprisonment, 0.20, 50.0);
+   llEnablePrisonerSystem();
    gValetteRulesEnabled = true;
 }
 

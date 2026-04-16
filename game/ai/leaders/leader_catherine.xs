@@ -14,6 +14,8 @@ void initLeaderCatherine(void)
    btBiasTrade = 0.3;
    llSetMilitaryFocus(0.6, 0.1, -0.1);
    cvMaxTowers = 5;
+   llSetPrisonerDoctrine(cLLPrisonerDoctrineForcedLabor, 0.32, 68.0);
+   llEnablePrisonerSystem();
    gCatherineRulesEnabled = true;
 }
 

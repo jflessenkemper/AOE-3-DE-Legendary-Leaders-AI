@@ -15,6 +15,8 @@ void initLeaderWashington(void)
    btBiasNative = 0.0;
    llSetMilitaryFocus(0.5, 0.1, 0.2);
    cvMaxTowers = 4;
+   llSetPrisonerDoctrine(cLLPrisonerDoctrineExchange, 0.20, 54.0);
+   llEnablePrisonerSystem();
    gWashingtonRulesEnabled = true;
 }
 

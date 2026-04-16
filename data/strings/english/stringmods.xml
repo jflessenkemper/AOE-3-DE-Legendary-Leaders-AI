@@ -87,7 +87,10 @@
 		<String _locID='400083'>Imperial Jagunço</String>
 		<String _locID='400084'>Veteran Granadero</String>
 		<String _locID='400085'>Guard Granadero</String>
-		<String _locID='400086'>Imperial Granadero</String>
+      <String _locID='400086'>Imperial Granadero</String>
+      <String _locID='400090'>Surrender</String>
+      <String _locID='400091'>First-pass surrender control for military units. This build exposes the button safely across land military classes while the unit-instance surrender behavior is still being completed.</String>
+      <String _locID='400092'>Surrender button registered for this unit. The safe first-pass build exposes the control without live capture conversion yet.</String>
 		
 		
     <string _locid="150000" comment="proto-Caravel civ-RvltModAmericans type-title">Katy</string>

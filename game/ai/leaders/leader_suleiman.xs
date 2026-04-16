@@ -15,6 +15,8 @@ void initLeaderSuleiman(void)
    btBiasNative = 0.2;
    llSetMilitaryFocus(0.4, -0.2, 0.6);
    cvMaxTowers = 4;
+   llSetPrisonerDoctrine(cLLPrisonerDoctrineExchange, 0.28, 66.0);
+   llEnablePrisonerSystem();
    gSuleimanRulesEnabled = true;
 }
 

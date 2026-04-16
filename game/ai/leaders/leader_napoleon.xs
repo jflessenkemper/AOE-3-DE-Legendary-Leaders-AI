@@ -24,6 +24,8 @@ void initLeaderNapoleon(void)
    cvDefenseReflexRadiusActive = 80.0;
    cvDefenseReflexSearchRadius = 80.0;
    cvDefenseReflexRadiusPassive = 28.0;
+   llSetPrisonerDoctrine(cLLPrisonerDoctrineForcedLabor, 0.35, 72.0);
+   llEnablePrisonerSystem();
 
    gNapoleonRulesEnabled = true;
 }
