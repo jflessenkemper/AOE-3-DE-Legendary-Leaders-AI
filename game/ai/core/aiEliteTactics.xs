@@ -280,7 +280,7 @@ int llGetPrimaryLandAttackPlanID(void)
 {
    int numPlans = aiPlanGetActiveCount();
    int i = 0;
-   for (i = 0; < numPlans; i++)
+   for (i = 0; < numPlans)
    {
       int planID = aiPlanGetIDByActiveIndex(i);
       if (aiPlanGetType(planID) != cPlanCombat)
