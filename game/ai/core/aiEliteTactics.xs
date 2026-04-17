@@ -13,6 +13,37 @@ extern int gLLEliteGuardAnchorUnitID = -1;
 extern int gLLEliteSupportPlanID = -1;
 extern int gLLEliteSupportAttackPlanID = -1;
 extern int gLLEliteSupportLastRefreshTime = -1;
+extern int gLLExplorerEscortPlanID = -1;
+extern int gLLExplorerEscortAttackPlanID = -1;
+extern int gLLExplorerEscortLastRefreshTime = -1;
+float gLLExplorerProtectionOverride = -1.0;
+float gLLDecapitationOverride = -1.0;
+int gLLExplorerEscortBonus = 0;
+float gLLExplorerRearOffsetBonus = 0.0;
+
+float llClamp01(float value = 0.0)
+{
+   if (value < 0.0)
+   {
+      return (0.0);
+   }
+
+   if (value > 1.0)
+   {
+      return (1.0);
+   }
+
+   return (value);
+}
+
+void llSetLeaderTacticalDoctrine(float protectionOverride = -1.0, float decapitationOverride = -1.0,
+   int escortBonus = 0, float rearOffsetBonus = 0.0)
+{
+   gLLExplorerProtectionOverride = protectionOverride;
+   gLLDecapitationOverride = decapitationOverride;
+   gLLExplorerEscortBonus = escortBonus;
+   gLLExplorerRearOffsetBonus = rearOffsetBonus;
+}
 
 int llGetPlaystyleBucket(void)
 {
@@ -27,6 +58,50 @@ int llGetPlaystyleBucket(void)
    }
 
    return (1);
+}
+
+float llGetExplorerProtectionBias(void)
+{
+   if (gLLExplorerProtectionOverride >= 0.0)
+   {
+      return (llClamp01(gLLExplorerProtectionOverride));
+   }
+
+   float protectionBias = 0.55 - (btOffenseDefense * 0.35) + (btBiasInf * 0.12) + (btBiasArt * 0.10) -
+      (btBiasCav * 0.14) - (btBiasNative * 0.06);
+
+   if (llGetPlaystyleBucket() == 0)
+   {
+      protectionBias = protectionBias + 0.12;
+   }
+   else if (llGetPlaystyleBucket() == 2)
+   {
+      protectionBias = protectionBias - 0.08;
+   }
+
+   return (llClamp01(protectionBias));
+}
+
+float llGetDecapitationBias(void)
+{
+   if (gLLDecapitationOverride >= 0.0)
+   {
+      return (llClamp01(gLLDecapitationOverride));
+   }
+
+   float decapitationBias = 0.20 + (btOffenseDefense * 0.38) + (btBiasCav * 0.24) + (btBiasNative * 0.10) -
+      (btBiasArt * 0.12) - (btBiasInf * 0.08);
+
+   if (llGetPlaystyleBucket() == 2)
+   {
+      decapitationBias = decapitationBias + 0.10;
+   }
+   else if (llGetPlaystyleBucket() == 0)
+   {
+      decapitationBias = decapitationBias - 0.14;
+   }
+
+   return (llClamp01(decapitationBias));
 }
 
 vector llGetEliteRetreatPoint(void)
@@ -269,6 +344,128 @@ vector llGetAttackPlanTargetPoint(int attackPlanID = -1)
    return (targetPoint);
 }
 
+vector llGetAttackPlanStrategicPoint(int attackPlanID = -1)
+{
+   if (attackPlanID < 0)
+   {
+      return (cInvalidVector);
+   }
+
+   int targetPlayer = aiPlanGetVariableInt(attackPlanID, cCombatPlanTargetPlayerID, 0);
+   int targetBaseID = aiPlanGetVariableInt(attackPlanID, cCombatPlanTargetBaseID, 0);
+   if ((targetPlayer >= 0) && (targetBaseID >= 0))
+   {
+      vector basePoint = kbBaseGetLocation(targetPlayer, targetBaseID);
+      if (basePoint != cInvalidVector)
+      {
+         return (basePoint);
+      }
+   }
+
+   return (llGetAttackPlanTargetPoint(attackPlanID));
+}
+
+int llGetPrimaryExplorerID(void)
+{
+   int heroQueryID = createSimpleUnitQuery(cUnitTypeHero, cMyID, cUnitStateAlive);
+   if (kbUnitQueryExecute(heroQueryID) <= 0)
+   {
+      return (-1);
+   }
+
+   return (kbUnitQueryGetResult(heroQueryID, 0));
+}
+
+vector llGetEnemyArmyMassPoint(int targetPlayer = -1, vector nearPoint = cInvalidVector, float radius = 42.0)
+{
+   if (nearPoint == cInvalidVector)
+   {
+      return (cInvalidVector);
+   }
+
+   int playerRelation = targetPlayer >= 0 ? targetPlayer : cPlayerRelationEnemyNotGaia;
+   int enemyQueryID = createSimpleUnitQuery(cUnitTypeLogicalTypeLandMilitary, playerRelation, cUnitStateAlive, nearPoint, radius);
+   int enemyCount = kbUnitQueryExecute(enemyQueryID);
+   if (enemyCount <= 0)
+   {
+      return (cInvalidVector);
+   }
+
+   float xTotal = 0.0;
+   float zTotal = 0.0;
+   for (int i = 0; < enemyCount)
+   {
+      vector unitPosition = kbUnitGetPosition(kbUnitQueryGetResult(enemyQueryID, i));
+      xTotal = xTotal + xsVectorGetX(unitPosition);
+      zTotal = zTotal + xsVectorGetZ(unitPosition);
+   }
+
+   return (xsVectorSet(xTotal / enemyCount, 0.0, zTotal / enemyCount));
+}
+
+int llGetBestEnemyExplorerStrikeID(int targetPlayer = -1, vector referencePoint = cInvalidVector, float searchRadius = 70.0,
+   int maxEscortCount = 4)
+{
+   int playerRelation = targetPlayer >= 0 ? targetPlayer : cPlayerRelationEnemyNotGaia;
+   int heroQueryID = createSimpleUnitQuery(cUnitTypeHero, playerRelation, cUnitStateAlive);
+   int heroCount = kbUnitQueryExecute(heroQueryID);
+   int bestHeroID = -1;
+   float bestScore = 99999.0;
+
+   for (int i = 0; < heroCount)
+   {
+      int heroID = kbUnitQueryGetResult(heroQueryID, i);
+      vector heroPosition = kbUnitGetPosition(heroID);
+      if ((referencePoint != cInvalidVector) && (distance(referencePoint, heroPosition) > searchRadius))
+      {
+         continue;
+      }
+
+      int escortQueryID = createSimpleUnitQuery(cUnitTypeLogicalTypeLandMilitary, kbUnitGetPlayerID(heroID), cUnitStateAlive,
+         heroPosition, 18.0);
+      int escortCount = kbUnitQueryExecute(escortQueryID);
+      if (escortCount > maxEscortCount)
+      {
+         continue;
+      }
+
+      float score = escortCount * 8.0;
+      if (referencePoint != cInvalidVector)
+      {
+         score = score + distance(referencePoint, heroPosition);
+      }
+
+      if (score < bestScore)
+      {
+         bestScore = score;
+         bestHeroID = heroID;
+      }
+   }
+
+   return (bestHeroID);
+}
+
+bool llIsEnemyExplorerInBattle(int heroID = -1, vector enemyArmyPoint = cInvalidVector, float battleRadius = 24.0)
+{
+   if (heroID < 0)
+   {
+      return (false);
+   }
+
+   vector heroPosition = kbUnitGetPosition(heroID);
+   if (enemyArmyPoint == cInvalidVector)
+   {
+      return (llGetNearbyEnemyPressureCount(heroPosition, battleRadius) > 4);
+   }
+
+   if (distance(heroPosition, enemyArmyPoint) > battleRadius)
+   {
+      return (false);
+   }
+
+   return (llGetNearbyEnemyPressureCount(heroPosition, battleRadius) > 4);
+}
+
 void llDestroyEliteGuardPlan(void)
 {
    if (gLLEliteGuardPlanID >= 0)
@@ -290,6 +487,18 @@ void llDestroyEliteSupportPlan(void)
    gLLEliteSupportPlanID = -1;
    gLLEliteSupportAttackPlanID = -1;
    gLLEliteSupportLastRefreshTime = -1;
+}
+
+void llDestroyExplorerEscortPlan(void)
+{
+   if (gLLExplorerEscortPlanID >= 0)
+   {
+      aiPlanDestroy(gLLExplorerEscortPlanID);
+   }
+
+   gLLExplorerEscortPlanID = -1;
+   gLLExplorerEscortAttackPlanID = -1;
+   gLLExplorerEscortLastRefreshTime = -1;
 }
 
 void llResetExplorerControlToBase(void)
@@ -332,6 +541,131 @@ void llPositionExplorerBehindArmy(vector rearPoint = cInvalidVector)
       }
       aiTaskUnitMove(heroID, rearPoint);
    }
+}
+
+void llRebuildExplorerEscortPlan(int attackPlanID = -1, vector gatherPoint = cInvalidVector, vector escortPoint = cInvalidVector,
+   int desiredEscortCount = 0)
+{
+   if ((attackPlanID < 0) || (gatherPoint == cInvalidVector) || (escortPoint == cInvalidVector) || (desiredEscortCount <= 0))
+   {
+      llDestroyExplorerEscortPlan();
+      return;
+   }
+
+   llDestroyExplorerEscortPlan();
+
+   int mainBaseID = kbBaseGetMainID(cMyID);
+   int planID = aiPlanCreate("Legendary Explorer Escort", cPlanCombat);
+   aiPlanSetVariableInt(planID, cCombatPlanCombatType, 0, cCombatPlanCombatTypeDefend);
+   aiPlanSetVariableInt(planID, cCombatPlanTargetMode, 0, cCombatPlanTargetModePoint);
+   aiPlanSetVariableVector(planID, cCombatPlanTargetPoint, 0, escortPoint);
+   aiPlanSetVariableVector(planID, cCombatPlanGatherPoint, 0, gatherPoint);
+   aiPlanSetVariableFloat(planID, cCombatPlanTargetEngageRange, 0, 16.0);
+   aiPlanSetVariableFloat(planID, cCombatPlanGatherDistance, 0, 8.0);
+   aiPlanSetVariableInt(planID, cCombatPlanRefreshFrequency, 0, 200);
+   aiPlanSetVariableInt(planID, cCombatPlanRetreatMode, 0, cCombatPlanRetreatModeNone);
+   aiPlanSetDesiredPriority(planID, 88);
+   aiPlanSetBaseID(planID, mainBaseID);
+   aiPlanSetInitialPosition(planID, gatherPoint);
+
+   int addedUnits = 0;
+   int unitQueryID = createSimpleUnitQuery(cUnitTypeLogicalTypeLandMilitary, cMyID, cUnitStateAlive);
+   int numberFound = kbUnitQueryExecute(unitQueryID);
+   for (int i = 0; < numberFound)
+   {
+      int unitID = kbUnitQueryGetResult(unitQueryID, i);
+      if (llIsEliteUnit(unitID) == true)
+      {
+         continue;
+      }
+
+      int currentPlanID = kbUnitGetPlanID(unitID);
+      if ((currentPlanID != attackPlanID) && (currentPlanID != gLLExplorerEscortPlanID))
+      {
+         continue;
+      }
+
+      vector unitLocation = kbUnitGetPosition(unitID);
+      if ((distance(unitLocation, escortPoint) > 46.0) && (distance(unitLocation, gatherPoint) > 42.0))
+      {
+         continue;
+      }
+
+      if ((currentPlanID >= 0) && (currentPlanID != planID))
+      {
+         aiPlanRemoveUnit(currentPlanID, unitID);
+      }
+
+      aiPlanAddUnitType(planID, kbUnitGetProtoUnitID(unitID), 0, 0, 1);
+      if (aiPlanAddUnit(planID, unitID) == true)
+      {
+         addedUnits = addedUnits + 1;
+      }
+
+      if (addedUnits >= desiredEscortCount)
+      {
+         break;
+      }
+   }
+
+   if (addedUnits <= 0)
+   {
+      aiPlanDestroy(planID);
+      return;
+   }
+
+   aiPlanSetActive(planID);
+   gLLExplorerEscortPlanID = planID;
+   gLLExplorerEscortAttackPlanID = attackPlanID;
+   gLLExplorerEscortLastRefreshTime = xsGetTime();
+   debugLegendaryLeaders("created explorer escort plan " + planID + " for attack plan " + attackPlanID +
+      " using " + addedUnits + " non-elite troops.");
+}
+
+vector llChooseAssaultObjectivePoint(int attackPlanID = -1, vector gatherPoint = cInvalidVector)
+{
+   vector strategicPoint = llGetAttackPlanStrategicPoint(attackPlanID);
+   if (strategicPoint == cInvalidVector)
+   {
+      return (cInvalidVector);
+   }
+
+   int targetPlayer = aiPlanGetVariableInt(attackPlanID, cCombatPlanTargetPlayerID, 0);
+   float decapitationBias = llGetDecapitationBias();
+   float protectionBias = llGetExplorerProtectionBias();
+   vector bulkPoint = llGetEnemyArmyMassPoint(targetPlayer, strategicPoint, 44.0);
+   if (bulkPoint == cInvalidVector)
+   {
+      aiPlanSetVariableInt(attackPlanID, cCombatPlanTargetMode, 0, cCombatPlanTargetModePoint);
+      aiPlanSetVariableVector(attackPlanID, cCombatPlanTargetPoint, 0, strategicPoint);
+      return (strategicPoint);
+   }
+
+   int enemyExplorerID = llGetBestEnemyExplorerStrikeID(targetPlayer, strategicPoint, 72.0,
+      2 + xsFloor((1.0 - decapitationBias) * 4.0));
+   if ((enemyExplorerID >= 0) && (decapitationBias >= 0.55) &&
+       (llIsEnemyExplorerInBattle(enemyExplorerID, bulkPoint, 26.0) == true))
+   {
+      vector strikePoint = kbUnitGetPosition(enemyExplorerID);
+      if ((distance(strikePoint, bulkPoint) <= 26.0) || (decapitationBias >= 0.80))
+      {
+         aiPlanSetVariableInt(attackPlanID, cCombatPlanTargetMode, 0, cCombatPlanTargetModePoint);
+         aiPlanSetVariableVector(attackPlanID, cCombatPlanTargetPoint, 0, strikePoint);
+         debugLegendaryLeaders("assault objective shifted toward enemy explorer at " + strikePoint +
+            " because leader doctrine favors decapitation strikes.");
+         llSendLegendaryLeaderDecapitationLine(targetPlayer, 150000);
+         return (strikePoint);
+      }
+   }
+
+   aiPlanSetVariableInt(attackPlanID, cCombatPlanTargetMode, 0, cCombatPlanTargetModePoint);
+   aiPlanSetVariableVector(attackPlanID, cCombatPlanTargetPoint, 0, bulkPoint);
+   if (protectionBias >= 0.45)
+   {
+      debugLegendaryLeaders("assault objective shifted onto the bulk enemy force to preserve leader escort integrity.");
+   }
+   llSendLegendaryLeaderBulkAssaultLine(targetPlayer, 150000);
+   return (bulkPoint);
 }
 
 void llRebuildEliteGuardPlan(int anchorUnitID = -1)
@@ -497,6 +831,7 @@ void llRetreatAllEliteUnits(void)
 
    llResetExplorerControlToBase();
    debugLegendaryLeaders("all elite units were ordered to retreat after the explorer fell.");
+   llSendLegendaryLeaderRetreatLine(cPlayerRelationEnemyNotGaia, 180000);
 }
 
 void llTryRansomExplorer(void)
@@ -605,9 +940,10 @@ bool llHandleEliteAssaultFormation(int attackPlanID = -1)
    }
 
    vector gatherPoint = llGetAttackPlanGatherPoint(attackPlanID);
-   vector targetPoint = llGetAttackPlanTargetPoint(attackPlanID);
+   vector targetPoint = llChooseAssaultObjectivePoint(attackPlanID, gatherPoint);
    if ((gatherPoint == cInvalidVector) || (targetPoint == cInvalidVector))
    {
+      llDestroyExplorerEscortPlan();
       llDestroyEliteSupportPlan();
       return (false);
    }
@@ -616,15 +952,19 @@ bool llHandleEliteAssaultFormation(int attackPlanID = -1)
    int eliteCount = llGetTotalEliteTroopCount();
    int totalArmyCount = nonEliteCount + eliteCount;
    bool largeArmy = ((nonEliteCount >= 12) && (totalArmyCount >= 18));
+   float protectionBias = llGetExplorerProtectionBias();
+   float decapitationBias = llGetDecapitationBias();
 
    float eliteOffset = 7.0;
-   float explorerOffset = 14.0;
+   float explorerOffset = 14.0 + (protectionBias * 10.0) - (decapitationBias * 4.0) + gLLExplorerRearOffsetBonus;
    int desiredEliteCount = 1;
+   int desiredEscortCount = 2 + xsFloor(protectionBias * 5.0) + gLLExplorerEscortBonus;
    if (largeArmy == true)
    {
       eliteOffset = 13.0;
-      explorerOffset = 22.0;
+      explorerOffset = explorerOffset + 6.0;
       desiredEliteCount = eliteCount;
+      desiredEscortCount = desiredEscortCount + 2;
       if (desiredEliteCount > 6)
       {
          desiredEliteCount = 6;
@@ -635,6 +975,26 @@ bool llHandleEliteAssaultFormation(int attackPlanID = -1)
       desiredEliteCount = 2;
    }
 
+   if (decapitationBias >= 0.70)
+   {
+      desiredEscortCount = desiredEscortCount - 1;
+   }
+
+   if (desiredEscortCount < 2)
+   {
+      desiredEscortCount = 2;
+   }
+
+   int escortCap = nonEliteCount / 3;
+   if (escortCap < 2)
+   {
+      escortCap = 2;
+   }
+   if (desiredEscortCount > escortCap)
+   {
+      desiredEscortCount = escortCap;
+   }
+
    vector elitePoint = llGetAssaultOffsetPoint(gatherPoint, targetPoint, eliteOffset);
    vector explorerPoint = llGetAssaultOffsetPoint(gatherPoint, targetPoint, explorerOffset);
 
@@ -642,9 +1002,21 @@ bool llHandleEliteAssaultFormation(int attackPlanID = -1)
 
    if ((nonEliteCount <= 0) || (eliteCount <= 0))
    {
+      llDestroyExplorerEscortPlan();
       llDestroyEliteSupportPlan();
       return (true);
    }
+
+    if ((gLLExplorerEscortPlanID < 0) || (gLLExplorerEscortAttackPlanID != attackPlanID) ||
+        (xsGetTime() - gLLExplorerEscortLastRefreshTime >= 12000))
+    {
+       llRebuildExplorerEscortPlan(attackPlanID, gatherPoint, explorerPoint, desiredEscortCount);
+    }
+    else
+    {
+       aiPlanSetVariableVector(gLLExplorerEscortPlanID, cCombatPlanTargetPoint, 0, explorerPoint);
+       aiPlanSetVariableVector(gLLExplorerEscortPlanID, cCombatPlanGatherPoint, 0, gatherPoint);
+    }
 
    if ((gLLEliteSupportPlanID < 0) || (gLLEliteSupportAttackPlanID != attackPlanID) ||
        (xsGetTime() - gLLEliteSupportLastRefreshTime >= 15000))
@@ -672,6 +1044,7 @@ minInterval 5
    if (aiGetFallenExplorerID() >= 0)
    {
       llDestroyEliteGuardPlan();
+      llDestroyExplorerEscortPlan();
       llDestroyEliteSupportPlan();
       llRetreatAllEliteUnits();
       llTryRansomExplorer();
@@ -689,6 +1062,7 @@ minInterval 5
    }
    else
    {
+      llDestroyExplorerEscortPlan();
       llDestroyEliteSupportPlan();
       llResetExplorerControlToBase();
    }

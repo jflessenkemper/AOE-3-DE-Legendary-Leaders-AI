@@ -14,6 +14,7 @@ void initLeaderCrazyHorse(void)
    btBiasTrade = -0.4;
    btBiasNative = 0.5;
    llSetMilitaryFocus(0.2, 0.8, -0.1);
+   llSetLeaderTacticalDoctrine(0.34, 0.86, -1, -3.0);
    cvMaxTowers = 1;
    llSetPrisonerDoctrine(cLLPrisonerDoctrineExecution, 0.40, 70.0);
    llEnablePrisonerSystem();

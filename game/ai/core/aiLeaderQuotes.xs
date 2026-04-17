@@ -7,6 +7,7 @@
 
 int gLLLeaderEnemyQuoteTime = -600000;
 int gLLLeaderAllyQuoteTime = -600000;
+int gLLLeaderTacticalQuoteTime = -600000;
 
 bool llHasLegendaryLeaderQuotes(void)
 {
@@ -103,6 +104,64 @@ void llSendLegendaryLeaderComplimentLine(int playerIDorRelation = -1, int minInt
    sendChatLine(playerIDorRelation, message);
    gLLLeaderAllyQuoteTime = xsGetTime();
    debugLegendaryLeaders("ally quote sent to " + playerIDorRelation + ": " + message);
+}
+
+void llSendLegendaryLeaderTacticalLine(int playerIDorRelation = -1, string message = "", int minInterval = 90000)
+{
+   if ((playerIDorRelation < 0) || (message == ""))
+   {
+      return;
+   }
+
+   if (xsGetTime() < gLLLeaderTacticalQuoteTime + minInterval)
+   {
+      debugLegendaryLeaders("tactical quote throttled for target " + playerIDorRelation + " with interval " + minInterval);
+      return;
+   }
+
+   sendChatLine(playerIDorRelation, message);
+   gLLLeaderTacticalQuoteTime = xsGetTime();
+   debugLegendaryLeaders("tactical quote sent to " + playerIDorRelation + ": " + message);
+}
+
+string llGetLegendaryLeaderRetreatLine(void)
+{
+   return ("Fall back and close ranks. Our leader will not be lost today.");
+}
+
+string llGetLegendaryLeaderPrisonerLine(void)
+{
+   return ("Your broken soldiers march in chains now.");
+}
+
+string llGetLegendaryLeaderBulkAssaultLine(void)
+{
+   return ("Break their main line first. The army is the real prize.");
+}
+
+string llGetLegendaryLeaderDecapitationLine(void)
+{
+   return ("Ignore the rabble. Bring down their leader.");
+}
+
+void llSendLegendaryLeaderRetreatLine(int playerIDorRelation = -1, int minInterval = 150000)
+{
+   llSendLegendaryLeaderTacticalLine(playerIDorRelation, llGetLegendaryLeaderRetreatLine(), minInterval);
+}
+
+void llSendLegendaryLeaderPrisonerLine(int playerIDorRelation = -1, int minInterval = 120000)
+{
+   llSendLegendaryLeaderTacticalLine(playerIDorRelation, llGetLegendaryLeaderPrisonerLine(), minInterval);
+}
+
+void llSendLegendaryLeaderBulkAssaultLine(int playerIDorRelation = -1, int minInterval = 120000)
+{
+   llSendLegendaryLeaderTacticalLine(playerIDorRelation, llGetLegendaryLeaderBulkAssaultLine(), minInterval);
+}
+
+void llSendLegendaryLeaderDecapitationLine(int playerIDorRelation = -1, int minInterval = 120000)
+{
+   llSendLegendaryLeaderTacticalLine(playerIDorRelation, llGetLegendaryLeaderDecapitationLine(), minInterval);
 }
 
 void llMaybeFollowStatementWithQuote(int playerID = -1, int commPromptID = -1)

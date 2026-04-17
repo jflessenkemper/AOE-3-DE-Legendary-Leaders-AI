@@ -17,6 +17,7 @@ void initLeaderNapoleon(void)
    btBiasTrade = -0.2;
    btBiasNative = -0.4;
    llSetMilitaryFocus(0.2, 0.4, 0.6);
+   llSetLeaderTacticalDoctrine(0.56, 0.68, 1, 0.0);
 
    cvMaxTowers = 4;
    cvOkToBuildForts = true;

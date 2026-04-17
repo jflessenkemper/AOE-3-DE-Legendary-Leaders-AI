@@ -14,6 +14,7 @@ void initLeaderTokugawa(void)
    btBiasTrade = 0.3;
    btBiasNative = -0.1;
    llSetMilitaryFocus(0.5, -0.2, 0.3);
+   llSetLeaderTacticalDoctrine(0.78, 0.22, 2, 3.0);
    cvMaxTowers = 5;
    llSetPrisonerDoctrine(cLLPrisonerDoctrineStrictImprisonment, 0.18, 54.0);
    llEnablePrisonerSystem();

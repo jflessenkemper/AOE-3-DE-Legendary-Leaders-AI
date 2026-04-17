@@ -14,6 +14,7 @@ void initLeaderIsabella(void)
    btBiasTrade = -0.5;
    btBiasNative = -0.3;
    llSetMilitaryFocus(0.5, 0.1, 0.2);
+   llSetLeaderTacticalDoctrine(0.48, 0.72, 0, -1.0);
    cvMaxTowers = 4;
    llSetPrisonerDoctrine(cLLPrisonerDoctrineExecution, 0.40, 74.0);
    llEnablePrisonerSystem();

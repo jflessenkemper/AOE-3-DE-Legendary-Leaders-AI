@@ -14,8 +14,19 @@ Elite units are chosen case by case for each nation and never auto-surrender. Or
 - Surrendered units are routed to the enemy's main military shipment drop point, usually the first Town Center or Home City gather-point building.
 - Once imprisoned, surrendered units are held there instead of fighting normally.
 - Only the original owner's explorer can reclaim imprisoned units.
-- In large AI attacks, regular units lead, elites follow as the second line, and the explorer stays behind them.
+- In large AI attacks, regular units lead, elites follow as the second line, and the explorer stays behind them with a dedicated escort.
 - If the AI explorer dies, the elite line retreats and the AI tries to ransom its leader.
+
+## 🧭 Leader Escort and Attack Doctrine
+
+Each AI now treats its explorer as the battlefield leader instead of a disposable scout. The army tries to keep a living screen around that leader, and different nations decide battles in different ways.
+
+- Defensive and line-focused leaders keep a thicker escort around the explorer and aim to break the enemy's main army first.
+- Aggressive and cavalry-heavy leaders will still protect their explorer, but they are more willing to lunge for an exposed enemy explorer if that leader is actually fighting near the front.
+- The AI does not blindly chase explorers hiding at home. Decapitation strikes only happen when the enemy leader is close enough to the real battle to matter.
+- If the explorer is lost, the elite core disengages instead of suiciding, then the AI attempts to ransom the leader back into play.
+
+In short: some nations win by crushing the line, others look for a leader-kill opening, but all of them now guard their own leader far more carefully.
 
 ## 🌍 Nation Guide
 

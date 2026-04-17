@@ -14,6 +14,7 @@ void initLeaderWellington(void)
    btBiasNative = -0.2;
    llSetMilitaryFocus(0.7, -0.2, 0.2);
    llEnableDeepDefenseStyle();
+   llSetLeaderTacticalDoctrine(0.82, 0.18, 2, 4.0);
    cvOkToBuildForts = true;
    llSetPrisonerDoctrine(cLLPrisonerDoctrineStrictImprisonment, 0.25, 58.0);
    llEnablePrisonerSystem();

@@ -1351,6 +1351,10 @@ minInterval 2
       {
          debugLegendaryLeaders("AI surrendering unit " + unitID + " reached prison custody for player " + captorPlayerID + ".");
          xsArraySetInt(gLLSurrenderStates, i, cLLSurrenderStateImprisoned);
+         if ((originalOwnerID >= 0) && (kbIsPlayerEnemy(originalOwnerID) == true))
+         {
+            llSendLegendaryLeaderPrisonerLine(originalOwnerID, 120000);
+         }
          llReleaseSurrenderingUnit(unitID);
          aiTaskUnitMove(unitID, destination);
          continue;
