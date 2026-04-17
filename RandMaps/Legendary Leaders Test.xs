@@ -54,6 +54,8 @@ void main(void)
     int avoidForestShort = rmCreateClassDistanceConstraint("ll avoid forest short", classForest, 12.0);
     int avoidTownCenter = rmCreateTypeDistanceConstraint("ll avoid town center", "townCenter", 26.0);
     int avoidTownCenterFar = rmCreateTypeDistanceConstraint("ll avoid town center far", "townCenter", 60.0);
+    int avoidWaterShort = rmCreateTerrainDistanceConstraint("ll avoid water short", "land", false, 10.0);
+    int stayNearWater = rmCreateTerrainDistanceConstraint("ll stay near water", "land", true, 8.0);
 
     int westSouthStartID = rmCreateArea("ll west south start");
     rmSetAreaSize(westSouthStartID, 0.022);
@@ -103,6 +105,22 @@ void main(void)
     rmSetAreaMix(southLaneID, "texas_dirt_Skirmish");
     rmSetAreaCoherence(southLaneID, 0.9);
     rmBuildArea(southLaneID);
+
+    int northWaterLaneID = rmCreateArea("ll north water lane");
+    rmSetAreaSize(northWaterLaneID, 0.080);
+    rmSetAreaLocation(northWaterLaneID, 0.50, 0.86);
+    rmSetAreaWaterType(northWaterLaneID, "texas river");
+    rmSetAreaBaseHeight(northWaterLaneID, -6.0);
+    rmSetAreaCoherence(northWaterLaneID, 0.95);
+    rmBuildArea(northWaterLaneID);
+
+    int southWaterLaneID = rmCreateArea("ll south water lane");
+    rmSetAreaSize(southWaterLaneID, 0.080);
+    rmSetAreaLocation(southWaterLaneID, 0.50, 0.14);
+    rmSetAreaWaterType(southWaterLaneID, "texas river");
+    rmSetAreaBaseHeight(southWaterLaneID, -6.0);
+    rmSetAreaCoherence(southWaterLaneID, 0.95);
+    rmBuildArea(southWaterLaneID);
 
     for (int i = 1; < numPlayer)
     {
@@ -215,6 +233,29 @@ void main(void)
     rmAddObjectDefToClass(laneMineID, classGold);
     rmAddObjectDefConstraint(laneMineID, avoidTownCenterFar);
 
+    int waterFishID = rmCreateObjectDef("ll water fish");
+    rmAddObjectDefItem(waterFishID, "FishSalmon", 3, 10.0);
+    rmSetObjectDefMinDistance(waterFishID, 0.0);
+    rmSetObjectDefMaxDistance(waterFishID, 12.0);
+
+    int waterWhaleID = rmCreateObjectDef("ll water whale");
+    rmAddObjectDefItem(waterWhaleID, "MinkeWhale", 1, 0.0);
+    rmSetObjectDefMinDistance(waterWhaleID, 0.0);
+    rmSetObjectDefMaxDistance(waterWhaleID, 10.0);
+
+    int shoreMineID = rmCreateObjectDef("ll shore mine");
+    rmAddObjectDefItem(shoreMineID, "MineCopper", 1, 0.0);
+    rmAddObjectDefToClass(shoreMineID, classGold);
+    rmAddObjectDefConstraint(shoreMineID, avoidTownCenterFar);
+    rmAddObjectDefConstraint(shoreMineID, stayNearWater);
+
+    int shoreTreePatchID = rmCreateObjectDef("ll shore tree patch");
+    rmAddObjectDefItem(shoreTreePatchID, "TreeTexas", 8, 5.0);
+    rmAddObjectDefToClass(shoreTreePatchID, classForest);
+    rmAddObjectDefConstraint(shoreTreePatchID, avoidTownCenter);
+    rmAddObjectDefConstraint(shoreTreePatchID, avoidForestShort);
+    rmAddObjectDefConstraint(shoreTreePatchID, stayNearWater);
+
     int laneHuntID = rmCreateObjectDef("ll lane hunt");
     rmAddObjectDefItem(laneHuntID, "bison", 8, 6.0);
     rmSetObjectDefCreateHerd(laneHuntID, true);
@@ -248,6 +289,28 @@ void main(void)
     rmPlaceObjectDefAtLoc(midNuggetID, 0, 0.50, 0.72);
     rmPlaceObjectDefAtLoc(midNuggetID, 0, 0.50, 0.50);
     rmPlaceObjectDefAtLoc(midNuggetID, 0, 0.50, 0.28);
+
+    rmPlaceObjectDefAtLoc(waterFishID, 0, 0.22, 0.86);
+    rmPlaceObjectDefAtLoc(waterFishID, 0, 0.50, 0.86);
+    rmPlaceObjectDefAtLoc(waterFishID, 0, 0.78, 0.86);
+    rmPlaceObjectDefAtLoc(waterFishID, 0, 0.22, 0.14);
+    rmPlaceObjectDefAtLoc(waterFishID, 0, 0.50, 0.14);
+    rmPlaceObjectDefAtLoc(waterFishID, 0, 0.78, 0.14);
+
+    rmPlaceObjectDefAtLoc(waterWhaleID, 0, 0.40, 0.86);
+    rmPlaceObjectDefAtLoc(waterWhaleID, 0, 0.60, 0.86);
+    rmPlaceObjectDefAtLoc(waterWhaleID, 0, 0.40, 0.14);
+    rmPlaceObjectDefAtLoc(waterWhaleID, 0, 0.60, 0.14);
+
+    rmPlaceObjectDefAtLoc(shoreMineID, 0, 0.18, 0.80);
+    rmPlaceObjectDefAtLoc(shoreMineID, 0, 0.82, 0.80);
+    rmPlaceObjectDefAtLoc(shoreMineID, 0, 0.18, 0.20);
+    rmPlaceObjectDefAtLoc(shoreMineID, 0, 0.82, 0.20);
+
+    rmPlaceObjectDefAtLoc(shoreTreePatchID, 0, 0.14, 0.88);
+    rmPlaceObjectDefAtLoc(shoreTreePatchID, 0, 0.86, 0.88);
+    rmPlaceObjectDefAtLoc(shoreTreePatchID, 0, 0.14, 0.12);
+    rmPlaceObjectDefAtLoc(shoreTreePatchID, 0, 0.86, 0.12);
 
     rmPlaceObjectDefAtLoc(sideTreePatchID, 0, 0.10, 0.16);
     rmPlaceObjectDefAtLoc(sideTreePatchID, 0, 0.10, 0.84);
