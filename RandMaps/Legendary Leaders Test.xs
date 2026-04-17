@@ -2,6 +2,10 @@
 // Flat 2v2-oriented test arena for validating surrender, prison routing,
 // elite support, explorer reclaim, and AI attack shape.
 
+include "mercenaries.xs";
+include "ypAsianInclude.xs";
+include "ypKOTHInclude.xs";
+
 int TeamNum = cNumberTeams;
 int PlayerNum = cNumberNonGaiaPlayers;
 int numPlayer = cNumberPlayers;
@@ -18,8 +22,13 @@ void main(void)
     int size = 2.0 * sqrt(effectivePlayers * playerTiles);
     rmSetMapSize(size, size);
     rmSetSeaLevel(0.0);
+    rmSetBaseTerrainMix("texas_grass");
     rmTerrainInitialize("grass", 0.0);
     rmSetLightingSet("Texas_Skirmish");
+    rmSetMapType("texas");
+    rmSetMapType("land");
+    rmSetMapType("grass");
+    rmSetWorldCircleConstraint(true);
 
     if ((PlayerNum == 4) && (TeamNum == 2) && (rmGetNumberPlayersOnTeam(0) == 2) && (rmGetNumberPlayersOnTeam(1) == 2))
     {
