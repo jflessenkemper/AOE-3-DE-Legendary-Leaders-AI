@@ -6,13 +6,11 @@
 
 ## 🏳️ Elite Units and Surrender
 
-Elite units are chosen case by case for each nation. 
+Elite units are chosen case by case for each nation and never auto-surrender. The explorer also counts as elite protection. Any ordinary land unit, including player-controlled units, will auto-surrender once it falls to 10% health and has no friendly elite unit or explorer nearby, after which it is sent to the enemy prison point and can only be recovered by its original owner with an explorer.
 
-Ordinary land units can surrender once they are badly damaged and no elite support is nearby, after which they are sent to the enemy prison point and can only be recovered by their owner with an explorer.
-
-- Elite units never surrender.
-- Ordinary land units will surrender at 10% health.
-- A unit will not surrender if a friendly elite unit is still nearby.
+- Elite units never auto-surrender.
+- Ordinary land units, including the player's own units, auto-surrender at 10% health.
+- A unit will not surrender if a friendly elite unit or explorer is still nearby.
 - Surrendered units are routed to the enemy's main military shipment drop point, usually the first Town Center or Home City gather-point building.
 - Once imprisoned, surrendered units are held there.
 - Only the owner's explorer can reclaim imprisoned units.

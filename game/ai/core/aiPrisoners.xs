@@ -271,6 +271,35 @@ bool llHasNearbyEliteSupport(int unitID = -1, float radius = 24.0)
    return (false);
 }
 
+bool llHasNearbyExplorerSupport(int unitID = -1, float radius = 24.0)
+{
+   if ((unitID < 0) || (radius <= 0.0))
+   {
+      return (false);
+   }
+
+   if (kbUnitIsType(unitID, cUnitTypeLogicalTypeLandMilitary) == false)
+   {
+      return (false);
+   }
+
+   int ownerID = kbUnitGetPlayerID(unitID);
+   int heroQueryID = createSimpleUnitQuery(cUnitTypeHero, ownerID, cUnitStateAlive, kbUnitGetPosition(unitID), radius);
+   int numberFound = kbUnitQueryExecute(heroQueryID);
+   for (int i = 0; < numberFound)
+   {
+      int nearbyUnitID = kbUnitQueryGetResult(heroQueryID, i);
+      if (nearbyUnitID == unitID)
+      {
+         continue;
+      }
+
+      return (true);
+   }
+
+   return (false);
+}
+
 float llGetSurrenderHealthThreshold(void)
 {
    return (0.10);
@@ -303,6 +332,12 @@ bool llCanUnitSurrender(int unitID = -1, float healthThreshold = 0.50, float eli
    if (llHasNearbyEliteSupport(unitID, eliteSupportRadius) == true)
    {
       debugLegendaryLeaders("unit " + unitID + " refused surrender because nearby elite support is still present.");
+      return (false);
+   }
+
+   if (llHasNearbyExplorerSupport(unitID, eliteSupportRadius) == true)
+   {
+      debugLegendaryLeaders("unit " + unitID + " refused surrender because a friendly explorer is still nearby.");
       return (false);
    }
 
