@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 40" role="img" aria-labelledby="title desc">
+  <title id="title">Stylized Mexica emblem</title>
+  <desc id="desc">A small parchment banner with a geometric red and teal emblem used as a stable local README icon.</desc>
+  <rect width="60" height="40" rx="3" fill="#efe2c3"/>
+  <rect x="1.5" y="1.5" width="57" height="37" rx="2" fill="none" stroke="#8b2e24" stroke-width="3"/>
+  <rect x="27" y="8" width="6" height="24" fill="#0f5c5e"/>
+  <rect x="18" y="14" width="24" height="4" fill="#0f5c5e"/>
+  <rect x="22" y="22" width="16" height="4" fill="#0f5c5e"/>
+  <path d="M30 6l6 5-2 4h-8l-2-4 6-5z" fill="#8b2e24"/>
+  <path d="M20 18l-5 5 5 5h7v-4h-3l-2-1 2-1h3v-4z" fill="#8b2e24"/>
+  <path d="M40 18l5 5-5 5h-7v-4h3l2-1-2-1h-3v-4z" fill="#8b2e24"/>
+  <circle cx="30" cy="23" r="3.2" fill="#efe2c3" stroke="#8b2e24" stroke-width="2"/>
+</svg>
