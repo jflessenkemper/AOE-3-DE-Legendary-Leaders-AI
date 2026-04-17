@@ -56,6 +56,8 @@ mutable void shipGrantedHandler(int parm = -1) {}
 // Chats.
 mutable void sendStatement(int playerIDorRelation = -1, int commPromptID = -1, vector vec = cInvalidVector) {}
 mutable void sendChatLine(int playerIDorRelation = -1, string message = "") {}
+mutable string llGetLegendaryLeaderInsult(void) { return (""); }
+mutable string llGetLegendaryLeaderCompliment(void) { return (""); }
 mutable void llSendLegendaryLeaderInsultLine(int playerIDorRelation = -1, int minInterval = 90000) {}
 mutable void llSendLegendaryLeaderComplimentLine(int playerIDorRelation = -1, int minInterval = 90000) {}
 mutable void llMaybeFollowStatementWithQuote(int playerID = -1, int commPromptID = -1) {}

@@ -87,7 +87,7 @@ If you want the cleanest first pass, use only one nation pair for the whole scen
 
 ## Editor Steps
 
-1. Open `Scenario/legendary-leaders-ai.age3Yscn` in the AoE3DE Scenario Editor.
+1. Open `Scenario/Legendary Leaders Test.age3Yscn` in the AoE3DE Scenario Editor.
 2. Set Player 1 to human and Player 2 to AI.
 3. Place one Town Center for each player first. This matters because prison routing falls back to the first Town Center when no better shipment drop building is available.
 4. Place explorers before placing combat groups so reclaim tests are easy to run.
@@ -119,3 +119,8 @@ If you want to make repeated testing faster in the editor, add these optional tr
 
 - This repo can store the scenario file, but it cannot reliably perform structured edits to `.age3Yscn` content from text tools.
 - If you want automation beyond this, the viable next step is to build the scenario in the in-game editor and then keep a written spec plus screenshots in the repo.
+
+## Map Picker Notes
+
+- `Legendary Leaders Test.age3Yscn` is the Custom Maps or Scenario version and should appear in the in-game `Custom Maps` list.
+- `RandMaps/Legendary Leaders Test.xs` is the random-map version and should appear in the normal Skirmish random map list.

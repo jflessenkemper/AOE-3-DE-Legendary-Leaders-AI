@@ -8,6 +8,7 @@
    <icon>resources/images/icons/singleplayer/cpai_avatar_indonesians_diponegoro.png</icon>
    <chatset>maurice</chatset>
    <playerNames>
-      <nameID>80811<civ>rvltmodindonesians</civ></nameID>
+      <nameID>80811</nameID>
+      <civ>rvltmodindonesians</civ>
    </playerNames>
 </AI>

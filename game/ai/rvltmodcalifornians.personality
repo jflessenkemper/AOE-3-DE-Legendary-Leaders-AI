@@ -8,6 +8,7 @@
    <icon>resources/images/icons/singleplayer/cpai_avatar_californians_vallejo.png</icon>
    <chatset>hidalgo</chatset>
    <playerNames>
-      <nameID>112822<civ>rvltmodcalifornians</civ></nameID>
+      <nameID>112822</nameID>
+      <civ>rvltmodcalifornians</civ>
    </playerNames>
 </AI>

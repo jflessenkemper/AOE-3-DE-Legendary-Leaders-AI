@@ -8,6 +8,7 @@
    <icon>resources/images/icons/singleplayer/cpai_avatar_yucatan_carrillo_puerto.png</icon>
    <chatset>hidalgo</chatset>
    <playerNames>
-      <nameID>112810<civ>rvltmodyucatan</civ></nameID>
+      <nameID>112810</nameID>
+      <civ>rvltmodyucatan</civ>
    </playerNames>
 </AI>

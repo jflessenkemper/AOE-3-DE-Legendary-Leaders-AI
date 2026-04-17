@@ -8,6 +8,7 @@
    <icon>resources/images/icons/singleplayer/cpai_avatar_texians_sam_houston.png</icon>
    <chatset>washington</chatset>
    <playerNames>
-      <nameID>112826<civ>rvltmodtexians</civ></nameID>
+      <nameID>112826</nameID>
+      <civ>rvltmodtexians</civ>
    </playerNames>
 </AI>
