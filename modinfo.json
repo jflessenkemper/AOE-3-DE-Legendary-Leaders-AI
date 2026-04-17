@@ -22,6 +22,10 @@
       "sourcePath": "art"
     },
     {
+      "type": "resources",
+      "sourcePath": "resources"
+    },
+    {
       "type": "sound",
       "sourcePath": "sound"
     }

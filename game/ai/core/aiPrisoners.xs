@@ -546,12 +546,42 @@ vector llGetPrisonHoldingPoint(int captorPlayerID = -1, int slot = 0)
    float offsetZ = 0.0;
    switch (ringIndex)
    {
-      case 0: offsetX = 4.0; break;
-      case 1: offsetX = -4.0; break;
-      case 2: offsetZ = 4.0; break;
-      case 3: offsetZ = -4.0; break;
-      case 4: offsetX = 3.0; offsetZ = 3.0; break;
-      case 5: offsetX = -3.0; offsetZ = -3.0; break;
+      case 0:
+      {
+         offsetX = 4.0;
+         break;
+      }
+      case 1:
+      {
+         offsetX = -4.0;
+         break;
+      }
+      case 2:
+      {
+         offsetZ = 4.0;
+         break;
+      }
+      case 3:
+      {
+         offsetZ = -4.0;
+         break;
+      }
+      case 4:
+      {
+         offsetX = 3.0;
+         offsetZ = 3.0;
+         break;
+      }
+      case 5:
+      {
+         offsetX = -3.0;
+         offsetZ = -3.0;
+         break;
+      }
+      default:
+      {
+         break;
+      }
    }
 
    return (xsVectorSet(xsVectorGetX(prisonAnchor) + offsetX, 0.0, xsVectorGetZ(prisonAnchor) + offsetZ));
