@@ -5,38 +5,18 @@ from pathlib import Path
 import sys
 import xml.etree.ElementTree as ET
 
+if __package__ is None or __package__ == "":
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
+from tools.validation.common import REPO_ROOT, build_repo_root_parser, find_children, find_first_child, get_attr_case_insensitive, repo_relative
+
 STRINGS_ROOT = REPO_ROOT / "data" / "strings"
 
 
-def local_name(tag: str) -> str:
-    return tag.rsplit("}", 1)[-1].lower()
-
-
-def child_elements(node):
-    return [child for child in list(node) if isinstance(child.tag, str)]
-
-
-def find_first_child(node, name: str):
-    target = name.lower()
-    for child in child_elements(node):
-        if local_name(child.tag) == target:
-            return child
-    return None
-
-
-def find_children(node, name: str):
-    target = name.lower()
-    return [child for child in child_elements(node) if local_name(child.tag) == target]
-
-
-def get_attr_case_insensitive(node, key: str) -> str:
-    target = key.lower()
-    for attr_name, value in node.attrib.items():
-        if attr_name.lower() == target:
-            return value
-    return ""
+def stringmods_repo_root(file_path: Path) -> Path:
+    if file_path.name == "stringmods.xml" and len(file_path.parents) >= 4:
+        return file_path.parents[3]
+    return REPO_ROOT
 
 
 def find_language_node(root) -> ET.Element | None:
@@ -49,20 +29,21 @@ def find_language_node(root) -> ET.Element | None:
 def validate_stringmods(file_path: Path) -> list[str]:
     issues: list[str] = []
     expected_language = file_path.parent.name.lower()
+    report_root = stringmods_repo_root(file_path)
 
     try:
         root = ET.parse(file_path).getroot()
     except ET.ParseError as exc:
-        return [f"{file_path.relative_to(REPO_ROOT)}: XML parse error: {exc}"]
+        return [f"{repo_relative(file_path, report_root)}: XML parse error: {exc}"]
 
     language_node = find_language_node(root)
     if language_node is None:
-        return [f"{file_path.relative_to(REPO_ROOT)}: missing StringTable/Language node"]
+        return [f"{repo_relative(file_path, report_root)}: missing StringTable/Language node"]
 
     actual_language = get_attr_case_insensitive(language_node, "name").lower()
     if actual_language != expected_language:
         issues.append(
-            f"{file_path.relative_to(REPO_ROOT)}: folder is '{expected_language}' but language name is '{actual_language or 'missing'}'"
+            f"{repo_relative(file_path, report_root)}: folder is '{expected_language}' but language name is '{actual_language or 'missing'}'"
         )
 
     locids: list[str] = []
@@ -87,30 +68,38 @@ def validate_stringmods(file_path: Path) -> list[str]:
     duplicate_locids = sorted(locid for locid, count in Counter(locids).items() if count > 1)
 
     if empty_locids:
-        issues.append(f"{file_path.relative_to(REPO_ROOT)}: {empty_locids} strings missing _locID")
+        issues.append(f"{repo_relative(file_path, report_root)}: {empty_locids} strings missing _locID")
     if invalid_locids:
-        issues.append(f"{file_path.relative_to(REPO_ROOT)}: invalid _locID values: {', '.join(sorted(set(invalid_locids)))}")
+        issues.append(f"{repo_relative(file_path, report_root)}: invalid _locID values: {', '.join(sorted(set(invalid_locids)))}")
     if duplicate_locids:
-        issues.append(f"{file_path.relative_to(REPO_ROOT)}: duplicate _locID values: {', '.join(duplicate_locids)}")
+        issues.append(f"{repo_relative(file_path, report_root)}: duplicate _locID values: {', '.join(duplicate_locids)}")
     if empty_strings:
-        issues.append(f"{file_path.relative_to(REPO_ROOT)}: empty string values for locids: {', '.join(empty_strings[:20])}")
+        issues.append(f"{repo_relative(file_path, report_root)}: empty string values for locids: {', '.join(empty_strings[:20])}")
 
     return issues
 
 
-def main() -> int:
-    if not STRINGS_ROOT.exists():
-        print(f"Strings folder not found: {STRINGS_ROOT.relative_to(REPO_ROOT)}")
-        return 1
+def validate_stringtables(repo_root: Path = REPO_ROOT) -> list[str]:
+    strings_root = repo_root / "data" / "strings"
+    if not strings_root.exists():
+        return [f"Strings folder not found: {repo_relative(strings_root, repo_root)}"]
 
-    stringmods_files = sorted(STRINGS_ROOT.rglob("stringmods.xml"))
+    stringmods_files = sorted(strings_root.rglob("stringmods.xml"))
     if not stringmods_files:
-        print("No stringmods.xml files found under data/strings.")
-        return 1
+        return ["No stringmods.xml files found under data/strings."]
 
     issues: list[str] = []
     for file_path in stringmods_files:
         issues.extend(validate_stringmods(file_path))
+    return issues
+
+
+def main() -> int:
+    parser = build_repo_root_parser("Validate StringTable files.")
+    args = parser.parse_args()
+    repo_root = args.repo_root.resolve()
+    issues = validate_stringtables(repo_root)
+    stringmods_files = sorted((repo_root / "data" / "strings").rglob("stringmods.xml")) if (repo_root / "data" / "strings").exists() else []
 
     if issues:
         print("StringTable validation failed:")

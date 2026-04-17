@@ -5,41 +5,19 @@ from pathlib import Path
 import sys
 import xml.etree.ElementTree as ET
 
+if __package__ is None or __package__ == "":
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
-PROTO_FILE = REPO_ROOT / "data" / "protomods.xml"
-
-
-def local_name(tag: str) -> str:
-    return tag.rsplit("}", 1)[-1].lower()
+from tools.validation.common import REPO_ROOT, build_repo_root_parser, child_elements, get_attr_case_insensitive, get_child_text, local_name, repo_relative
 
 
-def child_elements(node):
-    return [child for child in list(node) if isinstance(child.tag, str)]
+def validate_protomods(repo_root: Path = REPO_ROOT) -> list[str]:
+    proto_file = repo_root / "data" / "protomods.xml"
 
-
-def find_first_child_text(node, name: str) -> str:
-    target = name.lower()
-    for child in child_elements(node):
-        if local_name(child.tag) == target:
-            return (child.text or "").strip()
-    return ""
-
-
-def get_attr_case_insensitive(node, key: str) -> str:
-    target = key.lower()
-    for attr_name, value in node.attrib.items():
-        if attr_name.lower() == target:
-            return value.strip()
-    return ""
-
-
-def main() -> int:
     try:
-        root = ET.parse(PROTO_FILE).getroot()
+        root = ET.parse(proto_file).getroot()
     except ET.ParseError as exc:
-        print(f"Failed to parse {PROTO_FILE.relative_to(REPO_ROOT)}: {exc}")
-        return 1
+        return [f"Failed to parse {repo_relative(proto_file, repo_root)}: {exc}"]
 
     unit_names: list[str] = []
     unit_ids: list[str] = []
@@ -51,7 +29,7 @@ def main() -> int:
 
         unit_name = get_attr_case_insensitive(unit, "name")
         unit_id = get_attr_case_insensitive(unit, "id")
-        dbid = find_first_child_text(unit, "dbid")
+        dbid = get_child_text(unit, "dbid")
 
         if unit_name:
             unit_names.append(unit_name.lower())
@@ -72,6 +50,14 @@ def main() -> int:
         issues.append(f"Duplicate unit ids: {', '.join(duplicate_ids)}")
     if duplicate_dbids:
         issues.append(f"Duplicate unit DBIDs: {', '.join(duplicate_dbids)}")
+
+    return issues
+
+
+def main() -> int:
+    parser = build_repo_root_parser("Validate protomods duplicate names and IDs.")
+    args = parser.parse_args()
+    issues = validate_protomods(args.repo_root.resolve())
 
     if issues:
         print("Proto validation failed:")

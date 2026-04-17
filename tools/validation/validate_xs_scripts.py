@@ -6,9 +6,11 @@ from pathlib import Path
 import re
 import sys
 
+if __package__ is None or __package__ == "":
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
-AI_ROOT = REPO_ROOT / "game" / "ai"
+from tools.validation.common import REPO_ROOT, build_repo_root_parser, repo_relative
+
 LOCAL_DECLARATION_RE = re.compile(r"^\s*(int|bool|float|string|vector)\s+([A-Za-z_][A-Za-z0-9_]*)\s*(?:=|;)")
 FUNCTION_RE = re.compile(r"^\s*(?:void|bool|int|float|string|vector)\s+([A-Za-z_][A-Za-z0-9_]*)\s*\(")
 RULE_RE = re.compile(r"^\s*rule\s+([A-Za-z_][A-Za-z0-9_]*)\b")
@@ -35,7 +37,7 @@ def iter_xs_files(root: Path):
     yield from sorted(root.rglob("*.xs"))
 
 
-def check_duplicate_names(file_path: Path, lines: list[str]) -> list[str]:
+def check_duplicate_names(file_path: Path, lines: list[str], repo_root: Path) -> list[str]:
     issues: list[str] = []
 
     function_names = [match.group(1) for line in lines if (match := FUNCTION_RE.match(line))]
@@ -44,7 +46,7 @@ def check_duplicate_names(file_path: Path, lines: list[str]) -> list[str]:
     duplicate_functions = sorted(name for name, count in Counter(function_names).items() if count > 1)
     duplicate_rules = sorted(name for name, count in Counter(rule_names).items() if count > 1)
 
-    rel_path = file_path.relative_to(REPO_ROOT)
+    rel_path = repo_relative(file_path, repo_root)
     for name in duplicate_functions:
         issues.append(f"{rel_path}: duplicate function name '{name}'")
     for name in duplicate_rules:
@@ -53,7 +55,7 @@ def check_duplicate_names(file_path: Path, lines: list[str]) -> list[str]:
     return issues
 
 
-def check_duplicate_locals(file_path: Path, lines: list[str]) -> list[str]:
+def check_duplicate_locals(file_path: Path, lines: list[str], repo_root: Path) -> list[str]:
     issues: list[str] = []
     pending: Block | None = None
     active: Block | None = None
@@ -83,7 +85,7 @@ def check_duplicate_locals(file_path: Path, lines: list[str]) -> list[str]:
                     and any(previous == "{" for previous in active.recent_nonempty_lines[-2:])
                 )
                 if in_rule_loop_body and name in active.declarations:
-                    rel_path = file_path.relative_to(REPO_ROOT)
+                    rel_path = repo_relative(file_path, repo_root)
                     first_line = active.declarations[name]
                     issues.append(
                         f"{rel_path}:{index}: duplicate local '{name}' in {active.kind} '{active.name}' (first declared on line {first_line})"
@@ -103,16 +105,24 @@ def check_duplicate_locals(file_path: Path, lines: list[str]) -> list[str]:
     return issues
 
 
-def main() -> int:
-    if not AI_ROOT.exists():
-        print(f"AI folder not found: {AI_ROOT.relative_to(REPO_ROOT)}")
-        return 1
+def validate_xs_scripts(repo_root: Path = REPO_ROOT) -> list[str]:
+    ai_root = repo_root / "game" / "ai"
+    if not ai_root.exists():
+        return [f"AI folder not found: {repo_relative(ai_root, repo_root)}"]
 
     issues: list[str] = []
-    for file_path in iter_xs_files(AI_ROOT):
+    for file_path in iter_xs_files(ai_root):
         lines = file_path.read_text(encoding="utf-8", errors="replace").splitlines()
-        issues.extend(check_duplicate_names(file_path, lines))
-        issues.extend(check_duplicate_locals(file_path, lines))
+        issues.extend(check_duplicate_names(file_path, lines, repo_root))
+        issues.extend(check_duplicate_locals(file_path, lines, repo_root))
+
+    return issues
+
+
+def main() -> int:
+    parser = build_repo_root_parser("Validate XS duplicate symbols and duplicate rule locals.")
+    args = parser.parse_args()
+    issues = validate_xs_scripts(args.repo_root.resolve())
 
     if issues:
         print("XS validation failed:")

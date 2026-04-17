@@ -92,7 +92,8 @@
 		<RandomStartingUnits>0</RandomStartingUnits>
 		<HomeCityFilename>rvltmodhomecitynapoleon.xml</HomeCityFilename>
 		<HomeCityFlagTexture>objects\flags\french_revolution_ne</HomeCityFlagTexture>
-		<PostgameFlagIconWPF>resources/images/icons/flags/postgame_flag_french_revolution_ne.png</PostgameFlagIconWPF>
+		<PostgameFlagTexture>ui\ingame\ingame_ui_postgame_flag_french</PostgameFlagTexture>
+		<PostgameFlagIconWPF>resources/images/icons/flags/Flag_French_Revolution_NE.png</PostgameFlagIconWPF>
 		<HomeCityFlagIconWPF>resources/images/icons/flags/Flag_French_Revolution_NE.png</HomeCityFlagIconWPF>
 		<HomeCityFlagButtonWPF>resources/images/icons/flags/flag_hc_french_revolution_ne.png</HomeCityFlagButtonWPF>
 		<MatchmakingTextures>
@@ -355,7 +356,8 @@
 		<RandomStartingUnits>0</RandomStartingUnits>
 		<HomeCityFilename>rvltmodhomecityrevolutionaryfrance.xml</HomeCityFilename>
 		<HomeCityFlagTexture>objects\flags\french</HomeCityFlagTexture>
-		<PostgameFlagIconWPF>resources/images/icons/flags/postgame_flag_revolutionary_france.png</PostgameFlagIconWPF>
+		<PostgameFlagTexture>ui\ingame\ingame_ui_postgame_flag_french</PostgameFlagTexture>
+		<PostgameFlagIconWPF>resources/images/icons/flags/Flag_Revolutionary_France.png</PostgameFlagIconWPF>
 		<HomeCityFlagIconWPF>resources/images/icons/flags/Flag_Revolutionary_France.png</HomeCityFlagIconWPF>
 		<HomeCityFlagButtonWPF>resources/images/icons/flags/flag_hc_revolutionary_france.png</HomeCityFlagButtonWPF>
 		<MatchmakingTextures>
@@ -624,7 +626,7 @@
 		<HomeCityFlagButtonSet>washingtonFlagBtn</HomeCityFlagButtonSet>
 		<HomeCityFlagButtonSetLarge>washingtonFlagBtnLarge</HomeCityFlagButtonSetLarge>
 		<PostgameFlagTexture>ui\ingame\ingame_ui_postgame_flag_USA</PostgameFlagTexture>
-		<PostgameFlagIconWPF>resources/images/icons/flags/postgame_flag_usa.png</PostgameFlagIconWPF>
+		<PostgameFlagIconWPF>resources/images/icons/flags/Flag_USA.png</PostgameFlagIconWPF>
 		<HomeCityFlagIconWPF>resources/images/icons/flags/Flag_USA.png</HomeCityFlagIconWPF>
 		<HomeCityFlagButtonWPF>resources\images\icons\flags\flag_hc_usa.png</HomeCityFlagButtonWPF>
 		<MatchmakingTextures>
@@ -894,7 +896,7 @@
 		<HomeCityFlagButtonSet>hidalgoFlagBtn</HomeCityFlagButtonSet>
 		<HomeCityFlagButtonSetLarge>hidalgoFlagBtnLarge</HomeCityFlagButtonSetLarge>
 		<PostgameFlagTexture>ui\ingame\ingame_ui_postgame_flag_mexican</PostgameFlagTexture>
-		<PostgameFlagIconWPF>resources/images/icons/flags/postgame_flag_mexican_rev.png</PostgameFlagIconWPF>
+		<PostgameFlagIconWPF>resources/images/icons/flags/Flag_Mexican_Rev.png</PostgameFlagIconWPF>
 		<HomeCityFlagIconWPF>resources/images/icons/flags/Flag_Mexican_Rev.png</HomeCityFlagIconWPF>
 		<HomeCityFlagButtonWPF>resources\images\icons\flags\flag_hc_mexican_rev.png</HomeCityFlagButtonWPF>
 		<MatchmakingTextures>
@@ -1145,8 +1147,10 @@
 		<RandomStartingUnits>0</RandomStartingUnits>
 		<HomeCityFilename>rvltmodhomecitycanada.xml</HomeCityFilename>
 		<HomeCityFlagTexture>objects\flags\canadian</HomeCityFlagTexture>
+		<HomeCityFlagButtonSet>britishFlagBtn</HomeCityFlagButtonSet>
+		<HomeCityFlagButtonSetLarge>britishFlagBtnLarge</HomeCityFlagButtonSetLarge>
 		<PostgameFlagTexture>ui\ingame\ingame_ui_postgame_flag_canadian</PostgameFlagTexture>
-		<PostgameFlagIconWPF>resources/images/icons/flags/postgame_flag_canadian.png</PostgameFlagIconWPF>
+		<PostgameFlagIconWPF>resources/images/icons/flags/Flag_Canadians.png</PostgameFlagIconWPF>
 		<HomeCityFlagIconWPF>resources/images/icons/flags/Flag_Canadians.png</HomeCityFlagIconWPF>
 		<HomeCityFlagButtonWPF>resources\images\icons\flags\flag_hc_canadian.png</HomeCityFlagButtonWPF>
 		<MatchmakingTextures>
@@ -1410,12 +1414,12 @@
 		<HomeCityFilename>rvltmodhomecityfrenchcanada.xml</HomeCityFilename>
 		<HomeCityFlagTexture>objects\flags\spc_canadians</HomeCityFlagTexture>
 		<HomeCityFlagIconWPF>resources/images/icons/flags/Flag_SPC_Canadian.png</HomeCityFlagIconWPF>
-		<HomeCityPreviewWPF>resources/images/icons/history/histories/h_pc_british.png</HomeCityPreviewWPF>
+		<HomeCityPreviewWPF>resources/images/icons/singleplayer/cpai_avatar_british_wellington.png</HomeCityPreviewWPF>
 		<HomeCityFlagButtonWPF>resources\images\icons\flags\flag_hc_spc_canadian.png</HomeCityFlagButtonWPF>
 		<HomeCityFlagButtonSet>britishFlagBtn</HomeCityFlagButtonSet>
 		<HomeCityFlagButtonSetLarge>britishFlagBtnLarge</HomeCityFlagButtonSetLarge>
 		<PostgameFlagTexture>ui\ingame\ingame_ui_postgame_flag_spc_canadian</PostgameFlagTexture>
-		<PostgameFlagIconWPF>resources/images/icons/flags/postgame_flag_spc_canadian.png</PostgameFlagIconWPF>
+		<PostgameFlagIconWPF>resources/images/icons/flags/Flag_SPC_Canadian.png</PostgameFlagIconWPF>
 		<MatchmakingTextures>
 			<BannerTexture>ui\eso\civ_flags_quick_launch</BannerTexture>
 			<BannerTextureCoords>0 0.75 0.78125 0.875</BannerTextureCoords>
@@ -1684,7 +1688,7 @@
 		<HomeCityFlagButtonSet>bonifacioFlagBtn</HomeCityFlagButtonSet>
 		<HomeCityFlagButtonSetLarge>bonifacioFlagBtnLarge</HomeCityFlagButtonSetLarge>
 		<PostgameFlagTexture>ui\ingame\ingame_ui_postgame_flag_brazilian</PostgameFlagTexture>
-		<PostgameFlagIconWPF>resources/images/icons/flags/postgame_flag_brazilian.png</PostgameFlagIconWPF>
+		<PostgameFlagIconWPF>resources/images/icons/flags/Flag_Brazilian.png</PostgameFlagIconWPF>
 		<HomeCityFlagIconWPF>resources/images/icons/flags/Flag_Brazilian.png</HomeCityFlagIconWPF>
 		<HomeCityFlagButtonWPF>resources\images\icons\flags\flag_hc_brazilian.png</HomeCityFlagButtonWPF>
 		<MatchmakingTextures>
@@ -1954,7 +1958,7 @@
 		<HomeCityFlagButtonSet>sanMartinFlagBtn</HomeCityFlagButtonSet>
 		<HomeCityFlagButtonSetLarge>sanMartinFlagBtnLarge</HomeCityFlagButtonSetLarge>
 		<PostgameFlagTexture>ui\ingame\ingame_ui_postgame_flag_argentinian</PostgameFlagTexture>
-		<PostgameFlagIconWPF>resources/images/icons/flags/postgame_flag_argentinian.png</PostgameFlagIconWPF>
+		<PostgameFlagIconWPF>resources/images/icons/flags/Flag_Argentinian.png</PostgameFlagIconWPF>
 		<HomeCityFlagIconWPF>resources/images/icons/flags/Flag_Argentinian.png</HomeCityFlagIconWPF>
 		<HomeCityFlagButtonWPF>resources\images\icons\flags\flag_hc_argentinian.png</HomeCityFlagButtonWPF>
 		<MatchmakingTextures>
@@ -2209,7 +2213,7 @@
 		<HomeCityFlagButtonSet>oHigginsFlagBtn</HomeCityFlagButtonSet>
 		<HomeCityFlagButtonSetLarge>oHigginsFlagBtnLarge</HomeCityFlagButtonSetLarge>
 		<PostgameFlagTexture>ui\ingame\ingame_ui_postgame_flag_chilean</PostgameFlagTexture>
-		<PostgameFlagIconWPF>resources/images/icons/flags/postgame_flag_chilean.png</PostgameFlagIconWPF>
+		<PostgameFlagIconWPF>resources/images/icons/flags/Flag_Chilean.png</PostgameFlagIconWPF>
 		<HomeCityFlagIconWPF>resources/images/icons/flags/Flag_Chilean.png</HomeCityFlagIconWPF>
 		<HomeCityFlagButtonWPF>resources\images\icons\flags\flag_hc_chilean.png</HomeCityFlagButtonWPF>
 		<MatchmakingTextures>
@@ -2464,8 +2468,8 @@
 		<HomeCityFlagButtonSet>bolivarFlagBtn</HomeCityFlagButtonSet>
 		<HomeCityFlagButtonSetLarge>bolivarFlagBtnLarge</HomeCityFlagButtonSetLarge>
 		<PostgameFlagTexture>ui\ingame\ingame_ui_postgame_flag_peruvian</PostgameFlagTexture>
-		<PostgameFlagIconWPF>resources/images/icons/flags/postgame_flag_peruvian.png</PostgameFlagIconWPF>
-		<RevolutionFlagWPF>resources/images/politiciandlg/rev_flag_peruvian.png</RevolutionFlagWPF>
+		<PostgameFlagIconWPF>resources/images/icons/flags/Flag_Peruvian.png</PostgameFlagIconWPF>
+		<RevolutionFlagWPF>resources/images/icons/flags/Flag_Peruvian.png</RevolutionFlagWPF>
 		<HomeCityFlagIconWPF>resources/images/icons/flags/Flag_Peruvian.png</HomeCityFlagIconWPF>
 		<HomeCityFlagButtonWPF>resources\images\icons\flags\flag_hc_peruvian.png</HomeCityFlagButtonWPF>
 		<MatchmakingTextures>
@@ -2725,7 +2729,7 @@
 		<HomeCityFlagButtonSet>santanderFlagBtn</HomeCityFlagButtonSet>
 		<HomeCityFlagButtonSetLarge>santanderFlagBtnLarge</HomeCityFlagButtonSetLarge>
 		<PostgameFlagTexture>ui\ingame\ingame_ui_postgame_flag_colombian</PostgameFlagTexture>
-		<PostgameFlagIconWPF>resources/images/icons/flags/postgame_flag_colombian.png</PostgameFlagIconWPF>
+		<PostgameFlagIconWPF>resources/images/icons/flags/Flag_Colombian.png</PostgameFlagIconWPF>
 		<HomeCityFlagIconWPF>resources/images/icons/flags/Flag_Colombian.png</HomeCityFlagIconWPF>
 		<HomeCityFlagButtonWPF>resources\images\icons\flags\flag_hc_colombian.png</HomeCityFlagButtonWPF>
 		<MatchmakingTextures>
@@ -2981,7 +2985,7 @@
 		<HomeCityFlagButtonSet>louvertureFlagBtn</HomeCityFlagButtonSet>
 		<HomeCityFlagButtonSetLarge>louvertureFlagBtnLarge</HomeCityFlagButtonSetLarge>
 		<PostgameFlagTexture>ui\ingame\ingame_ui_postgame_flag_haitian</PostgameFlagTexture>
-		<PostgameFlagIconWPF>resources/images/icons/flags/postgame_flag_haitian.png</PostgameFlagIconWPF>
+		<PostgameFlagIconWPF>resources/images/icons/flags/Flag_Haitian.png</PostgameFlagIconWPF>
 		<HomeCityFlagIconWPF>resources/images/icons/flags/Flag_Haitian.png</HomeCityFlagIconWPF>
 		<HomeCityFlagButtonWPF>resources\images\icons\flags\flag_hc_haitian.png</HomeCityFlagButtonWPF>
 		<MatchmakingTextures>
@@ -3257,8 +3261,10 @@
 		<RandomStartingUnits>0</RandomStartingUnits>
 		<HomeCityFilename>rvltmodhomecityindonesians.xml</HomeCityFilename>
 		<HomeCityFlagTexture>objects\flags\indonesian</HomeCityFlagTexture>
+		<HomeCityFlagButtonSet>britishFlagBtn</HomeCityFlagButtonSet>
+		<HomeCityFlagButtonSetLarge>britishFlagBtnLarge</HomeCityFlagButtonSetLarge>
 		<PostgameFlagTexture>ui\ingame\ingame_ui_postgame_flag_indonesian</PostgameFlagTexture>
-		<PostgameFlagIconWPF>resources/images/icons/flags/postgame_flag_indonesian.png</PostgameFlagIconWPF>
+		<PostgameFlagIconWPF>resources/images/icons/flags/Flag_Indonesian.png</PostgameFlagIconWPF>
 		<HomeCityFlagIconWPF>resources/images/icons/flags/Flag_Indonesian.png</HomeCityFlagIconWPF>
 		<HomeCityFlagButtonWPF>resources\images\icons\flags\flag_hc_indonesian.png</HomeCityFlagButtonWPF>
 		<MatchmakingTextures>
@@ -3523,8 +3529,10 @@
 		<RandomStartingUnits>0</RandomStartingUnits>
 		<HomeCityFilename>rvltmodhomecitysouthafricans.xml</HomeCityFilename>
 		<HomeCityFlagTexture>objects\flags\south_african</HomeCityFlagTexture>
+		<HomeCityFlagButtonSet>britishFlagBtn</HomeCityFlagButtonSet>
+		<HomeCityFlagButtonSetLarge>britishFlagBtnLarge</HomeCityFlagButtonSetLarge>
 		<PostgameFlagTexture>ui\ingame\ingame_ui_postgame_flag_south_african</PostgameFlagTexture>
-		<PostgameFlagIconWPF>resources/images/icons/flags/postgame_flag_south_african.png</PostgameFlagIconWPF>
+		<PostgameFlagIconWPF>resources/images/icons/flags/Flag_South_African.png</PostgameFlagIconWPF>
 		<HomeCityFlagIconWPF>resources/images/icons/flags/Flag_South_African.png</HomeCityFlagIconWPF>
 		<HomeCityFlagButtonWPF>resources\images\icons\flags\flag_hc_south_african.png</HomeCityFlagButtonWPF>
 		<MatchmakingTextures>
@@ -3790,7 +3798,7 @@
 		<HomeCityFilename>rvltmodhomecityfinland.xml</HomeCityFilename>
 		<HomeCityFlagTexture>objects\flags\finnish</HomeCityFlagTexture>
 		<PostgameFlagTexture>ui\ingame\ingame_ui_postgame_flag_finnish</PostgameFlagTexture>
-		<PostgameFlagIconWPF>resources/images/icons/flags/postgame_flag_finnish.png</PostgameFlagIconWPF>
+		<PostgameFlagIconWPF>resources/images/icons/flags/Flag_Finnish.png</PostgameFlagIconWPF>
 		<HomeCityFlagIconWPF>resources/images/icons/flags/Flag_Finnish.png</HomeCityFlagIconWPF>
 		<HomeCityFlagButtonWPF>resources\images\icons\flags\flag_hc_finnish.png</HomeCityFlagButtonWPF>
 		<MatchmakingTextures>
@@ -4047,7 +4055,7 @@
 		<HomeCityFilename>rvltmodhomecityhungary.xml</HomeCityFilename>
 		<HomeCityFlagTexture>objects\flags\hungarian</HomeCityFlagTexture>
 		<PostgameFlagTexture>ui\ingame\ingame_ui_postgame_flag_hungarian</PostgameFlagTexture>
-		<PostgameFlagIconWPF>resources/images/icons/flags/postgame_flag_hungarian.png</PostgameFlagIconWPF>
+		<PostgameFlagIconWPF>resources/images/icons/flags/Flag_Hungarian.png</PostgameFlagIconWPF>
 		<HomeCityFlagIconWPF>resources/images/icons/flags/Flag_Hungarian.png</HomeCityFlagIconWPF>
 		<HomeCityFlagButtonWPF>resources\images\icons\flags\flag_hc_hungarian.png</HomeCityFlagButtonWPF>
 		<MatchmakingTextures>
@@ -4304,7 +4312,7 @@
 		<HomeCityFilename>rvltmodhomecityromania.xml</HomeCityFilename>
 		<HomeCityFlagTexture>objects\flags\romanian</HomeCityFlagTexture>
 		<PostgameFlagTexture>ui\ingame\ingame_ui_postgame_flag_romanian</PostgameFlagTexture>
-		<PostgameFlagIconWPF>resources/images/icons/flags/postgame_flag_romanian.png</PostgameFlagIconWPF>
+		<PostgameFlagIconWPF>resources/images/icons/flags/Flag_Romanians.png</PostgameFlagIconWPF>
 		<HomeCityFlagIconWPF>resources/images/icons/flags/Flag_Romanians.png</HomeCityFlagIconWPF>
 		<HomeCityFlagButtonWPF>resources\images\icons\flags\flag_hc_romanian.png</HomeCityFlagButtonWPF>
 		<MatchmakingTextures>
@@ -4557,7 +4565,7 @@
 		<HomeCityFilename>rvltmodhomecitybarbary.xml</HomeCityFilename>
 		<HomeCityFlagTexture>objects\flags\spc_barbary</HomeCityFlagTexture>
 		<PostgameFlagTexture>ui\ingame\ingame_ui_postgame_flag_barbary</PostgameFlagTexture>
-		<PostgameFlagIconWPF>resources/images/icons/flags/postgame_flag_barbary.png</PostgameFlagIconWPF>
+		<PostgameFlagIconWPF>resources/images/icons/flags/Flag_barbary.png</PostgameFlagIconWPF>
 		<HomeCityFlagIconWPF>resources/images/icons/flags/Flag_barbary.png</HomeCityFlagIconWPF>
 		<HomeCityFlagButtonWPF>resources\images\icons\flags\flag_hc_barbary.png</HomeCityFlagButtonWPF>
 		<MatchmakingTextures>
@@ -4801,7 +4809,7 @@
 		<HomeCityFilename>rvltmodhomecityegypt.xml</HomeCityFilename>
 		<HomeCityFlagTexture>objects\flags\egyptian</HomeCityFlagTexture>
 		<PostgameFlagTexture>ui\ingame\ingame_ui_postgame_flag_egyptian</PostgameFlagTexture>
-		<PostgameFlagIconWPF>resources/images/icons/flags/postgame_flag_egyptian.png</PostgameFlagIconWPF>
+		<PostgameFlagIconWPF>resources/images/icons/flags/Flag_Egyptians.png</PostgameFlagIconWPF>
 		<HomeCityFlagIconWPF>resources/images/icons/flags/Flag_Egyptians.png</HomeCityFlagIconWPF>
 		<HomeCityFlagButtonWPF>resources\images\icons\flags\flag_hc_egyptian.png</HomeCityFlagButtonWPF>
 		<MatchmakingTextures>
@@ -5056,7 +5064,10 @@
 		<SecondHeroHCLabelID>112249</SecondHeroHCLabelID>
 		<UseExtendedDeckUI />
 		<HomeCityFlagTexture>objects\flags\mx_central_american</HomeCityFlagTexture>
-		<PostgameFlagIconWPF>resources/images/icons/flags/postgame_flag_central_american.png</PostgameFlagIconWPF>
+		<HomeCityFlagButtonSet>hidalgoFlagBtn</HomeCityFlagButtonSet>
+		<HomeCityFlagButtonSetLarge>hidalgoFlagBtnLarge</HomeCityFlagButtonSetLarge>
+		<PostgameFlagTexture>ui\ingame\ingame_ui_postgame_flag_central_american</PostgameFlagTexture>
+		<PostgameFlagIconWPF>resources/images/icons/flags/Flag_Central_American.png</PostgameFlagIconWPF>
 		<HomeCityFlagIconWPF>resources/images/icons/flags/Flag_Central_American.png</HomeCityFlagIconWPF>
 		<HomeCityFlagButtonWPF>resources/images/icons/flags/flag_hc_central_american.png</HomeCityFlagButtonWPF>
 		<MatchmakingTextures>
@@ -5505,7 +5516,10 @@
 		<SecondHeroHCLabelID>112249</SecondHeroHCLabelID>
 		<UseExtendedDeckUI />
 		<HomeCityFlagTexture>objects\flags\mx_baja_californian</HomeCityFlagTexture>
-		<PostgameFlagIconWPF>resources/images/icons/flags/postgame_flag_baja_californian.png</PostgameFlagIconWPF>
+		<HomeCityFlagButtonSet>hidalgoFlagBtn</HomeCityFlagButtonSet>
+		<HomeCityFlagButtonSetLarge>hidalgoFlagBtnLarge</HomeCityFlagButtonSetLarge>
+		<PostgameFlagTexture>ui\ingame\ingame_ui_postgame_flag_baja_californian</PostgameFlagTexture>
+		<PostgameFlagIconWPF>resources/images/icons/flags/Flag_baja_californian.png</PostgameFlagIconWPF>
 		<HomeCityFlagIconWPF>resources/images/icons/flags/Flag_baja_californian.png</HomeCityFlagIconWPF>
 		<HomeCityFlagButtonWPF>resources/images/icons/flags/flag_hc_baja_californian.png</HomeCityFlagButtonWPF>
 		<MatchmakingTextures>
@@ -5954,7 +5968,10 @@
 		<SecondHeroHCLabelID>112249</SecondHeroHCLabelID>
 		<UseExtendedDeckUI />
 		<HomeCityFlagTexture>objects\flags\mx_yucatan</HomeCityFlagTexture>
-		<PostgameFlagIconWPF>resources/images/icons/flags/postgame_flag_yucatan.png</PostgameFlagIconWPF>
+		<HomeCityFlagButtonSet>hidalgoFlagBtn</HomeCityFlagButtonSet>
+		<HomeCityFlagButtonSetLarge>hidalgoFlagBtnLarge</HomeCityFlagButtonSetLarge>
+		<PostgameFlagTexture>ui\ingame\ingame_ui_postgame_flag_yucatan</PostgameFlagTexture>
+		<PostgameFlagIconWPF>resources/images/icons/flags/Flag_yucatan.png</PostgameFlagIconWPF>
 		<HomeCityFlagIconWPF>resources/images/icons/flags/Flag_yucatan.png</HomeCityFlagIconWPF>
 		<HomeCityFlagButtonWPF>resources/images/icons/flags/flag_hc_yucatan.png</HomeCityFlagButtonWPF>
 		<MatchmakingTextures>
@@ -6403,7 +6420,10 @@
 		<SecondHeroHCLabelID>112249</SecondHeroHCLabelID>
 		<UseExtendedDeckUI />
 		<HomeCityFlagTexture>objects\flags\mx_rio_grande</HomeCityFlagTexture>
-		<PostgameFlagIconWPF>resources/images/icons/flags/postgame_flag_rio_grande.png</PostgameFlagIconWPF>
+		<HomeCityFlagButtonSet>hidalgoFlagBtn</HomeCityFlagButtonSet>
+		<HomeCityFlagButtonSetLarge>hidalgoFlagBtnLarge</HomeCityFlagButtonSetLarge>
+		<PostgameFlagTexture>ui\ingame\ingame_ui_postgame_flag_rio_grande</PostgameFlagTexture>
+		<PostgameFlagIconWPF>resources/images/icons/flags/Flag_rio_grande.png</PostgameFlagIconWPF>
 		<HomeCityFlagIconWPF>resources/images/icons/flags/Flag_rio_grande.png</HomeCityFlagIconWPF>
 		<HomeCityFlagButtonWPF>resources/images/icons/flags/flag_hc_rio_grande.png</HomeCityFlagButtonWPF>
 		<MatchmakingTextures>
@@ -6852,7 +6872,10 @@
 		<SecondHeroHCLabelID>112249</SecondHeroHCLabelID>
 		<UseExtendedDeckUI />
 		<HomeCityFlagTexture>objects\flags\mx_mayan</HomeCityFlagTexture>
-		<PostgameFlagIconWPF>resources/images/icons/flags/postgame_flag_mayan.png</PostgameFlagIconWPF>
+		<HomeCityFlagButtonSet>hidalgoFlagBtn</HomeCityFlagButtonSet>
+		<HomeCityFlagButtonSetLarge>hidalgoFlagBtnLarge</HomeCityFlagButtonSetLarge>
+		<PostgameFlagTexture>ui\ingame\ingame_ui_postgame_flag_mayan</PostgameFlagTexture>
+		<PostgameFlagIconWPF>resources/images/icons/flags/Flag_mayan.png</PostgameFlagIconWPF>
 		<HomeCityFlagIconWPF>resources/images/icons/flags/Flag_mayan.png</HomeCityFlagIconWPF>
 		<HomeCityFlagButtonWPF>resources/images/icons/flags/flag_hc_mayan.png</HomeCityFlagButtonWPF>
 		<MatchmakingTextures>
@@ -7301,7 +7324,10 @@
 		<SecondHeroHCLabelID>112249</SecondHeroHCLabelID>
 		<UseExtendedDeckUI />
 		<HomeCityFlagTexture>objects\flags\mx_californian</HomeCityFlagTexture>
-		<PostgameFlagIconWPF>resources/images/icons/flags/postgame_flag_californian.png</PostgameFlagIconWPF>
+		<HomeCityFlagButtonSet>hidalgoFlagBtn</HomeCityFlagButtonSet>
+		<HomeCityFlagButtonSetLarge>hidalgoFlagBtnLarge</HomeCityFlagButtonSetLarge>
+		<PostgameFlagTexture>ui\ingame\ingame_ui_postgame_flag_californian</PostgameFlagTexture>
+		<PostgameFlagIconWPF>resources/images/icons/flags/Flag_californian.png</PostgameFlagIconWPF>
 		<HomeCityFlagIconWPF>resources/images/icons/flags/Flag_californian.png</HomeCityFlagIconWPF>
 		<HomeCityFlagButtonWPF>resources/images/icons/flags/flag_hc_californian.png</HomeCityFlagButtonWPF>
 		<MatchmakingTextures>
@@ -7750,7 +7776,10 @@
 		<SecondHeroHCLabelID>112249</SecondHeroHCLabelID>
 		<UseExtendedDeckUI />
 		<HomeCityFlagTexture>objects\flags\us_texan</HomeCityFlagTexture>
-		<PostgameFlagIconWPF>resources/images/icons/flags/postgame_flag_texan.png</PostgameFlagIconWPF>
+		<HomeCityFlagButtonSet>washingtonFlagBtn</HomeCityFlagButtonSet>
+		<HomeCityFlagButtonSetLarge>washingtonFlagBtnLarge</HomeCityFlagButtonSetLarge>
+		<PostgameFlagTexture>ui\ingame\ingame_ui_postgame_flag_texan</PostgameFlagTexture>
+		<PostgameFlagIconWPF>resources/images/icons/flags/Flag_texan.png</PostgameFlagIconWPF>
 		<HomeCityFlagIconWPF>resources/images/icons/flags/Flag_texan.png</HomeCityFlagIconWPF>
 		<HomeCityFlagButtonWPF>resources/images/icons/flags/flag_hc_texan.png</HomeCityFlagButtonWPF>
 		<MatchmakingTextures>

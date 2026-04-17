@@ -153,7 +153,7 @@
       <name>HCShipWoodCrates3</name>
       <maxcount>1</maxcount>
       <level>10</level>
-      <prereqtech>HCShipwoodCrates2</prereqtech>
+      <prereqtech>HCShipWoodCrates2</prereqtech>
       <age>1</age>
       <displayunitcount>700</displayunitcount>
       <infiniteinlastage>1</infiniteinlastage>
@@ -162,7 +162,7 @@
       <name>HCShipWoodCrates4</name>
       <maxcount>1</maxcount>
       <level>10</level>
-      <prereqtech>HCShipwoodCrates3</prereqtech>
+      <prereqtech>HCShipWoodCrates3</prereqtech>
       <age>2</age>
       <displayunitcount>1000</displayunitcount>
       <infiniteinlastage>1</infiniteinlastage>
@@ -215,7 +215,7 @@
       <name>HCShipCoinCrates4</name>
       <maxcount>1</maxcount>
       <level>10</level>
-      <prereqtech>HCShipwoodCrates3</prereqtech>
+      <prereqtech>HCShipWoodCrates3</prereqtech>
       <age>2</age>
       <displayunitcount>1000</displayunitcount>
       <infiniteinlastage>1</infiniteinlastage>
@@ -667,7 +667,7 @@
       <name>HCXPShipMortarsTeam</name>
       <maxcount>1</maxcount>
       <level>10</level>
-      <prereqtech>HCXPShipMortarsTeam</prereqtech>
+      <prereqtech>HCShipMortars2</prereqtech>
       <age>3</age>
       <displayunitcount>2</displayunitcount>
       <infiniteinlastage>1</infiniteinlastage>

@@ -1,0 +1,35 @@
+name: Package Validation
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  package-validation:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - name: Validate packaged mod output
+        run: python tools/validation/validate_packaged_mod.py --report-file .validation-reports/package-validation-report.txt
+      - name: Publish packaged validation summary
+        if: always()
+        run: |
+          {
+            echo "## Packaged Validation Report"
+            echo
+            echo '```text'
+            cat .validation-reports/package-validation-report.txt
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+      - name: Upload packaged validation report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: package-validation-report
+          path: .validation-reports/package-validation-report.txt
+          if-no-files-found: error

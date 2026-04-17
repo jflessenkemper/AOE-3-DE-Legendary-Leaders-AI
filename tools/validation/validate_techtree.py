@@ -5,41 +5,19 @@ from pathlib import Path
 import sys
 import xml.etree.ElementTree as ET
 
+if __package__ is None or __package__ == "":
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
-TECHTREE_FILE = REPO_ROOT / "data" / "techtreemods.xml"
-
-
-def local_name(tag: str) -> str:
-    return tag.rsplit("}", 1)[-1].lower()
+from tools.validation.common import REPO_ROOT, build_repo_root_parser, child_elements, get_attr_case_insensitive, get_child_text, local_name, repo_relative
 
 
-def child_elements(node):
-    return [child for child in list(node) if isinstance(child.tag, str)]
+def validate_techtree(repo_root: Path = REPO_ROOT) -> list[str]:
+    techtree_file = repo_root / "data" / "techtreemods.xml"
 
-
-def find_first_child_text(node, name: str) -> str:
-    target = name.lower()
-    for child in child_elements(node):
-        if local_name(child.tag) == target:
-            return (child.text or "").strip()
-    return ""
-
-
-def get_attr_case_insensitive(node, key: str) -> str:
-    target = key.lower()
-    for attr_name, value in node.attrib.items():
-        if attr_name.lower() == target:
-            return value.strip()
-    return ""
-
-
-def main() -> int:
     try:
-        root = ET.parse(TECHTREE_FILE).getroot()
+        root = ET.parse(techtree_file).getroot()
     except ET.ParseError as exc:
-        print(f"Failed to parse {TECHTREE_FILE.relative_to(REPO_ROOT)}: {exc}")
-        return 1
+        return [f"Failed to parse {repo_relative(techtree_file, repo_root)}: {exc}"]
 
     tech_names: list[str] = []
     dbids: list[str] = []
@@ -49,7 +27,7 @@ def main() -> int:
             continue
 
         tech_name = get_attr_case_insensitive(tech, "name")
-        dbid = find_first_child_text(tech, "dbid")
+        dbid = get_child_text(tech, "dbid")
 
         if tech_name:
             tech_names.append(tech_name.lower())
@@ -65,6 +43,14 @@ def main() -> int:
         issues.append(f"Duplicate tech names: {', '.join(duplicate_names)}")
     if duplicate_dbids:
         issues.append(f"Duplicate tech DBIDs: {', '.join(duplicate_dbids)}")
+
+    return issues
+
+
+def main() -> int:
+    parser = build_repo_root_parser("Validate techtree duplicate names and IDs.")
+    args = parser.parse_args()
+    issues = validate_techtree(args.repo_root.resolve())
 
     if issues:
         print("TechTree validation failed:")
