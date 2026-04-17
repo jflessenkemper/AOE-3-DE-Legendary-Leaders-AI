@@ -543,7 +543,8 @@ void llPositionExplorerBehindArmy(vector rearPoint = cInvalidVector)
 
    int heroQueryID = createSimpleUnitQuery(cUnitTypeHero, cMyID, cUnitStateAlive);
    int heroCount = kbUnitQueryExecute(heroQueryID);
-   for (int i = 0; < heroCount)
+   int i = 0;
+   for (i = 0; < heroCount)
    {
       int heroID = kbUnitQueryGetResult(heroQueryID, i);
       int currentPlanID = kbUnitGetPlanID(heroID);
