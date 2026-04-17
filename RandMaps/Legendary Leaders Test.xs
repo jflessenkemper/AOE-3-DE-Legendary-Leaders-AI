@@ -1,5 +1,5 @@
 // Legendary Leaders Test
-// Flat 1v1-oriented test arena for validating surrender, prison routing,
+// Flat 2v2-oriented test arena for validating surrender, prison routing,
 // elite support, explorer reclaim, and AI attack shape.
 
 int TeamNum = cNumberTeams;
@@ -11,8 +11,8 @@ void main(void)
     rmSetStatusText("", 0.01);
 
     int effectivePlayers = PlayerNum;
-    if (effectivePlayers < 2)
-        effectivePlayers = 2;
+    if (effectivePlayers < 4)
+        effectivePlayers = 4;
 
     int playerTiles = 13500;
     int size = 2.0 * sqrt(effectivePlayers * playerTiles);
@@ -21,7 +21,20 @@ void main(void)
     rmTerrainInitialize("grass", 0.0);
     rmSetLightingSet("Texas_Skirmish");
 
-    if (PlayerNum == 2)
+    if ((PlayerNum == 4) && (TeamNum == 2) && (rmGetNumberPlayersOnTeam(0) == 2) && (rmGetNumberPlayersOnTeam(1) == 2))
+    {
+        // Place full teams on fixed west/east sides so slot order does not matter.
+        rmSetPlacementTeam(0);
+        rmSetPlayerPlacementArea(0.10, 0.18, 0.26, 0.82);
+        rmPlacePlayersLine(0.18, 0.33, 0.18, 0.67, 0.0, 0.0);
+
+        rmSetPlacementTeam(1);
+        rmSetPlayerPlacementArea(0.74, 0.18, 0.90, 0.82);
+        rmPlacePlayersLine(0.82, 0.33, 0.82, 0.67, 0.0, 0.0);
+
+        rmSetPlacementTeam(-1);
+    }
+    else if (PlayerNum == 2)
     {
         rmPlacePlayer(1, 0.18, 0.50);
         rmPlacePlayer(2, 0.82, 0.50);
@@ -42,19 +55,33 @@ void main(void)
     int avoidTownCenter = rmCreateTypeDistanceConstraint("ll avoid town center", "townCenter", 26.0);
     int avoidTownCenterFar = rmCreateTypeDistanceConstraint("ll avoid town center far", "townCenter", 60.0);
 
-    int westStartID = rmCreateArea("ll west start");
-    rmSetAreaSize(westStartID, 0.03);
-    rmSetAreaLocation(westStartID, 0.18, 0.50);
-    rmSetAreaMix(westStartID, "texas_grass_Skrimish");
-    rmSetAreaCoherence(westStartID, 1.0);
-    rmBuildArea(westStartID);
+    int westSouthStartID = rmCreateArea("ll west south start");
+    rmSetAreaSize(westSouthStartID, 0.022);
+    rmSetAreaLocation(westSouthStartID, 0.18, 0.33);
+    rmSetAreaMix(westSouthStartID, "texas_grass_Skrimish");
+    rmSetAreaCoherence(westSouthStartID, 1.0);
+    rmBuildArea(westSouthStartID);
 
-    int eastStartID = rmCreateArea("ll east start");
-    rmSetAreaSize(eastStartID, 0.03);
-    rmSetAreaLocation(eastStartID, 0.82, 0.50);
-    rmSetAreaMix(eastStartID, "texas_grass_Skrimish");
-    rmSetAreaCoherence(eastStartID, 1.0);
-    rmBuildArea(eastStartID);
+    int westNorthStartID = rmCreateArea("ll west north start");
+    rmSetAreaSize(westNorthStartID, 0.022);
+    rmSetAreaLocation(westNorthStartID, 0.18, 0.67);
+    rmSetAreaMix(westNorthStartID, "texas_grass_Skrimish");
+    rmSetAreaCoherence(westNorthStartID, 1.0);
+    rmBuildArea(westNorthStartID);
+
+    int eastSouthStartID = rmCreateArea("ll east south start");
+    rmSetAreaSize(eastSouthStartID, 0.022);
+    rmSetAreaLocation(eastSouthStartID, 0.82, 0.33);
+    rmSetAreaMix(eastSouthStartID, "texas_grass_Skrimish");
+    rmSetAreaCoherence(eastSouthStartID, 1.0);
+    rmBuildArea(eastSouthStartID);
+
+    int eastNorthStartID = rmCreateArea("ll east north start");
+    rmSetAreaSize(eastNorthStartID, 0.022);
+    rmSetAreaLocation(eastNorthStartID, 0.82, 0.67);
+    rmSetAreaMix(eastNorthStartID, "texas_grass_Skrimish");
+    rmSetAreaCoherence(eastNorthStartID, 1.0);
+    rmBuildArea(eastNorthStartID);
 
     int northLaneID = rmCreateArea("ll north lane");
     rmSetAreaSize(northLaneID, 0.018);
