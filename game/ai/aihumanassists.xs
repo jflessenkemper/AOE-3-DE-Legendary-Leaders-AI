@@ -61,7 +61,8 @@ minInterval 8
 
    int landQueryID = createSimpleUnitQuery(cUnitTypeLogicalTypeLandMilitary, cMyID, cUnitStateAlive);
    int landCount = kbUnitQueryExecute(landQueryID);
-   for (int i = 0; < landCount)
+   int i = 0;
+   for (i = 0; < landCount)
    {
       int unitID = kbUnitQueryGetResult(landQueryID, i);
       if (llGetTrackedSurrenderIndex(unitID) >= 0)
@@ -84,7 +85,8 @@ minInterval 8
 
    int navalQueryID = createSimpleUnitQuery(cUnitTypeAbstractWarShip, cMyID, cUnitStateAlive);
    int navalCount = kbUnitQueryExecute(navalQueryID);
-   for (int i = 0; < navalCount)
+   i = 0;
+   for (i = 0; < navalCount)
    {
       int unitID = kbUnitQueryGetResult(navalQueryID, i);
       if (llGetTrackedSurrenderIndex(unitID) >= 0)
@@ -116,7 +118,8 @@ minInterval 2
       return;
    }
 
-   for (int i = 0; < cLLMaxSurrenderUnits)
+   int i = 0;
+   for (i = 0; < cLLMaxSurrenderUnits)
    {
       int unitID = xsArrayGetInt(gLLSurrenderUnitIDs, i);
       if (unitID < 0)

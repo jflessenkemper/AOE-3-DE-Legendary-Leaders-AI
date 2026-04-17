@@ -254,7 +254,8 @@ bool llHasNearbyEliteSupport(int unitID = -1, float radius = 24.0)
 
    int unitQueryID = createSimpleUnitQuery(supportTypeID, ownerID, cUnitStateAlive, kbUnitGetPosition(unitID), radius);
    int numberFound = kbUnitQueryExecute(unitQueryID);
-   for (int i = 0; < numberFound)
+   int i = 0;
+   for (i = 0; < numberFound)
    {
       int nearbyUnitID = kbUnitQueryGetResult(unitQueryID, i);
       if (nearbyUnitID == unitID)
@@ -286,7 +287,8 @@ bool llHasNearbyExplorerSupport(int unitID = -1, float radius = 24.0)
    int ownerID = kbUnitGetPlayerID(unitID);
    int heroQueryID = createSimpleUnitQuery(cUnitTypeHero, ownerID, cUnitStateAlive, kbUnitGetPosition(unitID), radius);
    int numberFound = kbUnitQueryExecute(heroQueryID);
-   for (int i = 0; < numberFound)
+   int i = 0;
+   for (i = 0; < numberFound)
    {
       int nearbyUnitID = kbUnitQueryGetResult(heroQueryID, i);
       if (nearbyUnitID == unitID)
@@ -379,7 +381,8 @@ int llGetTrackedSurrenderIndex(int unitID = -1)
       return (-1);
    }
 
-   for (int i = 0; < cLLMaxSurrenderUnits)
+   int i = 0;
+   for (i = 0; < cLLMaxSurrenderUnits)
    {
       if (xsArrayGetInt(gLLSurrenderUnitIDs, i) == unitID)
       {
@@ -602,7 +605,8 @@ bool llTrackSurrenderingUnit(int unitID = -1)
       return (true);
    }
 
-   for (int i = 0; < cLLMaxSurrenderUnits)
+   int i = 0;
+   for (i = 0; < cLLMaxSurrenderUnits)
    {
       if (xsArrayGetInt(gLLSurrenderUnitIDs, i) >= 0)
       {
@@ -880,7 +884,8 @@ vector llFindEnemyPrisonLocation(void)
 
    if ((gLLSurrenderUnitIDs >= 0) && (gLLSurrenderStates >= 0) && (gLLSurrenderCaptors >= 0))
    {
-      for (int i = 0; < cLLMaxSurrenderUnits)
+      int i = 0;
+      for (i = 0; < cLLMaxSurrenderUnits)
       {
          if (xsArrayGetInt(gLLSurrenderStates, i) != cLLSurrenderStateImprisoned)
          {
@@ -1263,7 +1268,8 @@ minInterval 8
 
    int landQueryID = createSimpleUnitQuery(cUnitTypeLogicalTypeLandMilitary, cMyID, cUnitStateAlive);
    int landCount = kbUnitQueryExecute(landQueryID);
-   for (int i = 0; < landCount)
+   int i = 0;
+   for (i = 0; < landCount)
    {
       int unitID = kbUnitQueryGetResult(landQueryID, i);
       if (llGetTrackedSurrenderIndex(unitID) >= 0)
@@ -1294,7 +1300,8 @@ minInterval 8
 
    int navalQueryID = createSimpleUnitQuery(cUnitTypeAbstractWarShip, cMyID, cUnitStateAlive);
    int navalCount = kbUnitQueryExecute(navalQueryID);
-   for (int i = 0; < navalCount)
+   i = 0;
+   for (i = 0; < navalCount)
    {
       int unitID = kbUnitQueryGetResult(navalQueryID, i);
       if (llGetTrackedSurrenderIndex(unitID) >= 0)
@@ -1329,7 +1336,8 @@ minInterval 2
       return;
    }
 
-   for (int i = 0; < cLLMaxSurrenderUnits)
+   int i = 0;
+   for (i = 0; < cLLMaxSurrenderUnits)
    {
       int unitID = xsArrayGetInt(gLLSurrenderUnitIDs, i);
       if (unitID < 0)

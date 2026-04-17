@@ -158,7 +158,8 @@ int llGetNearbyNonEliteSupportCount(vector location = cInvalidVector, float radi
    int count = 0;
    int unitQueryID = createSimpleUnitQuery(cUnitTypeLogicalTypeLandMilitary, cMyID, cUnitStateAlive, location, radius);
    int numberFound = kbUnitQueryExecute(unitQueryID);
-   for (int i = 0; < numberFound)
+   int i = 0;
+   for (i = 0; < numberFound)
    {
       int unitID = kbUnitQueryGetResult(unitQueryID, i);
       if (llIsEliteUnit(unitID) == true)
@@ -177,7 +178,8 @@ int llGetTotalNonEliteTroopCount(void)
    int count = 0;
    int unitQueryID = createSimpleUnitQuery(cUnitTypeLogicalTypeLandMilitary, cMyID, cUnitStateAlive);
    int numberFound = kbUnitQueryExecute(unitQueryID);
-   for (int i = 0; < numberFound)
+   int i = 0;
+   for (i = 0; < numberFound)
    {
       int unitID = kbUnitQueryGetResult(unitQueryID, i);
       if (llIsEliteUnit(unitID) == true)
@@ -196,7 +198,8 @@ int llGetTotalEliteTroopCount(void)
    int count = 0;
    int unitQueryID = createSimpleUnitQuery(cUnitTypeLogicalTypeLandMilitary, cMyID, cUnitStateAlive);
    int numberFound = kbUnitQueryExecute(unitQueryID);
-   for (int i = 0; < numberFound)
+   int i = 0;
+   for (i = 0; < numberFound)
    {
       int unitID = kbUnitQueryGetResult(unitQueryID, i);
       if (llIsEliteUnit(unitID) == false)
@@ -224,7 +227,8 @@ int llGetNearbyEliteCoreCount(vector location = cInvalidVector, float radius = 3
 
    int unitQueryID = createSimpleUnitQuery(cUnitTypeLogicalTypeLandMilitary, cMyID, cUnitStateAlive, location, radius);
    int numberFound = kbUnitQueryExecute(unitQueryID);
-   for (int i = 0; < numberFound)
+   int i = 0;
+   for (i = 0; < numberFound)
    {
       int unitID = kbUnitQueryGetResult(unitQueryID, i);
       if (llIsEliteUnit(unitID) == false)
@@ -242,7 +246,8 @@ int llGetThreatenedEliteAnchorID(void)
 {
    int heroQueryID = createSimpleUnitQuery(cUnitTypeHero, cMyID, cUnitStateAlive);
    int heroCount = kbUnitQueryExecute(heroQueryID);
-   for (int i = 0; < heroCount)
+   int i = 0;
+   for (i = 0; < heroCount)
    {
       int heroID = kbUnitQueryGetResult(heroQueryID, i);
       if (llGetNearbyEnemyPressureCount(kbUnitGetPosition(heroID), 28.0) > 0)
@@ -253,7 +258,8 @@ int llGetThreatenedEliteAnchorID(void)
 
    int eliteQueryID = createSimpleUnitQuery(cUnitTypeLogicalTypeLandMilitary, cMyID, cUnitStateAlive);
    int eliteCount = kbUnitQueryExecute(eliteQueryID);
-   for (int i = 0; < eliteCount)
+   i = 0;
+   for (i = 0; < eliteCount)
    {
       int unitID = kbUnitQueryGetResult(eliteQueryID, i);
       if (llIsEliteUnit(unitID) == false)
@@ -273,7 +279,8 @@ int llGetThreatenedEliteAnchorID(void)
 int llGetPrimaryLandAttackPlanID(void)
 {
    int numPlans = aiPlanGetActiveCount();
-   for (int i = 0; < numPlans; i++)
+   int i = 0;
+   for (i = 0; < numPlans; i++)
    {
       int planID = aiPlanGetIDByActiveIndex(i);
       if (aiPlanGetType(planID) != cPlanCombat)
@@ -393,7 +400,8 @@ vector llGetEnemyArmyMassPoint(int targetPlayer = -1, vector nearPoint = cInvali
 
    float xTotal = 0.0;
    float zTotal = 0.0;
-   for (int i = 0; < enemyCount)
+   int i = 0;
+   for (i = 0; < enemyCount)
    {
       vector unitPosition = kbUnitGetPosition(kbUnitQueryGetResult(enemyQueryID, i));
       xTotal = xTotal + xsVectorGetX(unitPosition);
@@ -412,7 +420,8 @@ int llGetBestEnemyExplorerStrikeID(int targetPlayer = -1, vector referencePoint 
    int bestHeroID = -1;
    float bestScore = 99999.0;
 
-   for (int i = 0; < heroCount)
+   int i = 0;
+   for (i = 0; < heroCount)
    {
       int heroID = kbUnitQueryGetResult(heroQueryID, i);
       vector heroPosition = kbUnitGetPosition(heroID);
@@ -576,7 +585,8 @@ void llRebuildExplorerEscortPlan(int attackPlanID = -1, vector gatherPoint = cIn
    int addedUnits = 0;
    int unitQueryID = createSimpleUnitQuery(cUnitTypeLogicalTypeLandMilitary, cMyID, cUnitStateAlive);
    int numberFound = kbUnitQueryExecute(unitQueryID);
-   for (int i = 0; < numberFound)
+   int i = 0;
+   for (i = 0; < numberFound)
    {
       int unitID = kbUnitQueryGetResult(unitQueryID, i);
       if (llIsEliteUnit(unitID) == true)
@@ -705,7 +715,8 @@ void llRebuildEliteGuardPlan(int anchorUnitID = -1)
    int addedUnits = 0;
    int unitQueryID = createSimpleUnitQuery(cUnitTypeLogicalTypeLandMilitary, cMyID, cUnitStateAlive, anchorLocation, 34.0);
    int numberFound = kbUnitQueryExecute(unitQueryID);
-   for (int i = 0; < numberFound)
+   int i = 0;
+   for (i = 0; < numberFound)
    {
       int unitID = kbUnitQueryGetResult(unitQueryID, i);
       if (llIsEliteUnit(unitID) == true)
@@ -766,7 +777,8 @@ void llRetreatEliteCore(int anchorUnitID = -1, float radius = 36.0)
 
    int heroQueryID = createSimpleUnitQuery(cUnitTypeHero, cMyID, cUnitStateAlive, anchorLocation, radius);
    int heroCount = kbUnitQueryExecute(heroQueryID);
-   for (int i = 0; < heroCount)
+   int i = 0;
+   for (i = 0; < heroCount)
    {
       int heroID = kbUnitQueryGetResult(heroQueryID, i);
       int currentPlanID = kbUnitGetPlanID(heroID);
@@ -780,7 +792,8 @@ void llRetreatEliteCore(int anchorUnitID = -1, float radius = 36.0)
 
    int unitQueryID = createSimpleUnitQuery(cUnitTypeLogicalTypeLandMilitary, cMyID, cUnitStateAlive, anchorLocation, radius);
    int numberFound = kbUnitQueryExecute(unitQueryID);
-   for (int i = 0; < numberFound)
+   i = 0;
+   for (i = 0; < numberFound)
    {
       int unitID = kbUnitQueryGetResult(unitQueryID, i);
       if (llIsEliteUnit(unitID) == false)
@@ -810,7 +823,8 @@ void llRetreatAllEliteUnits(void)
 
    int heroQueryID = createSimpleUnitQuery(cUnitTypeHero, cMyID, cUnitStateAlive);
    int heroCount = kbUnitQueryExecute(heroQueryID);
-   for (int i = 0; < heroCount)
+   int i = 0;
+   for (i = 0; < heroCount)
    {
       int heroID = kbUnitQueryGetResult(heroQueryID, i);
       int currentPlanID = kbUnitGetPlanID(heroID);
@@ -824,7 +838,8 @@ void llRetreatAllEliteUnits(void)
 
    int unitQueryID = createSimpleUnitQuery(cUnitTypeLogicalTypeLandMilitary, cMyID, cUnitStateAlive);
    int numberFound = kbUnitQueryExecute(unitQueryID);
-   for (int i = 0; < numberFound)
+   i = 0;
+   for (i = 0; < numberFound)
    {
       int unitID = kbUnitQueryGetResult(unitQueryID, i);
       if (llIsEliteUnit(unitID) == false)
@@ -897,7 +912,8 @@ void llRebuildEliteSupportPlan(int attackPlanID = -1, vector gatherPoint = cInva
    int addedUnits = 0;
    int unitQueryID = createSimpleUnitQuery(cUnitTypeLogicalTypeLandMilitary, cMyID, cUnitStateAlive);
    int numberFound = kbUnitQueryExecute(unitQueryID);
-   for (int i = 0; < numberFound)
+   int i = 0;
+   for (i = 0; < numberFound)
    {
       int unitID = kbUnitQueryGetResult(unitQueryID, i);
       if (llIsEliteUnit(unitID) == false)
