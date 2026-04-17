@@ -6,7 +6,16 @@
 
 ## 🏳️ Elite Units and Surrender
 
-Elite status is assigned case by case to each nation's guard, royal, veteran, or prestige core rather than to every unique unit. Those elite units never auto-surrender. All other ordinary land units, including AI units, surrender at 10% health if no friendly elite unit is nearby. Surrendering units are forced toward the enemy's main military shipment drop point, which usually means that side's first Town Center or Home City gather-point building, and are then held there as prisoners. The original owner can recover imprisoned units by bringing an explorer close to the prison site. In large AI attacks, regular units still go in first, elites follow as the second line, and the explorer stays behind them; if that explorer dies, the elite line retreats and the AI tries to ransom its leader.
+Elite units are chosen case by case for each nation and never auto-surrender. Ordinary land units can surrender once they are badly damaged and no elite support is nearby, after which they are sent to the enemy prison point and can only be recovered by their original owner with an explorer.
+
+- Elite units never auto-surrender.
+- Ordinary land units can surrender at 10% health.
+- A unit will not surrender if a friendly elite unit is still nearby.
+- Surrendered units are routed to the enemy's main military shipment drop point, usually the first Town Center or Home City gather-point building.
+- Once imprisoned, surrendered units are held there instead of fighting normally.
+- Only the original owner's explorer can reclaim imprisoned units.
+- In large AI attacks, regular units lead, elites follow as the second line, and the explorer stays behind them.
+- If the AI explorer dies, the elite line retreats and the AI tries to ransom its leader.
 
 ## 🌍 Nation Guide
 
