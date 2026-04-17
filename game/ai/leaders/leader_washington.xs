@@ -18,12 +18,14 @@ void initLeaderWashington(void)
    llSetPrisonerDoctrine(cLLPrisonerDoctrineExchange, 0.20, 54.0);
    llEnablePrisonerSystem();
    gWashingtonRulesEnabled = true;
+   llLogLeaderState("Washington initialized");
 }
 
 rule washingtonContinentalArmy
 inactive
 minInterval 80
 {
+   llLogRuleTick("washingtonContinentalArmy");
    if (gWashingtonRulesEnabled == false)
    {
       xsDisableSelf();

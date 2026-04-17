@@ -55,6 +55,7 @@ rule legendaryHumanSurrenderMonitor
 inactive
 minInterval 8
 {
+   llLogRuleTick("legendaryHumanSurrenderMonitor");
    float healthThreshold = 0.10;
    float eliteSupportRadius = 24.0;
 
@@ -109,6 +110,7 @@ rule legendaryHumanSurrenderMove
 inactive
 minInterval 2
 {
+   llLogRuleTick("legendaryHumanSurrenderMove");
    if (gLLSurrenderUnitIDs < 0)
    {
       return;
@@ -164,12 +166,14 @@ minInterval 2
             llClearTrackedSurrenderIndex(i);
             if (returnLocation != cInvalidVector)
             {
+               llLogUnitAction("human-surrender-return", unitID, "destination=" + returnLocation);
                aiTaskUnitMove(unitID, returnLocation);
             }
             continue;
          }
 
          llReleaseSurrenderingUnit(unitID);
+         llLogUnitAction("human-surrender-imprisoned-move", unitID, "destination=" + destination);
          aiTaskUnitMove(unitID, destination);
          continue;
       }
@@ -178,11 +182,13 @@ minInterval 2
       {
          xsArraySetInt(gLLSurrenderStates, i, cLLSurrenderStateImprisoned);
          llReleaseSurrenderingUnit(unitID);
+         llLogUnitAction("human-surrender-arrival-move", unitID, "destination=" + destination);
          aiTaskUnitMove(unitID, destination);
          continue;
       }
 
       llReleaseSurrenderingUnit(unitID);
+      llLogUnitAction("human-surrender-move", unitID, "destination=" + destination);
       aiTaskUnitMove(unitID, destination);
    }
 }
@@ -208,6 +214,7 @@ void main(void)
    kbSetTargetSelectorFactor(cTSFactorDanger, gTSFactorDanger);
 
    llEnsureSurrenderArrays();
+   llLogEvent("RULE", "enabling human assist surrender rules");
    xsEnableRule("legendaryHumanSurrenderMonitor");
    xsEnableRule("legendaryHumanSurrenderMove");
 }

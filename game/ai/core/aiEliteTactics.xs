@@ -470,6 +470,7 @@ void llDestroyEliteGuardPlan(void)
 {
    if (gLLEliteGuardPlanID >= 0)
    {
+      llLogPlanEvent("destroy", gLLEliteGuardPlanID, "name=Legendary Elite Guard");
       aiPlanDestroy(gLLEliteGuardPlanID);
    }
 
@@ -481,6 +482,7 @@ void llDestroyEliteSupportPlan(void)
 {
    if (gLLEliteSupportPlanID >= 0)
    {
+      llLogPlanEvent("destroy", gLLEliteSupportPlanID, "name=Legendary Elite Support");
       aiPlanDestroy(gLLEliteSupportPlanID);
    }
 
@@ -493,6 +495,7 @@ void llDestroyExplorerEscortPlan(void)
 {
    if (gLLExplorerEscortPlanID >= 0)
    {
+      llLogPlanEvent("destroy", gLLExplorerEscortPlanID, "name=Legendary Explorer Escort");
       aiPlanDestroy(gLLExplorerEscortPlanID);
    }
 
@@ -539,6 +542,7 @@ void llPositionExplorerBehindArmy(vector rearPoint = cInvalidVector)
       {
          aiPlanRemoveUnit(currentPlanID, heroID);
       }
+      llLogUnitAction("explorer-reposition", heroID, "destination=" + rearPoint);
       aiTaskUnitMove(heroID, rearPoint);
    }
 }
@@ -556,6 +560,7 @@ void llRebuildExplorerEscortPlan(int attackPlanID = -1, vector gatherPoint = cIn
 
    int mainBaseID = kbBaseGetMainID(cMyID);
    int planID = aiPlanCreate("Legendary Explorer Escort", cPlanCombat);
+   llLogPlanEvent("create", planID, "name=Legendary Explorer Escort attackPlan=" + attackPlanID);
    aiPlanSetVariableInt(planID, cCombatPlanCombatType, 0, cCombatPlanCombatTypeDefend);
    aiPlanSetVariableInt(planID, cCombatPlanTargetMode, 0, cCombatPlanTargetModePoint);
    aiPlanSetVariableVector(planID, cCombatPlanTargetPoint, 0, escortPoint);
@@ -610,6 +615,7 @@ void llRebuildExplorerEscortPlan(int attackPlanID = -1, vector gatherPoint = cIn
 
    if (addedUnits <= 0)
    {
+      llLogPlanEvent("destroy", planID, "reason=no escort units added");
       aiPlanDestroy(planID);
       return;
    }
@@ -686,6 +692,7 @@ void llRebuildEliteGuardPlan(int anchorUnitID = -1)
    llDestroyEliteGuardPlan();
 
    int planID = aiPlanCreate("Legendary Elite Guard", cPlanCombat);
+   llLogPlanEvent("create", planID, "name=Legendary Elite Guard anchorUnit=" + anchorUnitID);
    aiPlanSetVariableInt(planID, cCombatPlanCombatType, 0, cCombatPlanCombatTypeDefend);
    aiPlanSetVariableInt(planID, cCombatPlanTargetMode, 0, cCombatPlanTargetModePoint);
    aiPlanSetVariableVector(planID, cCombatPlanTargetPoint, 0, anchorLocation);
@@ -726,6 +733,7 @@ void llRebuildEliteGuardPlan(int anchorUnitID = -1)
 
    if (addedUnits <= 0)
    {
+      llLogPlanEvent("destroy", planID, "reason=no guard units added");
       aiPlanDestroy(planID);
       return;
    }
@@ -766,6 +774,7 @@ void llRetreatEliteCore(int anchorUnitID = -1, float radius = 36.0)
       {
          aiPlanRemoveUnit(currentPlanID, heroID);
       }
+      llLogUnitAction("elite-retreat-hero", heroID, "destination=" + retreatPoint);
       aiTaskUnitMove(heroID, retreatPoint);
    }
 
@@ -784,6 +793,7 @@ void llRetreatEliteCore(int anchorUnitID = -1, float radius = 36.0)
       {
          aiPlanRemoveUnit(currentPlanID, unitID);
       }
+      llLogUnitAction("elite-retreat-core", unitID, "destination=" + retreatPoint);
       aiTaskUnitMove(unitID, retreatPoint);
    }
 
@@ -808,6 +818,7 @@ void llRetreatAllEliteUnits(void)
       {
          aiPlanRemoveUnit(currentPlanID, heroID);
       }
+      llLogUnitAction("elite-global-retreat-hero", heroID, "destination=" + retreatPoint);
       aiTaskUnitMove(heroID, retreatPoint);
    }
 
@@ -826,6 +837,7 @@ void llRetreatAllEliteUnits(void)
       {
          aiPlanRemoveUnit(currentPlanID, unitID);
       }
+      llLogUnitAction("elite-global-retreat-core", unitID, "destination=" + retreatPoint);
       aiTaskUnitMove(unitID, retreatPoint);
    }
 
@@ -869,6 +881,7 @@ void llRebuildEliteSupportPlan(int attackPlanID = -1, vector gatherPoint = cInva
 
    int mainBaseID = kbBaseGetMainID(cMyID);
    int planID = aiPlanCreate("Legendary Elite Support", cPlanCombat);
+   llLogPlanEvent("create", planID, "name=Legendary Elite Support attackPlan=" + attackPlanID);
    aiPlanSetVariableInt(planID, cCombatPlanCombatType, 0, cCombatPlanCombatTypeDefend);
    aiPlanSetVariableInt(planID, cCombatPlanTargetMode, 0, cCombatPlanTargetModePoint);
    aiPlanSetVariableVector(planID, cCombatPlanTargetPoint, 0, elitePoint);
@@ -919,6 +932,7 @@ void llRebuildEliteSupportPlan(int attackPlanID = -1, vector gatherPoint = cInva
 
    if (addedUnits <= 0)
    {
+      llLogPlanEvent("destroy", planID, "reason=no elite support units added");
       aiPlanDestroy(planID);
       return;
    }
@@ -1036,6 +1050,7 @@ rule legendaryEliteGuardMonitor
 inactive
 minInterval 5
 {
+   llLogRuleTick("legendaryEliteGuardMonitor");
    if (gLLPrisonSystemEnabled == false)
    {
       return;

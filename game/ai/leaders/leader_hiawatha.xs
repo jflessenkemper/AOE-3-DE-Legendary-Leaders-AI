@@ -18,12 +18,14 @@ void initLeaderHiawatha(void)
    llSetPrisonerDoctrine(cLLPrisonerDoctrineIntegration, 0.30, 62.0);
    llEnablePrisonerSystem();
    gHiawathaRulesEnabled = true;
+   llLogLeaderState("Hiawatha initialized");
 }
 
 rule hiawathaConfederacyWarbands
 inactive
 minInterval 75
 {
+   llLogRuleTick("hiawathaConfederacyWarbands");
    if (gHiawathaRulesEnabled == false)
    {
       xsDisableSelf();

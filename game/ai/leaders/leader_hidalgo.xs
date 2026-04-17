@@ -18,12 +18,14 @@ void initLeaderHidalgo(void)
    llSetPrisonerDoctrine(cLLPrisonerDoctrineIntegration, 0.33, 68.0);
    llEnablePrisonerSystem();
    gHidalgoRulesEnabled = true;
+   llLogLeaderState("Hidalgo initialized");
 }
 
 rule hidalgoInsurgentMomentum
 inactive
 minInterval 80
 {
+   llLogRuleTick("hidalgoInsurgentMomentum");
    if (gHidalgoRulesEnabled == false)
    {
       xsDisableSelf();

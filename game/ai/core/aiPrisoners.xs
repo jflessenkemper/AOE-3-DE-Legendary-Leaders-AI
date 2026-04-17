@@ -1029,6 +1029,7 @@ void llEnablePrisonerSystem(void)
       gLLPrisonStructureType = gTowerUnit;
    }
 
+   llLogEvent("RULE", "enabling prisoner system rules with doctrine " + llGetPrisonerDoctrineName());
    xsEnableRule("legendaryPrisonerMonitor");
    xsEnableRule("legendaryPrisonGuard");
    xsEnableRule("legendaryPrisonRescueMonitor");
@@ -1043,6 +1044,7 @@ rule legendaryPrisonerMonitor
 inactive
 minInterval 10
 {
+   llLogRuleTick("legendaryPrisonerMonitor");
    if (gLLPrisonSystemEnabled == false)
    {
       return;
@@ -1066,6 +1068,7 @@ minInterval 10
       if ((gLLPrisonGuardPlanID >= 0) && (gLLPrisonLastSeenTime >= 0) && (xsGetTime() > gLLPrisonLastSeenTime + 45000))
       {
          debugLegendaryLeaders("destroying prison guard plan after prisoners were no longer detected.");
+         llLogPlanEvent("destroy", gLLPrisonGuardPlanID, "reason=no prisoners detected");
          aiPlanDestroy(gLLPrisonGuardPlanID);
          gLLPrisonGuardPlanID = -1;
       }
@@ -1095,6 +1098,7 @@ rule legendaryPrisonGuard
 inactive
 minInterval 15
 {
+   llLogRuleTick("legendaryPrisonGuard");
    if (gLLPrisonSystemEnabled == false)
    {
       return;
@@ -1118,6 +1122,7 @@ minInterval 15
    if ((gLLPrisonGuardPlanID < 0) || (aiPlanGetActive(gLLPrisonGuardPlanID) == false))
    {
       gLLPrisonGuardPlanID = aiPlanCreate("Legendary Prison Guard", cPlanCombat);
+      llLogPlanEvent("create", gLLPrisonGuardPlanID, "name=Legendary Prison Guard");
       aiPlanAddUnitType(gLLPrisonGuardPlanID, cUnitTypeLogicalTypeLandMilitary, 0, 1, guardCap);
       aiPlanSetVariableInt(gLLPrisonGuardPlanID, cCombatPlanCombatType, 0, cCombatPlanCombatTypeDefend);
       aiPlanSetVariableInt(gLLPrisonGuardPlanID, cCombatPlanTargetMode, 0, cCombatPlanTargetModePoint);
@@ -1143,6 +1148,7 @@ rule legendaryPrisonRescueMonitor
 inactive
 minInterval 25
 {
+   llLogRuleTick("legendaryPrisonRescueMonitor");
    if (gLLPrisonSystemEnabled == false)
    {
       return;
@@ -1177,6 +1183,7 @@ rule legendaryNavalPrisonGuard
 inactive
 minInterval 20
 {
+   llLogRuleTick("legendaryNavalPrisonGuard");
    if (gLLPrisonSystemEnabled == false)
    {
       return;
@@ -1245,6 +1252,7 @@ rule legendaryAISurrenderMonitor
 inactive
 minInterval 8
 {
+   llLogRuleTick("legendaryAISurrenderMonitor");
    if (gLLPrisonSystemEnabled == false)
    {
       return;
@@ -1315,6 +1323,7 @@ rule legendaryAISurrenderMove
 inactive
 minInterval 2
 {
+   llLogRuleTick("legendaryAISurrenderMove");
    if ((gLLPrisonSystemEnabled == false) || (gLLSurrenderUnitIDs < 0))
    {
       return;
@@ -1372,12 +1381,14 @@ minInterval 2
             debugLegendaryLeaders("AI prisoner " + unitID + " reclaimed by explorer for player " + originalOwnerID + ".");
             if (returnLocation != cInvalidVector)
             {
+               llLogUnitAction("ai-prisoner-return", unitID, "destination=" + returnLocation);
                aiTaskUnitMove(unitID, returnLocation);
             }
             continue;
          }
 
          llReleaseSurrenderingUnit(unitID);
+            llLogUnitAction("ai-surrender-imprisoned-move", unitID, "destination=" + destination);
          aiTaskUnitMove(unitID, destination);
          continue;
       }
@@ -1391,11 +1402,13 @@ minInterval 2
             llSendLegendaryLeaderPrisonerLine(originalOwnerID, 120000);
          }
          llReleaseSurrenderingUnit(unitID);
+         llLogUnitAction("ai-surrender-arrival-move", unitID, "destination=" + destination);
          aiTaskUnitMove(unitID, destination);
          continue;
       }
 
       llReleaseSurrenderingUnit(unitID);
+      llLogUnitAction("ai-surrender-move", unitID, "destination=" + destination);
       aiTaskUnitMove(unitID, destination);
    }
 }

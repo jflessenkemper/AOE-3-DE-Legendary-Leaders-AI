@@ -196,6 +196,7 @@ rule legendaryLeaderOpeningQuote
 inactive
 minInterval 10
 {
+   llLogRuleTick("legendaryLeaderOpeningQuote");
    if (llHasLegendaryLeaderQuotes() == false)
    {
       xsDisableSelf();
@@ -220,6 +221,7 @@ void enableLegendaryLeaderQuoteRules(void)
       return;
    }
 
+   llLogEvent("RULE", "enabling legendary leader opening quote rule");
    xsEnableRule("legendaryLeaderOpeningQuote");
 }
 

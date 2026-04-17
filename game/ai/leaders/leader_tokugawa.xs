@@ -19,12 +19,14 @@ void initLeaderTokugawa(void)
    llSetPrisonerDoctrine(cLLPrisonerDoctrineStrictImprisonment, 0.18, 54.0);
    llEnablePrisonerSystem();
    gTokugawaRulesEnabled = true;
+   llLogLeaderState("Tokugawa initialized");
 }
 
 rule tokugawaBakufuOrder
 inactive
 minInterval 80
 {
+   llLogRuleTick("tokugawaBakufuOrder");
    if (gTokugawaRulesEnabled == false)
    {
       xsDisableSelf();

@@ -18,12 +18,14 @@ void initLeaderSuleiman(void)
    llSetPrisonerDoctrine(cLLPrisonerDoctrineExchange, 0.28, 66.0);
    llEnablePrisonerSystem();
    gSuleimanRulesEnabled = true;
+   llLogLeaderState("Suleiman initialized");
 }
 
 rule suleimanGunpowderEmpire
 inactive
 minInterval 75
 {
+   llLogRuleTick("suleimanGunpowderEmpire");
    if (gSuleimanRulesEnabled == false)
    {
       xsDisableSelf();

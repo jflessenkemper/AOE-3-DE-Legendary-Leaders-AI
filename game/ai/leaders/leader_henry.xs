@@ -18,12 +18,14 @@ void initLeaderHenry(void)
    llSetPrisonerDoctrine(cLLPrisonerDoctrineExchange, 0.20, 54.0);
    llEnablePrisonerSystem();
    gHenryRulesEnabled = true;
+   llLogLeaderState("Henry initialized");
 }
 
 rule henryOverseasEmpire
 inactive
 minInterval 75
 {
+   llLogRuleTick("henryOverseasEmpire");
    if (gHenryRulesEnabled == false)
    {
       xsDisableSelf();

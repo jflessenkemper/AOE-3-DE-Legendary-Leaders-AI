@@ -18,12 +18,14 @@ void initLeaderKangxi(void)
    llSetPrisonerDoctrine(cLLPrisonerDoctrineStrictImprisonment, 0.24, 60.0);
    llEnablePrisonerSystem();
    gKangxiRulesEnabled = true;
+   llLogLeaderState("Kangxi initialized");
 }
 
 rule kangxiBannerDiscipline
 inactive
 minInterval 80
 {
+   llLogRuleTick("kangxiBannerDiscipline");
    if (gKangxiRulesEnabled == false)
    {
       xsDisableSelf();

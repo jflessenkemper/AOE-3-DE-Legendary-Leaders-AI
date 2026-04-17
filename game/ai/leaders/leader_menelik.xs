@@ -18,12 +18,14 @@ void initLeaderMenelik(void)
    llSetPrisonerDoctrine(cLLPrisonerDoctrineForcedLabor, 0.30, 66.0);
    llEnablePrisonerSystem();
    gMenelikRulesEnabled = true;
+   llLogLeaderState("Menelik initialized");
 }
 
 rule menelikHighlandModernization
 inactive
 minInterval 80
 {
+   llLogRuleTick("menelikHighlandModernization");
    if (gMenelikRulesEnabled == false)
    {
       xsDisableSelf();

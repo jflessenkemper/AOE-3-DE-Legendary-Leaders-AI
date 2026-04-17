@@ -28,12 +28,14 @@ void initLeaderNapoleon(void)
    llEnablePrisonerSystem();
 
    gNapoleonRulesEnabled = true;
+   llLogLeaderState("Napoleon initialized");
 }
 
 rule napoleonGrandBattery
 inactive
 minInterval 45
 {
+   llLogRuleTick("napoleonGrandBattery");
    if (gNapoleonRulesEnabled == false)
    {
       xsDisableSelf();
@@ -52,6 +54,7 @@ rule napoleonContinentalSystem
 inactive
 minInterval 60
 {
+   llLogRuleTick("napoleonContinentalSystem");
    if (gNapoleonRulesEnabled == false)
    {
       xsDisableSelf();
@@ -68,6 +71,7 @@ rule napoleonImperialTempo
 inactive
 minInterval 90
 {
+   llLogRuleTick("napoleonImperialTempo");
    if (gNapoleonRulesEnabled == false)
    {
       xsDisableSelf();

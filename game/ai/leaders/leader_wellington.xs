@@ -19,12 +19,14 @@ void initLeaderWellington(void)
    llSetPrisonerDoctrine(cLLPrisonerDoctrineStrictImprisonment, 0.25, 58.0);
    llEnablePrisonerSystem();
    gWellingtonRulesEnabled = true;
+   llLogLeaderState("Wellington initialized");
 }
 
 rule wellingtonLineDiscipline
 inactive
 minInterval 75
 {
+   llLogRuleTick("wellingtonLineDiscipline");
    if (gWellingtonRulesEnabled == false)
    {
       xsDisableSelf();

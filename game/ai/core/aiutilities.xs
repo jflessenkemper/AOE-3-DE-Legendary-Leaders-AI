@@ -98,6 +98,181 @@ void debugLegendaryLeaders (string message = "")
    }
 }
 
+int llGetVisibleDebugPlayer(void)
+{
+   if ((gLLDebugVisiblePlayer > 0) && (gLLDebugVisiblePlayer != cMyID) && (kbIsPlayerHuman(gLLDebugVisiblePlayer) == true) &&
+       (kbHasPlayerLost(gLLDebugVisiblePlayer) == false))
+   {
+      return (gLLDebugVisiblePlayer);
+   }
+
+   int player = 0;
+   for (player = 1; < cNumberPlayers)
+   {
+      if ((player == cMyID) || (kbHasPlayerLost(player) == true) || (kbIsPlayerHuman(player) == false))
+      {
+         continue;
+      }
+
+      if (kbIsPlayerAlly(player) == true)
+      {
+         gLLDebugVisiblePlayer = player;
+         return (gLLDebugVisiblePlayer);
+      }
+   }
+
+   for (player = 1; < cNumberPlayers)
+   {
+      if ((player == cMyID) || (kbHasPlayerLost(player) == true) || (kbIsPlayerHuman(player) == false))
+      {
+         continue;
+      }
+
+      gLLDebugVisiblePlayer = player;
+      return (gLLDebugVisiblePlayer);
+   }
+
+   gLLDebugVisiblePlayer = -1;
+   return (-1);
+}
+
+bool llShouldMirrorEventToChat(string category = "EVENT")
+{
+   if (cDebugLegendaryLeadersVisible == false)
+   {
+      return (false);
+   }
+
+   if ((category == "RULE") || (category == "CHAT"))
+   {
+      return (false);
+   }
+
+   return (true);
+}
+
+void llMirrorEventToChat(string category = "EVENT", string message = "")
+{
+   if ((message == "") || (llShouldMirrorEventToChat(category) == false))
+   {
+      return;
+   }
+
+   int currentTime = xsGetTime();
+   if (currentTime < gLLDebugVisibleTime + cDebugLegendaryLeadersVisibleCooldown)
+   {
+      return;
+   }
+
+   int playerID = llGetVisibleDebugPlayer();
+   if (playerID < 1)
+   {
+      return;
+   }
+
+   gLLDebugVisibleTime = currentTime;
+   aiChat(playerID, "[LL " + category + "] " + message);
+}
+
+string llDescribePlayerOrRelation(int playerIDorRelation = -1)
+{
+   switch (playerIDorRelation)
+   {
+      case cPlayerRelationAny:
+      {
+         return ("any-other-player");
+      }
+      case cPlayerRelationSelf:
+      {
+         return ("self");
+      }
+      case cPlayerRelationAlly:
+      {
+         return ("allies");
+      }
+      case cPlayerRelationAllyExcludingSelf:
+      {
+         return ("allies-excluding-self");
+      }
+      case cPlayerRelationEnemy:
+      {
+         return ("enemies");
+      }
+      case cPlayerRelationEnemyNotGaia:
+      {
+         return ("enemies-not-gaia");
+      }
+   }
+
+   return ("player-or-relation=" + playerIDorRelation);
+}
+
+void llLogEvent(string category = "EVENT", string message = "")
+{
+   debugLegendaryLeaders("[" + category + "] " + message);
+   llMirrorEventToChat(category, message);
+}
+
+void llLogRuleTick(string ruleName = "")
+{
+   llLogEvent("RULE", ruleName + " tick @" + xsGetTime());
+}
+
+void llLogRuleDisable(string ruleName = "", string reason = "")
+{
+   string message = ruleName + " disabling";
+   if (reason != "")
+   {
+      message = message + " because " + reason;
+   }
+   llLogEvent("RULE", message);
+}
+
+void llLogPlanEvent(string action = "", int planID = -1, string details = "")
+{
+   string message = action + " plan=" + planID;
+   if (details != "")
+   {
+      message = message + " " + details;
+   }
+   llLogEvent("PLAN", message);
+}
+
+void llLogUnitAction(string action = "", int unitID = -1, string details = "")
+{
+   string message = action + " unit=" + unitID;
+   if (details != "")
+   {
+      message = message + " " + details;
+   }
+   llLogEvent("UNIT", message);
+}
+
+void llLogChatDispatch(string mode = "", int playerIDorRelation = -1, string payload = "", vector vec = cInvalidVector)
+{
+   string details = mode + " target=" + llDescribePlayerOrRelation(playerIDorRelation) + " payload=" + payload;
+   if (vec != cInvalidVector)
+   {
+      details = details + " flare=" + vec;
+   }
+   llLogEvent("CHAT", details);
+}
+
+void llLogLeaderState(string context = "")
+{
+   llLogEvent("STATE", context +
+      " rush=" + btRushBoom +
+      " offense=" + btOffenseDefense +
+      " trade=" + btBiasTrade +
+      " native=" + btBiasNative +
+      " inf=" + btBiasInf +
+      " cav=" + btBiasCav +
+      " art=" + btBiasArt +
+      " maxArmy=" + cvMaxArmyPop +
+      " maxCiv=" + cvMaxCivPop +
+      " maxTowers=" + cvMaxTowers);
+}
+
 //==============================================================================
 // Civilization checks.
 //==============================================================================

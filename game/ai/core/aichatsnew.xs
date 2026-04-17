@@ -24,6 +24,7 @@ rule manyPlayersComment
 inactive
 minInterval 5
 {
+   llLogRuleTick("manyPlayersComment");
    if (cNumberPlayers >= 4) {
       sendStatement(cPlayerRelationAllyExcludingSelf, cAICommPromptToAllyBattleFourOrMorePlayers);
       sendStatement(cPlayerRelationEnemyNotGaia, cAICommPromptToEnemyBattleFourOrMorePlayers);
@@ -39,6 +40,7 @@ rule myWallChat
 inactive
 minInterval 5
 {
+   llLogRuleTick("myWallChat");
    int buildingId = getUnit(cUnitTypeAbstractWall, cMyID, cUnitStateAlive);
 
    if (buildingId >= 0)
@@ -56,6 +58,7 @@ rule enemyWallTaunt
 inactive
 minInterval 5
 {
+   llLogRuleTick("enemyWallTaunt");
    int buildingId = getUnit(cUnitTypeAbstractWall, cPlayerRelationEnemyNotGaia, cUnitStateAlive);
 
    if (buildingId >= 0)
@@ -76,6 +79,7 @@ rule boringChatter
 inactive
 minInterval 50
 {
+   llLogRuleTick("boringChatter");
    int currentTime = xsGetTime();
    int interval = aiRandInt(15) * 60 * 1000;
 

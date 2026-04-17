@@ -18,12 +18,14 @@ void initLeaderMaurice(void)
    llSetPrisonerDoctrine(cLLPrisonerDoctrineStrictImprisonment, 0.22, 56.0);
    llEnablePrisonerSystem();
    gMauriceRulesEnabled = true;
+   llLogLeaderState("Maurice initialized");
 }
 
 rule mauriceDrillReforms
 inactive
 minInterval 80
 {
+   llLogRuleTick("mauriceDrillReforms");
    if (gMauriceRulesEnabled == false)
    {
       xsDisableSelf();

@@ -18,12 +18,14 @@ void initLeaderShivaji(void)
    llSetPrisonerDoctrine(cLLPrisonerDoctrineExchange, 0.24, 58.0);
    llEnablePrisonerSystem();
    gShivajiRulesEnabled = true;
+   llLogLeaderState("Shivaji initialized");
 }
 
 rule shivajiMobileStatecraft
 inactive
 minInterval 75
 {
+   llLogRuleTick("shivajiMobileStatecraft");
    if (gShivajiRulesEnabled == false)
    {
       xsDisableSelf();

@@ -17,12 +17,14 @@ void initLeaderCatherine(void)
    llSetPrisonerDoctrine(cLLPrisonerDoctrineForcedLabor, 0.32, 68.0);
    llEnablePrisonerSystem();
    gCatherineRulesEnabled = true;
+   llLogLeaderState("Catherine initialized");
 }
 
 rule catherineImperialExpansion
 inactive
 minInterval 90
 {
+   llLogRuleTick("catherineImperialExpansion");
    if (gCatherineRulesEnabled == false)
    {
       xsDisableSelf();

@@ -19,12 +19,14 @@ void initLeaderPachacuti(void)
    llSetPrisonerDoctrine(cLLPrisonerDoctrineForcedLabor, 0.28, 60.0);
    llEnablePrisonerSystem();
    gPachacutiRulesEnabled = true;
+   llLogLeaderState("Pachacuti initialized");
 }
 
 rule pachacutiMountainEmpire
 inactive
 minInterval 85
 {
+   llLogRuleTick("pachacutiMountainEmpire");
    if (gPachacutiRulesEnabled == false)
    {
       xsDisableSelf();

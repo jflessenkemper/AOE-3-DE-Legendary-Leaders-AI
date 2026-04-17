@@ -18,12 +18,20 @@
 //==============================================================================
 void sendStatement(int playerIDorRelation = -1, int commPromptID = -1, vector vec = cInvalidVector)
 {
+   if (cvOkToTaunt == false)
+   {
+      llLogEvent("CHAT", "statement blocked by cvOkToTaunt target=" + llDescribePlayerOrRelation(playerIDorRelation) +
+         " prompt=" + commPromptID);
+      return;
+   }
+
    if (cvOkToTaunt == true)
    {
       // It's a player ID, not a relation.
       if (playerIDorRelation < 100)
       {
          int playerID = playerIDorRelation;
+         llLogChatDispatch("statement", playerID, "commPromptID=" + commPromptID, vec);
          debugChats("Sending AI Chat to player: " + playerID + ", commPromptID: " + commPromptID + ", vector: " + vec); 
          if (vec == cInvalidVector)
          {
@@ -88,6 +96,7 @@ void sendStatement(int playerIDorRelation = -1, int commPromptID = -1, vector ve
             }
             if (send == true)
             {
+               llLogChatDispatch("statement", player, "commPromptID=" + commPromptID, vec);
                if (vec == cInvalidVector)
                {
                   aiCommsSendStatement(player, commPromptID);
@@ -107,13 +116,22 @@ void sendStatement(int playerIDorRelation = -1, int commPromptID = -1, vector ve
 
 void sendChatLine(int playerIDorRelation = -1, string message = "")
 {
-   if ((cvOkToTaunt == false) || (message == ""))
+   if (message == "")
    {
+      llLogEvent("CHAT", "freeform chat suppressed because payload was empty for target=" + llDescribePlayerOrRelation(playerIDorRelation));
+      return;
+   }
+
+   if (cvOkToTaunt == false)
+   {
+      llLogEvent("CHAT", "freeform chat blocked by cvOkToTaunt target=" + llDescribePlayerOrRelation(playerIDorRelation) +
+         " payload=" + message);
       return;
    }
 
    if (playerIDorRelation < 100)
    {
+      llLogChatDispatch("freeform", playerIDorRelation, message);
       aiChat(playerIDorRelation, message);
       return;
    }
@@ -149,6 +167,7 @@ void sendChatLine(int playerIDorRelation = -1, string message = "")
 
       if (send == true)
       {
+         llLogChatDispatch("freeform", player, message);
          aiChat(player, message);
       }
    }

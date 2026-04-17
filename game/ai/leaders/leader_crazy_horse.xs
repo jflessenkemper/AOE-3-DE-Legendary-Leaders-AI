@@ -19,12 +19,14 @@ void initLeaderCrazyHorse(void)
    llSetPrisonerDoctrine(cLLPrisonerDoctrineExecution, 0.40, 70.0);
    llEnablePrisonerSystem();
    gCrazyHorseRulesEnabled = true;
+   llLogLeaderState("Crazy Horse initialized");
 }
 
 rule crazyHorseRunningFight
 inactive
 minInterval 65
 {
+   llLogRuleTick("crazyHorseRunningFight");
    if (gCrazyHorseRulesEnabled == false)
    {
       xsDisableSelf();

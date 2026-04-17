@@ -17,12 +17,14 @@ void initLeaderFrederick(void)
    llSetPrisonerDoctrine(cLLPrisonerDoctrineStrictImprisonment, 0.28, 62.0);
    llEnablePrisonerSystem();
    gFrederickRulesEnabled = true;
+   llLogLeaderState("Frederick initialized");
 }
 
 rule frederickObliqueOrder
 inactive
 minInterval 75
 {
+   llLogRuleTick("frederickObliqueOrder");
    if (gFrederickRulesEnabled == false)
    {
       xsDisableSelf();

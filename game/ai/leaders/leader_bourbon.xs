@@ -27,12 +27,14 @@ void initLeaderBourbon(void)
    llEnablePrisonerSystem();
 
    gBourbonRulesEnabled = true;
+   llLogLeaderState("Bourbon initialized");
 }
 
 rule bourbonCourtEconomy
 inactive
 minInterval 60
 {
+   llLogRuleTick("bourbonCourtEconomy");
    if (gBourbonRulesEnabled == false)
    {
       xsDisableSelf();
@@ -50,6 +52,7 @@ rule bourbonRoyalArmy
 inactive
 minInterval 80
 {
+   llLogRuleTick("bourbonRoyalArmy");
    if (gBourbonRulesEnabled == false)
    {
       xsDisableSelf();
@@ -68,6 +71,7 @@ rule bourbonRestorationFront
 inactive
 minInterval 90
 {
+   llLogRuleTick("bourbonRestorationFront");
    if (gBourbonRulesEnabled == false)
    {
       xsDisableSelf();

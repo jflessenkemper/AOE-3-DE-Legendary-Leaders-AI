@@ -67,12 +67,15 @@ void initLegendaryRevolutionSupport(void)
       btBiasNative = 0.6;
       btBiasTrade = 0.2;
    }
+
+   llLogLeaderState("revolution support initialized for " + rvltName);
 }
 
 rule legendaryRevolutionArmyProfile
 inactive
 minInterval 60
 {
+   llLogRuleTick("legendaryRevolutionArmyProfile");
    if (gLegendaryRevolutionSupportEnabled == false)
    {
       xsDisableSelf();

@@ -18,12 +18,14 @@ void initLeaderGaribaldi(void)
    llSetPrisonerDoctrine(cLLPrisonerDoctrineIntegration, 0.30, 64.0);
    llEnablePrisonerSystem();
    gGaribaldiRulesEnabled = true;
+   llLogLeaderState("Garibaldi initialized");
 }
 
 rule garibaldiVolunteerColumns
 inactive
 minInterval 80
 {
+   llLogRuleTick("garibaldiVolunteerColumns");
    if (gGaribaldiRulesEnabled == false)
    {
       xsDisableSelf();

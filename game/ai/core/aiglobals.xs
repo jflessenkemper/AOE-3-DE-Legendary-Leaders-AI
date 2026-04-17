@@ -524,14 +524,18 @@ extern int gXpValuePlayer8 = -1;
 //==============================================================================
 // Debug variables.
 //==============================================================================
-extern const bool cDebugUtilities = false;
-extern const bool cDebugBuildings = false;
-extern const bool cDebugTechs = false;
-extern const bool cDebugExploration = false;
-extern const bool cDebugEconomy = false;
+extern const bool cDebugUtilities = true;
+extern const bool cDebugBuildings = true;
+extern const bool cDebugTechs = true;
+extern const bool cDebugExploration = true;
+extern const bool cDebugEconomy = true;
 extern const bool cDebugMilitary = true;
-extern const bool cDebugHCCards = false;
+extern const bool cDebugHCCards = true;
 extern const bool cDebugChats = true;
 extern const bool cDebugSetup = true;
 extern const bool cDebugCore = true;
 extern const bool cDebugLegendaryLeaders = true;
+extern const bool cDebugLegendaryLeadersVisible = true;
+extern const int cDebugLegendaryLeadersVisibleCooldown = 12000;
+extern int gLLDebugVisiblePlayer = -1;
+extern int gLLDebugVisibleTime = -60000;

@@ -19,12 +19,14 @@ void initLeaderValette(void)
    llSetPrisonerDoctrine(cLLPrisonerDoctrineStrictImprisonment, 0.20, 50.0);
    llEnablePrisonerSystem();
    gValetteRulesEnabled = true;
+   llLogLeaderState("Valette initialized");
 }
 
 rule valetteFortressDiscipline
 inactive
 minInterval 70
 {
+   llLogRuleTick("valetteFortressDiscipline");
    if (gValetteRulesEnabled == false)
    {
       xsDisableSelf();

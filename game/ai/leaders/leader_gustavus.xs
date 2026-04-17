@@ -18,12 +18,14 @@ void initLeaderGustavus(void)
    llSetPrisonerDoctrine(cLLPrisonerDoctrineExchange, 0.24, 58.0);
    llEnablePrisonerSystem();
    gGustavusRulesEnabled = true;
+   llLogLeaderState("Gustavus initialized");
 }
 
 rule gustavusMobileArtillery
 inactive
 minInterval 75
 {
+   llLogRuleTick("gustavusMobileArtillery");
    if (gGustavusRulesEnabled == false)
    {
       xsDisableSelf();

@@ -18,12 +18,14 @@ void initLeaderMontezuma(void)
    llSetPrisonerDoctrine(cLLPrisonerDoctrineExecution, 0.40, 72.0);
    llEnablePrisonerSystem();
    gMontezumaRulesEnabled = true;
+   llLogLeaderState("Montezuma initialized");
 }
 
 rule montezumaFlowerWars
 inactive
 minInterval 70
 {
+   llLogRuleTick("montezumaFlowerWars");
    if (gMontezumaRulesEnabled == false)
    {
       xsDisableSelf();

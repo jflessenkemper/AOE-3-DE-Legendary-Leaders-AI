@@ -18,12 +18,14 @@ void initLeaderUsman(void)
    llSetPrisonerDoctrine(cLLPrisonerDoctrineIntegration, 0.32, 64.0);
    llEnablePrisonerSystem();
    gUsmanRulesEnabled = true;
+   llLogLeaderState("Usman initialized");
 }
 
 rule usmanCaliphateExpansion
 inactive
 minInterval 75
 {
+   llLogRuleTick("usmanCaliphateExpansion");
    if (gUsmanRulesEnabled == false)
    {
       xsDisableSelf();

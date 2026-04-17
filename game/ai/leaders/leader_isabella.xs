@@ -19,12 +19,14 @@ void initLeaderIsabella(void)
    llSetPrisonerDoctrine(cLLPrisonerDoctrineExecution, 0.40, 74.0);
    llEnablePrisonerSystem();
    gIsabellaRulesEnabled = true;
+   llLogLeaderState("Isabella initialized");
 }
 
 rule isabellaCrusadingTempo
 inactive
 minInterval 75
 {
+   llLogRuleTick("isabellaCrusadingTempo");
    if (gIsabellaRulesEnabled == false)
    {
       xsDisableSelf();
