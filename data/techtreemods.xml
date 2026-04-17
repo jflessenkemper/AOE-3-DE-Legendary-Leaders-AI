@@ -10713,7 +10713,7 @@
 		</Effects>
 	</Tech>
 	<Tech name ='RvltModCitizenshipHaitiShadow' type ='Normal'>
-		<DBID>30217</DBID>
+		<DBID>30223</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
@@ -10728,8 +10728,8 @@
 				<Target type ='ProtoUnit'>SaloonPirate</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModCitizenshipHaitiShadow' type ='Normal'>
-		<DBID>30218</DBID>
+	<Tech name ='RvltModTrainTimeUSShadow' type ='Normal'>
+		<DBID>30224</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>

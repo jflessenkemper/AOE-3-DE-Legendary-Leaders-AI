@@ -58,13 +58,14 @@ minInterval 8
    llLogRuleTick("legendaryHumanSurrenderMonitor");
    float healthThreshold = 0.10;
    float eliteSupportRadius = 24.0;
+   int unitID = -1;
 
    int landQueryID = createSimpleUnitQuery(cUnitTypeLogicalTypeLandMilitary, cMyID, cUnitStateAlive);
    int landCount = kbUnitQueryExecute(landQueryID);
    int i = 0;
    for (i = 0; < landCount)
    {
-      int unitID = kbUnitQueryGetResult(landQueryID, i);
+      unitID = kbUnitQueryGetResult(landQueryID, i);
       if (llGetTrackedSurrenderIndex(unitID) >= 0)
       {
          continue;
@@ -88,7 +89,7 @@ minInterval 8
    i = 0;
    for (i = 0; < navalCount)
    {
-      int unitID = kbUnitQueryGetResult(navalQueryID, i);
+      unitID = kbUnitQueryGetResult(navalQueryID, i);
       if (llGetTrackedSurrenderIndex(unitID) >= 0)
       {
          continue;
