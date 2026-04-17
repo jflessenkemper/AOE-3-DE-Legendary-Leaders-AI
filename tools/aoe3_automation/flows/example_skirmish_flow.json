@@ -1,0 +1,51 @@
+{
+  "notes": [
+    "Replace template image paths with your own captured screenshots.",
+    "Keep resolution and UI scale fixed across runs.",
+    "Launch is optional if the game is already open."
+  ],
+  "steps": [
+    {
+      "action": "launch",
+      "command": "xdg-open steam://run/933110"
+    },
+    {
+      "action": "sleep",
+      "seconds": 8
+    },
+    {
+      "action": "click_image",
+      "image": "../templates/single_player_button.png",
+      "timeout": 60,
+      "confidence": 0.9
+    },
+    {
+      "action": "click_image",
+      "image": "../templates/skirmish_button.png",
+      "timeout": 30,
+      "confidence": 0.9
+    },
+    {
+      "action": "click_image",
+      "image": "../templates/revolutionary_france_flag.png",
+      "timeout": 30,
+      "confidence": 0.92
+    },
+    {
+      "action": "click_image",
+      "image": "../templates/legendary_leaders_test_map.png",
+      "timeout": 30,
+      "confidence": 0.92
+    },
+    {
+      "action": "click_image",
+      "image": "../templates/start_game_button.png",
+      "timeout": 30,
+      "confidence": 0.9
+    },
+    {
+      "action": "screenshot",
+      "path": "../artifacts/post_launch_state.png"
+    }
+  ]
+}
