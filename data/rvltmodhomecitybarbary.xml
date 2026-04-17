@@ -3,20 +3,20 @@
   <name>$$80805$$</name>
   <heroname>$$43034$$</heroname>
   <gatherpointunit>HomeCityGatherFlag</gatherpointunit>
-  <visual>ottoman\ottoman_homecity.xml</visual>
-  <watervisual>ottoman\ottoman_homecity_water.xml</watervisual>
-  <backgroundvisual>ottoman\ottoman_background.xml</backgroundvisual>
-  <pathdata>ottoman\pathable_area_object.gr2</pathdata>
-  <camera>ottoman\ottoman_homecity_camera.cam</camera>
-  <widescreencamera>ottoman\ottoman_homecity_widescreencamera.cam</widescreencamera>
+  <visual>revolution\revolution_homecity.xml</visual>
+  <watervisual>revolution\revolution_homecity_water.xml</watervisual>
+  <backgroundvisual>revolution\revolution_background.xml</backgroundvisual>
+  <pathdata>revolution\pathable_area.gr2</pathdata>
+  <camera>revolution\revolution_homecity_camera.cam</camera>
+  <widescreencamera>revolution\revolution_homecity_camera.cam</widescreencamera>
   <transportroundtriptime>1</transportroundtriptime>
   <transportactivationtime>0</transportactivationtime>
   <level>1</level>
   <skillpoints>9</skillpoints>
-  <lightset>Constantinople</lightset>
-  <watertype>Constantinople</watertype>
+  <lightset>hc_revolution</lightset>
+  <watertype>London</watertype>
   <numpropunlocksearned>0</numpropunlocksearned>
-  <ambientsounds>homecity\ottomanambientsounds.xml</ambientsounds>
+  <ambientsounds>homecity\Revolutionambientsounds.xml</ambientsounds>
   <xsai>generic_city</xsai>
   <heroprotounits>
     <protounit>Explorer</protounit>

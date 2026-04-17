@@ -3,21 +3,21 @@
   <name>$$112819$$</name>
   <heroname>$$112003$$</heroname>
   <gatherpointunit>HomeCityGatherFlag</gatherpointunit>
-  <visual>mexico\mexico_homecity.xml</visual>
-  <watervisual>mexico\mexico_homecity_water.xml</watervisual>
-  <backgroundvisual>mexico\mexico_background.xml</backgroundvisual>
-  <pathdata>mexico\pathable_area.gr2</pathdata>
-  <camera>mexico\mexico_homecity_camera.cam</camera>
-  <widescreencamera>mexico\mexico_homecity_widescreencamera.cam</widescreencamera>
+  <visual>revolution\revolution_homecity.xml</visual>
+  <watervisual>revolution\revolution_homecity_water.xml</watervisual>
+  <backgroundvisual>revolution\revolution_background.xml</backgroundvisual>
+  <pathdata>revolution\pathable_area.gr2</pathdata>
+  <camera>revolution\revolution_homecity_camera.cam</camera>
+  <widescreencamera>revolution\revolution_homecity_camera.cam</widescreencamera>
   <transportroundtriptime>1</transportroundtriptime>
   <transportactivationtime>0</transportactivationtime>
   <level>1</level>
   <maxcardsperdeck>25</maxcardsperdeck>
   <skillpoints>9</skillpoints>
-  <lightset>Mexico</lightset>
-  <watertype>Seville</watertype>
+  <lightset>hc_revolution</lightset>
+  <watertype>London</watertype>
   <numpropunlocksearned>0</numpropunlocksearned>
-  <ambientsounds>homecity\spanishambientsounds.xml</ambientsounds>
+  <ambientsounds>homecity\Revolutionambientsounds.xml</ambientsounds>
   <xsai>generic_city</xsai>
   <heroprotounits>
     <protounit>deGeneral</protounit>

@@ -3,20 +3,20 @@
   <name>$$36885$$</name>
   <heroname>$$43031$$</heroname>
   <gatherpointunit>HomeCityGatherFlag</gatherpointunit>
-  <visual>french\french_homecity.xml</visual>
-  <watervisual>french\french_homecity_water.xml</watervisual>
-  <backgroundvisual>french\french_background.xml</backgroundvisual>
-  <pathdata>french\pathable_area_object.gr2</pathdata>
-  <camera>french\french_homecity_camera.cam</camera>
-  <widescreencamera>french\french_homecity_widescreencamera.cam</widescreencamera>
+  <visual>revolution\revolution_homecity.xml</visual>
+  <watervisual>revolution\revolution_homecity_water.xml</watervisual>
+  <backgroundvisual>revolution\revolution_background.xml</backgroundvisual>
+  <pathdata>revolution\pathable_area.gr2</pathdata>
+  <camera>revolution\revolution_homecity_camera.cam</camera>
+  <widescreencamera>revolution\revolution_homecity_camera.cam</widescreencamera>
   <transportroundtriptime>1</transportroundtriptime>
   <transportactivationtime>0</transportactivationtime>
   <level>1</level>
   <skillpoints>9</skillpoints>
-  <lightset>Paris</lightset>
-  <watertype>Paris</watertype>
+  <lightset>hc_revolution</lightset>
+  <watertype>London</watertype>
   <numpropunlocksearned>0</numpropunlocksearned>
-  <ambientsounds>homecity\FrenchAmbientSounds.xml</ambientsounds>
+  <ambientsounds>homecity\Revolutionambientsounds.xml</ambientsounds>
   <xsai>generic_city</xsai>
   <heroprotounits>
     <protounit>Explorer</protounit>

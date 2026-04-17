@@ -354,7 +354,7 @@
 		</EmpireWarsAgeUpRates>
 		<RandomStartingUnits>0</RandomStartingUnits>
 		<HomeCityFilename>rvltmodhomecityrevolutionaryfrance.xml</HomeCityFilename>
-		<HomeCityFlagTexture>objects\flags\french_revolution_ne</HomeCityFlagTexture>
+		<HomeCityFlagTexture>objects\flags\french</HomeCityFlagTexture>
 		<PostgameFlagIconWPF>resources/images/icons/flags/postgame_flag_revolutionary_france.png</PostgameFlagIconWPF>
 		<HomeCityFlagIconWPF>resources/images/icons/flags/Flag_Revolutionary_France.png</HomeCityFlagIconWPF>
 		<HomeCityFlagButtonWPF>resources/images/icons/flags/flag_hc_revolutionary_france.png</HomeCityFlagButtonWPF>
