@@ -2,6 +2,14 @@
 	<img src="resources/images/legendary_leaders_ai_banner.png" alt="Legendary Leaders AI banner" width="100%">
 </p>
 
+<p align="center">
+	<a href="https://github.com/jflessenkemper/AOE-3-DE-Legendary-Leaders-AI/actions/workflows/xml-malformation-check.yml"><img src="https://github.com/jflessenkemper/AOE-3-DE-Legendary-Leaders-AI/actions/workflows/xml-malformation-check.yml/badge.svg" alt="XML Malformation Check"></a>
+	<a href="https://github.com/jflessenkemper/AOE-3-DE-Legendary-Leaders-AI/actions/workflows/stringtable-validation.yml"><img src="https://github.com/jflessenkemper/AOE-3-DE-Legendary-Leaders-AI/actions/workflows/stringtable-validation.yml/badge.svg" alt="StringTable Validation"></a>
+	<a href="https://github.com/jflessenkemper/AOE-3-DE-Legendary-Leaders-AI/actions/workflows/proto-validation.yml"><img src="https://github.com/jflessenkemper/AOE-3-DE-Legendary-Leaders-AI/actions/workflows/proto-validation.yml/badge.svg" alt="Proto Validation"></a>
+	<a href="https://github.com/jflessenkemper/AOE-3-DE-Legendary-Leaders-AI/actions/workflows/techtree-validation.yml"><img src="https://github.com/jflessenkemper/AOE-3-DE-Legendary-Leaders-AI/actions/workflows/techtree-validation.yml/badge.svg" alt="TechTree Validation"></a>
+	<a href="https://github.com/jflessenkemper/AOE-3-DE-Legendary-Leaders-AI/actions/workflows/xs-validation.yml"><img src="https://github.com/jflessenkemper/AOE-3-DE-Legendary-Leaders-AI/actions/workflows/xs-validation.yml/badge.svg" alt="XS Validation"></a>
+</p>
+
 **Legendary Leaders AI** is a standalone Age of Empires III: Definitive Edition mod that combines the base civilizations with the playable revolution roster. Each nation is mapped to a themed leader personality and a clear battlefield identity.
 
 ## 🏳️ Elite Units and Surrender
