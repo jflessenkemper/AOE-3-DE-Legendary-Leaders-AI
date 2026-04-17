@@ -6,27 +6,32 @@
 
 ## 🏳️ Elite Units and Surrender
 
-Elite units are chosen case by case for each nation and never auto-surrender. Ordinary land units can surrender once they are badly damaged and no elite support is nearby, after which they are sent to the enemy prison point and can only be recovered by their original owner with an explorer.
+Elite units are chosen case by case for each nation. 
 
-- Elite units never auto-surrender.
-- Ordinary land units can surrender at 10% health.
+Ordinary land units can surrender once they are badly damaged and no elite support is nearby, after which they are sent to the enemy prison point and can only be recovered by their owner with an explorer.
+
+- Elite units never surrender.
+- Ordinary land units will surrender at 10% health.
 - A unit will not surrender if a friendly elite unit is still nearby.
 - Surrendered units are routed to the enemy's main military shipment drop point, usually the first Town Center or Home City gather-point building.
-- Once imprisoned, surrendered units are held there instead of fighting normally.
-- Only the original owner's explorer can reclaim imprisoned units.
+- Once imprisoned, surrendered units are held there.
+- Only the owner's explorer can reclaim imprisoned units.
 - In large AI attacks, regular units lead, elites follow as the second line, and the explorer stays behind them with a dedicated escort.
 - If the AI explorer dies, the elite line retreats and the AI tries to ransom its leader.
 
 ## 🧭 Leader Escort and Attack Doctrine
 
-Each AI now treats its explorer as the battlefield leader instead of a disposable scout. The army tries to keep a living screen around that leader, and different nations decide battles in different ways.
-*In short*: some nations win by crushing the line, others look for a leader-kill opening, but all of them now guard their own leader far more carefully.
+Each AI now treats its explorer as the battlefield leader instead of a disposable scout. 
+
+The army tries to keep a living screen around that leader, and different nations decide battles in different ways.
+
+**In short**: some nations win by crushing the line, others look for a leader-kill opening, but all of them now guard their own leader far more carefully.
 
 ## 🌍 Nation Guide
 
 Portraits below match the current in-game nation portraits used by the mod. 
-- The Elite Units column lists the units that won't surrender. 
-- The Non-Elite Units column lists the land cores that will surrender.
+- The Elite column lists the units that won't surrender. 
+- The Non-Elite column lists the land cores that will surrender.
 
 <details>
 <summary><strong>Standard Nations (22)</strong></summary>
