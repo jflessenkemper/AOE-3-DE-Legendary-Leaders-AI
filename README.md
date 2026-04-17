@@ -20,17 +20,13 @@ Elite units are chosen case by case for each nation and never auto-surrender. Or
 ## 🧭 Leader Escort and Attack Doctrine
 
 Each AI now treats its explorer as the battlefield leader instead of a disposable scout. The army tries to keep a living screen around that leader, and different nations decide battles in different ways.
-
-- Defensive and line-focused leaders keep a thicker escort around the explorer and aim to break the enemy's main army first.
-- Aggressive and cavalry-heavy leaders will still protect their explorer, but they are more willing to lunge for an exposed enemy explorer if that leader is actually fighting near the front.
-- The AI does not blindly chase explorers hiding at home. Decapitation strikes only happen when the enemy leader is close enough to the real battle to matter.
-- If the explorer is lost, the elite core disengages instead of suiciding, then the AI attempts to ransom the leader back into play.
-
-In short: some nations win by crushing the line, others look for a leader-kill opening, but all of them now guard their own leader far more carefully.
+*In short*: some nations win by crushing the line, others look for a leader-kill opening, but all of them now guard their own leader far more carefully.
 
 ## 🌍 Nation Guide
 
-Portraits below match the current in-game nation portraits used by the mod. The flag column now uses compact period flags where a clear historical state flag exists, and the closest documented banner or emblem for Indigenous confederacies and short-lived movements that did not use a standardized national flag. The Elite Units column lists the units treated as elite. The Non-Elite Units column lists the representative ordinary land cores that can surrender; it is descriptive rather than an exhaustive dump of every shipment-only, native, or mercenary exception.
+Portraits below match the current in-game nation portraits used by the mod. 
+- The Elite Units column lists the units that won't surrender. 
+- The Non-Elite Units column lists the land cores that will surrender.
 
 <details>
 <summary><strong>Standard Nations (22)</strong></summary>
