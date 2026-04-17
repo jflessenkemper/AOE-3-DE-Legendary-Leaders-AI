@@ -215,10 +215,10 @@ void main(void)
 
     for (int i = 1; < numPlayer)
     {
-        rmPlaceObjectDefAtLoc(TCID, i, rmPlayerLocXFraction(i), rmPlayerLocZFraction(i));
-        vector tcLoc = rmGetUnitPosition(rmGetUnitPlacedOfPlayer(TCID, i));
-        float tcX = rmXMetersToFraction(xsVectorGetX(tcLoc));
-        float tcZ = rmZMetersToFraction(xsVectorGetZ(tcLoc));
+        float tcX = rmPlayerLocXFraction(i);
+        float tcZ = rmPlayerLocZFraction(i);
+
+        rmPlaceObjectDefAtLoc(TCID, i, tcX, tcZ);
 
         rmPlaceObjectDefAtLoc(startingUnits, i, tcX, tcZ);
         rmPlaceObjectDefAtLoc(playerGoldID, i, tcX, tcZ);

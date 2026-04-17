@@ -2075,6 +2075,7 @@ void prepareForInit()
       if (kbUnitCount(cMyID, cUnitTypeAgeUpBuilding, cUnitStateAlive) > 0)
       {
          debugSetup("Start mode: Land Town Center (Command Post)");
+         llLogEvent("STARTUP", "Detected standard random map Town Center start");
          gStartMode = cStartModeLandTC;
          init(); // Call init directly and thus start the AI without delay.
       }
@@ -2083,11 +2084,21 @@ void prepareForInit()
          if (kbUnitCount(cMyID, cUnitTypeCoveredWagon, cUnitStateAlive) > 0)
          {
             debugSetup("Start mode: Land Wagon (Nomad)");
+            llLogEvent("STARTUP", "Detected random map wagon start");
             gStartMode = cStartModeLandWagon;
+         }
+         else if ((cRandomMapName == "unknown") || (cRandomMapName == "unknownlarge"))
+         {
+            debugSetup("Start mode unresolved on unknown random map, delaying startup classification");
+            llLogEvent("STARTUP", "Unknown random map start unresolved, delaying startup classification");
+            gUnknownRMStartupDelayAttempts = 0;
+            xsEnableRule("delayedRandomMapStartup");
+            return;
          }
          else
          {
             debugSetup("Start mode: Land Resources (Nomad)");
+            llLogEvent("STARTUP", "Falling back to land resources start");
             gStartMode = cStartModeLandResources;
          }
          
@@ -2146,6 +2157,48 @@ minInterval 1
          init(); // Call init directly and thus start the AI without delay.
       }
    }
+   xsDisableSelf();
+}
+
+//==============================================================================
+// delayedRandomMapStartup
+// Retry startup classification briefly for custom random maps whose starting TC
+// is not visible yet when prepareForInit() first runs.
+//==============================================================================
+rule delayedRandomMapStartup
+inactive
+minInterval 1
+{
+   if (kbUnitCount(cMyID, cUnitTypeAgeUpBuilding, cUnitStateAlive) > 0)
+   {
+      debugSetup("Delayed startup check found Town Center on unknown random map");
+      llLogEvent("STARTUP", "Delayed startup check found Town Center");
+      gStartMode = cStartModeLandTC;
+      init();
+      xsDisableSelf();
+      return;
+   }
+
+   if (kbUnitCount(cMyID, cUnitTypeCoveredWagon, cUnitStateAlive) > 0)
+   {
+      debugSetup("Delayed startup check found Covered Wagon on unknown random map");
+      llLogEvent("STARTUP", "Delayed startup check found Covered Wagon");
+      gStartMode = cStartModeLandWagon;
+      xsEnableRule("initRule");
+      xsDisableSelf();
+      return;
+   }
+
+   gUnknownRMStartupDelayAttempts++;
+   if (gUnknownRMStartupDelayAttempts < 8)
+   {
+      return;
+   }
+
+   debugSetup("Delayed startup check timed out, falling back to land resources start");
+   llLogEvent("STARTUP", "Delayed startup check timed out, falling back to land resources start");
+   gStartMode = cStartModeLandResources;
+   xsEnableRule("initRule");
    xsDisableSelf();
 }
 
@@ -2548,6 +2601,7 @@ minInterval 2
    }
 
    debugSetup("New TC is " + townCenterID + " at " + kbUnitGetPosition(townCenterID));
+   llLogEvent("STARTUP", townCenterID >= 0 ? "townCenterComplete found starting Town Center" : "townCenterComplete continuing without Town Center");
 
    if (townCenterID >= 0)
    {

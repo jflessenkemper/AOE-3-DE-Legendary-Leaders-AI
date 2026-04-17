@@ -461,6 +461,7 @@ extern const int cStartModeScenarioWagon = 2; // Scenario, wait for aiStart unit
 extern const int cStartModeLandTC = 3;        // RM or GC game, starting with a TC...just go.
 extern const int cStartModeLandWagon = 4;     // RM or GC game, starting with a wagon.  Explore, start TC build plan.
 extern const int cStartModeLandResources = 5; // RM or GC game, starting with enough resources to build a TC.
+extern int gUnknownRMStartupDelayAttempts = 0;
 
 extern vector gStartingLocationOverride = cInvalidVector;
 extern bool gStartOnDifferentIslands = false; // Does this map have players starting on different islands?
