@@ -1,7 +1,7 @@
 <?xml version = "1.0" encoding = "UTF-8"?>
-<mapinfo details = "45467" displayNameID = "45466" loadDetails = "45468" largeMapName = "unknownLarge"
-    imagepath = "ui\random_map\unknown\unknown_mini" cannotReplace = "" loadBackground = "ui\random_map\unknown\unknown_map">
-   <loadss>ui\random_map\unknown\unknown_ss_01</loadss>
-   <loadss>ui\random_map\unknown\unknown_ss_02</loadss>
-   <loadss>ui\random_map\unknown\unknown_ss_03</loadss>
+<mapinfo details = "490101" displayNameID = "490100" loadDetails = "490102" largeMapName = "texasLarge"
+    imagepath = "ui\random_map\texas\texas_mini" cannotReplace = "" loadBackground = "ui\random_map\texas\texas_map">
+   <loadss>ui\random_map\texas\texas_ss_01</loadss>
+   <loadss>ui\random_map\texas\texas_ss_02</loadss>
+   <loadss>ui\random_map\texas\texas_ss_03</loadss>
 </mapinfo>

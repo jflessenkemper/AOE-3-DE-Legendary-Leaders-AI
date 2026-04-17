@@ -1745,6 +1745,9 @@
     <string _locid="151624" comment="proto-FortFrontier civ-RvltModYucatan type-title">Bastion San Pedro</string>
     <string _locid="151625" comment="proto-FortFrontier civ-RvltModYucatan type-title">Bastion San Francisco</string>	
     <string _locid="151626" comment="proto-deGeneral civ-RvltModYucatan type-title">Santiago Imán</string>
+      <String _locID='490100'>Legendary Leaders Test</String>
+      <String _locID='490101'>Flat 2v2 test arena for Legendary Leaders AI behavior, including surrender logic, elite support, explorer reclaim, and coordinated team fights.</String>
+      <String _locID='490102'>Open west-vs-east Texas-style test field with three land lanes and two naval lanes for fast AI validation.</String>
       </Language>
    </StringTable>
 </stringmods>

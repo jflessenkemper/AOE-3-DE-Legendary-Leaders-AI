@@ -112,7 +112,7 @@ bool llIsEliteProtoForRevolution(int protoUnitID = -1, int playerID = -1)
        rvltName == "RvltModBajaCalifornians" || rvltName == "RvltModYucatan" ||
        rvltName == "RvltModRioGrande")
    {
-         return ((protoUnitID == cUnitTypedeChinaco) || (protoUnitID == cUnitTypedeSalteador));
+         return ((protoUnitID == cUnitTypedeChinaco) || (protoUnitID == cUnitTypedeEmboscador));
    }
    if (rvltName == "RvltModTexians")
    {
@@ -150,7 +150,7 @@ bool llIsEliteProtoForRevolution(int protoUnitID = -1, int playerID = -1)
    }
    if (rvltName == "RvltModMayans")
    {
-      return (protoUnitID == cUnitTypedeSalteador);
+      return (protoUnitID == cUnitTypedeEmboscador);
    }
 
    return (false);
