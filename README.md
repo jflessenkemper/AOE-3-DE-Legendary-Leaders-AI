@@ -19,57 +19,6 @@
 
 **Legendary Leaders AI** is a standalone Age of Empires III: Definitive Edition mod that combines the base civilizations with the playable revolution roster. Each nation is mapped to a themed leader personality and a clear battlefield identity.
 
-## Validation Commands
-
-Run the local validation stack:
-
-```bash
-python tools/validation/validate_civ_homecities.py && \
-python tools/validation/validate_civ_crossrefs.py && \
-python tools/validation/validate_homecity_cards.py && \
-python tools/validation/validate_civmods_ui.py && \
-python tools/validation/validate_packaged_mod.py && \
-python tools/validation/validate_protomods.py && \
-python tools/validation/validate_stringtables.py && \
-python tools/validation/validate_techtree.py && \
-python tools/validation/validate_xml_well_formed.py && \
-python tools/validation/validate_xs_scripts.py
-```
-
-Run the reusable Age of Pirates comparison profile:
-
-```bash
-python tools/validation/run_reference_checks.py \
-	--repo-root /home/jflessenkemper/Downloads/age-of-pirates-main \
-	--profile age-of-pirates
-```
-
-Run the packaged-output profile for this repo:
-
-```bash
-python tools/validation/run_reference_checks.py --profile packaged-mod
-```
-
-Run the runtime log validator after a targeted in-game test:
-
-```bash
-python tools/validation/validate_runtime_logs.py \
-	--log-path "$HOME/.steam/steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/Logs/Age3Log.txt" \
-	--suite prisoner_system_bootstrap
-```
-
-Use the runtime suites in `tools/validation/runtime_specs/legendary_runtime_suites.json` to validate specific scenario lanes:
-
-- `prisoner_system_bootstrap` checks that the revolution commander enabled the prisoner system.
-- `human_prisoner_lane` checks surrender, custody arrival, and explorer reclaim for player-controlled units.
-- `ai_prisoner_lane` checks surrender, custody arrival, and reclaim for AI-controlled units.
-- `elite_retreat_lane` checks escort-plan creation, elite disengage, and explorer ransom after leader death.
-
-Those runtime suites are intended to be used with the controlled layouts described in `Scenario/TEST_SCENARIO_SETUP.md` or with a deterministic skirmish automation flow.
-
-Add `--strict-display-name-ids` to either runner profile if you want `DisplayNameID` locIDs audited against repo StringTables instead of treating them as potentially stock-provided.
-
-Add `--fail-on-findings` if you want the reference comparison to return a failing exit code whenever the target repo has findings.
 ## 🏳️ Elite Units and Surrender
 
 Elite units are chosen case by case for each nation and never auto-surrender. The explorer also counts as elite protection. Any ordinary land unit, including player-controlled units, will auto-surrender once it falls to 10% health and has no friendly elite unit or explorer nearby, after which it is sent to the enemy prison point and can only be recovered by its original owner with an explorer.
