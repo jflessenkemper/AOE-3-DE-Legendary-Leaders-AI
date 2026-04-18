@@ -286,15 +286,21 @@ minInterval 10
 {
    int numberOfForts = kbUnitCount(cMyID, gFortUnit, cUnitStateABQ);
    int buildLimit = kbGetBuildLimit(cMyID, gFortUnit);
+   int fortsWanted = llGetWantedFortCount();
 
-   // Don't make any more Fort build plans if we're already at our calculated limit.
-   if (kbUnitCount(cMyID, gFortUnit, cUnitStateABQ) >= buildLimit)
+   if (buildLimit < 1 || fortsWanted < 1)
    {
       return;
    }
-   aiEcho("Waiting to build a fort! Fort Limit: "+buildLimit+"Forts Constructed: "+numberOfForts+"");
+
+   // Don't make any more Fort build plans if we're already at our calculated limit.
+   if (kbUnitCount(cMyID, gFortUnit, cUnitStateABQ) >= fortsWanted)
+   {
+      return;
+   }
+   aiEcho("Waiting to build a fort! Desired: "+fortsWanted+" Fort Limit: "+buildLimit+" Forts Constructed: "+numberOfForts+"");
    if ((aiPlanGetIDByTypeAndVariableType(cPlanBuild, cBuildPlanBuildingTypeID, gFortUnit) < 0) 
-      && (numberOfForts < buildLimit) && (kbTechGetStatus(cTechHCXPUnlockFort2) == cTechStatusActive))
+      && (numberOfForts < fortsWanted))
    {
       int fortBuildPlan = createSimpleBuildPlan(gFortUnit, 1, 100, false, cMilitaryEscrowID, kbBaseGetMainID(cMyID));
       //addBuilderToPlan(fortBuildPlan, cBuildPlanBuildingTypeID, 1);

@@ -7,11 +7,7 @@
 */
 //==============================================================================
 
-int cLLPrisonerDoctrineStrictImprisonment = 0;
-int cLLPrisonerDoctrineForcedLabor = 1;
-int cLLPrisonerDoctrineExecution = 2;
-int cLLPrisonerDoctrineIntegration = 3;
-int cLLPrisonerDoctrineExchange = 4;
+// Doctrine identifiers live in aiHeader.xs so leader includes can resolve them during parse.
 
 extern int gLLPrisonerDoctrine = 0;
 extern int gLLPrisonerProxyType = -1;
@@ -908,6 +904,27 @@ string llGetAllyPrisonAlert(int doctrine = -1)
    return ("Enemy prison camp spotted. Attack here and free the captives.");
 }
 
+void llAlertAlliesToEnemyPrison(vector prisonLocation = cInvalidVector)
+{
+   if (prisonLocation == cInvalidVector)
+   {
+      return;
+   }
+
+   string alertMessage = llGetAllyPrisonAlert();
+   for (int player = 1; player < cNumberPlayers; player++)
+   {
+      if ((player == cMyID) || (kbIsPlayerAlly(player) == false) || (kbHasPlayerLost(player) == true))
+      {
+         continue;
+      }
+
+      // Use an explicit targeted confirm flare so the prison location is marked on allied maps.
+      sendStatement(player, cAICommPromptToAllyConfirm, prisonLocation);
+      sendChatLine(player, alertMessage);
+   }
+}
+
 vector llFindEnemyPrisonLocation(void)
 {
    gLLEnemyPrisonPlayerID = -1;
@@ -1208,8 +1225,7 @@ minInterval 25
       return;
    }
 
-   sendStatement(cPlayerRelationAllyExcludingSelf, cAICommPromptToAllyIWillAttackEnemyBase, gLLEnemyPrisonLocation);
-   sendChatLine(cPlayerRelationAllyExcludingSelf, llGetAllyPrisonAlert());
+   llAlertAlliesToEnemyPrison(gLLEnemyPrisonLocation);
    gLLPrisonLastAllyAlertTime = xsGetTime();
    debugLegendaryLeaders("ally prison rescue alert sent for location " + gLLEnemyPrisonLocation);
 }

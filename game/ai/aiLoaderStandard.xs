@@ -152,6 +152,8 @@ void preInit(void)
       initLegendaryRevolutionCommander();
    }
 
+   llApplyBuildStyleForActiveCiv();
+
    if (aiGetGameMode() == cGameModeEconomyMode)
    {
       aiEcho("Economy mode setup");

@@ -223,14 +223,130 @@ minInterval 1
 // selectClosestBuildPlanPosition
 // Find the closest location to the unit to build.
 //==============================================================================
-void selectClosestBuildPlanPosition(int planID = -1, int baseID = -1)
+float llClampBuildValue(float value = 0.0, float minValue = 0.0, float maxValue = 0.0)
 {
+   if (value < minValue)
+   {
+      return (minValue);
+   }
+   if (value > maxValue)
+   {
+      return (maxValue);
+   }
+   return (value);
+}
+
+bool llIsEconomicBuildStyleStructure(int puid = -1)
+{
+   switch (puid)
+   {
+      case cUnitTypeBank:
+      case cUnitTypeMarket:
+      case cUnitTypeypTradeMarketAsian:
+      case cUnitTypedeLivestockMarket:
+      case cUnitTypeFarm:
+      case cUnitTypePlantation:
+      case cUnitTypeMill:
+      case cUnitTypedeFurTrade:
+      case cUnitTypedeGranary:
+      case cUnitTypedeField:
+      case cUnitTypeypRicePaddy:
+      case cUnitTypeypBerryBuilding:
+      case cUnitTypeypGroveBuilding:
+      case cUnitTypedeHacienda:
+      {
+         return (true);
+      }
+   }
+
+   return (false);
+}
+
+bool llIsMilitaryBuildStyleStructure(int puid = -1)
+{
+   int numMilitaryBuildings = xsArrayGetSize(gMilitaryBuildings);
+   for (i = 0; < numMilitaryBuildings)
+   {
+      if (puid == xsArrayGetInt(gMilitaryBuildings, i))
+      {
+         return (true);
+      }
+   }
+
+   return (false);
+}
+
+float llGetBuildStyleDistanceMultiplier(int puid = -1)
+{
+   switch (puid)
+   {
+      case cUnitTypeTownCenter:
+      {
+         return (gLLTownCenterDistanceMultiplier);
+      }
+      case cUnitTypedeHouseAfrican:
+      case cUnitTypeHouse:
+      case cUnitTypeypVillage:
+      case cUnitTypeypHouseIndian:
+      case cUnitTypeManor:
+      case cUnitTypeHouseEast:
+      case cUnitTypeHouseMed:
+      case cUnitTypeLonghouse:
+      case cUnitTypeHouseAztec:
+      case cUnitTypedeHouseInca:
+      {
+         return (gLLHouseDistanceMultiplier);
+      }
+   }
+
+   if (llIsEconomicBuildStyleStructure(puid) == true)
+   {
+      return (gLLEconomicDistanceMultiplier);
+   }
+   if (llIsMilitaryBuildStyleStructure(puid) == true)
+   {
+      return (gLLMilitaryDistanceMultiplier);
+   }
+
+   return ((gLLHouseDistanceMultiplier + gLLEconomicDistanceMultiplier + gLLMilitaryDistanceMultiplier) / 3.0);
+}
+
+void llApplyLegendaryBaseInfluence(int planID = -1, int baseID = -1, int puid = -1,
+   float defaultCenterDistance = 30.0, float defaultInfluenceDistance = 100.0, float defaultInfluenceValue = 200.0)
+{
+   if (baseID < 0)
+   {
+      return;
+   }
+
+   vector baseLocation = kbBaseGetLocation(cMyID, baseID);
+   if (baseLocation == cInvalidVector)
+   {
+      aiPlanSetBaseID(planID, baseID);
+      return;
+   }
+
+   float distanceMultiplier = llGetBuildStyleDistanceMultiplier(puid);
+   float centerDistance = llClampBuildValue(defaultCenterDistance * distanceMultiplier, 8.0, 90.0);
+   float influenceDistance = llClampBuildValue(defaultInfluenceDistance * distanceMultiplier, 35.0, 220.0);
+   float influenceValue = llClampBuildValue(defaultInfluenceValue / distanceMultiplier, 60.0, 320.0);
+
+   aiPlanSetVariableVector(planID, cBuildPlanCenterPosition, 0, baseLocation);
+   aiPlanSetVariableFloat(planID, cBuildPlanCenterPositionDistance, 0, centerDistance);
+   aiPlanSetVariableVector(planID, cBuildPlanInfluencePosition, 0, baseLocation);
+   aiPlanSetVariableFloat(planID, cBuildPlanInfluencePositionDistance, 0, influenceDistance);
+   aiPlanSetVariableFloat(planID, cBuildPlanInfluencePositionValue, 0, influenceValue);
+   aiPlanSetVariableInt(planID, cBuildPlanInfluencePositionFalloff, 0, cBPIFalloffLinear);
+   aiPlanSetBaseID(planID, baseID);
+}
+
+void selectClosestBuildPlanPosition(int planID = -1, int baseID = -1, int puid = -1)
+{
+   llApplyLegendaryBaseInfluence(planID, baseID, puid);
    aiPlanSetVariableBool(planID, cBuildPlanInfluenceAtBuilderPosition, 0, true);
    aiPlanSetVariableFloat(planID, cBuildPlanInfluenceBuilderPositionValue, 0, 100.0);    // 100m range.
    aiPlanSetVariableFloat(planID, cBuildPlanInfluenceBuilderPositionDistance, 0, 200.0); // 200 points max
    aiPlanSetVariableInt(planID, cBuildPlanInfluenceBuilderPositionFalloff, 0, cBPIFalloffLinear); // Linear slope falloff
-   // Base ID.
-   aiPlanSetBaseID(planID, baseID);
 }
 
 //==============================================================================
@@ -241,7 +357,7 @@ void selectShrineBuildPlanPosition(int planID = -1, int baseID = -1)
    if ((gDefenseReflexBaseID == kbBaseGetMainID(cMyID)) || // Don't try to be fancy with Shrines when we're under attack, we need pop.
        (aiGetGameStartingResources() == cGameStartingResourcesInfinite)) 
    {
-      selectClosestBuildPlanPosition(planID, baseID);
+      selectClosestBuildPlanPosition(planID, baseID, cUnitTypeypShrineJapanese);
       return;
    }
 
@@ -359,7 +475,7 @@ void selectShrineBuildPlanPosition(int planID = -1, int baseID = -1)
    }
    else
    {
-      selectClosestBuildPlanPosition(planID, baseID);
+      selectClosestBuildPlanPosition(planID, baseID, cUnitTypeypShrineJapanese);
    }
 }
 
@@ -371,7 +487,7 @@ void selectTorpBuildPlanPosition(int planID = -1, int baseID = -1)
    if ((gDefenseReflexBaseID == kbBaseGetMainID(cMyID)) || // Don't try to be fancy with Torps when we're under attack, we need pop.
        (aiGetGameStartingResources() == cGameStartingResourcesInfinite)) 
    {
-      selectClosestBuildPlanPosition(planID, baseID);
+      selectClosestBuildPlanPosition(planID, baseID, cUnitTypedeTorp);
       return;
    }
    
@@ -771,7 +887,7 @@ void selectTCBuildPlanPosition(int buildPlan = -1, int baseID = -1)
       mineQuery = kbUnitQueryCreate("Mine query for TC placement");
       kbUnitQuerySetPlayerID(mineQuery, 0);
       kbUnitQuerySetUnitType(mineQuery, cUnitTypeMine);
-      kbUnitQuerySetMaximumDistance(mineQuery, 100.0);
+      kbUnitQuerySetMaximumDistance(mineQuery, 100.0 * gLLTownCenterDistanceMultiplier);
       kbUnitQuerySetAscendingSort(mineQuery, true); // Ascending distance from initial location
    }
    kbUnitQuerySetPosition(mineQuery, kbBaseGetLocation(cMyID, kbBaseGetMainID(cMyID)));
@@ -830,7 +946,8 @@ void selectTCBuildPlanPosition(int buildPlan = -1, int baseID = -1)
 
    // Instead of base ID or areas, use a center position and falloff.
    aiPlanSetVariableVector(buildPlan, cBuildPlanCenterPosition, 0, loc);
-   aiPlanSetVariableFloat(buildPlan, cBuildPlanCenterPositionDistance, 0, 50.00);
+   aiPlanSetVariableFloat(buildPlan, cBuildPlanCenterPositionDistance, 0,
+      llClampBuildValue(50.0 * gLLTownCenterDistanceMultiplier, 35.0, 85.0));
 
    // Add position influences for trees, gold, TCs.
    aiPlanSetNumberVariableValues(buildPlan, cBuildPlanInfluenceUnitTypeID, 4, true);
@@ -862,8 +979,10 @@ void selectTCBuildPlanPosition(int buildPlan = -1, int baseID = -1)
 
    // Weight it to prefer the general starting neighborhood
    aiPlanSetVariableVector(buildPlan, cBuildPlanInfluencePosition, 0, loc);          // Position influence for landing position
-   aiPlanSetVariableFloat(buildPlan, cBuildPlanInfluencePositionDistance, 0, 100.0); // 100m range.
-   aiPlanSetVariableFloat(buildPlan, cBuildPlanInfluencePositionValue, 0, 300.0);    // 300 points max
+   aiPlanSetVariableFloat(buildPlan, cBuildPlanInfluencePositionDistance, 0,
+      llClampBuildValue(100.0 * gLLTownCenterDistanceMultiplier, 60.0, 180.0));      // 100m range.
+   aiPlanSetVariableFloat(buildPlan, cBuildPlanInfluencePositionValue, 0,
+      llClampBuildValue(300.0 / gLLTownCenterDistanceMultiplier, 150.0, 420.0));     // 300 points max
    aiPlanSetVariableInt(buildPlan, cBuildPlanInfluencePositionFalloff, 0, cBPIFalloffLinear); // Linear slope falloff
 
    aiPlanSetActive(buildPlan);
@@ -1139,7 +1258,7 @@ bool selectBuildPlanPosition(int planID = -1, int puid = -1, int baseID = -1)
       case cUnitTypeHouseAztec:
       case cUnitTypedeHouseInca:
       {
-         selectClosestBuildPlanPosition(planID, baseID);
+         selectClosestBuildPlanPosition(planID, baseID, puid);
          break;
       }
       case cUnitTypeTeepee:
@@ -1175,7 +1294,7 @@ bool selectBuildPlanPosition(int planID = -1, int puid = -1, int baseID = -1)
       {
          // Usually we need to defend with Banks, thus placing Banks with high HP at front is a good choice.
          aiPlanSetVariableInt(planID, cBuildPlanLocationPreference, 0, cBuildingPlacementPreferenceFront);
-         aiPlanSetBaseID(planID, baseID);
+         llApplyLegendaryBaseInfluence(planID, baseID, puid, 24.0, 85.0, 180.0);
          break;
       }
       case cUnitTypeTownCenter:
@@ -1226,7 +1345,7 @@ bool selectBuildPlanPosition(int planID = -1, int puid = -1, int baseID = -1)
             aiPlanSetVariableInt(planID, cBuildPlanLocationPreference, 0, aiRandInt(4));
             break;
          }
-         aiPlanSetBaseID(planID, baseID);
+         llApplyLegendaryBaseInfluence(planID, baseID, puid);
          break;
       }
    }
@@ -3158,9 +3277,6 @@ minInterval 40
       return;
    }
 
-   // Enhanced
-   cvMaxTowers = kbGetBuildLimit(cMyID, gTowerUnit);
-
    int towersWanted = 0;
    if (cvMaxTowers >= 0) // The control variable takes precendence over everything.
    {
@@ -3257,9 +3373,26 @@ void updateWantedTowers()
    }
 
    // Safety check.
-   if (gNumTowers > buildLimit || gNumTowers < buildLimit)
+   if (gLLTowerLevel <= 0)
+   {
+      gNumTowers = gNumTowers - 2;
+   }
+   else if (gLLTowerLevel == 2)
+   {
+      gNumTowers = gNumTowers + 1;
+   }
+   else if (gLLTowerLevel >= 3)
+   {
+      gNumTowers = gNumTowers + 2;
+   }
+
+   if (gNumTowers > buildLimit)
    {
       gNumTowers = buildLimit;
+   }
+   if (gNumTowers < 0)
+   {
+      gNumTowers = 0;
    }
 }
 

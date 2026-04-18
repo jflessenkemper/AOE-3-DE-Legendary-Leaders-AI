@@ -175,6 +175,34 @@ extern float   cvDefenseReflexRadiusActive = 60.0;    // When the AI is in a def
 extern float   cvDefenseReflexRadiusPassive = 30.0;   // When the AI is in a defense reflex, but hiding in its main base to regain strength, this is the main base attack range.
 extern float   cvDefenseReflexSearchRadius = 60.0;    // How far out from a base to look before triggering a defense reflex. THIS MUST NOT BE GREATER THAN 'RadiusActive' ABOVE!
 
+// Legendary Leaders prisoner doctrine identifiers.
+extern int     cLLPrisonerDoctrineStrictImprisonment = 0;
+extern int     cLLPrisonerDoctrineForcedLabor = 1;
+extern int     cLLPrisonerDoctrineExecution = 2;
+extern int     cLLPrisonerDoctrineIntegration = 3;
+extern int     cLLPrisonerDoctrineExchange = 4;
+
+// Legendary Leaders build-style identifiers and placement knobs.
+extern int     cLLBuildStyleCompactFortifiedCore = 1;
+extern int     cLLBuildStyleDistributedEconomicNetwork = 2;
+extern int     cLLBuildStyleForwardOperationalLine = 3;
+extern int     cLLBuildStyleMobileFrontierScatter = 4;
+extern int     cLLBuildStyleShrineTradeNodeSpread = 5;
+extern int     cLLBuildStyleCivicMilitiaCenter = 6;
+
+extern int     gLLBuildStyle = 0;
+extern int     gLLWallLevel = 1;
+extern bool    gLLEarlyWallingEnabled = false;
+extern bool    gLLLateWallingEnabled = true;
+extern float   gLLHouseDistanceMultiplier = 1.0;
+extern float   gLLEconomicDistanceMultiplier = 1.0;
+extern float   gLLMilitaryDistanceMultiplier = 1.0;
+extern float   gLLTownCenterDistanceMultiplier = 1.0;
+extern int     gLLTowerLevel = 1;
+extern int     gLLFortLevel = 1;
+extern int     gLLForwardBaseTowerCount = 2;
+extern bool    gLLPreferForwardFortifiedBase = false;
+
 int createInvalidBaseAttackRoute(int playerID = -1, int baseID = -1) { return(-1); }
 extern int(int, int) cvCreateBaseAttackRoute = createInvalidBaseAttackRoute; // Creates an attack route used by attack plans, if this is not set, we let the plan automatically manage it.
                                                                              // Look inside of age3zHB11p06.xs to see how it's used (AI for Historical Battle Grito de Dolores).

@@ -1,4 +1,157 @@
 //==============================================================================
+// RULE explorationAgeWalling
+// Start a basic ring wall around the main base in the Exploration Age.
+//==============================================================================
+bool llShouldBuildLegendaryWalls(bool earlyGame = false)
+{
+   if ((cvOkToBuildWalls == false) || (gLLWallLevel <= 0))
+   {
+      return (false);
+   }
+
+   if (earlyGame == true)
+   {
+      return (gLLEarlyWallingEnabled);
+   }
+
+   return (gLLLateWallingEnabled);
+}
+
+float llGetLegendaryWallRadius(bool lateGame = false)
+{
+   float wallRadius = 42.0;
+
+   if (lateGame == true)
+   {
+      wallRadius = 75.0;
+   }
+   if (gIslandMap == true)
+   {
+      wallRadius = lateGame == true ? 95.0 : 55.0;
+   }
+
+   if (gLLWallLevel == 1)
+   {
+      wallRadius = wallRadius - 6.0;
+   }
+   else if (gLLWallLevel == 3)
+   {
+      wallRadius = wallRadius + 6.0;
+   }
+   else if (gLLWallLevel >= 4)
+   {
+      wallRadius = wallRadius + 10.0;
+   }
+
+   if (gLLBuildStyle == cLLBuildStyleCompactFortifiedCore)
+   {
+      wallRadius = wallRadius - 4.0;
+   }
+   else if (gLLBuildStyle == cLLBuildStyleMobileFrontierScatter)
+   {
+      wallRadius = wallRadius + 8.0;
+   }
+
+   return (wallRadius);
+}
+
+int llGetLegendaryWallGateCount(bool lateGame = false)
+{
+   int gateCount = lateGame == true ? 15 : 4;
+
+   if (gLLWallLevel == 1)
+   {
+      gateCount = gateCount + 2;
+   }
+   else if (gLLWallLevel == 3)
+   {
+      gateCount = gateCount - 1;
+   }
+   else if (gLLWallLevel >= 4)
+   {
+      gateCount = gateCount - 2;
+   }
+
+   if (gateCount < 2)
+   {
+      gateCount = 2;
+   }
+
+   return (gateCount);
+}
+
+rule explorationAgeWalling
+inactive
+group tcComplete
+minInterval 15
+{
+   if ((llShouldBuildLegendaryWalls(true) == false) || (cvOkToBuild == false))
+   {
+      llLogDecision("WALL", "exploration walling disabled by config");
+      xsDisableSelf();
+      return;
+   }
+
+   if (kbGetAge() > cAge1)
+   {
+      xsDisableSelf();
+      return;
+   }
+
+   int mainBaseID = kbBaseGetMainID(cMyID);
+   if (mainBaseID < 0)
+   {
+      return;
+   }
+
+   if (aiPlanGetIDByTypeAndVariableType(cPlanBuildWall, cBuildWallPlanWallType, cBuildWallPlanWallTypeRing, true) >= 0)
+   {
+      return;
+   }
+
+   if (kbUnitCount(cMyID, cUnitTypeAbstractWall, cUnitStateABQ) > 0)
+   {
+      llLogDecision("WALL", "existing walls detected during exploration age, enabling gap fill support");
+      xsEnableRule("fillInWallGapsNew");
+      xsDisableSelf();
+      return;
+   }
+
+   if (kbResourceGet(cResourceWood) < 125.0)
+   {
+      return;
+   }
+
+   vector baseCenter = kbBaseGetLocation(cMyID, mainBaseID);
+   if (baseCenter == cInvalidVector)
+   {
+      return;
+   }
+
+   float wallRadius = llGetLegendaryWallRadius(false);
+   int wallPlanID = aiPlanCreate("Exploration Age Wall", cPlanBuildWall);
+   if (wallPlanID < 0)
+   {
+      llLogDecision("WALL", "failed to create exploration wall plan");
+      return;
+   }
+
+   aiPlanSetVariableInt(wallPlanID, cBuildWallPlanWallType, 0, cBuildWallPlanWallTypeRing);
+   aiPlanAddUnitType(wallPlanID, gEconUnit, 0, 1, 2);
+   aiPlanSetVariableVector(wallPlanID, cBuildWallPlanWallRingCenterPoint, 0, baseCenter);
+   aiPlanSetVariableFloat(wallPlanID, cBuildWallPlanWallRingRadius, 0.0, wallRadius);
+   aiPlanSetVariableInt(wallPlanID, cBuildWallPlanNumberOfGates, 0, llGetLegendaryWallGateCount(false));
+   aiPlanSetBaseID(wallPlanID, mainBaseID);
+   aiPlanSetEscrowID(wallPlanID, cEconomyEscrowID);
+   aiPlanSetDesiredPriority(wallPlanID, 62);
+   aiPlanSetActive(wallPlanID, true);
+
+   llLogPlanEvent("create", wallPlanID, "exploration-wall center=" + baseCenter + " radius=" + wallRadius + " gates=4");
+   xsEnableRule("fillInWallGapsNew");
+   xsDisableSelf();
+}
+
+//==============================================================================
 // RULE enhancedWalls
 //==============================================================================
 rule enhancedWalls
@@ -24,9 +177,12 @@ inactive
 minInterval 10
 {
    int wallPlanID=aiPlanCreate("WallInBase", cPlanBuildWall);
-   float wallRadius = 75.0;
-   if (gIslandMap == true) {
-      wallRadius = 95.0;
+   float wallRadius = llGetLegendaryWallRadius(true);
+
+   if (llShouldBuildLegendaryWalls(false) == false)
+   {
+      xsDisableSelf();
+      return;
    }
 
    if (kbGetAge() < cAge4) {
@@ -39,7 +195,7 @@ minInterval 10
       aiPlanAddUnitType(wallPlanID, gEconUnit, 0, 1, 2);
       aiPlanSetVariableVector(wallPlanID, cBuildWallPlanWallRingCenterPoint, 0, kbBaseGetLocation(cMyID, kbBaseGetMainID(cMyID)));
       aiPlanSetVariableFloat(wallPlanID, cBuildWallPlanWallRingRadius, 0.0, wallRadius);
-      aiPlanSetVariableInt(wallPlanID, cBuildWallPlanNumberOfGates, 0, 15);
+      aiPlanSetVariableInt(wallPlanID, cBuildWallPlanNumberOfGates, 0, llGetLegendaryWallGateCount(true));
       //aiPlanSetVariableInt(wallPlanID, cBuildWallPlanPieceRotations, 0, 1);
       aiPlanSetBaseID(wallPlanID, kbBaseGetMainID(cMyID));
       aiPlanSetEscrowID(wallPlanID, cEconomyEscrowID);
@@ -58,9 +214,12 @@ rule fillInWallGapsNew
   minInterval 51
   inactive
 {
-   float wallRadius = 75.0; //kbGetMapXSize() / 7.0;
-   if (gIslandMap == true) {
-      wallRadius = 95.0;
+   float wallRadius = llGetLegendaryWallRadius(true); //kbGetMapXSize() / 7.0;
+
+   if (llShouldBuildLegendaryWalls(false) == false)
+   {
+      xsDisableSelf();
+      return;
    }
 
   if(aiPlanGetIDByTypeAndVariableType(cPlanBuildWall, cBuildWallPlanWallType, cBuildWallPlanWallTypeRing, true) >= 1)
@@ -73,7 +232,7 @@ rule fillInWallGapsNew
          aiPlanAddUnitType(wallPlanID, gEconUnit, 0, 1, 2);
          aiPlanSetVariableVector(wallPlanID, cBuildWallPlanWallRingCenterPoint, 0, kbBaseGetLocation(cMyID, kbBaseGetMainID(cMyID)));
          aiPlanSetVariableFloat(wallPlanID, cBuildWallPlanWallRingRadius, 0.0, wallRadius);
-         aiPlanSetVariableInt(wallPlanID, cBuildWallPlanNumberOfGates, 0, 15);
+         aiPlanSetVariableInt(wallPlanID, cBuildWallPlanNumberOfGates, 0, llGetLegendaryWallGateCount(true));
          aiPlanSetBaseID(wallPlanID, kbBaseGetMainID(cMyID));
          aiPlanSetEscrowID(wallPlanID, cEconomyEscrowID);
          aiPlanSetDesiredPriority(wallPlanID, 65);
@@ -146,9 +305,21 @@ rule rebuildLostForts
 minInterval 10
 inactive
 {
+   int fortsWanted = llGetWantedFortCount();
+
+   if (fortsWanted < 1)
+   {
+      if (gFortRebuildPlan >= 0)
+      {
+         aiPlanDestroy(gFortRebuildPlan);
+         gFortRebuildPlan = -1;
+      }
+      return;
+   }
+
    aiEcho("Fort Limit: "+kbGetBuildLimit(cMyID, gFortUnit)+"Forts We Have: "
    +kbUnitCount(cMyID, gFortUnit, cUnitStateABQ)+"");
-if (kbGetBuildLimit(cMyID, gFortUnit) > kbUnitCount(cMyID, gFortUnit, cUnitStateABQ)) {
+if (fortsWanted > kbUnitCount(cMyID, gFortUnit, cUnitStateABQ)) {
 		aiEcho("I need to rebuild forts now!");
       // Nobody is making a fort, let's start a plan.
       if (gFortRebuildPlan == -1) {
@@ -201,7 +372,8 @@ if (kbGetBuildLimit(cMyID, gFortUnit) > kbUnitCount(cMyID, gFortUnit, cUnitState
             int forwardBaseFortQuery = createSimpleUnitQuery(gFortUnit, cMyID, cUnitStateABQ);
             kbUnitQuerySetMaximumDistance(forwardBaseFortQuery, 50.0);
             kbUnitQuerySetPosition(forwardBaseFortQuery, gForwardBaseLocation);
-            if (kbUnitQueryExecute(forwardBaseFortQuery) < 1) {
+            if ((gLLPreferForwardFortifiedBase == true) && (gForwardBaseLocation != cInvalidVector) &&
+               (kbUnitQueryExecute(forwardBaseFortQuery) < 1)) {
                aiPlanSetVariableVector(gFortRebuildPlan, cBuildPlanCenterPosition, 0, gForwardBaseLocation);
                aiPlanSetVariableFloat(gFortRebuildPlan, cBuildPlanCenterPositionDistance, 0, 30.0);
             }
@@ -352,17 +524,24 @@ minInterval 10
    int forwardBaseTowersVal = kbUnitQueryExecute(createSimpleUnitQuery(gTowerUnit, cMyID, cUnitStateABQ, 
    gForwardBaseLocation, 40.0));
    int additionalTowersAvailable = kbGetBuildLimit(cMyID, gTowerUnit) - kbUnitQueryExecute(createSimpleUnitQuery(gTowerUnit, cMyID, cUnitStateABQ));
+   int desiredForwardBaseTowers = gLLForwardBaseTowerCount;
    if (gForwardBaseState == cForwardBaseStateNone)
    {
       return;
    }
 
-   if (additionalTowersAvailable > 3) {
-      additionalTowersAvailable = 3;
+   if (desiredForwardBaseTowers < 0)
+   {
+      desiredForwardBaseTowers = 0;
    }
 
-   if (gForwardBaseState == cForwardBaseStateActive && forwardBaseTowersVal < 1) {
-      createSpacedLocationBuildPlan(gTowerUnit, 2, 50, true, cMilitaryEscrowID, gForwardBaseLocation, 1);
+   if (additionalTowersAvailable > desiredForwardBaseTowers) {
+      additionalTowersAvailable = desiredForwardBaseTowers;
+   }
+
+   if ((gForwardBaseState == cForwardBaseStateActive) && (desiredForwardBaseTowers > 0) &&
+      (forwardBaseTowersVal < desiredForwardBaseTowers) && (additionalTowersAvailable > 0)) {
+      createSpacedLocationBuildPlan(gTowerUnit, additionalTowersAvailable, 50, true, cMilitaryEscrowID, gForwardBaseLocation, 1);
    }
 }
 //==============================================================================
