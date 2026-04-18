@@ -659,7 +659,7 @@ vector llChooseAssaultObjectivePoint(int attackPlanID = -1, vector gatherPoint =
    }
 
    int enemyExplorerID = llGetBestEnemyExplorerStrikeID(targetPlayer, strategicPoint, 72.0,
-      2 + xsFloor((1.0 - decapitationBias) * 4.0));
+      2 + ((1.0 - decapitationBias) * 4.0));
    if ((enemyExplorerID >= 0) && (decapitationBias >= 0.55) &&
        (llIsEnemyExplorerInBattle(enemyExplorerID, bulkPoint, 26.0) == true))
    {
@@ -802,10 +802,10 @@ void llRetreatEliteCore(int anchorUnitID = -1, float radius = 36.0)
          continue;
       }
 
-      int currentPlanID = kbUnitGetPlanID(unitID);
-      if (currentPlanID >= 0)
+      int unitPlanID = kbUnitGetPlanID(unitID);
+      if (unitPlanID >= 0)
       {
-         aiPlanRemoveUnit(currentPlanID, unitID);
+         aiPlanRemoveUnit(unitPlanID, unitID);
       }
       llLogUnitAction("elite-retreat-core", unitID, "destination=" + retreatPoint);
       aiTaskUnitMove(unitID, retreatPoint);
@@ -848,10 +848,10 @@ void llRetreatAllEliteUnits(void)
          continue;
       }
 
-      int currentPlanID = kbUnitGetPlanID(unitID);
-      if (currentPlanID >= 0)
+      int unitPlanID = kbUnitGetPlanID(unitID);
+      if (unitPlanID >= 0)
       {
-         aiPlanRemoveUnit(currentPlanID, unitID);
+         aiPlanRemoveUnit(unitPlanID, unitID);
       }
       llLogUnitAction("elite-global-retreat-core", unitID, "destination=" + retreatPoint);
       aiTaskUnitMove(unitID, retreatPoint);
@@ -989,7 +989,7 @@ bool llHandleEliteAssaultFormation(int attackPlanID = -1)
    float eliteOffset = 7.0;
    float explorerOffset = 14.0 + (protectionBias * 10.0) - (decapitationBias * 4.0) + gLLExplorerRearOffsetBonus;
    int desiredEliteCount = 1;
-   int desiredEscortCount = 2 + xsFloor(protectionBias * 5.0) + gLLExplorerEscortBonus;
+   int desiredEscortCount = 2 + (protectionBias * 5.0) + gLLExplorerEscortBonus;
    if (largeArmy == true)
    {
       eliteOffset = 13.0;

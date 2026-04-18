@@ -14,6 +14,49 @@ from tools.validation.common import REPO_ROOT, build_repo_root_parser, repo_rela
 LOCAL_DECLARATION_RE = re.compile(r"^\s*(int|bool|float|string|vector)\s+([A-Za-z_][A-Za-z0-9_]*)\s*(?:=|;)")
 FUNCTION_RE = re.compile(r"^\s*(?:void|bool|int|float|string|vector)\s+([A-Za-z_][A-Za-z0-9_]*)\s*\(")
 RULE_RE = re.compile(r"^\s*rule\s+([A-Za-z_][A-Za-z0-9_]*)\b")
+FUNCTION_CALL_RE = re.compile(r"\b([A-Za-z_][A-Za-z0-9_]*)\s*\(")
+STOCK_XS_CALLS = {
+    "xsArrayCreateBool",
+    "xsArrayCreateFloat",
+    "xsArrayCreateInt",
+    "xsArrayCreateString",
+    "xsArrayCreateVector",
+    "xsArrayGetBool",
+    "xsArrayGetFloat",
+    "xsArrayGetInt",
+    "xsArrayGetSize",
+    "xsArrayGetString",
+    "xsArrayGetVector",
+    "xsArrayResizeInt",
+    "xsArrayResizeVector",
+    "xsArraySetBool",
+    "xsArraySetFloat",
+    "xsArraySetInt",
+    "xsArraySetString",
+    "xsArraySetVector",
+    "xsDisableRule",
+    "xsDisableSelf",
+    "xsEnableRule",
+    "xsEnableRuleGroup",
+    "xsGetTime",
+    "xsIsRuleEnabled",
+    "xsSetContextPlayer",
+    "xsSetRuleMaxIntervalSelf",
+    "xsSetRuleMinInterval",
+    "xsSetRuleMinIntervalSelf",
+    "xsVectorGetX",
+    "xsVectorGetZ",
+    "xsVectorLength",
+    "xsVectorNormalize",
+    "xsVectorSet",
+    "xsVectorSetX",
+    "xsVectorSetZ",
+}
+UNSUPPORTED_BUILTINS = {
+    "xsCeil",
+    "xsFloor",
+    "xsRound",
+}
 
 
 @dataclass
@@ -79,18 +122,17 @@ def check_duplicate_locals(file_path: Path, lines: list[str], repo_root: Path) -
             stripped = line.strip()
             if match := LOCAL_DECLARATION_RE.match(line):
                 name = match.group(2)
-                in_rule_loop_body = (
-                    active.kind == "rule"
-                    and any("for (" in previous for previous in active.recent_nonempty_lines)
+                in_loop_body = (
+                    any("for (" in previous for previous in active.recent_nonempty_lines)
                     and any(previous == "{" for previous in active.recent_nonempty_lines[-2:])
                 )
-                if in_rule_loop_body and name in active.declarations:
+                if in_loop_body and name in active.declarations:
                     rel_path = repo_relative(file_path, repo_root)
                     first_line = active.declarations[name]
                     issues.append(
                         f"{rel_path}:{index}: duplicate local '{name}' in {active.kind} '{active.name}' (first declared on line {first_line})"
                     )
-                elif in_rule_loop_body:
+                elif in_loop_body:
                     active.declarations[name] = index
 
             active.brace_depth += line.count("{")
@@ -105,6 +147,44 @@ def check_duplicate_locals(file_path: Path, lines: list[str], repo_root: Path) -
     return issues
 
 
+def check_unsupported_builtins(file_path: Path, lines: list[str], repo_root: Path) -> list[str]:
+    issues: list[str] = []
+    rel_path = repo_relative(file_path, repo_root)
+
+    for index, line in enumerate(lines, start=1):
+        code = line.split("//", 1)[0]
+        stripped = code.strip()
+        if not stripped or stripped.startswith("//"):
+            continue
+
+        for match in FUNCTION_CALL_RE.finditer(code):
+            function_name = match.group(1)
+            if function_name in UNSUPPORTED_BUILTINS:
+                issues.append(f"{rel_path}:{index}: unsupported XS builtin '{function_name}'")
+
+    return issues
+
+
+def check_unknown_xs_calls(file_path: Path, lines: list[str], repo_root: Path) -> list[str]:
+    issues: list[str] = []
+    rel_path = repo_relative(file_path, repo_root)
+
+    for index, line in enumerate(lines, start=1):
+        code = line.split("//", 1)[0]
+        stripped = code.strip()
+        if not stripped:
+            continue
+
+        for match in FUNCTION_CALL_RE.finditer(code):
+            function_name = match.group(1)
+            if function_name.startswith("xs") and function_name not in STOCK_XS_CALLS and function_name not in UNSUPPORTED_BUILTINS:
+                issues.append(
+                    f"{rel_path}:{index}: unknown xs-prefixed call '{function_name}' is outside the stock AoE3 XS surface"
+                )
+
+    return issues
+
+
 def validate_xs_scripts(repo_root: Path = REPO_ROOT) -> list[str]:
     ai_root = repo_root / "game" / "ai"
     if not ai_root.exists():
@@ -115,6 +195,8 @@ def validate_xs_scripts(repo_root: Path = REPO_ROOT) -> list[str]:
         lines = file_path.read_text(encoding="utf-8", errors="replace").splitlines()
         issues.extend(check_duplicate_names(file_path, lines, repo_root))
         issues.extend(check_duplicate_locals(file_path, lines, repo_root))
+        issues.extend(check_unsupported_builtins(file_path, lines, repo_root))
+        issues.extend(check_unknown_xs_calls(file_path, lines, repo_root))
 
     return issues
 

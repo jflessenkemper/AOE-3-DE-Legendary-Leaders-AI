@@ -123,4 +123,5 @@ If you want to make repeated testing faster in the editor, add these optional tr
 ## Map Picker Notes
 
 - `Legendary Leaders Test.age3Yscn` is the Custom Maps or Scenario version and should appear in the in-game `Custom Maps` list.
-- `RandMaps/Legendary Leaders Test.xs` is the random-map version and should appear in the normal Skirmish random map list.
+- `RandMaps/Legendary Leaders Test.xs` is the random-map version and should appear in the Skirmish picker under the `Legendary Leaders Test Maps` set.
+- If the scenario entry itself still shows as `Unknown`, the remaining metadata is inside the binary `.age3Yscn` payload and must be refreshed by opening and re-saving that scenario in the AoE3DE Scenario Editor.

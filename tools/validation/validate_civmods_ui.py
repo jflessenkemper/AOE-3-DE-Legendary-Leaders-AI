@@ -10,6 +10,8 @@ if __package__ is None or __package__ == "":
 from tools.validation.common import REPO_ROOT, build_repo_root_parser, child_elements, get_child_text, iter_repo_resource_paths, local_name
 
 REQUIRED_FLAG_FIELDS = (
+    "HomeCityFlagButtonSet",
+    "HomeCityFlagButtonSetLarge",
     "PostgameFlagTexture",
     "PostgameFlagIconWPF",
     "HomeCityFlagIconWPF",

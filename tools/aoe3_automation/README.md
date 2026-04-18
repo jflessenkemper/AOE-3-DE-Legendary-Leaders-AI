@@ -75,6 +75,42 @@ Collect failure artifacts:
 python3 tools/aoe3_automation/aoe3_ui_automation.py collect-artifacts tools/aoe3_automation/artifacts/latest --screenshot
 ```
 
+Validate the resulting AoE3 runtime log against a named Legendary Leaders suite:
+
+```bash
+python tools/validation/validate_runtime_logs.py \
+	--log-path "$HOME/.steam/steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/Logs/Age3Log.txt" \
+	--suite elite_retreat_lane
+```
+
+Orchestrate the whole sequence with one command:
+
+```bash
+./.venv/bin/python tools/aoe3_automation/run_runtime_validation.py \
+	tools/aoe3_automation/flows/dutch_napoleon_vs_russia_egypt_skirmish.json \
+	--suite prisoner_system_bootstrap \
+	--artifacts-dir tools/aoe3_automation/artifacts/dutch_napoleon_vs_russia_egypt \
+	--screenshot
+```
+
+This is the preferred way to promote runtime systems from "structurally wired" to "behaviorally verified": drive the menu flow, run a deterministic scenario or skirmish, collect `Age3Log.txt`, and assert on `Legendary Leaders:` log markers.
+
+Retest the current mod install with one shell command:
+
+```bash
+tools/aoe3_automation/launch_retest_mod.sh
+```
+
+Useful variants:
+
+```bash
+tools/aoe3_automation/launch_retest_mod.sh --skip-launch --flow tools/aoe3_automation/flows/capture_open_menu.json
+tools/aoe3_automation/launch_retest_mod.sh --skip-launch --skip-flow
+tools/aoe3_automation/launch_retest_mod.sh --runtime-suite prisoner_system_bootstrap
+```
+
+The script snapshots the previous `Age3Log.txt`, runs the static validation profiles, optionally launches AoE3, optionally runs a UI flow, collects artifacts, and writes a grep-based runtime error scan into the run artifact directory.
+
 ## Flow Format
 
 `run-flow` expects a JSON object with a `steps` array. Supported actions:
@@ -99,6 +135,7 @@ See [tools/aoe3_automation/flows/example_skirmish_flow.json](tools/aoe3_automati
 3. Keep the game resolution and UI scale fixed.
 4. Use `record-input` only for short stable segments, not as the primary whole-run approach.
 5. Run `probe-environment` first if you are inside Flatpak or Wayland, so you know which host backends are actually usable.
+6. After the match or scenario run, validate `Age3Log.txt` with `tools/validation/validate_runtime_logs.py` and the appropriate suite name.
 
 ## Current Limits
 

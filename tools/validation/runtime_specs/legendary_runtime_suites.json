@@ -1,0 +1,117 @@
+{
+  "suites": [
+    {
+      "name": "prisoner_system_bootstrap",
+      "description": "Verifies that the revolution commander enabled the prisoner rules and surrender arrays during runtime.",
+      "required": [
+        {
+          "value": "Legendary Leaders: [RULE] enabling prisoner system rules",
+          "description": "prisoner system rules enabled"
+        },
+        {
+          "value": "Legendary Leaders: prisoner system enabled with doctrine",
+          "description": "prisoner doctrine activation logged"
+        }
+      ]
+    },
+    {
+      "name": "human_prisoner_lane",
+      "description": "Verifies that a surrendering human unit moves into custody and can be reclaimed.",
+      "required": [
+        {
+          "value": "Legendary Leaders: [UNIT] human-surrender-move unit=",
+          "description": "human surrender move issued"
+        },
+        {
+          "value": "Legendary Leaders: [UNIT] human-surrender-arrival-move unit=",
+          "description": "human surrender arrival recorded"
+        },
+        {
+          "value": "Legendary Leaders: [UNIT] human-surrender-return unit=",
+          "description": "human prisoner reclaim recorded"
+        }
+      ],
+      "ordered": [
+        {
+          "value": "Legendary Leaders: [UNIT] human-surrender-move unit=",
+          "description": "human surrender move"
+        },
+        {
+          "value": "Legendary Leaders: [UNIT] human-surrender-arrival-move unit=",
+          "description": "human surrender arrival"
+        },
+        {
+          "value": "Legendary Leaders: [UNIT] human-surrender-return unit=",
+          "description": "human surrender reclaim"
+        }
+      ]
+    },
+    {
+      "name": "ai_prisoner_lane",
+      "description": "Verifies that an AI unit surrenders, reaches custody, and can be reclaimed.",
+      "required": [
+        {
+          "value": "Legendary Leaders: [UNIT] ai-surrender-move unit=",
+          "description": "AI surrender move issued"
+        },
+        {
+          "value": "Legendary Leaders: [UNIT] ai-surrender-arrival-move unit=",
+          "description": "AI surrender arrival recorded"
+        },
+        {
+          "value": "Legendary Leaders: [UNIT] ai-prisoner-return unit=",
+          "description": "AI prisoner reclaim recorded"
+        }
+      ],
+      "ordered": [
+        {
+          "value": "Legendary Leaders: \\[UNIT\\] ai-surrender-move unit=",
+          "kind": "regex",
+          "description": "AI surrender move"
+        },
+        {
+          "value": "Legendary Leaders: \\[UNIT\\] ai-surrender-arrival-move unit=",
+          "kind": "regex",
+          "description": "AI surrender arrival"
+        },
+        {
+          "value": "Legendary Leaders: \\[UNIT\\] ai-prisoner-return unit=",
+          "kind": "regex",
+          "description": "AI reclaim"
+        }
+      ]
+    },
+    {
+      "name": "elite_retreat_lane",
+      "description": "Verifies that elite escort logic creates plans and retreats when the explorer falls.",
+      "required": [
+        {
+          "value": "Legendary Leaders: created explorer escort plan",
+          "description": "explorer escort plan created"
+        },
+        {
+          "value": "Legendary Leaders: all elite units were ordered to retreat after the explorer fell.",
+          "description": "elite retreat triggered after explorer death"
+        },
+        {
+          "value": "Legendary Leaders: queued explorer ransom through the town center command after losing the leader.",
+          "description": "explorer ransom queued"
+        }
+      ],
+      "ordered": [
+        {
+          "value": "Legendary Leaders: created explorer escort plan",
+          "description": "escort plan creation"
+        },
+        {
+          "value": "Legendary Leaders: all elite units were ordered to retreat after the explorer fell.",
+          "description": "elite retreat"
+        },
+        {
+          "value": "Legendary Leaders: queued explorer ransom through the town center command after losing the leader.",
+          "description": "explorer ransom"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "notes": [
+    "Use this when AoE3 is already open and visible.",
+    "Wait for the verified main-menu anchor without relaunching the game.",
+    "Capture a fresh desktop screenshot from the current visible state."
+  ],
+  "steps": [
+    {
+      "action": "wait_image",
+      "image": "../templates/menu_anchor.png",
+      "timeout": 30,
+      "confidence": 0.97,
+      "region": [460, 360, 420, 320]
+    },
+    {
+      "action": "screenshot",
+      "path": "../artifacts/open_menu_capture.png"
+    }
+  ]
+}

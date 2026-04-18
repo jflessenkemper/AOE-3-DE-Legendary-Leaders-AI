@@ -1,0 +1,64 @@
+===============================================================
+File 'Age3Log.txt' opened at Fri Apr 17 20:45:47 2026
+
+===============================================================
+
+PreGame  84:  ************* Memory Report ***************
+PreGame  84:  There is  57 percent of memory in use.
+PreGame  84:  There are 32765512 total KB of physical memory.
+PreGame  84:  There are 13839216 free  KB of physical memory.
+PreGame  84:  There are 49147976 total KB of paging file.
+PreGame  84:  There are 24355656 free  KB of paging file.
+PreGame  84:  There are 137438953344 total KB of virtual memory.
+PreGame  84:  There are 137438773144 free  KB of virtual memory.
+PreGame  84:  There are 0 free  KB of extended memory.
+PreGame  84:  *******************************************
+PreGame  3085:  Account Event - New State: AttemptingLogIn, Old State: Invalid, Last Error ID: None
+PreGame  3115:  startGame : Sign In SUCCESS
+PreGame  3115:  User folder id: 76561198170207043
+PreGame  3163:  ------------------------------------------------------------
+PreGame  3163:  Version: 100.15.59076.0 (386756)
+PreGame  3163:  ------------------------------------------------------------
+PreGame  4884:  Enabled Mods:
+PreGame  4884:    1 "Legendary Leaders AI" Crc: 3806995030 CrcFromInstall: 0 SafeForMultiplayer: 0
+PreGame  5005:  Game locale: English
+PreGame  8622:  SetupMovie: 1920 x 1080 z:\var\home\jflessenkemper\.local\share\steam\steamapps\common\aoe3de\Game\Movies\AOE_Microsoft.bk2
+PreGame  8897:  Data patch 28.0.2 crc 1248332430
+PreGame  11331:     SetupMovie: 1920 x 1080 z:\var\home\jflessenkemper\.local\share\steam\steamapps\common\aoe3de\Game\Movies\Tantalus.bk2
+PreGame  14003:     SetupMovie: 1920 x 1080 z:\var\home\jflessenkemper\.local\share\steam\steamapps\common\aoe3de\Game\Movies\ForgottenEmpires.bk2
+PreGame  18973:  SetupMovie: 3840 x 1638 z:\var\home\jflessenkemper\.local\share\steam\steamapps\common\aoe3de\Game\Movies\AOE_WorldsEdge.bk2
+PreGame  20932:  Game startup complete (20.91 sec)!
+PreGame  20932:  ------------------------------------------------------------
+PreGame  40454:  SetupMovie: 1920 x 1080 z:\var\home\jflessenkemper\.local\share\steam\steamapps\common\aoe3de\Game\Movies\IntroMovie.bk2
+PreGame  130794:  startGame : End
+PreGame  130801:  APregame : EnterMode : Start
+PreGame  130801:  ************* Memory Report ***************
+PreGame  130801:  There is  59 percent of memory in use.
+PreGame  130801:  There are 32765512 total KB of physical memory.
+PreGame  130801:  There are 13120652 free  KB of physical memory.
+PreGame  130801:  There are 49147976 total KB of paging file.
+PreGame  130801:  There are 23638640 free  KB of paging file.
+PreGame  130801:  There are 137438953344 total KB of virtual memory.
+PreGame  130801:  There are 137437864180 free  KB of virtual memory.
+PreGame  130801:  There are 0 free  KB of extended memory.
+PreGame  130801:  *******************************************
+PreGame  130801:  APregame : EnterMode : Create Home City
+PreGame  130834:  APregame : EnterMode : EnterScreen : Start
+PreGame  130834:  APregame : EnterMode : EnterScreen : End
+PreGame  130834:  ModeTrack -- entering mode 1 (Pregame) from mode 0 (<Invalid>)
+PreGame  130857:  APregame : EnterMode : End
+PreGame  133299:  Account Event - New State: LoggedIn, Old State: AttemptingLogIn, Last Error ID: None
+PreGame  139209:  Unlock Error - Inventory Extended:-1
+PreGame  339315:  ModeTrack -- entering mode 11 (Options) from mode 0 (<Invalid>)
+PreGame  447400:  ModeTrack -- leaving mode 11 (Options) going to mode 0 (<Invalid>)
+PreGame  637306:  ------------------------------------------------------------
+PreGame  637306:  shutdownGame : Start
+PreGame  637312:  APregame : LeaveMode : Start
+PreGame  637312:  ModeTrack -- leaving mode 1 (Pregame) going to mode 0 (<Invalid>)
+PreGame  637316:  APregame : LeaveMode : Destroyed City
+PreGame  637316:  APregame : LeaveMode : End
+PreGame  637326:  cleanup : Start
+PreGame  637432:  BRandomManager::~BRandomManager(void)
+PreGame  647035:  cleanup : Complete
+PreGame  647036:  shutdownGame : Complete
+PreGame  647036:  ------------------------------------------------------------

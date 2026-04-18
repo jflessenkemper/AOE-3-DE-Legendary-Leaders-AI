@@ -92,6 +92,8 @@
 		<RandomStartingUnits>0</RandomStartingUnits>
 		<HomeCityFilename>rvltmodhomecitynapoleon.xml</HomeCityFilename>
 		<HomeCityFlagTexture>objects\flags\french_revolution_ne</HomeCityFlagTexture>
+		<HomeCityFlagButtonSet>frenchFlagBtn</HomeCityFlagButtonSet>
+		<HomeCityFlagButtonSetLarge>frenchFlagBtnLarge</HomeCityFlagButtonSetLarge>
 		<PostgameFlagTexture>ui\ingame\ingame_ui_postgame_flag_french</PostgameFlagTexture>
 		<PostgameFlagIconWPF>resources/images/icons/flags/Flag_French_Revolution_NE.png</PostgameFlagIconWPF>
 		<HomeCityFlagIconWPF>resources/images/icons/flags/Flag_French_Revolution_NE.png</HomeCityFlagIconWPF>
@@ -355,7 +357,9 @@
 		</EmpireWarsAgeUpRates>
 		<RandomStartingUnits>0</RandomStartingUnits>
 		<HomeCityFilename>rvltmodhomecityrevolutionaryfrance.xml</HomeCityFilename>
-		<HomeCityFlagTexture>objects\flags\french</HomeCityFlagTexture>
+		<HomeCityFlagTexture>objects\flags\french_revolution_ne</HomeCityFlagTexture>
+		<HomeCityFlagButtonSet>frenchFlagBtn</HomeCityFlagButtonSet>
+		<HomeCityFlagButtonSetLarge>frenchFlagBtnLarge</HomeCityFlagButtonSetLarge>
 		<PostgameFlagTexture>ui\ingame\ingame_ui_postgame_flag_french</PostgameFlagTexture>
 		<PostgameFlagIconWPF>resources/images/icons/flags/Flag_Revolutionary_France.png</PostgameFlagIconWPF>
 		<HomeCityFlagIconWPF>resources/images/icons/flags/Flag_Revolutionary_France.png</HomeCityFlagIconWPF>
@@ -3797,6 +3801,8 @@
 		<RandomStartingUnits>0</RandomStartingUnits>
 		<HomeCityFilename>rvltmodhomecityfinland.xml</HomeCityFilename>
 		<HomeCityFlagTexture>objects\flags\finnish</HomeCityFlagTexture>
+		<HomeCityFlagButtonSet>swedishFlagBtn</HomeCityFlagButtonSet>
+		<HomeCityFlagButtonSetLarge>swedishFlagBtnLarge</HomeCityFlagButtonSetLarge>
 		<PostgameFlagTexture>ui\ingame\ingame_ui_postgame_flag_finnish</PostgameFlagTexture>
 		<PostgameFlagIconWPF>resources/images/icons/flags/Flag_Finnish.png</PostgameFlagIconWPF>
 		<HomeCityFlagIconWPF>resources/images/icons/flags/Flag_Finnish.png</HomeCityFlagIconWPF>
@@ -4054,6 +4060,8 @@
 		<RandomStartingUnits>0</RandomStartingUnits>
 		<HomeCityFilename>rvltmodhomecityhungary.xml</HomeCityFilename>
 		<HomeCityFlagTexture>objects\flags\hungarian</HomeCityFlagTexture>
+		<HomeCityFlagButtonSet>swedishFlagBtn</HomeCityFlagButtonSet>
+		<HomeCityFlagButtonSetLarge>swedishFlagBtnLarge</HomeCityFlagButtonSetLarge>
 		<PostgameFlagTexture>ui\ingame\ingame_ui_postgame_flag_hungarian</PostgameFlagTexture>
 		<PostgameFlagIconWPF>resources/images/icons/flags/Flag_Hungarian.png</PostgameFlagIconWPF>
 		<HomeCityFlagIconWPF>resources/images/icons/flags/Flag_Hungarian.png</HomeCityFlagIconWPF>
@@ -4311,6 +4319,8 @@
 		<RandomStartingUnits>0</RandomStartingUnits>
 		<HomeCityFilename>rvltmodhomecityromania.xml</HomeCityFilename>
 		<HomeCityFlagTexture>objects\flags\romanian</HomeCityFlagTexture>
+		<HomeCityFlagButtonSet>swedishFlagBtn</HomeCityFlagButtonSet>
+		<HomeCityFlagButtonSetLarge>swedishFlagBtnLarge</HomeCityFlagButtonSetLarge>
 		<PostgameFlagTexture>ui\ingame\ingame_ui_postgame_flag_romanian</PostgameFlagTexture>
 		<PostgameFlagIconWPF>resources/images/icons/flags/Flag_Romanians.png</PostgameFlagIconWPF>
 		<HomeCityFlagIconWPF>resources/images/icons/flags/Flag_Romanians.png</HomeCityFlagIconWPF>
@@ -4564,6 +4574,8 @@
 		<RandomStartingUnits>0</RandomStartingUnits>
 		<HomeCityFilename>rvltmodhomecitybarbary.xml</HomeCityFilename>
 		<HomeCityFlagTexture>objects\flags\spc_barbary</HomeCityFlagTexture>
+		<HomeCityFlagButtonSet>ottomanFlagBtn</HomeCityFlagButtonSet>
+		<HomeCityFlagButtonSetLarge>ottomanFlagBtnLarge</HomeCityFlagButtonSetLarge>
 		<PostgameFlagTexture>ui\ingame\ingame_ui_postgame_flag_barbary</PostgameFlagTexture>
 		<PostgameFlagIconWPF>resources/images/icons/flags/Flag_barbary.png</PostgameFlagIconWPF>
 		<HomeCityFlagIconWPF>resources/images/icons/flags/Flag_barbary.png</HomeCityFlagIconWPF>
@@ -4808,6 +4820,8 @@
 		<RandomStartingUnits>0</RandomStartingUnits>
 		<HomeCityFilename>rvltmodhomecityegypt.xml</HomeCityFilename>
 		<HomeCityFlagTexture>objects\flags\egyptian</HomeCityFlagTexture>
+		<HomeCityFlagButtonSet>ottomanFlagBtn</HomeCityFlagButtonSet>
+		<HomeCityFlagButtonSetLarge>ottomanFlagBtnLarge</HomeCityFlagButtonSetLarge>
 		<PostgameFlagTexture>ui\ingame\ingame_ui_postgame_flag_egyptian</PostgameFlagTexture>
 		<PostgameFlagIconWPF>resources/images/icons/flags/Flag_Egyptians.png</PostgameFlagIconWPF>
 		<HomeCityFlagIconWPF>resources/images/icons/flags/Flag_Egyptians.png</HomeCityFlagIconWPF>

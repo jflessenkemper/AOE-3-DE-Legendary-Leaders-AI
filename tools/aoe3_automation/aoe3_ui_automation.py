@@ -153,9 +153,23 @@ def capture_screen(output_path: Path, region: list[int] | None = None) -> str:
     else:
         fail(f"unknown screenshot backend: {backend}")
 
+    Image = import_pillow_image()
+    deadline = time.time() + 5.0
+    last_error: Exception | None = None
+    while time.time() < deadline:
+        try:
+            with Image.open(output_path) as image:
+                image.load()
+            break
+        except Exception as exc:
+            last_error = exc
+            time.sleep(0.1)
+    else:
+        message = str(last_error) if last_error is not None else "unknown error"
+        fail(f"captured screenshot is not readable yet: {message}")
+
     if region is not None:
         left, top, width, height = normalize_region(region)
-        Image = import_pillow_image()
         with Image.open(output_path) as image:
             cropped = image.crop((left, top, left + width, top + height))
             cropped.save(output_path)
@@ -168,13 +182,16 @@ def locate_image_with_capture(image_path: Path, timeout: float, confidence: floa
     cv2 = import_cv2()
     offset_x = 0
     offset_y = 0
+    temp_dir = Path(__file__).resolve().parent / "artifacts" / ".tmp"
+    temp_dir.mkdir(parents=True, exist_ok=True)
     if region is not None:
         offset_x, offset_y, _, _ = normalize_region(region)
 
     deadline = time.time() + timeout
     while time.time() < deadline:
-        with tempfile.NamedTemporaryFile(suffix=".png", delete=False) as handle:
+        with tempfile.NamedTemporaryFile(dir=temp_dir, suffix=".png", delete=False) as handle:
             screenshot_path = Path(handle.name)
+        screenshot_path.unlink(missing_ok=True)
 
         try:
             capture_screen(screenshot_path, region)

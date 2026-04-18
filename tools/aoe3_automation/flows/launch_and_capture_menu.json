@@ -1,0 +1,24 @@
+{
+  "notes": [
+    "Launch Age of Empires III: DE through Steam using the host Steam CLI.",
+    "Wait for a verified main-menu anchor instead of sending blind input.",
+    "Capture a desktop screenshot for template extraction and menu-state inspection."
+  ],
+  "steps": [
+    {
+      "action": "launch",
+      "command": "flatpak-spawn --host steam -applaunch 933110"
+    },
+    {
+      "action": "wait_image",
+      "image": "../templates/menu_anchor.png",
+      "timeout": 120,
+      "confidence": 0.97,
+      "region": [460, 360, 420, 320]
+    },
+    {
+      "action": "screenshot",
+      "path": "../artifacts/launch_and_capture_menu.png"
+    }
+  ]
+}
