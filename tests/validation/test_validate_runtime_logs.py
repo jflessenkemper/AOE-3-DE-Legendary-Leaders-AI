@@ -13,13 +13,13 @@ SAMPLE_SPEC = {
         {
             "name": "runtime_happy_path",
             "required": [
-                {"value": "Legendary Leaders: [RULE] enabling prisoner system rules", "description": "bootstrap"},
+                {"value": "Legendary Leaders: [RULE] AI non-elite rout enabled at 25% health; elite units hold and human-controlled units keep manual control", "description": "bootstrap"},
                 {"value": "Legendary Leaders: created explorer escort plan", "description": "escort"},
             ],
             "ordered": [
-                {"value": "Legendary Leaders: [UNIT] human-surrender-move unit=", "description": "move"},
-                {"value": "Legendary Leaders: [UNIT] human-surrender-arrival-move unit=", "description": "arrival"},
-                {"value": "Legendary Leaders: [UNIT] human-surrender-return unit=", "description": "return"},
+                {"value": "Legendary Leaders: [UNIT] ai-rout-start unit=", "description": "start"},
+                {"value": "Legendary Leaders: [UNIT] ai-rout-move unit=", "description": "move"},
+                {"value": "Legendary Leaders: [UNIT] ai-rout-arrival unit=", "description": "arrival"},
             ],
             "forbidden": [
                 {"value": "Runtime log validation failed", "description": "validator recursion"}
@@ -28,25 +28,24 @@ SAMPLE_SPEC = {
         {
             "name": "regex_suite",
             "required": [
-                {"kind": "regex", "value": r"Legendary Leaders: \[UNIT\] ai-surrender-move unit=\d+", "description": "AI move"}
+                {"kind": "regex", "value": r"Legendary Leaders: \[UNIT\] ai-rout-move unit=\d+", "description": "AI move"}
             ]
         }
     ]
 }
 
 
-GOOD_LOG = """Legendary Leaders: [RULE] enabling prisoner system rules with doctrine strict imprisonment
+GOOD_LOG = """Legendary Leaders: [RULE] AI non-elite rout enabled at 25% health; elite units hold and human-controlled units keep manual control
 Legendary Leaders: created explorer escort plan 12 for attack plan 8 using 4 non-elite troops.
-Legendary Leaders: [UNIT] human-surrender-move unit=11 destination=<1,2,3>
-Legendary Leaders: [UNIT] human-surrender-arrival-move unit=11 destination=<1,2,3>
-Legendary Leaders: [UNIT] human-surrender-return unit=11 destination=<4,5,6>
-Legendary Leaders: [UNIT] ai-surrender-move unit=27 destination=<7,8,9>
+Legendary Leaders: [UNIT] ai-rout-start unit=27 destination=<7,8,9>
+Legendary Leaders: [UNIT] ai-rout-move unit=27 destination=<7,8,9>
+Legendary Leaders: [UNIT] ai-rout-arrival unit=27 destination=<7,8,9>
 """
 
 
-BAD_ORDER_LOG = """Legendary Leaders: [UNIT] human-surrender-arrival-move unit=11 destination=<1,2,3>
-Legendary Leaders: [UNIT] human-surrender-move unit=11 destination=<1,2,3>
-Legendary Leaders: [UNIT] human-surrender-return unit=11 destination=<4,5,6>
+BAD_ORDER_LOG = """Legendary Leaders: [UNIT] ai-rout-arrival unit=27 destination=<7,8,9>
+Legendary Leaders: [UNIT] ai-rout-start unit=27 destination=<7,8,9>
+Legendary Leaders: [UNIT] ai-rout-move unit=27 destination=<7,8,9>
 """
 
 

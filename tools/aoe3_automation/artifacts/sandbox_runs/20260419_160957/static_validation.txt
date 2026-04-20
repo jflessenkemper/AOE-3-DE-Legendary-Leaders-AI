@@ -1,0 +1,41 @@
+== age-of-pirates profile ==
+Reference validation profile: age-of-pirates
+Target repo: /var/home/jflessenkemper/AOE-3-DE-Legendary-Leaders-AI
+
+Summary: 9 passed, 0 failed
+
+[PASS] Proto
+  - no findings
+
+[PASS] TechTree
+  - no findings
+
+[PASS] StringTables
+  - no findings
+
+[PASS] XML Well-Formedness
+  - no findings
+
+[PASS] XS
+  - no findings
+
+[PASS] Civ Crossrefs
+  - no findings
+
+[PASS] Civ/HomeCity
+  - no findings
+
+[PASS] Homecity Cards
+  - no findings
+
+[PASS] Civ UI
+  - no findings
+
+== packaged-mod profile ==
+Reference validation profile: packaged-mod
+Target repo: /var/home/jflessenkemper/AOE-3-DE-Legendary-Leaders-AI
+
+Summary: 1 passed, 0 failed
+
+[PASS] Packaged Mod
+  - no findings

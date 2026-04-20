@@ -1,0 +1,33 @@
+===============================================================
+File 'Age3Log.txt' opened at Sat Apr 18 15:23:20 2026
+
+===============================================================
+
+PreGame  92:  ************* Memory Report ***************
+PreGame  92:  There is  37 percent of memory in use.
+PreGame  92:  There are 32765520 total KB of physical memory.
+PreGame  92:  There are 20391588 free  KB of physical memory.
+PreGame  92:  There are 49147984 total KB of paging file.
+PreGame  92:  There are 36774048 free  KB of paging file.
+PreGame  92:  There are 137438953344 total KB of virtual memory.
+PreGame  92:  There are 137438773332 free  KB of virtual memory.
+PreGame  92:  There are 0 free  KB of extended memory.
+PreGame  92:  *******************************************
+PreGame  3735:  Account Event - New State: AttemptingLogIn, Old State: Invalid, Last Error ID: None
+PreGame  3787:  startGame : Sign In SUCCESS
+PreGame  3787:  User folder id: 76561198170207043
+PreGame  3839:  ------------------------------------------------------------
+PreGame  3839:  Version: 100.15.59076.0 (386756)
+PreGame  3839:  ------------------------------------------------------------
+PreGame  5508:  Enabled Mods:
+PreGame  5508:    1 "Legendary Leaders AI" Crc: 660439940 CrcFromInstall: 0 SafeForMultiplayer: 0
+PreGame  5660:  Game locale: English
+PreGame  9546:  SetupMovie: 1920 x 1080 z:\var\home\jflessenkemper\.local\share\steam\steamapps\common\aoe3de\Game\Movies\AOE_Microsoft.bk2
+PreGame  10139:  Data patch 28.0.2 crc 1248332430
+PreGame  12290:  SetupMovie: 1920 x 1080 z:\var\home\jflessenkemper\.local\share\steam\steamapps\common\aoe3de\Game\Movies\Tantalus.bk2
+PreGame  14964:     SetupMovie: 1920 x 1080 z:\var\home\jflessenkemper\.local\share\steam\steamapps\common\aoe3de\Game\Movies\ForgottenEmpires.bk2
+PreGame  19935:  SetupMovie: 3840 x 1638 z:\var\home\jflessenkemper\.local\share\steam\steamapps\common\aoe3de\Game\Movies\AOE_WorldsEdge.bk2
+PreGame  22287:  Game startup complete (22.27 sec)!
+PreGame  22287:  ------------------------------------------------------------
+PreGame  32098:  cleanup : Start
+PreGame  32250:  BRandomManager::~BRandomManager(void)

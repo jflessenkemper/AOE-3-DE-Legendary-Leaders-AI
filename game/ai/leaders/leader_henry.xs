@@ -6,7 +6,7 @@ bool gHenryRulesEnabled = false;
 
 void initLeaderHenry(void)
 {
-   aiEcho("Legendary Leaders: activating Prince Henry the Navigator personality.");
+   llVerboseEcho("Legendary Leaders: activating Prince Henry the Navigator personality.");
 
    llSetBalancedPersonality();
    btRushBoom = -0.2;

@@ -6,7 +6,7 @@ bool gCrazyHorseRulesEnabled = false;
 
 void initLeaderCrazyHorse(void)
 {
-   aiEcho("Legendary Leaders: activating Crazy Horse personality.");
+   llVerboseEcho("Legendary Leaders: activating Crazy Horse personality.");
 
    llSetAggressivePersonality();
    btRushBoom = 0.7;

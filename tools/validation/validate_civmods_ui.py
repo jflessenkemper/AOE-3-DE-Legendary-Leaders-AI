@@ -19,6 +19,14 @@ REQUIRED_FLAG_FIELDS = (
 )
 
 
+def get_matchmaking_portrait_wpf(civ: ET.Element) -> str:
+    for child in child_elements(civ):
+        if local_name(child.tag) != "matchmakingtextures":
+            continue
+        return get_child_text(child, "SmallPortraitTextureWPF")
+    return ""
+
+
 def iter_target_civs(root: ET.Element, name_prefixes: tuple[str, ...] | None):
     for civ in child_elements(root):
         if local_name(civ.tag) != "civ":
@@ -44,6 +52,12 @@ def validate_civmods_ui(repo_root: Path = REPO_ROOT, name_prefixes: tuple[str, .
         missing_fields = [field for field in REQUIRED_FLAG_FIELDS if not get_child_text(civ, field)]
         if missing_fields:
             errors.append(f"{name}: missing required civ UI fields: {', '.join(missing_fields)}")
+
+        if not get_child_text(civ, "HomeCityPreviewWPF"):
+            errors.append(f"{name}: missing required civ portrait field: HomeCityPreviewWPF")
+
+        if not get_matchmaking_portrait_wpf(civ):
+            errors.append(f"{name}: missing required civ portrait field: MatchmakingTextures/SmallPortraitTextureWPF")
 
         for tag_name, relative_path in iter_repo_resource_paths(civ):
             file_path = repo_root / relative_path

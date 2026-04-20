@@ -1,0 +1,51 @@
+===============================================================
+File 'Age3Log.txt' opened at Sun Apr 19 16:04:32 2026
+
+===============================================================
+
+PreGame  95:  ************* Memory Report ***************
+PreGame  95:  There is  57 percent of memory in use.
+PreGame  95:  There are 32765520 total KB of physical memory.
+PreGame  95:  There are 14051324 free  KB of physical memory.
+PreGame  95:  There are 49147984 total KB of paging file.
+PreGame  95:  There are 29037144 free  KB of paging file.
+PreGame  95:  There are 137438953344 total KB of virtual memory.
+PreGame  95:  There are 137438773164 free  KB of virtual memory.
+PreGame  95:  There are 0 free  KB of extended memory.
+PreGame  95:  *******************************************
+PreGame  3689:  Account Event - New State: AttemptingLogIn, Old State: Invalid, Last Error ID: None
+PreGame  3730:  startGame : Sign In SUCCESS
+PreGame  3730:  User folder id: 76561198170207043
+PreGame  3773:  ------------------------------------------------------------
+PreGame  3773:  Version: 100.15.59076.0 (386756)
+PreGame  3773:  ------------------------------------------------------------
+PreGame  5275:  Enabled Mods:
+PreGame  5275:    1 "Legendary Leaders AI" Crc: 544070903 CrcFromInstall: 0 SafeForMultiplayer: 0
+PreGame  5452:  Game locale: English
+PreGame  10348:  SetupMovie: 1920 x 1080 z:\var\home\jflessenkemper\.local\share\steam\steamapps\common\aoe3de\Game\Movies\AOE_Microsoft.bk2
+PreGame  10664:  Data patch 28.0.2 crc 1248332430
+PreGame  13071:  SetupMovie: 1920 x 1080 z:\var\home\jflessenkemper\.local\share\steam\steamapps\common\aoe3de\Game\Movies\Tantalus.bk2
+PreGame  15744:     SetupMovie: 1920 x 1080 z:\var\home\jflessenkemper\.local\share\steam\steamapps\common\aoe3de\Game\Movies\ForgottenEmpires.bk2
+PreGame  17452:  SetupMovie: 3840 x 1638 z:\var\home\jflessenkemper\.local\share\steam\steamapps\common\aoe3de\Game\Movies\AOE_WorldsEdge.bk2
+PreGame  18392:  SetupMovie: 1920 x 1080 z:\var\home\jflessenkemper\.local\share\steam\steamapps\common\aoe3de\Game\Movies\IntroMovie.bk2
+PreGame  23751:  Game startup complete (23.73 sec)!
+PreGame  23751:  ------------------------------------------------------------
+PreGame  24659:  startGame : End
+PreGame  24665:  APregame : EnterMode : Start
+PreGame  24665:  ************* Memory Report ***************
+PreGame  24665:  There is  61 percent of memory in use.
+PreGame  24665:  There are 32765520 total KB of physical memory.
+PreGame  24665:  There are 12655168 free  KB of physical memory.
+PreGame  24665:  There are 49147984 total KB of paging file.
+PreGame  24665:  There are 27641032 free  KB of paging file.
+PreGame  24665:  There are 137438953344 total KB of virtual memory.
+PreGame  24665:  There are 137437857256 free  KB of virtual memory.
+PreGame  24665:  There are 0 free  KB of extended memory.
+PreGame  24665:  *******************************************
+PreGame  24665:  APregame : EnterMode : Create Home City
+PreGame  24761:  APregame : EnterMode : EnterScreen : Start
+PreGame  24761:  APregame : EnterMode : EnterScreen : End
+PreGame  24761:  ModeTrack -- entering mode 1 (Pregame) from mode 0 (<Invalid>)
+PreGame  24787:  APregame : EnterMode : End
+PreGame  27613:  Account Event - New State: LoggedIn, Old State: AttemptingLogIn, Last Error ID: None
+PreGame  33011:  Unlock Error - Inventory Extended:-1

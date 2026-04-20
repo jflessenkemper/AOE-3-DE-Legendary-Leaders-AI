@@ -1,0 +1,69 @@
+===============================================================
+File 'Age3Log.txt' opened at Sun Apr 19 19:11:39 2026
+
+===============================================================
+
+PreGame  104:  ************* Memory Report ***************
+PreGame  104:  There is  58 percent of memory in use.
+PreGame  104:  There are 32765520 total KB of physical memory.
+PreGame  104:  There are 13441340 free  KB of physical memory.
+PreGame  104:  There are 49147984 total KB of paging file.
+PreGame  104:  There are 24194720 free  KB of paging file.
+PreGame  104:  There are 137438953344 total KB of virtual memory.
+PreGame  104:  There are 137438772908 free  KB of virtual memory.
+PreGame  104:  There are 0 free  KB of extended memory.
+PreGame  104:  *******************************************
+PreGame  3466:  Account Event - New State: AttemptingLogIn, Old State: Invalid, Last Error ID: None
+PreGame  3503:  startGame : Sign In SUCCESS
+PreGame  3503:  User folder id: 76561198170207043
+PreGame  3531:  ------------------------------------------------------------
+PreGame  3531:  Version: 100.15.59076.0 (386756)
+PreGame  3531:  ------------------------------------------------------------
+PreGame  4965:  Enabled Mods:
+PreGame  4965:    1 "Legendary Leaders AI" Crc: 1223153886 CrcFromInstall: 0 SafeForMultiplayer: 0
+PreGame  5109:  Game locale: English
+PreGame  8946:  SetupMovie: 1920 x 1080 z:\var\home\jflessenkemper\.local\share\steam\steamapps\common\aoe3de\Game\Movies\AOE_Microsoft.bk2
+PreGame  9198:  Data patch 28.0.2 crc 1248332430
+PreGame  11459:  SetupMovie: 1920 x 1080 z:\var\home\jflessenkemper\.local\share\steam\steamapps\common\aoe3de\Game\Movies\Tantalus.bk2
+PreGame  11642:  SetupMovie: 1920 x 1080 z:\var\home\jflessenkemper\.local\share\steam\steamapps\common\aoe3de\Game\Movies\ForgottenEmpires.bk2
+PreGame  11898:     SetupMovie: 3840 x 1638 z:\var\home\jflessenkemper\.local\share\steam\steamapps\common\aoe3de\Game\Movies\AOE_WorldsEdge.bk2
+PreGame  12193:     SetupMovie: 1920 x 1080 z:\var\home\jflessenkemper\.local\share\steam\steamapps\common\aoe3de\Game\Movies\IntroMovie.bk2
+PreGame  20711:  Game startup complete (20.69 sec)!
+PreGame  20711:  ------------------------------------------------------------
+PreGame  20768:  startGame : End
+PreGame  20771:  APregame : EnterMode : Start
+PreGame  20771:  ************* Memory Report ***************
+PreGame  20771:  There is  58 percent of memory in use.
+PreGame  20771:  There are 32765520 total KB of physical memory.
+PreGame  20771:  There are 13491132 free  KB of physical memory.
+PreGame  20771:  There are 49147984 total KB of paging file.
+PreGame  20771:  There are 24248116 free  KB of paging file.
+PreGame  20771:  There are 137438953344 total KB of virtual memory.
+PreGame  20771:  There are 137437856840 free  KB of virtual memory.
+PreGame  20771:  There are 0 free  KB of extended memory.
+PreGame  20771:  *******************************************
+PreGame  20771:  APregame : EnterMode : Create Home City
+PreGame  20815:  APregame : EnterMode : EnterScreen : Start
+PreGame  20815:  APregame : EnterMode : EnterScreen : End
+PreGame  20816:  ModeTrack -- entering mode 1 (Pregame) from mode 0 (<Invalid>)
+PreGame  20838:  APregame : EnterMode : End
+PreGame  23872:  Account Event - New State: LoggedIn, Old State: AttemptingLogIn, Last Error ID: None
+PreGame  24757:  APregame : LeaveMode : Start
+PreGame  24758:  ModeTrack -- leaving mode 1 (Pregame) going to mode 0 (<Invalid>)
+PreGame  24761:  APregame : LeaveMode : Destroyed City
+PreGame  24761:  APregame : LeaveMode : End
+PreGame  24761:  ModeTrack -- entering mode 3 (SinglePlayerSetup) from mode 0 (<Invalid>)
+PreGame  30714:  Unlock Error - Inventory Extended:-1
+PreGame  104909:  ModeTrack -- leaving mode 3 (SinglePlayerSetup) going to mode 0 (<Invalid>)
+PreGame  104916:  ModeTrack -- entering mode 7 (RandomMapGame) from mode 0 (<Invalid>)
+PreGame  115094:  ModeTrack -- leaving mode 7 (RandomMapGame) going to mode 0 (<Invalid>)
+PreGame  115096:  MAP CODE: 'indochina/5/31190/0/1/5/1/127/0/137/0/138/1/144'
+PreGame  115115:  ModeTrack -- entering mode 6 (Random Map Setup) from mode 0 (<Invalid>)
+PreGame  120613:  ModeTrack -- leaving mode 6 (Random Map Setup) going to mode 0 (<Invalid>)
+PreGame  120629:  ModeTrack -- entering mode 27 (SinglePlayer) from mode 0 (<Invalid>)
+PreGame  133385:  WorldAssetPreloadingTime 12552.035156ms
+63072    00:01:03:  ------------------------------------------------------------
+63072    00:01:03:  shutdownGame : Start
+63072    00:01:03:  ModeTrack -- leaving mode 27 (SinglePlayer) going to mode 0 (<Invalid>)
+63072    00:01:03:  cleanup : Start
+63072    00:01:03:  BRandomManager::~BRandomManager(void)

@@ -114,7 +114,7 @@ highFrequency // Run every frame until it's disabled.
 			   // If the Enhanced deck exists, we will use it.
             if (gIslandMap == false || gWaterMap == false) {
                enhancedDeckExists = aiHCPreMadeDeckGetIndex("Enhanced-Land");
-               aiEcho("Enhanced Deck: "+enhancedDeckExists+" Number of Premade Decks:"+numPremadeDecks+"");
+               llVerboseEcho("Enhanced Deck: "+enhancedDeckExists+" Number of Premade Decks:"+numPremadeDecks+"");
                if (enhancedDeckExists > 0){
                   premadeDeckID = enhancedDeckExists;
                   numCardsPremadeDeck = aiHCPreMadeDeckGetNumberCards(premadeDeckID);
@@ -131,7 +131,7 @@ highFrequency // Run every frame until it's disabled.
                }
             } else if (gIslandMap == true && gWaterMap == true) {
                enhancedDeckExists = aiHCPreMadeDeckGetIndex("Enhanced-Naval");
-               aiEcho("Enhanced Deck: "+enhancedDeckExists+" Number of Premade Decks:"+numPremadeDecks+"");
+               llVerboseEcho("Enhanced Deck: "+enhancedDeckExists+" Number of Premade Decks:"+numPremadeDecks+"");
                if (enhancedDeckExists > 0){
                   premadeDeckID = enhancedDeckExists;
                   numCardsPremadeDeck = aiHCPreMadeDeckGetNumberCards(premadeDeckID);
@@ -2424,7 +2424,7 @@ highFrequency // Run every frame until it's disabled.
                      
                      if (unit == cUnitTypeFactoryWagon && civIsEuropean() == true)
                      {
-                        //aiEcho("Factory found!" +card+ "");
+                        //llVerboseEcho("Factory found!" +card+ "");
                         bestCard = card; // Put as many factories as you can in the deck.
                         toPickNaval++;
                         break;
@@ -2698,7 +2698,7 @@ highFrequency // Run every frame until it's disabled.
                //    cardsRemaining = emptyCardSlots;
                //    toPick = cardsRemaining;
                //    toPickNaval = 2;
-               //    aiEcho("Cards Remaining!" +toPick+ "");
+               //    llVerboseEcho("Cards Remaining!" +toPick+ "");
                //    pass = 11;
                //    break;
                // }

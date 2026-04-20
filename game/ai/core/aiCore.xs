@@ -49,6 +49,10 @@ mutable void setUnitPickerPreference(int upID = -1) {}
 mutable void endDefenseReflex(void) {}
 mutable void addUnitsToMilitaryPlan(int planID = -1) {}
 mutable float getMilitaryUnitStrength(int puid = -1) { return (0.0); }
+mutable bool llIsCommanderAvailableForMajorAttack(void) { return (true); }
+mutable void llCancelCommanderlessMajorAttacks(void) {}
+mutable bool llEnsureCommanderRecovery(void) { return (false); }
+mutable void llDestroyCommanderRecoveryPlan(void) {}
 
 // Home City cards.
 mutable void shipGrantedHandler(int parm = -1) {}
@@ -56,8 +60,11 @@ mutable void shipGrantedHandler(int parm = -1) {}
 // Chats.
 mutable void sendStatement(int playerIDorRelation = -1, int commPromptID = -1, vector vec = cInvalidVector) {}
 mutable void sendChatLine(int playerIDorRelation = -1, string message = "") {}
+mutable void llSendPrisonAlertToPlayer(int playerID = -1, vector prisonLocation = cInvalidVector, string alertMessage = "") {}
+mutable void llSendEnemyPrisonTaunt(vector prisonLocation = cInvalidVector) {}
 mutable string llGetLegendaryLeaderInsult(void) { return (""); }
 mutable string llGetLegendaryLeaderCompliment(void) { return (""); }
+mutable string llGetEnemyPrisonTaunt(int doctrine = -1) { return (""); }
 mutable void llSendLegendaryLeaderInsultLine(int playerIDorRelation = -1, int quoteInterval = 90000) {}
 mutable void llSendLegendaryLeaderComplimentLine(int playerIDorRelation = -1, int quoteInterval = 90000) {}
 mutable void llMaybeFollowStatementWithQuote(int playerID = -1, int commPromptID = -1) {}
@@ -67,6 +74,7 @@ mutable void enableLegendaryLeaderQuoteRules(void) {}
 mutable void deathMatchStartupBegin(void) {}
 mutable void initCeylonNomadStart(void) {}
 mutable void init(void) {}
+mutable int llGetWantedFortCount(void) { return (0); }
 
 // Core.
 mutable void updateSettlersAndPopManager() {}
@@ -109,6 +117,24 @@ include "core\aiNavalNew.xs";
 include "core\aiArchipelago.xs";
 include "core\aiSpecialNew.xs"; // For special scenario-related code...
 include "core\aiKingOfTheHill.xs";
+
+void llSendPrisonAlertToPlayer(int playerID = -1, vector prisonLocation = cInvalidVector, string alertMessage = "")
+{
+   if (playerID < 0)
+   {
+      return;
+   }
+
+   // Keep the prison flare and text bundled behind a wrapper so aiHumanAssists can include aiPrisoners.xs safely.
+   sendStatement(playerID, cAICommPromptToAllyConfirm, prisonLocation);
+   sendChatLine(playerID, alertMessage);
+}
+
+void llSendEnemyPrisonTaunt(vector prisonLocation = cInvalidVector)
+{
+   sendStatement(cPlayerRelationEnemyNotGaia, cAICommPromptToEnemyLull, prisonLocation);
+   sendChatLine(cPlayerRelationEnemyNotGaia, llGetEnemyPrisonTaunt());
+}
 
 //==============================================================================
 // updateSettlerCounts
@@ -293,7 +319,7 @@ void setMilPopLimit(int age1Limit = 10, int age2Limit = 30, int age3Limit = 130,
    // Set the military population to its maximum potential...
    // int spaceLeftForMilitary = kbGetPopCap() - aiGetEconomyPop();
    // militaryPopLimit = spaceLeftForMilitary;
-   // aiEcho("MilitaryPop:"+kbUnitCount(cMyID, cUnitTypeAbstractVillager, cUnitStateAlive)+"");
+   // llVerboseEcho("MilitaryPop:"+kbUnitCount(cMyID, cUnitTypeAbstractVillager, cUnitStateAlive)+"");
    aiSetMilitaryPop(militaryPopLimit);
 }
 
@@ -2376,6 +2402,8 @@ minInterval 5
       {
          xsEnableRule("ransomExplorer");
       }
+
+      xsEnableRule("commanderRecoveryMonitor");
       
       if ((cvOkToTrainArmy == true) && (civIsNative() == true))
       {
@@ -2493,6 +2521,7 @@ minInterval 5
       xsEnableRule("rescueExplorer");
       xsEnableRule("settlerUpgradeMonitor");
       xsEnableRule("healerMonitor");
+      xsEnableRule("legendaryEliteGuardMonitor");
 
       if (cRandomMapName == "euitalianwars")
       {
@@ -2532,7 +2561,7 @@ minInterval 10
       // if (gIslandMap == true)
       // {
       //    xsEnableRule("warShipManager");
-      //    aiEcho("Enabling the new Navy Manager.");
+      //    llVerboseEcho("Enabling the new Navy Manager.");
       // }
 
       // Make sure Germans build settler wagons...
@@ -2820,7 +2849,7 @@ minInterval 10
 	   if (xsIsRuleEnabled("fortManager") == false)
       {
          xsEnableRule("fortManager");
-         aiEcho("Enabling the new Fort Manager.");
+         llVerboseEcho("Enabling the new Fort Manager.");
       }
       // Maintain the maximum number of forts...
       if (civIsEuropean() == true) {
@@ -2842,7 +2871,7 @@ minInterval 10
          (cRandomMapName == "eumediterraneanlarge")) {
             xsEnableRule("transportMilitaryNaval");
          }
-         aiEcho("Enabling the new Island Invasion logic.");
+         llVerboseEcho("Enabling the new Island Invasion logic.");
       }
 
       if (civIsEuropean() == true)

@@ -1,0 +1,1800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Legendary Leaders AI</title>
+<style>
+:root{--bg:#121212;--card:#1e1e1e;--accent:#00e5ff;--accent2:#2c2c2c;--text:#eee;--dim:#999;--border:#333;--elite:#ffd700;--tag-bg:#2c2c2c;--tag-text:#80cbc4}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);padding:20px;max-width:1200px;line-height:1.5}
+h1{font-size:1.8rem;margin-bottom:4px;color:var(--accent)}
+.subtitle{color:var(--dim);margin-bottom:18px;font-size:.9rem}
+.toolbar{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap}
+.toolbar button{background:var(--accent2);color:var(--text);border:1px solid var(--border);padding:6px 16px;border-radius:4px;cursor:pointer;font-size:.85rem}
+.toolbar button:hover{background:var(--accent);border-color:var(--accent)}
+details{margin-left:18px;border-left:2px solid var(--border);padding-left:12px}
+details[open]>summary{margin-bottom:4px}
+summary{cursor:pointer;list-style:none;position:relative;padding:3px 0;user-select:none}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'+';display:inline-block;width:18px;font-weight:bold;color:var(--accent);font-family:monospace;font-size:1rem}
+details[open]>summary::before{content:'\2212'}
+.nation-header{display:inline-flex;align-items:center;gap:8px;font-size:1.05rem;font-weight:600}
+.nation-header img{border-radius:3px;vertical-align:middle;object-fit:contain}
+.flag-img{height:24px;width:auto;border:1px solid var(--border)}
+.portrait-img{height:48px;width:auto;border:1px solid var(--border);border-radius:50%}
+.base-flag{display:inline-block;background:var(--tag-bg);color:var(--tag-text);font-size:.7rem;padding:1px 6px;border-radius:3px;vertical-align:middle}
+.section-head>summary{font-size:1.3rem;font-weight:700;color:var(--accent);padding:10px 0}
+.section-head{margin-left:0;border-left:none;padding-left:0;margin-bottom:12px}
+.cat-label{font-weight:600;color:var(--tag-text)}
+.elite{color:var(--elite);font-weight:600}
+.unit{display:inline-block;background:var(--card);border:1px solid var(--border);padding:1px 8px;border-radius:3px;margin:2px;font-size:.85rem}
+.unit-icon{height:20px;width:20px;vertical-align:middle;margin-right:3px;border-radius:2px}
+.stat{font-family:'Cascadia Code','Fira Code',monospace;color:var(--tag-text);font-size:.82rem}
+.quote{font-style:italic;color:#ccc;padding:2px 0;font-size:.9rem}
+.quote::before{content:'\201C';color:var(--accent)}
+.quote::after{content:'\201D';color:var(--accent)}
+.trigger{display:inline-block;background:var(--accent2);color:var(--tag-text);font-size:.7rem;padding:1px 6px;border-radius:3px;margin-left:6px;font-style:normal}
+.age-rule{margin:2px 0}
+.age-rule .rule-name{color:var(--accent);font-weight:600;font-size:.85rem}
+.shared-note{color:var(--dim);font-size:.8rem;font-style:italic}
+li{list-style:none;padding:1px 0}
+.nation-node{margin-bottom:6px}
+.buildparam{display:grid;grid-template-columns:auto 1fr;gap:0 12px;font-size:.85rem;margin:2px 0}
+.buildparam dt{color:var(--dim);text-align:right}
+.buildparam dd{color:var(--tag-text);font-family:monospace}
+</style>
+</head>
+<body>
+<h1>Legendary Leaders AI</h1>
+<p class="subtitle">A standalone Age of Empires III: Definitive Edition mod that combines the base civilizations with the playable revolution roster.<br>Each nation is mapped to a themed leader personality and a clear battlefield identity.</p>
+
+<div class="toolbar">
+<button onclick="document.querySelectorAll('details').forEach(d=>d.open=true)">Expand All</button>
+<button onclick="document.querySelectorAll('details').forEach(d=>d.open=false)">Collapse All</button>
+<a href="https://github.com/jflessenkemper/AOE-3-DE-Legendary-Leaders-AI" target="_blank" rel="noopener" style="text-decoration:none"><button type="button">GitHub Repo</button></a>
+</div>
+
+
+<!-- ============================== STANDARD NATIONS ============================== -->
+<details class="section-head" open>
+<summary>Standard Nations (22)</summary>
+
+<!-- ──────────── Aztecs ──────────── -->
+<details class="nation-node" data-name="Aztecs Montezuma">
+<summary><span class="nation-header"><img class="flag-img" src="resources/images/icons/flags/Flag_Aztec.png" alt="Aztec flag"> <img class="portrait-img" src="resources/images/icons/singleplayer/cpai_avatar_aztecs_montezuma.png" alt="Montezuma II"> Aztecs &mdash; Montezuma II</span></summary>
+
+<details><summary><span class="cat-label">Elite Units</span></summary>
+<ul><li><span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/az_jaguar_warrior_icon.png" alt="">Jaguar Knight</span> <span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/az_arrow_knight_icon.png" alt="">Arrow Knight</span></li></ul>
+</details>
+
+<details><summary><span class="cat-label">Non-Elite Units</span></summary>
+<ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/az_macehuatlin_icon.png" alt="">Macehualtin</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/az_coyote_man_icon.png" alt="">Coyote Runner</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/az_puma_man_icon.png" alt="">Puma Spearman</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/az_eagle_knight_icon.png" alt="">Eagle Runner</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/az_skull_knight_icon.png" alt="">Skull Knight</span></li></ul>
+</details>
+
+<details><summary><span class="cat-label">Playstyle: Aggressive imperial warbands</span></summary>
+<ul style="margin:4px 0;font-size:.9rem;padding-left:18px">
+<li><strong>Discovery:</strong> Rushes into an aggressive economy, prioritizing fast military production over trade. Recruits native allies early.</li>
+<li><strong>Colonial:</strong> Launches Flower Wars — relentless infantry raids with Macehualtin and Coyote Runners, pressuring enemies before they can boom.</li>
+<li><strong>Fortress:</strong> Doubles down on infantry warbands, flooding the battlefield with foot soldiers and coyote cavalry. No artillery at all.</li>
+<li><strong>Industrial+:</strong> Maintains pure infantry aggression, adding elite Skull Knights and Eagle Runners for decisive mass assaults.</li>
+</ul>
+</details>
+
+<details><summary><span class="cat-label">Buildstyle: Compact Fortified Core</span></summary>
+<dl class="buildparam">
+<dt>Wall Level</dt><dd>0</dd>
+<dt>Early Walls</dt><dd>false</dd>
+<dt>House Distance</dt><dd>&times;0.75</dd>
+<dt>Economic Distance</dt><dd>&times;0.85</dd>
+<dt>Military Distance</dt><dd>&times;0.85</dd>
+<dt>TC Distance</dt><dd>&times;0.85</dd>
+</dl>
+</details>
+<details><summary><span class="cat-label">Card Deck</span></summary>
+<p style="margin:4px 0;font-size:.9rem">Base game home city. The AI selects an Enhanced-Land or Enhanced-Naval pre-built deck if one exists, or builds a deck dynamically card-by-card.</p>
+</details>
+
+<details><summary><span class="cat-label">Quotes</span></summary>
+<details><summary>Encouragement <span class="trigger">ally: game-open / lull / statement follow-up</span></summary>
+<ul>
+<li><span class="quote">Hold the causeway and let them shatter on it.</span></li>
+<li><span class="quote">Fight with ceremony and with teeth.</span></li>
+</ul>
+</details>
+<details><summary>Taunt <span class="trigger">enemy: game-open / lull / statement follow-up</span></summary>
+<ul>
+<li><span class="quote">The omens condemn such disorder.</span></li>
+<li><span class="quote">Even Tenochtitlan deserved a better foe.</span></li>
+</ul>
+</details>
+<details><summary>Retreat <span class="trigger">explorer dies</span></summary>
+<ul><li><span class="quote">The sun demands blood — fall back and gather it anew.</span></li></ul></details>
+<details><summary>Bulk Assault <span class="trigger">targeting army mass</span></summary>
+<ul><li><span class="quote">Let the obsidian tide swallow their ranks whole.</span></li></ul></details>
+<details><summary>Decapitation <span class="trigger">targeting enemy explorer</span></summary>
+<ul><li><span class="quote">Take their leader. The gods hunger for a worthy sacrifice.</span></li></ul></details>
+</details>
+</details>
+
+<!-- ──────────── British ──────────── -->
+<details class="nation-node" data-name="British Wellington">
+<summary><span class="nation-header"><img class="flag-img" src="resources/images/icons/flags/Flag_British.png" alt="British flag"> <img class="portrait-img" src="resources/images/icons/singleplayer/cpai_avatar_british_wellington.png" alt="Duke of Wellington"> British &mdash; Duke of Wellington</span></summary>
+
+<details><summary><span class="cat-label">Elite Units</span></summary>
+<ul><li><span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/hc_musketeer_icon.png" alt="">Musketeer</span></li></ul>
+</details>
+<details><summary><span class="cat-label">Non-Elite Units</span></summary>
+<ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/longbow_icon.png" alt="">Longbowman</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hungarian_hussar_icon.png" alt="">Hussar</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_dragoon_icon.png" alt="">Dragoon</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_grenadier_icon.png" alt="">Grenadier</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_rifleman_icon.png" alt="">Ranger</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/cannon_icon.png" alt="">Artillery</span></li></ul>
+</details>
+<details><summary><span class="cat-label">Playstyle: Defensive manor-and-musketeer</span></summary>
+<ul style="margin:4px 0;font-size:.9rem;padding-left:18px">
+<li><strong>Discovery:</strong> Slow defensive buildup focused on economy and manors. Avoids early aggression, building towers and establishing deep defensive lines.</li>
+<li><strong>Colonial:</strong> Continues turtling behind fortifications. Trains mainly infantry while growing the economy behind walls and towers.</li>
+<li><strong>Fortress:</strong> Line Discipline takes hold — deploys a powerful infantry-dominated army with supporting artillery, holding ground tenaciously.</li>
+<li><strong>Industrial+:</strong> Maximises the defensive advantage with fort-supported musketeer lines and heavy artillery, punishing any who approach.</li>
+</ul>
+</details>
+<details><summary><span class="cat-label">Buildstyle: Distributed Economic Network</span></summary>
+<dl class="buildparam">
+<dt>Wall Level</dt><dd>2</dd>
+<dt>Early Walls</dt><dd>false</dd>
+<dt>House Distance</dt><dd>&times;1.15</dd>
+<dt>Economic Distance</dt><dd>&times;1.35</dd>
+<dt>Military Distance</dt><dd>&times;1.0</dd>
+<dt>TC Distance</dt><dd>&times;1.35</dd>
+</dl>
+</details>
+<details><summary><span class="cat-label">Card Deck</span></summary>
+<p style="margin:4px 0;font-size:.9rem">Base game home city. The AI selects an Enhanced-Land or Enhanced-Naval pre-built deck if one exists, or builds a deck dynamically card-by-card.</p>
+</details>
+<details><summary><span class="cat-label">Quotes</span></summary>
+<details><summary>Encouragement <span class="trigger">ally: game-open / lull / statement follow-up</span></summary>
+<ul>
+<li><span class="quote">Hold the line. After that, the rest is arithmetic.</span></li>
+<li><span class="quote">Steady now. Disorder loses battles.</span></li>
+</ul>
+</details>
+<details><summary>Taunt <span class="trigger">enemy: game-open / lull / statement follow-up</span></summary>
+<ul>
+<li><span class="quote">That advance would die nameless on a ridge in Spain.</span></li>
+<li><span class="quote">You confuse obstinacy with discipline.</span></li>
+</ul>
+</details>
+<details><summary>Retreat <span class="trigger">explorer dies</span></summary>
+<ul><li><span class="quote">Withdraw in order. A line that bends need not break.</span></li></ul></details>
+<details><summary>Bulk Assault <span class="trigger">targeting army mass</span></summary>
+<ul><li><span class="quote">Concentrate fire on their center. Let the volleys do the work.</span></li></ul></details>
+<details><summary>Decapitation <span class="trigger">targeting enemy explorer</span></summary>
+<ul><li><span class="quote">Find their commander. Cut the head and the body falls.</span></li></ul></details>
+</details>
+</details>
+
+<!-- ──────────── Chinese ──────────── -->
+<details class="nation-node" data-name="Chinese Kangxi">
+<summary><span class="nation-header"><img class="flag-img" src="resources/images/icons/flags/Flag_Chinese.png" alt="Chinese flag"> <img class="portrait-img" src="resources/images/icons/singleplayer/cpai_avatar_chinese_kangxi.png" alt="Kangxi Emperor"> Chinese &mdash; Kangxi Emperor</span></summary>
+
+<details><summary><span class="cat-label">Elite Units</span></summary>
+<ul><li><span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/hc_arquebusier_icon.png" alt="">Arquebusier</span> <span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/hc_meteor_hammer_icon.png" alt="">Meteor Hammer</span></li></ul>
+</details>
+<details><summary><span class="cat-label">Non-Elite Units</span></summary>
+<ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_chu_ko_nu_icon.png" alt="">Chu Ko Nu</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_changdao_icon.png" alt="">Changdao</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_keshik_icon.png" alt="">Keshik</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_steppe_rider_icon.png" alt="">Steppe Rider</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_iron_flail_icon.png" alt="">Iron Flail</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_arquebusier_icon.png" alt="">Flying Crow</span></li></ul>
+</details>
+<details><summary><span class="cat-label">Playstyle: Balanced banner-army macro</span></summary>
+<ul style="margin:4px 0;font-size:.9rem;padding-left:18px">
+<li><strong>Discovery:</strong> Methodical start with a slight lean toward aggression. Invests modestly in trade while building up a mixed force.</li>
+<li><strong>Colonial:</strong> Steadily grows the economy and trains banner armies — a disciplined mix of infantry and artillery.</li>
+<li><strong>Fortress:</strong> Banner Discipline kicks in — fields strong infantry blocks backed by reliable artillery, controlling the battlefield through organization.</li>
+<li><strong>Industrial+:</strong> Scales the balanced army further, maintaining infantry and artillery superiority through disciplined macro play.</li>
+</ul>
+</details>
+<details><summary><span class="cat-label">Buildstyle: Compact Fortified Core</span></summary>
+<dl class="buildparam">
+<dt>Wall Level</dt><dd>3</dd>
+<dt>Early Walls</dt><dd>true</dd>
+<dt>House Distance</dt><dd>&times;0.75</dd>
+<dt>Economic Distance</dt><dd>&times;0.85</dd>
+<dt>Military Distance</dt><dd>&times;0.85</dd>
+<dt>TC Distance</dt><dd>&times;0.85</dd>
+</dl>
+</details>
+<details><summary><span class="cat-label">Card Deck</span></summary>
+<p style="margin:4px 0;font-size:.9rem">Base game home city. The AI selects an Enhanced-Land or Enhanced-Naval pre-built deck if one exists, or builds a deck dynamically card-by-card.</p>
+</details>
+<details><summary><span class="cat-label">Quotes</span></summary>
+<details><summary>Encouragement <span class="trigger">ally: game-open / lull / statement follow-up</span></summary>
+<ul>
+<li><span class="quote">Keep the banners aligned and the field is ours.</span></li>
+<li><span class="quote">Discipline first. Triumph follows.</span></li>
+</ul>
+</details>
+<details><summary>Taunt <span class="trigger">enemy: game-open / lull / statement follow-up</span></summary>
+<ul>
+<li><span class="quote">You bring disorder to a field that demands harmony.</span></li>
+<li><span class="quote">Even frontier rebels show firmer order.</span></li>
+</ul>
+</details>
+<details><summary>Retreat <span class="trigger">explorer dies</span></summary>
+<ul><li><span class="quote">Pull back. Even the Great Wall serves those who know when to shelter behind it.</span></li></ul></details>
+<details><summary>Bulk Assault <span class="trigger">targeting army mass</span></summary>
+<ul><li><span class="quote">Bring the full weight forward. Let numbers speak where words cannot.</span></li></ul></details>
+<details><summary>Decapitation <span class="trigger">targeting enemy explorer</span></summary>
+<ul><li><span class="quote">Isolate their general. A dynasty falls with its head.</span></li></ul></details>
+</details>
+</details>
+
+<!-- ──────────── Dutch ──────────── -->
+<details class="nation-node" data-name="Dutch Maurice Nassau">
+<summary><span class="nation-header"><img class="flag-img" src="resources/images/icons/flags/Flag_Dutch.png" alt="Dutch flag"> <img class="portrait-img" src="resources/images/icons/singleplayer/cpai_avatar_dutch_maurice.png" alt="Maurice of Nassau"> Dutch &mdash; Maurice of Nassau</span></summary>
+
+<details><summary><span class="cat-label">Elite Units</span></summary>
+<ul><li><span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/halberdier_icon.png" alt="">Halberdier</span> <span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/hc_reiter_icon.png" alt="">Ruyter</span></li></ul>
+</details>
+<details><summary><span class="cat-label">Non-Elite Units</span></summary>
+<ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/pikeman_icon.png" alt="">Pikeman</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/skirmisher_icon.png" alt="">Skirmisher</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_musketeer_icon.png" alt="">Musketeer</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hungarian_hussar_icon.png" alt="">Hussar</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_grenadier_icon.png" alt="">Grenadier</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/cannon_icon.png" alt="">Artillery</span></li></ul>
+</details>
+<details><summary><span class="cat-label">Playstyle: Defensive bank economy</span></summary>
+<ul style="margin:4px 0;font-size:.9rem;padding-left:18px">
+<li><strong>Discovery:</strong> Defensive economic opener focused on establishing banks and trade income. Builds towers and avoids early fighting.</li>
+<li><strong>Colonial:</strong> Grows the bank-based economy while training a core infantry force. Stays behind defences and accumulates wealth.</li>
+<li><strong>Fortress:</strong> Drill Reforms activate — deploys a disciplined infantry line backed by strong trade income, able to sustain prolonged wars.</li>
+<li><strong>Industrial+:</strong> Leverages massive trade wealth to field a well-drilled infantry army, outlasting opponents economically.</li>
+</ul>
+</details>
+<details><summary><span class="cat-label">Buildstyle: Compact Fortified Core</span></summary>
+<dl class="buildparam">
+<dt>Wall Level</dt><dd>2</dd>
+<dt>Early Walls</dt><dd>false</dd>
+<dt>House Distance</dt><dd>&times;0.75</dd>
+<dt>Economic Distance</dt><dd>&times;0.85</dd>
+<dt>Military Distance</dt><dd>&times;0.85</dd>
+<dt>TC Distance</dt><dd>&times;0.85</dd>
+</dl>
+</details>
+<details><summary><span class="cat-label">Card Deck</span></summary>
+<p style="margin:4px 0;font-size:.9rem">Base game home city. The AI selects an Enhanced-Land or Enhanced-Naval pre-built deck if one exists, or builds a deck dynamically card-by-card.</p>
+</details>
+<details><summary><span class="cat-label">Quotes</span></summary>
+<details><summary>Encouragement <span class="trigger">ally: game-open / lull / statement follow-up</span></summary>
+<ul>
+<li><span class="quote">Dress the line and trust the drill.</span></li>
+<li><span class="quote">Measure, volley, advance.</span></li>
+</ul>
+</details>
+<details><summary>Taunt <span class="trigger">enemy: game-open / lull / statement follow-up</span></summary>
+<ul>
+<li><span class="quote">Your volley is late and your drill worse.</span></li>
+<li><span class="quote">A republic deserves firmer drill than this.</span></li>
+</ul>
+</details>
+<details><summary>Retreat <span class="trigger">explorer dies</span></summary>
+<ul><li><span class="quote">Reform behind the river line. Discipline survives what courage alone cannot.</span></li></ul></details>
+<details><summary>Bulk Assault <span class="trigger">targeting army mass</span></summary>
+<ul><li><span class="quote">Advance by volley rotation. Let drill overwhelm their disorder.</span></li></ul></details>
+<details><summary>Decapitation <span class="trigger">targeting enemy explorer</span></summary>
+<ul><li><span class="quote">Mark their commander. One precise stroke saves a thousand rounds.</span></li></ul></details>
+</details>
+</details>
+
+<!-- ──────────── Ethiopians ──────────── -->
+<details class="nation-node" data-name="Ethiopians Menelik">
+<summary><span class="nation-header"><img class="flag-img" src="resources/images/icons/flags/Flag_Ethiopian.png" alt="Ethiopian flag"> <img class="portrait-img" src="resources/images/icons/singleplayer/cpai_avatar_ethiopians_menelik.png" alt="Menelik II"> Ethiopians &mdash; Menelik II</span></summary>
+
+<details><summary><span class="cat-label">Elite Units</span></summary>
+<ul><li><span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/oromo_warrior_icon.png" alt="">Oromo Warrior</span> <span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/shotel_warrior_icon.png" alt="">Shotel Warrior</span></li></ul>
+</details>
+<details><summary><span class="cat-label">Non-Elite Units</span></summary>
+<ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/gascenya_icon.png" alt="">Gascenya</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/neftenya_icon.png" alt="">Neftenya</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/javelin_rider_icon.png" alt="">Javelin Rider</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/sebastopol_mortar_icon.png" alt="">Mortar Crews</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/villager_icon.png" alt="">Support Infantry</span></li></ul>
+</details>
+<details><summary><span class="cat-label">Playstyle: Aggressive modernization</span></summary>
+<ul style="margin:4px 0;font-size:.9rem;padding-left:18px">
+<li><strong>Discovery:</strong> Aggressive opener, building economy alongside military from the start. Willing to invest in forts early.</li>
+<li><strong>Colonial:</strong> Pushes forward with infantry and some artillery pressure, using influence to strengthen the army.</li>
+<li><strong>Fortress:</strong> Highland Modernization — fields a strong infantry core with artillery support, building forts to anchor forward positions.</li>
+<li><strong>Industrial+:</strong> Continues infantry-and-artillery aggression, using modernized forces and forts to control territory.</li>
+</ul>
+</details>
+<details><summary><span class="cat-label">Buildstyle: Compact Fortified Core</span></summary>
+<dl class="buildparam">
+<dt>Wall Level</dt><dd>2</dd>
+<dt>Early Walls</dt><dd>false</dd>
+<dt>House Distance</dt><dd>&times;0.75</dd>
+<dt>Economic Distance</dt><dd>&times;0.85</dd>
+<dt>Military Distance</dt><dd>&times;0.85</dd>
+<dt>TC Distance</dt><dd>&times;0.85</dd>
+</dl>
+</details>
+<details><summary><span class="cat-label">Card Deck</span></summary>
+<p style="margin:4px 0;font-size:.9rem">Base game home city. The AI selects an Enhanced-Land or Enhanced-Naval pre-built deck if one exists, or builds a deck dynamically card-by-card.</p>
+</details>
+<details><summary><span class="cat-label">Quotes</span></summary>
+<details><summary>Encouragement <span class="trigger">ally: game-open / lull / statement follow-up</span></summary>
+<ul>
+<li><span class="quote">Stand firm and let the high ground judge them.</span></li>
+<li><span class="quote">Order the line. Let them spend themselves.</span></li>
+</ul>
+</details>
+<details><summary>Taunt <span class="trigger">enemy: game-open / lull / statement follow-up</span></summary>
+<ul>
+<li><span class="quote">You climb these heights without judgment.</span></li>
+<li><span class="quote">Adwa would have buried such ambition.</span></li>
+</ul>
+</details>
+<details><summary>Retreat <span class="trigger">explorer dies</span></summary>
+<ul><li><span class="quote">Withdraw to the highlands. Ethiopia does not fall — she retreats to rise.</span></li></ul></details>
+<details><summary>Bulk Assault <span class="trigger">targeting army mass</span></summary>
+<ul><li><span class="quote">All forces forward. Adwa taught the world what massed courage achieves.</span></li></ul></details>
+<details><summary>Decapitation <span class="trigger">targeting enemy explorer</span></summary>
+<ul><li><span class="quote">Bring down their leader. Without a head, the invader is nothing.</span></li></ul></details>
+</details>
+</details>
+
+<!-- ──────────── French ──────────── -->
+<details class="nation-node" data-name="French Louis XVIII Bourbon">
+<summary><span class="nation-header"><img class="flag-img" src="resources/images/icons/flags/Flag_French.png" alt="French flag"> <img class="portrait-img" src="resources/images/icons/singleplayer/cpai_avatar_french_bourbon.png" alt="Louis XVIII"> French &mdash; Louis XVIII</span></summary>
+
+<details><summary><span class="cat-label">Elite Units</span></summary>
+<ul><li><span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/skirmisher_icon.png" alt="">Skirmisher</span> <span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/hc_saxon_cuirassier_icon.png" alt="">Cuirassier</span></li></ul>
+</details>
+<details><summary><span class="cat-label">Non-Elite Units</span></summary>
+<ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_musketeer_icon.png" alt="">Musketeer</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hungarian_hussar_icon.png" alt="">Hussar</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_dragoon_icon.png" alt="">Dragoon</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_grenadier_icon.png" alt="">Grenadier</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/cannon_icon.png" alt="">Artillery</span></li></ul>
+</details>
+<details><summary><span class="cat-label">Playstyle: Defensive Bourbon restoration</span></summary>
+<ul style="margin:4px 0;font-size:.9rem;padding-left:18px">
+<li><strong>Discovery:</strong> Defensive boom focused on growing the court economy. Avoids aggression, builds towers, and invests heavily in trade.</li>
+<li><strong>Colonial:</strong> Deepens into trade further while pulling back from any offensive action. Economy is the sole focus.</li>
+<li><strong>Fortress:</strong> Fields a balanced Royal Army of infantry and cavalry with supporting artillery, finally ready to fight.</li>
+<li><strong>Industrial+:</strong> Expands the army to its full size and adds more fortifications. A large, professional late-game force emerges.</li>
+</ul>
+</details>
+<details><summary><span class="cat-label">Buildstyle: Compact Fortified Core</span></summary>
+<dl class="buildparam">
+<dt>Wall Level</dt><dd>2</dd>
+<dt>Early Walls</dt><dd>false</dd>
+<dt>House Distance</dt><dd>&times;0.75</dd>
+<dt>Economic Distance</dt><dd>&times;0.85</dd>
+<dt>Military Distance</dt><dd>&times;0.85</dd>
+<dt>TC Distance</dt><dd>&times;0.85</dd>
+</dl>
+</details>
+<details><summary><span class="cat-label">Card Deck</span></summary>
+<p style="margin:4px 0;font-size:.9rem">Base game home city. The AI selects an Enhanced-Land or Enhanced-Naval pre-built deck if one exists, or builds a deck dynamically card-by-card.</p>
+</details>
+<details><summary><span class="cat-label">Quotes</span></summary>
+<details><summary>Encouragement <span class="trigger">ally: game-open / lull / statement follow-up</span></summary>
+<ul>
+<li><span class="quote">Take the ground quickly, then make it ours.</span></li>
+<li><span class="quote">Momentum, not hesitation, wins empires.</span></li>
+</ul>
+</details>
+<details><summary>Taunt <span class="trigger">enemy: game-open / lull / statement follow-up</span></summary>
+<ul>
+<li><span class="quote">You maneuver like a clerk and expect empire to follow.</span></li>
+<li><span class="quote">Even at Austerlitz I saw less confusion.</span></li>
+</ul>
+</details>
+<details><summary>Retreat <span class="trigger">explorer dies</span></summary>
+<ul><li><span class="quote">Fall back to the reserve. Even I have known the value of one step backward.</span></li></ul></details>
+<details><summary>Bulk Assault <span class="trigger">targeting army mass</span></summary>
+<ul><li><span class="quote">The whole mass forward! Speed, mass, and shock — that is the formula.</span></li></ul></details>
+<details><summary>Decapitation <span class="trigger">targeting enemy explorer</span></summary>
+<ul><li><span class="quote">Target their general. Wars are won by killing the mind, not the body.</span></li></ul></details>
+</details>
+</details>
+
+<!-- ──────────── Germans ──────────── -->
+<details class="nation-node" data-name="Germans Frederick Great">
+<summary><span class="nation-header"><img class="flag-img" src="resources/images/icons/flags/Flag_German.png" alt="German flag"> <img class="portrait-img" src="resources/images/icons/singleplayer/cpai_avatar_germans_frederick.png" alt="Frederick the Great"> Germans &mdash; Frederick the Great</span></summary>
+<details><summary><span class="cat-label">Elite Units</span></summary>
+<ul><li><span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/skirmisher_icon.png" alt="">Skirmisher</span> <span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/uhlan_icon.png" alt="">Uhlan</span></li></ul></details>
+<details><summary><span class="cat-label">Non-Elite Units</span></summary>
+<ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/dopplesoldner_icon.png" alt="">Doppelsoldner</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_war_wagon_icon.png" alt="">War Wagon</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hungarian_hussar_icon.png" alt="">Hussar</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_crossbow_icon.png" alt="">Crossbowman</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/cannon_icon.png" alt="">Artillery</span></li></ul></details>
+<details><summary><span class="cat-label">Playstyle: Balanced cavalry-mercenary warfare</span></summary>
+<ul style="margin:4px 0;font-size:.9rem;padding-left:18px">
+<li><strong>Discovery:</strong> Slightly aggressive start with a balanced approach. Trains infantry and cavalry side by side from the beginning.</li>
+<li><strong>Colonial:</strong> Builds up infantry and cavalry evenly, applying moderate pressure while keeping the economy growing.</li>
+<li><strong>Fortress:</strong> Oblique Order — strikes with strong infantry and cavalry columns working together in coordinated attacks.</li>
+<li><strong>Industrial+:</strong> Maintains the balanced infantry-cavalry doctrine, potentially supplemented by mercenaries.</li>
+</ul>
+</details>
+<details><summary><span class="cat-label">Buildstyle: Distributed Economic Network</span></summary>
+<dl class="buildparam"><dt>Wall Level</dt><dd>1</dd><dt>House Dist</dt><dd>&times;1.15</dd><dt>Eco Dist</dt><dd>&times;1.35</dd><dt>Mil Dist</dt><dd>&times;0.9 (override)</dd><dt>TC Dist</dt><dd>&times;1.35</dd></dl></details>
+<details><summary><span class="cat-label">Card Deck</span></summary>
+<p style="margin:4px 0;font-size:.9rem">Base game home city. The AI selects an Enhanced-Land or Enhanced-Naval pre-built deck if one exists, or builds a deck dynamically card-by-card.</p>
+</details>
+<details><summary><span class="cat-label">Quotes</span></summary>
+<details><summary>Encouragement <span class="trigger">ally</span></summary>
+<ul><li><span class="quote">Dress the ranks and fire by measure.</span></li><li><span class="quote">Speed and precision, nothing else.</span></li></ul></details>
+<details><summary>Taunt <span class="trigger">enemy</span></summary>
+<ul><li><span class="quote">Your line offends both reason and powder.</span></li><li><span class="quote">Leuthen required more nerve than this.</span></li></ul></details>
+<details><summary>Retreat <span class="trigger">explorer dies</span></summary>
+<ul><li><span class="quote">Withdraw in echelon. Panic is the only enemy I cannot outmaneuver.</span></li></ul></details>
+<details><summary>Bulk Assault <span class="trigger">targeting army mass</span></summary>
+<ul><li><span class="quote">Oblique the entire line into their flank. Geometry wins battles.</span></li></ul></details>
+<details><summary>Decapitation <span class="trigger">targeting enemy explorer</span></summary>
+<ul><li><span class="quote">Seize their commander. An army without a brain is merely a mob.</span></li></ul></details>
+</details>
+</details>
+
+<!-- ──────────── Haudenosaunee ──────────── -->
+<details class="nation-node" data-name="Haudenosaunee Hiawatha Iroquois">
+<summary><span class="nation-header"><img class="flag-img" src="resources/images/icons/flags/Flag_Iroquois.png" alt="Haudenosaunee flag"> <img class="portrait-img" src="resources/images/icons/singleplayer/cpai_avatar_haudenosaunee_hiawatha.png" alt="Hiawatha"> Haudenosaunee &mdash; Hiawatha</span></summary>
+<details><summary><span class="cat-label">Elite Units</span></summary>
+<ul><li><span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/iro_tomahawk_icon.png" alt="">Tomahawk</span> <span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/sx_warrifle_icon.png" alt="">War Rifle</span></li></ul></details>
+<details><summary><span class="cat-label">Non-Elite Units</span></summary>
+<ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/iro_aenna_icon.png" alt="">Aenna</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/mantlet_icon.png" alt="">Mantlet</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/iro_forrest_runner_icon.png" alt="">Forest Prowler</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/iro_musket_rider_icon.png" alt="">Musket Rider</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/sx_light_cannon_icon.png" alt="">Light Cannon</span></li></ul></details>
+<details><summary><span class="cat-label">Playstyle: Balanced confederacy warfare</span></summary>
+<ul style="margin:4px 0;font-size:.9rem;padding-left:18px">
+<li><strong>Discovery:</strong> Balanced start with a strong focus on native alliances. Builds modest military while seeking tribal allies.</li>
+<li><strong>Colonial:</strong> Confederacy Warbands activate — pushes forward with infantry backed by native allies, applying early pressure.</li>
+<li><strong>Fortress:</strong> Infantry-heavy warfare supported by maximum native alliance. Uses the confederacy network for sustained warfare.</li>
+<li><strong>Industrial+:</strong> Maintains infantry and native alliance supremacy, integrating captured prisoners to grow the population.</li>
+</ul>
+</details>
+<details><summary><span class="cat-label">Buildstyle: Civic Militia Center</span></summary>
+<dl class="buildparam"><dt>Wall Level</dt><dd>1</dd><dt>House Dist</dt><dd>&times;0.95</dd><dt>Eco Dist</dt><dd>&times;1.05</dd><dt>Mil Dist</dt><dd>&times;0.95</dd><dt>TC Dist</dt><dd>&times;1.15</dd></dl></details>
+<details><summary><span class="cat-label">Card Deck</span></summary>
+<p style="margin:4px 0;font-size:.9rem">Base game home city. The AI selects an Enhanced-Land or Enhanced-Naval pre-built deck if one exists, or builds a deck dynamically card-by-card.</p>
+</details>
+<details><summary><span class="cat-label">Quotes</span></summary>
+<details><summary>Encouragement <span class="trigger">ally</span></summary>
+<ul><li><span class="quote">Stand together. A strong confederacy does not bend.</span></li><li><span class="quote">Let wisdom guide the first blow.</span></li></ul></details>
+<details><summary>Taunt <span class="trigger">enemy</span></summary>
+<ul><li><span class="quote">You break ranks as easily as broken councils.</span></li><li><span class="quote">A careless warrior shames his people twice.</span></li></ul></details>
+<details><summary>Retreat <span class="trigger">explorer dies</span></summary>
+<ul><li><span class="quote">Step back to the longhouse shadow. Wisdom outlasts a single wound.</span></li></ul></details>
+<details><summary>Bulk Assault <span class="trigger">targeting army mass</span></summary>
+<ul><li><span class="quote">Send the warbands together. United clans break any wall.</span></li></ul></details>
+<details><summary>Decapitation <span class="trigger">targeting enemy explorer</span></summary>
+<ul><li><span class="quote">Strike their chief. Without council, their people scatter.</span></li></ul></details>
+</details>
+
+</details>
+<!-- ──────────── Hausa ──────────── -->
+<details class="nation-node" data-name="Hausa Usman dan Fodio">
+<summary><span class="nation-header"><img class="flag-img" src="resources/images/icons/flags/Flag_Hausa.png" alt="Hausa flag"> <img class="portrait-img" src="resources/images/icons/singleplayer/cpai_avatar_hausa_usman.png" alt="Usman dan Fodio"> Hausa &mdash; Usman dan Fodio</span></summary>
+<details><summary><span class="cat-label">Elite Units</span></summary>
+<ul><li><span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/fula_warrior_icon.png" alt="">Fula Warrior</span> <span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/raider_icon.png" alt="">Raider</span></li></ul></details>
+<details><summary><span class="cat-label">Non-Elite Units</span></summary>
+<ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/bodyguard_icon.png" alt="">Maigadi</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/knight_icon.png" alt="">Lifidi Knight</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/desert_archer_icon.png" alt="">Desert Archer</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/cannon_icon.png" alt="">Cannon Crews</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/sebastopol_mortar_icon.png" alt="">Mortar Crews</span></li></ul></details>
+<details><summary><span class="cat-label">Playstyle: Aggressive influence-backed expansion</span></summary>
+<ul style="margin:4px 0;font-size:.9rem;padding-left:18px">
+<li><strong>Discovery:</strong> Aggressive start with balanced infantry and cavalry training. Uses influence to recruit allies and build trade.</li>
+<li><strong>Colonial:</strong> Caliphate Expansion — shifts to cavalry raids backed by growing trade income. Mobile and hard to pin down.</li>
+<li><strong>Fortress:</strong> Cavalry-dominant mobile warfare continues. Trade income funds a constant stream of mounted raiders.</li>
+<li><strong>Industrial+:</strong> Maintains cavalry pressure with strong trade economy, fielding Fula Warriors and Lifidi Knights in force.</li>
+</ul>
+</details>
+<details><summary><span class="cat-label">Buildstyle: Distributed Economic Network</span></summary>
+<dl class="buildparam"><dt>Wall Level</dt><dd>2</dd><dt>House Dist</dt><dd>&times;1.15</dd><dt>Eco Dist</dt><dd>&times;1.35</dd><dt>Mil Dist</dt><dd>&times;1.0</dd><dt>TC Dist</dt><dd>&times;1.35</dd></dl></details>
+<details><summary><span class="cat-label">Card Deck</span></summary>
+<p style="margin:4px 0;font-size:.9rem">Base game home city. The AI selects an Enhanced-Land or Enhanced-Naval pre-built deck if one exists, or builds a deck dynamically card-by-card.</p>
+</details>
+<details><summary><span class="cat-label">Quotes</span></summary>
+<details><summary>Encouragement <span class="trigger">ally</span></summary>
+<ul><li><span class="quote">Keep faith and order, and the day will answer.</span></li><li><span class="quote">Discipline first. Victory after.</span></li></ul></details>
+<details><summary>Taunt <span class="trigger">enemy</span></summary>
+<ul><li><span class="quote">You advance without justice or discipline.</span></li><li><span class="quote">A ruler without justice invites his own ruin.</span></li></ul></details>
+<details><summary>Retreat <span class="trigger">explorer dies</span></summary>
+<ul><li><span class="quote">Regroup in faith. A just cause is not ended by one setback.</span></li></ul></details>
+<details><summary>Bulk Assault <span class="trigger">targeting army mass</span></summary>
+<ul><li><span class="quote">Commit all riders. Let discipline and devotion carry the charge.</span></li></ul></details>
+<details><summary>Decapitation <span class="trigger">targeting enemy explorer</span></summary>
+<ul><li><span class="quote">Find their ruler. A corrupt head poisons the body beneath it.</span></li></ul></details>
+</details>
+
+</details>
+<!-- ──────────── Inca ──────────── -->
+<details class="nation-node" data-name="Inca Pachacuti">
+<summary><span class="nation-header"><img class="flag-img" src="resources/images/icons/flags/Flag_Incan.png" alt="Inca flag"> <img class="portrait-img" src="resources/images/icons/singleplayer/cpai_avatar_inca_pachacuti.png" alt="Pachacuti"> Inca &mdash; Pachacuti</span></summary>
+<details><summary><span class="cat-label">Elite Units</span></summary>
+<ul><li><span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/bolas_warrior_icon.png" alt="">Bolas Warrior</span> <span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/hc_runner_icon.png" alt="">Jungle Bowman</span></li></ul></details>
+<details><summary><span class="cat-label">Non-Elite Units</span></summary>
+<ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/slinger_icon.png" alt="">Huaraca</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/runner_icon.png" alt="">Chimu Runner</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/maceman_icon.png" alt="">Maceman</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/spearman_icon.png" alt="">Spearmen</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/villager_icon.png" alt="">Support Infantry</span></li></ul></details>
+<details><summary><span class="cat-label">Playstyle: Defensive mountain empire</span></summary>
+<ul style="margin:4px 0;font-size:.9rem;padding-left:18px">
+<li><strong>Discovery:</strong> Defensive buildup behind walls and towers. Allies with natives and focuses on a strong economic foundation.</li>
+<li><strong>Colonial:</strong> Continues fortifying positions and growing the economy. Trains infantry behind defensive works, avoiding open battle.</li>
+<li><strong>Fortress:</strong> Mountain Empire — heavy infantry pours out from fortress positions, anchored by forts and maximum defensive coverage.</li>
+<li><strong>Industrial+:</strong> Holds territory with masses of infantry from fortified positions, using forced labor to sustain the war effort.</li>
+</ul>
+</details>
+<details><summary><span class="cat-label">Buildstyle: Compact Fortified Core</span></summary>
+<dl class="buildparam"><dt>Wall Level</dt><dd>3</dd><dt>Early Walls</dt><dd>true</dd><dt>House Dist</dt><dd>&times;0.75</dd><dt>Eco Dist</dt><dd>&times;0.85</dd><dt>Mil Dist</dt><dd>&times;0.85</dd><dt>TC Dist</dt><dd>&times;0.85</dd></dl></details>
+<details><summary><span class="cat-label">Card Deck</span></summary>
+<p style="margin:4px 0;font-size:.9rem">Base game home city. The AI selects an Enhanced-Land or Enhanced-Naval pre-built deck if one exists, or builds a deck dynamically card-by-card.</p>
+</details>
+<details><summary><span class="cat-label">Quotes</span></summary>
+<details><summary>Encouragement <span class="trigger">ally</span></summary>
+<ul><li><span class="quote">Hold the heights and let them climb to ruin.</span></li><li><span class="quote">Build the field as you would an empire.</span></li></ul></details>
+<details><summary>Taunt <span class="trigger">enemy</span></summary>
+<ul><li><span class="quote">You cannot build victory on such loose stones.</span></li><li><span class="quote">The mountain road would reject this army.</span></li></ul></details>
+<details><summary>Retreat <span class="trigger">explorer dies</span></summary>
+<ul><li><span class="quote">Fall back to the terrace walls. The mountain gives what the field takes.</span></li></ul></details>
+<details><summary>Bulk Assault <span class="trigger">targeting army mass</span></summary>
+<ul><li><span class="quote">Send every spear down the slope. Let the weight of empire roll over them.</span></li></ul></details>
+<details><summary>Decapitation <span class="trigger">targeting enemy explorer</span></summary>
+<ul><li><span class="quote">Take their leader from the field. An empire without its sun collapses.</span></li></ul></details>
+</details>
+
+</details>
+<!-- ──────────── Indians ──────────── -->
+<details class="nation-node" data-name="Indians Shivaji Maharaj Maratha">
+<summary><span class="nation-header"><img class="flag-img" src="resources/images/icons/flags/Flag_Indian.png" alt="Indian flag"> <img class="portrait-img" src="resources/images/icons/singleplayer/cpai_avatar_indians_shivaji.png" alt="Shivaji Maharaj"> Indians &mdash; Shivaji Maharaj</span></summary>
+<details><summary><span class="cat-label">Elite Units</span></summary>
+<ul><li><span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/hc_sepoy_icon.png" alt="">Sepoy</span> <span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/sowar_icon.png" alt="">Sowar</span></li></ul></details>
+<details><summary><span class="cat-label">Non-Elite Units</span></summary>
+<ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_gurkha_icon.png" alt="">Gurkha</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_rajput_icon.png" alt="">Rajput</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_zamburak_icon.png" alt="">Zamburak</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_musketeer_icon.png" alt="">Howdah</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_lancer_icon.png" alt="">Mahout</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_urumi_icon.png" alt="">Urumi</span></li></ul></details>
+<details><summary><span class="cat-label">Playstyle: Balanced flexibility</span></summary>
+<ul style="margin:4px 0;font-size:.9rem;padding-left:18px">
+<li><strong>Discovery:</strong> Balanced approach with a flexible army composition. Trains a mix of infantry, cavalry, and some artillery.</li>
+<li><strong>Colonial:</strong> Grows all three military branches evenly, keeping options open for any situation.</li>
+<li><strong>Fortress:</strong> Mobile Statecraft — fields a combined infantry and cavalry force, adapting to the enemy's composition.</li>
+<li><strong>Industrial+:</strong> Maintains the adaptable combined-arms force, using prisoner exchanges to keep the army replenished.</li>
+</ul>
+</details>
+<details><summary><span class="cat-label">Buildstyle: Civic Militia Center</span></summary>
+<dl class="buildparam"><dt>Wall Level</dt><dd>2</dd><dt>House Dist</dt><dd>&times;0.95</dd><dt>Eco Dist</dt><dd>&times;1.05</dd><dt>Mil Dist</dt><dd>&times;0.95</dd><dt>TC Dist</dt><dd>&times;1.15</dd></dl></details>
+<details><summary><span class="cat-label">Card Deck</span></summary>
+<p style="margin:4px 0;font-size:.9rem">Base game home city. The AI selects an Enhanced-Land or Enhanced-Naval pre-built deck if one exists, or builds a deck dynamically card-by-card.</p>
+</details>
+<details><summary><span class="cat-label">Quotes</span></summary>
+<details><summary>Encouragement <span class="trigger">ally</span></summary>
+<ul><li><span class="quote">Strike fast, vanish faster.</span></li><li><span class="quote">Guard every pass. Yield none.</span></li></ul></details>
+<details><summary>Taunt <span class="trigger">enemy</span></summary>
+<ul><li><span class="quote">You guard no flank and deserve none.</span></li><li><span class="quote">Even a hill fort sees through this plan.</span></li></ul></details>
+<details><summary>Retreat <span class="trigger">explorer dies</span></summary>
+<ul><li><span class="quote">Withdraw to the hill forts. Stone endures what open fields do not.</span></li></ul></details>
+<details><summary>Bulk Assault <span class="trigger">targeting army mass</span></summary>
+<ul><li><span class="quote">Surge forward. Let speed and numbers overwhelm their line.</span></li></ul></details>
+<details><summary>Decapitation <span class="trigger">targeting enemy explorer</span></summary>
+<ul><li><span class="quote">Hunt their commander. A struck head saves a hundred skirmishes.</span></li></ul></details>
+</details>
+
+</details>
+<!-- ──────────── Italians ──────────── -->
+<details class="nation-node" data-name="Italians Garibaldi">
+<summary><span class="nation-header"><img class="flag-img" src="resources/images/icons/flags/Flag_Italian.png" alt="Italian flag"> <img class="portrait-img" src="resources/images/icons/singleplayer/cpai_avatar_italians_garibaldi.png" alt="Giuseppe Garibaldi"> Italians &mdash; Giuseppe Garibaldi</span></summary>
+<details><summary><span class="cat-label">Elite Units</span></summary>
+<ul><li><span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/bersagliere_icon.png" alt="">Bersagliere</span> <span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/pavisier_icon.png" alt="">Pavisier</span></li></ul></details>
+<details><summary><span class="cat-label">Non-Elite Units</span></summary>
+<ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/schiavone_icon.png" alt="">Schiavone</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/papal_zouave_icon.png" alt="">Papal Zouave</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/mounted_infantry_icon.png" alt="">Mounted Infantry</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/minuteman_icon.png" alt="">Militia</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/cannon_icon.png" alt="">Artillery</span></li></ul></details>
+<details><summary><span class="cat-label">Playstyle: Balanced architect-command economy</span></summary>
+<ul style="margin:4px 0;font-size:.9rem;padding-left:18px">
+<li><strong>Discovery:</strong> Aggressive start training infantry and cavalry in equal measure. No artillery. Aims for early volunteer armies.</li>
+<li><strong>Colonial:</strong> Continues building balanced infantry and cavalry forces, integrating prisoners and pushing forward.</li>
+<li><strong>Fortress:</strong> Volunteer Columns — balanced infantry and cavalry columns strike together, fighting with revolutionary fervor.</li>
+<li><strong>Industrial+:</strong> Maintains the twin infantry-cavalry force, supplemented by architect-built economic infrastructure.</li>
+</ul>
+</details>
+<details><summary><span class="cat-label">Buildstyle: Civic Militia Center</span></summary>
+<dl class="buildparam"><dt>Wall Level</dt><dd>2</dd><dt>House Dist</dt><dd>&times;0.95</dd><dt>Eco Dist</dt><dd>&times;1.05</dd><dt>Mil Dist</dt><dd>&times;0.95</dd><dt>TC Dist</dt><dd>&times;1.15</dd></dl></details>
+<details><summary><span class="cat-label">Card Deck</span></summary>
+<p style="margin:4px 0;font-size:.9rem">Base game home city. The AI selects an Enhanced-Land or Enhanced-Naval pre-built deck if one exists, or builds a deck dynamically card-by-card.</p>
+</details>
+<details><summary><span class="cat-label">Quotes</span></summary>
+<details><summary>Encouragement <span class="trigger">ally</span></summary>
+<ul><li><span class="quote">Forward. Italy is made by those who move.</span></li><li><span class="quote">Keep the pressure. Do not give them breath.</span></li></ul></details>
+<details><summary>Taunt <span class="trigger">enemy</span></summary>
+<ul><li><span class="quote">You march like ceremony, not revolution.</span></li><li><span class="quote">Italy is not made by men who wait.</span></li></ul></details>
+<details><summary>Retreat <span class="trigger">explorer dies</span></summary>
+<ul><li><span class="quote">Fall back but do not despair. The cause survives every wound.</span></li></ul></details>
+<details><summary>Bulk Assault <span class="trigger">targeting army mass</span></summary>
+<ul><li><span class="quote">Charge with everything! History rewards the bold, not the cautious.</span></li></ul></details>
+<details><summary>Decapitation <span class="trigger">targeting enemy explorer</span></summary>
+<ul><li><span class="quote">Take their leader. Without a tyrant, their army has no purpose.</span></li></ul></details>
+</details>
+
+</details>
+<!-- ──────────── Japanese ──────────── -->
+<details class="nation-node" data-name="Japanese Tokugawa Ieyasu">
+<summary><span class="nation-header"><img class="flag-img" src="resources/images/icons/flags/Flag_Japanese.png" alt="Japanese flag"> <img class="portrait-img" src="resources/images/icons/singleplayer/cpai_avatar_japanese_tokugawa.png" alt="Tokugawa Ieyasu"> Japanese &mdash; Tokugawa Ieyasu</span></summary>
+<details><summary><span class="cat-label">Elite Units</span></summary>
+<ul><li><span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/samurai_icon.png" alt="">Kensei</span> <span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/hc_musketeer_icon.png" alt="">Ashigaru</span></li></ul></details>
+<details><summary><span class="cat-label">Non-Elite Units</span></summary>
+<ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_bowman_icon.png" alt="">Yumi</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/samurai_icon.png" alt="">Samurai</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/yabusame_icon.png" alt="">Yabusame</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_cav_archer_icon.png" alt="">Naginata Rider</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_arquebusier_icon.png" alt="">Flaming Arrow</span></li></ul></details>
+<details><summary><span class="cat-label">Playstyle: Defensive shrine economy</span></summary>
+<ul style="margin:4px 0;font-size:.9rem;padding-left:18px">
+<li><strong>Discovery:</strong> Defensive shrine-based economy. Builds slowly, placing shrines to generate passive income while avoiding conflict.</li>
+<li><strong>Colonial:</strong> Grows trade income from shrines while training a core infantry force behind defences.</li>
+<li><strong>Fortress:</strong> Bakufu Order — deploys a disciplined infantry force backed by increased trade from the shrine network.</li>
+<li><strong>Industrial+:</strong> Fields a highly disciplined army funded by a mature shrine economy, controlling the pace of battle.</li>
+</ul>
+</details>
+<details><summary><span class="cat-label">Buildstyle: Shrine or Trade Node Spread</span></summary>
+<dl class="buildparam"><dt>Wall Level</dt><dd>3</dd><dt>House Dist</dt><dd>&times;1.0</dd><dt>Eco Dist</dt><dd>&times;1.5</dd><dt>Mil Dist</dt><dd>&times;0.95</dd><dt>TC Dist</dt><dd>&times;1.2</dd></dl></details>
+<details><summary><span class="cat-label">Card Deck</span></summary>
+<p style="margin:4px 0;font-size:.9rem">Base game home city. The AI selects an Enhanced-Land or Enhanced-Naval pre-built deck if one exists, or builds a deck dynamically card-by-card.</p>
+</details>
+<details><summary><span class="cat-label">Quotes</span></summary>
+<details><summary>Encouragement <span class="trigger">ally</span></summary>
+<ul><li><span class="quote">Step slow and steady, then strike to finish it.</span></li><li><span class="quote">Keep order. Let them waste themselves.</span></li></ul></details>
+<details><summary>Taunt <span class="trigger">enemy</span></summary>
+<ul><li><span class="quote">The impatient commander defeats himself first.</span></li><li><span class="quote">Sekigahara was won with more patience than this.</span></li></ul></details>
+<details><summary>Retreat <span class="trigger">explorer dies</span></summary>
+<ul><li><span class="quote">Withdraw behind the shrine line. Patience has won more wars than bravery.</span></li></ul></details>
+<details><summary>Bulk Assault <span class="trigger">targeting army mass</span></summary>
+<ul><li><span class="quote">Commit the reserves. When the moment is right, hold nothing back.</span></li></ul></details>
+<details><summary>Decapitation <span class="trigger">targeting enemy explorer</span></summary>
+<ul><li><span class="quote">Strike their lord. Every castle falls when its master is taken.</span></li></ul></details>
+</details>
+
+</details>
+<!-- ──────────── Lakota ──────────── -->
+<details class="nation-node" data-name="Lakota Crazy Horse Sioux">
+<summary><span class="nation-header"><img class="flag-img" src="resources/images/icons/flags/Flag_Sioux.png" alt="Lakota flag"> <img class="portrait-img" src="resources/images/icons/singleplayer/cpai_avatar_lakota_crazy_horse.png" alt="Crazy Horse"> Lakota &mdash; Crazy Horse</span></summary>
+<details><summary><span class="cat-label">Elite Units</span></summary>
+<ul><li><span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/sx_axe_rider_icon.png" alt="">Axe Rider</span> <span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/sx_rifle_rider_icon.png" alt="">Rifle Rider</span></li></ul></details>
+<details><summary><span class="cat-label">Non-Elite Units</span></summary>
+<ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/sx_bow_rider_icon.png" alt="">Bow Rider</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/sx_warrifle_icon.png" alt="">Wakina Rifle</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/sx_tokala_icon.png" alt="">Tashunke Prowler</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/sx_warclub_icon.png" alt="">Club Warrior</span></li></ul></details>
+<details><summary><span class="cat-label">Playstyle: Aggressive mounted mobility</span></summary>
+<ul style="margin:4px 0;font-size:.9rem;padding-left:18px">
+<li><strong>Discovery:</strong> The most aggressive opener of any nation. Pure cavalry focus from the very start, with native allies riding alongside.</li>
+<li><strong>Colonial:</strong> Running Fight — extreme cavalry aggression, raiding the enemy base constantly. Minimal buildings, maximum horses.</li>
+<li><strong>Fortress:</strong> Continues all-cavalry warfare with native allies. Attacks from multiple directions, never letting the enemy settle.</li>
+<li><strong>Industrial+:</strong> Cavalry-only warfare at its peak. Overwhelms with speed and numbers, executing any prisoners taken.</li>
+</ul>
+</details>
+<details><summary><span class="cat-label">Buildstyle: Mobile Frontier Scatter</span></summary>
+<dl class="buildparam"><dt>Wall Level</dt><dd>0</dd><dt>House Dist</dt><dd>&times;1.35</dd><dt>Eco Dist</dt><dd>&times;1.45</dd><dt>Mil Dist</dt><dd>&times;1.1</dd><dt>TC Dist</dt><dd>&times;1.5</dd></dl></details>
+<details><summary><span class="cat-label">Card Deck</span></summary>
+<p style="margin:4px 0;font-size:.9rem">Base game home city. The AI selects an Enhanced-Land or Enhanced-Naval pre-built deck if one exists, or builds a deck dynamically card-by-card.</p>
+</details>
+<details><summary><span class="cat-label">Quotes</span></summary>
+<details><summary>Encouragement <span class="trigger">ally</span></summary>
+<ul><li><span class="quote">Hit fast and keep moving.</span></li><li><span class="quote">Let the plains carry our courage.</span></li></ul></details>
+<details><summary>Taunt <span class="trigger">enemy</span></summary>
+<ul><li><span class="quote">You ride as if the plains forgive weakness.</span></li><li><span class="quote">A slow hunter does not return.</span></li></ul></details>
+<details><summary>Retreat <span class="trigger">explorer dies</span></summary>
+<ul><li><span class="quote">Scatter to the wind. The plains give no victory to those who stand still.</span></li></ul></details>
+<details><summary>Bulk Assault <span class="trigger">targeting army mass</span></summary>
+<ul><li><span class="quote">Ride them down as one. Let the thunder of hooves be their last warning.</span></li></ul></details>
+<details><summary>Decapitation <span class="trigger">targeting enemy explorer</span></summary>
+<ul><li><span class="quote">Take their chief from the saddle. A herd without a lead runs blind.</span></li></ul></details>
+</details>
+
+</details>
+<!-- ──────────── Maltese ──────────── -->
+<details class="nation-node" data-name="Maltese Valette">
+<summary><span class="nation-header"><img class="flag-img" src="resources/images/icons/flags/Flag_Maltese.png" alt="Maltese flag"> <img class="portrait-img" src="resources/images/icons/singleplayer/cpai_avatar_maltese_valette.png" alt="Jean Parisot de Valette"> Maltese &mdash; Jean Parisot de Valette</span></summary>
+<details><summary><span class="cat-label">Elite Units</span></summary>
+<ul><li><span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/hospitaller_icon.png" alt="">Hospitaller</span> <span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/hoop_thrower_icon.png" alt="">Hoop Thrower</span></li></ul></details>
+<details><summary><span class="cat-label">Non-Elite Units</span></summary>
+<ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_crossbow_icon.png" alt="">Crossbowman</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/pikeman_icon.png" alt="">Pikeman</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_arquebusier_icon.png" alt="">Fire Thrower</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/sentinel_icon.png" alt="">Sentinel</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/cannon_icon.png" alt="">Artillery</span></li></ul></details>
+<details><summary><span class="cat-label">Playstyle: Defensive fortress play</span></summary>
+<ul style="margin:4px 0;font-size:.9rem;padding-left:18px">
+<li><strong>Discovery:</strong> Very defensive boom behind walls, towers, and early fortifications. Maximum eight towers from the start.</li>
+<li><strong>Colonial:</strong> Fortress Discipline begins — trains heavy infantry behind walls while adding fortifications.</li>
+<li><strong>Fortress:</strong> Adds artillery to the defensive infantry. Fights from fortress positions with maximum emplacement coverage.</li>
+<li><strong>Industrial+:</strong> The ultimate turtle — heavy infantry and artillery behind layers of walls, towers, and forts.</li>
+</ul>
+</details>
+<details><summary><span class="cat-label">Buildstyle: Compact Fortified Core</span></summary>
+<dl class="buildparam"><dt>Wall Level</dt><dd>4</dd><dt>Early Walls</dt><dd>true</dd><dt>House Dist</dt><dd>&times;0.75</dd><dt>Eco Dist</dt><dd>&times;0.85</dd><dt>Mil Dist</dt><dd>&times;0.85</dd><dt>TC Dist</dt><dd>&times;0.85</dd></dl></details>
+<details><summary><span class="cat-label">Card Deck</span></summary>
+<p style="margin:4px 0;font-size:.9rem">Base game home city. The AI selects an Enhanced-Land or Enhanced-Naval pre-built deck if one exists, or builds a deck dynamically card-by-card.</p>
+</details>
+<details><summary><span class="cat-label">Quotes</span></summary>
+<details><summary>Encouragement <span class="trigger">ally</span></summary>
+<ul><li><span class="quote">Hold the walls and let faith harden them.</span></li><li><span class="quote">Make every step cost them blood.</span></li></ul></details>
+<details><summary>Taunt <span class="trigger">enemy</span></summary>
+<ul><li><span class="quote">You break on stone and call it valor.</span></li><li><span class="quote">Malta endured fiercer men than you.</span></li></ul></details>
+<details><summary>Retreat <span class="trigger">explorer dies</span></summary>
+<ul><li><span class="quote">Pull back behind the bastions. Stone endures what flesh cannot.</span></li></ul></details>
+<details><summary>Bulk Assault <span class="trigger">targeting army mass</span></summary>
+<ul><li><span class="quote">Forward, knights. Let iron faith drive them from our walls.</span></li></ul></details>
+<details><summary>Decapitation <span class="trigger">targeting enemy explorer</span></summary>
+<ul><li><span class="quote">Bring down their commander. Without him, the siege breaks itself.</span></li></ul></details>
+</details>
+
+</details>
+<!-- ──────────── Mexicans (Standard) ──────────── -->
+<details class="nation-node" data-name="Mexicans Hidalgo Standard">
+<summary><span class="nation-header"><img class="flag-img" src="resources/images/icons/flags/Flag_Mexican.png" alt="Mexican flag"> <img class="portrait-img" src="resources/images/icons/singleplayer/cpai_avatar_mexicans_hidalgo.png" alt="Hidalgo"> Mexicans &mdash; Miguel Hidalgo y Costilla</span></summary>
+<details><summary><span class="cat-label">Elite Units</span></summary>
+<ul><li><span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/soldado_icon.png" alt="">Soldado</span> <span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/chinaco_icon.png" alt="">Chinaco</span></li></ul></details>
+<details><summary><span class="cat-label">Non-Elite Units</span></summary>
+<ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/insurgente_icon.png" alt="">Insurgente</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/emboscador_icon.png" alt="">Salteador</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/cowboy_icon.png" alt="">Cuatrero</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/lancer_icon.png" alt="">Lancero</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/cannon_icon.png" alt="">Artillery</span></li></ul></details>
+<details><summary><span class="cat-label">Playstyle: Balanced insurgent republic</span></summary>
+<ul style="margin:4px 0;font-size:.9rem;padding-left:18px">
+<li><strong>Discovery:</strong> Aggressive start focused on infantry production, building civic infrastructure for the republic.</li>
+<li><strong>Colonial:</strong> Insurgent Momentum — infantry numbers surge with growing offensive pressure. Pushes forward decisively.</li>
+<li><strong>Fortress:</strong> Infantry-dominant with civic militia support. The republic mobilizes fully for war.</li>
+<li><strong>Industrial+:</strong> Maintains insurgent aggression, integrating prisoners into a growing population of fighters.</li>
+</ul>
+</details>
+<details><summary><span class="cat-label">Buildstyle: Civic Militia Center</span></summary>
+<dl class="buildparam"><dt>Wall Level</dt><dd>1</dd><dt>Eco Dist</dt><dd>&times;1.15 (override)</dd><dt>House Dist</dt><dd>&times;0.95</dd><dt>Mil Dist</dt><dd>&times;0.95</dd><dt>TC Dist</dt><dd>&times;1.15</dd></dl></details>
+<details><summary><span class="cat-label">Card Deck</span></summary>
+<p style="margin:4px 0;font-size:.9rem">Base game home city. The AI selects an Enhanced-Land or Enhanced-Naval pre-built deck if one exists, or builds a deck dynamically card-by-card.</p>
+</details>
+<details><summary><span class="cat-label">Quotes</span></summary>
+<details><summary>Encouragement <span class="trigger">ally</span></summary>
+<ul><li><span class="quote">Stand for the cause and the people will answer.</span></li><li><span class="quote">Let conviction hold where powder cannot.</span></li></ul></details>
+<details><summary>Taunt <span class="trigger">enemy</span></summary>
+<ul><li><span class="quote">A people do not stay quiet forever.</span></li><li><span class="quote">Your authority sounds louder than it stands.</span></li></ul></details>
+<details><summary>Retreat <span class="trigger">explorer dies</span></summary>
+<ul><li><span class="quote">Fall back to the pueblo. The cry of liberty echoes even in retreat.</span></li></ul></details>
+<details><summary>Bulk Assault <span class="trigger">targeting army mass</span></summary>
+<ul><li><span class="quote">All together now! The people are the army — let them feel it.</span></li></ul></details>
+<details><summary>Decapitation <span class="trigger">targeting enemy explorer</span></summary>
+<ul><li><span class="quote">Find their officer. The people do not fear a headless authority.</span></li></ul></details>
+</details>
+
+</details>
+<!-- ──────────── Ottomans ──────────── -->
+<details class="nation-node" data-name="Ottomans Suleiman">
+<summary><span class="nation-header"><img class="flag-img" src="resources/images/icons/flags/Flag_Ottoman.png" alt="Ottoman flag"> <img class="portrait-img" src="resources/images/icons/singleplayer/cpai_avatar_ottomans_suleiman.png" alt="Suleiman"> Ottomans &mdash; Suleiman the Magnificent</span></summary>
+<details><summary><span class="cat-label">Elite Units</span></summary>
+<ul><li><span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/hc_grenadier_icon.png" alt="">Grenadier</span> <span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/hungarian_hussar_icon.png" alt="">Hussar</span></li></ul></details>
+<details><summary><span class="cat-label">Non-Elite Units</span></summary>
+<ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_janissary_icon.png" alt="">Janissary</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/abus_gun_icon.png" alt="">Abus Gun</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/nizam_icon.png" alt="">Nizam Fusilier</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/spahi_icon.png" alt="">Spahi</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/cannon_icon.png" alt="">Artillery</span></li></ul></details>
+<details><summary><span class="cat-label">Playstyle: Aggressive gunpowder tempo</span></summary>
+<ul style="margin:4px 0;font-size:.9rem;padding-left:18px">
+<li><strong>Discovery:</strong> Aggressive buildup leveraging trade income. Invests in artillery production early, with strong diplomatic ties.</li>
+<li><strong>Colonial:</strong> Builds mixed arms with trade income, preparing the gunpowder core.</li>
+<li><strong>Fortress:</strong> Gunpowder Empire — deploys a massive artillery core backed by infantry. The cannons do the talking.</li>
+<li><strong>Industrial+:</strong> Peak artillery power with infantry support. Trade-funded war machine at full strength, exchanging prisoners.</li>
+</ul>
+</details>
+<details><summary><span class="cat-label">Buildstyle: Compact Fortified Core</span></summary>
+<dl class="buildparam"><dt>Wall Level</dt><dd>1 (override)</dd><dt>Eco Dist</dt><dd>&times;1.1 (override)</dd><dt>Mil Dist</dt><dd>&times;1.05 (override)</dd><dt>House Dist</dt><dd>&times;0.75</dd><dt>TC Dist</dt><dd>&times;0.85</dd></dl></details>
+<details><summary><span class="cat-label">Card Deck</span></summary>
+<p style="margin:4px 0;font-size:.9rem">Base game home city. The AI selects an Enhanced-Land or Enhanced-Naval pre-built deck if one exists, or builds a deck dynamically card-by-card.</p>
+</details>
+<details><summary><span class="cat-label">Quotes</span></summary>
+<details><summary>Encouragement <span class="trigger">ally</span></summary>
+<ul><li><span class="quote">Advance with order and with law.</span></li><li><span class="quote">Make the empire look inevitable.</span></li></ul></details>
+<details><summary>Taunt <span class="trigger">enemy</span></summary>
+<ul><li><span class="quote">You bring neither law nor strength.</span></li><li><span class="quote">Belgrade demanded more order than this.</span></li></ul></details>
+<details><summary>Retreat <span class="trigger">explorer dies</span></summary>
+<ul><li><span class="quote">Withdraw in formation. The law commands order, even in retreat.</span></li></ul></details>
+<details><summary>Bulk Assault <span class="trigger">targeting army mass</span></summary>
+<ul><li><span class="quote">Bring the full weight of empire upon them. Let the Janissaries finish it.</span></li></ul></details>
+<details><summary>Decapitation <span class="trigger">targeting enemy explorer</span></summary>
+<ul><li><span class="quote">Strike their commander. An empire with no sultan is just a province.</span></li></ul></details>
+</details>
+
+</details>
+<!-- ──────────── Portuguese ──────────── -->
+<details class="nation-node" data-name="Portuguese Henry Navigator">
+<summary><span class="nation-header"><img class="flag-img" src="resources/images/icons/flags/Flag_Portuguese.png" alt="Portuguese flag"> <img class="portrait-img" src="resources/images/icons/singleplayer/cpai_avatar_portuguese_henry.png" alt="Prince Henry"> Portuguese &mdash; Prince Henry the Navigator</span></summary>
+<details><summary><span class="cat-label">Elite Units</span></summary>
+<ul><li><span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/hc_musketeer_icon.png" alt="">Musketeer</span> <span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/hc_dragoon_icon.png" alt="">Dragoon</span></li></ul></details>
+<details><summary><span class="cat-label">Non-Elite Units</span></summary>
+<ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_cacadore_icon.png" alt="">Cassador</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hungarian_hussar_icon.png" alt="">Hussar</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_arquebusier_icon.png" alt="">Organ Gun</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/pikeman_icon.png" alt="">Pikeman</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_crossbow_icon.png" alt="">Crossbowman</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/cannon_icon.png" alt="">Artillery</span></li></ul></details>
+<details><summary><span class="cat-label">Playstyle: Defensive town-center boom</span></summary>
+<ul style="margin:4px 0;font-size:.9rem;padding-left:18px">
+<li><strong>Discovery:</strong> Slight boom with heavy trade focus. Builds the economy and trains naval forces on water maps.</li>
+<li><strong>Colonial:</strong> Grows the overseas trade network. Trains a modest force of infantry and artillery.</li>
+<li><strong>Fortress:</strong> On water maps, Overseas Empire activates — extreme trade focus with artillery protecting trade routes.</li>
+<li><strong>Industrial+:</strong> Trade-funded army with strong artillery. On land maps, plays a measured combined-arms game.</li>
+</ul>
+</details>
+<details><summary><span class="cat-label">Buildstyle: Distributed Economic Network</span></summary>
+<dl class="buildparam"><dt>Wall Level</dt><dd>2</dd><dt>House Dist</dt><dd>&times;1.15</dd><dt>Eco Dist</dt><dd>&times;1.35</dd><dt>Mil Dist</dt><dd>&times;1.0</dd><dt>TC Dist</dt><dd>&times;1.35</dd></dl></details>
+<details><summary><span class="cat-label">Card Deck</span></summary>
+<p style="margin:4px 0;font-size:.9rem">Base game home city. The AI selects an Enhanced-Land or Enhanced-Naval pre-built deck if one exists, or builds a deck dynamically card-by-card.</p>
+</details>
+<details><summary><span class="cat-label">Quotes</span></summary>
+<details><summary>Encouragement <span class="trigger">ally</span></summary>
+<ul><li><span class="quote">Chart the field, then claim it.</span></li><li><span class="quote">Let patience guide the expedition.</span></li></ul></details>
+<details><summary>Taunt <span class="trigger">enemy</span></summary>
+<ul><li><span class="quote">You mistake horizon for mastery.</span></li><li><span class="quote">Such seamanship would shame Sagres.</span></li></ul></details>
+<details><summary>Retreat <span class="trigger">explorer dies</span></summary>
+<ul><li><span class="quote">Pull back to the harbor. No voyage succeeds without knowing when to turn.</span></li></ul></details>
+<details><summary>Bulk Assault <span class="trigger">targeting army mass</span></summary>
+<ul><li><span class="quote">Full broadside. Let every gun speak as one.</span></li></ul></details>
+<details><summary>Decapitation <span class="trigger">targeting enemy explorer</span></summary>
+<ul><li><span class="quote">Mark their captain. A ship without a navigator runs aground.</span></li></ul></details>
+</details>
+
+</details>
+<!-- ──────────── Russians ──────────── -->
+<details class="nation-node" data-name="Russians Catherine Great">
+<summary><span class="nation-header"><img class="flag-img" src="resources/images/icons/flags/Flag_Russian.png" alt="Russian flag"> <img class="portrait-img" src="resources/images/icons/singleplayer/cpai_avatar_russians_catherine.png" alt="Catherine the Great"> Russians &mdash; Catherine the Great</span></summary>
+<details><summary><span class="cat-label">Elite Units</span></summary>
+<ul><li><span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/hc_grenadier_icon.png" alt="">Grenadier</span> <span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/hc_cav_archer_icon.png" alt="">Cavalry Archer</span></li></ul></details>
+<details><summary><span class="cat-label">Non-Elite Units</span></summary>
+<ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_strelet_icon.png" alt="">Streltsy</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/cossack_icon.png" alt="">Cossack</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/oprichnik_icon.png" alt="">Oprichnik</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_musketeer_icon.png" alt="">Musketeer</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/cannon_icon.png" alt="">Artillery</span></li></ul></details>
+<details><summary><span class="cat-label">Playstyle: Aggressive mass-army play</span></summary>
+<ul style="margin:4px 0;font-size:.9rem;padding-left:18px">
+<li><strong>Discovery:</strong> Near-balanced start with trade investment and infantry training. Grows population and economy together.</li>
+<li><strong>Colonial:</strong> Mass infantry training begins. Cheap soldiers pour out while the economy expands.</li>
+<li><strong>Fortress:</strong> Imperial Expansion — raises the civilian population cap and fields enormous infantry masses.</li>
+<li><strong>Industrial+:</strong> Massive conscript armies overwhelm the enemy through sheer numbers, funded by trade and forced labour.</li>
+</ul>
+</details>
+<details><summary><span class="cat-label">Buildstyle: Forward Operational Line</span></summary>
+<dl class="buildparam"><dt>Wall Level</dt><dd>0</dd><dt>House Dist</dt><dd>&times;1.0</dd><dt>Eco Dist</dt><dd>&times;1.05</dd><dt>Mil Dist</dt><dd>&times;0.95</dd><dt>TC Dist</dt><dd>&times;1.1</dd></dl></details>
+<details><summary><span class="cat-label">Card Deck</span></summary>
+<p style="margin:4px 0;font-size:.9rem">Base game home city. The AI selects an Enhanced-Land or Enhanced-Naval pre-built deck if one exists, or builds a deck dynamically card-by-card.</p>
+</details>
+<details><summary><span class="cat-label">Quotes</span></summary>
+<details><summary>Encouragement <span class="trigger">ally</span></summary>
+<ul><li><span class="quote">Press on. Empire is not built timidly.</span></li><li><span class="quote">Stretch them until they break.</span></li></ul></details>
+<details><summary>Taunt <span class="trigger">enemy</span></summary>
+<ul><li><span class="quote">You have breadth but no design.</span></li><li><span class="quote">Even the frontier deserves a sharper will.</span></li></ul></details>
+<details><summary>Retreat <span class="trigger">explorer dies</span></summary>
+<ul><li><span class="quote">Withdraw into the depth. Russia has always devoured those who overreach.</span></li></ul></details>
+<details><summary>Bulk Assault <span class="trigger">targeting army mass</span></summary>
+<ul><li><span class="quote">Send the whole mass. Let sheer weight grind them into nothing.</span></li></ul></details>
+<details><summary>Decapitation <span class="trigger">targeting enemy explorer</span></summary>
+<ul><li><span class="quote">Seize their general. Cut the head and claim the frontier.</span></li></ul></details>
+</details>
+
+</details>
+<!-- ──────────── Spanish ──────────── -->
+<details class="nation-node" data-name="Spanish Isabella Castile">
+<summary><span class="nation-header"><img class="flag-img" src="resources/images/icons/flags/Flag_Spanish.png" alt="Spanish flag"> <img class="portrait-img" src="resources/images/icons/singleplayer/cpai_avatar_spanish_isabella.png" alt="Isabella I"> Spanish &mdash; Isabella I of Castile</span></summary>
+<details><summary><span class="cat-label">Elite Units</span></summary>
+<ul><li><span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/hc_redolero_icon.png" alt="">Rodelero</span> <span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/lancer_icon.png" alt="">Lancer</span></li></ul></details>
+<details><summary><span class="cat-label">Non-Elite Units</span></summary>
+<ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/pikeman_icon.png" alt="">Pikeman</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_crossbow_icon.png" alt="">Crossbowman</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_musketeer_icon.png" alt="">Musketeer</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_dragoon_icon.png" alt="">Dragoon</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hungarian_hussar_icon.png" alt="">Hussar</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/cannon_icon.png" alt="">Artillery</span></li></ul></details>
+<details><summary><span class="cat-label">Playstyle: Aggressive shipment-led conquest</span></summary>
+<ul style="margin:4px 0;font-size:.9rem;padding-left:18px">
+<li><strong>Discovery:</strong> Aggressive start. Shuns trade and natives, focusing on building a conquering army.</li>
+<li><strong>Colonial:</strong> Crusading Tempo — early offensive with strong infantry and some artillery. Applies fast pressure.</li>
+<li><strong>Fortress:</strong> Presses the attack with heavy infantry and artillery. Executes prisoners to demoralize the enemy.</li>
+<li><strong>Industrial+:</strong> Relentless conquest with shipment-boosted forces. Keeps attacking without pause.</li>
+</ul>
+</details>
+<details><summary><span class="cat-label">Buildstyle: Forward Operational Line</span></summary>
+<dl class="buildparam"><dt>Wall Level</dt><dd>2</dd><dt>House Dist</dt><dd>&times;1.0</dd><dt>Eco Dist</dt><dd>&times;1.05</dd><dt>Mil Dist</dt><dd>&times;0.95</dd><dt>TC Dist</dt><dd>&times;1.1</dd></dl></details>
+<details><summary><span class="cat-label">Card Deck</span></summary>
+<p style="margin:4px 0;font-size:.9rem">Base game home city. The AI selects an Enhanced-Land or Enhanced-Naval pre-built deck if one exists, or builds a deck dynamically card-by-card.</p>
+</details>
+<details><summary><span class="cat-label">Quotes</span></summary>
+<details><summary>Encouragement <span class="trigger">ally</span></summary>
+<ul><li><span class="quote">Press the matter and do not relent.</span></li><li><span class="quote">Faith and order. Keep both.</span></li></ul></details>
+<details><summary>Taunt <span class="trigger">enemy</span></summary>
+<ul><li><span class="quote">You squander zeal as well as steel.</span></li><li><span class="quote">Granada required sterner resolve than this.</span></li></ul></details>
+<details><summary>Retreat <span class="trigger">explorer dies</span></summary>
+<ul><li><span class="quote">Fall back to the siege lines. Faith endures what the field denies.</span></li></ul></details>
+<details><summary>Bulk Assault <span class="trigger">targeting army mass</span></summary>
+<ul><li><span class="quote">In the name of the crown — forward! Let nothing stand before us.</span></li></ul></details>
+<details><summary>Decapitation <span class="trigger">targeting enemy explorer</span></summary>
+<ul><li><span class="quote">Take their commander. A kingdom without its sovereign crumbles to dust.</span></li></ul></details>
+</details>
+
+</details>
+<!-- ──────────── Swedes ──────────── -->
+<details class="nation-node" data-name="Swedes Gustavus Adolphus Swedish">
+<summary><span class="nation-header"><img class="flag-img" src="resources/images/icons/flags/Flag_Swedish.png" alt="Swedish flag"> <img class="portrait-img" src="resources/images/icons/singleplayer/cpai_avatar_swedes_gustavus.png" alt="Gustavus Adolphus"> Swedes &mdash; Gustavus Adolphus</span></summary>
+<details><summary><span class="cat-label">Elite Units</span></summary>
+<ul><li><span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/pikeman_icon.png" alt="">Pikeman</span> <span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/hackapell_icon.png" alt="">Finnish Rider</span></li></ul></details>
+<details><summary><span class="cat-label">Non-Elite Units</span></summary>
+<ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/carolean_icon.png" alt="">Carolean</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hakkapelit_icon.png" alt="">Hakkapelit</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/leather_cannon_icon.png" alt="">Leather Cannon</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hungarian_hussar_icon.png" alt="">Hussar</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/cannon_icon.png" alt="">Artillery</span></li></ul></details>
+<details><summary><span class="cat-label">Playstyle: Aggressive torp-and-timing warfare</span></summary>
+<ul style="margin:4px 0;font-size:.9rem;padding-left:18px">
+<li><strong>Discovery:</strong> Aggressive start. Infantry and artillery receive equal investment from the beginning. Torps fuel the economy.</li>
+<li><strong>Colonial:</strong> Grows the torp economy alongside the military, applying timing pressure.</li>
+<li><strong>Fortress:</strong> Mobile Artillery — strong infantry and artillery columns strike together. The hallmark of Swedish combined arms.</li>
+<li><strong>Industrial+:</strong> Maintains infantry-artillery balance at scale, with torp economy sustaining constant production.</li>
+</ul>
+</details>
+<details><summary><span class="cat-label">Buildstyle: Shrine or Trade Node Spread</span></summary>
+<dl class="buildparam"><dt>Wall Level</dt><dd>1</dd><dt>House Dist</dt><dd>&times;1.0</dd><dt>Eco Dist</dt><dd>&times;1.5</dd><dt>Mil Dist</dt><dd>&times;0.95</dd><dt>TC Dist</dt><dd>&times;1.2</dd></dl></details>
+<details><summary><span class="cat-label">Card Deck</span></summary>
+<p style="margin:4px 0;font-size:.9rem">Base game home city. The AI selects an Enhanced-Land or Enhanced-Naval pre-built deck if one exists, or builds a deck dynamically card-by-card.</p>
+</details>
+<details><summary><span class="cat-label">Quotes</span></summary>
+<details><summary>Encouragement <span class="trigger">ally</span></summary>
+<ul><li><span class="quote">Keep the pace and the guns close.</span></li><li><span class="quote">Speed and discipline will break them.</span></li></ul></details>
+<details><summary>Taunt <span class="trigger">enemy</span></summary>
+<ul><li><span class="quote">You are too slow for modern war.</span></li><li><span class="quote">Breitenfeld punished lesser confusion.</span></li></ul></details>
+<details><summary>Retreat <span class="trigger">explorer dies</span></summary>
+<ul><li><span class="quote">Pull the guns back. Innovation survives what recklessness does not.</span></li></ul></details>
+<details><summary>Bulk Assault <span class="trigger">targeting army mass</span></summary>
+<ul><li><span class="quote">Infantry and guns together! Let coordinated fire shatter their formation.</span></li></ul></details>
+<details><summary>Decapitation <span class="trigger">targeting enemy explorer</span></summary>
+<ul><li><span class="quote">Target their general. Modern war is won by removing the brain.</span></li></ul></details>
+</details>
+
+</details>
+<!-- ──────────── United States ──────────── -->
+<details class="nation-node" data-name="United States Washington">
+<summary><span class="nation-header"><img class="flag-img" src="resources/images/icons/flags/Flag_USA.png" alt="United States flag"> <img class="portrait-img" src="resources/images/icons/singleplayer/cpai_avatar_united_states_washington.png" alt="George Washington"> United States &mdash; George Washington</span></summary>
+<details><summary><span class="cat-label">Elite Units</span></summary>
+<ul><li><span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/rifleman_icon.png" alt="">Rifleman</span> <span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/us_cavalry_icon.png" alt="">US Cavalry</span></li></ul></details>
+<details><summary><span class="cat-label">Non-Elite Units</span></summary>
+<ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/us_regular_icon.png" alt="">Regular</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/state_militia_icon.png" alt="">State Militia</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_rifleman_icon.png" alt="">Sharpshooter</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_mounted_rifleman_icon.png" alt="">Carbine Cavalry</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/cannon_icon.png" alt="">Artillery</span></li></ul></details>
+<details><summary><span class="cat-label">Playstyle: Balanced republican flexibility</span></summary>
+<ul style="margin:4px 0;font-size:.9rem;padding-left:18px">
+<li><strong>Discovery:</strong> Balanced start. Infantry-led with a steady economy and no extreme biases.</li>
+<li><strong>Colonial:</strong> Builds the economy and army together in measured fashion, keeping options open.</li>
+<li><strong>Fortress:</strong> Continental Army — deploys a solid infantry core with artillery support, adapting to the situation.</li>
+<li><strong>Industrial+:</strong> Flexible combined arms. Can pivot to whatever the battlefield demands.</li>
+</ul>
+</details>
+<details><summary><span class="cat-label">Buildstyle: Civic Militia Center</span></summary>
+<dl class="buildparam"><dt>Wall Level</dt><dd>1</dd><dt>House Dist</dt><dd>&times;0.95</dd><dt>Eco Dist</dt><dd>&times;1.05</dd><dt>Mil Dist</dt><dd>&times;0.95</dd><dt>TC Dist</dt><dd>&times;1.15</dd></dl></details>
+<details><summary><span class="cat-label">Card Deck</span></summary>
+<p style="margin:4px 0;font-size:.9rem">Base game home city. The AI selects an Enhanced-Land or Enhanced-Naval pre-built deck if one exists, or builds a deck dynamically card-by-card.</p>
+</details>
+<details><summary><span class="cat-label">Quotes</span></summary>
+<details><summary>Encouragement <span class="trigger">ally</span></summary>
+<ul><li><span class="quote">Stand steady. Let the line prove the cause.</span></li><li><span class="quote">Hold fast. Resolve carries free men through.</span></li></ul></details>
+<details><summary>Taunt <span class="trigger">enemy</span></summary>
+<ul><li><span class="quote">Liberty is not defended by blundering in plain sight.</span></li><li><span class="quote">You would not survive a winter at Valley Forge.</span></li></ul></details>
+<details><summary>Retreat <span class="trigger">explorer dies</span></summary>
+<ul><li><span class="quote">Withdraw in good order. The cause of liberty outlasts any single battle.</span></li></ul></details>
+<details><summary>Bulk Assault <span class="trigger">targeting army mass</span></summary>
+<ul><li><span class="quote">Advance the line. Let Continental resolve carry the day.</span></li></ul></details>
+<details><summary>Decapitation <span class="trigger">targeting enemy explorer</span></summary>
+<ul><li><span class="quote">Take their commander. Free men fight harder when tyranny loses its face.</span></li></ul></details>
+</details>
+
+</details>
+</details><!-- END Standard Nations -->
+
+<!-- ═══════════════════════════════════════════════════════════════
+     REVOLUTION NATIONS (26)
+     ═══════════════════════════════════════════════════════════════ -->
+<details class="section-head">
+<summary>Revolution Nations (26) &mdash; shared doctrine buckets, Age III+ trigger, army scaling</summary>
+<p style="margin:6px 0;font-size:.85rem;color:#aaa">All revolution nations share: doctrine buckets (7), Age III+ trigger, armyPop = 130 (Age III) / 145 (Age IV), +0.1 inf/art bias per age.</p>
+
+<!-- ──────────── Americans ──────────── -->
+<details class="nation-node" data-name="Americans Jefferson Revolution">
+<summary><span class="nation-header"><img class="flag-img" src="resources/images/icons/flags/Flag_USA.png" alt="USA flag"> <img class="portrait-img" src="resources/images/icons/singleplayer/cpai_avatar_americans_jefferson.png" alt="Jefferson"> Americans &mdash; Thomas Jefferson</span></summary>
+<details><summary><span class="cat-label">Elite Units</span></summary>
+<ul><li><span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/gatling_gun_icon.png" alt="">Gatling Gun</span> <span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/rocket_icon.png" alt="">Congreve Rocket</span></li></ul></details>
+<details><summary><span class="cat-label">Non-Elite Units</span></summary>
+<ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/us_regular_icon.png" alt="">Regulars</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/state_militia_icon.png" alt="">State Militia</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_rifleman_icon.png" alt="">Sharpshooters</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/us_cavalry_icon.png" alt="">Volunteer Cavalry</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/horse_artillery_icon.png" alt="">Field Guns</span></li></ul></details>
+<details><summary><span class="cat-label">Playstyle: Balanced statesman-general play</span></summary>
+<ul style="margin:4px 0;font-size:.9rem;padding-left:18px">
+<li><strong>Colonial:</strong> Balanced start with infantry and cavalry. Builds a republican economy with measured military growth.</li>
+<li><strong>Fortress:</strong> Cavalry Assault doctrine — shifts to cavalry-led strikes backed by infantry, pushing offense sharply.</li>
+<li><strong>Industrial+:</strong> Full army deployment with increased infantry and artillery. A professional revolutionary force at peak strength.</li>
+</ul>
+</details>
+<details><summary><span class="cat-label">Buildstyle: Civic Militia Center</span></summary>
+<dl class="buildparam"><dt>House Dist</dt><dd>&times;0.95</dd><dt>Eco Dist</dt><dd>&times;1.05</dd><dt>Mil Dist</dt><dd>&times;0.95</dd><dt>TC Dist</dt><dd>&times;1.15</dd></dl></details>
+<details><summary><span class="cat-label">Card Deck</span></summary>
+<p style="margin:4px 0;font-size:.9rem">Mod home city: <code>rvltmodhomecityamericans.xml</code>. Single default deck. AI builds dynamically.</p>
+</details>
+<details><summary><span class="cat-label">Quotes</span></summary>
+<details><summary>Encouragement <span class="trigger">ally</span></summary>
+<ul><li><span class="quote">Hold firm. The line is our argument.</span></li><li><span class="quote">Resolve first. Victory after.</span></li></ul></details>
+<details><summary>Taunt <span class="trigger">enemy</span></summary>
+<ul><li><span class="quote">A republic cannot survive such command.</span></li><li><span class="quote">Your cause buckles under poor leadership.</span></li></ul></details>
+<details><summary>Retreat <span class="trigger">explorer dies</span></summary>
+<ul><li><span class="quote">Fall back and regroup. Reason endures where passion falters.</span></li></ul></details>
+<details><summary>Bulk Assault <span class="trigger">targeting army mass</span></summary>
+<ul><li><span class="quote">Commit the full line. Let republican resolve decide it.</span></li></ul></details>
+<details><summary>Decapitation <span class="trigger">targeting enemy explorer</span></summary>
+<ul><li><span class="quote">Find their leader. A cause without a voice cannot command.</span></li></ul></details>
+</details>
+</details>
+
+<!-- ──────────── Argentines ──────────── -->
+<details class="nation-node" data-name="Argentines San Martin Revolution">
+<summary><span class="nation-header"><img class="flag-img" src="resources/images/icons/flags/Flag_Argentinian.png" alt="Argentine flag"> <img class="portrait-img" src="resources/images/icons/singleplayer/cpai_avatar_argentines_san_martin.png" alt="San Martin"> Argentines &mdash; Jose de San Martin</span></summary>
+<details><summary><span class="cat-label">Elite Units</span></summary>
+<ul><li><span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/pikeman_icon.png" alt="">Pikeman</span> <span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/hc_redolero_icon.png" alt="">Rodelero</span> <span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/lancer_icon.png" alt="">Lancer</span></li></ul></details>
+<details><summary><span class="cat-label">Non-Elite Units</span></summary>
+<ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_musketeer_icon.png" alt="">Musketeers</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_dragoon_icon.png" alt="">Dragoons</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_grenadier_icon.png" alt="">Grenadiers</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/minuteman_icon.png" alt="">Militia</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/horse_artillery_icon.png" alt="">Field Guns</span></li></ul></details>
+<details><summary><span class="cat-label">Playstyle: Aggressive liberation cavalry</span></summary>
+<ul style="margin:4px 0;font-size:.9rem;padding-left:18px">
+<li><strong>Colonial:</strong> Aggressive cavalry-heavy opener. Forward bases established immediately to pressure the enemy lines.</li>
+<li><strong>Fortress:</strong> Cavalry Assault doctrine — cavalry and infantry combine in fast-moving liberation campaigns.</li>
+<li><strong>Industrial+:</strong> Expands the cavalry force further, with infantry and artillery rounding out a full-spectrum army.</li>
+</ul>
+</details>
+<details><summary><span class="cat-label">Buildstyle: Forward Operational Line</span></summary>
+<dl class="buildparam"><dt>House Dist</dt><dd>&times;1.0</dd><dt>Eco Dist</dt><dd>&times;1.05</dd><dt>Mil Dist</dt><dd>&times;0.95</dd><dt>TC Dist</dt><dd>&times;1.1</dd></dl></details>
+<details><summary><span class="cat-label">Card Deck</span></summary>
+<p style="margin:4px 0;font-size:.9rem">Mod home city: <code>rvltmodhomecityargentina.xml</code>. Single default deck. AI builds dynamically.</p>
+</details>
+<details><summary><span class="cat-label">Quotes</span></summary>
+<details><summary>Encouragement <span class="trigger">ally</span></summary>
+<ul><li><span class="quote">Keep the column lean and relentless.</span></li><li><span class="quote">Forward. The Andes taught us not to linger.</span></li></ul></details>
+<details><summary>Taunt <span class="trigger">enemy</span></summary>
+<ul><li><span class="quote">The Andes would laugh at such a march.</span></li><li><span class="quote">You spend men where nerve would suffice.</span></li></ul></details>
+<details><summary>Retreat <span class="trigger">explorer dies</span></summary>
+<ul><li><span class="quote">Reform the column. The Andes did not stop us, and neither will this.</span></li></ul></details>
+<details><summary>Bulk Assault <span class="trigger">targeting army mass</span></summary>
+<ul><li><span class="quote">The full column forward. Liberation waits for no man.</span></li></ul></details>
+<details><summary>Decapitation <span class="trigger">targeting enemy explorer</span></summary>
+<ul><li><span class="quote">Take their general. A headless empire is already free.</span></li></ul></details>
+</details>
+
+</details>
+<!-- ──────────── Baja Californians ──────────── -->
+<details class="nation-node" data-name="Baja Californians Alvarado Revolution">
+<summary><span class="nation-header"><img class="flag-img" src="resources/images/icons/flags/Flag_baja_californian.png" alt="Baja California flag"> <img class="portrait-img" src="resources/images/icons/singleplayer/cpai_avatar_baja_californians_alvarado.png" alt="Alvarado"> Baja Californians &mdash; Juan Bautista Alvarado</span></summary>
+<details><summary><span class="cat-label">Elite Units</span></summary>
+<ul><li><span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/chinaco_icon.png" alt="">Chinaco</span> <span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/emboscador_icon.png" alt="">Salteador</span></li></ul></details>
+<details><summary><span class="cat-label">Non-Elite Units</span></summary>
+<ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/insurgente_icon.png" alt="">Insurgentes</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/soldado_icon.png" alt="">Soldados</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/cowboy_icon.png" alt="">Cuatreros</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/minuteman_icon.png" alt="">Militia</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/horse_artillery_icon.png" alt="">Field Guns</span></li></ul></details>
+<details><summary><span class="cat-label">Playstyle: Aggressive frontier raiding</span></summary>
+<ul style="margin:4px 0;font-size:.9rem;padding-left:18px">
+<li><strong>Colonial:</strong> Aggressive cavalry raider. Sends mounted forces to harass and disrupt the enemy economy.</li>
+<li><strong>Fortress:</strong> Cavalry Assault doctrine — cavalry swarms supported by infantry skirmishers, striking fast and pulling back.</li>
+<li><strong>Industrial+:</strong> Maintains cavalry dominance with added infantry and artillery for decisive engagements.</li>
+</ul>
+</details>
+<details><summary><span class="cat-label">Buildstyle: Mobile Frontier Scatter</span></summary>
+<dl class="buildparam"><dt>House Dist</dt><dd>&times;1.35</dd><dt>Eco Dist</dt><dd>&times;1.45</dd><dt>Mil Dist</dt><dd>&times;1.1</dd><dt>TC Dist</dt><dd>&times;1.5</dd></dl></details>
+<details><summary><span class="cat-label">Card Deck</span></summary>
+<p style="margin:4px 0;font-size:.9rem">Mod home city: <code>rvltmodhomecitybajacalifornians.xml</code>. Full deck set: Beginner, Land, Naval, Tycoon, Treaty.</p>
+</details>
+<details><summary><span class="cat-label">Quotes</span></summary>
+<details><summary>Encouragement <span class="trigger">ally</span></summary>
+<ul><li><span class="quote">Keep the saddle and the initiative.</span></li><li><span class="quote">Raid cleanly. Vanish quickly.</span></li></ul></details>
+<details><summary>Taunt <span class="trigger">enemy</span></summary>
+<ul><li><span class="quote">The frontier swallows slower men than you.</span></li><li><span class="quote">You ride hard and think late.</span></li></ul></details>
+<details><summary>Retreat <span class="trigger">explorer dies</span></summary>
+<ul><li><span class="quote">Scatter into the brush. The frontier forgives those who vanish.</span></li></ul></details>
+<details><summary>Bulk Assault <span class="trigger">targeting army mass</span></summary>
+<ul><li><span class="quote">Ride in as one and trample their line!</span></li></ul></details>
+<details><summary>Decapitation <span class="trigger">targeting enemy explorer</span></summary>
+<ul><li><span class="quote">Drag their officer from the saddle. Leaderless men flee.</span></li></ul></details>
+</details>
+
+</details>
+<!-- ──────────── Barbary ──────────── -->
+<details class="nation-node" data-name="Barbary Barbarossa Corsair Revolution">
+<summary><span class="nation-header"><img class="flag-img" src="resources/images/icons/flags/Flag_barbary.png" alt="Algiers flag"> <img class="portrait-img" src="resources/images/icons/singleplayer/cpai_avatar_barbary_barbarossa.png" alt="Barbarossa"> Barbary &mdash; Hayreddin Barbarossa</span></summary>
+<details><summary><span class="cat-label">Elite Units</span></summary>
+<ul><li><span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/barbary_warrior_icon.png" alt="">Barbary Warrior</span> <span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/tribal_horseman_icon.png" alt="">Tribal Horseman</span> <span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/bedouin_horse_archer_icon.png" alt="">Bedouin Horse Archer</span></li></ul></details>
+<details><summary><span class="cat-label">Non-Elite Units</span></summary>
+<ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_barbary_corsair_icon.png" alt="">Corsair Infantry</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/berber_camel_rider_icon.png" alt="">Camel Riders</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_musketeer_icon.png" alt="">Gunpowder Troops</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/horse_artillery_icon.png" alt="">Field Guns</span></li></ul></details>
+<details><summary><span class="cat-label">Playstyle: Aggressive corsair warfare</span></summary>
+<ul style="margin:4px 0;font-size:.9rem;padding-left:18px">
+<li><strong>Colonial:</strong> Aggressive cavalry and naval focus. Trade-positive, building wealth while raiding with mounted corsairs.</li>
+<li><strong>Fortress:</strong> Cavalry Assault doctrine — cavalry raiders supported by native allies strike at enemy weak points.</li>
+<li><strong>Industrial+:</strong> Full aggressive force with cavalry leading and infantry supporting. Trade income fuels constant raids.</li>
+</ul>
+</details>
+<details><summary><span class="cat-label">Buildstyle: Forward Operational Line</span></summary>
+<dl class="buildparam"><dt>House Dist</dt><dd>&times;1.0</dd><dt>Eco Dist</dt><dd>&times;1.05</dd><dt>Mil Dist</dt><dd>&times;0.95</dd><dt>TC Dist</dt><dd>&times;1.1</dd></dl></details>
+<details><summary><span class="cat-label">Card Deck</span></summary>
+<p style="margin:4px 0;font-size:.9rem">Mod home city: <code>rvltmodhomecitybarbary.xml</code>. Beginner deck only. AI builds the rest dynamically.</p>
+</details>
+<details><summary><span class="cat-label">Quotes</span></summary>
+<details><summary>Encouragement <span class="trigger">ally</span></summary>
+<ul><li><span class="quote">Strike boldly and leave them no harbor.</span></li><li><span class="quote">Let speed and nerve carry the day.</span></li></ul></details>
+<details><summary>Taunt <span class="trigger">enemy</span></summary>
+<ul><li><span class="quote">You sail and march with equal confusion.</span></li><li><span class="quote">The sea would have judged you already.</span></li></ul></details>
+<details><summary>Retreat <span class="trigger">explorer dies</span></summary>
+<ul><li><span class="quote">Back to open water. A ship saved fights another day.</span></li></ul></details>
+<details><summary>Bulk Assault <span class="trigger">targeting army mass</span></summary>
+<ul><li><span class="quote">All guns and all crew — board them and take everything!</span></li></ul></details>
+<details><summary>Decapitation <span class="trigger">targeting enemy explorer</span></summary>
+<ul><li><span class="quote">Take their captain. A crew without a helm drifts to ruin.</span></li></ul></details>
+</details>
+
+</details>
+<!-- ──────────── Brazil ──────────── -->
+<details class="nation-node" data-name="Brazil Pedro Revolution">
+<summary><span class="nation-header"><img class="flag-img" src="resources/images/icons/flags/Flag_Brazilian.png" alt="Brazilian flag"> <img class="portrait-img" src="resources/images/icons/singleplayer/cpai_avatar_brazil_pedro_i.png" alt="Pedro I"> Brazil &mdash; Pedro I of Brazil</span></summary>
+<details><summary><span class="cat-label">Elite Units</span></summary>
+<ul><li><span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/hc_musketeer_icon.png" alt="">Musketeer</span> <span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/hc_dragoon_icon.png" alt="">Dragoon</span> <span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/hc_crossbow_icon.png" alt="">Crossbowman</span> <span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/pikeman_icon.png" alt="">Pikeman</span></li></ul></details>
+<details><summary><span class="cat-label">Non-Elite Units</span></summary>
+<ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_cacadore_icon.png" alt="">Cassadors</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hungarian_hussar_icon.png" alt="">Hussars</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_arquebusier_icon.png" alt="">Organ Guns</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/minuteman_icon.png" alt="">Militia</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/cannon_icon.png" alt="">Heavy Cannons</span></li></ul></details>
+<details><summary><span class="cat-label">Playstyle: Balanced imperial combined arms</span></summary>
+<ul style="margin:4px 0;font-size:.9rem;padding-left:18px">
+<li><strong>Colonial:</strong> Balanced start with a mix of infantry, cavalry, and artillery. Builds trade for long-term strength.</li>
+<li><strong>Fortress:</strong> Industrial Power doctrine — fields artillery as the main striking arm with infantry support. Builds forts.</li>
+<li><strong>Industrial+:</strong> Full combined arms with strong artillery core. Forts anchor positions while the army pushes forward.</li>
+</ul>
+</details>
+<details><summary><span class="cat-label">Buildstyle: Distributed Economic Network</span></summary>
+<dl class="buildparam"><dt>House Dist</dt><dd>&times;1.15</dd><dt>Eco Dist</dt><dd>&times;1.35</dd><dt>Mil Dist</dt><dd>&times;1.0</dd><dt>TC Dist</dt><dd>&times;1.35</dd></dl></details>
+<details><summary><span class="cat-label">Card Deck</span></summary>
+<p style="margin:4px 0;font-size:.9rem">Mod home city: <code>rvltmodhomecitybrazil.xml</code>. Single default deck. AI builds dynamically.</p>
+</details>
+<details><summary><span class="cat-label">Quotes</span></summary>
+<details><summary>Encouragement <span class="trigger">ally</span></summary>
+<ul><li><span class="quote">Advance with confidence. The crown must look certain.</span></li><li><span class="quote">Push on. Let them see a nation rising.</span></li></ul></details>
+<details><summary>Taunt <span class="trigger">enemy</span></summary>
+<ul><li><span class="quote">Empires are not born from such hesitation.</span></li><li><span class="quote">You bring pomp without vigor.</span></li></ul></details>
+<details><summary>Retreat <span class="trigger">explorer dies</span></summary>
+<ul><li><span class="quote">Pull back to the line. An empire bends but does not break.</span></li></ul></details>
+<details><summary>Bulk Assault <span class="trigger">targeting army mass</span></summary>
+<ul><li><span class="quote">Full advance. Let the world see a nation being born.</span></li></ul></details>
+<details><summary>Decapitation <span class="trigger">targeting enemy explorer</span></summary>
+<ul><li><span class="quote">Find their commander. An empire without a crown cannot hold.</span></li></ul></details>
+</details>
+
+</details>
+<!-- ──────────── Californians ──────────── -->
+<details class="nation-node" data-name="Californians Vallejo Revolution">
+<summary><span class="nation-header"><img class="flag-img" src="resources/images/icons/flags/Flag_californian.png" alt="California flag"> <img class="portrait-img" src="resources/images/icons/singleplayer/cpai_avatar_californians_vallejo.png" alt="Vallejo"> Californians &mdash; Mariano Guadalupe Vallejo</span></summary>
+<details><summary><span class="cat-label">Elite Units</span></summary>
+<ul><li><span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/chinaco_icon.png" alt="">Chinaco</span> <span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/emboscador_icon.png" alt="">Salteador</span></li></ul></details>
+<details><summary><span class="cat-label">Non-Elite Units</span></summary>
+<ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/insurgente_icon.png" alt="">Insurgentes</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/soldado_icon.png" alt="">Soldados</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/cowboy_icon.png" alt="">Cuatreros</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/minuteman_icon.png" alt="">Militia</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/horse_artillery_icon.png" alt="">Field Guns</span></li></ul></details>
+<details><summary><span class="cat-label">Playstyle: Defensive frontier administration</span></summary>
+<ul style="margin:4px 0;font-size:.9rem;padding-left:18px">
+<li><strong>Colonial:</strong> Defensive start focused on trade and cavalry. Builds wealth before committing to military action.</li>
+<li><strong>Fortress:</strong> Trade and Cavalry doctrine — uses trade income to fund a cavalry force, avoiding aggressive action.</li>
+<li><strong>Industrial+:</strong> Trade-funded cavalry army. Plays a long game, winning through economic superiority.</li>
+</ul>
+</details>
+<details><summary><span class="cat-label">Buildstyle: Civic Militia Center</span></summary>
+<dl class="buildparam"><dt>House Dist</dt><dd>&times;0.95</dd><dt>Eco Dist</dt><dd>&times;1.05</dd><dt>Mil Dist</dt><dd>&times;0.95</dd><dt>TC Dist</dt><dd>&times;1.15</dd></dl></details>
+<details><summary><span class="cat-label">Card Deck</span></summary>
+<p style="margin:4px 0;font-size:.9rem">Mod home city: <code>rvltmodhomecitycalifornia.xml</code>. Full deck set: Beginner, Land, Naval, Tycoon, Treaty.</p>
+</details>
+<details><summary><span class="cat-label">Quotes</span></summary>
+<details><summary>Encouragement <span class="trigger">ally</span></summary>
+<ul><li><span class="quote">Conserve strength and strike when it matters.</span></li><li><span class="quote">Hold the province together.</span></li></ul></details>
+<details><summary>Taunt <span class="trigger">enemy</span></summary>
+<ul><li><span class="quote">You threaten the province more than you command it.</span></li><li><span class="quote">That advance has no staying power.</span></li></ul></details>
+<details><summary>Retreat <span class="trigger">explorer dies</span></summary>
+<ul><li><span class="quote">Fall back to the rancho. The province endures what recklessness does not.</span></li></ul></details>
+<details><summary>Bulk Assault <span class="trigger">targeting army mass</span></summary>
+<ul><li><span class="quote">Commit the garrison. Let careful strength decide this.</span></li></ul></details>
+<details><summary>Decapitation <span class="trigger">targeting enemy explorer</span></summary>
+<ul><li><span class="quote">Mark their officer. Remove the head and the province is ours.</span></li></ul></details>
+</details>
+
+</details>
+<!-- ──────────── Canadians ──────────── -->
+<details class="nation-node" data-name="Canadians Brock Revolution">
+<summary><span class="nation-header"><img class="flag-img" src="resources/images/icons/flags/Flag_Canadians.png" alt="Canadian flag"> <img class="portrait-img" src="resources/images/icons/singleplayer/cpai_avatar_canadians_brock.png" alt="Brock"> Canadians &mdash; Isaac Brock</span></summary>
+<details><summary><span class="cat-label">Elite Units</span></summary>
+<ul><li><span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/hc_musketeer_icon.png" alt="">Musketeer</span> <span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/hungarian_hussar_icon.png" alt="">Hussar</span></li></ul></details>
+<details><summary><span class="cat-label">Non-Elite Units</span></summary>
+<ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/longbow_icon.png" alt="">Longbowmen</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_rifleman_icon.png" alt="">Rangers</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_dragoon_icon.png" alt="">Dragoons</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_grenadier_icon.png" alt="">Grenadiers</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/horse_artillery_icon.png" alt="">Field Guns</span></li></ul></details>
+<details><summary><span class="cat-label">Playstyle: Defensive frontier line</span></summary>
+<ul style="margin:4px 0;font-size:.9rem;padding-left:18px">
+<li><strong>Colonial:</strong> Defensive buildup with infantry and trade. Establishes a firm defensive perimeter.</li>
+<li><strong>Fortress:</strong> Fortress Defense doctrine — maximum towers and fortifications, heavy infantry with artillery support.</li>
+<li><strong>Industrial+:</strong> The Canadian fortress. Infantry and artillery behind eight towers and fort walls. Extremely hard to crack.</li>
+</ul>
+</details>
+<details><summary><span class="cat-label">Buildstyle: Compact Fortified Core</span></summary>
+<dl class="buildparam"><dt>Wall Level</dt><dd>3</dd><dt>Early Walls</dt><dd>true</dd><dt>House Dist</dt><dd>&times;0.75</dd><dt>Eco Dist</dt><dd>&times;0.85</dd><dt>Mil Dist</dt><dd>&times;0.85</dd><dt>TC Dist</dt><dd>&times;0.85</dd></dl></details>
+<details><summary><span class="cat-label">Card Deck</span></summary>
+<p style="margin:4px 0;font-size:.9rem">Mod home city: <code>rvltmodhomecitycanada.xml</code>. Single default deck. AI builds dynamically.</p>
+</details>
+<details><summary><span class="cat-label">Quotes</span></summary>
+<details><summary>Encouragement <span class="trigger">ally</span></summary>
+<ul><li><span class="quote">Hold the frontier and let them come on.</span></li><li><span class="quote">Steady fire. Waste nothing.</span></li></ul></details>
+<details><summary>Taunt <span class="trigger">enemy</span></summary>
+<ul><li><span class="quote">This frontier has broken louder men than you.</span></li><li><span class="quote">You rush the woods and call it strategy.</span></li></ul></details>
+<details><summary>Retreat <span class="trigger">explorer dies</span></summary>
+<ul><li><span class="quote">Fall back to the fort. Frontier walls hold when flesh cannot.</span></li></ul></details>
+<details><summary>Bulk Assault <span class="trigger">targeting army mass</span></summary>
+<ul><li><span class="quote">Bayonets forward! Let one decisive charge finish them.</span></li></ul></details>
+<details><summary>Decapitation <span class="trigger">targeting enemy explorer</span></summary>
+<ul><li><span class="quote">Take their commander. Queenston Heights was won by such nerve.</span></li></ul></details>
+</details>
+
+</details>
+<!-- ──────────── Central Americans ──────────── -->
+<details class="nation-node" data-name="Central Americans Morazan Revolution">
+<summary><span class="nation-header"><img class="flag-img" src="resources/images/icons/flags/Flag_Central_American.png" alt="FRCA flag"> <img class="portrait-img" src="resources/images/icons/singleplayer/cpai_avatar_central_americans_morazan.png" alt="Morazan"> Central Americans &mdash; Francisco Morazan</span></summary>
+<details><summary><span class="cat-label">Elite Units</span></summary>
+<ul><li><span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/chinaco_icon.png" alt="">Chinaco</span> <span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/emboscador_icon.png" alt="">Salteador</span></li></ul></details>
+<details><summary><span class="cat-label">Non-Elite Units</span></summary>
+<ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/insurgente_icon.png" alt="">Insurgentes</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/soldado_icon.png" alt="">Soldados</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/cowboy_icon.png" alt="">Cuatreros</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/minuteman_icon.png" alt="">Militia</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/horse_artillery_icon.png" alt="">Field Guns</span></li></ul></details>
+<details><summary><span class="cat-label">Playstyle: Balanced federalist warfare</span></summary>
+<ul style="margin:4px 0;font-size:.9rem;padding-left:18px">
+<li><strong>Colonial:</strong> Balanced start with infantry focus, native allies, and trade. Builds a diverse coalition army.</li>
+<li><strong>Fortress:</strong> Native Integration doctrine — infantry reinforced by extensive native alliances and growing trade.</li>
+<li><strong>Industrial+:</strong> Full federalist army with infantry, native allies, and trade-funded reinforcements.</li>
+</ul>
+</details>
+<details><summary><span class="cat-label">Buildstyle: Distributed Economic Network</span></summary>
+<dl class="buildparam"><dt>House Dist</dt><dd>&times;1.15</dd><dt>Eco Dist</dt><dd>&times;1.35</dd><dt>Mil Dist</dt><dd>&times;1.0</dd><dt>TC Dist</dt><dd>&times;1.35</dd></dl></details>
+<details><summary><span class="cat-label">Card Deck</span></summary>
+<p style="margin:4px 0;font-size:.9rem">Mod home city: <code>rvltmodhomecitycentralamericans.xml</code>. Full deck set: Beginner, Land, Naval, Tycoon, Treaty.</p>
+</details>
+<details><summary><span class="cat-label">Quotes</span></summary>
+<details><summary>Encouragement <span class="trigger">ally</span></summary>
+<ul><li><span class="quote">Stand together. Federation is strength.</span></li><li><span class="quote">Keep formation and keep faith.</span></li></ul></details>
+<details><summary>Taunt <span class="trigger">enemy</span></summary>
+<ul><li><span class="quote">A divided command defeats itself.</span></li><li><span class="quote">You split what you are too weak to govern.</span></li></ul></details>
+<details><summary>Retreat <span class="trigger">explorer dies</span></summary>
+<ul><li><span class="quote">Regroup behind the federation line. Unity survives what division cannot.</span></li></ul></details>
+<details><summary>Bulk Assault <span class="trigger">targeting army mass</span></summary>
+<ul><li><span class="quote">All provinces forward. United arms break any tyranny.</span></li></ul></details>
+<details><summary>Decapitation <span class="trigger">targeting enemy explorer</span></summary>
+<ul><li><span class="quote">Seize their caudillo. Without a dictator, their cause collapses.</span></li></ul></details>
+</details>
+
+</details>
+<!-- ──────────── Chileans ──────────── -->
+<details class="nation-node" data-name="Chileans OHiggins Revolution">
+<summary><span class="nation-header"><img class="flag-img" src="resources/images/icons/flags/Flag_Chilean.png" alt="Chilean flag"> <img class="portrait-img" src="resources/images/icons/singleplayer/cpai_avatar_chileans_ohiggins.png" alt="O'Higgins"> Chileans &mdash; Bernardo O'Higgins</span></summary>
+<details><summary><span class="cat-label">Elite Units</span></summary>
+<ul><li><span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/pikeman_icon.png" alt="">Pikeman</span> <span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/hc_redolero_icon.png" alt="">Rodelero</span> <span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/lancer_icon.png" alt="">Lancer</span> <span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/hungarian_hussar_icon.png" alt="">Hussar</span></li></ul></details>
+<details><summary><span class="cat-label">Non-Elite Units</span></summary>
+<ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_musketeer_icon.png" alt="">Musketeers</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_dragoon_icon.png" alt="">Dragoons</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_grenadier_icon.png" alt="">Grenadiers</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/minuteman_icon.png" alt="">Militia</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/horse_artillery_icon.png" alt="">Field Guns</span></li></ul></details>
+<details><summary><span class="cat-label">Playstyle: Balanced republican army</span></summary>
+<ul style="margin:4px 0;font-size:.9rem;padding-left:18px">
+<li><strong>Colonial:</strong> Balanced start with infantry focus and some trade. Methodical buildup.</li>
+<li><strong>Fortress:</strong> Balanced Garrison doctrine — infantry and cavalry combine in a flexible defensive-offensive force. Forts available.</li>
+<li><strong>Industrial+:</strong> Full republican army with forts providing strategic anchors. Cavalry supports the infantry core.</li>
+</ul>
+</details>
+<details><summary><span class="cat-label">Buildstyle: Civic Militia Center</span></summary>
+<dl class="buildparam"><dt>House Dist</dt><dd>&times;0.95</dd><dt>Eco Dist</dt><dd>&times;1.05</dd><dt>Mil Dist</dt><dd>&times;0.95</dd><dt>TC Dist</dt><dd>&times;1.15</dd></dl></details>
+<details><summary><span class="cat-label">Card Deck</span></summary>
+<p style="margin:4px 0;font-size:.9rem">Mod home city: <code>rvltmodhomecitychile.xml</code>. Single default deck. AI builds dynamically.</p>
+</details>
+<details><summary><span class="cat-label">Quotes</span></summary>
+<details><summary>Encouragement <span class="trigger">ally</span></summary>
+<ul><li><span class="quote">Hold the republic together with steel.</span></li><li><span class="quote">Stay stubborn. Let them tire first.</span></li></ul></details>
+<details><summary>Taunt <span class="trigger">enemy</span></summary>
+<ul><li><span class="quote">A wavering hand cannot found a republic.</span></li><li><span class="quote">You attack without endurance.</span></li></ul></details>
+<details><summary>Retreat <span class="trigger">explorer dies</span></summary>
+<ul><li><span class="quote">Fall back to the heights. The republic is not lost by one retreat.</span></li></ul></details>
+<details><summary>Bulk Assault <span class="trigger">targeting army mass</span></summary>
+<ul><li><span class="quote">The full republican line forward. Let steel and will decide it.</span></li></ul></details>
+<details><summary>Decapitation <span class="trigger">targeting enemy explorer</span></summary>
+<ul><li><span class="quote">Take their general. A republic cannot be defeated — only its tyrants can.</span></li></ul></details>
+</details>
+
+</details>
+<!-- ──────────── Columbians ──────────── -->
+<details class="nation-node" data-name="Columbians Bolivar Colombia Revolution">
+<summary><span class="nation-header"><img class="flag-img" src="resources/images/icons/flags/Flag_Colombian.png" alt="Gran Colombia flag"> <img class="portrait-img" src="resources/images/icons/singleplayer/cpai_avatar_columbians_bolivar.png" alt="Bolivar"> Columbians &mdash; Simon Bolivar</span></summary>
+<details><summary><span class="cat-label">Elite Units</span></summary>
+<ul><li><span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/pikeman_icon.png" alt="">Pikeman</span> <span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/hc_redolero_icon.png" alt="">Rodelero</span> <span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/lancer_icon.png" alt="">Lancer</span></li></ul></details>
+<details><summary><span class="cat-label">Non-Elite Units</span></summary>
+<ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_musketeer_icon.png" alt="">Musketeers</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_dragoon_icon.png" alt="">Dragoons</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_grenadier_icon.png" alt="">Grenadiers</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/minuteman_icon.png" alt="">Militia</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/horse_artillery_icon.png" alt="">Field Guns</span></li></ul></details>
+<details><summary><span class="cat-label">Playstyle: Aggressive liberator combined arms</span></summary>
+<ul style="margin:4px 0;font-size:.9rem;padding-left:18px">
+<li><strong>Colonial:</strong> Aggressive opener with forward bases. Fields a balanced force of infantry, cavalry, and artillery.</li>
+<li><strong>Fortress:</strong> Industrial Power doctrine — strong artillery backed by infantry. Builds forts to project power forward.</li>
+<li><strong>Industrial+:</strong> Full liberator army. Artillery leads the way while cavalry and infantry exploit breakthroughs.</li>
+</ul>
+</details>
+<details><summary><span class="cat-label">Buildstyle: Forward Operational Line</span></summary>
+<dl class="buildparam"><dt>House Dist</dt><dd>&times;1.0</dd><dt>Eco Dist</dt><dd>&times;1.05</dd><dt>Mil Dist</dt><dd>&times;0.95</dd><dt>TC Dist</dt><dd>&times;1.1</dd></dl></details>
+<details><summary><span class="cat-label">Card Deck</span></summary>
+<p style="margin:4px 0;font-size:.9rem">Mod home city: <code>rvltmodhomecitycolumbia.xml</code>. Single default deck. AI builds dynamically.</p>
+</details>
+<details><summary><span class="cat-label">Quotes</span></summary>
+<details><summary>Encouragement <span class="trigger">ally</span></summary>
+<ul><li><span class="quote">Strike hard. Let liberty outrun fatigue.</span></li><li><span class="quote">Carry the fire forward.</span></li></ul></details>
+<details><summary>Taunt <span class="trigger">enemy</span></summary>
+<ul><li><span class="quote">You dream of empire and cannot hold a ridge.</span></li><li><span class="quote">History does not wait for weaker men.</span></li></ul></details>
+<details><summary>Retreat <span class="trigger">explorer dies</span></summary>
+<ul><li><span class="quote">Withdraw but do not yield. Liberty does not die — it retreats to higher ground.</span></li></ul></details>
+<details><summary>Bulk Assault <span class="trigger">targeting army mass</span></summary>
+<ul><li><span class="quote">Everything forward! Let this charge write history.</span></li></ul></details>
+<details><summary>Decapitation <span class="trigger">targeting enemy explorer</span></summary>
+<ul><li><span class="quote">Find their general. Kill the crown and the colonies awaken.</span></li></ul></details>
+</details>
+
+</details>
+<!-- ──────────── Egyptians ──────────── -->
+<details class="nation-node" data-name="Egyptians Muhammad Ali Revolution">
+<summary><span class="nation-header"><img class="flag-img" src="resources/images/icons/flags/Flag_Egyptians.png" alt="Egyptian flag"> <img class="portrait-img" src="resources/images/icons/singleplayer/cpai_avatar_egyptians_muhammad_ali.png" alt="Muhammad Ali"> Egyptians &mdash; Muhammad Ali Pasha</span></summary>
+<details><summary><span class="cat-label">Elite Units</span></summary>
+<ul><li><span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/deli_icon.png" alt="">Deli</span> <span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/humbaraci_icon.png" alt="">Humbaraci</span></li></ul></details>
+<details><summary><span class="cat-label">Non-Elite Units</span></summary>
+<ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_janissary_icon.png" alt="">Janissaries</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/abus_gun_icon.png" alt="">Abus Guns</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/nizam_icon.png" alt="">Nizam Fusiliers</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/spahi_icon.png" alt="">Spahi</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/cannon_icon.png" alt="">Artillery</span></li></ul></details>
+<details><summary><span class="cat-label">Playstyle: Balanced reformer modernization</span></summary>
+<ul style="margin:4px 0;font-size:.9rem;padding-left:18px">
+<li><strong>Colonial:</strong> Balanced start with strong trade and artillery investment. Modernizes the army early.</li>
+<li><strong>Fortress:</strong> Industrial Power doctrine — fields modern artillery backed by infantry. Builds forts for defence.</li>
+<li><strong>Industrial+:</strong> Full modernized army. Strong artillery core with disciplined infantry and fort-based defence.</li>
+</ul>
+</details>
+<details><summary><span class="cat-label">Buildstyle: Compact Fortified Core</span></summary>
+<dl class="buildparam"><dt>Wall Level</dt><dd>3</dd><dt>Early Walls</dt><dd>true</dd><dt>House Dist</dt><dd>&times;0.75</dd><dt>Eco Dist</dt><dd>&times;0.85</dd><dt>Mil Dist</dt><dd>&times;0.85</dd><dt>TC Dist</dt><dd>&times;0.85</dd></dl></details>
+<details><summary><span class="cat-label">Card Deck</span></summary>
+<p style="margin:4px 0;font-size:.9rem">Mod home city: <code>rvltmodhomecityegypt.xml</code>. Beginner deck only. AI builds the rest dynamically.</p>
+</details>
+<details><summary><span class="cat-label">Quotes</span></summary>
+<details><summary>Encouragement <span class="trigger">ally</span></summary>
+<ul><li><span class="quote">Build pressure carefully and keep it there.</span></li><li><span class="quote">Advance in order. Let discipline carry the day.</span></li></ul></details>
+<details><summary>Taunt <span class="trigger">enemy</span></summary>
+<ul><li><span class="quote">You inherit strength and waste it.</span></li><li><span class="quote">Ambition without administration is just noise.</span></li></ul></details>
+<details><summary>Retreat <span class="trigger">explorer dies</span></summary>
+<ul><li><span class="quote">Reform the line. A modern state does not panic — it adapts.</span></li></ul></details>
+<details><summary>Bulk Assault <span class="trigger">targeting army mass</span></summary>
+<ul><li><span class="quote">Full battery and all regiments. Let reformed discipline crush the old order.</span></li></ul></details>
+<details><summary>Decapitation <span class="trigger">targeting enemy explorer</span></summary>
+<ul><li><span class="quote">Eliminate their pasha. Without direction, their armies are relics.</span></li></ul></details>
+</details>
+
+</details>
+<!-- ──────────── Finnish ──────────── -->
+<details class="nation-node" data-name="Finnish Mannerheim Revolution">
+<summary><span class="nation-header"><img class="flag-img" src="resources/images/icons/flags/Flag_Finnish.png" alt="Finnish flag"> <img class="portrait-img" src="resources/images/icons/singleplayer/cpai_avatar_finnish_mannerheim.png" alt="Mannerheim"> Finnish &mdash; Carl Gustaf Emil Mannerheim</span></summary>
+<details><summary><span class="cat-label">Elite Units</span></summary>
+<ul><li><span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/pikeman_icon.png" alt="">Pikeman</span> <span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/hackapell_icon.png" alt="">Finnish Rider</span> <span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/hc_grenadier_icon.png" alt="">Grenadier</span></li></ul></details>
+<details><summary><span class="cat-label">Non-Elite Units</span></summary>
+<ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/carolean_icon.png" alt="">Caroleans</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hakkapelit_icon.png" alt="">Hakkapelit</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/leather_cannon_icon.png" alt="">Leather Cannons</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hungarian_hussar_icon.png" alt="">Hussars</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/minuteman_icon.png" alt="">Militia</span></li></ul></details>
+<details><summary><span class="cat-label">Playstyle: Defensive winter warfare</span></summary>
+<ul style="margin:4px 0;font-size:.9rem;padding-left:18px">
+<li><strong>Colonial:</strong> Defensive start with infantry and artillery. Digs in and builds fortifications.</li>
+<li><strong>Fortress:</strong> Fortress Defense doctrine — maximum towers and heavy infantry with artillery. Impenetrable defensive lines.</li>
+<li><strong>Industrial+:</strong> The Finnish defence at full strength. Infantry and artillery behind maximum fortifications.</li>
+</ul>
+</details>
+<details><summary><span class="cat-label">Buildstyle: Compact Fortified Core</span></summary>
+<dl class="buildparam"><dt>Wall Level</dt><dd>4</dd><dt>Early Walls</dt><dd>true</dd><dt>House Dist</dt><dd>&times;0.75</dd><dt>Eco Dist</dt><dd>&times;0.85</dd><dt>Mil Dist</dt><dd>&times;0.85</dd><dt>TC Dist</dt><dd>&times;0.85</dd></dl></details>
+<details><summary><span class="cat-label">Card Deck</span></summary>
+<p style="margin:4px 0;font-size:.9rem">Mod home city: <code>rvltmodhomecityfinland.xml</code>. Single default deck. AI builds dynamically.</p>
+</details>
+<details><summary><span class="cat-label">Quotes</span></summary>
+<details><summary>Encouragement <span class="trigger">ally</span></summary>
+<ul><li><span class="quote">Make the ground do half the work.</span></li><li><span class="quote">Order, cold nerve, and exact fire.</span></li></ul></details>
+<details><summary>Taunt <span class="trigger">enemy</span></summary>
+<ul><li><span class="quote">You waste terrain as if it were free.</span></li><li><span class="quote">Such a line would not survive a winter.</span></li></ul></details>
+<details><summary>Retreat <span class="trigger">explorer dies</span></summary>
+<ul><li><span class="quote">Fall back to the prepared line. Winter and fortification will do the rest.</span></li></ul></details>
+<details><summary>Bulk Assault <span class="trigger">targeting army mass</span></summary>
+<ul><li><span class="quote">Commit the reserves. Not one step further — push them back now.</span></li></ul></details>
+<details><summary>Decapitation <span class="trigger">targeting enemy explorer</span></summary>
+<ul><li><span class="quote">Target their commander. A frozen army without orders will perish.</span></li></ul></details>
+</details>
+
+</details>
+<!-- ──────────── Hungarians ──────────── -->
+<details class="nation-node" data-name="Hungarians Kossuth Revolution">
+<summary><span class="nation-header"><img class="flag-img" src="resources/images/icons/flags/Flag_Hungarian.png" alt="Hungarian flag"> <img class="portrait-img" src="resources/images/icons/singleplayer/cpai_avatar_hungarians_kossuth.png" alt="Kossuth"> Hungarians &mdash; Lajos Kossuth</span></summary>
+<details><summary><span class="cat-label">Elite Units</span></summary>
+<ul><li><span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/hungarian_hussar_icon.png" alt="">Hussar</span></li></ul></details>
+<details><summary><span class="cat-label">Non-Elite Units</span></summary>
+<ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_counter_jaeger_icon.png" alt="">Grensers</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/line_infantry_icon.png" alt="">Line Infantry</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/uhlan_icon.png" alt="">Uhlans</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/minuteman_icon.png" alt="">Militia</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/horse_artillery_icon.png" alt="">Field Guns</span></li></ul></details>
+<details><summary><span class="cat-label">Playstyle: Aggressive revolutionary cavalry</span></summary>
+<ul style="margin:4px 0;font-size:.9rem;padding-left:18px">
+<li><strong>Colonial:</strong> Aggressive start with forward bases. Fields balanced infantry and cavalry forces.</li>
+<li><strong>Fortress:</strong> Cavalry Assault doctrine — cavalry-led assaults backed by infantry, pushing offense to maximum.</li>
+<li><strong>Industrial+:</strong> Full revolutionary army. Cavalry charges supported by infantry and added artillery depth.</li>
+</ul>
+</details>
+<details><summary><span class="cat-label">Buildstyle: Forward Operational Line</span></summary>
+<dl class="buildparam"><dt>House Dist</dt><dd>&times;1.0</dd><dt>Eco Dist</dt><dd>&times;1.05</dd><dt>Mil Dist</dt><dd>&times;0.95</dd><dt>TC Dist</dt><dd>&times;1.1</dd></dl></details>
+<details><summary><span class="cat-label">Card Deck</span></summary>
+<p style="margin:4px 0;font-size:.9rem">Mod home city: <code>rvltmodhomecityhungary.xml</code>. Single default deck. AI builds dynamically.</p>
+</details>
+<details><summary><span class="cat-label">Quotes</span></summary>
+<details><summary>Encouragement <span class="trigger">ally</span></summary>
+<ul><li><span class="quote">Fight as if the nation is watching.</span></li><li><span class="quote">Let resolve outrun their numbers.</span></li></ul></details>
+<details><summary>Taunt <span class="trigger">enemy</span></summary>
+<ul><li><span class="quote">A nation is not led by hesitation.</span></li><li><span class="quote">You bow to events before the battle is decided.</span></li></ul></details>
+<details><summary>Retreat <span class="trigger">explorer dies</span></summary>
+<ul><li><span class="quote">Fall back behind the Danube. Hungary has survived worse than this.</span></li></ul></details>
+<details><summary>Bulk Assault <span class="trigger">targeting army mass</span></summary>
+<ul><li><span class="quote">Forward, Magyars! Let national fury drive them from our soil.</span></li></ul></details>
+<details><summary>Decapitation <span class="trigger">targeting enemy explorer</span></summary>
+<ul><li><span class="quote">Strike their commander. The empire crumbles one general at a time.</span></li></ul></details>
+</details>
+
+</details>
+<!-- ──────────── French Canadians ──────────── -->
+<details class="nation-node" data-name="French Canadians Papineau Revolution">
+<summary><span class="nation-header"><img class="flag-img" src="resources/images/icons/flags/Flag_SPC_Canadian.png" alt="Patriote flag"> <img class="portrait-img" src="resources/images/icons/singleplayer/cpai_avatar_french_canadians_papineau.png" alt="Papineau"> French Canadians &mdash; Louis-Joseph Papineau</span></summary>
+<details><summary><span class="cat-label">Elite Units</span></summary>
+<ul><li><span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/skirmisher_icon.png" alt="">Skirmisher</span> <span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/hc_saxon_cuirassier_icon.png" alt="">Cuirassier</span></li></ul></details>
+<details><summary><span class="cat-label">Non-Elite Units</span></summary>
+<ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_musketeer_icon.png" alt="">Musketeers</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hungarian_hussar_icon.png" alt="">Hussars</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_dragoon_icon.png" alt="">Dragoons</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_grenadier_icon.png" alt="">Grenadiers</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/cannon_icon.png" alt="">Artillery</span></li></ul></details>
+<details><summary><span class="cat-label">Playstyle: Defensive patriote resistance</span></summary>
+<ul style="margin:4px 0;font-size:.9rem;padding-left:18px">
+<li><strong>Colonial:</strong> Defensive start with infantry, trade, and native alliances. Builds up resources before acting.</li>
+<li><strong>Fortress:</strong> Diplomatic Retreat doctrine — falls back defensively, strengthening infantry and trade while avoiding open battle.</li>
+<li><strong>Industrial+:</strong> Holds firm with strong infantry and trade income. A war of attrition fought from prepared positions.</li>
+</ul>
+</details>
+<details><summary><span class="cat-label">Buildstyle: Civic Militia Center</span></summary>
+<dl class="buildparam"><dt>House Dist</dt><dd>&times;0.95</dd><dt>Eco Dist</dt><dd>&times;1.05</dd><dt>Mil Dist</dt><dd>&times;0.95</dd><dt>TC Dist</dt><dd>&times;1.15</dd></dl></details>
+<details><summary><span class="cat-label">Card Deck</span></summary>
+<p style="margin:4px 0;font-size:.9rem">Mod home city: <code>rvltmodhomecityfrenchcanada.xml</code>. Single default deck. AI builds dynamically.</p>
+</details>
+<details><summary><span class="cat-label">Quotes</span></summary>
+<details><summary>Encouragement <span class="trigger">ally</span></summary>
+<ul><li><span class="quote">Stand firm. Principle must not blink.</span></li><li><span class="quote">Give them resolve, not noise.</span></li></ul></details>
+<details><summary>Taunt <span class="trigger">enemy</span></summary>
+<ul><li><span class="quote">You govern by habit and expect obedience.</span></li><li><span class="quote">Even your victories sound like excuses.</span></li></ul></details>
+<details><summary>Retreat <span class="trigger">explorer dies</span></summary>
+<ul><li><span class="quote">Withdraw with dignity. Principle survives what force cannot defend.</span></li></ul></details>
+<details><summary>Bulk Assault <span class="trigger">targeting army mass</span></summary>
+<ul><li><span class="quote">All together. Let civic resolve outweigh their arms.</span></li></ul></details>
+<details><summary>Decapitation <span class="trigger">targeting enemy explorer</span></summary>
+<ul><li><span class="quote">Find their governor. Remove the tyrant and the people breathe free.</span></li></ul></details>
+</details>
+
+</details>
+<!-- ──────────── Haitians ──────────── -->
+<details class="nation-node" data-name="Haitians Louverture Revolution">
+<summary><span class="nation-header"><img class="flag-img" src="resources/images/icons/flags/Flag_Haitian.png" alt="Haitian flag"> <img class="portrait-img" src="resources/images/icons/singleplayer/cpai_avatar_haitians_louverture.png" alt="Louverture"> Haitians &mdash; Toussaint Louverture</span></summary>
+<details><summary><span class="cat-label">Elite Units</span></summary>
+<ul><li><span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/hc_emboscador_icon.png" alt="">Maroon</span></li></ul></details>
+<details><summary><span class="cat-label">Non-Elite Units</span></summary>
+<ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/revolutionary_scout_icon.png" alt="">Revolutionaries</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/colonial_militia_icon.png" alt="">Colonial Militia</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_dragoon_icon.png" alt="">Dragoons</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/horse_artillery_icon.png" alt="">Field Guns</span></li></ul></details>
+<details><summary><span class="cat-label">Playstyle: Aggressive liberation infantry</span></summary>
+<ul style="margin:4px 0;font-size:.9rem;padding-left:18px">
+<li><strong>Colonial:</strong> Aggressive infantry-heavy opener with strong native alliances and trade. Fights for liberty from the start.</li>
+<li><strong>Fortress:</strong> Native Integration doctrine — infantry reinforced by extensive native alliances and trade income.</li>
+<li><strong>Industrial+:</strong> Full liberation army. Infantry masses backed by native allies and trade-funded reinforcements.</li>
+</ul>
+</details>
+<details><summary><span class="cat-label">Buildstyle: Mobile Frontier Scatter</span></summary>
+<dl class="buildparam"><dt>House Dist</dt><dd>&times;1.35</dd><dt>Eco Dist</dt><dd>&times;1.45</dd><dt>Mil Dist</dt><dd>&times;1.1</dd><dt>TC Dist</dt><dd>&times;1.5</dd></dl></details>
+<details><summary><span class="cat-label">Card Deck</span></summary>
+<p style="margin:4px 0;font-size:.9rem">Mod home city: <code>rvltmodhomecityhaiti.xml</code>. Single default deck. AI builds dynamically.</p>
+</details>
+<details><summary><span class="cat-label">Quotes</span></summary>
+<details><summary>Encouragement <span class="trigger">ally</span></summary>
+<ul><li><span class="quote">Stand unbroken. Liberty remembers courage.</span></li><li><span class="quote">Hold your ground with dignity and fire.</span></li></ul></details>
+<details><summary>Taunt <span class="trigger">enemy</span></summary>
+<ul><li><span class="quote">No army stands long upon the whip.</span></li><li><span class="quote">You command fear and mistake it for loyalty.</span></li></ul></details>
+<details><summary>Retreat <span class="trigger">explorer dies</span></summary>
+<ul><li><span class="quote">Back to the mountains. Freedom finds shelter where chains cannot follow.</span></li></ul></details>
+<details><summary>Bulk Assault <span class="trigger">targeting army mass</span></summary>
+<ul><li><span class="quote">Forward together! Let them see what free men can do.</span></li></ul></details>
+<details><summary>Decapitation <span class="trigger">targeting enemy explorer</span></summary>
+<ul><li><span class="quote">Take the slaveholder’s general. Liberty strikes at the head.</span></li></ul></details>
+</details>
+
+</details>
+<!-- ──────────── Indonesians ──────────── -->
+<details class="nation-node" data-name="Indonesians Diponegoro Revolution">
+<summary><span class="nation-header"><img class="flag-img" src="resources/images/icons/flags/Flag_Indonesian.png" alt="Yogyakarta flag"> <img class="portrait-img" src="resources/images/icons/singleplayer/cpai_avatar_indonesians_diponegoro.png" alt="Diponegoro"> Indonesians &mdash; Prince Diponegoro</span></summary>
+<details><summary><span class="cat-label">Elite Units</span></summary>
+<ul><li><span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/halberdier_icon.png" alt="">Halberdier</span> <span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/hc_reiter_icon.png" alt="">Ruyter</span></li></ul></details>
+<details><summary><span class="cat-label">Non-Elite Units</span></summary>
+<ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/skirmisher_icon.png" alt="">Skirmishers</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_musketeer_icon.png" alt="">Musketeers</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hungarian_hussar_icon.png" alt="">Hussars</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/minuteman_icon.png" alt="">Militia</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/horse_artillery_icon.png" alt="">Field Guns</span></li></ul></details>
+<details><summary><span class="cat-label">Playstyle: Defensive guerrilla resistance</span></summary>
+<ul style="margin:4px 0;font-size:.9rem;padding-left:18px">
+<li><strong>Colonial:</strong> Defensive start with infantry, native allies, and trade. Builds a resistance network.</li>
+<li><strong>Fortress:</strong> Native Integration doctrine — infantry supported by widespread native alliances and growing trade.</li>
+<li><strong>Industrial+:</strong> Full resistance army. Infantry and native allies defend the homeland with trade-funded sustainability.</li>
+</ul>
+</details>
+<details><summary><span class="cat-label">Buildstyle: Distributed Economic Network</span></summary>
+<dl class="buildparam"><dt>House Dist</dt><dd>&times;1.15</dd><dt>Eco Dist</dt><dd>&times;1.35</dd><dt>Mil Dist</dt><dd>&times;1.0</dd><dt>TC Dist</dt><dd>&times;1.35</dd></dl></details>
+<details><summary><span class="cat-label">Card Deck</span></summary>
+<p style="margin:4px 0;font-size:.9rem">Mod home city: <code>rvltmodhomecityindonesians.xml</code>. Single default deck. AI builds dynamically.</p>
+</details>
+<details><summary><span class="cat-label">Quotes</span></summary>
+<details><summary>Encouragement <span class="trigger">ally</span></summary>
+<ul><li><span class="quote">Fight with patience and conviction.</span></li><li><span class="quote">Let the land fight beside us.</span></li></ul></details>
+<details><summary>Taunt <span class="trigger">enemy</span></summary>
+<ul><li><span class="quote">You occupy land you do not understand.</span></li><li><span class="quote">Java has buried stronger arrogance than this.</span></li></ul></details>
+<details><summary>Retreat <span class="trigger">explorer dies</span></summary>
+<ul><li><span class="quote">Melt back into the land. Java protects those who know her.</span></li></ul></details>
+<details><summary>Bulk Assault <span class="trigger">targeting army mass</span></summary>
+<ul><li><span class="quote">Rise together. Let the will of a people sweep them from our soil.</span></li></ul></details>
+<details><summary>Decapitation <span class="trigger">targeting enemy explorer</span></summary>
+<ul><li><span class="quote">Strike their colonial commander. Without orders, occupiers crumble.</span></li></ul></details>
+</details>
+
+</details>
+<!-- ──────────── Mayans ──────────── -->
+<details class="nation-node" data-name="Mayans Canek Maya Revolution">
+<summary><span class="nation-header"><img class="flag-img" src="resources/images/icons/flags/Flag_mayan.png" alt="Chan Santa Cruz flag"> <img class="portrait-img" src="resources/images/icons/singleplayer/cpai_avatar_mayans_canek.png" alt="Canek"> Mayans &mdash; Jacinto Canek</span></summary>
+<details><summary><span class="cat-label">Elite Units</span></summary>
+<ul><li><span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/emboscador_icon.png" alt="">Salteador</span></li></ul></details>
+<details><summary><span class="cat-label">Non-Elite Units</span></summary>
+<ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/insurgente_icon.png" alt="">Insurgentes</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/soldado_icon.png" alt="">Soldados</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/cowboy_icon.png" alt="">Cuatreros</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/minuteman_icon.png" alt="">Militia</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/horse_artillery_icon.png" alt="">Field Guns</span></li></ul></details>
+<details><summary><span class="cat-label">Playstyle: Aggressive native-alliance warfare</span></summary>
+<ul style="margin:4px 0;font-size:.9rem;padding-left:18px">
+<li><strong>Colonial:</strong> Aggressive infantry opener with maximum native alliance focus. Recruits every available ally.</li>
+<li><strong>Fortress:</strong> Native Integration doctrine — infantry masses backed by the strongest native alliances of any revolution.</li>
+<li><strong>Industrial+:</strong> Peak native-alliance warfare. Infantry hordes and allied warriors overwhelm through sheer numbers.</li>
+</ul>
+</details>
+<details><summary><span class="cat-label">Buildstyle: Civic Militia Center</span></summary>
+<dl class="buildparam"><dt>House Dist</dt><dd>&times;0.95</dd><dt>Eco Dist</dt><dd>&times;1.05</dd><dt>Mil Dist</dt><dd>&times;0.95</dd><dt>TC Dist</dt><dd>&times;1.15</dd></dl></details>
+<details><summary><span class="cat-label">Card Deck</span></summary>
+<p style="margin:4px 0;font-size:.9rem">Mod home city: <code>rvltmodhomecitymaya.xml</code>. Full deck set: Beginner, Land, Naval, Tycoon, Treaty.</p>
+</details>
+<details><summary><span class="cat-label">Quotes</span></summary>
+<details><summary>Encouragement <span class="trigger">ally</span></summary>
+<ul><li><span class="quote">Stand for the old ground and strike hard.</span></li><li><span class="quote">Hold the line with pride and fury.</span></li></ul></details>
+<details><summary>Taunt <span class="trigger">enemy</span></summary>
+<ul><li><span class="quote">Old ground does not honor cowards.</span></li><li><span class="quote">You mistake dominion for permanence.</span></li></ul></details>
+<details><summary>Retreat <span class="trigger">explorer dies</span></summary>
+<ul><li><span class="quote">Withdraw to the old stones. The ancestors guard what empires cannot take.</span></li></ul></details>
+<details><summary>Bulk Assault <span class="trigger">targeting army mass</span></summary>
+<ul><li><span class="quote">Swarm forward. Let the old earth shake beneath our fury.</span></li></ul></details>
+<details><summary>Decapitation <span class="trigger">targeting enemy explorer</span></summary>
+<ul><li><span class="quote">Bring down their master. The land obeys no foreign crown.</span></li></ul></details>
+</details>
+
+</details>
+<!-- ──────────── Mexicans (Revolution) ──────────── -->
+<details class="nation-node" data-name="Mexicans Hidalgo Revolution">
+<summary><span class="nation-header"><img class="flag-img" src="resources/images/icons/flags/Flag_Mexican_Rev.png" alt="Mexican flag"> <img class="portrait-img" src="resources/images/icons/singleplayer/cpai_avatar_mexicans_hidalgo.png" alt="Hidalgo"> Mexicans (Revolution) &mdash; Miguel Hidalgo y Costilla</span></summary>
+<details><summary><span class="cat-label">Elite Units</span></summary>
+<ul><li><span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/pikeman_icon.png" alt="">Pikeman</span> <span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/hc_redolero_icon.png" alt="">Rodelero</span> <span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/chinaco_icon.png" alt="">Chinaco</span></li></ul></details>
+<details><summary><span class="cat-label">Non-Elite Units</span></summary>
+<ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/insurgente_icon.png" alt="">Insurgentes</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/soldado_icon.png" alt="">Soldados</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/emboscador_icon.png" alt="">Salteadores</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/minuteman_icon.png" alt="">Militia</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/horse_artillery_icon.png" alt="">Field Guns</span></li></ul></details>
+<details><summary><span class="cat-label">Playstyle: Aggressive liberator offense</span></summary>
+<ul style="margin:4px 0;font-size:.9rem;padding-left:18px">
+<li><strong>Colonial:</strong> Aggressive infantry-led attacks pushing deep into enemy territory. Forward bases established early.</li>
+<li><strong>Fortress:</strong> Cavalry Assault doctrine — cavalry joins the infantry for swift combined assaults on enemy positions.</li>
+<li><strong>Industrial+:</strong> Full liberator army at peak strength. Infantry and cavalry combine for relentless offensive pressure.</li>
+</ul>
+</details>
+<details><summary><span class="cat-label">Buildstyle: Forward Operational Line</span></summary>
+<dl class="buildparam"><dt>House Dist</dt><dd>&times;1.0</dd><dt>Eco Dist</dt><dd>&times;1.05</dd><dt>Mil Dist</dt><dd>&times;0.95</dd><dt>TC Dist</dt><dd>&times;1.1</dd></dl></details>
+<details><summary><span class="cat-label">Card Deck</span></summary>
+<p style="margin:4px 0;font-size:.9rem">Mod home city: <code>rvltmodhomecitymexicans.xml</code>. Single default deck. AI builds dynamically.</p>
+</details>
+<details><summary><span class="cat-label">Quotes</span></summary>
+<details><summary>Encouragement <span class="trigger">ally</span></summary>
+<ul><li><span class="quote">Give them courage and they will give you a nation.</span></li><li><span class="quote">Push on. Let the cry for liberty answer with powder.</span></li></ul></details>
+<details><summary>Taunt <span class="trigger">enemy</span></summary>
+<ul><li><span class="quote">The people owe no loyalty to weakness.</span></li><li><span class="quote">Your rule shakes before a single volley.</span></li></ul></details>
+<details><summary>Retreat <span class="trigger">explorer dies</span></summary>
+<ul><li><span class="quote">Fall back to the village. The spark of revolution cannot be stamped out.</span></li></ul></details>
+<details><summary>Bulk Assault <span class="trigger">targeting army mass</span></summary>
+<ul><li><span class="quote">Together, all of you! The voice of the people is louder than cannon.</span></li></ul></details>
+<details><summary>Decapitation <span class="trigger">targeting enemy explorer</span></summary>
+<ul><li><span class="quote">Seize their viceroy. The chains snap when the jailer falls.</span></li></ul></details>
+</details>
+
+</details>
+<!-- ──────────── Napoleonic France ──────────── -->
+<details class="nation-node" data-name="Napoleonic France Napoleon Bonaparte Revolution">
+<summary><span class="nation-header"><img class="flag-img" src="resources/images/icons/flags/Flag_French_Revolution_NE.png" alt="First Empire flag"> <img class="portrait-img" src="resources/images/icons/singleplayer/cpai_avatar_napoleonic_france.png" alt="Napoleon"> Napoleonic France &mdash; Napoleon Bonaparte</span></summary>
+<details><summary><span class="cat-label">Elite Units</span></summary>
+<ul><li><span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/skirmisher_icon.png" alt="">Skirmisher</span> <span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/hc_saxon_cuirassier_icon.png" alt="">Cuirassier</span></li></ul></details>
+<details><summary><span class="cat-label">Non-Elite Units</span></summary>
+<ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_musketeer_icon.png" alt="">Musketeers</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hungarian_hussar_icon.png" alt="">Hussars</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_dragoon_icon.png" alt="">Dragoons</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_grenadier_icon.png" alt="">Grenadiers</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/cannon_icon.png" alt="">Artillery</span></li></ul></details>
+<details><summary><span class="cat-label">Playstyle: Hyper-aggressive artillery empire</span></summary>
+<ul style="margin:4px 0;font-size:.9rem;padding-left:18px">
+<li><strong>Colonial:</strong> Hyper-aggressive opener with maximum offense. Cavalry and artillery form the core. Trade is suppressed.</li>
+<li><strong>Fortress:</strong> Grand Battery — massive artillery concentrations backed by cavalry. The Continental System suppresses trade entirely.</li>
+<li><strong>Industrial+:</strong> Imperial Tempo — forward bases established, army at peak size. Artillery dominates with cavalry support.</li>
+</ul>
+</details>
+<details><summary><span class="cat-label">Buildstyle: Forward Operational Line</span></summary>
+<dl class="buildparam"><dt>House Dist</dt><dd>&times;1.0</dd><dt>Eco Dist</dt><dd>&times;1.05</dd><dt>Mil Dist</dt><dd>&times;0.95</dd><dt>TC Dist</dt><dd>&times;1.1</dd></dl></details>
+<details><summary><span class="cat-label">Card Deck</span></summary>
+<p style="margin:4px 0;font-size:.9rem">Mod home city: <code>rvltmodhomecitynapoleon.xml</code>. Full deck set: Beginner, Land, Naval, Tycoon, Treaty.</p>
+</details>
+<details><summary><span class="cat-label">Quotes</span></summary>
+<details><summary>Encouragement <span class="trigger">ally</span></summary>
+<ul><li><span class="quote">Take the center and dictate the day.</span></li><li><span class="quote">Push hard. Let them live in reaction.</span></li></ul></details>
+<details><summary>Taunt <span class="trigger">enemy</span></summary>
+<ul><li><span class="quote">Europe did not fear me for such maneuvers.</span></li><li><span class="quote">You waste the moment and the map.</span></li></ul></details>
+<details><summary>Retreat <span class="trigger">explorer dies</span></summary>
+<ul><li><span class="quote">Regroup on the Guard. I have rebuilt armies from worse than this.</span></li></ul></details>
+<details><summary>Bulk Assault <span class="trigger">targeting army mass</span></summary>
+<ul><li><span class="quote">La Garde avance! One hammer blow to shatter their center.</span></li></ul></details>
+<details><summary>Decapitation <span class="trigger">targeting enemy explorer</span></summary>
+<ul><li><span class="quote">Find their general. I have ended wars with a single stroke.</span></li></ul></details>
+</details>
+
+</details>
+<!-- ──────────── Peruvians ──────────── -->
+<details class="nation-node" data-name="Peruvians Santa Cruz Peru Revolution">
+<summary><span class="nation-header"><img class="flag-img" src="resources/images/icons/flags/Flag_Peruvian.png" alt="Peru flag"> <img class="portrait-img" src="resources/images/icons/singleplayer/cpai_avatar_peruvians_santa_cruz.png" alt="Santa Cruz"> Peruvians &mdash; Andres de Santa Cruz</span></summary>
+<details><summary><span class="cat-label">Elite Units</span></summary>
+<ul><li><span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/pikeman_icon.png" alt="">Pikeman</span> <span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/hc_redolero_icon.png" alt="">Rodelero</span> <span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/lancer_icon.png" alt="">Lancer</span></li></ul></details>
+<details><summary><span class="cat-label">Non-Elite Units</span></summary>
+<ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_musketeer_icon.png" alt="">Musketeers</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_dragoon_icon.png" alt="">Dragoons</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_grenadier_icon.png" alt="">Grenadiers</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/minuteman_icon.png" alt="">Militia</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/horse_artillery_icon.png" alt="">Field Guns</span></li></ul></details>
+<details><summary><span class="cat-label">Playstyle: Defensive highland resistance</span></summary>
+<ul style="margin:4px 0;font-size:.9rem;padding-left:18px">
+<li><strong>Colonial:</strong> Defensive start with infantry and strong native alliances. Builds trade for sustainability.</li>
+<li><strong>Fortress:</strong> Native Integration doctrine — infantry and native allies defend highland positions with growing trade.</li>
+<li><strong>Industrial+:</strong> Full highland army. Infantry, native allies, and trade sustain a war of defensive attrition.</li>
+</ul>
+</details>
+<details><summary><span class="cat-label">Buildstyle: Compact Fortified Core</span></summary>
+<dl class="buildparam"><dt>Wall Level</dt><dd>3</dd><dt>Early Walls</dt><dd>true</dd><dt>House Dist</dt><dd>&times;0.75</dd><dt>Eco Dist</dt><dd>&times;0.85</dd><dt>Mil Dist</dt><dd>&times;0.85</dd><dt>TC Dist</dt><dd>&times;0.85</dd></dl></details>
+<details><summary><span class="cat-label">Card Deck</span></summary>
+<p style="margin:4px 0;font-size:.9rem">Mod home city: <code>rvltmodhomecityperu.xml</code>. Single default deck. AI builds dynamically.</p>
+</details>
+<details><summary><span class="cat-label">Quotes</span></summary>
+<details><summary>Encouragement <span class="trigger">ally</span></summary>
+<ul><li><span class="quote">Keep the line measured and the heights ours.</span></li><li><span class="quote">Advance with order, and let the heights favor us.</span></li></ul></details>
+<details><summary>Taunt <span class="trigger">enemy</span></summary>
+<ul><li><span class="quote">You campaign without altitude or vision.</span></li><li><span class="quote">The Andes grant no pardon to such noise.</span></li></ul></details>
+<details><summary>Retreat <span class="trigger">explorer dies</span></summary>
+<ul><li><span class="quote">Withdraw to the heights. The Andes do not abandon those who know them.</span></li></ul></details>
+<details><summary>Bulk Assault <span class="trigger">targeting army mass</span></summary>
+<ul><li><span class="quote">Advance the confederation. Let altitude and mass break their will.</span></li></ul></details>
+<details><summary>Decapitation <span class="trigger">targeting enemy explorer</span></summary>
+<ul><li><span class="quote">Take their commander from the field. A confederation without its head is only tribes.</span></li></ul></details>
+</details>
+
+</details>
+<!-- ──────────── Revolutionary France ──────────── -->
+<details class="nation-node" data-name="Revolutionary France Robespierre Revolution">
+<summary><span class="nation-header"><img class="flag-img" src="resources/images/icons/flags/Flag_French_Revolution_NE.png" alt="French tricolor"> <img class="portrait-img" src="resources/images/icons/singleplayer/cpai_avatar_revolutionary_france.png" alt="Robespierre"> Revolutionary France &mdash; Maximilien Robespierre</span></summary>
+<details><summary><span class="cat-label">Elite Units</span></summary>
+<ul><li><span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/skirmisher_icon.png" alt="">Skirmisher</span> <span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/hc_saxon_cuirassier_icon.png" alt="">Cuirassier</span></li></ul></details>
+<details><summary><span class="cat-label">Non-Elite Units</span></summary>
+<ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_musketeer_icon.png" alt="">Musketeers</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hungarian_hussar_icon.png" alt="">Hussars</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_dragoon_icon.png" alt="">Dragoons</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_grenadier_icon.png" alt="">Grenadiers</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/cannon_icon.png" alt="">Artillery</span></li></ul></details>
+<details><summary><span class="cat-label">Playstyle: Aggressive revolutionary terror</span></summary>
+<ul style="margin:4px 0;font-size:.9rem;padding-left:18px">
+<li><strong>Colonial:</strong> Aggressive infantry-heavy opener with forward bases. No mercy — prisoners are executed.</li>
+<li><strong>Fortress:</strong> Cavalry Assault doctrine — revolutionary cavalry and infantry strike with maximum offense and terror.</li>
+<li><strong>Industrial+:</strong> Full revolutionary army at peak aggression. Cavalry leads the charge while infantry consolidates.</li>
+</ul>
+</details>
+<details><summary><span class="cat-label">Buildstyle: Civic Militia Center</span></summary>
+<dl class="buildparam"><dt>House Dist</dt><dd>&times;0.95</dd><dt>Eco Dist</dt><dd>&times;1.05</dd><dt>Mil Dist</dt><dd>&times;0.95</dd><dt>TC Dist</dt><dd>&times;1.15</dd></dl></details>
+<details><summary><span class="cat-label">Card Deck</span></summary>
+<p style="margin:4px 0;font-size:.9rem">Mod home city: <code>rvltmodhomecityrevolutionaryfrance.xml</code>. Full deck set: Beginner, Land, Naval, Tycoon, Treaty.</p>
+</details>
+<details><summary><span class="cat-label">Quotes</span></summary>
+<details><summary>Encouragement <span class="trigger">ally</span></summary>
+<ul><li><span class="quote">Take the ground quickly, then make it ours.</span></li><li><span class="quote">Momentum, not hesitation, wins empires.</span></li></ul></details>
+<details><summary>Taunt <span class="trigger">enemy</span></summary>
+<ul><li><span class="quote">You maneuver like a clerk and expect empire to follow.</span></li><li><span class="quote">Even at Austerlitz I saw less confusion.</span></li></ul></details>
+<details><summary>Retreat <span class="trigger">explorer dies</span></summary>
+<ul><li><span class="quote">Pull back. The Republic does not die — it purges and returns.</span></li></ul></details>
+<details><summary>Bulk Assault <span class="trigger">targeting army mass</span></summary>
+<ul><li><span class="quote">All citizens to the front! The nation in arms is unstoppable.</span></li></ul></details>
+<details><summary>Decapitation <span class="trigger">targeting enemy explorer</span></summary>
+<ul><li><span class="quote">Take their tyrant. The guillotine teaches that no head is above the people.</span></li></ul></details>
+</details>
+
+</details>
+<!-- ──────────── Rio Grande ──────────── -->
+<details class="nation-node" data-name="Rio Grande Canales Rosillo Revolution">
+<summary><span class="nation-header"><img class="flag-img" src="resources/images/icons/flags/Flag_rio_grande.png" alt="Rio Grande flag"> <img class="portrait-img" src="resources/images/icons/singleplayer/cpai_avatar_rio_grande_canales_rosillo.png" alt="Canales Rosillo"> Rio Grande &mdash; Antonio Canales Rosillo</span></summary>
+<details><summary><span class="cat-label">Elite Units</span></summary>
+<ul><li><span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/chinaco_icon.png" alt="">Chinaco</span> <span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/emboscador_icon.png" alt="">Salteador</span></li></ul></details>
+<details><summary><span class="cat-label">Non-Elite Units</span></summary>
+<ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/insurgente_icon.png" alt="">Insurgentes</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/soldado_icon.png" alt="">Soldados</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/cowboy_icon.png" alt="">Cuatreros</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/minuteman_icon.png" alt="">Militia</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/horse_artillery_icon.png" alt="">Field Guns</span></li></ul></details>
+<details><summary><span class="cat-label">Playstyle: Aggressive frontier cavalry</span></summary>
+<ul style="margin:4px 0;font-size:.9rem;padding-left:18px">
+<li><strong>Colonial:</strong> Aggressive cavalry-focused opener with forward bases. Strikes fast at enemy territory.</li>
+<li><strong>Fortress:</strong> Cavalry Assault doctrine — cavalry dominates with infantry support. Maximum offensive pressure.</li>
+<li><strong>Industrial+:</strong> Full frontier army. Fast cavalry raids backed by infantry and added artillery.</li>
+</ul>
+</details>
+<details><summary><span class="cat-label">Buildstyle: Mobile Frontier Scatter</span></summary>
+<dl class="buildparam"><dt>House Dist</dt><dd>&times;1.35</dd><dt>Eco Dist</dt><dd>&times;1.45</dd><dt>Mil Dist</dt><dd>&times;1.1</dd><dt>TC Dist</dt><dd>&times;1.5</dd></dl></details>
+<details><summary><span class="cat-label">Card Deck</span></summary>
+<p style="margin:4px 0;font-size:.9rem">Mod home city: <code>rvltmodhomecityriogrande.xml</code>. Full deck set: Beginner, Land, Naval, Tycoon, Treaty.</p>
+</details>
+<details><summary><span class="cat-label">Quotes</span></summary>
+<details><summary>Encouragement <span class="trigger">ally</span></summary>
+<ul><li><span class="quote">Hit first and keep them guessing.</span></li><li><span class="quote">Keep the border moving under them.</span></li></ul></details>
+<details><summary>Taunt <span class="trigger">enemy</span></summary>
+<ul><li><span class="quote">You were too slow for this border.</span></li><li><span class="quote">Your retreat started before your charge.</span></li></ul></details>
+<details><summary>Retreat <span class="trigger">explorer dies</span></summary>
+<ul><li><span class="quote">Back across the river. The border is patient — it will wait for our return.</span></li></ul></details>
+<details><summary>Bulk Assault <span class="trigger">targeting army mass</span></summary>
+<ul><li><span class="quote">All riders at once. Hit them before they know which side of the border they stand on.</span></li></ul></details>
+<details><summary>Decapitation <span class="trigger">targeting enemy explorer</span></summary>
+<ul><li><span class="quote">Find their officer. A headless patrol is just lost men.</span></li></ul></details>
+</details>
+
+</details>
+<!-- ──────────── Romanians ──────────── -->
+<details class="nation-node" data-name="Romanians Cuza Revolution">
+<summary><span class="nation-header"><img class="flag-img" src="resources/images/icons/flags/Flag_Romanians.png" alt="Romanian flag"> <img class="portrait-img" src="resources/images/icons/singleplayer/cpai_avatar_romanians_cuza.png" alt="Cuza"> Romanians &mdash; Alexandru Ioan Cuza</span></summary>
+<details><summary><span class="cat-label">Elite Units</span></summary>
+<ul><li><span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/dorobant_icon.png" alt="">Dorabant</span> <span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/rosior_dragoon_icon.png" alt="">Rosior Dragoon</span></li></ul></details>
+<details><summary><span class="cat-label">Non-Elite Units</span></summary>
+<ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/line_infantry_icon.png" alt="">Line Infantry</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hungarian_hussar_icon.png" alt="">Hussars</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/skirmisher_icon.png" alt="">Skirmishers</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/minuteman_icon.png" alt="">Militia</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/horse_artillery_icon.png" alt="">Field Guns</span></li></ul></details>
+<details><summary><span class="cat-label">Playstyle: Defensive reformist garrison</span></summary>
+<ul style="margin:4px 0;font-size:.9rem;padding-left:18px">
+<li><strong>Colonial:</strong> Defensive start with infantry, cavalry, and some artillery. Builds trade while fortifying.</li>
+<li><strong>Fortress:</strong> Balanced Garrison doctrine — infantry and cavalry combine behind forts in a flexible defensive posture.</li>
+<li><strong>Industrial+:</strong> Full reformed army. Forts anchor positions while the combined-arms force grows to full strength.</li>
+</ul>
+</details>
+<details><summary><span class="cat-label">Buildstyle: Civic Militia Center</span></summary>
+<dl class="buildparam"><dt>House Dist</dt><dd>&times;0.95</dd><dt>Eco Dist</dt><dd>&times;1.05</dd><dt>Mil Dist</dt><dd>&times;0.95</dd><dt>TC Dist</dt><dd>&times;1.15</dd></dl></details>
+<details><summary><span class="cat-label">Card Deck</span></summary>
+<p style="margin:4px 0;font-size:.9rem">Mod home city: <code>rvltmodhomecityromania.xml</code>. Single default deck. AI builds dynamically.</p>
+</details>
+<details><summary><span class="cat-label">Quotes</span></summary>
+<details><summary>Encouragement <span class="trigger">ally</span></summary>
+<ul><li><span class="quote">Keep the line ordered and the state intact.</span></li><li><span class="quote">Method first. Glory later.</span></li></ul></details>
+<details><summary>Taunt <span class="trigger">enemy</span></summary>
+<ul><li><span class="quote">You confuse disorder with liberty.</span></li><li><span class="quote">Your command lacks both nerve and order.</span></li></ul></details>
+<details><summary>Retreat <span class="trigger">explorer dies</span></summary>
+<ul><li><span class="quote">Withdraw in order. A reformed state does not crumble — it repositions.</span></li></ul></details>
+<details><summary>Bulk Assault <span class="trigger">targeting army mass</span></summary>
+<ul><li><span class="quote">All arms forward. Let modernized discipline speak for itself.</span></li></ul></details>
+<details><summary>Decapitation <span class="trigger">targeting enemy explorer</span></summary>
+<ul><li><span class="quote">Neutralize their commander. Without leadership, old empires fracture.</span></li></ul></details>
+</details>
+
+</details>
+<!-- ──────────── South Africans ──────────── -->
+<details class="nation-node" data-name="South Africans Kruger Boer Revolution">
+<summary><span class="nation-header"><img class="flag-img" src="resources/images/icons/flags/Flag_South_African.png" alt="Boer flag"> <img class="portrait-img" src="resources/images/icons/singleplayer/cpai_avatar_south_africans_kruger.png" alt="Kruger"> South Africans &mdash; Paul Kruger</span></summary>
+<details><summary><span class="cat-label">Elite Units</span></summary>
+<ul><li><span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/halberdier_icon.png" alt="">Halberdier</span> <span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/hc_reiter_icon.png" alt="">Ruyter</span></li></ul></details>
+<details><summary><span class="cat-label">Non-Elite Units</span></summary>
+<ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/skirmisher_icon.png" alt="">Skirmishers</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_musketeer_icon.png" alt="">Musketeers</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hungarian_hussar_icon.png" alt="">Hussars</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/minuteman_icon.png" alt="">Militia</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/horse_artillery_icon.png" alt="">Field Guns</span></li></ul></details>
+<details><summary><span class="cat-label">Playstyle: Defensive trade-focused cavalry</span></summary>
+<ul style="margin:4px 0;font-size:.9rem;padding-left:18px">
+<li><strong>Colonial:</strong> Defensive start with cavalry and trade. Builds wealth before fielding the main force.</li>
+<li><strong>Fortress:</strong> Trade and Cavalry doctrine — trade income funds a mounted force. Avoids offensive commitments.</li>
+<li><strong>Industrial+:</strong> Trade-funded cavalry army. Wins through economic endurance rather than direct assault.</li>
+</ul>
+</details>
+<details><summary><span class="cat-label">Buildstyle: Mobile Frontier Scatter</span></summary>
+<dl class="buildparam"><dt>House Dist</dt><dd>&times;1.35</dd><dt>Eco Dist</dt><dd>&times;1.45</dd><dt>Mil Dist</dt><dd>&times;1.1</dd><dt>TC Dist</dt><dd>&times;1.5</dd></dl></details>
+<details><summary><span class="cat-label">Card Deck</span></summary>
+<p style="margin:4px 0;font-size:.9rem">Mod home city: <code>rvltmodhomecitysouthafricans.xml</code>. Single default deck. AI builds dynamically.</p>
+</details>
+<details><summary><span class="cat-label">Quotes</span></summary>
+<details><summary>Encouragement <span class="trigger">ally</span></summary>
+<ul><li><span class="quote">Save your powder and make it count.</span></li><li><span class="quote">Hold steady. Stubborn men outlast empires.</span></li></ul></details>
+<details><summary>Taunt <span class="trigger">enemy</span></summary>
+<ul><li><span class="quote">You spend strength like a man with borrowed land.</span></li><li><span class="quote">Noise is not resolve.</span></li></ul></details>
+<details><summary>Retreat <span class="trigger">explorer dies</span></summary>
+<ul><li><span class="quote">Fall back to the kopje. Stubbornness is the veldt’s best armor.</span></li></ul></details>
+<details><summary>Bulk Assault <span class="trigger">targeting army mass</span></summary>
+<ul><li><span class="quote">All commandos forward. Let Boer marksmanship end this cleanly.</span></li></ul></details>
+<details><summary>Decapitation <span class="trigger">targeting enemy explorer</span></summary>
+<ul><li><span class="quote">Drop their general. Without him, the British column wanders.</span></li></ul></details>
+</details>
+
+</details>
+<!-- ──────────── Texians ──────────── -->
+<details class="nation-node" data-name="Texians Sam Houston Texas Revolution">
+<summary><span class="nation-header"><img class="flag-img" src="resources/images/icons/flags/Flag_texan.png" alt="Texan flag"> <img class="portrait-img" src="resources/images/icons/singleplayer/cpai_avatar_texians_sam_houston.png" alt="Sam Houston"> Texians &mdash; Sam Houston</span></summary>
+<details><summary><span class="cat-label">Elite Units</span></summary>
+<ul><li><span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/chinaco_icon.png" alt="">Chinaco</span> <span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/state_militia_icon.png" alt="">State Militia</span></li></ul></details>
+<details><summary><span class="cat-label">Non-Elite Units</span></summary>
+<ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/rifleman_icon.png" alt="">Riflemen</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/us_volunteer_icon.png" alt="">Volunteers</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_dragoon_icon.png" alt="">Dragoons</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/minuteman_icon.png" alt="">Militia</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/horse_artillery_icon.png" alt="">Field Guns</span></li></ul></details>
+<details><summary><span class="cat-label">Playstyle: Defensive frontier militia</span></summary>
+<ul style="margin:4px 0;font-size:.9rem;padding-left:18px">
+<li><strong>Colonial:</strong> Defensive start with infantry and cavalry. Builds a frontier militia force.</li>
+<li><strong>Fortress:</strong> Balanced Garrison doctrine — infantry and cavalry behind forts. A solid defensive posture.</li>
+<li><strong>Industrial+:</strong> Full Texian militia army. Forts and cavalry secure the frontier while infantry holds the line.</li>
+</ul>
+</details>
+<details><summary><span class="cat-label">Buildstyle: Civic Militia Center</span></summary>
+<dl class="buildparam"><dt>House Dist</dt><dd>&times;0.95</dd><dt>Eco Dist</dt><dd>&times;1.05</dd><dt>Mil Dist</dt><dd>&times;0.95</dd><dt>TC Dist</dt><dd>&times;1.15</dd></dl></details>
+<details><summary><span class="cat-label">Card Deck</span></summary>
+<p style="margin:4px 0;font-size:.9rem">Mod home city: <code>rvltmodhomecitytexas.xml</code>. Full deck set: Beginner, Land, Naval, Tycoon, Treaty.</p>
+</details>
+<details><summary><span class="cat-label">Quotes</span></summary>
+<details><summary>Encouragement <span class="trigger">ally</span></summary>
+<ul><li><span class="quote">Wait for the opening and hit hard.</span></li><li><span class="quote">Make one blow decide it.</span></li></ul></details>
+<details><summary>Taunt <span class="trigger">enemy</span></summary>
+<ul><li><span class="quote">A loud charge is still a bad plan.</span></li><li><span class="quote">You forgot the ending before the first shot.</span></li></ul></details>
+<details><summary>Retreat <span class="trigger">explorer dies</span></summary>
+<ul><li><span class="quote">Fall back to the creek line. San Jacinto was won by choosing the right moment.</span></li></ul></details>
+<details><summary>Bulk Assault <span class="trigger">targeting army mass</span></summary>
+<ul><li><span class="quote">Remember the Alamo! All rifles — one charge to finish it.</span></li></ul></details>
+<details><summary>Decapitation <span class="trigger">targeting enemy explorer</span></summary>
+<ul><li><span class="quote">Take their general. One clean shot ends the whole campaign.</span></li></ul></details>
+</details>
+
+</details>
+<!-- ──────────── Yucatan ──────────── -->
+<details class="nation-node" data-name="Yucatan Carrillo Puerto Revolution">
+<summary><span class="nation-header"><img class="flag-img" src="resources/images/icons/flags/Flag_yucatan.png" alt="Yucatan flag"> <img class="portrait-img" src="resources/images/icons/singleplayer/cpai_avatar_yucatan_carrillo_puerto.png" alt="Carrillo Puerto"> Yucatan &mdash; Felipe Carrillo Puerto</span></summary>
+<details><summary><span class="cat-label">Elite Units</span></summary>
+<ul><li><span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/chinaco_icon.png" alt="">Chinaco</span> <span class="unit elite"><img class="unit-icon" src="resources/images/icons/units/emboscador_icon.png" alt="">Salteador</span></li></ul></details>
+<details><summary><span class="cat-label">Non-Elite Units</span></summary>
+<ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/insurgente_icon.png" alt="">Insurgentes</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/soldado_icon.png" alt="">Soldados</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/cowboy_icon.png" alt="">Cuatreros</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/minuteman_icon.png" alt="">Militia</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/horse_artillery_icon.png" alt="">Field Guns</span></li></ul></details>
+<details><summary><span class="cat-label">Playstyle: Balanced native-alliance defence</span></summary>
+<ul style="margin:4px 0;font-size:.9rem;padding-left:18px">
+<li><strong>Colonial:</strong> Balanced start with maximum native alliances and trade. Infantry forms the core with allied support.</li>
+<li><strong>Fortress:</strong> Native Integration doctrine — infantry and native allies with trade income for long-term sustainability.</li>
+<li><strong>Industrial+:</strong> Full Yucatecan army. Native alliances, infantry masses, and trade sustain a prolonged defensive campaign.</li>
+</ul>
+</details>
+<details><summary><span class="cat-label">Buildstyle: Civic Militia Center</span></summary>
+<dl class="buildparam"><dt>House Dist</dt><dd>&times;0.95</dd><dt>Eco Dist</dt><dd>&times;1.05</dd><dt>Mil Dist</dt><dd>&times;0.95</dd><dt>TC Dist</dt><dd>&times;1.15</dd></dl></details>
+<details><summary><span class="cat-label">Card Deck</span></summary>
+<p style="margin:4px 0;font-size:.9rem">Mod home city: <code>rvltmodhomecityyucatan.xml</code>. Full deck set: Beginner, Land, Naval, Tycoon, Treaty.</p>
+</details>
+<details><summary><span class="cat-label">Quotes</span></summary>
+<details><summary>Encouragement <span class="trigger">ally</span></summary>
+<ul><li><span class="quote">Hold the people close and the line closer.</span></li><li><span class="quote">Stand firm. The land remembers loyalty.</span></li></ul></details>
+<details><summary>Taunt <span class="trigger">enemy</span></summary>
+<ul><li><span class="quote">You rule without listening and fight the same way.</span></li><li><span class="quote">Even victory would not clean this disorder.</span></li></ul></details>
+<details><summary>Retreat <span class="trigger">explorer dies</span></summary>
+<ul><li><span class="quote">Back to the cenotes. The land shelters those who serve its people.</span></li></ul></details>
+<details><summary>Bulk Assault <span class="trigger">targeting army mass</span></summary>
+<ul><li><span class="quote">All hands forward. Let the will of the people roll over them.</span></li></ul></details>
+<details><summary>Decapitation <span class="trigger">targeting enemy explorer</span></summary>
+<ul><li><span class="quote">Take their commander. The land does not obey outsiders.</span></li></ul></details>
+</details>
+
+</details>
+</details><!-- END Revolution Nations -->
+</div><!-- END tree-root -->
+</body>
+</html>
+

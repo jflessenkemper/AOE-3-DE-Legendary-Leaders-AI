@@ -6,7 +6,7 @@ bool gHidalgoRulesEnabled = false;
 
 void initLeaderHidalgo(void)
 {
-   aiEcho("Legendary Leaders: activating Miguel Hidalgo personality.");
+   llVerboseEcho("Legendary Leaders: activating Miguel Hidalgo personality.");
 
    llSetAggressivePersonality();
    btRushBoom = 0.4;

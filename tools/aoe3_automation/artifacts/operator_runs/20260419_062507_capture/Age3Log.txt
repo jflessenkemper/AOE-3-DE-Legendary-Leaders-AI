@@ -1,0 +1,21 @@
+===============================================================
+File 'Age3Log.txt' opened at Sun Apr 19 16:25:04 2026
+
+===============================================================
+
+PreGame  79:  ************* Memory Report ***************
+PreGame  79:  There is  56 percent of memory in use.
+PreGame  79:  There are 32765520 total KB of physical memory.
+PreGame  79:  There are 14178964 free  KB of physical memory.
+PreGame  79:  There are 49147984 total KB of paging file.
+PreGame  79:  There are 27838936 free  KB of paging file.
+PreGame  79:  There are 137438953344 total KB of virtual memory.
+PreGame  79:  There are 137438773064 free  KB of virtual memory.
+PreGame  79:  There are 0 free  KB of extended memory.
+PreGame  79:  *******************************************
+PreGame  3088:  Account Event - New State: AttemptingLogIn, Old State: Invalid, Last Error ID: None
+PreGame  3123:  startGame : Sign In SUCCESS
+PreGame  3123:  User folder id: 76561198170207043
+PreGame  3143:  ------------------------------------------------------------
+PreGame  3143:  Version: 100.15.59076.0 (386756)
+PreGame  3143:  ------------------------------------------------------------

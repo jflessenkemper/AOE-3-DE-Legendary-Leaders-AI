@@ -6,7 +6,7 @@ bool gHiawathaRulesEnabled = false;
 
 void initLeaderHiawatha(void)
 {
-   aiEcho("Legendary Leaders: activating Hiawatha personality.");
+   llVerboseEcho("Legendary Leaders: activating Hiawatha personality.");
 
    llSetBalancedPersonality();
    btRushBoom = 0.3;

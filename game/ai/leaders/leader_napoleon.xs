@@ -9,7 +9,7 @@ bool gNapoleonRulesEnabled = false;
 
 void initLeaderNapoleon(void)
 {
-   aiEcho("Legendary Leaders: activating Napoleon Bonaparte personality.");
+   llVerboseEcho("Legendary Leaders: activating Napoleon Bonaparte personality.");
 
    llSetAggressivePersonality();
    btRushBoom = 0.7;

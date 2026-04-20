@@ -6,7 +6,7 @@ bool gUsmanRulesEnabled = false;
 
 void initLeaderUsman(void)
 {
-   aiEcho("Legendary Leaders: activating Usman dan Fodio personality.");
+   llVerboseEcho("Legendary Leaders: activating Usman dan Fodio personality.");
 
    llSetAggressivePersonality();
    btRushBoom = 0.5;

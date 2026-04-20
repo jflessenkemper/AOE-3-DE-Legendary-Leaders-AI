@@ -6,6 +6,25 @@
 */
 //==============================================================================
 
+mutable vector getStartingLocation(void) { return (kbGetPlayerStartingPosition(cMyID)); }
+
+mutable void selectTowerBuildPlanPosition(int buildPlan = -1, int baseID = -1) {}
+mutable void selectShrineBuildPlanPosition(int planID = -1, int baseID = -1) {}
+mutable void selectTorpBuildPlanPosition(int planID = -1, int baseID = -1) {}
+mutable void selectTCBuildPlanPosition(int buildPlan = -1, int baseID = -1) {}
+mutable void selectTeepeeBuildPlanPosition(int buildPlan = -1, int baseID = -1) {}
+mutable bool selectTribalMarketplaceBuildPlanPosition(int buildPlan = -1, int baseID = -1) { return (false); }
+mutable bool selectFieldBuildPlanPosition(int planID = -1, int baseID = -1) { return (false); }
+mutable void selectMountainMonasteryBuildPlanPosition(int planID = -1, int baseID = -1) {}
+mutable void selectGranaryBuildPlanPosition(int planID = -1, int baseID = -1) {}
+mutable void selectClosestBuildPlanPosition(int planID = -1, int baseID = -1, int puid = -1) {}
+mutable bool selectBuildPlanPosition(int planID = -1, int puid = -1, int baseID = -1) { return (false); }
+mutable bool addBuilderToPlan(int planID = -1, int puid = -1, int numberBuilders = 1) { return (false); }
+mutable void sendStatement(int playerIDorRelation = -1, int commPromptID = -1, vector vec = cInvalidVector) {}
+mutable void sendChatLine(int playerIDorRelation = -1, string message = "") {}
+mutable void llSendPrisonAlertToPlayer(int playerID = -1, vector prisonLocation = cInvalidVector, string alertMessage = "") {}
+mutable void llSendEnemyPrisonTaunt(vector prisonLocation = cInvalidVector) {}
+
 include "aiHeader.xs";
 include "core\aiGlobals.xs";
 include "core\aiUtilities.xs";
@@ -56,7 +75,12 @@ inactive
 minInterval 8
 {
    llLogRuleTick("legendaryHumanSurrenderMonitor");
-   float healthThreshold = 0.10;
+   if (gLLPrisonSystemEnabled == false)
+   {
+      return;
+   }
+
+   float healthThreshold = 0.25;
    float eliteSupportRadius = 24.0;
    int unitID = -1;
 
@@ -71,13 +95,15 @@ minInterval 8
          continue;
       }
 
-      if (llCanUnitSurrender(unitID, healthThreshold, eliteSupportRadius) == false)
+      if (llHasEnemyPressureForSurrender(unitID) == false)
       {
          continue;
       }
 
-      if (llHasEnemyPressureForSurrender(unitID) == false)
+      string surrenderBlockReason = llGetUnitSurrenderBlockReason(unitID, healthThreshold, eliteSupportRadius);
+      if (surrenderBlockReason != "")
       {
+         llLogSurrenderBlock("human", unitID, surrenderBlockReason);
          continue;
       }
 
@@ -95,13 +121,15 @@ minInterval 8
          continue;
       }
 
-      if (llCanUnitSurrender(unitID, healthThreshold, eliteSupportRadius) == false)
+      if (llHasEnemyPressureForSurrender(unitID) == false)
       {
          continue;
       }
 
-      if (llHasEnemyPressureForSurrender(unitID) == false)
+      string navalSurrenderBlockReason = llGetUnitSurrenderBlockReason(unitID, healthThreshold, eliteSupportRadius);
+      if (navalSurrenderBlockReason != "")
       {
+         llLogSurrenderBlock("human", unitID, navalSurrenderBlockReason);
          continue;
       }
 
@@ -114,7 +142,7 @@ inactive
 minInterval 2
 {
    llLogRuleTick("legendaryHumanSurrenderMove");
-   if (gLLSurrenderUnitIDs < 0)
+   if ((gLLPrisonSystemEnabled == false) || (gLLSurrenderUnitIDs < 0))
    {
       return;
    }
@@ -202,9 +230,9 @@ minInterval 2
 //==============================================================================
 void main(void)
 {
-   aiEcho("Human player assists AI startup.");
-   aiEcho("Game type is " + aiGetGameType() + ", 0=Scn, 1=Saved, 2=Rand, 3=GC, 4=Cmpgn");
-   aiEcho("Map name is " + cRandomMapName);
+   llVerboseEcho("Human player assists AI startup.");
+   llVerboseEcho("Game type is " + aiGetGameType() + ", 0=Scn, 1=Saved, 2=Rand, 3=GC, 4=Cmpgn");
+   llVerboseEcho("Map name is " + cRandomMapName);
 
    aiRandSetSeed(-1);         // Set our random seed.  "-1" is a random init.
    kbAreaCalculate();         // Analyze the map, create area matrix
@@ -217,10 +245,7 @@ void main(void)
    kbSetTargetSelectorFactor(cTSFactorBase, gTSFactorBase);
    kbSetTargetSelectorFactor(cTSFactorDanger, gTSFactorDanger);
 
-   llEnsureSurrenderArrays();
-   llLogEvent("RULE", "enabling human assist surrender rules");
-   xsEnableRule("legendaryHumanSurrenderMonitor");
-   xsEnableRule("legendaryHumanSurrenderMove");
+   llLogEvent("RULE", "human assist rout rules disabled; player-controlled units keep manual control");
 }
 
 

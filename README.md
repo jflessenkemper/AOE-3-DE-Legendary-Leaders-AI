@@ -19,16 +19,16 @@
 
 **Legendary Leaders AI** is a standalone Age of Empires III: Definitive Edition mod that combines the base civilizations with the playable revolution roster. Each nation is mapped to a themed leader personality and a clear battlefield identity.
 
-## 🏳️ Elite Units and Surrender
+## 🏳️ Elite Units and AI Rout
 
-Elite units are chosen case by case for each nation and never auto-surrender. The explorer also counts as elite protection. Any ordinary land unit, including player-controlled units, will auto-surrender once it falls to 10% health and has no friendly elite unit or explorer nearby, after which it is sent to the enemy prison point and can only be recovered by its original owner with an explorer.
+Elite units are chosen case by case for each nation and do not auto-rout. Only AI-controlled non-elite land units are eligible to rout, and they do so at 25% health or below when enemy pressure is present and no friendly elite support is nearby. Player-controlled units keep manual control.
 
-- Elite units never auto-surrender.
-- Ordinary land units, including the player's own units, auto-surrender at 10% health.
-- A unit will not surrender if a friendly elite unit or explorer is still nearby.
-- Surrendered units are routed to the enemy's main military shipment drop point, usually the first Town Center or Home City gather-point building.
-- Once imprisoned, surrendered units are held there.
-- Only the owner's explorer can reclaim imprisoned units.
+- AI elite units do not auto-rout.
+- Only AI-controlled non-elite land units auto-rout.
+- The rout threshold is 25% health.
+- Nearby friendly elite units block rout.
+- Routed AI units fall back toward their own return point instead of entering prison custody.
+- Player-controlled units do not auto-rout.
 - In large AI attacks, regular units lead, elites follow as the second line, and the explorer stays behind them with a dedicated escort.
 - If the AI explorer dies, the elite line retreats and the AI tries to ransom its leader.
 
@@ -40,11 +40,24 @@ The army tries to keep a living screen around that leader, and different nations
 
 **In short**: some nations win by crushing the line, others look for a leader-kill opening, but all of them now guard their own leader far more carefully.
 
+## Testing
+
+The repo uses a staged validation workflow instead of relying on one long manual match to catch everything.
+
+- Local staged runner: `./.venv/bin/python tools/validation/run_staged_validation.py`
+- VS Code task entry point: `Tasks: Run Task` -> any `Validation:` task in `.vscode/tasks.json`
+- Live installed-copy check: `./.venv/bin/python tools/validation/run_staged_validation.py --stage live`
+- Runtime log checks: `tools/validation/run_objective_runtime_checks.sh`
+- Sandbox retests: `./.venv/bin/python tools/aoe3_automation/run_sandbox.py --runtime-suite ai_rout_bootstrap`
+
+The roster, portraits, flags, quotes, elite/non-elite unit split, and expected AI style notes are collected in `LEGENDARY_LEADERS_NATION_REFERENCE.txt`.
+- Full playbook: `TESTING.md`
+
 ## 🌍 Nation Guide
 
 Portraits below match the current in-game nation portraits used by the mod. 
-- The Elite column lists the units that won't surrender. 
-- The Non-Elite column lists the land cores that will surrender.
+- The Elite column lists the units that won't auto-rout.
+- The Non-Elite column lists the AI land cores that may auto-rout under pressure.
 
 <details>
 <summary><strong>Standard Nations (22)</strong></summary>

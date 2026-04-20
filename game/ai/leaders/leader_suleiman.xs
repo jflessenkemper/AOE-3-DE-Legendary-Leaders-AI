@@ -6,7 +6,7 @@ bool gSuleimanRulesEnabled = false;
 
 void initLeaderSuleiman(void)
 {
-   aiEcho("Legendary Leaders: activating Suleiman the Magnificent personality.");
+   llVerboseEcho("Legendary Leaders: activating Suleiman the Magnificent personality.");
 
    llSetBalancedPersonality();
    btRushBoom = 0.4;

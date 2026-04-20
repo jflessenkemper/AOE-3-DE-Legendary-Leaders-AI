@@ -6,7 +6,7 @@ bool gMauriceRulesEnabled = false;
 
 void initLeaderMaurice(void)
 {
-   aiEcho("Legendary Leaders: activating Maurice of Nassau personality.");
+   llVerboseEcho("Legendary Leaders: activating Maurice of Nassau personality.");
 
    llSetDefensivePersonality();
    btRushBoom = -0.2;

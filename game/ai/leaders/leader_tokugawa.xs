@@ -6,7 +6,7 @@ bool gTokugawaRulesEnabled = false;
 
 void initLeaderTokugawa(void)
 {
-   aiEcho("Legendary Leaders: activating Tokugawa Ieyasu personality.");
+   llVerboseEcho("Legendary Leaders: activating Tokugawa Ieyasu personality.");
 
    llSetDefensivePersonality();
    btRushBoom = -0.2;

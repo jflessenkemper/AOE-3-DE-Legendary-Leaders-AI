@@ -129,9 +129,9 @@ string llGetLegendaryLeaderRetreatLine(void)
    return ("Fall back and close ranks. Our leader will not be lost today.");
 }
 
-string llGetLegendaryLeaderPrisonerLine(void)
+string llGetLegendaryLeaderRoutLine(void)
 {
-   return ("Your broken soldiers march in chains now.");
+   return ("Your broken soldiers are in full retreat now.");
 }
 
 string llGetLegendaryLeaderBulkAssaultLine(void)
@@ -149,9 +149,9 @@ void llSendLegendaryLeaderRetreatLine(int playerIDorRelation = -1, int quoteInte
    llSendLegendaryLeaderTacticalLine(playerIDorRelation, llGetLegendaryLeaderRetreatLine(), quoteInterval);
 }
 
-void llSendLegendaryLeaderPrisonerLine(int playerIDorRelation = -1, int quoteInterval = 120000)
+void llSendLegendaryLeaderRoutLine(int playerIDorRelation = -1, int quoteInterval = 120000)
 {
-   llSendLegendaryLeaderTacticalLine(playerIDorRelation, llGetLegendaryLeaderPrisonerLine(), quoteInterval);
+   llSendLegendaryLeaderTacticalLine(playerIDorRelation, llGetLegendaryLeaderRoutLine(), quoteInterval);
 }
 
 void llSendLegendaryLeaderBulkAssaultLine(int playerIDorRelation = -1, int quoteInterval = 120000)

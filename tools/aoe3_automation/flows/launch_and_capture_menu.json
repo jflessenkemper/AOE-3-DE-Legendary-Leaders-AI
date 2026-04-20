@@ -1,7 +1,8 @@
 {
   "notes": [
     "Launch Age of Empires III: DE through Steam using the host Steam CLI.",
-    "Wait for a verified main-menu anchor instead of sending blind input.",
+    "Focus the game window after launch so recovery input lands in the right place.",
+    "Wait for a verified main-menu anchor and only send Esc while it is still missing.",
     "Capture a desktop screenshot for template extraction and menu-state inspection."
   ],
   "steps": [
@@ -10,11 +11,27 @@
       "command": "flatpak-spawn --host steam -applaunch 933110"
     },
     {
-      "action": "wait_image",
+      "action": "sleep",
+      "seconds": 28
+    },
+    {
+      "action": "focus_window"
+    },
+    {
+      "action": "sleep",
+      "seconds": 1
+    },
+    {
+      "action": "ensure_image",
       "image": "../templates/menu_anchor.png",
-      "timeout": 120,
-      "confidence": 0.97,
-      "region": [460, 360, 420, 320]
+      "timeout": 180,
+      "attemptTimeout": 4,
+      "confidence": 0.92,
+      "region": [360, 240, 820, 540],
+      "recoveryKey": "esc",
+      "recoveryPresses": 2,
+      "recoveryInterval": 0.75,
+      "recoverySleep": 1.5
     },
     {
       "action": "screenshot",

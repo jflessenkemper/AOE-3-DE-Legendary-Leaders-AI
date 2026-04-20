@@ -29,7 +29,7 @@ void initLegendaryRevolutionCommander(void)
 
    if (rvltName == "RvltModCanadians")
    {
-      aiEcho("Legendary Leaders: activating Isaac Brock personality.");
+      llVerboseEcho("Legendary Leaders: activating Isaac Brock personality.");
       llSetDefensivePersonality();
       llSetMilitaryFocus(0.7, -0.2, 0.3);
       btBiasTrade = 0.2;
@@ -39,7 +39,7 @@ void initLegendaryRevolutionCommander(void)
    }
    else if (rvltName == "RvltModRevolutionaryFrance")
    {
-      aiEcho("Legendary Leaders: activating Maximilien Robespierre personality.");
+      llVerboseEcho("Legendary Leaders: activating Maximilien Robespierre personality.");
       llSetAggressivePersonality();
       llSetMilitaryFocus(0.7, -0.2, 0.1);
       llEnableForwardBaseStyle();
@@ -49,7 +49,7 @@ void initLegendaryRevolutionCommander(void)
    }
    else if (rvltName == "RvltModFrenchCanadians")
    {
-      aiEcho("Legendary Leaders: activating Louis-Joseph Papineau personality.");
+      llVerboseEcho("Legendary Leaders: activating Louis-Joseph Papineau personality.");
       llSetDefensivePersonality();
       llSetMilitaryFocus(0.6, -0.2, 0.0);
       btBiasTrade = 0.3;
@@ -59,7 +59,7 @@ void initLegendaryRevolutionCommander(void)
    }
    else if (rvltName == "RvltModBrazil")
    {
-      aiEcho("Legendary Leaders: activating Pedro I personality.");
+      llVerboseEcho("Legendary Leaders: activating Pedro I personality.");
       llSetBalancedPersonality();
       llSetMilitaryFocus(0.3, 0.2, 0.3);
       btBiasTrade = 0.2;
@@ -68,7 +68,7 @@ void initLegendaryRevolutionCommander(void)
    }
    else if (rvltName == "RvltModArgentines")
    {
-      aiEcho("Legendary Leaders: activating Jose de San Martin personality.");
+      llVerboseEcho("Legendary Leaders: activating Jose de San Martin personality.");
       llSetAggressivePersonality();
       llSetMilitaryFocus(0.2, 0.7, 0.1);
       llEnableForwardBaseStyle();
@@ -77,7 +77,7 @@ void initLegendaryRevolutionCommander(void)
    }
    else if (rvltName == "RvltModChileans")
    {
-      aiEcho("Legendary Leaders: activating Bernardo O'Higgins personality.");
+      llVerboseEcho("Legendary Leaders: activating Bernardo O'Higgins personality.");
       llSetBalancedPersonality();
       llSetMilitaryFocus(0.5, 0.1, 0.2);
       btBiasTrade = 0.2;
@@ -86,7 +86,7 @@ void initLegendaryRevolutionCommander(void)
    }
    else if (rvltName == "RvltModPeruvians")
    {
-      aiEcho("Legendary Leaders: activating Andres de Santa Cruz personality.");
+      llVerboseEcho("Legendary Leaders: activating Andres de Santa Cruz personality.");
       llSetDefensivePersonality();
       llSetMilitaryFocus(0.5, 0.0, 0.2);
       btBiasNative = 0.5;
@@ -96,7 +96,7 @@ void initLegendaryRevolutionCommander(void)
    }
    else if (rvltName == "RvltModColumbians")
    {
-      aiEcho("Legendary Leaders: activating Simon Bolivar personality.");
+      llVerboseEcho("Legendary Leaders: activating Simon Bolivar personality.");
       llSetAggressivePersonality();
       llSetMilitaryFocus(0.3, 0.4, 0.3);
       llEnableForwardBaseStyle();
@@ -105,7 +105,7 @@ void initLegendaryRevolutionCommander(void)
    }
    else if (rvltName == "RvltModHaitians")
    {
-      aiEcho("Legendary Leaders: activating Toussaint Louverture personality.");
+      llVerboseEcho("Legendary Leaders: activating Toussaint Louverture personality.");
       llSetAggressivePersonality();
       llSetMilitaryFocus(0.7, -0.2, 0.0);
       btBiasNative = 0.6;
@@ -114,7 +114,7 @@ void initLegendaryRevolutionCommander(void)
    }
    else if (rvltName == "RvltModIndonesians")
    {
-      aiEcho("Legendary Leaders: activating Diponegoro personality.");
+      llVerboseEcho("Legendary Leaders: activating Diponegoro personality.");
       llSetDefensivePersonality();
       llSetMilitaryFocus(0.6, -0.2, 0.1);
       btBiasNative = 0.6;
@@ -124,7 +124,7 @@ void initLegendaryRevolutionCommander(void)
    }
    else if (rvltName == "RvltModSouthAfricans")
    {
-      aiEcho("Legendary Leaders: activating Paul Kruger personality.");
+      llVerboseEcho("Legendary Leaders: activating Paul Kruger personality.");
       llSetDefensivePersonality();
       llSetMilitaryFocus(0.2, 0.5, 0.1);
       btBiasTrade = 0.4;
@@ -134,7 +134,7 @@ void initLegendaryRevolutionCommander(void)
    }
    else if (rvltName == "RvltModFinnish")
    {
-      aiEcho("Legendary Leaders: activating Carl Gustaf Mannerheim personality.");
+      llVerboseEcho("Legendary Leaders: activating Carl Gustaf Mannerheim personality.");
       llSetDefensivePersonality();
       llSetMilitaryFocus(0.6, 0.0, 0.3);
       btBiasTrade = -0.1;
@@ -144,7 +144,7 @@ void initLegendaryRevolutionCommander(void)
    }
    else if (rvltName == "RvltModHungarians")
    {
-      aiEcho("Legendary Leaders: activating Lajos Kossuth personality.");
+      llVerboseEcho("Legendary Leaders: activating Lajos Kossuth personality.");
       llSetAggressivePersonality();
       llSetMilitaryFocus(0.4, 0.4, 0.1);
       btBiasTrade = 0.1;
@@ -153,7 +153,7 @@ void initLegendaryRevolutionCommander(void)
    }
    else if (rvltName == "RvltModRomanians")
    {
-      aiEcho("Legendary Leaders: activating Alexandru Ioan Cuza personality.");
+      llVerboseEcho("Legendary Leaders: activating Alexandru Ioan Cuza personality.");
       llSetDefensivePersonality();
       llSetMilitaryFocus(0.4, 0.2, 0.3);
       btBiasTrade = 0.2;
@@ -162,7 +162,7 @@ void initLegendaryRevolutionCommander(void)
    }
    else if (rvltName == "RvltModBarbary")
    {
-      aiEcho("Legendary Leaders: activating Hayreddin Barbarossa personality.");
+      llVerboseEcho("Legendary Leaders: activating Hayreddin Barbarossa personality.");
       llSetAggressivePersonality();
       llSetMilitaryFocus(0.2, 0.5, 0.0);
       btBiasTrade = 0.4;
@@ -171,7 +171,7 @@ void initLegendaryRevolutionCommander(void)
    }
    else if (rvltName == "RvltModEgyptians")
    {
-      aiEcho("Legendary Leaders: activating Muhammad Ali Pasha personality.");
+      llVerboseEcho("Legendary Leaders: activating Muhammad Ali Pasha personality.");
       llSetBalancedPersonality();
       llSetMilitaryFocus(0.4, 0.0, 0.4);
       btBiasTrade = 0.3;
@@ -180,7 +180,7 @@ void initLegendaryRevolutionCommander(void)
    }
    else if (rvltName == "RvltModCentralAmericans")
    {
-      aiEcho("Legendary Leaders: activating Francisco Morazan personality.");
+      llVerboseEcho("Legendary Leaders: activating Francisco Morazan personality.");
       llSetBalancedPersonality();
       llSetMilitaryFocus(0.5, 0.1, 0.1);
       btBiasNative = 0.5;
@@ -189,7 +189,7 @@ void initLegendaryRevolutionCommander(void)
    }
    else if (rvltName == "RvltModBajaCalifornians")
    {
-      aiEcho("Legendary Leaders: activating Juan Bautista Alvarado personality.");
+      llVerboseEcho("Legendary Leaders: activating Juan Bautista Alvarado personality.");
       llSetAggressivePersonality();
       llSetMilitaryFocus(0.2, 0.6, 0.0);
       btBiasTrade = 0.1;
@@ -197,7 +197,7 @@ void initLegendaryRevolutionCommander(void)
    }
    else if (rvltName == "RvltModYucatan")
    {
-      aiEcho("Legendary Leaders: activating Felipe Carrillo Puerto personality.");
+      llVerboseEcho("Legendary Leaders: activating Felipe Carrillo Puerto personality.");
       llSetBalancedPersonality();
       llSetMilitaryFocus(0.6, -0.2, 0.0);
       btBiasNative = 0.7;
@@ -206,7 +206,7 @@ void initLegendaryRevolutionCommander(void)
    }
    else if (rvltName == "RvltModRioGrande")
    {
-      aiEcho("Legendary Leaders: activating Antonio Canales Rosillo personality.");
+      llVerboseEcho("Legendary Leaders: activating Antonio Canales Rosillo personality.");
       llSetAggressivePersonality();
       llSetMilitaryFocus(0.3, 0.6, 0.0);
       llEnableForwardBaseStyle();
@@ -215,7 +215,7 @@ void initLegendaryRevolutionCommander(void)
    }
    else if (rvltName == "RvltModMayans")
    {
-      aiEcho("Legendary Leaders: activating Jacinto Canek personality.");
+      llVerboseEcho("Legendary Leaders: activating Jacinto Canek personality.");
       llSetAggressivePersonality();
       llSetMilitaryFocus(0.7, -0.3, 0.0);
       btBiasNative = 0.8;
@@ -224,7 +224,7 @@ void initLegendaryRevolutionCommander(void)
    }
    else if (rvltName == "RvltModCalifornians")
    {
-      aiEcho("Legendary Leaders: activating Mariano Guadalupe Vallejo personality.");
+      llVerboseEcho("Legendary Leaders: activating Mariano Guadalupe Vallejo personality.");
       llSetDefensivePersonality();
       llSetMilitaryFocus(0.2, 0.4, 0.1);
       btBiasTrade = 0.5;
@@ -233,7 +233,7 @@ void initLegendaryRevolutionCommander(void)
    }
    else if (rvltName == "RvltModTexians")
    {
-      aiEcho("Legendary Leaders: activating Sam Houston personality.");
+      llVerboseEcho("Legendary Leaders: activating Sam Houston personality.");
       llSetDefensivePersonality();
       llSetMilitaryFocus(0.5, 0.3, 0.0);
       btBiasTrade = 0.1;

@@ -6,7 +6,7 @@ bool gGustavusRulesEnabled = false;
 
 void initLeaderGustavus(void)
 {
-   aiEcho("Legendary Leaders: activating Gustavus Adolphus personality.");
+   llVerboseEcho("Legendary Leaders: activating Gustavus Adolphus personality.");
 
    llSetAggressivePersonality();
    btRushBoom = 0.5;

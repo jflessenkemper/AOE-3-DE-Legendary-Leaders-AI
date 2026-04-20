@@ -1,0 +1,15 @@
+===============================================================
+File 'Age3Log.txt' opened at Sun Apr 19 16:25:43 2026
+
+===============================================================
+
+PreGame  79:  ************* Memory Report ***************
+PreGame  79:  There is  60 percent of memory in use.
+PreGame  79:  There are 32765520 total KB of physical memory.
+PreGame  79:  There are 12922904 free  KB of physical memory.
+PreGame  79:  There are 49147984 total KB of paging file.
+PreGame  79:  There are 26583752 free  KB of paging file.
+PreGame  79:  There are 137438953344 total KB of virtual memory.
+PreGame  79:  There are 137438773056 free  KB of virtual memory.
+PreGame  79:  There are 0 free  KB of extended memory.
+PreGame  79:  *******************************************

@@ -1,0 +1,115 @@
+{
+  "notes": [
+    "Launch Age of Empires III: DE and reach the main menu.",
+    "Focus the live game window before sending recovery input.",
+    "Best-effort open the settings/options screens with OCR/text matching.",
+    "Try to bias the test environment toward lower graphics and louder audio before autonomous validation.",
+    "Capture a screenshot at the end so the operator can review the resulting state."
+  ],
+  "steps": [
+    {
+      "action": "launch",
+      "command": "flatpak-spawn --host steam -applaunch 933110"
+    },
+    {
+      "action": "sleep",
+      "seconds": 28
+    },
+    {
+      "action": "focus_window"
+    },
+    {
+      "action": "sleep",
+      "seconds": 1
+    },
+    {
+      "action": "screenshot",
+      "path": "../artifacts/operator_prepare_settings_start.png"
+    },
+    {
+      "action": "ensure_image",
+      "image": "../templates/menu_anchor.png",
+      "timeout": 180,
+      "attemptTimeout": 4,
+      "confidence": 0.92,
+      "region": [360, 240, 820, 540],
+      "recoveryKey": "esc",
+      "recoveryPresses": 2,
+      "recoveryInterval": 0.75,
+      "recoverySleep": 1.5
+    },
+    {
+      "action": "click_text",
+      "texts": ["Options", "OPTIONS", "Settings", "SETTINGS"],
+      "timeout": 20,
+      "partial": true,
+      "optional": true
+    },
+    {
+      "action": "sleep",
+      "seconds": 2
+    },
+    {
+      "action": "click_text",
+      "texts": ["Graphics", "GRAPHICS", "Video", "VIDEO"],
+      "timeout": 8,
+      "partial": true,
+      "optional": true
+    },
+    {
+      "action": "sleep",
+      "seconds": 1
+    },
+    {
+      "action": "click_text",
+      "texts": ["Low", "LOW", "Lowest", "LOWEST", "Performance", "PERFORMANCE"],
+      "timeout": 6,
+      "partial": true,
+      "optional": true
+    },
+    {
+      "action": "sleep",
+      "seconds": 0.8
+    },
+    {
+      "action": "click_text",
+      "texts": ["Audio", "AUDIO", "Sound", "SOUND"],
+      "timeout": 8,
+      "partial": true,
+      "optional": true
+    },
+    {
+      "action": "sleep",
+      "seconds": 0.8
+    },
+    {
+      "action": "press",
+      "key": "right",
+      "presses": 8,
+      "interval": 0.12,
+      "optional": true
+    },
+    {
+      "action": "sleep",
+      "seconds": 0.6
+    },
+    {
+      "action": "click_text",
+      "texts": ["Apply", "APPLY", "OK", "Okay", "Confirm", "CONFIRM", "Accept", "ACCEPT"],
+      "timeout": 4,
+      "partial": true,
+      "optional": true
+    },
+    {
+      "action": "press",
+      "key": "esc",
+      "presses": 2,
+      "interval": 0.5,
+      "optional": true
+    },
+    {
+      "action": "screenshot",
+      "path": "../artifacts/operator_prepare_settings.png"
+    }
+  ]
+}

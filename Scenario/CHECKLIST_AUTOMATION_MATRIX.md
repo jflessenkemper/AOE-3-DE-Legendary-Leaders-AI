@@ -33,22 +33,20 @@ These are already represented by runtime suites in `tools/validation/runtime_spe
 - Best setup: Lane C from `Scenario/TEST_SCENARIO_SETUP.md`
 - Fast trigger idea: one-button AI explorer kill trigger
 
-### 14. Unsupported non-elite units surrender while elite-supported or explorer-supported units keep fighting
-
-- Status: `Partially automatable`
-- Runtime suites: `human_prisoner_lane`, `ai_prisoner_lane`
-- Covered today:
-  - surrender move issued
-  - custody arrival recorded
-  - reclaim recorded
-- Not fully covered today:
-  - explicit negative case that elite support blocked surrender
-  - explicit negative case that explorer support blocked surrender
-
-### 15. Prisoner routing and explorer reclaim create visible tactical consequences
+### 14. Unsupported AI non-elite units rout while elite-supported units keep fighting
 
 - Status: `Automatable`
-- Runtime suites: `human_prisoner_lane`, `ai_prisoner_lane`
+- Runtime suites: `ai_rout_lane`, `elite_support_blocks_rout`
+- Covered today:
+  - AI rout start recorded
+  - AI rout move recorded
+  - AI rout arrival recorded
+  - explicit support-block case logged with `elite_support_blocks_rout`
+
+### 15. AI rout and elite retreat create visible tactical consequences
+
+- Status: `Automatable`
+- Runtime suites: `ai_rout_lane`, `elite_retreat_lane`
 - Best setup: Lane A and Lane B from `Scenario/TEST_SCENARIO_SETUP.md`
 
 ## Manual Today

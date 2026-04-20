@@ -6,7 +6,7 @@ bool gIsabellaRulesEnabled = false;
 
 void initLeaderIsabella(void)
 {
-   aiEcho("Legendary Leaders: activating Isabella I personality.");
+   llVerboseEcho("Legendary Leaders: activating Isabella I personality.");
 
    llSetAggressivePersonality();
    btRushBoom = 0.5;

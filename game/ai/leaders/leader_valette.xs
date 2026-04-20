@@ -6,7 +6,7 @@ bool gValetteRulesEnabled = false;
 
 void initLeaderValette(void)
 {
-   aiEcho("Legendary Leaders: activating Jean Parisot de Valette personality.");
+   llVerboseEcho("Legendary Leaders: activating Jean Parisot de Valette personality.");
 
    llSetDefensivePersonality();
    btRushBoom = -0.5;

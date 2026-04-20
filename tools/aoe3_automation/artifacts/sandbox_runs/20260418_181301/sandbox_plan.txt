@@ -1,0 +1,20 @@
+timestamp=2026-04-18T18:13:01
+dry_run=yes
+live_mod_root=/home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI
+profile_root=/home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043
+artifacts_dir=/var/home/jflessenkemper/AOE-3-DE-Legendary-Leaders-AI/tools/aoe3_automation/artifacts/sandbox_runs/20260418_181301
+flow_path=/var/home/jflessenkemper/AOE-3-DE-Legendary-Leaders-AI/tools/aoe3_automation/flows/launch_and_capture_menu.json
+random_map_name=Legendary Leaders Test
+scenario_name=
+actions:
+- ensure directory /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI
+- sync /tmp/aoe3-sandbox-packaged-ly4rxov9/runtime_payload/RandMaps -> /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/RandMaps
+- sync /tmp/aoe3-sandbox-packaged-ly4rxov9/runtime_payload/Scenario -> /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/Scenario
+- sync /tmp/aoe3-sandbox-packaged-ly4rxov9/runtime_payload/art -> /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/art
+- sync /tmp/aoe3-sandbox-packaged-ly4rxov9/runtime_payload/data -> /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/data
+- sync /tmp/aoe3-sandbox-packaged-ly4rxov9/runtime_payload/game -> /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/game
+- sync /tmp/aoe3-sandbox-packaged-ly4rxov9/runtime_payload/modinfo.json -> /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/modinfo.json
+- sync /tmp/aoe3-sandbox-packaged-ly4rxov9/runtime_payload/resources -> /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/resources
+- sync /tmp/aoe3-sandbox-packaged-ly4rxov9/runtime_payload/sound -> /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/sound
+- sync /var/home/jflessenkemper/AOE-3-DE-Legendary-Leaders-AI/RandMaps/Legendary Leaders Test.xs -> /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/RandMaps/Legendary Leaders Test.xs
+- sync /var/home/jflessenkemper/AOE-3-DE-Legendary-Leaders-AI/RandMaps/Legendary Leaders Test.xml -> /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/RandMaps/Legendary Leaders Test.xml

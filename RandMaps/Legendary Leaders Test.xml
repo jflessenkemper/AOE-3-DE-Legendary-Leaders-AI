@@ -1,5 +1,5 @@
 <?xml version = "1.0" encoding = "UTF-8"?>
-<mapinfo details = "490101" displayNameID = "490100" loadDetails = "490102" largeMapName = "texasLarge"
+<mapinfo displayName = "Legendary Leaders Test" detailsText = "Observer-first 2v2 stress map for surrender, reclaim, commander, and naval AI checks." loadDetailsText = "Open west-vs-east 2v2 test arena with staged observer windows and Player 1 Town Center console buttons." largeMapName = "texasLarge"
     imagepath = "ui\random_map\texas\texas_mini" cannotReplace = "" loadBackground = "ui\random_map\texas\texas_map">
    <loadss>ui\random_map\texas\texas_ss_01</loadss>
    <loadss>ui\random_map\texas\texas_ss_02</loadss>

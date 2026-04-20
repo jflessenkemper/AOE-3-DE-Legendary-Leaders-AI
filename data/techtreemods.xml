@@ -10912,6 +10912,59 @@
 			<Effect type ='TextOutput'>400092</Effect>
 		</Effects>
 	</Tech>
+	<Tech name ='LLObserverConsoleGlobal' type ='Normal'>
+		<DBID>39993</DBID>
+		<ResearchPoints>0.0000</ResearchPoints>
+		<Status>UNOBTAINABLE</Status>
+		<Flag>Shadow</Flag>
+		<Effects>
+			<Effect type ='TechStatus' status ='obtainable'>LLObserverWaterWindow</Effect>
+			<Effect type ='TechStatus' status ='obtainable'>LLObserverCommanderWindow</Effect>
+			<Effect type ='TechStatus' status ='obtainable'>LLObserverRepeatFightWindow</Effect>
+			<Effect type ='CommandAdd' tech ='LLObserverWaterWindow' page ='1' column ='10'>
+				<Target type ='ProtoUnit'>TownCenter</Target></Effect>
+			<Effect type ='CommandAdd' tech ='LLObserverCommanderWindow' page ='1' column ='11'>
+				<Target type ='ProtoUnit'>TownCenter</Target></Effect>
+			<Effect type ='CommandAdd' tech ='LLObserverRepeatFightWindow' page ='1' column ='12'>
+				<Target type ='ProtoUnit'>TownCenter</Target></Effect>
+		</Effects>
+	</Tech>
+	<Tech name ='LLObserverWaterWindow' type ='Normal'>
+		<DBID>39994</DBID>
+		<DisplayNameID>400093</DisplayNameID>
+		<ResearchPoints>0.0000</ResearchPoints>
+		<Status>UNOBTAINABLE</Status>
+		<Icon>resources\images\icons\techs\spc\militia_act.png</Icon>
+		<RolloverTextID>400094</RolloverTextID>
+		<Flag>YPInfiniteTech</Flag>
+		<Effects>
+			<Effect type ='TextOutput'>400095</Effect>
+		</Effects>
+	</Tech>
+	<Tech name ='LLObserverCommanderWindow' type ='Normal'>
+		<DBID>39995</DBID>
+		<DisplayNameID>400096</DisplayNameID>
+		<ResearchPoints>0.0000</ResearchPoints>
+		<Status>UNOBTAINABLE</Status>
+		<Icon>resources\images\icons\techs\spc\militia_act.png</Icon>
+		<RolloverTextID>400097</RolloverTextID>
+		<Flag>YPInfiniteTech</Flag>
+		<Effects>
+			<Effect type ='TextOutput'>400098</Effect>
+		</Effects>
+	</Tech>
+	<Tech name ='LLObserverRepeatFightWindow' type ='Normal'>
+		<DBID>39996</DBID>
+		<DisplayNameID>400099</DisplayNameID>
+		<ResearchPoints>0.0000</ResearchPoints>
+		<Status>UNOBTAINABLE</Status>
+		<Icon>resources\images\icons\techs\spc\militia_act.png</Icon>
+		<RolloverTextID>400100</RolloverTextID>
+		<Flag>YPInfiniteTech</Flag>
+		<Effects>
+			<Effect type ='TextOutput'>400101</Effect>
+		</Effects>
+	</Tech>
 	<Tech mergeMode='replace' name ='DEHCSPCMilitiaAct' type ='Normal'>
 		<DBID>7445</DBID>
 		<DisplayNameID>112122</DisplayNameID>

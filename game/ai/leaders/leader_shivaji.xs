@@ -6,7 +6,7 @@ bool gShivajiRulesEnabled = false;
 
 void initLeaderShivaji(void)
 {
-   aiEcho("Legendary Leaders: activating Shivaji Maharaj personality.");
+   llVerboseEcho("Legendary Leaders: activating Shivaji Maharaj personality.");
 
    llSetBalancedPersonality();
    btRushBoom = 0.2;

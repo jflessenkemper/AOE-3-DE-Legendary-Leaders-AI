@@ -6,7 +6,7 @@ bool gPachacutiRulesEnabled = false;
 
 void initLeaderPachacuti(void)
 {
-   aiEcho("Legendary Leaders: activating Pachacuti personality.");
+   llVerboseEcho("Legendary Leaders: activating Pachacuti personality.");
 
    llSetDefensivePersonality();
    btRushBoom = -0.2;

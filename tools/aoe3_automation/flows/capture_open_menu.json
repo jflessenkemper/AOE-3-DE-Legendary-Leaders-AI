@@ -1,16 +1,29 @@
 {
   "notes": [
     "Use this when AoE3 is already open and visible.",
-    "Wait for the verified main-menu anchor without relaunching the game.",
+    "Focus the game window before reading the current state.",
+    "Use Esc recovery only if the verified main-menu anchor is not visible yet.",
     "Capture a fresh desktop screenshot from the current visible state."
   ],
   "steps": [
     {
-      "action": "wait_image",
+      "action": "focus_window"
+    },
+    {
+      "action": "sleep",
+      "seconds": 1
+    },
+    {
+      "action": "ensure_image",
       "image": "../templates/menu_anchor.png",
       "timeout": 30,
-      "confidence": 0.97,
-      "region": [460, 360, 420, 320]
+      "attemptTimeout": 3,
+      "confidence": 0.92,
+      "region": [360, 240, 820, 540],
+      "recoveryKey": "esc",
+      "recoveryPresses": 2,
+      "recoveryInterval": 0.5,
+      "recoverySleep": 1.2
     },
     {
       "action": "screenshot",

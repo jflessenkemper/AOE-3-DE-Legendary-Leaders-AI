@@ -1,0 +1,94 @@
+===============================================================
+File 'Age3Log.txt' opened at Sun Apr 19 19:16:05 2026
+
+===============================================================
+
+PreGame  87:  ************* Memory Report ***************
+PreGame  87:  There is  58 percent of memory in use.
+PreGame  87:  There are 32765520 total KB of physical memory.
+PreGame  87:  There are 13566316 free  KB of physical memory.
+PreGame  87:  There are 49147984 total KB of paging file.
+PreGame  87:  There are 23628400 free  KB of paging file.
+PreGame  87:  There are 137438953344 total KB of virtual memory.
+PreGame  87:  There are 137438772908 free  KB of virtual memory.
+PreGame  87:  There are 0 free  KB of extended memory.
+PreGame  87:  *******************************************
+PreGame  3213:  Account Event - New State: AttemptingLogIn, Old State: Invalid, Last Error ID: None
+PreGame  3246:  startGame : Sign In SUCCESS
+PreGame  3246:  User folder id: 76561198170207043
+PreGame  3272:  ------------------------------------------------------------
+PreGame  3272:  Version: 100.15.59076.0 (386756)
+PreGame  3272:  ------------------------------------------------------------
+PreGame  4687:  Enabled Mods:
+PreGame  4687:    1 "Legendary Leaders AI" Crc: 1716393754 CrcFromInstall: 0 SafeForMultiplayer: 0
+PreGame  4824:  Game locale: English
+PreGame  8523:  SetupMovie: 1920 x 1080 z:\var\home\jflessenkemper\.local\share\steam\steamapps\common\aoe3de\Game\Movies\AOE_Microsoft.bk2
+PreGame  8760:  Data patch 28.0.2 crc 1248332430
+PreGame  11225:     SetupMovie: 1920 x 1080 z:\var\home\jflessenkemper\.local\share\steam\steamapps\common\aoe3de\Game\Movies\Tantalus.bk2
+PreGame  13893:     SetupMovie: 1920 x 1080 z:\var\home\jflessenkemper\.local\share\steam\steamapps\common\aoe3de\Game\Movies\ForgottenEmpires.bk2
+PreGame  18865:  SetupMovie: 3840 x 1638 z:\var\home\jflessenkemper\.local\share\steam\steamapps\common\aoe3de\Game\Movies\AOE_WorldsEdge.bk2
+PreGame  20569:  Game startup complete (20.55 sec)!
+PreGame  20570:  ------------------------------------------------------------
+PreGame  26536:  SetupMovie: 1920 x 1080 z:\var\home\jflessenkemper\.local\share\steam\steamapps\common\aoe3de\Game\Movies\IntroMovie.bk2
+PreGame  30504:  startGame : End
+PreGame  30512:  APregame : EnterMode : Start
+PreGame  30513:  ************* Memory Report ***************
+PreGame  30513:  There is  60 percent of memory in use.
+PreGame  30513:  There are 32765520 total KB of physical memory.
+PreGame  30513:  There are 12832412 free  KB of physical memory.
+PreGame  30513:  There are 49147984 total KB of paging file.
+PreGame  30513:  There are 22905376 free  KB of paging file.
+PreGame  30513:  There are 137438953344 total KB of virtual memory.
+PreGame  30513:  There are 137437852324 free  KB of virtual memory.
+PreGame  30513:  There are 0 free  KB of extended memory.
+PreGame  30513:  *******************************************
+PreGame  30513:  APregame : EnterMode : Create Home City
+PreGame  30572:  APregame : EnterMode : EnterScreen : Start
+PreGame  30572:  APregame : EnterMode : EnterScreen : End
+PreGame  30572:  ModeTrack -- entering mode 1 (Pregame) from mode 0 (<Invalid>)
+PreGame  30595:  APregame : EnterMode : End
+PreGame  33746:  Account Event - New State: LoggedIn, Old State: AttemptingLogIn, Last Error ID: None
+PreGame  35936:  APregame : LeaveMode : Start
+PreGame  35936:  ModeTrack -- leaving mode 1 (Pregame) going to mode 0 (<Invalid>)
+PreGame  35939:  APregame : LeaveMode : Destroyed City
+PreGame  35939:  APregame : LeaveMode : End
+PreGame  35939:  ModeTrack -- entering mode 3 (SinglePlayerSetup) from mode 0 (<Invalid>)
+PreGame  40260:  Unlock Error - Inventory Extended:-1
+PreGame  74143:  ModeTrack -- leaving mode 3 (SinglePlayerSetup) going to mode 0 (<Invalid>)
+PreGame  74150:  ModeTrack -- entering mode 7 (RandomMapGame) from mode 0 (<Invalid>)
+PreGame  86384:  ModeTrack -- leaving mode 7 (RandomMapGame) going to mode 0 (<Invalid>)
+PreGame  86387:  MAP CODE: 'indochina/5/3088/0/0/5/0/127/0/128/1/144/1/149'
+PreGame  86409:  ModeTrack -- entering mode 6 (Random Map Setup) from mode 0 (<Invalid>)
+PreGame  91204:  ModeTrack -- leaving mode 6 (Random Map Setup) going to mode 0 (<Invalid>)
+PreGame  91225:  ModeTrack -- entering mode 27 (SinglePlayer) from mode 0 (<Invalid>)
+PreGame  102960:  WorldAssetPreloadingTime 11529.621094ms
+523294   00:08:43:  ModeTrack -- entering mode 34 (GameMenu) from mode 0 (<Invalid>)
+523294   00:08:43:  ModeTrack -- leaving mode 34 (GameMenu) going to mode 0 (<Invalid>)
+523294   00:08:43:  ModeTrack -- leaving mode 27 (SinglePlayer) going to mode 0 (<Invalid>)
+523294   00:08:43:  APregame : EnterMode : Start
+523294   00:08:43:  ************* Memory Report ***************
+523294   00:08:43:  There is  65 percent of memory in use.
+523294   00:08:43:  There are 32765520 total KB of physical memory.
+523294   00:08:43:  There are 11367860 free  KB of physical memory.
+523294   00:08:43:  There are 49147984 total KB of paging file.
+523294   00:08:43:  There are 20779768 free  KB of paging file.
+523294   00:08:43:  There are 137438953344 total KB of virtual memory.
+523294   00:08:43:  There are 137435751696 free  KB of virtual memory.
+523294   00:08:43:  There are 0 free  KB of extended memory.
+523294   00:08:43:  *******************************************
+523294   00:08:43:  APregame : EnterMode : Create Home City
+523294   00:08:43:  APregame : EnterMode : EnterScreen : Start
+523294   00:08:43:  APregame : EnterMode : EnterScreen : End
+523294   00:08:43:  ModeTrack -- entering mode 1 (Pregame) from mode 0 (<Invalid>)
+523294   00:08:43:  APregame : EnterMode : End
+523294   00:08:43:  ------------------------------------------------------------
+523294   00:08:43:  shutdownGame : Start
+523294   00:08:43:  APregame : LeaveMode : Start
+523294   00:08:43:  ModeTrack -- leaving mode 1 (Pregame) going to mode 0 (<Invalid>)
+523294   00:08:43:  APregame : LeaveMode : Destroyed City
+523294   00:08:43:  APregame : LeaveMode : End
+523294   00:08:43:  cleanup : Start
+523294   00:08:43:  BRandomManager::~BRandomManager(void)
+523294   00:08:43:  cleanup : Complete
+523294   00:08:43:  shutdownGame : Complete
+523294   00:08:43:  ------------------------------------------------------------

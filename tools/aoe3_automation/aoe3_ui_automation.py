@@ -6,6 +6,7 @@ import argparse
 import json
 import math
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -37,8 +38,9 @@ def ensure_runtime_support(needs_input: bool = False) -> None:
     display = os.environ.get("DISPLAY", "")
     if session_type == "wayland" and needs_input:
         fail(
-            "Wayland usually blocks desktop input automation. Install a supported injector such as ydotool/wtype, "
-            "or run this under X11/XWayland. You can use the 'probe-environment' command to see what is missing."
+            "Raw input recording is not supported on pure Wayland from this harness. Use run-flow with grim + "
+            "ydotool/wtype, or run recording under X11/XWayland. You can use the 'probe-environment' command to "
+            "see what is missing."
         )
     if not display and session_type != "wayland":
         fail("No desktop display detected.")
@@ -75,6 +77,99 @@ def host_xdotool_available() -> bool:
     return result.returncode == 0
 
 
+def find_host_game_window() -> str | None:
+    if host_xdotool_available() is False:
+        return None
+
+    result = run_host_command(
+        ["sh", "-lc", "xdotool search --name 'Age of Empires|AoE3|age of empires' | head -n1"],
+        capture_output=True,
+    )
+    if result.returncode != 0:
+        return None
+
+    lines = (result.stdout or "").strip().splitlines()
+    if not lines:
+        return None
+    return lines[0].strip()
+
+
+def focus_host_game_window() -> str | None:
+    window_id = find_host_game_window()
+    if not window_id:
+        return None
+    run_host_command(["xdotool", "windowactivate", "--sync", window_id])
+    return window_id
+
+
+def focus_game_window(backend: str | None = None) -> bool:
+    if backend == "host_xdotool" or backend is None:
+        window_id = focus_host_game_window()
+        return window_id is not None
+    return False
+
+
+def wait_for_game_window_focus(
+    backend: str | None = None,
+    timeout_seconds: float = 30.0,
+    poll_interval_seconds: float = 1.0,
+) -> bool:
+    deadline = time.time() + max(timeout_seconds, 0.0)
+    while True:
+        if focus_game_window(backend):
+            return True
+        if time.time() >= deadline:
+            return False
+        time.sleep(max(poll_interval_seconds, 0.1))
+
+
+def run_host_xdotool_window_command(command: list[str], supports_window: bool = True) -> None:
+    window_id = focus_host_game_window()
+    if window_id is not None and supports_window:
+        run_host_command(["xdotool", command[0], "--window", window_id, *command[1:]])
+        return
+    run_host_command(["xdotool", *command])
+
+
+def host_wayland_tool_available(name: str) -> bool:
+    return can_spawn_host() and host_command_exists(name)
+
+
+def host_ydotool_daemon_running() -> bool:
+    if host_wayland_tool_available("ydotoold") is False:
+        return False
+    result = run_host_command(["sh", "-lc", "pgrep -x ydotoold >/dev/null"], capture_output=True)
+    return result.returncode == 0
+
+
+def host_wayland_input_available() -> bool:
+    return host_wayland_tool_available("ydotool") and host_wayland_tool_available("wtype")
+
+
+def local_wayland_input_available() -> bool:
+    return command_exists("ydotool") and command_exists("wtype")
+
+
+def run_checked_command(args: list[str]) -> None:
+    result = subprocess.run(args, check=False, text=True, capture_output=True)
+    if result.returncode != 0:
+        message = (result.stderr or result.stdout or "unknown error").strip()
+        fail(message)
+
+
+def run_wayland_command(backend: str, args: list[str]) -> None:
+    if backend == "local_wayland":
+        run_checked_command(args)
+        return
+    if backend == "host_wayland":
+        result = run_host_command(args, capture_output=True)
+        if result.returncode != 0:
+            message = (result.stderr or result.stdout or "unknown error").strip()
+            fail(message)
+        return
+    fail(f"unknown Wayland backend: {backend}")
+
+
 def default_aoe3_log_dir() -> Path:
     return Path.home() / ".steam/steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/Logs"
 
@@ -95,6 +190,32 @@ def import_cv2():
     return cv2
 
 
+def import_pytesseract():
+    try:
+        import pytesseract  # type: ignore
+    except Exception as exc:
+        fail(f"pytesseract import failed: {exc}")
+    return pytesseract
+
+
+def resolve_tesseract_command() -> str:
+    if command_exists("tesseract"):
+        return shutil.which("tesseract") or "tesseract"
+
+    if can_spawn_host() and host_command_exists("tesseract"):
+        wrapper_path = Path(__file__).resolve().parent / "artifacts" / ".tmp" / "host_tesseract.sh"
+        wrapper_path.parent.mkdir(parents=True, exist_ok=True)
+        if wrapper_path.exists() is False:
+            wrapper_path.write_text(
+                "#!/usr/bin/env sh\nexec flatpak-spawn --host tesseract \"$@\"\n",
+                encoding="utf-8",
+            )
+            wrapper_path.chmod(0o755)
+        return str(wrapper_path)
+
+    fail("No tesseract binary found locally or on the host.")
+
+
 def detect_input_backend(needs_vision: bool = False) -> str:
     session_type = os.environ.get("XDG_SESSION_TYPE", "").lower()
     display = os.environ.get("DISPLAY", "")
@@ -105,14 +226,21 @@ def detect_input_backend(needs_vision: bool = False) -> str:
     if can_spawn_host() and host_xdotool_available():
         return "host_xdotool"
 
+    if session_type == "wayland":
+        if local_wayland_input_available():
+            return "local_wayland"
+        if host_wayland_input_available():
+            return "host_wayland"
+
     if needs_vision:
         fail(
-            "No usable input/vision backend found. Install Python requirements for local control or ensure host xdotool/import are reachable via flatpak-spawn."
+            "No usable input/vision backend found. Install Python requirements for local control, or provide host Wayland tools "
+            "(ydotool/wtype/grim) or host X11 tools (xdotool/import) reachable via flatpak-spawn."
         )
 
     if session_type == "wayland":
         fail(
-            "Wayland input automation needs either local pyautogui on X11/XWayland or a host xdotool backend reachable through flatpak-spawn."
+            "Wayland input automation needs ydotool plus wtype locally or on the host, or an X11/XWayland-compatible backend."
         )
     if not display:
         fail("No desktop display detected.")
@@ -120,38 +248,107 @@ def detect_input_backend(needs_vision: bool = False) -> str:
 
 
 def detect_capture_backend() -> str:
+    preferred_backends: list[str] = []
     if command_exists("gnome-screenshot"):
-        return "gnome-screenshot"
+        preferred_backends.append("gnome-screenshot")
     if maybe_import_pyautogui() is not None:
-        return "pyautogui"
+        preferred_backends.append("pyautogui")
+    if command_exists("spectacle"):
+        preferred_backends.append("spectacle")
+    if command_exists("import"):
+        preferred_backends.append("import")
     if can_spawn_host() and host_command_exists("spectacle"):
-        return "host-spectacle"
+        preferred_backends.append("host-spectacle")
     if can_spawn_host() and host_command_exists("import"):
-        return "host-import"
-    fail("No screenshot backend found. Install pyautogui locally or provide a host capture tool such as spectacle.")
+        preferred_backends.append("host-import")
+    if command_exists("grim"):
+        preferred_backends.append("grim")
+    if host_wayland_tool_available("grim"):
+        preferred_backends.append("host-grim")
+    if preferred_backends:
+        return preferred_backends[0]
+    fail("No screenshot backend found. Install grim or pyautogui locally, or provide a host capture tool such as grim, spectacle, or import.")
 
 
 def capture_screen(output_path: Path, region: list[int] | None = None) -> str:
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    backend = detect_capture_backend()
+    normalized_region = normalize_region(region)
+    backend_candidates: list[str] = []
+    if command_exists("gnome-screenshot"):
+        backend_candidates.append("gnome-screenshot")
+    if maybe_import_pyautogui() is not None:
+        backend_candidates.append("pyautogui")
+    if command_exists("spectacle"):
+        backend_candidates.append("spectacle")
+    if command_exists("import"):
+        backend_candidates.append("import")
+    if can_spawn_host() and host_command_exists("spectacle"):
+        backend_candidates.append("host-spectacle")
+    if can_spawn_host() and host_command_exists("import"):
+        backend_candidates.append("host-import")
+    if command_exists("grim"):
+        backend_candidates.append("grim")
+    if host_wayland_tool_available("grim"):
+        backend_candidates.append("host-grim")
 
-    if backend == "gnome-screenshot":
-        subprocess.run(["gnome-screenshot", "-f", str(output_path)], check=True)
-    elif backend == "pyautogui":
-        pyautogui = import_pyautogui()
-        pyautogui.screenshot(str(output_path))
-    elif backend == "host-spectacle":
-        result = run_host_command(["spectacle", "-b", "-n", "-o", str(output_path)], capture_output=True)
-        if result.returncode != 0:
-            message = (result.stderr or result.stdout or "unknown error").strip()
-            fail(f"host screenshot failed: {message}")
-    elif backend == "host-import":
-        result = run_host_command(["import", "-window", "root", str(output_path)], capture_output=True)
-        if result.returncode != 0:
-            message = (result.stderr or result.stdout or "unknown error").strip()
-            fail(f"host screenshot failed: {message}")
-    else:
-        fail(f"unknown screenshot backend: {backend}")
+    if not backend_candidates:
+        detect_capture_backend()
+
+    backend = ""
+    capture_errors: list[str] = []
+    for candidate in backend_candidates:
+        try:
+            if candidate == "grim":
+                args = ["grim"]
+                if normalized_region is not None:
+                    left, top, width, height = normalized_region
+                    args.extend(["-g", f"{left},{top} {width}x{height}"])
+                args.append(str(output_path))
+                run_checked_command(args)
+            elif candidate == "gnome-screenshot":
+                subprocess.run(["gnome-screenshot", "-f", str(output_path)], check=True)
+            elif candidate == "pyautogui":
+                pyautogui = import_pyautogui()
+                pyautogui.screenshot(str(output_path))
+            elif candidate == "spectacle":
+                result = subprocess.run(["spectacle", "-b", "-n", "-o", str(output_path)], check=False, text=True, capture_output=True)
+                if result.returncode != 0:
+                    message = (result.stderr or result.stdout or "unknown error").strip()
+                    raise RuntimeError(message)
+            elif candidate == "import":
+                result = subprocess.run(["import", "-window", "root", str(output_path)], check=False, text=True, capture_output=True)
+                if result.returncode != 0:
+                    message = (result.stderr or result.stdout or "unknown error").strip()
+                    raise RuntimeError(message)
+            elif candidate == "host-grim":
+                args = ["grim"]
+                if normalized_region is not None:
+                    left, top, width, height = normalized_region
+                    args.extend(["-g", f"{left},{top} {width}x{height}"])
+                args.append(str(output_path))
+                result = run_host_command(args, capture_output=True)
+                if result.returncode != 0:
+                    message = (result.stderr or result.stdout or "unknown error").strip()
+                    raise RuntimeError(message)
+            elif candidate == "host-spectacle":
+                result = run_host_command(["spectacle", "-b", "-n", "-o", str(output_path)], capture_output=True)
+                if result.returncode != 0:
+                    message = (result.stderr or result.stdout or "unknown error").strip()
+                    raise RuntimeError(message)
+            elif candidate == "host-import":
+                result = run_host_command(["import", "-window", "root", str(output_path)], capture_output=True)
+                if result.returncode != 0:
+                    message = (result.stderr or result.stdout or "unknown error").strip()
+                    raise RuntimeError(message)
+            else:
+                raise RuntimeError(f"unknown screenshot backend: {candidate}")
+            backend = candidate
+            break
+        except Exception as exc:
+            capture_errors.append(f"{candidate}: {exc}")
+
+    if not backend:
+        fail("host screenshot failed: " + " | ".join(capture_errors))
 
     Image = import_pillow_image()
     deadline = time.time() + 5.0
@@ -168,7 +365,7 @@ def capture_screen(output_path: Path, region: list[int] | None = None) -> str:
         message = str(last_error) if last_error is not None else "unknown error"
         fail(f"captured screenshot is not readable yet: {message}")
 
-    if region is not None:
+    if (region is not None) and (backend not in {"grim", "host-grim"}):
         left, top, width, height = normalize_region(region)
         with Image.open(output_path) as image:
             cropped = image.crop((left, top, left + width, top + height))
@@ -216,6 +413,252 @@ def locate_image_with_capture(image_path: Path, timeout: float, confidence: floa
     return None
 
 
+def ensure_image_visible(
+    *,
+    image_path: Path,
+    overall_timeout: float,
+    confidence: float,
+    grayscale: bool,
+    region: list[int] | None,
+    recovery_key: str | None,
+    recovery_presses: int,
+    recovery_interval: float,
+    recovery_sleep: float,
+    attempt_timeout: float,
+    dry_run: bool,
+) -> tuple[int, int] | None:
+    deadline = time.time() + overall_timeout
+    backend: str | None = None
+    if not dry_run:
+        backend = detect_input_backend()
+
+    while time.time() < deadline:
+        remaining = max(0.5, deadline - time.time())
+        point = locate_image(
+            None,
+            image_path,
+            timeout=min(attempt_timeout, remaining),
+            confidence=confidence,
+            grayscale=grayscale,
+            region=region,
+        )
+        if point is not None:
+            return point
+        if dry_run or not recovery_key:
+            continue
+        focus_game_window(backend)
+        press_key(
+            backend,
+            recovery_key,
+            presses=max(1, recovery_presses),
+            interval=recovery_interval,
+        )
+        if recovery_sleep > 0:
+            time.sleep(recovery_sleep)
+
+    return None
+
+
+def normalize_ocr_string(value: str) -> str:
+    return re.sub(r"\s+", " ", value).strip().lower()
+
+
+def normalize_ocr_token(value: str) -> str:
+    return re.sub(r"[^0-9a-z]+", "", value.lower())
+
+
+def preprocess_ocr_image(image, grayscale: bool, threshold: int | None):
+    if grayscale:
+        image = image.convert("L")
+    if threshold is not None:
+        threshold_value = max(0, min(255, int(threshold)))
+        image = image.point(lambda pixel: 255 if pixel >= threshold_value else 0)
+    return image
+
+
+def extract_ocr_entries(region: list[int] | None, grayscale: bool, threshold: int | None,
+                        psm: int) -> tuple[list[dict[str, Any]], str]:
+    pytesseract = import_pytesseract()
+    pytesseract.pytesseract.tesseract_cmd = resolve_tesseract_command()
+    Image = import_pillow_image()
+    temp_dir = Path(__file__).resolve().parent / "artifacts" / ".tmp"
+    temp_dir.mkdir(parents=True, exist_ok=True)
+
+    with tempfile.NamedTemporaryFile(dir=temp_dir, suffix=".png", delete=False) as handle:
+        screenshot_path = Path(handle.name)
+    screenshot_path.unlink(missing_ok=True)
+
+    try:
+        capture_screen(screenshot_path, region)
+        with Image.open(screenshot_path) as image:
+            processed = preprocess_ocr_image(image, grayscale=grayscale, threshold=threshold)
+            data = pytesseract.image_to_data(
+                processed,
+                config=f"--psm {int(psm)}",
+                output_type=pytesseract.Output.DICT,
+            )
+    finally:
+        screenshot_path.unlink(missing_ok=True)
+
+    entries: list[dict[str, Any]] = []
+    total_items = len(data.get("text", []))
+    for index in range(total_items):
+        raw_text = str(data["text"][index]).strip()
+        if raw_text == "":
+            continue
+
+        try:
+            confidence = float(data.get("conf", ["-1"])[index])
+        except Exception:
+            confidence = -1.0
+        if confidence < 0:
+            continue
+
+        entry = {
+            "text": raw_text,
+            "normalized": normalize_ocr_string(raw_text),
+            "token": normalize_ocr_token(raw_text),
+            "left": int(data["left"][index]),
+            "top": int(data["top"][index]),
+            "width": int(data["width"][index]),
+            "height": int(data["height"][index]),
+            "block": int(data["block_num"][index]),
+            "paragraph": int(data["par_num"][index]),
+            "line": int(data["line_num"][index]),
+            "word": int(data["word_num"][index]),
+            "confidence": confidence,
+        }
+        entries.append(entry)
+
+    full_text = normalize_ocr_string(" ".join(entry["text"] for entry in entries))
+    return entries, full_text
+
+
+def target_texts_from_step(step: dict[str, Any], field_name: str = "text") -> list[str]:
+    single_value = step.get(field_name)
+    if isinstance(single_value, str) and single_value.strip() != "":
+        return [single_value]
+
+    plural_value = step.get("texts")
+    if isinstance(plural_value, list):
+        targets = [str(value) for value in plural_value if str(value).strip() != ""]
+        if targets:
+            return targets
+
+    fail(f"{field_name} action requires 'text' or a non-empty 'texts' array")
+
+
+def build_ocr_line_groups(entries: list[dict[str, Any]]) -> list[list[dict[str, Any]]]:
+    grouped: dict[tuple[int, int, int], list[dict[str, Any]]] = {}
+    for entry in entries:
+        key = (entry["block"], entry["paragraph"], entry["line"])
+        grouped.setdefault(key, []).append(entry)
+
+    lines: list[list[dict[str, Any]]] = []
+    for key in sorted(grouped.keys()):
+        lines.append(sorted(grouped[key], key=lambda item: item["word"]))
+    return lines
+
+
+def collect_text_box_matches(entries: list[dict[str, Any]], targets: list[str], partial: bool) -> list[tuple[int, int, str]]:
+    normalized_targets = [normalize_ocr_string(target) for target in targets]
+    token_targets = [
+        [token for token in (normalize_ocr_token(part) for part in target.split()) if token != ""]
+        for target in targets
+    ]
+
+    matches: list[tuple[int, int, str]] = []
+
+    for line_entries in build_ocr_line_groups(entries):
+        line_text = normalize_ocr_string(" ".join(entry["text"] for entry in line_entries))
+        line_tokens = [entry["token"] for entry in line_entries]
+
+        for target, normalized_target, target_tokens in zip(targets, normalized_targets, token_targets):
+            if normalized_target == "":
+                continue
+
+            if partial and normalized_target in line_text and target_tokens:
+                if len(target_tokens) == 1:
+                    for entry in line_entries:
+                        if target_tokens[0] in entry["token"]:
+                            center_x = entry["left"] + entry["width"] // 2
+                            center_y = entry["top"] + entry["height"] // 2
+                            matches.append((center_x, center_y, target))
+                    continue
+                else:
+                    joined_tokens = " ".join(token for token in line_tokens if token != "")
+                    joined_target = " ".join(target_tokens)
+                    if joined_target not in joined_tokens:
+                        continue
+
+            if not target_tokens:
+                continue
+
+            window = len(target_tokens)
+            for start_index in range(0, len(line_entries) - window + 1):
+                candidate_entries = line_entries[start_index:start_index + window]
+                candidate_tokens = [entry["token"] for entry in candidate_entries]
+                if partial:
+                    if len(target_tokens) == 1:
+                        if target_tokens[0] not in candidate_tokens[0]:
+                            continue
+                    else:
+                        if candidate_tokens != target_tokens:
+                            continue
+                else:
+                    if candidate_tokens != target_tokens:
+                        continue
+
+                left = min(entry["left"] for entry in candidate_entries)
+                top = min(entry["top"] for entry in candidate_entries)
+                right = max(entry["left"] + entry["width"] for entry in candidate_entries)
+                bottom = max(entry["top"] + entry["height"] for entry in candidate_entries)
+                matches.append((left + (right - left) // 2, top + (bottom - top) // 2, target))
+
+    return matches
+
+
+def locate_text_box(entries: list[dict[str, Any]], targets: list[str], partial: bool,
+                    match_index: int = 0) -> tuple[int, int, str] | None:
+    if match_index < 0:
+        fail("matchIndex must be greater than or equal to 0")
+
+    matches = collect_text_box_matches(entries, targets=targets, partial=partial)
+    if match_index >= len(matches):
+        return None
+    return matches[match_index]
+
+
+def locate_text_with_capture(targets: list[str], timeout: float, region: list[int] | None, partial: bool,
+                             grayscale: bool, threshold: int | None, psm: int,
+                             match_index: int = 0) -> tuple[int | None, int | None, str] | None:
+    deadline = time.time() + timeout
+    while time.time() < deadline:
+        entries, full_text = extract_ocr_entries(region=region, grayscale=grayscale, threshold=threshold, psm=psm)
+        box = locate_text_box(entries, targets=targets, partial=partial, match_index=match_index)
+        if box is not None:
+            return box
+
+        for target in targets:
+            normalized_target = normalize_ocr_string(target)
+            if normalized_target == "":
+                continue
+            if partial:
+                if normalized_target in full_text:
+                    return None, None, target
+            else:
+                full_text_tokens = full_text.split()
+                target_tokens = normalized_target.split()
+                if target_tokens and target_tokens == full_text_tokens[:len(target_tokens)]:
+                    return None, None, target
+                if f" {normalized_target} " in f" {full_text} ":
+                    return None, None, target
+
+        time.sleep(0.5)
+
+    return None
+
+
 def normalize_key_name(key: str) -> str:
     if key.startswith("Key."):
         key = key[4:]
@@ -250,7 +693,11 @@ def move_pointer(backend: str, x: int, y: int, duration: float = 0.0) -> None:
         pyautogui = import_pyautogui()
         pyautogui.moveTo(x, y, duration=duration)
         return
+    if backend in {"local_wayland", "host_wayland"}:
+        run_wayland_command(backend, ["ydotool", "mousemove", "--absolute", "-x", str(x), "-y", str(y)])
+        return
     if backend == "host_xdotool":
+        focus_host_game_window()
         run_host_command(["xdotool", "mousemove", str(x), str(y)])
         return
     fail(f"unknown input backend: {backend}")
@@ -264,9 +711,18 @@ def click_pointer(backend: str, button: str = "left", presses: int = 1) -> None:
         else:
             pyautogui.click(button=button, clicks=presses)
         return
+    if backend in {"local_wayland", "host_wayland"}:
+        button_map = {"left": "0xC0", "right": "0xC1", "middle": "0xC2"}
+        args = ["ydotool", "click"]
+        if presses > 1:
+            args.extend(["--repeat", str(max(1, presses)), "--next-delay", "50"])
+        args.append(button_map.get(button, "0xC0"))
+        run_wayland_command(backend, args)
+        return
     if backend == "host_xdotool":
         button_map = {"left": "1", "middle": "2", "right": "3"}
         x_button = button_map.get(button, "1")
+        focus_host_game_window()
         run_host_command(["xdotool", "click", "--repeat", str(max(1, presses)), x_button])
         return
     fail(f"unknown input backend: {backend}")
@@ -280,10 +736,13 @@ def mouse_button(backend: str, button: str, pressed: bool) -> None:
         else:
             pyautogui.mouseUp(button=button)
         return
+    if backend in {"local_wayland", "host_wayland"}:
+        fail("Wayland ydotool backend does not support replaying separate mouse down/up events. Use run-flow instead of replay-input.")
     if backend == "host_xdotool":
         button_map = {"left": "1", "middle": "2", "right": "3"}
         x_button = button_map.get(button, "1")
         action = "mousedown" if pressed else "mouseup"
+        focus_host_game_window()
         run_host_command(["xdotool", action, x_button])
         return
     fail(f"unknown input backend: {backend}")
@@ -294,10 +753,28 @@ def press_key(backend: str, key: str, presses: int = 1, interval: float = 0.05) 
         pyautogui = import_pyautogui()
         pyautogui.press(key, presses=presses, interval=interval)
         return
+    if backend in {"local_wayland", "host_wayland"}:
+        normalized = normalize_wayland_key_name(key)
+        try:
+            for index in range(max(1, presses)):
+                run_wayland_command(backend, ["wtype", "-P", normalized, "-p", normalized])
+                if index + 1 < presses:
+                    time.sleep(interval)
+            return
+        except SystemExit:
+            if backend != "host_wayland" or not host_xdotool_available():
+                raise
+            backend = "host_xdotool"
+            normalized = normalize_key_name(key)
+            for index in range(max(1, presses)):
+                run_host_xdotool_window_command(["key", normalized])
+                if index + 1 < presses:
+                    time.sleep(interval)
+        return
     if backend == "host_xdotool":
         normalized = normalize_key_name(key)
         for index in range(max(1, presses)):
-            run_host_command(["xdotool", "key", normalized])
+            run_host_xdotool_window_command(["key", normalized])
             if index + 1 < presses:
                 time.sleep(interval)
         return
@@ -312,9 +789,13 @@ def key_state(backend: str, key: str, pressed: bool) -> None:
         else:
             pyautogui.keyUp(key)
         return
+    if backend in {"local_wayland", "host_wayland"}:
+        action = "-P" if pressed else "-p"
+        run_wayland_command(backend, ["wtype", action, normalize_wayland_key_name(key)])
+        return
     if backend == "host_xdotool":
         action = "keydown" if pressed else "keyup"
-        run_host_command(["xdotool", action, normalize_key_name(key)])
+        run_host_xdotool_window_command([action, normalize_key_name(key)])
         return
     fail(f"unknown input backend: {backend}")
 
@@ -324,9 +805,42 @@ def press_hotkey(backend: str, keys: list[str]) -> None:
         pyautogui = import_pyautogui()
         pyautogui.hotkey(*keys)
         return
+    if backend in {"local_wayland", "host_wayland"}:
+        modifier_map = {
+            "alt": "alt",
+            "alt_l": "alt",
+            "control": "ctrl",
+            "control_l": "ctrl",
+            "ctrl": "ctrl",
+            "shift": "shift",
+            "shift_l": "shift",
+            "super": "super",
+            "super_l": "super",
+        }
+        normalized_keys = [normalize_wayland_key_name(key) for key in keys]
+        args = ["wtype"]
+        non_modifiers: list[str] = []
+        modifiers_to_release: list[str] = []
+        for normalized in normalized_keys:
+            modifier = modifier_map.get(normalized.lower())
+            if modifier is not None:
+                args.extend(["-M", modifier])
+                modifiers_to_release.append(modifier)
+            else:
+                non_modifiers.append(normalized)
+
+        if len(non_modifiers) == 0:
+            fail("hotkey action requires at least one non-modifier key")
+
+        final_key = non_modifiers[-1]
+        args.extend(["-P", final_key, "-p", final_key])
+        for modifier in reversed(modifiers_to_release):
+            args.extend(["-m", modifier])
+        run_wayland_command(backend, args)
+        return
     if backend == "host_xdotool":
         chord = "+".join(normalize_key_name(key) for key in keys)
-        run_host_command(["xdotool", "key", chord])
+        run_host_xdotool_window_command(["key", chord])
         return
     fail(f"unknown input backend: {backend}")
 
@@ -336,9 +850,13 @@ def type_text(backend: str, text: str, interval: float = 0.02) -> None:
         pyautogui = import_pyautogui()
         pyautogui.write(text, interval=interval)
         return
+    if backend in {"local_wayland", "host_wayland"}:
+        delay_ms = max(0, int(interval * 1000))
+        run_wayland_command(backend, ["wtype", "-d", str(delay_ms), text])
+        return
     if backend == "host_xdotool":
         delay_ms = max(1, int(interval * 1000))
-        run_host_command(["xdotool", "type", "--delay", str(delay_ms), text])
+        run_host_xdotool_window_command(["type", "--delay", str(delay_ms), text])
         return
     fail(f"unknown input backend: {backend}")
 
@@ -348,6 +866,8 @@ def scroll_pointer(backend: str, clicks: int) -> None:
         pyautogui = import_pyautogui()
         pyautogui.scroll(clicks)
         return
+    if backend in {"local_wayland", "host_wayland"}:
+        fail("Wayland backend does not currently support scroll emulation. Prefer click_image flows that avoid wheel input.")
     if backend == "host_xdotool":
         button = "4" if clicks > 0 else "5"
         for _ in range(abs(clicks)):
@@ -395,16 +915,20 @@ def probe_environment() -> None:
     print(f"session_type: {os.environ.get('XDG_SESSION_TYPE', 'unknown')}")
     print(f"display: {os.environ.get('DISPLAY', '') or '<unset>'}")
     print(f"wayland_display: {os.environ.get('WAYLAND_DISPLAY', '') or '<unset>'}")
-    for command in ["ydotool", "wtype", "grim", "slurp", "gnome-screenshot", "xdotool"]:
+    for command in ["ydotool", "wtype", "grim", "slurp", "gnome-screenshot", "xdotool", "tesseract"]:
         print(f"{command}: {'yes' if command_exists(command) else 'no'}")
+
+    print(f"local_wayland_input_ready: {'yes' if local_wayland_input_available() else 'no'}")
 
     print(f"flatpak_spawn: {'yes' if can_spawn_host() else 'no'}")
     if can_spawn_host():
-        for command in ["xdotool", "spectacle", "import", "ydotool", "ydotoold"]:
+        for command in ["xdotool", "spectacle", "import", "grim", "wtype", "ydotool", "ydotoold", "tesseract"]:
             print(f"host_{command}: {'yes' if host_command_exists(command) else 'no'}")
         print(f"host_xdotool_ready: {'yes' if host_xdotool_available() else 'no'}")
+        print(f"host_wayland_input_ready: {'yes' if host_wayland_input_available() else 'no'}")
+        print(f"host_ydotoold_running: {'yes' if host_ydotool_daemon_running() else 'no'}")
 
-    for module in ["pyautogui", "PIL", "mss", "pynput"]:
+    for module in ["pyautogui", "PIL", "mss", "pynput", "pytesseract"]:
         try:
             __import__(module)
             print(f"{module}: yes")
@@ -455,6 +979,36 @@ def normalize_region(region: list[int] | None) -> tuple[int, int, int, int] | No
     return tuple(int(value) for value in region)
 
 
+def normalize_wayland_key_name(key: str) -> str:
+    if key.startswith("Key."):
+        key = key[4:]
+
+    mapping = {
+        "alt": "alt",
+        "backspace": "BackSpace",
+        "ctrl": "ctrl",
+        "control": "ctrl",
+        "delete": "Delete",
+        "down": "Down",
+        "enter": "Return",
+        "esc": "Escape",
+        "escape": "Escape",
+        "left": "Left",
+        "pagedown": "Next",
+        "pageup": "Prior",
+        "pgdn": "Next",
+        "pgup": "Prior",
+        "return": "Return",
+        "right": "Right",
+        "shift": "shift",
+        "space": "space",
+        "super": "super",
+        "tab": "Tab",
+        "up": "Up",
+    }
+    return mapping.get(key.lower(), key)
+
+
 def locate_image(pyautogui, image_path: Path, timeout: float, confidence: float, grayscale: bool,
                  region: list[int] | None) -> tuple[int, int] | None:
     if pyautogui is None:
@@ -495,92 +1049,157 @@ def run_flow(flow_path: Path, dry_run: bool) -> None:
         action = step.get("action")
         if not isinstance(action, str):
             fail(f"flow step {index} is missing an action")
+        optional = bool(step.get("optional", False))
 
         print(f"[{index}/{len(steps)}] {action}")
 
-        if action == "launch":
-            command = step.get("command")
-            if not command:
-                fail("launch action requires 'command'")
-            if dry_run:
-                continue
-            if isinstance(command, str):
-                subprocess.Popen(command, shell=True)
-            elif isinstance(command, list):
-                subprocess.Popen(command)
-            else:
-                fail("launch command must be a string or array")
-        elif action == "sleep":
-            seconds = float(step.get("seconds", 1.0))
-            time.sleep(seconds)
-        elif action in {"wait_image", "click_image"}:
-            image = step.get("image")
-            if not isinstance(image, str):
-                fail(f"{action} requires 'image'")
-            image_path = resolve_path(base_dir, image)
-            if not image_path.exists():
-                fail(f"image not found: {image_path}")
-            point = locate_image(
-                None,
-                image_path,
-                timeout=float(step.get("timeout", 20.0)),
-                confidence=float(step.get("confidence", 0.92)),
-                grayscale=bool(step.get("grayscale", False)),
-                region=step.get("region"),
-            )
-            if point is None:
-                fail(f"timed out waiting for image: {image_path}")
-            if action == "click_image" and not dry_run:
+        try:
+            if action == "launch":
+                command = step.get("command")
+                if not command:
+                    fail("launch action requires 'command'")
+                if dry_run:
+                    continue
+                if isinstance(command, str):
+                    subprocess.Popen(command, shell=True)
+                elif isinstance(command, list):
+                    subprocess.Popen(command)
+                else:
+                    fail("launch command must be a string or array")
+            elif action == "sleep":
+                seconds = float(step.get("seconds", 1.0))
+                time.sleep(seconds)
+            elif action == "focus_window":
+                if dry_run:
+                    continue
                 backend = detect_input_backend()
-                offset = step.get("offset", [0, 0])
-                x = int(point[0] + int(offset[0]))
-                y = int(point[1] + int(offset[1]))
-                move_pointer(backend, x, y, duration=float(step.get("moveDuration", 0.15)))
-                click_pointer(backend, presses=2 if step.get("double", False) else 1)
-        elif action == "click":
-            if dry_run:
+                timeout_seconds = float(step.get("timeout", 30.0))
+                poll_interval_seconds = float(step.get("pollInterval", 1.0))
+                if not wait_for_game_window_focus(backend, timeout_seconds, poll_interval_seconds):
+                    fail("could not find or focus the Age of Empires III window")
+            elif action in {"wait_image", "click_image"}:
+                image = step.get("image")
+                if not isinstance(image, str):
+                    fail(f"{action} requires 'image'")
+                image_path = resolve_path(base_dir, image)
+                if not image_path.exists():
+                    fail(f"image not found: {image_path}")
+                point = locate_image(
+                    None,
+                    image_path,
+                    timeout=float(step.get("timeout", 20.0)),
+                    confidence=float(step.get("confidence", 0.92)),
+                    grayscale=bool(step.get("grayscale", False)),
+                    region=step.get("region"),
+                )
+                if point is None:
+                    fail(f"timed out waiting for image: {image_path}")
+                if action == "click_image" and not dry_run:
+                    backend = detect_input_backend()
+                    offset = step.get("offset", [0, 0])
+                    x = int(point[0] + int(offset[0]))
+                    y = int(point[1] + int(offset[1]))
+                    move_pointer(backend, x, y, duration=float(step.get("moveDuration", 0.15)))
+                    click_pointer(backend, presses=2 if step.get("double", False) else 1)
+            elif action == "ensure_image":
+                image = step.get("image")
+                if not isinstance(image, str):
+                    fail("ensure_image requires 'image'")
+                image_path = resolve_path(base_dir, image)
+                if not image_path.exists():
+                    fail(f"image not found: {image_path}")
+                point = ensure_image_visible(
+                    image_path=image_path,
+                    overall_timeout=float(step.get("timeout", 20.0)),
+                    confidence=float(step.get("confidence", 0.92)),
+                    grayscale=bool(step.get("grayscale", False)),
+                    region=step.get("region"),
+                    recovery_key=str(step.get("recoveryKey")) if step.get("recoveryKey") is not None else None,
+                    recovery_presses=int(step.get("recoveryPresses", 1)),
+                    recovery_interval=float(step.get("recoveryInterval", 0.1)),
+                    recovery_sleep=float(step.get("recoverySleep", 0.5)),
+                    attempt_timeout=float(step.get("attemptTimeout", 2.0)),
+                    dry_run=dry_run,
+                )
+                if point is None:
+                    fail(f"timed out ensuring image: {image_path}")
+            elif action in {"wait_text", "click_text"}:
+                targets = target_texts_from_step(step)
+                match = locate_text_with_capture(
+                    targets=targets,
+                    timeout=float(step.get("timeout", 20.0)),
+                    region=step.get("region"),
+                    partial=bool(step.get("partial", True)),
+                    grayscale=bool(step.get("grayscale", True)),
+                    threshold=int(step["threshold"]) if "threshold" in step else None,
+                    psm=int(step.get("psm", 6)),
+                    match_index=int(step.get("matchIndex", 0)),
+                )
+                if match is None:
+                    fail(f"timed out waiting for text: {targets}")
+                if action == "click_text" and not dry_run:
+                    x, y, matched_text = match
+                    if x is None or y is None:
+                        fail(f"matched text without clickable OCR box: {matched_text}")
+                    backend = detect_input_backend()
+                    offset = step.get("offset", [0, 0])
+                    move_pointer(
+                        backend,
+                        int(x + int(offset[0])),
+                        int(y + int(offset[1])),
+                        duration=float(step.get("moveDuration", 0.15)),
+                    )
+                    click_pointer(backend, presses=2 if step.get("double", False) else 1)
+            elif action == "click":
+                if dry_run:
+                    continue
+                backend = detect_input_backend()
+                move_pointer(backend, int(step["x"]), int(step["y"]), duration=float(step.get("moveDuration", 0.15)))
+                click_pointer(backend)
+            elif action == "press":
+                if dry_run:
+                    continue
+                backend = detect_input_backend()
+                key = step.get("key")
+                if not isinstance(key, str):
+                    fail("press action requires 'key'")
+                press_key(backend, key, presses=int(step.get("presses", 1)), interval=float(step.get("interval", 0.05)))
+            elif action == "hotkey":
+                if dry_run:
+                    continue
+                backend = detect_input_backend()
+                keys = step.get("keys")
+                if not isinstance(keys, list) or not keys:
+                    fail("hotkey action requires a non-empty 'keys' array")
+                press_hotkey(backend, [str(key) for key in keys])
+            elif action == "type_text":
+                if dry_run:
+                    continue
+                backend = detect_input_backend()
+                text = step.get("text")
+                if not isinstance(text, str):
+                    fail("type_text action requires 'text'")
+                type_text(backend, text, interval=float(step.get("interval", 0.02)))
+            elif action == "scroll":
+                if dry_run:
+                    continue
+                backend = detect_input_backend()
+                scroll_pointer(backend, int(step.get("clicks", 0)))
+            elif action == "screenshot":
+                output = step.get("path")
+                if not isinstance(output, str):
+                    fail("screenshot action requires 'path'")
+                output_path = resolve_path(base_dir, output)
+                if not dry_run:
+                    capture_screen(output_path)
+            else:
+                fail(f"unknown action: {action}")
+        except SystemExit as exc:
+            if optional:
+                message = str(exc) if str(exc) else f"optional step failed: {action}"
+                print(f"warning: optional step skipped: {message}", file=sys.stderr)
                 continue
-            backend = detect_input_backend()
-            move_pointer(backend, int(step["x"]), int(step["y"]), duration=float(step.get("moveDuration", 0.15)))
-            click_pointer(backend)
-        elif action == "press":
-            if dry_run:
-                continue
-            backend = detect_input_backend()
-            key = step.get("key")
-            if not isinstance(key, str):
-                fail("press action requires 'key'")
-            press_key(backend, key, presses=int(step.get("presses", 1)), interval=float(step.get("interval", 0.05)))
-        elif action == "hotkey":
-            if dry_run:
-                continue
-            backend = detect_input_backend()
-            keys = step.get("keys")
-            if not isinstance(keys, list) or not keys:
-                fail("hotkey action requires a non-empty 'keys' array")
-            press_hotkey(backend, [str(key) for key in keys])
-        elif action == "type_text":
-            if dry_run:
-                continue
-            backend = detect_input_backend()
-            text = step.get("text")
-            if not isinstance(text, str):
-                fail("type_text action requires 'text'")
-            type_text(backend, text, interval=float(step.get("interval", 0.02)))
-        elif action == "scroll":
-            if dry_run:
-                continue
-            backend = detect_input_backend()
-            scroll_pointer(backend, int(step.get("clicks", 0)))
-        elif action == "screenshot":
-            output = step.get("path")
-            if not isinstance(output, str):
-                fail("screenshot action requires 'path'")
-            output_path = resolve_path(base_dir, output)
-            if not dry_run:
-                capture_screen(output_path)
-        else:
-            fail(f"unknown action: {action}")
+            raise
 
 
 def record_input(output_path: Path) -> None:
@@ -702,6 +1321,25 @@ def capture_reference(output_path: Path, region: list[int] | None) -> None:
     print(f"Saved reference image to {output_path}")
 
 
+def capture_loop(output_dir: Path, interval: float, count: int, region: list[int] | None) -> None:
+    ensure_runtime_support(needs_input=False)
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    latest_path = output_dir / "latest.png"
+    iteration = 0
+
+    while count <= 0 or iteration < count:
+        iteration += 1
+        timestamp = time.strftime("%Y%m%d_%H%M%S")
+        output_path = output_dir / f"screen_{timestamp}_{iteration:04d}.png"
+        backend = capture_screen(output_path, region)
+        shutil.copy2(output_path, latest_path)
+        print(f"[{iteration}] Captured via {backend}: {output_path}")
+        if count > 0 and iteration >= count:
+            break
+        time.sleep(max(0.1, interval))
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="AoE3 DE desktop automation helper")
     subparsers = parser.add_subparsers(dest="command", required=True)
@@ -720,6 +1358,12 @@ def build_parser() -> argparse.ArgumentParser:
     capture_parser = subparsers.add_parser("capture-reference", help="Capture a screenshot for image matching")
     capture_parser.add_argument("output", type=Path)
     capture_parser.add_argument("--region", nargs=4, type=int)
+
+    watch_parser = subparsers.add_parser("capture-loop", help="Capture repeated screenshots at a fixed interval")
+    watch_parser.add_argument("output", type=Path)
+    watch_parser.add_argument("--interval", type=float, default=1.0)
+    watch_parser.add_argument("--count", type=int, default=0, help="Number of screenshots to capture. Use 0 to run until stopped.")
+    watch_parser.add_argument("--region", nargs=4, type=int)
 
     probe_parser = subparsers.add_parser("probe-environment", help="Report available desktop automation backends")
 
@@ -742,6 +1386,8 @@ def main() -> None:
         replay_input(args.input.resolve(), args.speed)
     elif args.command == "capture-reference":
         capture_reference(args.output.resolve(), args.region)
+    elif args.command == "capture-loop":
+        capture_loop(args.output.resolve(), args.interval, args.count, args.region)
     elif args.command == "probe-environment":
         probe_environment()
     elif args.command == "collect-artifacts":

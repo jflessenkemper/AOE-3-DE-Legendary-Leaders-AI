@@ -1068,11 +1068,6 @@ inactive
 minInterval 5
 {
    llLogRuleTick("legendaryEliteGuardMonitor");
-   if (gLLPrisonSystemEnabled == false)
-   {
-      return;
-   }
-
    if (aiGetFallenExplorerID() >= 0)
    {
       llDestroyEliteGuardPlan();

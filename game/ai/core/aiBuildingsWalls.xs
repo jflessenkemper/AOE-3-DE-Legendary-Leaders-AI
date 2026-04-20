@@ -4,7 +4,7 @@
 //==============================================================================
 bool llShouldBuildLegendaryWalls(bool earlyGame = false)
 {
-   if ((cvOkToBuildWalls == false) || (gLLWallLevel <= 0))
+   if (cvOkToBuildWalls == false)
    {
       return (false);
    }
@@ -12,6 +12,11 @@ bool llShouldBuildLegendaryWalls(bool earlyGame = false)
    if (earlyGame == true)
    {
       return (gLLEarlyWallingEnabled);
+   }
+
+   if (gLLWallLevel <= 0)
+   {
+      return (false);
    }
 
    return (gLLLateWallingEnabled);
@@ -203,7 +208,7 @@ minInterval 10
       aiPlanSetActive(wallPlanID, true);
       //Enable our wall gap rule, too.
       xsEnableRule("fillInWallGapsNew");
-      aiEcho("Enabling Wall Plan for Base ID: "+kbBaseGetMainID(cMyID));
+      llVerboseEcho("Enabling Wall Plan for Base ID: "+kbBaseGetMainID(cMyID));
    } 
    xsDisableSelf();
 }
@@ -317,10 +322,10 @@ inactive
       return;
    }
 
-   aiEcho("Fort Limit: "+kbGetBuildLimit(cMyID, gFortUnit)+"Forts We Have: "
+   llVerboseEcho("Fort Limit: "+kbGetBuildLimit(cMyID, gFortUnit)+"Forts We Have: "
    +kbUnitCount(cMyID, gFortUnit, cUnitStateABQ)+"");
 if (fortsWanted > kbUnitCount(cMyID, gFortUnit, cUnitStateABQ)) {
-		aiEcho("I need to rebuild forts now!");
+		llVerboseEcho("I need to rebuild forts now!");
       // Nobody is making a fort, let's start a plan.
       if (gFortRebuildPlan == -1) {
          gFortRebuildPlan = aiPlanCreate("Fortress Build Plan", cPlanBuild);
@@ -383,8 +388,8 @@ if (fortsWanted > kbUnitCount(cMyID, gFortUnit, cUnitStateABQ)) {
          }
       
          aiPlanSetActive(gFortRebuildPlan);
-         aiEcho("Fort building activated!");
-         aiEcho("**** STARTING FORT PLAN, plan ID "+gFortRebuildPlan);
+         llVerboseEcho("Fort building activated!");
+         llVerboseEcho("**** STARTING FORT PLAN, plan ID "+gFortRebuildPlan);
       }
 	} else {
       aiPlanDestroy(gFortRebuildPlan);
@@ -480,7 +485,7 @@ minInterval 10
    cUnitStateABQ, gForwardBaseLocation, 40.0));
    int forwardBaseBarracksVal = kbUnitQueryExecute(createSimpleUnitQuery(cUnitTypeBarracks, cMyID, 
    cUnitStateABQ, gForwardBaseLocation, 40.0));
-   aiEcho("Stables: "+forwardBaseStablesVal+" Base State: "+gForwardBaseState+"");
+   llVerboseEcho("Stables: "+forwardBaseStablesVal+" Base State: "+gForwardBaseState+"");
    if (gForwardBaseState == cForwardBaseStateNone)
    {
       return;
@@ -490,7 +495,7 @@ minInterval 10
       && aiPlanGetActive(gForwardBaseStablesPlan) == false) {
       aiPlanDestroy(gForwardBaseStablesPlan);
       gForwardBaseStablesPlan = createSpacedLocationBuildPlan(cUnitTypeStable, 1, 45, true, cMilitaryEscrowID, gForwardBaseLocation, 1);
-      aiEcho("Stables Plan created!");
+      llVerboseEcho("Stables Plan created!");
    } else if (gForwardBaseState == cForwardBaseStateActive && forwardBaseStablesVal > 0) {
       // Start training at the forward base...
       if (kbBaseGetActive(cMyID, gIslandBaseID) == true) {
@@ -503,7 +508,7 @@ minInterval 10
       && aiPlanGetActive(gForwardBaseBarracksPlan) == false) {
       aiPlanDestroy(gForwardBaseBarracksPlan);
       gForwardBaseBarracksPlan = createSpacedLocationBuildPlan(cUnitTypeBarracks, 1, 45, true, cMilitaryEscrowID, gForwardBaseLocation, 1);
-      aiEcho("Barracks Plan created!");
+      llVerboseEcho("Barracks Plan created!");
    } else if (gForwardBaseState == cForwardBaseStateActive && forwardBaseBarracksVal > 0) {
       // Start training at the forward base...
       if (kbBaseGetActive(cMyID, gIslandBaseID) == true) {
@@ -565,7 +570,7 @@ minInterval 10
 //       fortPlan = createSimpleMaintainPlan(gFortUnit, limit, true, -1, 1);
 //       aiPlanSetDesiredPriority(fortPlan, 85);
 //       //aiPlanSetVariableInt(missionaryPlan, cTrainPlanBuildFromType, 0, cUnitTypeChurch);
-//       aiEcho("Fort maintain plan!");
+//       llVerboseEcho("Fort maintain plan!");
 //    }
 //    else
 //    {

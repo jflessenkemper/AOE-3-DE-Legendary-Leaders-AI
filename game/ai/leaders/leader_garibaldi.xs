@@ -6,7 +6,7 @@ bool gGaribaldiRulesEnabled = false;
 
 void initLeaderGaribaldi(void)
 {
-   aiEcho("Legendary Leaders: activating Giuseppe Garibaldi personality.");
+   llVerboseEcho("Legendary Leaders: activating Giuseppe Garibaldi personality.");
 
    llSetAggressivePersonality();
    btRushBoom = 0.5;

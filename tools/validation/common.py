@@ -67,7 +67,9 @@ def normalize_path(value: str) -> str:
 
 
 def iter_repo_resource_paths(element: ET.Element):
-    for child in child_elements(element):
+    for child in element.iter():
+        if not isinstance(child.tag, str):
+            continue
         if not child.tag.endswith("WPF"):
             continue
         if child.text is None:

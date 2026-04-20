@@ -1,0 +1,111 @@
+===============================================================
+File 'Age3Log.txt' opened at Sun Apr 19 17:29:40 2026
+
+===============================================================
+
+PreGame  90:  ************* Memory Report ***************
+PreGame  90:  There is  65 percent of memory in use.
+PreGame  90:  There are 32765520 total KB of physical memory.
+PreGame  90:  There are 11407892 free  KB of physical memory.
+PreGame  90:  There are 49147984 total KB of paging file.
+PreGame  90:  There are 25083348 free  KB of paging file.
+PreGame  90:  There are 137438953344 total KB of virtual memory.
+PreGame  90:  There are 137438773000 free  KB of virtual memory.
+PreGame  90:  There are 0 free  KB of extended memory.
+PreGame  90:  *******************************************
+PreGame  3413:  Account Event - New State: AttemptingLogIn, Old State: Invalid, Last Error ID: None
+PreGame  3446:  startGame : Sign In SUCCESS
+PreGame  3447:  User folder id: 76561198170207043
+PreGame  3471:  ------------------------------------------------------------
+PreGame  3471:  Version: 100.15.59076.0 (386756)
+PreGame  3471:  ------------------------------------------------------------
+PreGame  4893:  Enabled Mods:
+PreGame  4893:    1 "Legendary Leaders AI" Crc: 544070903 CrcFromInstall: 0 SafeForMultiplayer: 0
+PreGame  5036:  Game locale: English
+PreGame  8819:  SetupMovie: 1920 x 1080 z:\var\home\jflessenkemper\.local\share\steam\steamapps\common\aoe3de\Game\Movies\AOE_Microsoft.bk2
+PreGame  9073:  Data patch 28.0.2 crc 1248332430
+PreGame  11520:  SetupMovie: 1920 x 1080 z:\var\home\jflessenkemper\.local\share\steam\steamapps\common\aoe3de\Game\Movies\Tantalus.bk2
+PreGame  14187:     SetupMovie: 1920 x 1080 z:\var\home\jflessenkemper\.local\share\steam\steamapps\common\aoe3de\Game\Movies\ForgottenEmpires.bk2
+PreGame  19158:  SetupMovie: 3840 x 1638 z:\var\home\jflessenkemper\.local\share\steam\steamapps\common\aoe3de\Game\Movies\AOE_WorldsEdge.bk2
+PreGame  22371:  Game startup complete (22.35 sec)!
+PreGame  22372:  ------------------------------------------------------------
+PreGame  29872:  SetupMovie: 1920 x 1080 z:\var\home\jflessenkemper\.local\share\steam\steamapps\common\aoe3de\Game\Movies\IntroMovie.bk2
+PreGame  30818:  startGame : End
+PreGame  30822:  APregame : EnterMode : Start
+PreGame  30822:  ************* Memory Report ***************
+PreGame  30822:  There is  66 percent of memory in use.
+PreGame  30822:  There are 32765520 total KB of physical memory.
+PreGame  30822:  There are 10898560 free  KB of physical memory.
+PreGame  30822:  There are 49147984 total KB of paging file.
+PreGame  30822:  There are 24574048 free  KB of paging file.
+PreGame  30822:  There are 137438953344 total KB of virtual memory.
+PreGame  30822:  There are 137437857740 free  KB of virtual memory.
+PreGame  30822:  There are 0 free  KB of extended memory.
+PreGame  30822:  *******************************************
+PreGame  30822:  APregame : EnterMode : Create Home City
+PreGame  30919:  APregame : EnterMode : EnterScreen : Start
+PreGame  30919:  APregame : EnterMode : EnterScreen : End
+PreGame  30919:  ModeTrack -- entering mode 1 (Pregame) from mode 0 (<Invalid>)
+PreGame  30946:  APregame : EnterMode : End
+PreGame  33575:  Account Event - New State: LoggedIn, Old State: AttemptingLogIn, Last Error ID: None
+PreGame  38951:  Unlock Error - Inventory Extended:-1
+PreGame  39517:  APregame : LeaveMode : Start
+PreGame  39518:  ModeTrack -- leaving mode 1 (Pregame) going to mode 0 (<Invalid>)
+PreGame  39521:  APregame : LeaveMode : Destroyed City
+PreGame  39521:  APregame : LeaveMode : End
+PreGame  39521:  ModeTrack -- entering mode 3 (SinglePlayerSetup) from mode 0 (<Invalid>)
+PreGame  44256:  ModeTrack -- leaving mode 3 (SinglePlayerSetup) going to mode 0 (<Invalid>)
+PreGame  44259:  ModeTrack -- entering mode 7 (RandomMapGame) from mode 0 (<Invalid>)
+PreGame  70866:  ModeTrack -- leaving mode 7 (RandomMapGame) going to mode 0 (<Invalid>)
+PreGame  70871:  MAP CODE: 'legendary leaders test/8/3519/0/0/20/0/136/1/7/1/142/1/16/0/3/0/27/1/1'
+PreGame  71005:  ModeTrack -- leaving mode 6 (Random Map Setup) going to mode 0 (<Invalid>)
+PreGame  71005:  APregame : EnterMode : Start
+PreGame  71005:  ************* Memory Report ***************
+PreGame  71005:  There is  64 percent of memory in use.
+PreGame  71005:  There are 32765520 total KB of physical memory.
+PreGame  71005:  There are 11657868 free  KB of physical memory.
+PreGame  71005:  There are 49147984 total KB of paging file.
+PreGame  71005:  There are 25333372 free  KB of paging file.
+PreGame  71005:  There are 137438953344 total KB of virtual memory.
+PreGame  71005:  There are 137437603684 free  KB of virtual memory.
+PreGame  71005:  There are 0 free  KB of extended memory.
+PreGame  71005:  *******************************************
+PreGame  71125:  APregame : EnterMode : Create Home City
+PreGame  71211:  APregame : EnterMode : EnterScreen : Start
+PreGame  71211:  APregame : EnterMode : EnterScreen : End
+PreGame  71211:  ModeTrack -- entering mode 1 (Pregame) from mode 0 (<Invalid>)
+PreGame  71235:  APregame : EnterMode : End
+PreGame  73543:  APregame : LeaveMode : Start
+PreGame  73543:  ModeTrack -- leaving mode 1 (Pregame) going to mode 0 (<Invalid>)
+PreGame  73548:  APregame : LeaveMode : Destroyed City
+PreGame  73548:  APregame : LeaveMode : End
+PreGame  73548:  ModeTrack -- entering mode 3 (SinglePlayerSetup) from mode 0 (<Invalid>)
+PreGame  75965:  ModeTrack -- leaving mode 3 (SinglePlayerSetup) going to mode 0 (<Invalid>)
+PreGame  75969:  ModeTrack -- entering mode 7 (RandomMapGame) from mode 0 (<Invalid>)
+PreGame  102845:  ModeTrack -- leaving mode 7 (RandomMapGame) going to mode 0 (<Invalid>)
+PreGame  102850:  MAP CODE: 'legendary leaders test/8/30819/0/0/20/0/38/1/130/1/1/0/39/0/127/1/42/1/6'
+PreGame  102854:  ModeTrack -- leaving mode 6 (Random Map Setup) going to mode 0 (<Invalid>)
+PreGame  102854:  APregame : EnterMode : Start
+PreGame  102855:  ************* Memory Report ***************
+PreGame  102855:  There is  67 percent of memory in use.
+PreGame  102855:  There are 32765520 total KB of physical memory.
+PreGame  102855:  There are 10676512 free  KB of physical memory.
+PreGame  102855:  There are 49147984 total KB of paging file.
+PreGame  102855:  There are 24352252 free  KB of paging file.
+PreGame  102855:  There are 137438953344 total KB of virtual memory.
+PreGame  102855:  There are 137437594364 free  KB of virtual memory.
+PreGame  102855:  There are 0 free  KB of extended memory.
+PreGame  102855:  *******************************************
+PreGame  102965:  APregame : EnterMode : Create Home City
+PreGame  103055:  APregame : EnterMode : EnterScreen : Start
+PreGame  103055:  APregame : EnterMode : EnterScreen : End
+PreGame  103055:  ModeTrack -- entering mode 1 (Pregame) from mode 0 (<Invalid>)
+PreGame  103078:  APregame : EnterMode : End
+PreGame  103089:  ------------------------------------------------------------
+PreGame  103089:  shutdownGame : Start
+PreGame  103098:  APregame : LeaveMode : Start
+PreGame  103098:  ModeTrack -- leaving mode 1 (Pregame) going to mode 0 (<Invalid>)
+PreGame  103102:  APregame : LeaveMode : Destroyed City
+PreGame  103102:  APregame : LeaveMode : End
+PreGame  103113:  cleanup : Start
+PreGame  103256:  BRandomManager::~BRandomManager(void)

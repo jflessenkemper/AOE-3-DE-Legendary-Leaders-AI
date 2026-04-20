@@ -6,7 +6,7 @@ bool gKangxiRulesEnabled = false;
 
 void initLeaderKangxi(void)
 {
-   aiEcho("Legendary Leaders: activating Kangxi Emperor personality.");
+   llVerboseEcho("Legendary Leaders: activating Kangxi Emperor personality.");
 
    llSetBalancedPersonality();
    btRushBoom = 0.1;

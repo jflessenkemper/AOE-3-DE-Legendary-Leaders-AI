@@ -54,7 +54,7 @@ minInterval 20
       return;
    }
 
-   // aiEcho("Island Invasion Manager!");
+   // llVerboseEcho("Island Invasion Manager!");
    // sendStatement(1, cAICommPromptToAllyConfirm, gNavalInvasionCoastalPoint);
 
    aiPlanDestroy(gForgottenMilitaryAssaultPlanID);
@@ -81,7 +81,7 @@ rule warshipNuggetCollector
 inactive
 minInterval 10
 {
-   //aiEcho("There be treasures in these waters!");
+   //llVerboseEcho("There be treasures in these waters!");
 
    if (gDefenseReflex == true) {
       aiPlanDestroy(gWarshipExplorePlan);
@@ -159,7 +159,7 @@ minInterval 10
    int closeNumberFound = kbUnitQueryExecute(closeShipQueryId);
 
    //sendStatement(1, cAICommPromptToAllyConfirm, closestNuggetPosition);
-   //aiEcho("Number in Plan: "+aiPlanGetNumberUnits(gWarshipExplorePlan, cUnitTypeAbstractWarShip)+"");
+   //llVerboseEcho("Number in Plan: "+aiPlanGetNumberUnits(gWarshipExplorePlan, cUnitTypeAbstractWarShip)+"");
 
    if ((numberNuggets > 0 && numberGuardians == 0) && (closeNumberFound < 1 || 
         aiPlanGetNumberUnits(gWarshipExplorePlan, cUnitTypeAbstractWarShip) < 1))
@@ -217,7 +217,7 @@ minInterval 40
       galleonTrainingPlan = createSimpleMaintainPlan(cUnitTypeLogicalTypeLandMilitary, limit, true, -1, 1);
       aiPlanSetDesiredPriority(galleonTrainingPlan, 85);
       aiPlanSetVariableInt(galleonTrainingPlan, cTrainPlanBuildFromType, 0, gGalleonUnit);
-      aiEcho("Galleon training!");
+      llVerboseEcho("Galleon training!");
    }
    else
    {
@@ -719,7 +719,7 @@ void assignIdleIslandUnitsToAssault()
    }
    
    if (unitsAssigned > 0) {
-      aiEcho("Assigned " + unitsAssigned + " idle units to assault plan");
+      llVerboseEcho("Assigned " + unitsAssigned + " idle units to assault plan");
    }
 }
 
@@ -780,7 +780,7 @@ void assignIdleIslandUnitsToSearch()
    }
    
    if (unitsAssigned > 0) {
-      aiEcho("Assigned " + unitsAssigned + " idle units to search plan");
+      llVerboseEcho("Assigned " + unitsAssigned + " idle units to search plan");
    }
 }
 //==============================================================================
@@ -822,7 +822,7 @@ void createIslandBasePatrolPlan()
    aiPlanSetDesiredPriority(gIslandBasePatrolPlan, 55);
    aiPlanSetActive(gIslandBasePatrolPlan, true);
    
-   aiEcho("Created island base patrol plan");
+   llVerboseEcho("Created island base patrol plan");
 }
 //==============================================================================
 // manageIslandBaseTroops
@@ -933,7 +933,7 @@ void manageIslandBaseTroops()
    }
    
    if (unitsAssigned > 0) {
-      aiEcho("Managed " + unitsAssigned + " island base troops");
+      llVerboseEcho("Managed " + unitsAssigned + " island base troops");
    }
 }
 

@@ -9,7 +9,7 @@ include "core/aiCore.xs";
 //==============================================================================
 void main(void)
 {
-   aiEcho("Main is starting");
+   llVerboseEcho("Main is starting");
 
    // Set our random seed, "-1" is a random init. 
    // Very important that this is done early so we can use our rand functions.
@@ -75,6 +75,4 @@ void main(void)
    // Inside of townCenterComplete we keep querying to see if we have a TC, we need this to actually make sense of it all.
    // If we find a TC we enable the bulk of the rules and actually start playing for real.
    
-   // Send a message when game starts...
-   xsEnableRule("modInfoChat");
 }

@@ -6,7 +6,7 @@ bool gWellingtonRulesEnabled = false;
 
 void initLeaderWellington(void)
 {
-   aiEcho("Legendary Leaders: activating Duke of Wellington personality.");
+   llVerboseEcho("Legendary Leaders: activating Duke of Wellington personality.");
 
    llSetDefensivePersonality();
    btRushBoom = -0.3;

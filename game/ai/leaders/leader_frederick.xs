@@ -6,7 +6,7 @@ bool gFrederickRulesEnabled = false;
 
 void initLeaderFrederick(void)
 {
-   aiEcho("Legendary Leaders: activating Frederick the Great personality.");
+   llVerboseEcho("Legendary Leaders: activating Frederick the Great personality.");
 
    llSetBalancedPersonality();
    btRushBoom = 0.2;

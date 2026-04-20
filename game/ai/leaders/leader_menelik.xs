@@ -6,7 +6,7 @@ bool gMenelikRulesEnabled = false;
 
 void initLeaderMenelik(void)
 {
-   aiEcho("Legendary Leaders: activating Menelik II personality.");
+   llVerboseEcho("Legendary Leaders: activating Menelik II personality.");
 
    llSetAggressivePersonality();
    btRushBoom = 0.4;

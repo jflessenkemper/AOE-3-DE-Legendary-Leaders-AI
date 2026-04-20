@@ -6,7 +6,7 @@ bool gMontezumaRulesEnabled = false;
 
 void initLeaderMontezuma(void)
 {
-   aiEcho("Legendary Leaders: activating Montezuma II personality.");
+   llVerboseEcho("Legendary Leaders: activating Montezuma II personality.");
 
    llSetAggressivePersonality();
    btRushBoom = 0.6;

@@ -1,16 +1,30 @@
 {
   "suites": [
     {
-      "name": "prisoner_system_bootstrap",
-      "description": "Verifies that the revolution commander enabled the prisoner rules and surrender arrays during runtime.",
+      "name": "ai_rout_bootstrap",
+      "description": "Verifies that the legacy prisoner hook now enables AI-only non-elite rout while leaving elite units and player-controlled units under manual control.",
       "required": [
         {
-          "value": "Legendary Leaders: [RULE] enabling prisoner system rules",
-          "description": "prisoner system rules enabled"
+          "value": "Legendary Leaders: [RULE] AI non-elite rout enabled at 25% health; elite units hold and human-controlled units keep manual control",
+          "description": "AI rout enabled"
         },
         {
-          "value": "Legendary Leaders: prisoner system enabled with doctrine",
-          "description": "prisoner doctrine activation logged"
+          "value": "Legendary Leaders: prison hook remapped to AI-only rout; non-elite AI units fall back to their return point once pressure breaks them.",
+          "description": "AI rout contract logged"
+        }
+      ]
+    },
+    {
+      "name": "prisoner_system_bootstrap",
+      "description": "Legacy alias for ai_rout_bootstrap.",
+      "required": [
+        {
+          "value": "Legendary Leaders: [RULE] AI non-elite rout enabled at 25% health; elite units hold and human-controlled units keep manual control",
+          "description": "AI rout enabled"
+        },
+        {
+          "value": "Legendary Leaders: prison hook remapped to AI-only rout; non-elite AI units fall back to their return point once pressure breaks them.",
+          "description": "AI rout contract logged"
         }
       ]
     },
@@ -47,37 +61,94 @@
       ]
     },
     {
-      "name": "ai_prisoner_lane",
-      "description": "Verifies that an AI unit surrenders, reaches custody, and can be reclaimed.",
+      "name": "ai_rout_lane",
+      "description": "Verifies that an AI non-elite unit breaks, falls back toward its return point, and reaches its rout destination.",
       "required": [
         {
-          "value": "Legendary Leaders: [UNIT] ai-surrender-move unit=",
-          "description": "AI surrender move issued"
+          "value": "Legendary Leaders: [UNIT] ai-rout-start unit=",
+          "description": "AI rout start recorded"
         },
         {
-          "value": "Legendary Leaders: [UNIT] ai-surrender-arrival-move unit=",
-          "description": "AI surrender arrival recorded"
+          "value": "Legendary Leaders: [UNIT] ai-rout-move unit=",
+          "description": "AI rout move issued"
         },
         {
-          "value": "Legendary Leaders: [UNIT] ai-prisoner-return unit=",
-          "description": "AI prisoner reclaim recorded"
+          "value": "Legendary Leaders: [UNIT] ai-rout-arrival unit=",
+          "description": "AI rout arrival recorded"
         }
       ],
       "ordered": [
         {
-          "value": "Legendary Leaders: \\[UNIT\\] ai-surrender-move unit=",
+          "value": "Legendary Leaders: \\[UNIT\\] ai-rout-start unit=",
           "kind": "regex",
-          "description": "AI surrender move"
+          "description": "AI rout start"
         },
         {
-          "value": "Legendary Leaders: \\[UNIT\\] ai-surrender-arrival-move unit=",
+          "value": "Legendary Leaders: \\[UNIT\\] ai-rout-move unit=",
           "kind": "regex",
-          "description": "AI surrender arrival"
+          "description": "AI rout move"
         },
         {
-          "value": "Legendary Leaders: \\[UNIT\\] ai-prisoner-return unit=",
+          "value": "Legendary Leaders: \\[UNIT\\] ai-rout-arrival unit=",
           "kind": "regex",
-          "description": "AI reclaim"
+          "description": "AI rout arrival"
+        }
+      ]
+    },
+    {
+      "name": "ai_prisoner_lane",
+      "description": "Legacy alias for ai_rout_lane.",
+      "required": [
+        {
+          "value": "Legendary Leaders: [UNIT] ai-rout-start unit=",
+          "description": "AI rout start recorded"
+        },
+        {
+          "value": "Legendary Leaders: [UNIT] ai-rout-move unit=",
+          "description": "AI rout move issued"
+        },
+        {
+          "value": "Legendary Leaders: [UNIT] ai-rout-arrival unit=",
+          "description": "AI rout arrival recorded"
+        }
+      ],
+      "ordered": [
+        {
+          "value": "Legendary Leaders: \\[UNIT\\] ai-rout-start unit=",
+          "kind": "regex",
+          "description": "AI rout start"
+        },
+        {
+          "value": "Legendary Leaders: \\[UNIT\\] ai-rout-move unit=",
+          "kind": "regex",
+          "description": "AI rout move"
+        },
+        {
+          "value": "Legendary Leaders: \\[UNIT\\] ai-rout-arrival unit=",
+          "kind": "regex",
+          "description": "AI rout arrival"
+        }
+      ]
+    },
+    {
+      "name": "elite_support_blocks_rout",
+      "description": "Verifies that rout was blocked because elite support stayed nearby while under pressure.",
+      "required": [
+        {
+          "kind": "regex",
+          "value": "Legendary Leaders: \\[UNIT\\] ai-rout-blocked unit=\\d+ reason=elite-support",
+          "description": "support blocked rout"
+        }
+      ]
+    },
+    {
+      "name": "support_blocked_surrender",
+      "description": "Legacy alias for elite_support_blocks_rout.",
+      "required": [
+        {
+          "kind": "regex",
+          "value": "Legendary Leaders: \\[UNIT\\] ai-rout-blocked unit=\\d+ reason=elite-support",
+          "description": "support blocked rout"
         }
       ]
     },

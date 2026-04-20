@@ -26,6 +26,8 @@ Build one small repeatable scenario that verifies the current mod behavior:
 - Player 1: human
 - Player 2: AI
 
+This scenario path remains the right tool when you need exact player-triggered interactions, but it can still be run mostly as an observer map: let the pre-placed lanes fight on their own, and only intervene when you specifically need to test reclaim, support removal, or forced explorer death.
+
 ## Core Layout
 
 Use three lanes across the same scenario so one load can test several behaviors.
@@ -99,11 +101,22 @@ If you want the cleanest first pass, use only one nation pair for the whole scen
 
 If you want to make repeated testing faster in the editor, add these optional triggers:
 
-- Intro message trigger that labels each lane.
+- Intro message trigger that labels each lane so you can mostly spectate.
 - One-button unit heal trigger to reset a lane without rebuilding it.
 - One-button respawn trigger for each lane.
 - Explorer teleport trigger that moves the original owner's explorer into the prison radius.
 - AI explorer kill trigger for the elite-retreat test.
+- Observer-only trigger pads near the Player 1 Town Center so you can fire each lane reset without walking across the map.
+
+Recommended observer-first pad set:
+
+- `Lane A Reset`
+- `Lane B Reset`
+- `Lane C Reset`
+- `Explorer Reclaim Test`
+- `Kill AI Explorer`
+
+That keeps the scenario useful for the exact interactions the RMS cannot assert precisely, while still avoiding normal macro play.
 
 ## Pass Checklist
 

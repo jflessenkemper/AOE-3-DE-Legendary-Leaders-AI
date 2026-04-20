@@ -1,0 +1,26 @@
+===============================================================
+File 'Age3Log.txt' opened at Sun Apr 19 16:24:07 2026
+
+===============================================================
+
+PreGame  108:  ************* Memory Report ***************
+PreGame  108:  There is  56 percent of memory in use.
+PreGame  108:  There are 32765520 total KB of physical memory.
+PreGame  108:  There are 14335944 free  KB of physical memory.
+PreGame  108:  There are 49147984 total KB of paging file.
+PreGame  108:  There are 27994712 free  KB of paging file.
+PreGame  108:  There are 137438953344 total KB of virtual memory.
+PreGame  108:  There are 137438773056 free  KB of virtual memory.
+PreGame  108:  There are 0 free  KB of extended memory.
+PreGame  108:  *******************************************
+PreGame  3148:  Account Event - New State: AttemptingLogIn, Old State: Invalid, Last Error ID: None
+PreGame  3178:  startGame : Sign In SUCCESS
+PreGame  3178:  User folder id: 76561198170207043
+PreGame  3198:  ------------------------------------------------------------
+PreGame  3198:  Version: 100.15.59076.0 (386756)
+PreGame  3198:  ------------------------------------------------------------
+PreGame  4460:  Enabled Mods:
+PreGame  4460:    1 "Legendary Leaders AI" Crc: 544070903 CrcFromInstall: 0 SafeForMultiplayer: 0
+PreGame  4593:  Game locale: English
+PreGame  8137:  SetupMovie: 1920 x 1080 z:\var\home\jflessenkemper\.local\share\steam\steamapps\common\aoe3de\Game\Movies\AOE_Microsoft.bk2
+PreGame  8413:  Data patch 28.0.2 crc 1248332430

@@ -272,22 +272,22 @@ int getNavalTargetPlayerId()
    kbUnitQuerySetState(unitQueryID, cUnitStateABQ);
    kbUnitQueryResetResults(unitQueryID);
 	count = kbUnitQueryExecute(unitQueryID);
-   //aiEcho("Enemy fishing boats: "+ count);
+   //llVerboseEcho("Enemy fishing boats: "+ count);
    
    kbUnitQuerySetUnitType(unitQueryID, cUnitTypeAbstractWarShip);
    kbUnitQuerySetState(unitQueryID, cUnitStateABQ);
 	count = kbUnitQueryExecute(unitQueryID); // This value is cumulative.
-   //aiEcho("Enemy fishing boats and warships: "+ count);
+   //llVerboseEcho("Enemy fishing boats and warships: "+ count);
    
    kbUnitQuerySetUnitType(unitQueryID, gDockUnit);
    kbUnitQuerySetState(unitQueryID, cUnitStateABQ);
 	count = kbUnitQueryExecute(unitQueryID); // This value is cumulative.
-   //aiEcho("Enemy fishing boats, warships and docks: "+ count);
+   //llVerboseEcho("Enemy fishing boats, warships and docks: "+ count);
    
    if (count > 0) {
       enemyPlayerId = kbUnitGetPlayerID(kbUnitQueryGetResult(unitQueryID, 0));
    } 
-   aiEcho("Enemy Unit Owner: "+enemyPlayerId+" Unit Count: "+count+"");
+   llVerboseEcho("Enemy Unit Owner: "+enemyPlayerId+" Unit Count: "+count+"");
    
    return(enemyPlayerId);
 }
@@ -997,7 +997,7 @@ void trainFromIslandBase() {
 
       if (kbProtoUnitIsType(candidate, cUnitTypeAbstractInfantry) && gIslandBaseLandUnit < 1) {
          gIslandBaseLandUnit = candidate;
-         aiEcho("Land Unit To Train: " + kbGetProtoUnitName(gIslandBaseLandUnit));
+         llVerboseEcho("Land Unit To Train: " + kbGetProtoUnitName(gIslandBaseLandUnit));
       } else if (i == randomInteger) {
          gIslandBaseArtilleryUnit = candidate;
       }
@@ -1015,7 +1015,7 @@ void trainFromIslandBase() {
       //aiPlanSetVariableInt(gIslandBaseMaintainPlan, cTrainPlanBuildFromType, 1, cUnitTypeStable);
       aiPlanSetActive(gIslandBaseMaintainPlan, true);
       
-      aiEcho("Island base training initiated!");
+      llVerboseEcho("Island base training initiated!");
    }
    else
    {

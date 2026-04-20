@@ -18,7 +18,7 @@ int createColonizationTransportPlan(vector gatherPoint = cInvalidVector, vector 
    int unitPlanID = -1;
    int transportID = -1;
    float transportHitpoints = 0.0;
-   aiEcho("Ships: "+numberFound+"");
+   llVerboseEcho("Ships: "+numberFound+"");
    for (i = 0; < numberFound)
    {
       shipID = kbUnitQueryGetResult(shipQueryID, i);

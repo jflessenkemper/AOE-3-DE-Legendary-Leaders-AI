@@ -9,7 +9,7 @@ bool gBourbonRulesEnabled = false;
 
 void initLeaderBourbon(void)
 {
-   aiEcho("Legendary Leaders: activating Louis XVIII personality.");
+   llVerboseEcho("Legendary Leaders: activating Louis XVIII personality.");
 
    llSetDefensivePersonality();
    btRushBoom = -0.3;

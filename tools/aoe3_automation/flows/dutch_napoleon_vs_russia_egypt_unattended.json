@@ -1,0 +1,190 @@
+{
+  "notes": [
+    "This is the unattended version of the Dutch + Napoleon vs Russia + Egypt skirmish flow.",
+    "It still depends on the same lobby template images as the manual skirmish flow.",
+    "The end-of-match handling uses OCR so the runner can wait for Victory or Defeat and return to menu without manual input.",
+    "Keep game resolution, UI scale, and locale fixed. This flow assumes English text."
+  ],
+  "steps": [
+    {
+      "action": "launch",
+      "command": "xdg-open steam://run/933110"
+    },
+    {
+      "action": "sleep",
+      "seconds": 8
+    },
+    {
+      "action": "click_image",
+      "image": "../templates/dutch_napoleon_vs_russia_egypt/single_player_button.png",
+      "timeout": 60,
+      "confidence": 0.9
+    },
+    {
+      "action": "click_image",
+      "image": "../templates/dutch_napoleon_vs_russia_egypt/skirmish_button.png",
+      "timeout": 30,
+      "confidence": 0.9
+    },
+    {
+      "action": "click_image",
+      "image": "../templates/dutch_napoleon_vs_russia_egypt/player1_civ_dropdown.png",
+      "timeout": 30,
+      "confidence": 0.92
+    },
+    {
+      "action": "click_image",
+      "image": "../templates/dutch_napoleon_vs_russia_egypt/civ_dutch.png",
+      "timeout": 30,
+      "confidence": 0.92
+    },
+    {
+      "action": "click_image",
+      "image": "../templates/dutch_napoleon_vs_russia_egypt/player2_civ_dropdown.png",
+      "timeout": 30,
+      "confidence": 0.92
+    },
+    {
+      "action": "click_image",
+      "image": "../templates/dutch_napoleon_vs_russia_egypt/civ_napoleonic_france.png",
+      "timeout": 30,
+      "confidence": 0.92
+    },
+    {
+      "action": "click_image",
+      "image": "../templates/dutch_napoleon_vs_russia_egypt/player3_civ_dropdown.png",
+      "timeout": 30,
+      "confidence": 0.92
+    },
+    {
+      "action": "click_image",
+      "image": "../templates/dutch_napoleon_vs_russia_egypt/civ_russia.png",
+      "timeout": 30,
+      "confidence": 0.92
+    },
+    {
+      "action": "click_image",
+      "image": "../templates/dutch_napoleon_vs_russia_egypt/player4_civ_dropdown.png",
+      "timeout": 30,
+      "confidence": 0.92
+    },
+    {
+      "action": "click_image",
+      "image": "../templates/dutch_napoleon_vs_russia_egypt/civ_egyptians.png",
+      "timeout": 30,
+      "confidence": 0.92
+    },
+    {
+      "action": "click_image",
+      "image": "../templates/dutch_napoleon_vs_russia_egypt/player2_team_dropdown.png",
+      "timeout": 30,
+      "confidence": 0.92
+    },
+    {
+      "action": "click_image",
+      "image": "../templates/dutch_napoleon_vs_russia_egypt/team_1_option.png",
+      "timeout": 30,
+      "confidence": 0.92
+    },
+    {
+      "action": "click_image",
+      "image": "../templates/dutch_napoleon_vs_russia_egypt/player3_team_dropdown.png",
+      "timeout": 30,
+      "confidence": 0.92
+    },
+    {
+      "action": "click_image",
+      "image": "../templates/dutch_napoleon_vs_russia_egypt/team_2_option.png",
+      "timeout": 30,
+      "confidence": 0.92
+    },
+    {
+      "action": "click_image",
+      "image": "../templates/dutch_napoleon_vs_russia_egypt/player4_team_dropdown.png",
+      "timeout": 30,
+      "confidence": 0.92
+    },
+    {
+      "action": "click_image",
+      "image": "../templates/dutch_napoleon_vs_russia_egypt/team_2_option.png",
+      "timeout": 30,
+      "confidence": 0.92
+    },
+    {
+      "action": "click_image",
+      "image": "../templates/dutch_napoleon_vs_russia_egypt/map_dropdown.png",
+      "timeout": 30,
+      "confidence": 0.92
+    },
+    {
+      "action": "click_image",
+      "image": "../templates/dutch_napoleon_vs_russia_egypt/map_legendary_leaders_test.png",
+      "timeout": 30,
+      "confidence": 0.92
+    },
+    {
+      "action": "screenshot",
+      "path": "../artifacts/dutch_napoleon_vs_russia_egypt_lobby.png"
+    },
+    {
+      "action": "click_image",
+      "image": "../templates/dutch_napoleon_vs_russia_egypt/start_game_button.png",
+      "timeout": 30,
+      "confidence": 0.9
+    },
+    {
+      "action": "sleep",
+      "seconds": 12
+    },
+    {
+      "action": "screenshot",
+      "path": "../artifacts/dutch_napoleon_vs_russia_egypt_loading_or_start.png"
+    },
+    {
+      "action": "wait_text",
+      "texts": [
+        "Victory",
+        "Defeat"
+      ],
+      "timeout": 5400,
+      "grayscale": true,
+      "partial": false,
+      "psm": 6,
+      "threshold": 170
+    },
+    {
+      "action": "screenshot",
+      "path": "../artifacts/dutch_napoleon_vs_russia_egypt_result.png"
+    },
+    {
+      "action": "click_text",
+      "texts": [
+        "Continue",
+        "OK"
+      ],
+      "timeout": 60,
+      "grayscale": true,
+      "partial": false,
+      "psm": 6,
+      "threshold": 165
+    },
+    {
+      "action": "click_text",
+      "texts": [
+        "Home City",
+        "Main Menu"
+      ],
+      "timeout": 90,
+      "grayscale": true,
+      "partial": false,
+      "psm": 6,
+      "threshold": 165,
+      "optional": true
+    },
+    {
+      "action": "screenshot",
+      "path": "../artifacts/dutch_napoleon_vs_russia_egypt_postgame.png",
+      "optional": true
+    }
+  ]
+}

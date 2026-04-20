@@ -15,6 +15,10 @@ LOCAL_DECLARATION_RE = re.compile(r"^\s*(int|bool|float|string|vector)\s+([A-Za-
 FUNCTION_RE = re.compile(r"^\s*(?:void|bool|int|float|string|vector)\s+([A-Za-z_][A-Za-z0-9_]*)\s*\(")
 RULE_RE = re.compile(r"^\s*rule\s+([A-Za-z_][A-Za-z0-9_]*)\b")
 FUNCTION_CALL_RE = re.compile(r"\b([A-Za-z_][A-Za-z0-9_]*)\s*\(")
+INCLUDE_RE = re.compile(r'^\s*include\s+"([^"]+)"\s*;?')
+CALLABLE_DECL_RE = re.compile(r"^\s*(?:mutable\s+)?(?:void|bool|int|float|string|vector)\s+([A-Za-z_][A-Za-z0-9_]*)\s*\(")
+KNOWN_ENGINE_PREFIXES = ("xs", "ai", "kb", "cv", "bt")
+KNOWN_LANGUAGE_CALLS = {"if", "for", "switch", "while", "return"}
 STOCK_XS_CALLS = {
     "xsArrayCreateBool",
     "xsArrayCreateFloat",
@@ -78,6 +82,43 @@ class Block:
 
 def iter_xs_files(root: Path):
     yield from sorted(root.rglob("*.xs"))
+
+
+def strip_inline_block_comments(line: str, in_block_comment: bool) -> tuple[str, bool]:
+    result = []
+    cursor = 0
+
+    while cursor < len(line):
+        if in_block_comment:
+            end = line.find("*/", cursor)
+            if end == -1:
+                return ("".join(result), True)
+            cursor = end + 2
+            in_block_comment = False
+            continue
+
+        start = line.find("/*", cursor)
+        if start == -1:
+            result.append(line[cursor:])
+            break
+
+        result.append(line[cursor:start])
+        cursor = start + 2
+        in_block_comment = True
+
+    return ("".join(result), in_block_comment)
+
+
+def collect_declared_callables(ai_root: Path) -> set[str]:
+    declared: set[str] = set()
+    for file_path in iter_xs_files(ai_root):
+        lines = file_path.read_text(encoding="utf-8", errors="replace").splitlines()
+        in_block_comment = False
+        for line in lines:
+            code, in_block_comment = strip_inline_block_comments(line, in_block_comment)
+            if match := CALLABLE_DECL_RE.match(code):
+                declared.add(match.group(1))
+    return declared
 
 
 def check_duplicate_names(file_path: Path, lines: list[str], repo_root: Path) -> list[str]:
@@ -185,6 +226,76 @@ def check_unknown_xs_calls(file_path: Path, lines: list[str], repo_root: Path) -
     return issues
 
 
+def flatten_loader_includes(entry_file: Path, ai_root: Path) -> list[tuple[Path, int, str]]:
+    ordered_lines: list[tuple[Path, int, str]] = []
+    visited: set[Path] = set()
+
+    def visit(file_path: Path) -> None:
+        resolved = file_path.resolve()
+        if resolved in visited or not file_path.exists():
+            return
+        visited.add(resolved)
+
+        lines = file_path.read_text(encoding="utf-8", errors="replace").splitlines()
+        for index, line in enumerate(lines, start=1):
+            if match := INCLUDE_RE.match(line):
+                include_path = ai_root / match.group(1).replace("\\", "/")
+                visit(include_path)
+                continue
+            ordered_lines.append((file_path, index, line))
+
+    visit(entry_file)
+    return ordered_lines
+
+
+def should_track_loader_call(function_name: str) -> bool:
+    if function_name in KNOWN_LANGUAGE_CALLS:
+        return False
+    if function_name.startswith(KNOWN_ENGINE_PREFIXES):
+        return False
+    return True
+
+
+def check_unresolved_loader_calls(repo_root: Path) -> list[str]:
+    ai_root = repo_root / "game" / "ai"
+    loader_path = ai_root / "aiLoaderStandard.xs"
+    if not loader_path.exists():
+        return []
+
+    issues: list[str] = []
+    known_helpers: set[str] = set()
+    declared_callables = collect_declared_callables(ai_root)
+    in_block_comment = False
+
+    for file_path, index, line in flatten_loader_includes(loader_path, ai_root):
+        uncommented, in_block_comment = strip_inline_block_comments(line, in_block_comment)
+        code = uncommented.split("//", 1)[0]
+        stripped = code.strip()
+        if not stripped:
+            continue
+
+        declaration_match = CALLABLE_DECL_RE.match(code)
+        if declaration_match is not None:
+            declared_name = declaration_match.group(1)
+            known_helpers.add(declared_name)
+
+        for match in FUNCTION_CALL_RE.finditer(code):
+            function_name = match.group(1)
+            if should_track_loader_call(function_name) is False:
+                continue
+            if function_name not in declared_callables:
+                continue
+            if declaration_match is not None and function_name == declaration_match.group(1):
+                continue
+            if function_name not in known_helpers:
+                rel_path = repo_relative(file_path, repo_root)
+                issues.append(
+                    f"{rel_path}:{index}: helper call '{function_name}' appears before any declaration in aiLoaderStandard include order"
+                )
+
+    return issues
+
+
 def validate_xs_scripts(repo_root: Path = REPO_ROOT) -> list[str]:
     ai_root = repo_root / "game" / "ai"
     if not ai_root.exists():
@@ -197,6 +308,8 @@ def validate_xs_scripts(repo_root: Path = REPO_ROOT) -> list[str]:
         issues.extend(check_duplicate_locals(file_path, lines, repo_root))
         issues.extend(check_unsupported_builtins(file_path, lines, repo_root))
         issues.extend(check_unknown_xs_calls(file_path, lines, repo_root))
+
+    issues.extend(check_unresolved_loader_calls(repo_root))
 
     return issues
 

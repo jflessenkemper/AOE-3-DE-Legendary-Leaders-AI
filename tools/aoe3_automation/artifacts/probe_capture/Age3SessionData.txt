@@ -1,0 +1,5 @@
+PlayerSessionID = 92c75c9c-ffc5-464e-a285-11c73db378b8
+Version = 100.15.59076.0
+DataPatchVersion = 28.0.2
+Config = Final
+Stream = //stream/Age3/Age3-BuildFarm-Stable

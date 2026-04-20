@@ -69,7 +69,7 @@ void llResetBuildStyleProfile(void)
 {
    gLLBuildStyle = 0;
    gLLWallLevel = 1;
-   gLLEarlyWallingEnabled = false;
+   gLLEarlyWallingEnabled = true;
    gLLLateWallingEnabled = true;
    gLLHouseDistanceMultiplier = 1.0;
    gLLEconomicDistanceMultiplier = 1.0;
@@ -90,7 +90,7 @@ void llConfigureBuildStyleProfile(int style = 0, int wallLevel = 1, bool earlyWa
 {
    gLLBuildStyle = style;
    gLLWallLevel = wallLevel;
-   gLLEarlyWallingEnabled = earlyWalls;
+   gLLEarlyWallingEnabled = true;
    gLLLateWallingEnabled = (wallLevel > 0);
    gLLHouseDistanceMultiplier = houseDistanceMultiplier;
    gLLEconomicDistanceMultiplier = economicDistanceMultiplier;
@@ -100,7 +100,7 @@ void llConfigureBuildStyleProfile(int style = 0, int wallLevel = 1, bool earlyWa
    gLLFortLevel = fortLevel;
    gLLForwardBaseTowerCount = forwardBaseTowerCount;
    gLLPreferForwardFortifiedBase = preferForwardFortifiedBase;
-   cvOkToBuildWalls = (wallLevel > 0);
+   cvOkToBuildWalls = true;
 }
 
 void llUseCompactFortifiedCoreStyle(int wallLevel = 3, bool earlyWalls = true)

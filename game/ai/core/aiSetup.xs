@@ -3293,18 +3293,11 @@ minInterval 10
 
 //==============================================================================
 // modInfoChat
-// Send a message to announce that this mod is active.
+// Deprecated startup announcement rule kept inactive for compatibility.
 //==============================================================================
 rule modInfoChat
 inactive
 minInterval 10
 {
-	for (player = 1; < cNumberPlayers)
-   {
-      if (kbIsPlayerHuman(player) == true) {
-         aiChat(player, "Enhanced AI. Version 1.0.9: Updated on the 29th of December, 2025. Enjoy!");
-      }
-   }
-
 	xsDisableSelf();
 }

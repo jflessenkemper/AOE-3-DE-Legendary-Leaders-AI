@@ -10,6 +10,7 @@ It supports two automation styles:
 It also includes two support commands:
 
 - `probe-environment`: report which Linux desktop automation backends are available.
+- `capture-loop`: capture screenshots on a fixed interval so you can observe the current game state continuously.
 - `collect-artifacts`: copy AoE3 log files and optionally grab a screenshot after a failure.
 
 The image-driven flow is the safer mode for game menus because it is less sensitive to timing drift than pure replay.
@@ -26,22 +27,44 @@ pip install -r tools/aoe3_automation/requirements.txt
 
 ## Linux Note
 
-This script is intended for X11 or XWayland. Pure Wayland sessions often block input injection and sometimes screen scraping.
+The harness supports two Linux automation paths:
 
-If you run VS Code inside Flatpak, the script can also use host-side tools through `flatpak-spawn --host`. On this machine that means:
+- X11/XWayland via `pyautogui` or host `xdotool`
+- native Wayland via `ydotool` + `wtype` for input and `grim` for screenshots
 
-- host `xdotool` can drive input
-- host `spectacle` can capture screenshots
+If you run VS Code inside Flatpak, the script can use host-side tools through `flatpak-spawn --host`.
 
-That makes image-driven flows viable from inside the sandbox, as long as the host X display remains reachable.
+For this machine, prefer host `xdotool` first when the game window is exposed through XWayland. Some compositors reject the virtual-keyboard path used by `wtype`, which can stall flows even when `ydotoold` is running.
 
-If host passthrough is not available, you will still need a compositor-approved injector such as `ydotool` or a normal X11/XWayland session.
+Fallback host paths:
+
+- host `xdotool` for pointer movement, clicks, and key presses when the game window is reachable
+- host `ydotool` plus `wtype` for native Wayland input when XWayland control is not available
+- host `grim` or `spectacle` for screenshots
+
+Use the helper below to inspect the host machine and print the exact install command:
+
+```bash
+tools/aoe3_automation/setup_linux_host.sh
+```
+
+On an immutable Fedora/Bazzite-style host this will recommend `rpm-ostree install` and a reboot before the new tools become available.
 
 Check your current environment with:
 
 ```bash
 python3 tools/aoe3_automation/aoe3_ui_automation.py probe-environment
 ```
+
+`probe-environment` reports whether local or host Wayland input is ready and whether `ydotoold` is already running.
+
+## Host Setup
+
+After the host packages are installed:
+
+1. Ensure `ydotoold` is running on the host.
+2. Re-run `probe-environment` from the repo.
+3. Run a flow with `run-flow` or `launch_retest_mod.sh`.
 
 ## Commands
 
@@ -62,6 +85,14 @@ Capture a reference image for button matching:
 ```bash
 python3 tools/aoe3_automation/aoe3_ui_automation.py capture-reference tools/aoe3_automation/templates/single_player_button.png
 ```
+
+Capture one screenshot every second into a folder while the game is open:
+
+```bash
+python3 tools/aoe3_automation/aoe3_ui_automation.py capture-loop tools/aoe3_automation/artifacts/live_watch --interval 1.0
+```
+
+`capture-loop` writes timestamped frames and also refreshes `latest.png` on each capture. That gives you a simple observe-act workflow: keep grabbing the current screen, inspect `latest.png`, then issue a `run-flow`, `press`, `click`, or other targeted action based on what is visible.
 
 Run an image-driven flow:
 
@@ -88,7 +119,7 @@ Orchestrate the whole sequence with one command:
 ```bash
 ./.venv/bin/python tools/aoe3_automation/run_runtime_validation.py \
 	tools/aoe3_automation/flows/dutch_napoleon_vs_russia_egypt_skirmish.json \
-	--suite prisoner_system_bootstrap \
+	--suite ai_rout_bootstrap \
 	--artifacts-dir tools/aoe3_automation/artifacts/dutch_napoleon_vs_russia_egypt \
 	--screenshot
 ```
@@ -101,12 +132,38 @@ Retest the current mod install with one shell command:
 tools/aoe3_automation/launch_retest_mod.sh
 ```
 
+For a reproducible sandbox run that first syncs the repo into the live Proton mod install, republishes the active test random map into the profile `RandMaps` folder, and then delegates to `launch_retest_mod.sh`, use:
+
+```bash
+python3 tools/aoe3_automation/run_sandbox.py \
+	--runtime-suite ai_rout_bootstrap
+```
+
+Useful variants:
+
+```bash
+python3 tools/aoe3_automation/run_sandbox.py --dry-run
+python3 tools/aoe3_automation/run_sandbox.py --skip-launch --skip-flow
+python3 tools/aoe3_automation/run_sandbox.py --scenario "Legendary Leaders Test" --skip-flow
+```
+
+`run_sandbox.py` is the preferred entrypoint for this repo when debugging custom RMS, scenario payloads, or live-install drift because it closes the gap between repo state and what AoE3 actually loads.
+
+Before launching, `launch_retest_mod.sh` now checks whether AoE3 or its Proton children are still alive on the host. It first asks Steam to stop app `933110`, then escalates to terminating matching `compatdata/933110`, `RelicCardinal`, `AoE3`, `wine64`, or Proton child processes if Steam is stuck showing the game as still open.
+
+If Steam still shows AoE3 as running after you already closed the window manually, the reliable fix is the same sequence the script now uses:
+
+```bash
+flatpak-spawn --host sh -lc 'steam steam://stop/933110 >/dev/null 2>&1 || true'
+flatpak-spawn --host sh -lc 'pkill -f -i "compatdata/933110|age3y\\.exe|AoE3|RelicCardinal|steamgameid=933110" >/dev/null 2>&1 || true'
+```
+
 Useful variants:
 
 ```bash
 tools/aoe3_automation/launch_retest_mod.sh --skip-launch --flow tools/aoe3_automation/flows/capture_open_menu.json
 tools/aoe3_automation/launch_retest_mod.sh --skip-launch --skip-flow
-tools/aoe3_automation/launch_retest_mod.sh --runtime-suite prisoner_system_bootstrap
+tools/aoe3_automation/launch_retest_mod.sh --runtime-suite ai_rout_bootstrap
 ```
 
 The script snapshots the previous `Age3Log.txt`, runs the static validation profiles, optionally launches AoE3, optionally runs a UI flow, collects artifacts, and writes a grep-based runtime error scan into the run artifact directory.
@@ -119,6 +176,8 @@ The script snapshots the previous `Age3Log.txt`, runs the static validation prof
 - `sleep`
 - `wait_image`
 - `click_image`
+- `wait_text`
+- `click_text`
 - `click`
 - `press`
 - `hotkey`
@@ -132,10 +191,12 @@ See [tools/aoe3_automation/flows/example_skirmish_flow.json](tools/aoe3_automati
 
 1. Capture reference images for the exact buttons and civ/map slots you want.
 2. Build a `run-flow` JSON that waits for those images before clicking.
-3. Keep the game resolution and UI scale fixed.
-4. Use `record-input` only for short stable segments, not as the primary whole-run approach.
-5. Run `probe-environment` first if you are inside Flatpak or Wayland, so you know which host backends are actually usable.
-6. After the match or scenario run, validate `Age3Log.txt` with `tools/validation/validate_runtime_logs.py` and the appropriate suite name.
+3. Run `python3 tools/aoe3_automation/run_sandbox.py --dry-run` to confirm the live mod root, profile root, and published assets.
+4. Keep the game resolution and UI scale fixed.
+5. Use `record-input` only for short stable segments, not as the primary whole-run approach.
+6. Run `probe-environment` first if you are inside Flatpak or Wayland, so you know which host backends are actually usable.
+7. Prefer `run_sandbox.py` over manual file copies so the active local mod, profile `RandMaps`, and artifacts folder all stay in sync.
+8. After the match or scenario run, validate `Age3Log.txt` with `tools/validation/validate_runtime_logs.py` and the appropriate suite name.
 
 ## Current Limits
 
@@ -143,5 +204,29 @@ See [tools/aoe3_automation/flows/example_skirmish_flow.json](tools/aoe3_automati
 - It relies on the game window being visible.
 - It will be brittle if the UI layout, resolution, or language changes.
 - `Esc` is the stop key for recording.
-- `record-input` still depends on local Python packages such as `pynput`; host passthrough currently helps with playback and flow execution, not raw event capture.
+- `record-input` still depends on local Python packages such as `pynput`; host passthrough helps with playback and flow execution, not raw event capture.
+- `replay-input` is still a poor fit on Wayland because low-level mouse down/up replay is not supported by the `ydotool` path. Prefer `run-flow` for real tests.
+- Wheel scrolling is not implemented for the Wayland backend yet, so flows should prefer direct image clicks over scroll-dependent menu traversal.
 - Image matching still depends on Python dependencies from [tools/aoe3_automation/requirements.txt](tools/aoe3_automation/requirements.txt).
+- OCR-driven `wait_text` and `click_text` steps require `pytesseract` plus a `tesseract` binary available either locally or on the host through `flatpak-spawn`.
+
+## Unattended Runs
+
+For a hands-off test run, build one flow that both starts the match and waits for post-game UI before collecting artifacts. The OCR actions are intended for the long-running part because they are easier to generalize across end-of-match screens than fixed templates.
+
+Example:
+
+```bash
+python3 tools/aoe3_automation/run_runtime_validation.py \
+	tools/aoe3_automation/flows/dutch_napoleon_vs_russia_egypt_unattended.json \
+	--suite ai_rout_bootstrap \
+	--artifacts-dir tools/aoe3_automation/artifacts/dutch_napoleon_vs_russia_egypt_unattended \
+	--screenshot
+```
+
+Useful flow fields for unattended runs:
+
+- `optional: true` lets the run continue if a non-essential cleanup click is absent.
+- `matchIndex` selects the zero-based OCR match to use when the same text appears more than once in the search region.
+- `wait_text` waits for OCR text such as `Victory`, `Defeat`, `Continue`, `Home City`, or `Main Menu`.
+- `click_text` clicks the center of OCR-detected text when a stable template image is not practical.

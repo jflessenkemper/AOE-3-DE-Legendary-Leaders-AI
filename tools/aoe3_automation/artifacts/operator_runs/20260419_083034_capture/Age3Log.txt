@@ -1,0 +1,32 @@
+===============================================================
+File 'Age3Log.txt' opened at Sun Apr 19 18:29:49 2026
+
+===============================================================
+
+PreGame  81:  ************* Memory Report ***************
+PreGame  81:  There is  66 percent of memory in use.
+PreGame  81:  There are 32765520 total KB of physical memory.
+PreGame  81:  There are 11101872 free  KB of physical memory.
+PreGame  81:  There are 49147984 total KB of paging file.
+PreGame  81:  There are 24456812 free  KB of paging file.
+PreGame  81:  There are 137438953344 total KB of virtual memory.
+PreGame  81:  There are 137438773200 free  KB of virtual memory.
+PreGame  81:  There are 0 free  KB of extended memory.
+PreGame  81:  *******************************************
+PreGame  3220:  Account Event - New State: AttemptingLogIn, Old State: Invalid, Last Error ID: None
+PreGame  3250:  startGame : Sign In SUCCESS
+PreGame  3251:  User folder id: 76561198170207043
+PreGame  3273:  ------------------------------------------------------------
+PreGame  3273:  Version: 100.15.59076.0 (386756)
+PreGame  3273:  ------------------------------------------------------------
+PreGame  4670:  Enabled Mods:
+PreGame  4670:    1 "Legendary Leaders AI" Crc: 544070903 CrcFromInstall: 0 SafeForMultiplayer: 0
+PreGame  4802:  Game locale: English
+PreGame  8447:  SetupMovie: 1920 x 1080 z:\var\home\jflessenkemper\.local\share\steam\steamapps\common\aoe3de\Game\Movies\AOE_Microsoft.bk2
+PreGame  8697:  Data patch 28.0.2 crc 1248332430
+PreGame  11158:  SetupMovie: 1920 x 1080 z:\var\home\jflessenkemper\.local\share\steam\steamapps\common\aoe3de\Game\Movies\Tantalus.bk2
+PreGame  13830:     SetupMovie: 1920 x 1080 z:\var\home\jflessenkemper\.local\share\steam\steamapps\common\aoe3de\Game\Movies\ForgottenEmpires.bk2
+PreGame  18803:  SetupMovie: 3840 x 1638 z:\var\home\jflessenkemper\.local\share\steam\steamapps\common\aoe3de\Game\Movies\AOE_WorldsEdge.bk2
+PreGame  21014:  Game startup complete (21.00 sec)!
+PreGame  21014:  ------------------------------------------------------------
+PreGame  40283:  SetupMovie: 1920 x 1080 z:\var\home\jflessenkemper\.local\share\steam\steamapps\common\aoe3de\Game\Movies\IntroMovie.bk2

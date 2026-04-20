@@ -7,6 +7,321 @@
 */
 //==============================================================================
 
+extern int gCommanderRecoveryPlanID = -1;
+
+void llDestroyCommanderRecoveryPlan(void)
+{
+   if (gCommanderRecoveryPlanID < 0)
+   {
+      return;
+   }
+
+   aiPlanDestroy(gCommanderRecoveryPlanID);
+   gCommanderRecoveryPlanID = -1;
+}
+
+bool llIsCommanderAvailableForMajorAttack(void)
+{
+   if (aiGetFallenExplorerID() >= 0)
+   {
+      return (false);
+   }
+
+   int heroQueryID = createSimpleUnitQuery(cUnitTypeHero, cMyID, cUnitStateAlive);
+   return (kbUnitQueryExecute(heroQueryID) > 0);
+}
+
+bool llHasStartedBaseWalling(int mainBaseID = -1)
+{
+   if (mainBaseID < 0)
+   {
+      mainBaseID = kbBaseGetMainID(cMyID);
+   }
+
+   if (mainBaseID < 0)
+   {
+      return (true);
+   }
+
+   if (kbUnitCount(cMyID, cUnitTypeAbstractWall, cUnitStateABQ) > 0)
+   {
+      return (true);
+   }
+
+   return (false);
+}
+
+bool llHasOperationalPrisonStructure(void)
+{
+   if ((gLLPrisonSystemEnabled == false) || (gLLPrisonStructureType < 0) || (gLLPrisonLocation == cInvalidVector))
+   {
+      return (false);
+   }
+
+   return (getUnitCountByLocation(gLLPrisonStructureType, cMyID, cUnitStateABQ, gLLPrisonLocation, 30.0) > 0);
+}
+
+bool llHasWalledPrisonCompound(void)
+{
+   if ((gLLPrisonSystemEnabled == false) || (gLLPrisonLocation == cInvalidVector))
+   {
+      return (false);
+   }
+
+   if (getUnitCountByLocation(cUnitTypeAbstractWall, cMyID, cUnitStateABQ, gLLPrisonLocation, 20.0) < 6)
+   {
+      return (false);
+   }
+
+   if ((gLLPrisonWallPlanID >= 0) && (aiPlanGetActive(gLLPrisonWallPlanID) == true))
+   {
+      return (false);
+   }
+
+   return (true);
+}
+
+bool llEnsurePrisonCompoundBeforeAttack(void)
+{
+   if (gLLPrisonSystemEnabled == false)
+   {
+      return (true);
+   }
+
+   if (gLLPrisonLocation == cInvalidVector)
+   {
+      llLogDecision("PRISON", "holding attacks until prison anchor is established");
+      return (false);
+   }
+
+   if (llHasOperationalPrisonStructure() == false)
+   {
+      llLogDecision("PRISON", "holding attacks until prison structure is built");
+      return (false);
+   }
+
+   if (llHasWalledPrisonCompound() == false)
+   {
+      llLogDecision("PRISON", "holding attacks until prison walls are built");
+      return (false);
+   }
+
+   return (true);
+}
+
+bool llEnsureBaseWallsBeforeMajorAttack(int mainBaseID = -1)
+{
+   if (cvOkToBuildWalls == false)
+   {
+      return (true);
+   }
+
+   if (mainBaseID < 0)
+   {
+      mainBaseID = kbBaseGetMainID(cMyID);
+   }
+
+   if (mainBaseID < 0)
+   {
+      return (true);
+   }
+
+   if (llHasStartedBaseWalling(mainBaseID) == true)
+   {
+      return (true);
+   }
+
+   if (aiPlanGetIDByTypeAndVariableType(cPlanBuildWall, cBuildWallPlanWallType, cBuildWallPlanWallTypeRing, true) >= 0)
+   {
+      llLogDecision("WALL", "holding major attack until base walls begin construction");
+      return (false);
+   }
+
+   vector baseCenter = kbBaseGetLocation(cMyID, mainBaseID);
+   if (baseCenter == cInvalidVector)
+   {
+      return (true);
+   }
+
+   if (kbResourceGet(cResourceWood) < 125.0)
+   {
+      llLogDecision("WALL", "holding major attack until enough wood is available for pre-attack walls");
+      return (false);
+   }
+
+   float wallRadius = 42.0;
+   int gateCount = 4;
+   if (gIslandMap == true)
+   {
+      wallRadius = 55.0;
+   }
+
+   if (gLLWallLevel == 1)
+   {
+      wallRadius = wallRadius - 6.0;
+      gateCount = gateCount + 2;
+   }
+   else if (gLLWallLevel == 3)
+   {
+      wallRadius = wallRadius + 6.0;
+      gateCount = gateCount - 1;
+   }
+   else if (gLLWallLevel >= 4)
+   {
+      wallRadius = wallRadius + 10.0;
+      gateCount = gateCount - 2;
+   }
+
+   if (gateCount < 2)
+   {
+      gateCount = 2;
+   }
+
+   int wallPlanID = aiPlanCreate("Pre-Attack Base Wall", cPlanBuildWall);
+   if (wallPlanID < 0)
+   {
+      llLogDecision("WALL", "failed to create pre-attack wall plan");
+      return (false);
+   }
+
+   aiPlanSetVariableInt(wallPlanID, cBuildWallPlanWallType, 0, cBuildWallPlanWallTypeRing);
+   aiPlanAddUnitType(wallPlanID, gEconUnit, 0, 1, 2);
+   aiPlanSetVariableVector(wallPlanID, cBuildWallPlanWallRingCenterPoint, 0, baseCenter);
+   aiPlanSetVariableFloat(wallPlanID, cBuildWallPlanWallRingRadius, 0.0, wallRadius);
+   aiPlanSetVariableInt(wallPlanID, cBuildWallPlanNumberOfGates, 0, gateCount);
+   aiPlanSetBaseID(wallPlanID, mainBaseID);
+   aiPlanSetEscrowID(wallPlanID, cEconomyEscrowID);
+   aiPlanSetDesiredPriority(wallPlanID, 68);
+   aiPlanSetActive(wallPlanID, true);
+   xsEnableRule("fillInWallGapsNew");
+
+   llLogPlanEvent("create", wallPlanID, "pre-attack-wall center=" + baseCenter + " radius=" + wallRadius +
+      " gates=" + gateCount);
+   llLogDecision("WALL", "holding major attack until base walls begin construction");
+   return (false);
+}
+
+void llCancelCommanderlessMajorAttacks(void)
+{
+   int numPlans = aiPlanGetActiveCount();
+   int i = 0;
+   for (i = 0; < numPlans)
+   {
+      int planID = aiPlanGetIDByActiveIndex(i);
+      if (aiPlanGetType(planID) != cPlanCombat)
+      {
+         continue;
+      }
+
+      if (aiPlanGetVariableInt(planID, cCombatPlanCombatType, 0) != cCombatPlanCombatTypeAttack)
+      {
+         continue;
+      }
+
+      if (aiPlanGetParentID(planID) >= 0)
+      {
+         continue;
+      }
+
+        if ((planID == gNavyAttackPlan) || (planID == gLandPatrolPlan) || (planID == gWaterPatrolPlan) ||
+           (planID == gWaterDockAttackPlan) || (planID == gWarshipExplorePlan) || (planID == gKOTHCombatPlan) ||
+           (planID == gKOTHGuardPlan) || (planID == gIslandSearchPlanID))
+      {
+         continue;
+      }
+
+      aiPlanDestroy(planID);
+   }
+
+   if (gIslandAssaultTransportPlanID >= 0)
+   {
+      aiPlanDestroy(gIslandAssaultTransportPlanID);
+      gIslandAssaultTransportPlanID = -1;
+   }
+
+   if (gIslandAssaultTransportPlan2ID >= 0)
+   {
+      aiPlanDestroy(gIslandAssaultTransportPlan2ID);
+      gIslandAssaultTransportPlan2ID = -1;
+   }
+
+   if (gIslandAssaultPlanID >= 0)
+   {
+      aiPlanDestroy(gIslandAssaultPlanID);
+      gIslandAssaultPlanID = -1;
+   }
+
+   if (gIslandSearchPlanID >= 0)
+   {
+      aiPlanDestroy(gIslandSearchPlanID);
+      gIslandSearchPlanID = -1;
+   }
+}
+
+bool llEnsureCommanderRecovery(void)
+{
+   int fallenExplorerID = aiGetFallenExplorerID();
+   if (fallenExplorerID < 0)
+   {
+      llDestroyCommanderRecoveryPlan();
+      return (false);
+   }
+
+   if (aiPlanGetIDByTypeAndVariableType(cPlanResearch, cResearchPlanProtoUnitCommandID,
+      cProtoUnitCommandRansomExplorer) < 0)
+   {
+      int tcID = getUnit(cUnitTypeTownCenter, cMyID, cUnitStateAlive);
+      if ((tcID >= 0) && (kbResourceGet(cResourceGold) >= 1300))
+      {
+         createProtoUnitCommandResearchPlan(cProtoUnitCommandRansomExplorer, tcID, cMilitaryEscrowID, 95, 95);
+         debugMilitary("Creating commander ransom plan");
+         llDestroyCommanderRecoveryPlan();
+         return (true);
+      }
+   }
+
+   if (kbUnitGetHealth(fallenExplorerID) < 0.3)
+   {
+      return (false);
+   }
+
+   if ((gCommanderRecoveryPlanID >= 0) && (aiPlanGetState(gCommanderRecoveryPlanID) >= 0))
+   {
+      return (true);
+   }
+
+   llDestroyCommanderRecoveryPlan();
+
+   int scoutType = findBestScoutType();
+   if (scoutType < 0)
+   {
+      return (false);
+   }
+
+   vector fallenExplorerLocation = kbUnitGetPosition(fallenExplorerID);
+   if (fallenExplorerLocation == cInvalidVector)
+   {
+      return (false);
+   }
+
+   gCommanderRecoveryPlanID = aiPlanCreate("Recover Commander", cPlanExplore);
+   if (gCommanderRecoveryPlanID < 0)
+   {
+      return (false);
+   }
+
+   aiPlanAddUnitType(gCommanderRecoveryPlanID, scoutType, 1, 1, 1);
+   aiPlanAddWaypoint(gCommanderRecoveryPlanID, fallenExplorerLocation);
+   aiPlanSetVariableBool(gCommanderRecoveryPlanID, cExplorePlanDoLoops, 0, false);
+   aiPlanSetVariableBool(gCommanderRecoveryPlanID, cExplorePlanAvoidingAttackedAreas, 0, false);
+   aiPlanSetVariableInt(gCommanderRecoveryPlanID, cExplorePlanNumberOfLoops, 0, -1);
+   aiPlanSetRequiresAllNeedUnits(gCommanderRecoveryPlanID, true);
+   aiPlanSetDesiredPriority(gCommanderRecoveryPlanID, 95);
+   aiPlanSetActive(gCommanderRecoveryPlanID);
+   debugMilitary("Trying to recover commander");
+   return (true);
+}
+
 //==============================================================================
 // mostHatedEnemy
 // Determine who we should attack, checking cvPlayerToAttack too
@@ -1363,6 +1678,24 @@ minInterval 15
    vector gatherPoint = kbBaseGetMilitaryGatherPoint(cMyID, mainBaseID);
    if (targetIsEnemy == true)
    {
+      if (llIsCommanderAvailableForMajorAttack() == false)
+      {
+         debugMilitary("Holding major land attack until commander returns");
+         return;
+      }
+
+      if (llEnsurePrisonCompoundBeforeAttack() == false)
+      {
+         debugMilitary("Holding major land attack until prison compound is ready");
+         return;
+      }
+
+      if (llEnsureBaseWallsBeforeMajorAttack(mainBaseID) == false)
+      {
+         debugMilitary("Holding major land attack until base walling begins");
+         return;
+      }
+
       llLogDecision("COMBAT", "launching land attack targetPlayer=" + targetPlayer + " targetBase=" + targetBaseID +
          " gatherPoint=" + gatherPoint + " targetPoint=" + targetBaseLocation);
       planID = aiPlanCreate("Attack Player " + targetPlayer + " Base " + targetBaseID, cPlanCombat);
@@ -1672,7 +2005,7 @@ minInterval 30
       //aiPlanSetVariableFloat(dockPlan, cBuildPlanBuildingBufferSpace, 0, 3.0); // Put some space between docks...
      
       aiPlanSetActive(dockPlan);
-      aiEcho("**** STARTING NAVY DOCK PLAN, plan ID "+dockPlan);
+      llVerboseEcho("**** STARTING NAVY DOCK PLAN, plan ID "+dockPlan);
       return;  // Nothing else to do until dock is complete
    }
 
@@ -3716,56 +4049,9 @@ minInterval 30
 //==============================================================================
 rule rescueExplorer
 inactive
-minInterval 120
+minInterval 15
 {
-   static int rescuePlan = -1;
-
-   // Destroy old rescue plan (if any).
-   if (rescuePlan >= 0)
-   {
-      aiPlanDestroy(rescuePlan);
-      rescuePlan = -1;
-   }
-   
-   int fallenExplorerID = aiGetFallenExplorerID();
-   // We need a fallen Explorer for all of this to make sense right.
-   if (fallenExplorerID < 0)
-   {
-      return;
-   }
-   
-   // Let the ransom rule take care of this if we have enough coin.
-   if (kbResourceGet(cResourceGold) >= 1300)
-   {
-      debugMilitary("Ransom explorer instead of attempting to rescue");
-      return;
-   }
-   
-   // Only try to rescue an Explorer that can actually be revived.
-   if (kbUnitGetHealth(fallenExplorerID) < 0.3)
-   {
-      debugMilitary("Explorer too weak to be rescued");
-      return;
-   }
-
-   // Decide on which unit type to use for rescue attempt.
-   int scoutType = findBestScoutType();
-   
-   // Get position of fallen explorer and send scout unit there.
-   vector fallenExplorerLocation = kbUnitGetPosition(fallenExplorerID);
-   rescuePlan = aiPlanCreate("Rescue Explorer", cPlanExplore);
-   if (rescuePlan >= 0)
-   {
-      aiPlanAddUnitType(rescuePlan, scoutType, 1, 1, 1);
-      aiPlanAddWaypoint(rescuePlan, fallenExplorerLocation);
-      aiPlanSetVariableBool(rescuePlan, cExplorePlanDoLoops, 0, false);
-      aiPlanSetVariableBool(rescuePlan, cExplorePlanAvoidingAttackedAreas, 0, false);
-      aiPlanSetVariableInt(rescuePlan, cExplorePlanNumberOfLoops, 0, -1);
-      aiPlanSetRequiresAllNeedUnits(rescuePlan, true);
-      aiPlanSetDesiredPriority(rescuePlan, 42);
-      aiPlanSetActive(rescuePlan);
-      debugMilitary("Trying to rescue explorer");
-   }
+   llEnsureCommanderRecovery();
 }
 
 //==============================================================================
@@ -3773,29 +4059,29 @@ minInterval 120
 //==============================================================================
 rule ransomExplorer
 inactive
-minInterval 120
+minInterval 15
 {
-   int fallenExplorerID = aiGetFallenExplorerID();
-   // Use only when we have enough coin in the bank.
-   if ((fallenExplorerID < 0) || (kbResourceGet(cResourceGold) < 1300))
+   llEnsureCommanderRecovery();
+}
+
+//==============================================================================
+// commanderRecoveryMonitor
+//==============================================================================
+rule commanderRecoveryMonitor
+inactive
+minInterval 10
+{
+   if (llIsCommanderAvailableForMajorAttack() == true)
    {
+      if ((gCommanderRecoveryPlanID >= 0) && (aiPlanGetState(gCommanderRecoveryPlanID) < 0))
+      {
+         gCommanderRecoveryPlanID = -1;
+      }
       return;
    }
 
-   if (aiPlanGetIDByTypeAndVariableType(cPlanResearch, cResearchPlanProtoUnitCommandID, cProtoUnitCommandRansomExplorer) >= 0)
-   {
-      return;
-   }
-
-   int tcID = getUnit(cUnitTypeTownCenter, cMyID, cUnitStateAlive);
-
-   if (tcID < 0)
-   {
-      return;
-   }
-
-   createProtoUnitCommandResearchPlan(cProtoUnitCommandRansomExplorer, tcID, cMilitaryEscrowID, 50, 50);
-   debugMilitary("Creating ransom explorer plan");
+   llCancelCommanderlessMajorAttacks();
+   llEnsureCommanderRecovery();
 }
 
 //==============================================================================

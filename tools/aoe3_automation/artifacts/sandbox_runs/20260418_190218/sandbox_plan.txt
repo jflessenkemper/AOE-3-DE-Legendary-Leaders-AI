@@ -1,0 +1,67 @@
+timestamp=2026-04-18T19:02:18
+dry_run=no
+live_mod_root=/home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI
+profile_root=/home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043
+artifacts_dir=/var/home/jflessenkemper/AOE-3-DE-Legendary-Leaders-AI/tools/aoe3_automation/artifacts/sandbox_runs/20260418_190218
+flow_path=/var/home/jflessenkemper/AOE-3-DE-Legendary-Leaders-AI/tools/aoe3_automation/flows/launch_and_capture_menu.json
+random_map_name=Legendary Leaders Test
+scenario_name=
+actions:
+- ensure directory /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI
+- sync /tmp/aoe3-sandbox-packaged-23dxns4u/runtime_payload/RandMaps -> /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/RandMaps
+- ensure directory /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/RandMaps
+- sync /tmp/aoe3-sandbox-packaged-23dxns4u/runtime_payload/Scenario -> /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/Scenario
+- ensure directory /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/Scenario
+- sync /tmp/aoe3-sandbox-packaged-23dxns4u/runtime_payload/art -> /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/art
+- ensure directory /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/art
+- ensure directory /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/art/buildings
+- ensure directory /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/art/buildings/church
+- ensure directory /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/art/ui
+- ensure directory /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/art/ui/leaders
+- ensure directory /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/art/units
+- ensure directory /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/art/units/artillery
+- ensure directory /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/art/units/artillery/culverin
+- ensure directory /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/art/units/artillery/falconet
+- ensure directory /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/art/units/artillery/horse_artillery
+- ensure directory /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/art/units/artillery/mortar
+- ensure directory /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/art/units/cavalry
+- ensure directory /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/art/units/cavalry/cav_archer
+- ensure directory /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/art/units/cavalry/dragoon
+- ensure directory /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/art/units/cavalry/light_cavalry
+- ensure directory /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/art/units/explorers
+- ensure directory /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/art/units/generals
+- ensure directory /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/art/units/infantry_ranged
+- ensure directory /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/art/units/infantry_ranged/colonial_militia
+- ensure directory /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/art/units/infantry_ranged/coureur
+- ensure directory /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/art/units/infantry_ranged/emboscador
+- ensure directory /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/art/units/infantry_ranged/grenadier
+- ensure directory /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/art/units/infantry_ranged/skirmisher
+- ensure directory /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/art/units/mercenaries
+- ensure directory /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/art/units/mercenaries/pandour
+- ensure directory /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/art/units/natives
+- ensure directory /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/art/units/natives/europeans
+- ensure directory /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/art/units/natives/europeans/royal_dragoon
+- ensure directory /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/art/units/natives/europeans/royal_musketeer
+- ensure directory /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/art/units/villagers
+- sync /tmp/aoe3-sandbox-packaged-23dxns4u/runtime_payload/data -> /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/data
+- ensure directory /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/data
+- ensure directory /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/data/strings
+- ensure directory /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/data/strings/english
+- sync /tmp/aoe3-sandbox-packaged-23dxns4u/runtime_payload/game -> /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/game
+- ensure directory /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/game
+- ensure directory /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/game/ai
+- ensure directory /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/game/ai/core
+- ensure directory /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/game/ai/leaders
+- sync /tmp/aoe3-sandbox-packaged-23dxns4u/runtime_payload/modinfo.json -> /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/modinfo.json
+- sync /tmp/aoe3-sandbox-packaged-23dxns4u/runtime_payload/resources -> /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/resources
+- ensure directory /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/resources
+- ensure directory /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/resources/art
+- ensure directory /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/resources/audio
+- ensure directory /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/resources/images
+- ensure directory /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/resources/images/icons
+- ensure directory /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/resources/images/icons/flags
+- ensure directory /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/resources/images/icons/singleplayer
+- sync /tmp/aoe3-sandbox-packaged-23dxns4u/runtime_payload/sound -> /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/sound
+- ensure directory /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/sound
+- sync /var/home/jflessenkemper/AOE-3-DE-Legendary-Leaders-AI/RandMaps/Legendary Leaders Test.xs -> /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/RandMaps/Legendary Leaders Test.xs
+- sync /var/home/jflessenkemper/AOE-3-DE-Legendary-Leaders-AI/RandMaps/Legendary Leaders Test.xml -> /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/RandMaps/Legendary Leaders Test.xml

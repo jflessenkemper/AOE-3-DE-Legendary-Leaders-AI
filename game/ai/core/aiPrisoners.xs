@@ -9,31 +9,6 @@
 
 // Doctrine identifiers live in aiHeader.xs so leader includes can resolve them during parse.
 
-extern int gLLPrisonerDoctrine = 0;
-extern int gLLPrisonerProxyType = -1;
-extern int gLLPrisonStructureType = -1;
-extern int gLLPrisonBuildPlanID = -1;
-extern int gLLPrisonGuardPlanID = -1;
-extern int gLLPrisonLastSeenTime = -1;
-extern int gLLPrisonLastTauntTime = -60000;
-extern int gLLPrisonLastAllyAlertTime = -60000;
-extern int gLLPrisonLastRescueScanTime = -60000;
-extern int gLLEnemyPrisonPlayerID = -1;
-extern bool gLLPrisonSystemEnabled = false;
-extern float gLLPrisonEscortFraction = 0.30;
-extern float gLLPrisonDetectionRadius = 60.0;
-extern float gLLPrisonBuildDistance = 22.0;
-extern int gLLNavalPrisonBuildPlanID = -1;
-extern int gLLNavalPrisonLastSeenTime = -1;
-extern vector gLLPrisonLocation = cInvalidVector;
-extern vector gLLEnemyPrisonLocation = cInvalidVector;
-extern vector gLLNavalPrisonLocation = cInvalidVector;
-extern int gLLSurrenderUnitIDs = -1;
-extern int gLLSurrenderTimes = -1;
-extern int gLLSurrenderStates = -1;
-extern int gLLSurrenderCaptors = -1;
-extern int gLLSurrenderOriginalOwners = -1;
-
 int cLLMaxSurrenderUnits = 64;
 int cLLMaxSurrenderLifetime = 90000;
 float cLLSurrenderArrivalRadius = 18.0;
@@ -300,7 +275,7 @@ bool llHasNearbyExplorerSupport(int unitID = -1, float radius = 24.0)
 
 float llGetSurrenderHealthThreshold(void)
 {
-   return (0.10);
+   return (0.25);
 }
 
 float llGetSurrenderEliteSupportRadius(void)
@@ -308,38 +283,76 @@ float llGetSurrenderEliteSupportRadius(void)
    return (24.0);
 }
 
-bool llCanUnitSurrender(int unitID = -1, float healthThreshold = 0.50, float eliteSupportRadius = 24.0)
+string llGetUnitSurrenderBlockReason(int unitID = -1, float healthThreshold = 0.50, float eliteSupportRadius = 24.0)
 {
    if (unitID < 0)
    {
-      return (false);
+      return ("invalid");
    }
 
    if (kbUnitGetHealth(unitID) > healthThreshold)
    {
-      return (false);
+      return ("healthy");
    }
 
    if (llIsEliteUnit(unitID) == true)
    {
       debugLegendaryLeaders("unit " + unitID + " refused surrender because " + kbGetProtoUnitName(kbUnitGetProtoUnitID(unitID)) +
                             " is treated as elite for " + llGetPlayerCivName(kbUnitGetPlayerID(unitID)) + ".");
-      return (false);
+      return ("elite");
    }
 
    if (llHasNearbyEliteSupport(unitID, eliteSupportRadius) == true)
    {
       debugLegendaryLeaders("unit " + unitID + " refused surrender because nearby elite support is still present.");
-      return (false);
+      return ("elite-support");
    }
 
-   if (llHasNearbyExplorerSupport(unitID, eliteSupportRadius) == true)
+   return ("");
+}
+
+bool llCanUnitSurrender(int unitID = -1, float healthThreshold = 0.50, float eliteSupportRadius = 24.0)
+{
+   return (llGetUnitSurrenderBlockReason(unitID, healthThreshold, eliteSupportRadius) == "");
+}
+
+vector llGetAIRoutDestination(int playerID = -1)
+{
+   if (playerID < 0)
    {
-      debugLegendaryLeaders("unit " + unitID + " refused surrender because a friendly explorer is still nearby.");
-      return (false);
+      playerID = cMyID;
    }
 
-   return (true);
+   int mainBaseID = kbBaseGetMainID(playerID);
+   if (mainBaseID >= 0)
+   {
+      vector gatherPoint = kbBaseGetMilitaryGatherPoint(playerID, mainBaseID);
+      if (gatherPoint != cInvalidVector)
+      {
+         return (gatherPoint);
+      }
+
+      return (kbBaseGetLocation(playerID, mainBaseID));
+   }
+
+   int townCenterID = getUnit(cUnitTypeTownCenter, playerID, cUnitStateAlive);
+   if (townCenterID >= 0)
+   {
+      return (kbUnitGetPosition(townCenterID));
+   }
+
+   return (cInvalidVector);
+}
+
+void llLogSurrenderBlock(string context = "", int unitID = -1, string reason = "")
+{
+   if ((unitID < 0) || (reason == "") || (reason == "healthy") || (reason == "elite") || (reason == "invalid"))
+   {
+      return;
+   }
+
+   llLogUnitAction(context + "-rout-blocked", unitID,
+      "reason=" + reason + " proto=" + kbGetProtoUnitName(kbUnitGetProtoUnitID(unitID)));
 }
 
 void llEnsureSurrenderArrays(void)
@@ -919,9 +932,7 @@ void llAlertAlliesToEnemyPrison(vector prisonLocation = cInvalidVector)
          continue;
       }
 
-      // Use an explicit targeted confirm flare so the prison location is marked on allied maps.
-      sendStatement(player, cAICommPromptToAllyConfirm, prisonLocation);
-      sendChatLine(player, alertMessage);
+      llSendPrisonAlertToPlayer(player, prisonLocation, alertMessage);
    }
 }
 
@@ -1068,28 +1079,104 @@ int llGetNavalPrisonShipCount(vector location = cInvalidVector)
 
 void llEnablePrisonerSystem(void)
 {
-   gLLPrisonSystemEnabled = true;
+   gLLPrisonSystemEnabled = false;
+   gLLAIRoutEnabled = true;
    llEnsureSurrenderArrays();
-
-   if (gLLPrisonerProxyType < 0)
-   {
-      gLLPrisonerProxyType = cUnitTypeLogicalTypeLandMilitary;
-   }
-
-   if (gLLPrisonStructureType < 0)
-   {
-      gLLPrisonStructureType = gTowerUnit;
-   }
-
-   llLogEvent("RULE", "enabling prisoner system rules with doctrine " + llGetPrisonerDoctrineName());
-   xsEnableRule("legendaryPrisonerMonitor");
-   xsEnableRule("legendaryPrisonGuard");
-   xsEnableRule("legendaryPrisonRescueMonitor");
-   xsEnableRule("legendaryNavalPrisonGuard");
    xsEnableRule("legendaryAISurrenderMonitor");
    xsEnableRule("legendaryAISurrenderMove");
-   xsEnableRule("legendaryEliteGuardMonitor");
-   debugLegendaryLeaders("prisoner system enabled with doctrine " + llGetPrisonerDoctrineName());
+   llLogEvent("RULE", "AI non-elite rout enabled at 25% health; elite units hold and human-controlled units keep manual control");
+   debugLegendaryLeaders("prison hook remapped to AI-only rout; non-elite AI units fall back to their return point once pressure breaks them.");
+}
+
+bool llHasPrisonStructure(void)
+{
+   if ((gLLPrisonStructureType < 0) || (gLLPrisonLocation == cInvalidVector))
+   {
+      return (false);
+   }
+
+   return (getUnitCountByLocation(gLLPrisonStructureType, cMyID, cUnitStateABQ, gLLPrisonLocation, 30.0) > 0);
+}
+
+int llGetPrisonWallCount(void)
+{
+   if (gLLPrisonLocation == cInvalidVector)
+   {
+      return (0);
+   }
+
+   return (getUnitCountByLocation(cUnitTypeAbstractWall, cMyID, cUnitStateABQ, gLLPrisonLocation, 20.0));
+}
+
+bool llHasPrisonWalls(void)
+{
+   return (llGetPrisonWallCount() > 0);
+}
+
+bool llHasCompletedPrisonWallRing(int minimumWallPieces = 6)
+{
+   if (llGetPrisonWallCount() < minimumWallPieces)
+   {
+      return (false);
+   }
+
+   if ((gLLPrisonWallPlanID >= 0) && (aiPlanGetActive(gLLPrisonWallPlanID) == true))
+   {
+      return (false);
+   }
+
+   return (true);
+}
+
+void llEnsurePrisonCompound(void)
+{
+   if ((gLLPrisonSystemEnabled == false) || (gLLPrisonerProxyType < 0))
+   {
+      return;
+   }
+
+   if (gLLPrisonLocation == cInvalidVector)
+   {
+      gLLPrisonLocation = llGetPrisonAnchorLocation();
+      debugMilitary("Legendary Prison: established " + llGetPrisonerDoctrineName() + " prison anchor.");
+   }
+
+   if (gLLPrisonLocation == cInvalidVector)
+   {
+      return;
+   }
+
+   if ((gLLPrisonStructureType >= 0) && (llHasPrisonStructure() == false))
+   {
+      if ((gLLPrisonBuildPlanID < 0) || (aiPlanGetState(gLLPrisonBuildPlanID) < 0))
+      {
+         gLLPrisonBuildPlanID = createLocationBuildPlan(gLLPrisonStructureType, 1, 68, false, cMilitaryEscrowID, gLLPrisonLocation, 1);
+         debugLegendaryLeaders("creating prison structure build plan " + gLLPrisonBuildPlanID + " at " + gLLPrisonLocation);
+      }
+      return;
+   }
+
+   if (llHasCompletedPrisonWallRing() == false)
+   {
+      if ((gLLPrisonWallPlanID < 0) || (aiPlanGetState(gLLPrisonWallPlanID) < 0))
+      {
+         int mainBaseID = kbBaseGetMainID(cMyID);
+         gLLPrisonWallPlanID = aiPlanCreate("Legendary Prison Wall", cPlanBuildWall);
+         if (gLLPrisonWallPlanID >= 0)
+         {
+            aiPlanSetVariableInt(gLLPrisonWallPlanID, cBuildWallPlanWallType, 0, cBuildWallPlanWallTypeRing);
+            aiPlanAddUnitType(gLLPrisonWallPlanID, gEconUnit, 0, 1, 2);
+            aiPlanSetVariableVector(gLLPrisonWallPlanID, cBuildWallPlanWallRingCenterPoint, 0, gLLPrisonLocation);
+            aiPlanSetVariableFloat(gLLPrisonWallPlanID, cBuildWallPlanWallRingRadius, 0.0, 14.0);
+            aiPlanSetVariableInt(gLLPrisonWallPlanID, cBuildWallPlanNumberOfGates, 0, 1);
+            aiPlanSetBaseID(gLLPrisonWallPlanID, mainBaseID);
+            aiPlanSetEscrowID(gLLPrisonWallPlanID, cEconomyEscrowID);
+            aiPlanSetDesiredPriority(gLLPrisonWallPlanID, 69);
+            aiPlanSetActive(gLLPrisonWallPlanID, true);
+            debugLegendaryLeaders("creating prison wall plan " + gLLPrisonWallPlanID + " at " + gLLPrisonLocation);
+         }
+      }
+   }
 }
 
 rule legendaryPrisonerMonitor
@@ -1107,10 +1194,11 @@ minInterval 10
       return;
    }
 
+   llEnsurePrisonCompound();
+
    if (gLLPrisonLocation == cInvalidVector)
    {
-      gLLPrisonLocation = llGetPrisonAnchorLocation();
-      debugMilitary("Legendary Prison: established " + llGetPrisonerDoctrineName() + " prison anchor.");
+      return;
    }
 
    int prisonerCount = llGetPrisonerCount(gLLPrisonLocation, cLLPrisonHoldRadius);
@@ -1129,18 +1217,9 @@ minInterval 10
 
    gLLPrisonLastSeenTime = xsGetTime();
 
-   if ((gLLPrisonStructureType >= 0) &&
-       (getUnitCountByLocation(gLLPrisonStructureType, cMyID, cUnitStateABQ, gLLPrisonLocation, 30.0) < 1) &&
-       (aiPlanGetIDByTypeAndVariableType(cPlanBuild, cBuildPlanBuildingTypeID, gLLPrisonStructureType) < 0))
-   {
-      gLLPrisonBuildPlanID = createLocationBuildPlan(gLLPrisonStructureType, 1, 68, false, cMilitaryEscrowID, gLLPrisonLocation, 1);
-      debugLegendaryLeaders("creating prison structure build plan " + gLLPrisonBuildPlanID + " at " + gLLPrisonLocation);
-   }
-
    if ((cvOkToTaunt == true) && (xsGetTime() > gLLPrisonLastTauntTime + 60000))
    {
-      sendStatement(cPlayerRelationEnemyNotGaia, cAICommPromptToEnemyLull, gLLPrisonLocation);
-      sendChatLine(cPlayerRelationEnemyNotGaia, llGetEnemyPrisonTaunt());
+      llSendEnemyPrisonTaunt(gLLPrisonLocation);
       gLLPrisonLastTauntTime = xsGetTime();
       debugLegendaryLeaders("enemy prison taunt fired at location " + gLLPrisonLocation);
    }
@@ -1304,7 +1383,7 @@ inactive
 minInterval 8
 {
    llLogRuleTick("legendaryAISurrenderMonitor");
-   if (gLLPrisonSystemEnabled == false)
+   if (gLLAIRoutEnabled == false)
    {
       return;
    }
@@ -1324,51 +1403,26 @@ minInterval 8
          continue;
       }
 
-      if (llCanUnitSurrender(unitID, healthThreshold, eliteSupportRadius) == false)
-      {
-         continue;
-      }
-
       if (llHasEnemyPressureForSurrender(unitID) == false)
       {
          continue;
       }
 
-      if (llTrackSurrenderingUnit(unitID) == true)
+      string surrenderBlockReason = llGetUnitSurrenderBlockReason(unitID, healthThreshold, eliteSupportRadius);
+      if (surrenderBlockReason != "")
       {
-         debugLegendaryLeaders("AI land unit " + unitID + " marked as surrendering.");
-      }
-   }
-
-   if (gHaveWaterSpawnFlag == false)
-   {
-      return;
-   }
-
-   int navalQueryID = createSimpleUnitQuery(cUnitTypeAbstractWarShip, cMyID, cUnitStateAlive);
-   int navalCount = kbUnitQueryExecute(navalQueryID);
-   i = 0;
-   for (i = 0; < navalCount)
-   {
-      unitID = kbUnitQueryGetResult(navalQueryID, i);
-      if (llGetTrackedSurrenderIndex(unitID) >= 0)
-      {
-         continue;
-      }
-
-      if (llCanUnitSurrender(unitID, healthThreshold, eliteSupportRadius) == false)
-      {
-         continue;
-      }
-
-      if (llHasEnemyPressureForSurrender(unitID) == false)
-      {
+         llLogSurrenderBlock("ai", unitID, surrenderBlockReason);
          continue;
       }
 
       if (llTrackSurrenderingUnit(unitID) == true)
       {
-         debugLegendaryLeaders("AI warship " + unitID + " marked as surrendering.");
+         vector routDestination = llGetAIRoutDestination(cMyID);
+         if (routDestination != cInvalidVector)
+         {
+            llLogUnitAction("ai-rout-start", unitID, "destination=" + routDestination);
+         }
+         debugLegendaryLeaders("AI land unit " + unitID + " marked as routing.");
       }
    }
 }
@@ -1378,10 +1432,12 @@ inactive
 minInterval 2
 {
    llLogRuleTick("legendaryAISurrenderMove");
-   if ((gLLPrisonSystemEnabled == false) || (gLLSurrenderUnitIDs < 0))
+   if ((gLLAIRoutEnabled == false) || (gLLSurrenderUnitIDs < 0))
    {
       return;
    }
+
+   float healthThreshold = llGetSurrenderHealthThreshold();
 
    int i = 0;
    for (i = 0; < cLLMaxSurrenderUnits)
@@ -1400,70 +1456,41 @@ minInterval 2
 
       int surrenderTime = xsArrayGetInt(gLLSurrenderTimes, i);
       int trackedDuration = xsGetTime() - surrenderTime;
-      int surrenderState = xsArrayGetInt(gLLSurrenderStates, i);
-      int captorPlayerID = xsArrayGetInt(gLLSurrenderCaptors, i);
       int originalOwnerID = xsArrayGetInt(gLLSurrenderOriginalOwners, i);
 
       if (trackedDuration > cLLMaxSurrenderLifetime)
       {
-         debugLegendaryLeaders("AI surrendering unit " + unitID + " timed out and returned to normal control.");
+         debugLegendaryLeaders("AI routed unit " + unitID + " timed out and returned to normal control.");
          llClearTrackedSurrenderIndex(i);
          continue;
       }
 
-      if (captorPlayerID < 0)
+      if (kbUnitGetHealth(unitID) > healthThreshold)
       {
-         captorPlayerID = llGetCapturingPlayerForUnit(unitID);
-         xsArraySetInt(gLLSurrenderCaptors, i, captorPlayerID);
+         llClearTrackedSurrenderIndex(i);
+         continue;
       }
 
-      vector destination = llGetPrisonHoldingPoint(captorPlayerID, i);
+      vector destination = llGetAIRoutDestination(originalOwnerID);
       if (destination == cInvalidVector)
       {
-         destination = llGetSurrenderDestination(unitID);
-         if (destination == cInvalidVector)
-         {
-            continue;
-         }
-      }
-
-      if (surrenderState == cLLSurrenderStateImprisoned)
-      {
-         if ((originalOwnerID >= 0) && (llHasFriendlyExplorerNearby(originalOwnerID, kbUnitGetPosition(unitID), cLLPrisonReclaimRadius) == true))
-         {
-            vector returnLocation = llGetReturnLocationForPlayer(originalOwnerID);
-            llClearTrackedSurrenderIndex(i);
-            debugLegendaryLeaders("AI prisoner " + unitID + " reclaimed by explorer for player " + originalOwnerID + ".");
-            if (returnLocation != cInvalidVector)
-            {
-               llLogUnitAction("ai-prisoner-return", unitID, "destination=" + returnLocation);
-               aiTaskUnitMove(unitID, returnLocation);
-            }
-            continue;
-         }
-
-         llReleaseSurrenderingUnit(unitID);
-            llLogUnitAction("ai-surrender-imprisoned-move", unitID, "destination=" + destination);
-         aiTaskUnitMove(unitID, destination);
          continue;
       }
 
       if (distance(kbUnitGetPosition(unitID), destination) < cLLSurrenderArrivalRadius)
       {
-         debugLegendaryLeaders("AI surrendering unit " + unitID + " reached prison custody for player " + captorPlayerID + ".");
-         xsArraySetInt(gLLSurrenderStates, i, cLLSurrenderStateImprisoned);
-         if ((originalOwnerID >= 0) && (kbIsPlayerEnemy(originalOwnerID) == true))
-         {
-            llSendLegendaryLeaderPrisonerLine(originalOwnerID, 120000);
-         }
-         llReleaseSurrenderingUnit(unitID);
-         llLogUnitAction("ai-surrender-arrival-move", unitID, "destination=" + destination);
-         aiTaskUnitMove(unitID, destination);
+         llClearTrackedSurrenderIndex(i);
+         llLogUnitAction("ai-rout-arrival", unitID, "destination=" + destination);
          continue;
       }
 
+      if (llHasEnemyPressureForSurrender(unitID) == false)
+      {
+         debugLegendaryLeaders("AI routed unit " + unitID + " is falling back without immediate enemy pressure.");
+      }
+
       llReleaseSurrenderingUnit(unitID);
-      llLogUnitAction("ai-surrender-move", unitID, "destination=" + destination);
+      llLogUnitAction("ai-rout-move", unitID, "destination=" + destination);
       aiTaskUnitMove(unitID, destination);
    }
 }

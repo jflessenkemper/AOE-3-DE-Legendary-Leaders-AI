@@ -98,6 +98,14 @@ void debugLegendaryLeaders (string message = "")
    }
 }
 
+void llVerboseEcho(string message = "")
+{
+   if (cLLVerboseDiagnostics == true)
+   {
+      aiEcho(message);
+   }
+}
+
 int llGetVisibleDebugPlayer(void)
 {
    if ((gLLDebugVisiblePlayer > 0) && (gLLDebugVisiblePlayer != cMyID) && (kbIsPlayerHuman(gLLDebugVisiblePlayer) == true) &&
@@ -209,7 +217,10 @@ string llDescribePlayerOrRelation(int playerIDorRelation = -1)
 
 void llLogEvent(string category = "EVENT", string message = "")
 {
-   debugLegendaryLeaders("[" + category + "] " + message);
+   if ((message != "") && (cLLRuntimeTelemetry == true))
+   {
+      aiEcho("Legendary Leaders: [" + category + "] " + message);
+   }
    llMirrorEventToChat(category, message);
 }
 
@@ -266,10 +277,6 @@ string llDescribeCombatTargetMode(int targetMode = -1)
       case cCombatPlanTargetModePoint:
       {
          return ("point");
-      }
-      case cCombatPlanTargetModeUnitType:
-      {
-         return ("unit-type");
       }
    }
 
@@ -340,7 +347,6 @@ void llLogChatDispatch(string mode = "", int playerIDorRelation = -1, string pay
    {
       details = details + " flare=" + vec;
    }
-   aiEcho("Legendary Leaders: [CHAT] " + details);
    llLogEvent("CHAT", details);
 }
 
@@ -1867,7 +1873,7 @@ int createSimpleBuildPlan(int puid = -1, int numberWanted = 1, int pri = 100, bo
       // This only adds the needed/wanted/minimum variables of the unittype to the plan not the actual builders.
       if (numberBuilders > 0)
       {
-         if (addBuilderToPlan(planID, puid, numberBuilders) == false)
+          if (addBuilderToPlan(planID, puid, numberBuilders) == false)
          {
             aiPlanDestroy(planID);
             return (-1);
@@ -1967,10 +1973,13 @@ int createLocationBuildPlan(int puid = -1, int number = 1, int pri = 100, bool e
       aiPlanSetDesiredPriority(planID, pri);
 
       // Builders.
-      if (numberBuilders > 0 && addBuilderToPlan(planID, puid, numberBuilders) == false)
+         if (numberBuilders > 0)
       {
-         aiPlanDestroy(planID);
-         return (-1);
+            if (addBuilderToPlan(planID, puid, numberBuilders) == false)
+            {
+               aiPlanDestroy(planID);
+               return (-1);
+            }
       }
 
       aiPlanSetVariableVector(planID, cBuildPlanInfluencePosition, 0, position);              // Influence toward position

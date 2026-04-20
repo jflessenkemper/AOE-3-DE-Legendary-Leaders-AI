@@ -6,7 +6,7 @@ bool gWashingtonRulesEnabled = false;
 
 void initLeaderWashington(void)
 {
-   aiEcho("Legendary Leaders: activating George Washington personality.");
+   llVerboseEcho("Legendary Leaders: activating George Washington personality.");
 
    llSetBalancedPersonality();
    btRushBoom = 0.2;

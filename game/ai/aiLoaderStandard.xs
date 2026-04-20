@@ -49,7 +49,7 @@ include "leaders\leader_gustavus.xs";
 //==============================================================================
 void preInit(void)
 {
-   aiEcho("preInit() starting.");
+   llVerboseEcho("preInit() starting.");
 
    string legendaryLeaderCivName = kbGetCivName(cMyCiv);
 
@@ -156,7 +156,7 @@ void preInit(void)
 
    if (aiGetGameMode() == cGameModeEconomyMode)
    {
-      aiEcho("Economy mode setup");
+      llVerboseEcho("Economy mode setup");
 
       btRushBoom = -1.0; // boom
       btOffenseDefense = -1.0; // defend
@@ -179,7 +179,7 @@ void preInit(void)
 //==============================================================================
 void postInit(void)
 {
-   aiEcho("postInit() starting.");
+   llVerboseEcho("postInit() starting.");
    enableLegendaryRevolutionSupportRules();
    enableLegendaryRevolutionCommanderRules();
    enableLeaderBourbonRules();

@@ -6,7 +6,7 @@ bool gCatherineRulesEnabled = false;
 
 void initLeaderCatherine(void)
 {
-   aiEcho("Legendary Leaders: activating Catherine the Great personality.");
+   llVerboseEcho("Legendary Leaders: activating Catherine the Great personality.");
 
    llSetBalancedPersonality();
    btRushBoom = -0.1;
