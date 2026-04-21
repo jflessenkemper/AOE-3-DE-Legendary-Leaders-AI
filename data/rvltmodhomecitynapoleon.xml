@@ -1431,6 +1431,7 @@
         <card>DEHCREVContinentalBlockade</card>
         <card>DEHCREVRustamsRegiment</card>
         <card>DEHCREVClientStates</card>
+        <card>DEHCREVSisterRepublics</card>
         <card>DEHCShipBalloonsFrench</card>
         <card>HCExoticHardwoods</card>
         <card>DEHCCentSuisses</card>
@@ -1438,7 +1439,6 @@
         <card>DEHCWittelsbachAllies1</card>
         <card>HCFencingSchool</card>
         <card>DEHCREVGenieTroops</card>
-        <card>DEHCREVSisterRepublics</card>
         <card>DEHCRevFrenchRoyalArmy</card>
         <card>DEHCREVShipmentRevolutionaries</card>
         <card>DEHCREVMercsBosniaksRepeat</card>

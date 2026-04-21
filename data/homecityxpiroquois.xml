@@ -1320,10 +1320,11 @@
       <name>Legendary Leaders</name>
       <default />
       <cards>
+        <card>HCXPShipTomahawk3</card>
         <card>HCXPWarChiefIroquois1</card>
-        <card>DEHCMedicineWheels</card>
-        <card>DEHCExtensiveFortificationsWarchief</card>
+        <card>HCXPForestMother</card>
         <card>HCXPWarChiefIroquois2</card>
+        <card>DEHCExtensiveFortificationsWarchief</card>
         <card>HCXPBattlefieldConstructionIroquois</card>
         <card>HCXPInfantryDamageIroquois</card>
         <card>HCXPInfantryHitpointsIroquois</card>
@@ -1337,7 +1338,6 @@
         <card>HCXPOldWaysIroquois</card>
         <card>HCXPShipMantlets2</card>
         <card>HCXPShipMantlets4</card>
-        <card>HCXPShipMantletsRepeat</card>
         <card>HCXPIroquoisMohawkSupport</card>
         <card>HCXPIroquoisOneidaSupport</card>
         <card>HCXPIroquoisOnondagaSupport</card>

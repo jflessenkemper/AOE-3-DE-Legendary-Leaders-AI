@@ -1373,6 +1373,8 @@
         <card>DEHCREVCultSupremeBeing</card>
         <card>DEHCREVCantinieres</card>
         <card>DEHCREVShipmentRevolutionaries</card>
+        <card>DEHCREVHorseHunters</card>
+        <card>DEHCREVClientStates</card>
         <card>DEHCMercsIrishBrigadiers</card>
         <card>DEHCCentSuisses</card>
         <card>DEHCColbertismTeam</card>
@@ -1381,8 +1383,6 @@
         <card>HCShipSkirmishers3</card>
         <card>HCXPTirailleurs</card>
         <card>DEHCMercsArmoredPistoleers</card>
-        <card>DEHCREVClientStates</card>
-        <card>DEHCREVHorseHunters</card>
         <card>DEHCREVShipHorseArtillery3</card>
         <card>HCShipSkirmishers2</card>
         <card>HCShipSkirmishers4</card>

@@ -1378,25 +1378,25 @@
       <default>
       </default>
       <cards>
-        <card>HCXPFurTrade</card>
-        <card>HCExoticHardwoods</card>
+        <card>DEHCREVFencibles</card>
         <card>DEHCREVCanadianOfficer</card>
-        <card>DEHCREVBuffaloHunt</card>
-        <card>DEHCMercsIrishBrigadiers</card>
-        <card>DEHCExtensiveFortificationsEuropean</card>
-        <card>DEHCHanoverAllies1</card>
-        <card>DEHCREVShipWarCanoes</card>
-        <card>DEHCMercsGiantGrenadiers</card>
-        <card>HCRefrigeration</card>
-        <card>DEHCHanoverAllies2</card>
-        <card>DEHCShipRangers1</card>
-        <card>DEHCSiegeArchery</card>
         <card>DEHCREVConscriptionCanada</card>
         <card>DEHCREVNativeAlliesCanada</card>
         <card>DEHCCanadianLoyalists</card>
-        <card>DEHCREVNorthAmericaTrade</card>
-        <card>DEHCREVFencibles</card>
+        <card>HCXPFurTrade</card>
+        <card>DEHCGreenwichTime</card>
+        <card>DEHCREVBuffaloHunt</card>
+        <card>DEHCExtensiveFortificationsEuropean</card>
+        <card>DEHCMercsIrishBrigadiers</card>
+        <card>DEHCHanoverAllies1</card>
+        <card>DEHCREVShipWarCanoes</card>
+        <card>DEHCMercsGiantGrenadiers</card>
+        <card>HCUnlockFort</card>
+        <card>DEHCHanoverAllies2</card>
+        <card>DEHCShipRangers1</card>
+        <card>DEHCSiegeArchery</card>
         <card>DEHCREVHighlanders</card>
+        <card>DEHCREVNorthAmericaTrade</card>
         <card>DEHCREVQuebec</card>
         <card>DEHCREVShipElk</card>
         <card>DEHCREVShipGrizzlies</card>

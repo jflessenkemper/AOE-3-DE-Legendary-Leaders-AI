@@ -1360,6 +1360,7 @@
       <default>
       </default>
       <cards>
+        <card>DEHCCharreada</card>
         <card>DEHCBarbacoa</card>
         <card>DEHCIturbidePalace</card>
         <card>DEHCMercsIrishBrigadiers</card>
@@ -1377,7 +1378,6 @@
         <card>DEHCREVNativeAlliesMexico</card>
         <card>DEHCREVShipBandidos</card>
         <card>DEHCShipBattleshipRepeat</card>
-        <card>DEHCBourbonAllies1</card>
         <card>HCXPIndustrialRevolution</card>
         <card>DEHCHandMortar</card>
         <card>DEHCLiberationMarch</card>

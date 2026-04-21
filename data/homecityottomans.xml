@@ -1848,31 +1848,31 @@
       <name>Legendary Leaders</name>
       <default />
       <cards>
+        <card>HCShipJanissaries3</card>
+        <card>HCShipSpahis3</card>
+        <card>HCShipGreatBombards2</card>
+        <card>HCExplorerOttoman</card>
+        <card>HCRoyalDecreeOttoman</card>
         <card>DEHCColonialMilitiaOttoman</card>
-        <card>DEHCShipSettlersOttoman1</card>
         <card>DEHCFencingSchoolOttoman</card>
         <card>DEHCShipSettlersOttoman2</card>
         <card>DEHCShipSpies1Ottoman</card>
         <card>HCLightArtilleryHitpointsOttoman</card>
-        <card>HCRoyalDecreeOttoman</card>
         <card>DEHCHandMortarOttoman</card>
         <card>HCJanissaryCombatOttoman</card>
         <card>DEHCShipBerberAllies2Ottoman</card>
         <card>DEHCShipSpies2Ottoman</card>
         <card>HCArtilleryCombatOttoman</card>
-        <card>HCCavalryCombatOttoman</card>
+        <card>HCShipGreatBombards1</card>
         <card>DEHCMercsOttoman</card>
         <card>DEHCShipMercXebecOttoman</card>
         <card>DEHCOttomanBattleshipCard</card>
         <card>DEHCHeavyInfHitpointsOttoman</card>
-        <card>HCShipGreatBombards1</card>
+        <card>DEHCShipSettlersOttoman1</card>
         <card>DEHCShipSettlersOttomanRepeat</card>
-        <card>HCShipGreatBombards2</card>
-        <card>HCMosqueConstruction</card>
         <card>HCShipAbusGuns1</card>
-        <card>HCShipSpahis1</card>
-        <card>HCShipSpahis3</card>
-        <card>HCJanissaryCost</card>
+        <card>HCShipAbusGuns2</card>
+        <card>HCShipAbusGuns3</card>
       </cards>
     </deck>
     <deck>

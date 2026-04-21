@@ -1882,31 +1882,31 @@
       <name>Legendary Leaders</name>
       <default />
       <cards>
-        <card>HCExplorerSpanish</card>
-        <card>DEHCAlpacaWool</card>
-        <card>DEHCExtensiveFortificationsEuropean</card>
-        <card>HCSpanishGalleons</card>
-        <card>HCHandCavalryDamageSpanish</card>
-        <card>HCHandCavalryHitpointsSpanish</card>
-        <card>HCHandInfantryDamageSpanishTeam</card>
         <card>DEHCHabsburgAllies1</card>
+        <card>HCInquisition</card>
+        <card>HCShipRodeleros3</card>
+        <card>HCShipLancers3</card>
+        <card>HCShipSpanishSquare</card>
+        <card>HCSpanishTreasureFleet</card>
+        <card>DEHCPeninsularGuerrillas</card>
+        <card>HCExplorerSpanish</card>
+        <card>HCRoyalDecreeSpanish</card>
+        <card>DEHCAlpacaWool</card>
+        <card>HCSpanishGalleons</card>
+        <card>DEHCReconquista</card>
+        <card>HCShipGalleons</card>
         <card>HCHandCavalryCombatSpanish</card>
         <card>HCHandInfantryCombatSpanish</card>
         <card>HCShipLancers1</card>
-        <card>HCShipLancers3</card>
         <card>HCShipRodeleros2</card>
-        <card>DEHCPeninsularGuerrillas</card>
         <card>HCShipLancers4</card>
-        <card>HCShipLancers5</card>
-        <card>HCShipRodeleros3</card>
-        <card>HCShipSpanishSquare</card>
+        <card>DEHCExtensiveFortificationsEuropean</card>
         <card>HCShipRodeleros4</card>
         <card>HCXPSpanishGold</card>
-        <card>HCSpanishTreasureFleet</card>
+        <card>HCShipLancers5</card>
         <card>DEHCMercsArmoredPistoleers</card>
-        <card>HCHandInfantryHitpointsSpanish</card>
-        <card>HCInquisition</card>
-        <card>HCRoyalDecreeSpanish</card>
+        <card>HCHandCavalryDamageSpanish</card>
+        <card>HCHandCavalryHitpointsSpanish</card>
       </cards>
     </deck>
     <deck>

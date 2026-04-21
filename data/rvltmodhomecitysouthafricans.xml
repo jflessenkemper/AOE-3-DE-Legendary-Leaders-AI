@@ -1349,31 +1349,31 @@
       <default>
       </default>
       <cards>
+        <card>DEHCREVDiamondRush</card>
         <card>HCXPSouthSeaBubble</card>
         <card>DEHCFeitorias</card>
         <card>DEHCREVWanderlust</card>
         <card>DEHCMercsIrishBrigadiers</card>
-        <card>HCXPBankWagon</card>
+        <card>HCShipCaravels1</card>
+        <card>HCShipCaravels2</card>
         <card>DEHCBuckriders</card>
-        <card>DEHCExtensiveFortificationsEuropean</card>
         <card>DEHCREVBankWagons</card>
         <card>DEHCREVShipHomesteadWagons</card>
         <card>DEHCREVShipMilitaryWagons</card>
         <card>DEHCREVShipOutpostWagons</card>
         <card>DEHCMercsBosniaks</card>
         <card>DEHCMercsPandours</card>
-        <card>DEHCREVDiamondRush</card>
         <card>DEHCREVHuguenots</card>
         <card>DEHCREVShipXhosaFoods</card>
-        <card>DEHCMercsAskaris</card>
-        <card>DEHCMercsMountedRiflemen</card>
         <card>DEHCDutchBattleshipCard</card>
         <card>DEHCShipBattleshipRepeat</card>
+        <card>DEHCMercsAskaris</card>
+        <card>DEHCMercsMountedRiflemen</card>
+        <card>HCShipFrigates</card>
+        <card>HCShipMonitors</card>
+        <card>HCXPShipMonitorsTeam</card>
         <card>DEHCBlueGuards</card>
         <card>DEHCHabsburgAllies1</card>
-        <card>DEHCHandMortar</card>
-        <card>DEHCShipHussars2</card>
-        <card>DEHCWettinAllies2</card>
       </cards>
     </deck>
   </decks>

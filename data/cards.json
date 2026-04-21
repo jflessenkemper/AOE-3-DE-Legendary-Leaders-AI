@@ -869,6 +869,11 @@
     "icon": "university_icon.png",
     "name": "Hausa Kingdom"
   },
+  "DEHCHeavyFortificationsAfrican": {
+    "desc": "Grants free improvements that increase the combat ability of Walls, Outposts, Blockhouses, Forts, War Huts, and Nobles' Huts.",
+    "icon": "hc_heavy_fortifications.png",
+    "name": "Heavy Fortifications"
+  },
   "DEHCHeavyFortificationsInca": {
     "desc": "Grants free improvements that increase the combat ability of Strongholds, War Huts, and Tambos.",
     "icon": "hc_heavy_fortifications.png",
@@ -1029,6 +1034,11 @@
     "icon": "kalmar_castle.png",
     "name": "Kalmar Castle"
   },
+  "DEHCKatsinaFortifications": {
+    "desc": "Allows Levies to garrison inside Watch Towers. Units garrisoned in a Watch Tower improve its damage by 10%.",
+    "icon": "katsina_fortifications.png",
+    "name": "Katsina Fortifications"
+  },
   "DEHCKingKings": {
     "desc": "You receive a free pet Lion with all future shipments, starting with this one. Rases gains the \"Roar of the Lion!\" ability:\\n \u2022 Roar of the Lion: Increases the movement and attack speed of units nearby any Ras for a short duration.",
     "icon": "king_of_kings.png",
@@ -1078,6 +1088,11 @@
     "desc": "Changes the Coin cost of Mexican Cavalry and Infantry to Wood. May be sent again to swap back.",
     "icon": "leather_soldiers.png",
     "name": "Leather Soldiers"
+  },
+  "DEHCLegionWashington": {
+    "desc": "Ships a number of powerful Grenadiers equipped with Grenade Launchers and enables them to be trained at Forts.",
+    "icon": "legion_washington.png",
+    "name": "Washington's Legion"
   },
   "DEHCLenapeAllies": {
     "desc": "",
@@ -2719,10 +2734,25 @@
     "icon": "hc_ranged_infantry_hitpoints.png",
     "name": "Ranged Infantry Hitpoints"
   },
+  "DEHCRangers": {
+    "desc": "Longbowmen are fully replaced with Rangers at the Barracks, Homecity, and on the map. Rangers use a rifle instead of a bow to counter Heavy Infantry more effectively, but have less range.",
+    "icon": "rangers.png",
+    "name": "Rangers"
+  },
+  "DEHCReconquista": {
+    "desc": "Ships 1 Conquistador for each 3 Archaic infantry units you have lost (up to a maximum of 10).",
+    "icon": "reconquista.png",
+    "name": "Reconquista"
+  },
   "DEHCRedFulaniCattle": {
     "desc": "",
     "icon": "red_fulani.png",
     "name": "Red Fulani Cattle"
+  },
+  "DEHCRedshirts": {
+    "desc": "Improves the damage of all Italian musket and rifle infantry.",
+    "icon": "redshirts.png",
+    "name": "Garibaldini"
   },
   "DEHCRefurbishedFirearms": {
     "desc": "Soldados gain a powerful charged Grenade Launcher attack that can be used when attacking at longer ranges.",
@@ -2858,6 +2888,11 @@
     "desc": "",
     "icon": "infinite_tribal_horseman.png",
     "name": "7 Tribal Horsemen"
+  },
+  "DEHCSahelianKingdoms": {
+    "desc": "Native Warrior, Outlaw, and Mercenary combat improved.",
+    "icon": "mercenary_combat.png",
+    "name": "Sahelian Kingdoms"
   },
   "DEHCSanMarcosFair": {
     "desc": "Ships 3 Semi-fattened cows + 3 more for each 5 minutes elapsed. Improves market food sell rate by 50%",
@@ -3489,6 +3524,11 @@
     "icon": "hc_british_rifleman_icon.png",
     "name": "8 Rangers"
   },
+  "DEHCShipRangers2": {
+    "desc": "",
+    "icon": "hc_british_rifleman_icon.png",
+    "name": "13 Rangers"
+  },
   "DEHCShipRegulars1": {
     "desc": "",
     "icon": "us_regular_icon.png",
@@ -3839,6 +3879,11 @@
     "icon": "hc_royal_arquebusier_icon.png",
     "name": "11 Vasa Allies"
   },
+  "DEHCVenetianArsenal": {
+    "desc": "Ships 1 early Arsenal Wagon. Docks and Military Buildings work faster when an Arsenal is nearby.",
+    "icon": "venetian_arsenal.png",
+    "name": "Venetian Arsenal"
+  },
   "DEHCWallGuns": {
     "desc": "Walls improve the attack and range of nearby Sentinels.",
     "icon": "wall_guns.png",
@@ -3936,6 +3981,11 @@
   },
   "HCAdvancedArtillery": {
     "desc": "Ships 1 Mortar. Moves Mortars and Horse Artillery to the Fortress Age.",
+    "icon": "shot_tower.png",
+    "name": "Advanced Artillery"
+  },
+  "HCAdvancedArtilleryGerman": {
+    "desc": "Ships 1 Mortar. Moves Horse Artillery and Mortars to the Fortress Age, +3 Uhlans.",
     "icon": "shot_tower.png",
     "name": "Advanced Artillery"
   },
@@ -4194,6 +4244,11 @@
     "icon": "hc_explorer_french.png",
     "name": "Voyageur"
   },
+  "HCExplorerGerman": {
+    "desc": "Improves your German Explorer in combat, lets him build Trading Posts and Town Centers faster, and gives him a powerful canine companion.",
+    "icon": "hc_explorer_german.png",
+    "name": "Buergermeister"
+  },
   "HCExplorerOttoman": {
     "desc": "Improves your Ottoman Explorer in combat, increases his movement rate, and gives him a powerful canine companion.",
     "icon": "hc_ottoman_explorer.png",
@@ -4443,6 +4498,11 @@
     "desc": "Ships a number of Hessian Jaeger mercenaries.",
     "icon": "hire_hessian_jaeger_divsion.png",
     "name": "Hire Hessian Jaeger Division"
+  },
+  "HCMercsHessiansGerman": {
+    "desc": "Ships a number of Hessian Jaeger Mercenaries. Instead of Uhlans, you get extra Jaegers.",
+    "icon": "hc_hessian_jaeger_icon.png",
+    "name": "Hire Hessian Jaegers"
   },
   "HCMercsHighland": {
     "desc": "Ships an army of Highland mercenaries: Highlanders, Swiss Pikemen and Harquebusiers.",
@@ -4719,6 +4779,11 @@
     "icon": "hc_royal_decree.png",
     "name": "Edict of Nantes"
   },
+  "HCRoyalDecreeGerman": {
+    "desc": "Provides your Church with unique German improvements, +2 Uhlans.",
+    "icon": "hc_royal_decree.png",
+    "name": "Treaty of Westphalia"
+  },
   "HCRoyalDecreeOttoman": {
     "desc": "Provides your Mosque with unique Ottoman improvements.",
     "icon": "hc_royal_decree.png",
@@ -4829,6 +4894,11 @@
     "icon": "cannon_icon_64.png",
     "name": "2 Heavy Cannon"
   },
+  "HCShipCannons1German": {
+    "desc": "",
+    "icon": "cannon_icon_64.png",
+    "name": "2 Heavy Cannon +4 Uhlans"
+  },
   "HCShipCannonsRepeat": {
     "desc": "",
     "icon": "infinite_heavy_cannon.png",
@@ -4838,6 +4908,11 @@
     "desc": "",
     "icon": "infinite_caravel.png",
     "name": "1 Caravel"
+  },
+  "HCShipCaravels1German": {
+    "desc": "",
+    "icon": "infinite_caravel.png",
+    "name": "1 Caravel +2 Uhlans"
   },
   "HCShipCaravels2": {
     "desc": "",
@@ -5048,6 +5123,11 @@
     "desc": "",
     "icon": "infinite_falconet.png",
     "name": "1 Falconet"
+  },
+  "HCShipFalconets1German": {
+    "desc": "",
+    "icon": "infinite_falconet.png",
+    "name": "1 Falconet +3 Uhlans"
   },
   "HCShipFalconets2": {
     "desc": "",
@@ -5479,6 +5559,11 @@
     "icon": "hc_reiter_icon.png",
     "name": "17 Ruyters"
   },
+  "HCShipSettlerWagons1": {
+    "desc": "",
+    "icon": "infinite_settler_wagon.png",
+    "name": "1 Settler Wagon"
+  },
   "HCShipSettlerWagons3": {
     "desc": "",
     "icon": "settler_wagon_icon.png",
@@ -5594,10 +5679,20 @@
     "icon": "hc_strelet_icon.png",
     "name": "19 Streltsy"
   },
+  "HCShipStrelets3": {
+    "desc": "",
+    "icon": "hc_strelet_icon.png",
+    "name": "24 Streltsy"
+  },
   "HCShipSurgeons": {
     "desc": "",
     "icon": "hc_team_2_surgeons.png",
     "name": "TEAM 2 Surgeons"
+  },
+  "HCShipUhlans3": {
+    "desc": "",
+    "icon": "hc_uhlan_icon.png",
+    "name": "11 Uhlans"
   },
   "HCShipWarWagons1": {
     "desc": "",
@@ -5803,6 +5898,11 @@
     "desc": "",
     "icon": "infinite_bison.png",
     "name": "13 Bison"
+  },
+  "HCXPBuffalo3": {
+    "desc": "",
+    "icon": "bison_icon_64.png",
+    "name": "9 Bison"
   },
   "HCXPBuffalo4": {
     "desc": "",
@@ -6434,10 +6534,20 @@
     "icon": "sx_rifle_rider_icon.png",
     "name": "4 Rifle Riders"
   },
+  "HCXPShipRifleRiders2": {
+    "desc": "",
+    "icon": "sx_rifle_rider_icon.png",
+    "name": "6 Rifle Riders"
+  },
   "HCXPShipRifleRiders3": {
     "desc": "",
     "icon": "sx_rifle_rider_icon.png",
     "name": "5 Rifle Riders"
+  },
+  "HCXPShipRifleRiders4": {
+    "desc": "",
+    "icon": "sx_rifle_rider_icon.png",
+    "name": "7 Rifle Riders"
   },
   "HCXPShipRocketsRepeat": {
     "desc": "",
@@ -6468,6 +6578,11 @@
     "desc": "",
     "icon": "hc_iro_tomahawk_icon.png",
     "name": "6 Tomahawks"
+  },
+  "HCXPShipTomahawk3": {
+    "desc": "",
+    "icon": "hc_iro_tomahawk_icon.png",
+    "name": "13 Tomahawks"
   },
   "HCXPShipTradingPostTravois": {
     "desc": "",
@@ -6789,10 +6904,20 @@
     "icon": "hc_admirality.png",
     "name": "Admiralty"
   },
+  "YPHCAdvancedConsulate": {
+    "desc": "Consulate armies and improvements arrive 50% faster. Improvements cost less, and brigade Shipments receive a moderate discount.",
+    "icon": "advanced_consulate.png",
+    "name": "Good Faith Agreements"
+  },
   "YPHCAdvancedConsulateIndians": {
     "desc": "Consulate armies and improvements arrive 50% faster. Improvements cost less, and brigade Shipments receive a moderate discount, +1 Villager.",
     "icon": "advanced_consulate.png",
     "name": "Good Faith Agreements"
+  },
+  "YPHCAdvancedMonasteryIndians": {
+    "desc": "Monastery improvements cheaper and ships a Monastery Rickshaw, +1 Villager.",
+    "icon": "hc_expanded_monastery.png",
+    "name": "Holy Refuge"
   },
   "YPHCAdvancedWonders": {
     "desc": "Wonders have more hitpoints and are built faster.",
@@ -6869,6 +6994,21 @@
     "icon": "hc_atonement.png",
     "name": "Atonement"
   },
+  "YPHCBakufu": {
+    "desc": "Japanese leadership enables all military units to be trained more quickly. Daimyo and Shoguns train units faster than buildings. Daimyo and Shoguns move faster and have a greater line of sight.",
+    "icon": "hc_bakufu.png",
+    "name": "Bakufu"
+  },
+  "YPHCBannerReforms": {
+    "desc": "All Chu Ko Nus transform into Arquebusiers and all Qiang Pikemen transform into Changdao Swordsmen.",
+    "icon": "hc_banner_reforms.png",
+    "name": "New Army"
+  },
+  "YPHCBannerSchool": {
+    "desc": "All Banner Armies train faster. Free Banner Armies created by the Summer Palace spawn slightly faster.",
+    "icon": "hc_banner_school.png",
+    "name": "Banner School"
+  },
   "YPHCBattlefieldConstruction": {
     "desc": "Sepoys can build Barracks, Caravanserais and Castles, +1 Villager.",
     "icon": "hc_battlefield_construction.png",
@@ -6929,6 +7069,16 @@
     "icon": "hc_exotic_hardwoods.png",
     "name": "Exotic Hardwoods"
   },
+  "YPHCExpandedTradingPostIndians": {
+    "desc": "You get a Trading Post Rickshaw, and Trading Posts are cheaper and stronger, +1 Villager.",
+    "icon": "hc_trade_empire.png",
+    "name": "Trade Empire"
+  },
+  "YPHCExtensiveFortificationsIndians": {
+    "desc": "Enables you to construct twice as many Castles and increases the hitpoints of ALL fortifications!",
+    "icon": "hc_extensive_fortifications.png",
+    "name": "Extensive Fortifications"
+  },
   "YPHCFishMarketIndians": {
     "desc": "Boats gather Food and Coin faster, +1 Villager.",
     "icon": "hc_fish_market.png",
@@ -6948,6 +7098,16 @@
     "desc": "When this Shipment arrives, all of your current Food is exchanged for a greater amount of Coin, +1 Villager.",
     "icon": "fur_trade.png",
     "name": "Fur Trade"
+  },
+  "YPHCGreatWall": {
+    "desc": "Wall hitpoints increased as well as their build time.",
+    "icon": "hc_great_wall.png",
+    "name": "Great Wall"
+  },
+  "YPHCGurkhaAid": {
+    "desc": "Gurkhas deal more damage to Heavy Infantry. Each tech at the Consulate grants additional Gurkhas for free, +1 Villager.",
+    "icon": "hc_ghurka_aid_icon_64.png",
+    "name": "Royal Green Jackets"
   },
   "YPHCHanAntiCavalryBonus": {
     "desc": "Chu Ko Nu and Arquebusier do extra damage to light cavalry, shock infantry, and heavy infantry.",
@@ -6999,6 +7159,11 @@
     "icon": "hc_japanese_mercenary_army.png",
     "name": "Hire Japanese Mercenary Army"
   },
+  "YPHCMercsMandarinArmy1": {
+    "desc": "Ships a number of Manchu Horse Archer mercenaries and Ming Iron Troop mercenaries.",
+    "icon": "hc_mandarin_mercenary_army.png",
+    "name": "Hire Mandarin Mercenary Army"
+  },
   "YPHCMercsRattanShield1": {
     "desc": "",
     "icon": "shield_rattan_icon.png",
@@ -7038,6 +7203,11 @@
     "desc": "Naginata Rider hitpoints increased.",
     "icon": "hc_cavalry_hitpoints.png",
     "name": "Naginata Rider Hitpoints"
+  },
+  "YPHCNativeHitpointsIndians": {
+    "desc": "Native warrior hitpoints and speed increased, +1 Villager.",
+    "icon": "hc_native_warrior_hp.png",
+    "name": "Native Warrior Hitpoints"
   },
   "YPHCNativeIncorporation": {
     "desc": "Native warriors are less expensive and you can train more of them.",

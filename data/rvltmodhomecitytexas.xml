@@ -1400,6 +1400,8 @@
         <card>DEHCREVMXEmpresarioContracts</card>
         <card>DEHCREVMXGonzalesGuns</card>
         <card>DEHCREVMXBurnetLand</card>
+        <card>DEHCREVMXShipSharpshooters</card>
+        <card>DEHCREVMXHeavyFortifications</card>
         <card>DEHCShipHaciendaWagon1</card>
         <card>HCFrontierDefenses</card>
         <card>DEHCFedMXFortifiedHaciendas</card>
@@ -1415,8 +1417,6 @@
         <card>DEHCREVMXIroncladsSteamers1</card>
         <card>DEHCREVMXRobberBarons2</card>
         <card>DEHCREVMXShipHaciendaWagonRepeat1</card>
-        <card>DEHCREVMXShipSharpshooters</card>
-        <card>DEHCREVMXHeavyFortifications</card>
         <card>DEHCShipIroncladsRepeat1</card>
         <card>RvltModHCREVMXTexasMarines</card>
       </cards>

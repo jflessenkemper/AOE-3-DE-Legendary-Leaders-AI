@@ -1297,11 +1297,11 @@
       <default>
       </default>
       <cards>
+        <card>DEHCExtensiveFortificationsEuropean</card>
         <card>HCStonemasons</card>
         <card>HCExoticHardwoods</card>
         <card>DEHCREVCitizenshipChile</card>
         <card>DEHCREVFishingFleet</card>
-        <card>DEHCExtensiveFortificationsEuropean</card>
         <card>DEHCMercsIrishBrigadiers</card>
         <card>DEHCTheaters</card>
         <card>DEHCREVSalitrera</card>

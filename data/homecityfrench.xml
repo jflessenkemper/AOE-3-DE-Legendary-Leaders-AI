@@ -2065,31 +2065,31 @@
       <name>Legendary Leaders</name>
       <default />
       <cards>
-        <card>HCEarlySkirmishersTeam</card>
-        <card>HCShipCoureurs1</card>
+        <card>DEHCBourbonAllies1</card>
+        <card>DEHCFrenchRoyalArmy</card>
         <card>DEHCFencingSchoolFrench</card>
         <card>HCExplorerFrench</card>
-        <card>HCHandCavalryDamageFrenchTeam</card>
-        <card>HCHandCavalryHitpointsFrench</card>
-        <card>HCRangedInfantryHitpointsFrench</card>
-        <card>DEHCFrenchRoyalArmy</card>
+        <card>HCRoyalDecreeFrench</card>
         <card>HCCavalryCombatFrench</card>
         <card>HCRangedInfantryDamageFrenchTeam</card>
+        <card>HCEarlySkirmishersTeam</card>
+        <card>HCShipCoureurs1</card>
+        <card>DEHCExtensiveFortificationsEuropean</card>
+        <card>HCHandCavalryDamageFrenchTeam</card>
+        <card>HCRoyalMint</card>
         <card>HCShipCuirassiers1</card>
         <card>HCShipCuirassiers3</card>
-        <card>HCShipSkirmishers1</card>
+        <card>DEHCMercsRoyalHorseman</card>
         <card>DEHCFrenchBattleshipCard</card>
         <card>DEHCShipBalloonsFrench</card>
         <card>HCShipCoureurs4</card>
-        <card>HCShipCuirassiers4</card>
-        <card>HCShipCuirassiers5</card>
+        <card>HCShipHussars2</card>
+        <card>HCShipSkirmishers1</card>
         <card>HCShipSkirmishers3</card>
         <card>HCXPTirailleurs</card>
-        <card>HCShipSkirmishers2</card>
-        <card>HCShipSkirmishers4</card>
-        <card>HCShipSkirmishers5</card>
-        <card>HCXPShipCuirassiersRepeat</card>
-        <card>DEHCMercsArmoredPistoleers</card>
+        <card>HCShipCuirassiers4</card>
+        <card>HCShipCuirassiers5</card>
+        <card>HCShipHussars3</card>
       </cards>
     </deck>
     <deck>

@@ -1244,31 +1244,31 @@
       <name>Legendary Leaders</name>
       <default />
       <cards>
+        <card>YPHCAdvancedConsulate</card>
         <card>YPHCShipShrineWagon</card>
-        <card>YPHCShrineLearning</card>
         <card>DEHCShrineHitpoints</card>
         <card>YPHCShipShrineWagon2</card>
         <card>YPHCArmedFishermenJapanese</card>
         <card>YPHCAshigaruDamage</card>
         <card>YPHCAtonementJapanese</card>
         <card>DEHCArtilleryDamageJapaneseTeam</card>
+        <card>YPHCConsulateRelations</card>
         <card>YPHCArtilleryHitpointsJapanese</card>
         <card>YPHCAshigaruAntiCavalryDamage</card>
-        <card>YPHCConsulateRelations</card>
+        <card>YPHCBakufu</card>
         <card>YPHCJapaneseMonkRangeAura</card>
-        <card>YPHCNaginataAntiInfantryDamage</card>
         <card>YPHCMercsJapaneseArmy</card>
         <card>YPHCArtilleryCostJapanese</card>
         <card>YPHCMorutaruRangeJapanese</card>
         <card>YPHCShipAshigaru3</card>
         <card>YPHCShipNaginataRider1</card>
+        <card>YPHCShrineLearning</card>
+        <card>YPHCNaginataAntiInfantryDamage</card>
         <card>YPHCSamuraiSpeed</card>
         <card>YPHCShipAshigaru1</card>
         <card>YPHCShipAshigaru4</card>
         <card>YPHCShipCoveredWagonsJapan</card>
         <card>YPHCShipDaimyoAizu</card>
-        <card>YPHCShipNaginataRider2</card>
-        <card>YPHCShipNaginataRider4</card>
       </cards>
     </deck>
     <deck>

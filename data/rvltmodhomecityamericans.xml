@@ -1269,6 +1269,8 @@
       <default>
       </default>
       <cards>
+        <card>DEHCREVPowderAlarm</card>
+        <card>DEHCREVLongRifles</card>
         <card>HCPioneers</card>
         <card>DEHCWhaleOilTeam</card>
         <card>DEHCREVLegionSpies</card>
@@ -1281,12 +1283,10 @@
         <card>DEHCREVImmigrantsEuropean</card>
         <card>DEHCREVLegionIronPetards</card>
         <card>DEHCREVLegionUhlans</card>
-        <card>DEHCREVPowderAlarm</card>
         <card>DEHCREVLegionRegulars</card>
         <card>DEHCREVLegionCarbines</card>
         <card>DEHCREVLegionArtillery</card>
         <card>DEHCREVLegionGrenadiers</card>
-        <card>DEHCREVLongRifles</card>
         <card>DEHCREVUSACombat</card>
         <card>DEHCREVUSAHeroBuff</card>
         <card>DEHCREVVolunteers</card>

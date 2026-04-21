@@ -1273,29 +1273,29 @@
       <cards>
         <card>YPHCAdvancedConsulateIndians</card>
         <card>YPHCAdvancedWondersIndians</card>
-        <card>YPHCSpiceTradeIndian</card>
+        <card>YPHCExtensiveFortificationsIndians</card>
         <card>YPHCAdmiralityIndians</card>
         <card>YPHCArmedFishermenIndians</card>
         <card>YPHCAtonementIndians</card>
         <card>YPHCCamelDamageIndians</card>
-        <card>DEHCExportTradeIndians</card>
         <card>YPHCConsulateRelationsIndians</card>
         <card>YPHCIndianMonkFrighten</card>
-        <card>YPHCNativeTradeTaxIndians</card>
+        <card>DEHCExportTradeIndians</card>
         <card>YPHCMercenaryLoyaltyIndians</card>
         <card>YPHCShipFrigateIndians</card>
+        <card>YPHCEastIndiaCompany</card>
         <card>DEHCShipMercWarDhowsIndians</card>
         <card>DEHCCheapSepoys</card>
         <card>YPHCMercsIndianArmy</card>
         <card>YPHCShipFrigateDoubleIndians</card>
         <card>YPHCShipMonitorIndians</card>
         <card>YPHCIndianMonkCombat</card>
-        <card>YPHCExoticHardwoodsIndians</card>
-        <card>YPHCFishMarketIndians</card>
-        <card>YPHCFurTradeIndians</card>
-        <card>YPHCSawmillsIndians</card>
-        <card>YPHCEastIndiaCompany</card>
+        <card>YPHCAdvancedMonasteryIndians</card>
+        <card>YPHCExpandedTradingPostIndians</card>
         <card>YPHCElephantCombatIndians</card>
+        <card>YPHCGurkhaAid</card>
+        <card>YPHCNativeHitpointsIndians</card>
+        <card>YPHCNativeTradeTaxIndians</card>
       </cards>
     </deck>
     <deck>

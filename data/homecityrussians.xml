@@ -1777,31 +1777,31 @@
       <name>Legendary Leaders</name>
       <default />
       <cards>
+        <card>HCShipStrelets3</card>
+        <card>HCShipCossacks3</card>
         <card>HCExplorerRussian</card>
+        <card>HCRoyalDecreeRussian</card>
         <card>DEHCLandedGentry</card>
         <card>DEHCInfantryCombatRussian</card>
         <card>DEHCShipHalberdiersRussian1</card>
         <card>HCShipCossacks1</card>
         <card>HCShipCossacks4</card>
-        <card>HCRoyalDecreeRussian</card>
-        <card>HCStreletsCombatRussian</card>
         <card>DEHCBashkirRebellion</card>
+        <card>HCStreletsCombatRussian</card>
         <card>HCBlockhouseCannon</card>
         <card>HCShipCossacks2</card>
         <card>HCCavalryCombatRussian</card>
         <card>HCFrontierDefensesRussian</card>
         <card>DEHCRussianBattleshipCard</card>
-        <card>HCShipCossacks3</card>
         <card>HCShipHalberdiersRussian2</card>
         <card>HCShipHalberdiersRussian3</card>
-        <card>HCShipMusketeersRussian3</card>
         <card>HCShipHalberdiersRussian1</card>
         <card>HCShipMusketeersRussian2</card>
         <card>HCShipOprichniks1</card>
         <card>HCShipOprichniks2</card>
         <card>HCShipStrelets2</card>
+        <card>HCShipMusketeersRussian3</card>
         <card>HCShipOprichniks3</card>
-        <card>HCShipRussianFleet</card>
       </cards>
     </deck>
     <deck>

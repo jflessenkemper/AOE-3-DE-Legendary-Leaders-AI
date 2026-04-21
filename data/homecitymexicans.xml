@@ -2453,14 +2453,17 @@
       <name>Legendary Leaders</name>
       <default />
       <cards>
-        <card>DEHCGeneralMexicans</card>
-        <card>DEHCAdvancedSaloon</card>
+        <card>DEHCAlhondigaDeGranaditas</card>
         <card>DEHCFedMXFortifiedHaciendas</card>
+        <card>DEHCCharreada</card>
+        <card>DEHCChipotles</card>
+        <card>DEHCBarbacoa</card>
+        <card>DEHCCriollos</card>
+        <card>DEHCGeneralMexicans</card>
+        <card>DEHCCavalryCombatMexican</card>
+        <card>DEHCCathedralConstruction</card>
         <card>DEHCRoyalDecreeMexican</card>
         <card>DEHCShipInsurgente1</card>
-        <card>DEHCShipCapturedGalleons1</card>
-        <card>DEHCChipotles</card>
-        <card>DEHCCavalryCombatMexican</card>
         <card>DEHCMexicanMint</card>
         <card>DEHCMexicanStandoff</card>
         <card>DEHCSPCInsurgenteCombat</card>
@@ -2470,14 +2473,11 @@
         <card>DEHCIndianFriendshipMexican</card>
         <card>DEHCShipInsurgente2</card>
         <card>DEHCShipFrigateRepeat</card>
-        <card>DEHCAltaCalifornia</card>
+        <card>DEHCShipRegulars4</card>
         <card>DEHCShipCapturedGalleons2</card>
         <card>DEHCShipIroncladsRepeat1</card>
+        <card>DEHCShipCapturedGalleons1</card>
         <card>DEHCGuerillaTactics</card>
-        <card>DEHCHireManilamen</card>
-        <card>DEHCImmigrantsRussian</card>
-        <card>DEHCLeatherSoldiers</card>
-        <card>DEHCLiberationMarch</card>
       </cards>
     </deck>
     <deck>

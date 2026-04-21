@@ -1284,29 +1284,29 @@
       <name>Legendary Leaders</name>
       <default />
       <cards>
+        <card>HCXPShipDogSoldiers3</card>
+        <card>HCXPShipRifleRiders3</card>
+        <card>HCXPShipAxeRiders3</card>
         <card>HCXPWarChiefSioux1</card>
-        <card>DEHCShipNativeScout</card>
+        <card>HCXPBuffalo3</card>
         <card>DEHCExtensiveFortificationsWarchief</card>
         <card>HCXPCavalryDamageSioux</card>
-        <card>HCXPNewWaysSioux</card>
         <card>HCXPShipAxeRiders1</card>
-        <card>HCXPShipAxeRiders3</card>
+        <card>HCXPBuffalo4</card>
         <card>HCXPSiouxLakotaSupport</card>
         <card>HCXPWarChiefSioux2</card>
         <card>DEHCLakotaImprovedSiege</card>
         <card>HCXPCavalryCombatSioux</card>
-        <card>HCXPShipAxeRiders2</card>
-        <card>HCXPShipAxeRiders4</card>
         <card>HCXPWarChiefSioux3</card>
-        <card>HCXPOldWaysSioux</card>
         <card>HCXPShipAxeRiders5</card>
         <card>HCXPShipAxeRidersRepeat</card>
-        <card>HCXPShipDogSoldiers2</card>
-        <card>HCXPShipDogSoldiers1</card>
-        <card>HCXPShipDogSoldiers3</card>
-        <card>HCXPShipDogSoldiersTeam1</card>
+        <card>HCXPShipRifleRiders2</card>
+        <card>HCXPShipRifleRiders4</card>
+        <card>HCXPShipAxeRiders2</card>
+        <card>HCXPShipAxeRiders4</card>
         <card>HCXPShipRifleRiders1</card>
-        <card>HCXPShipRifleRiders3</card>
+        <card>HCXPShipDogSoldiers1</card>
+        <card>HCXPShipDogSoldiersTeam1</card>
         <card>HCXPShipWarRifles1</card>
         <card>HCXPSiouxBurntThighSupport</card>
       </cards>

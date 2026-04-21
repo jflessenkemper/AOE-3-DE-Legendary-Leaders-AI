@@ -1345,31 +1345,31 @@
       <default>
       </default>
       <cards>
+        <card>DEHCLiberationMarch</card>
         <card>DEHCREVNationalHero</card>
-        <card>HCAdvancedTradingPost</card>
-        <card>DEHCMercsIrishBrigadiers</card>
+        <card>HCCheapBarracksTeam</card>
         <card>DEHCExtensiveFortificationsEuropean</card>
+        <card>DEHCMercsIrishBrigadiers</card>
+        <card>HCFrontierDefenses</card>
         <card>DEHCTheaters</card>
-        <card>HCShipSettlers2</card>
-        <card>HCShipSettlers4</card>
+        <card>HCAdvancedArsenal</card>
         <card>DEHCREVCattleDeliveryColombia</card>
         <card>DEHCREVShipSteamers</card>
         <card>RvltModHCLlaneros</card>
         <card>DEHCMercsArmoredPistoleers</card>
-        <card>DEHCHabsburgAllies1</card>
-        <card>DEHCHandMortar</card>
+        <card>HCUnlockFort</card>
         <card>DEHCREVColombianNavy</card>
         <card>DEHCREVShipColombianRevolutionaries</card>
         <card>DEHCREVShipIronclads</card>
         <card>DEHCREVAlbionLegion</card>
-        <card>DEHCShipBattleshipRepeat</card>
+        <card>HCHeavyFortifications</card>
         <card>HCXPIndustrialRevolution</card>
-        <card>DEHCLiberationMarch</card>
+        <card>DEHCShipBattleshipRepeat</card>
+        <card>DEHCHabsburgAllies1</card>
+        <card>DEHCHandMortar</card>
         <card>DEHCMarvelousYear</card>
         <card>DEHCShipGatlings1</card>
         <card>DEHCBourbonAllies1</card>
-        <card>DEHCShipCannons1Team</card>
-        <card>DEHCShipNuestrasSenoras</card>
       </cards>
     </deck>
   </decks>

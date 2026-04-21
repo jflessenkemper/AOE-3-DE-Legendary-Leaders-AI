@@ -1355,7 +1355,7 @@
       </default>
       <cards>
         <card>DEHCColonialMilitiaOttoman</card>
-        <card>HCExoticHardwoods</card>
+        <card>HCStonemasons</card>
         <card>DEHCREVNileFlood</card>
         <card>DEHCREVSuezCanal</card>
         <card>DEHCExtensiveFortificationsEuropean</card>
@@ -1366,7 +1366,7 @@
         <card>DEHCREVSudaneseAllies</card>
         <card>RvltModHCMercsMamelukes</card>
         <card>DEHCMercsBosniaks</card>
-        <card>DEHCHandMortarOttoman</card>
+        <card>HCUnlockFort</card>
         <card>DEHCREVShipEgyptianFleet</card>
         <card>DEHCREVGatlingCamels</card>
         <card>DEHCREVSennarHorsemen</card>
@@ -1377,8 +1377,8 @@
         <card>DEHCShipMercXebecOttoman</card>
         <card>DEHCOttomanBattleshipCard</card>
         <card>DEHCShipBattleshipRepeat</card>
+        <card>DEHCHandMortarOttoman</card>
         <card>DEHCShiAzaps2</card>
-        <card>DEHCShipBerberAllies2Ottoman</card>
       </cards>
     </deck>
   </decks>

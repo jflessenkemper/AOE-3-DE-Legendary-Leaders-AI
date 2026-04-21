@@ -1590,31 +1590,31 @@
       <name>Legendary Leaders</name>
       <default />
       <cards>
-        <card>DEHCAdvancedCommanderies</card>
-        <card>DEHCExplorerMaltese</card>
-        <card>DEHCExtensiveFortificationsEuropean</card>
+        <card>DEHCKnightsMalta</card>
+        <card>DEHCKnightsRhodes</card>
+        <card>DEHCKnightsBodrum</card>
         <card>DEHCAuberges</card>
         <card>DEHCBritishTongue</card>
-        <card>DEHCHospitality</card>
-        <card>DEHCKnightsBodrum</card>
-        <card>DEHCKnightsRhodes</card>
+        <card>DEHCFrenchTongue</card>
+        <card>DEHCSpanishTongue</card>
+        <card>DEHCGermanTongue</card>
+        <card>DEHCWallGuns</card>
+        <card>DEHCExplorerMaltese</card>
+        <card>HCHeavyFortifications</card>
+        <card>DEHCExtensiveFortificationsEuropean</card>
+        <card>DEHCShipHospitaller1</card>
+        <card>DEHCShipHospitaller2</card>
         <card>DEHCMalteseCombat</card>
         <card>DEHCPortugueseTongue</card>
-        <card>DEHCShipHospitaller2</card>
-        <card>DEHCSpanishTongue</card>
-        <card>DEHCWallGuns</card>
-        <card>DEHCKnightsMalta</card>
-        <card>DEHCMalteseBattleshipCard</card>
-        <card>HCHeavyFortifications</card>
-        <card>DEHCFrenchTongue</card>
-        <card>DEHCRussianTongue</card>
         <card>DEHCShipHospitaller4</card>
-        <card>DEHCShipRollingWoodMalta</card>
-        <card>DEHCShipHospitaller1</card>
-        <card>DEHCGermanTongue</card>
-        <card>DEHCShipHospitallerTeam</card>
         <card>DEHCUnlockFort3</card>
+        <card>DEHCShipHospitallerTeam</card>
         <card>DEHCEarlyFort</card>
+        <card>DEHCMalteseBattleshipCard</card>
+        <card>DEHCRussianTongue</card>
+        <card>DEHCShipRollingWoodMalta</card>
+        <card>DEHCHospitality</card>
+        <card>HCUnlockFort</card>
       </cards>
     </deck>
     <deck>

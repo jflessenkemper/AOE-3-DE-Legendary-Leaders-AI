@@ -1329,31 +1329,31 @@
       <default>
       </default>
       <cards>
+        <card>DEHCCriollos</card>
         <card>DEHCREVMXColonialMilitia</card>
-        <card>DEHCAdvancedSaloon</card>
-        <card>DEHCREVMXShipColonialMilitia</card>
+        <card>HCExoticHardwoods</card>
         <card>DEHCREVFedMXSantamariaFire</card>
         <card>DEHCREVMXFrontierDefenses</card>
+        <card>DEHCREVMXShipColonialMilitia</card>
         <card>DEHCREVMXShipFalconets1</card>
-        <card>DEHCREVMXShipSettlersRepeat</card>
         <card>DEHCREVMXShipIronclad1</card>
         <card>DEHCREVMXFrontierDefensesRepeat</card>
         <card>DEHCREVMXShipCulverins2</card>
+        <card>HCRefrigeration</card>
         <card>DEHCShipCapturedGalleons2</card>
         <card>DEHCCavalryCombatMexican</card>
-        <card>DEHCGuerillaTactics</card>
+        <card>HCUnlockFactory</card>
         <card>DEHCShipFrigateRepeat</card>
         <card>DEHCAltaCalifornia</card>
         <card>DEHCCampecheFortifications</card>
         <card>DEHCCantinas</card>
-        <card>DEHCChapultepecCastle</card>
+        <card>DEHCREVMXShipSettlersRepeat</card>
         <card>DEHCREVMXTehuantepecRoute</card>
         <card>DEHCREVMXVeteranBarracks</card>
         <card>DEHCREVMXVeteranStable</card>
-        <card>DEHCCriollos</card>
         <card>DEHCShipCapturedGalleons1</card>
+        <card>DEHCGuerillaTactics</card>
         <card>DEHCLeatherSoldiers</card>
-        <card>DEHCLiberationMarch</card>
       </cards>
     </deck>
     <deck>

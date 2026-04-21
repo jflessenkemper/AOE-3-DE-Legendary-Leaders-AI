@@ -1948,31 +1948,31 @@
       <name>Legendary Leaders</name>
       <default />
       <cards>
-        <card>DEHCAdvancedEnvoy</card>
+        <card>HCXPBankWagon</card>
+        <card>HCBetterBanks</card>
+        <card>HCInfantryCombatDutch</card>
+        <card>HCShipRuyters3</card>
+        <card>HCShipHalberdiers3</card>
+        <card>HCShipFluyts2</card>
+        <card>DEHCMercenaryArmyDutch</card>
+        <card>DEHCDutchPaintings</card>
+        <card>DEHCDutchBattleshipCard</card>
         <card>DEHCShipSettlersDutch3</card>
         <card>DEHCShipSettlersDutch2</card>
-        <card>HCXPBankWagon</card>
         <card>HCInfantryDamageDutch</card>
         <card>HCInfantryHitpointsDutchTeam</card>
         <card>HCNativeChampionsDutchTeam</card>
-        <card>DEHCMercenaryArmyDutch</card>
-        <card>HCCavalryCombatDutch</card>
-        <card>HCInfantryCombatDutch</card>
-        <card>HCShipFluyts2</card>
-        <card>HCShipHalberdiers1</card>
-        <card>HCShipHalberdiers3</card>
-        <card>DEHCDutchBattleshipCard</card>
+        <card>HCMercenaryLoyalty</card>
+        <card>DEHCShipBattleshipRepeat</card>
         <card>HCShipDutchRaidingFleet</card>
-        <card>HCBetterBanks</card>
         <card>HCMortarsDamageDutchTeam</card>
-        <card>HCShipDutchCounterCavForce</card>
         <card>DEHCShipSettlersDutchRepeat</card>
-        <card>HCShipEnvoyTeam</card>
-        <card>DEHCDutchPaintings</card>
+        <card>DEHCAdvancedEnvoy</card>
+        <card>HCCavalryCombatDutch</card>
+        <card>HCShipHalberdiers1</card>
         <card>HCShipRuyters1</card>
-        <card>HCShipRuyters3</card>
+        <card>HCShipDutchCounterCavForce</card>
         <card>HCShipHalberdiers5</card>
-        <card>HCShipRuyters2</card>
       </cards>
     </deck>
     <deck>

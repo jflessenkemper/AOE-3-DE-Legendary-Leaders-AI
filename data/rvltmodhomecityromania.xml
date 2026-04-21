@@ -1106,30 +1106,30 @@
       </default>
       <cards>
         <card>DEHCLandedGentry</card>
-        <card>HCStonemasons</card>
+        <card>HCColonialMilitia</card>
         <card>DEHCExtensiveFortificationsEuropean</card>
         <card>DEHCInfantryHitpointsItalian</card>
         <card>DEHCPhanarAllies2</card>
         <card>DEHCTheaters</card>
         <card>HCAdvancedArsenal</card>
-        <card>RvltModHCWallachianArchers</card>
         <card>RvltModHCSovnyaRomanian</card>
+        <card>RvltModHCWallachianArchers</card>
         <card>DEHCMercsGiantGrenadiers</card>
-        <card>HCUnlockFort</card>
         <card>DEHCHandMortar</card>
         <card>DEHCPhanarAllies1</card>
+        <card>HCRefrigeration</card>
         <card>DEHCREVShipHorseArtillery3</card>
         <card>RvltModHCFlightArcheryRomanians</card>
-        <card>HCHeavyFortifications</card>
         <card>DEHCShipBattleshipRepeat</card>
-        <card>HCXPUnlockFort2</card>
-        <card>HCXPIndustrialRevolution</card>
-        <card>HCRefrigeration</card>
-        <card>HCRoyalMint</card>
+        <card>HCHeavyFortifications</card>
         <card>HCUnlockFactory</card>
+        <card>HCXPIndustrialRevolution</card>
+        <card>HCRoyalMint</card>
+        <card>HCUnlockFort</card>
         <card>RvltModHCShipFortWagonOutpost</card>
         <card>HCMercenaryLoyalty</card>
         <card>HCMercsBlackRiders</card>
+        <card>HCMercsHessians</card>
       </cards>
     </deck>
   </decks>

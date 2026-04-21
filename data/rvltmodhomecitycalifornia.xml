@@ -1401,31 +1401,31 @@
       <default>
       </default>
       <cards>
+        <card>DEHCFedMXFortifiedHaciendas</card>
         <card>DEHCREVMXCaliforniaHaciendas</card>
         <card>DEHCRancheros</card>
         <card>DEHCREVMXRanchos</card>
         <card>DEHCREVMXSanDiegoPort</card>
         <card>DEHCREVMXSanFranciscoBay</card>
         <card>HCFrontierDefenses</card>
-        <card>DEHCShipTradingPostWagons</card>
         <card>DEHCREVMXFrontierDefensesRepeat</card>
-        <card>DEHCREVMXShipSettlersRepeat2</card>
         <card>DEHCREVFedMXRanching</card>
+        <card>DEHCREVMXShipSettlersRepeat2</card>
         <card>HCFrontierDefenses2</card>
         <card>RvltModHCREVMXCaliforniaStatehood</card>
-        <card>DEHCShipCapturedGalleons2</card>
-        <card>DEHCREVMXShipGoldMineWagonRepeat</card>
+        <card>HCRefrigeration</card>
         <card>DEHCREVMXCaliforniaLancers</card>
         <card>DEHCREVMXCaliforniaRobberBarons</card>
         <card>DEHCREVMXShipCalifornios</card>
-        <card>DEHCREVMXShipHaciendaWagonRepeat1</card>
+        <card>DEHCREVMXShipGoldMineWagonRepeat</card>
         <card>DEHCREVMXShipIroncladRepeat1</card>
+        <card>DEHCREVMXShipHaciendaWagonRepeat1</card>
         <card>DEHCAltaCalifornia</card>
+        <card>HCExoticHardwoods</card>
+        <card>HCUnlockFactory</card>
+        <card>DEHCShipCapturedGalleons2</card>
         <card>DEHCShipFrigateRepeat</card>
-        <card>DEHCShipHaciendaWagon1</card>
         <card>DEHCCavalryCombatMexican</card>
-        <card>DEHCGuerillaTactics</card>
-        <card>DEHCImmigrantsRussian</card>
       </cards>
     </deck>
     <deck>

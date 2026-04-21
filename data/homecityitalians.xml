@@ -2094,8 +2094,8 @@
       <cards>
         <card>DEHCExplorerItalian</card>
         <card>DEHCLombardy</card>
-        <card>DEHCCavalryDamageItalianTeam</card>
         <card>DEHCInfantryHitpointsItalian</card>
+        <card>DEHCCavalryDamageItalianTeam</card>
         <card>DEHCRoyalDecreeItalians</card>
         <card>DEHCSchiavoniSwords</card>
         <card>DEHCShipPavisiers1</card>
@@ -2108,15 +2108,15 @@
         <card>DEHCItalianBattleshipCard</card>
         <card>DEHCPapalArsenal</card>
         <card>DEHCPapalCompany</card>
+        <card>DEHCRedshirts</card>
         <card>DEHCShipBersaglieri1</card>
         <card>DEHCShipBersaglieriRepeat</card>
         <card>DEHCShipPapalBombards</card>
         <card>DEHCShipPapalBombardsRepeat</card>
         <card>DEHCShipPavisiers4</card>
+        <card>DEHCVenetianArsenal</card>
         <card>DEHCPioneersItalian</card>
         <card>HCFrontierDefensesItalian</card>
-        <card>DEBasilicaShipPapalZouave1</card>
-        <card>DEBasilicaShipPapalGuards1</card>
       </cards>
     </deck>
     <deck>

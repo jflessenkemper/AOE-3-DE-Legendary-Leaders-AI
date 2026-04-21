@@ -1374,31 +1374,31 @@
       <default>
       </default>
       <cards>
+        <card>DEHCREVKratonGuards</card>
+        <card>DEHCREVAcehExports</card>
+        <card>DEHCREVLantakas</card>
+        <card>DEHCREVShipJavaSpearman</card>
+        <card>DEHCREVShipCetbang</card>
+        <card>DEHCREVShipWokouJunk</card>
         <card>HCSpiceTradeTeam</card>
         <card>DEHCFeitorias</card>
         <card>DEHCMercsIrishBrigadiers</card>
-        <card>HCShipCaravels1</card>
-        <card>HCShipCaravels2</card>
         <card>DEHCExtensiveFortificationsEuropean</card>
         <card>DEHCTheaters</card>
-        <card>DEHCREVAcehExports</card>
-        <card>DEHCREVLantakas</card>
+        <card>HCAdvancedArsenal</card>
+        <card>HCFrontierDefenses</card>
         <card>DEHCMercenaryArmyDutch</card>
         <card>DEHCMercsBosniaks</card>
-        <card>HCShipFrigates</card>
         <card>DEHCBlueGuards</card>
-        <card>DEHCREVKratonGuards</card>
-        <card>DEHCREVShipJavaSpearman</card>
-        <card>DEHCREVShipWokouJunk</card>
+        <card>DEHCHabsburgAllies1</card>
         <card>DEHCREVOttomanExpArmy</card>
-        <card>DEHCREVShipCetbang</card>
         <card>DEHCMercsMountedRiflemen</card>
         <card>DEHCDutchBattleshipCard</card>
         <card>DEHCShipBattleshipRepeat</card>
-        <card>HCREVShipIronclads</card>
-        <card>HCShipMonitors</card>
-        <card>HCXPShipMonitorsTeam</card>
-        <card>DEHCHabsburgAllies1</card>
+        <card>DEHCHandMortar</card>
+        <card>DEHCShipHussars2</card>
+        <card>DEHCBelandaHitam</card>
+        <card>DEHCWettinAllies2</card>
       </cards>
     </deck>
   </decks>

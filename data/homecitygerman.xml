@@ -1777,31 +1777,31 @@
       <name>Legendary Leaders</name>
       <default />
       <cards>
-        <card>HCAdvancedDockGerman</card>
-        <card>HCAdvancedMarketGerman</card>
+        <card>HCExplorerGerman</card>
+        <card>HCShipUhlans3</card>
+        <card>HCShipWarWagons1</card>
+        <card>HCShipSettlerWagons1</card>
+        <card>HCRoyalDecreeGerman</card>
         <card>HCMercsLandsknecht1German</card>
         <card>DEHCMercsIrishBrigadiersGerman</card>
         <card>DEHCWettinAlliesGerman1</card>
-        <card>HCCavalryDamageGermanTeam</card>
-        <card>HCCavalryHitpointsGerman</card>
+        <card>HCShipCaravels1German</card>
         <card>DEHCHabsburgAlliesGerman</card>
+        <card>HCMercsHessiansGerman</card>
         <card>HCMercsLandsknecht2German</card>
+        <card>DEHCHandMortarGerman</card>
         <card>DEHCMercenaryCampsGerman</card>
-        <card>DEHCMercsBosniaksGerman</card>
-        <card>DEHCMercsPandoursGerman</card>
-        <card>DEHCGermanBattleshipCard</card>
         <card>HCUhlanCombatGerman</card>
         <card>DEHCMercsGiantGrenadiersGerman</card>
         <card>DEHCHabsburgAllies2</card>
         <card>DEHCWettinAlliesGerman2</card>
-        <card>HCXPShipHorseArtillery1German</card>
+        <card>DEHCMercsBosniaksGerman</card>
+        <card>DEHCMercsPandoursGerman</card>
+        <card>DEHCGermanBattleshipCard</card>
         <card>DEHCGermanChevaulegers</card>
-        <card>DEHCHandMortarGerman</card>
-        <card>HCMercsBlackRidersGerman</card>
-        <card>HCCavalryCombatGerman</card>
-        <card>HCXPShipHorseArtillery2German</card>
-        <card>HCMercenaryCombatGerman</card>
-        <card>HCMercenaryLoyaltyGerman</card>
+        <card>HCAdvancedArtilleryGerman</card>
+        <card>HCShipFalconets1German</card>
+        <card>HCShipCannons1German</card>
       </cards>
     </deck>
     <deck>

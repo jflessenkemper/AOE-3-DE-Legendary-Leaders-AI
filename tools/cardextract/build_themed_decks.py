@@ -159,7 +159,8 @@ def score_card(card: str, age: int, theme: dict) -> int:
     return s
 
 
-def select_deck(civ_id: str, pool: dict[str, int], theme: dict) -> list[str]:
+def select_deck(civ_id: str, pool: dict[str, int], theme: dict,
+                warnings: list[str] | None = None) -> list[str]:
     excludes = set(theme.get("must_exclude", []))
     if not theme["is_revolution"]:
         # Strip ALL revolution-themed and revolution-trigger cards from
@@ -180,12 +181,17 @@ def select_deck(civ_id: str, pool: dict[str, int], theme: dict) -> list[str]:
 
     # Pass 1: must_include (only if present in pool & not excluded)
     for c in theme.get("must_include", []):
-        if c in pool and c not in excludes and c not in seen:
-            chosen.append(c)
-            seen.add(c)
-            by_age[pool[c]] += 1
-            if len(chosen) >= TARGET_SIZE:
-                return chosen
+        if c not in pool:
+            if warnings is not None:
+                warnings.append(f"{civ_id}: must_include '{c}' not in pool")
+            continue
+        if c in excludes or c in seen:
+            continue
+        chosen.append(c)
+        seen.add(c)
+        by_age[pool[c]] += 1
+        if len(chosen) >= TARGET_SIZE:
+            return chosen
 
     # Pass 2: walk scored list, respecting AGE_FLOOR (try to fill each age
     # bucket up to its floor before letting any single age dominate)
@@ -255,6 +261,7 @@ def main() -> int:
     summary_standard: dict[str, dict[str, list[str]]] = {}
 
     civ_ids = civ_themes.all_civs()
+    warnings: list[str] = []
     print(f"curating {len(civ_ids)} decks (target {TARGET_SIZE} cards)\n")
 
     # Pretty header
@@ -273,7 +280,7 @@ def main() -> int:
             print(f"  {civ_id:38s} no pool found")
             continue
 
-        chosen = select_deck(civ_id, pool, theme)
+        chosen = select_deck(civ_id, pool, theme, warnings)
         deck = find_default_deck(root)
         if deck is None:
             decks = root.find("decks") or ET.SubElement(root, "decks")
@@ -318,6 +325,10 @@ def main() -> int:
         json.dumps(summary_standard, indent=2, sort_keys=True), encoding="utf-8")
     print(f"\nwrote data/decks_legendary.json ({len(summary_legendary)} civs)")
     print(f"wrote data/decks_standard.json   ({len(summary_standard)} civs)")
+    if warnings:
+        print(f"\n{len(warnings)} warnings (must_include cards not in pool):")
+        for w in warnings:
+            print(f"  {w}")
     return 0
 
 

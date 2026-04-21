@@ -1269,27 +1269,27 @@
       <cards>
         <card>DEHCCalendarCeremony</card>
         <card>DEHCCalmecac</card>
+        <card>DEHCSkullWall</card>
+        <card>DEHCRitualGladiators</card>
+        <card>DEHCShipJaguarKnights6</card>
+        <card>DEHCMacehualtinCombat</card>
+        <card>DEHCAztecFort</card>
+        <card>HCXPShipEagleKnights3</card>
+        <card>DEHCChichimecaRebellion</card>
+        <card>DEHCZapotecAlliesTeam</card>
         <card>HCXPCoinCratesAztec3</card>
         <card>HCXPShipJaguars2</card>
         <card>HCXPShipJaguarsTeam</card>
         <card>HCXPShipMacehualtins1</card>
         <card>HCXPShipMacehualtins3</card>
-        <card>DEHCAztecFort</card>
-        <card>DEHCRitualGladiators</card>
-        <card>DEHCShipJaguarKnights6</card>
-        <card>DEHCShipMedicineMen3Aztec</card>
-        <card>DEHCTeamCoinCratesAztec</card>
         <card>HCXPWarChiefAztec2</card>
-        <card>DEHCChichimecaRebellion</card>
-        <card>DEHCMacehualtinCombat</card>
-        <card>DEHCSkullWall</card>
-        <card>DEHCZapotecAlliesTeam</card>
+        <card>DEHCShipMedicineMen3Aztec</card>
         <card>HCXPCoinCratesAztec5</card>
         <card>HCXPWarChiefAztec1</card>
+        <card>DEHCTeamCoinCratesAztec</card>
         <card>HCXPAztecMining</card>
         <card>HCXPCoinCratesAztec4</card>
         <card>HCXPShipEagleKnights1</card>
-        <card>HCXPShipEagleKnights3</card>
         <card>HCXPShipJaguarKnights1</card>
         <card>HCXPShipJaguarKnights3</card>
       </cards>

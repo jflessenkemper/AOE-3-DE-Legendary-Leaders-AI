@@ -1939,30 +1939,30 @@
       <default />
       <cards>
         <card>DEHCFeitorias</card>
-        <card>DEHCNavalInfantry</card>
+        <card>HCShipCacadores3</card>
+        <card>HCShipDragoons3</card>
+        <card>HCExplorerPortuguese</card>
+        <card>HCRoyalDecreePortuguese</card>
         <card>HCNavalCombat</card>
         <card>HCNavalGunners</card>
         <card>HCRangedInfantryDamagePortuguese</card>
-        <card>HCRoyalDecreePortuguese</card>
         <card>DEHCMercsCannoneersEuropean</card>
         <card>HCDragoonCombatPortuguese</card>
         <card>DEHCCarracks</card>
         <card>DEHCHandCombatPortuguese</card>
         <card>HCArtilleryHitpointsPortugueseTeam</card>
-        <card>HCRangedInfantryHitpointsPortugueseTeam</card>
-        <card>HCShipDragoons1</card>
         <card>DEHCPortugueseBattleshipCard</card>
+        <card>DEHCShipBattleshipRepeat</card>
         <card>HCRangedInfantryCombatPortuguese</card>
         <card>HCShipDragoons2</card>
         <card>HCShipDragoons4</card>
-        <card>HCShipOrganGuns2</card>
-        <card>HCShipDragoons3</card>
+        <card>DEHCNavalInfantry</card>
+        <card>HCRangedInfantryHitpointsPortugueseTeam</card>
+        <card>HCShipDragoons1</card>
         <card>HCShipOrganGuns1</card>
+        <card>HCShipOrganGuns2</card>
         <card>HCShipOrganGuns3</card>
         <card>HCShipPortugueseExpForce</card>
-        <card>DEHCMercsArmoredPistoleers</card>
-        <card>DEHCShipBattleshipRepeat</card>
-        <card>DEHCEstremozGuns</card>
       </cards>
     </deck>
     <deck>

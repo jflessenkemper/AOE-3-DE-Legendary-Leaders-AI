@@ -1389,6 +1389,8 @@
       <default>
       </default>
       <cards>
+        <card>DEHCREVQuebec</card>
+        <card>DEHCREVNativeAlliesCanada</card>
         <card>HCFurrier</card>
         <card>HCShipCoureurs1</card>
         <card>DEHCREVCanadianOfficer</card>
@@ -1403,8 +1405,6 @@
         <card>DEHCHanoverAllies2</card>
         <card>DEHCSPCRangedInfantryDamageFrenchTeam</card>
         <card>DEHCREVConscriptionCanada</card>
-        <card>DEHCREVNativeAlliesCanada</card>
-        <card>DEHCREVQuebec</card>
         <card>DEHCREVFencibles</card>
         <card>DEHCREVHighlanders</card>
         <card>DEHCREVNorthAmericaTrade</card>
