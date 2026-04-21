@@ -27,10 +27,6 @@ Elite units are chosen case by case for each nation and do not auto-rout. Only A
 - Only AI-controlled non-elite land units auto-rout.
 - The rout threshold is 25% health.
 - Nearby friendly elite units block rout.
-- Routed AI units fall back toward their own return point instead of entering prison custody.
-- Player-controlled units do not auto-rout.
-- In large AI attacks, regular units lead, elites follow as the second line, and the explorer stays behind them with a dedicated escort.
-- If the AI explorer dies, the elite line retreats and the AI tries to ransom its leader.
 
 ## 🧭 Leader Escort and Attack Doctrine
 
