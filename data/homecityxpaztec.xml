@@ -151,7 +151,7 @@
       <name>HCShipWoodCrates3</name>
       <maxcount>1</maxcount>
       <level>10</level>
-      <prereqtech>HCShipwoodCrates2</prereqtech>
+      <prereqtech>HCShipWoodCrates2</prereqtech>
       <age>1</age>
       <displayunitcount>700</displayunitcount>
       <infiniteinlastage>1</infiniteinlastage>
@@ -1827,7 +1827,7 @@
       <tech x="3.6" y="3.0">HCXPMayanAllies2</tech>
       <tech x="3.6" y="7.0">HCXPMayanAlliesRepeat</tech>
       <tech x="4.5" y="1.0">HCXPSpanishAllies1</tech>
-      <tech x="4.5" y="3.0">HCXPSPanishAllies2</tech>
+      <tech x="4.5" y="3.0">HCXPSpanishAllies2</tech>
       <tech x="4.5" y="4.0">HCXPBuccaneers</tech>
       <tech x="4.5" y="5.0">HCXPBuccaneers2</tech>
       <tech x="5.2" y="3.0">HCXPTempleCenteotl</tech>
@@ -1860,7 +1860,7 @@
       <tech x="3.6" y="3.0">HCXPMayanAllies2</tech>
       <tech x="3.6" y="7.0">HCXPMayanAlliesRepeat</tech>
       <tech x="4.5" y="1.0">HCXPSpanishAllies1</tech>
-      <tech x="4.5" y="3.0">HCXPSPanishAllies2</tech>
+      <tech x="4.5" y="3.0">HCXPSpanishAllies2</tech>
       <tech x="4.5" y="4.0">HCXPBuccaneers</tech>
       <tech x="4.5" y="5.0">HCXPBuccaneers2</tech>
       <tech x="5.2" y="3.0">HCXPTempleCenteotl</tech>

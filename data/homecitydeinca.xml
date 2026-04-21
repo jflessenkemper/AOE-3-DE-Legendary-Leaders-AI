@@ -1758,7 +1758,7 @@
       <tech x="7.2" y="5.0">DEHCFloatingIslands</tech>
       <tech x="7.2" y="5.0">DEHCChinchillas</tech>
       <tech x="4.5" y="1.0">HCXPSpanishAllies1</tech>
-      <tech x="4.5" y="3.0">HCXPSPanishAllies2</tech>
+      <tech x="4.5" y="3.0">HCXPSpanishAllies2</tech>
     </obtainabletechs>
     <activetechs>
       <tech>DEHCCajamarcaSupport</tech>
@@ -1793,7 +1793,7 @@
       <tech>DEHCFloatingIslands</tech>
       <tech>DEHCChinchillas</tech>
       <tech>HCXPSpanishAllies1</tech>
-      <tech>HCXPSPanishAllies2</tech>
+      <tech>HCXPSpanishAllies2</tech>
     </activetechs>
     <validunits />
     <units />
