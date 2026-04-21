@@ -36,3 +36,15 @@ The army tries to keep a living screen around that leader, and different nations
 
 **In short**: some nations win by crushing the line, others look for a leader-kill opening, but all of them now guard their own leader far more carefully.
 
+---
+
+<p align="center">
+  <a href="https://jflessenkemper.github.io/AOE-3-DE-Legendary-Leaders-AI/">
+    <img src="https://img.shields.io/badge/%F0%9F%93%96%20Browse%20the%20Reference%20Website-1f6feb?style=for-the-badge&logoColor=white" alt="Browse the Legendary Leaders AI reference website">
+  </a>
+</p>
+
+<p align="center">
+  Every nation, leader, doctrine, signature unit, and curated 25-card deck &mdash; searchable on one page.
+</p>
+
