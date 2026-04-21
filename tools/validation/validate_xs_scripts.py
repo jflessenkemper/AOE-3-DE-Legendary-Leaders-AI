@@ -332,6 +332,78 @@ def resolve_base_game_ai_root() -> Path | None:
     return None
 
 
+CV_DECL_RE = re.compile(
+    r"^\s*(?:mutable\s+|extern\s+|const\s+|extern\s+const\s+)*"
+    r"(?:int|bool|float|string|vector)\s+"
+    r"(cv[A-Z][A-Za-z0-9_]*)\s*(?:=|;)"
+)
+CV_USE_RE = re.compile(r"\b(cv[A-Z][A-Za-z0-9_]*)\b")
+
+
+def collect_declared_cv_vars(ai_root: Path) -> set[str]:
+    """Collect cv-prefixed civ-variable declarations including function-pointer
+    variants like ``extern int(int, int) cvCreateBaseAttackRoute = ...``. These
+    are settable AI knobs the engine looks up by exact name — an assignment to
+    an undeclared cv-symbol produces XS ERROR 0310 at runtime."""
+    declared: set[str] = set()
+    for file_path in iter_xs_files(ai_root):
+        lines = file_path.read_text(encoding="utf-8", errors="replace").splitlines()
+        in_block_comment = False
+        for line in lines:
+            code, in_block_comment = strip_inline_block_comments(line, in_block_comment)
+            code = strip_string_literals(code)
+            if match := CV_DECL_RE.match(code):
+                declared.add(match.group(1))
+            # Function-pointer cv declarations.
+            for match in FUNCTION_PTR_DECL_RE.finditer(code):
+                name = match.group(1)
+                if name.startswith("cv") and len(name) >= 3 and name[2].isupper():
+                    declared.add(name)
+    return declared
+
+
+def check_undefined_cv_vars(repo_root: Path) -> list[str]:
+    """Flag cv-prefixed symbol uses that have no extern declaration in the
+    mod or base-game AI. Catches ``cvMinNumVills = 18`` patterns where the
+    variable was never declared, which the XS VM rejects with
+    ``XS ERROR 0310: INVALID SYMBOL LOOKUP FOR ...``."""
+    ai_root = repo_root / "game" / "ai"
+    if not ai_root.exists():
+        return []
+
+    declared = collect_declared_cv_vars(ai_root)
+    base_root = resolve_base_game_ai_root()
+    if base_root is not None:
+        try:
+            declared |= collect_declared_cv_vars(base_root)
+        except OSError:
+            pass
+
+    issues: list[str] = []
+    for file_path in iter_xs_files(ai_root):
+        lines = file_path.read_text(encoding="utf-8", errors="replace").splitlines()
+        in_block_comment = False
+        rel_path = repo_relative(file_path, repo_root)
+
+        for index, line in enumerate(lines, start=1):
+            uncommented, in_block_comment = strip_inline_block_comments(line, in_block_comment)
+            code = uncommented.split("//", 1)[0]
+            # Skip the declaration line itself.
+            if CV_DECL_RE.match(code):
+                continue
+            scan_target = strip_string_literals(code)
+            if not scan_target.strip():
+                continue
+            for match in CV_USE_RE.finditer(scan_target):
+                name = match.group(1)
+                if name not in declared:
+                    issues.append(
+                        f"{rel_path}:{index}: undefined cv-variable '{name}' — not declared as extern int/bool/float/string/vector in the mod or base game"
+                    )
+
+    return issues
+
+
 def check_undefined_helper_calls(repo_root: Path) -> list[str]:
     """Flag calls to non-engine, non-language functions that have no definition
     anywhere in the mod's AI or the installed base-game AI. Catches e.g. a
@@ -446,6 +518,7 @@ def validate_xs_scripts(repo_root: Path = REPO_ROOT) -> list[str]:
         issues.extend(check_unknown_xs_calls(file_path, lines, repo_root))
 
     issues.extend(check_undefined_helper_calls(repo_root))
+    issues.extend(check_undefined_cv_vars(repo_root))
     issues.extend(check_unresolved_loader_calls(repo_root))
 
     return issues

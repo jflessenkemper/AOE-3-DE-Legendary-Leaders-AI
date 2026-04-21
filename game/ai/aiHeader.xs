@@ -158,7 +158,8 @@ extern bool    cvOkToBuildDeck = false;      // Setting it false will prevent de
 extern int     cvMaxArmyPop = -1;            // -1 means the AI decides himself. 0 means don't train anything.
 extern int     cvMaxCivPop = -1;             // -1 means the AI decides himself. 0 means don't train anything.
 extern int     cvMaxAge = cAge5;             // Set this to cAge1..cAge4 to cap age upgrades. cvMaxAge = cAge3 will let the AI go age 3, but not age 4.
-extern int     cvMaxTowers = -1;             // The AI will try to create this many Towers. 
+extern int     cvMaxTowers = -1;             // The AI will try to create this many Towers.
+extern int     cvMinNumVills = -1;           // Floor on villager count the AI should reach before diverting to military. -1 lets the AI decide.
 
 // Non-boolean control variables
                                                    // To make the AI train mostly hussars and some musketeers, set cvNumArmyUnitTypes = 2; cvPrimaryArmyUnit = cUnitTypeHussar;
