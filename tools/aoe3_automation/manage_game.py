@@ -1,0 +1,241 @@
+#!/usr/bin/env python3
+"""Close, sync, and reopen Age of Empires III: Definitive Edition on Linux/Proton.
+
+Subcommands:
+    status   — print whether the game is running plus window geometry.
+    close    — gracefully close the game and wait for its processes to exit.
+    sync     — rsync the repo into the live Steam mod install.
+    open     — launch the game via Steam URI and wait for the main menu window.
+    cycle    — close + sync + open, for applying a mod fix in one step.
+
+Usage (from repo root):
+    python3 tools/aoe3_automation/manage_game.py cycle
+    python3 tools/aoe3_automation/manage_game.py close
+    python3 tools/aoe3_automation/manage_game.py open --timeout 90
+"""
+from __future__ import annotations
+
+import argparse
+import os
+import re
+import shutil
+import signal
+import subprocess
+import sys
+import time
+from pathlib import Path
+
+APP_ID = 933110
+GAME_EXE = "AoE3DE_s.exe"
+WINDOW_TITLE_SUBSTR = "Age of Empires III"
+
+REPO_ROOT = Path(__file__).resolve().parents[2]
+LIVE_MOD_PATH = (
+    Path.home()
+    / ".local/share/Steam/steamapps/compatdata"
+    / str(APP_ID)
+    / "pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI"
+)
+
+# Directories that exist in the repo but should NOT be copied to the live
+# install. Mirrors tools/validation/validate_packaged_mod.py DEV_ONLY_TOP_LEVEL.
+RSYNC_EXCLUDES = (
+    "/.*",
+    "/age-of-pirates",
+    "/age-of-pirates-main",
+    "/reference-mods",
+    "/tests",
+    "/tools",
+)
+
+
+def run(cmd: list[str], check: bool = False, capture: bool = True) -> subprocess.CompletedProcess:
+    return subprocess.run(cmd, check=check, capture_output=capture, text=True)
+
+
+def game_pids() -> list[int]:
+    """Return PIDs of any live AoE3 DE game processes."""
+    res = run(["pgrep", "-f", GAME_EXE], check=False)
+    if res.returncode != 0:
+        return []
+    return [int(p) for p in res.stdout.split() if p.strip().isdigit()]
+
+
+def game_window() -> tuple[str, int, int, int, int] | None:
+    """Return (window_id, x, y, w, h) for the game window, or None."""
+    res = run(["wmctrl", "-lG"], check=False)
+    if res.returncode != 0:
+        return None
+    for line in res.stdout.splitlines():
+        if WINDOW_TITLE_SUBSTR in line:
+            parts = line.split(None, 7)
+            if len(parts) >= 6:
+                return parts[0], int(parts[2]), int(parts[3]), int(parts[4]), int(parts[5])
+    return None
+
+
+def cmd_status(_args: argparse.Namespace) -> int:
+    pids = game_pids()
+    win = game_window()
+    print(f"Game processes: {pids or 'none'}")
+    print(f"Game window:    {win or 'none'}")
+    if win is not None and (win[3], win[4]) != (1920, 1080):
+        print(f"WARN: window geometry is {win[3]}x{win[4]}, expected 1920x1080")
+    return 0 if pids else 1
+
+
+def cmd_close(args: argparse.Namespace) -> int:
+    pids = game_pids()
+    if not pids:
+        print("Game not running.")
+        return 0
+
+    # 1) Graceful WM close via window ID.
+    win = game_window()
+    if win is not None:
+        print(f"Sending WM_DELETE to window {win[0]}")
+        run(["wmctrl", "-i", "-c", win[0]], check=False)
+
+    deadline = time.time() + args.graceful_timeout
+    while time.time() < deadline:
+        if not game_pids():
+            print("Game closed cleanly.")
+            return 0
+        time.sleep(1)
+
+    # 2) SIGTERM to the game EXE process(es).
+    print(f"Graceful close timed out after {args.graceful_timeout}s; sending SIGTERM")
+    run(["pkill", "-TERM", "-f", GAME_EXE], check=False)
+    deadline = time.time() + 10
+    while time.time() < deadline:
+        if not game_pids():
+            print("Game exited after SIGTERM.")
+            return 0
+        time.sleep(1)
+
+    # 3) Last resort — SIGKILL.
+    print("SIGTERM did not take; escalating to SIGKILL")
+    run(["pkill", "-KILL", "-f", GAME_EXE], check=False)
+    time.sleep(2)
+    if game_pids():
+        print("ERROR: game processes still present after SIGKILL:", game_pids(), file=sys.stderr)
+        return 2
+
+    # Give Steam a beat to register "not running" before any relaunch.
+    time.sleep(3)
+    print("Game closed (SIGKILL).")
+    return 0
+
+
+def cmd_sync(args: argparse.Namespace) -> int:
+    if not LIVE_MOD_PATH.exists():
+        print(f"ERROR: live mod path does not exist: {LIVE_MOD_PATH}", file=sys.stderr)
+        return 2
+    if game_pids():
+        print("WARN: game is still running; sync may not take effect until restart")
+
+    excludes: list[str] = []
+    for pattern in RSYNC_EXCLUDES:
+        excludes.extend(["--exclude", pattern])
+
+    src = str(REPO_ROOT) + os.sep
+    dst = str(LIVE_MOD_PATH) + os.sep
+    cmd = ["rsync", "-a", "--checksum", "--delete", *excludes, src, dst]
+    if args.dry_run:
+        cmd.insert(1, "-n")
+    print("Running:", " ".join(cmd))
+    res = run(cmd, check=False, capture=False)
+    if res.returncode != 0:
+        print(f"ERROR: rsync exited {res.returncode}", file=sys.stderr)
+        return res.returncode
+    print(f"Sync complete: {REPO_ROOT} -> {LIVE_MOD_PATH}")
+    return 0
+
+
+def cmd_open(args: argparse.Namespace) -> int:
+    if game_pids():
+        print("Game is already running.")
+        win = game_window()
+        if win:
+            print(f"Window: {win}")
+        return 0
+
+    if not shutil.which("steam"):
+        print("ERROR: steam binary not on PATH", file=sys.stderr)
+        return 2
+
+    print(f"Launching via steam steam://rungameid/{APP_ID}")
+    # detach so we don't hold the steam client in our process tree
+    subprocess.Popen(
+        ["steam", f"steam://rungameid/{APP_ID}"],
+        start_new_session=True,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+    )
+
+    deadline = time.time() + args.timeout
+    while time.time() < deadline:
+        win = game_window()
+        if win is not None and (win[3], win[4]) == (1920, 1080):
+            # Window exists at expected size; give the engine a moment to finish
+            # rendering the main menu before returning success.
+            time.sleep(args.post_menu_wait)
+            print(f"Game window ready at geometry {win[3]}x{win[4]} offset ({win[1]}, {win[2]})")
+            return 0
+        time.sleep(2)
+
+    print(f"ERROR: game window did not appear at 1920x1080 within {args.timeout}s", file=sys.stderr)
+    win = game_window()
+    if win:
+        print(f"Current window: {win} (wrong size/geometry)", file=sys.stderr)
+    return 3
+
+
+def cmd_cycle(args: argparse.Namespace) -> int:
+    rc = cmd_close(args)
+    if rc != 0:
+        return rc
+    rc = cmd_sync(args)
+    if rc != 0:
+        return rc
+    rc = cmd_open(args)
+    return rc
+
+
+def main(argv: list[str] | None = None) -> int:
+    p = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    sub = p.add_subparsers(dest="command", required=True)
+
+    sub.add_parser("status", help="Report game process + window state")
+
+    p_close = sub.add_parser("close", help="Close the game; escalate to SIGKILL if needed")
+    p_close.add_argument("--graceful-timeout", type=int, default=15,
+                         help="Seconds to wait after WM_DELETE before SIGTERM (default 15)")
+
+    p_sync = sub.add_parser("sync", help="Rsync repo into live Steam mod install")
+    p_sync.add_argument("--dry-run", action="store_true", help="Show what would change without writing")
+
+    p_open = sub.add_parser("open", help="Launch the game via steam:// URI and wait for main menu")
+    p_open.add_argument("--timeout", type=int, default=90,
+                        help="Seconds to wait for the main menu window (default 90)")
+    p_open.add_argument("--post-menu-wait", type=int, default=5,
+                        help="Seconds to wait after window appears so the engine settles (default 5)")
+
+    p_cycle = sub.add_parser("cycle", help="close + sync + open — one-shot mod-iterate")
+    p_cycle.add_argument("--graceful-timeout", type=int, default=15)
+    p_cycle.add_argument("--timeout", type=int, default=90)
+    p_cycle.add_argument("--post-menu-wait", type=int, default=5)
+    p_cycle.add_argument("--dry-run", action="store_true")
+
+    args = p.parse_args(argv)
+    return {
+        "status": cmd_status,
+        "close": cmd_close,
+        "sync": cmd_sync,
+        "open": cmd_open,
+        "cycle": cmd_cycle,
+    }[args.command](args)
+
+
+if __name__ == "__main__":
+    sys.exit(main())
