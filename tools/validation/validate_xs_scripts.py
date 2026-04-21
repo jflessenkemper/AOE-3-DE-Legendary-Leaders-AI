@@ -16,9 +16,40 @@ FUNCTION_RE = re.compile(r"^\s*(?:void|bool|int|float|string|vector)\s+([A-Za-z_
 RULE_RE = re.compile(r"^\s*rule\s+([A-Za-z_][A-Za-z0-9_]*)\b")
 FUNCTION_CALL_RE = re.compile(r"\b([A-Za-z_][A-Za-z0-9_]*)\s*\(")
 INCLUDE_RE = re.compile(r'^\s*include\s+"([^"]+)"\s*;?')
-CALLABLE_DECL_RE = re.compile(r"^\s*(?:mutable\s+)?(?:void|bool|int|float|string|vector)\s+([A-Za-z_][A-Za-z0-9_]*)\s*\(")
+# Classic form: ``int foo(...)`` / ``bool llBar(...)``. Accepts a custom return
+# type (any identifier), which covers base-game struct returns like
+# ``ValidResourceInfo getValidResourceInfo(...)``.
+CALLABLE_DECL_RE = re.compile(
+    r"^\s*(?:mutable\s+|extern\s+)?[A-Za-z_][A-Za-z0-9_]*\s+([A-Za-z_][A-Za-z0-9_]*)\s*\("
+)
+# Function-pointer form: ``int() createFoo = [](...)`` / ``bool(int) gFoo = impl``
+# / function-pointer parameters ``bool(int, int) comp = defaultComp``.
+FUNCTION_PTR_DECL_RE = re.compile(
+    r"(?:^|,|\()\s*(?:mutable\s+|extern\s+)?[A-Za-z_][A-Za-z0-9_]*\s*\([^)]*\)\s+([A-Za-z_][A-Za-z0-9_]*)\s*="
+)
 KNOWN_ENGINE_PREFIXES = ("xs", "ai", "kb", "cv", "bt")
-KNOWN_LANGUAGE_CALLS = {"if", "for", "switch", "while", "return"}
+# Type keywords also match FUNCTION_CALL_RE when used in function-pointer type
+# declarations like ``extern int(int, int) cvFoo``.
+KNOWN_LANGUAGE_CALLS = {
+    "if", "for", "switch", "while", "return",
+    "int", "bool", "float", "string", "vector", "void",
+}
+# Engine-provided helpers that don't follow the KNOWN_ENGINE_PREFIXES convention.
+KNOWN_ENGINE_CALLS = {
+    "createSimpleUnitQuery",
+    "createUnitQuery",
+    # Math builtins exposed by the XS VM.
+    "abs", "sin", "cos", "tan", "sqrt", "pow", "min", "max", "round", "ceil", "floor",
+}
+# AoE3 DE installs on Linux under Proton keep the game tree under
+# ``steamapps/common/AoE3DE/Game/AI`` (case-sensitive on Linux). Historically
+# native installs used lowercase paths.
+BASE_GAME_AI_PATHS = (
+    Path.home() / ".local/share/Steam/steamapps/common/AoE3DE/Game/AI",
+    Path.home() / ".local/share/Steam/steamapps/common/AoE3DE/game/ai",
+    Path.home() / ".steam/steam/steamapps/common/AoE3DE/Game/AI",
+    Path.home() / ".steam/steam/steamapps/common/AoE3DE/game/ai",
+)
 STOCK_XS_CALLS = {
     "xsArrayCreateBool",
     "xsArrayCreateFloat",
@@ -109,14 +140,49 @@ def strip_inline_block_comments(line: str, in_block_comment: bool) -> tuple[str,
     return ("".join(result), in_block_comment)
 
 
+def strip_string_literals(code: str) -> str:
+    """Remove content inside double-quoted strings so regex scans don't match
+    words like ``ENABLED (`` that appear inside log messages."""
+    out: list[str] = []
+    i = 0
+    in_string = False
+    while i < len(code):
+        ch = code[i]
+        if in_string:
+            if ch == "\\" and i + 1 < len(code):
+                i += 2
+                continue
+            if ch == '"':
+                out.append('"')
+                in_string = False
+            i += 1
+            continue
+        if ch == '"':
+            out.append('"')
+            in_string = True
+            i += 1
+            continue
+        out.append(ch)
+        i += 1
+    return "".join(out)
+
+
 def collect_declared_callables(ai_root: Path) -> set[str]:
+    """Collect everything that can be invoked like a function: classic
+    function declarations, rule names, and function-pointer declarations
+    (including function-pointer parameters and lambda-assigned globals)."""
     declared: set[str] = set()
     for file_path in iter_xs_files(ai_root):
         lines = file_path.read_text(encoding="utf-8", errors="replace").splitlines()
         in_block_comment = False
         for line in lines:
             code, in_block_comment = strip_inline_block_comments(line, in_block_comment)
+            code = strip_string_literals(code)
             if match := CALLABLE_DECL_RE.match(code):
+                declared.add(match.group(1))
+            if match := RULE_RE.match(code):
+                declared.add(match.group(1))
+            for match in FUNCTION_PTR_DECL_RE.finditer(code):
                 declared.add(match.group(1))
     return declared
 
@@ -256,6 +322,72 @@ def should_track_loader_call(function_name: str) -> bool:
     return True
 
 
+def resolve_base_game_ai_root() -> Path | None:
+    for candidate in BASE_GAME_AI_PATHS:
+        try:
+            if candidate.exists():
+                return candidate
+        except OSError:
+            continue
+    return None
+
+
+def check_undefined_helper_calls(repo_root: Path) -> list[str]:
+    """Flag calls to non-engine, non-language functions that have no definition
+    anywhere in the mod's AI or the installed base-game AI. Catches e.g. a
+    typo'd helper name that the engine's XS VM will reject at runtime with
+    ``ERROR 0172: '...' IS NOT A VALID OPERATOR``.
+    """
+    ai_root = repo_root / "game" / "ai"
+    if not ai_root.exists():
+        return []
+
+    declared = collect_declared_callables(ai_root)
+    base_root = resolve_base_game_ai_root()
+    if base_root is not None:
+        try:
+            declared |= collect_declared_callables(base_root)
+        except OSError:
+            # Base game path exists but we can't read it — fall back to mod-only.
+            pass
+
+    issues: list[str] = []
+    for file_path in iter_xs_files(ai_root):
+        lines = file_path.read_text(encoding="utf-8", errors="replace").splitlines()
+        in_block_comment = False
+        rel_path = repo_relative(file_path, repo_root)
+
+        for index, line in enumerate(lines, start=1):
+            uncommented, in_block_comment = strip_inline_block_comments(line, in_block_comment)
+            code = uncommented.split("//", 1)[0]
+            declaration_match = CALLABLE_DECL_RE.match(code)
+            declared_here = declaration_match.group(1) if declaration_match else None
+            scan_target = strip_string_literals(code)
+            stripped = scan_target.strip()
+            if not stripped:
+                continue
+
+            for match in FUNCTION_CALL_RE.finditer(scan_target):
+                function_name = match.group(1)
+                if function_name in KNOWN_LANGUAGE_CALLS:
+                    continue
+                if function_name.startswith(KNOWN_ENGINE_PREFIXES):
+                    continue
+                if function_name in STOCK_XS_CALLS or function_name in KNOWN_ENGINE_CALLS:
+                    continue
+                if function_name.startswith("debug"):
+                    continue
+                if declared_here is not None and function_name == declared_here:
+                    continue
+                if function_name in declared:
+                    continue
+                issues.append(
+                    f"{rel_path}:{index}: undefined helper call '{function_name}' — not declared in the mod or base game"
+                )
+
+    return issues
+
+
 def check_unresolved_loader_calls(repo_root: Path) -> list[str]:
     ai_root = repo_root / "game" / "ai"
     loader_path = ai_root / "aiLoaderStandard.xs"
@@ -276,10 +408,14 @@ def check_unresolved_loader_calls(repo_root: Path) -> list[str]:
 
         declaration_match = CALLABLE_DECL_RE.match(code)
         if declaration_match is not None:
-            declared_name = declaration_match.group(1)
-            known_helpers.add(declared_name)
+            known_helpers.add(declaration_match.group(1))
+        if rule_match := RULE_RE.match(code):
+            known_helpers.add(rule_match.group(1))
+        for ptr_match in FUNCTION_PTR_DECL_RE.finditer(code):
+            known_helpers.add(ptr_match.group(1))
 
-        for match in FUNCTION_CALL_RE.finditer(code):
+        scan_target = strip_string_literals(code)
+        for match in FUNCTION_CALL_RE.finditer(scan_target):
             function_name = match.group(1)
             if should_track_loader_call(function_name) is False:
                 continue
@@ -309,6 +445,7 @@ def validate_xs_scripts(repo_root: Path = REPO_ROOT) -> list[str]:
         issues.extend(check_unsupported_builtins(file_path, lines, repo_root))
         issues.extend(check_unknown_xs_calls(file_path, lines, repo_root))
 
+    issues.extend(check_undefined_helper_calls(repo_root))
     issues.extend(check_unresolved_loader_calls(repo_root))
 
     return issues

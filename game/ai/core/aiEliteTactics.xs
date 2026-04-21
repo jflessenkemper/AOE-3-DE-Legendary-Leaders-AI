@@ -21,6 +21,35 @@ float gLLDecapitationOverride = -1.0;
 int gLLExplorerEscortBonus = 0;
 float gLLExplorerRearOffsetBonus = 0.0;
 
+//==============================================================================
+/* llIsEliteUnit — predicate for "elite" land-military units used by the
+   screening logic in this file. The formation groups standard troops around
+   elite units (line 265+), so every callsite here asks whether a given unit
+   should be treated as a screening anchor (elite) or a screen body (non-elite).
+
+   Heroes are counted separately by the callers via cUnitTypeHero queries, so
+   this predicate must NOT return true for heroes — doing so would double-count
+   them in the elite-line tally.
+
+   The mod does not yet maintain a curated list of "elite" proto units. Until
+   one is provided, this conservatively returns false, which degrades the
+   formation to "all land-military act as screen body, heroes are the only
+   elite anchors". That's behaviourally safe and keeps the AI running instead
+   of crashing with XS parse errors (ERROR 0172).
+
+   TODO: wire this to a proto-allowlist (e.g. elite Dragoons, elite Musketeers,
+   upgraded proto variants, or a bespoke gLLEliteProtoIDs array). */
+//==============================================================================
+bool llIsEliteUnit(int unitID = -1)
+{
+   if (unitID < 0)
+   {
+      return (false);
+   }
+
+   return (false);
+}
+
 float llClamp01(float value = 0.0)
 {
    if (value < 0.0)
