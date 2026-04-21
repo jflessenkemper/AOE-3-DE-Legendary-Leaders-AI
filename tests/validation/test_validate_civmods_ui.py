@@ -17,6 +17,10 @@ LOWERCASE_CIVMODS = """<civsmods>
     <postgameflagiconwpf>resources/images/icons/flags/postgame_flag_example.png</postgameflagiconwpf>
     <homecityflagiconwpf>resources/images/icons/flags/flag_example.png</homecityflagiconwpf>
     <homecityflagbuttonwpf>resources/images/icons/flags/flag_hc_example.png</homecityflagbuttonwpf>
+    <homecitypreviewwpf>resources/images/icons/singleplayer/example_preview.png</homecitypreviewwpf>
+    <matchmakingtextures>
+      <smallportraittexturewpf>resources/images/icons/singleplayer/example_small.png</smallportraittexturewpf>
+    </matchmakingtextures>
   </civ>
 </civsmods>
 """
@@ -58,6 +62,8 @@ class ValidateCivmodsUiTests(unittest.TestCase):
         self.assertEqual(
             validate_civmods_ui(repo_root, name_prefixes=None),
             [
-                "zpExample: missing required civ UI fields: HomeCityFlagButtonSet, HomeCityFlagButtonSetLarge, PostgameFlagTexture, PostgameFlagIconWPF, HomeCityFlagIconWPF, HomeCityFlagButtonWPF"
+                "zpExample: missing required civ UI fields: HomeCityFlagButtonSet, HomeCityFlagButtonSetLarge, PostgameFlagTexture, PostgameFlagIconWPF, HomeCityFlagIconWPF, HomeCityFlagButtonWPF",
+                "zpExample: missing required civ portrait field: HomeCityPreviewWPF",
+                "zpExample: missing required civ portrait field: MatchmakingTextures/SmallPortraitTextureWPF",
             ],
         )
