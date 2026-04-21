@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <homecity>
   <civ>RvltModRevolutionaryFrance</civ>
   <name>$$36885$$</name>
@@ -1362,35 +1363,35 @@
   </cards>
   <decks>
     <deck>
-      <name>$$71332$$Beginner</name>
+      <name>Legendary Leaders</name>
       <default>
       </default>
       <cards>
-        <card dbid="3387">HCXPEconomicTheory</card>
-        <card dbid="3381">HCShipCoureurs4</card>
-        <card dbid="625">HCUnlockFactory</card>
-        <card dbid="2031">HCRobberBarons</card>
-        <card dbid="3421">HCXPShipCuirassiersRepeat</card>
-        <card dbid="814">HCUnlockFort</card>
-        <card dbid="2376">HCShipDragoons3</card>
-        <card dbid="2250">HCShipSkirmishers3</card>
-        <card dbid="2254">HCShipCuirassiers3</card>
-        <card dbid="3443">HCXPTirailleurs</card>
-        <card dbid="2244">HCShipCrossbowmen2</card>
-        <card dbid="2571">HCFrontierDefenses</card>
-        <card dbid="2226">HCShipCrossbowmen1</card>
-        <card dbid="2212">HCShipWoodCrates3</card>
-        <card dbid="2261">HCShipCoureurs2</card>
-        <card dbid="2209">HCShipFoodCrates3</card>
-        <card dbid="2215">HCShipCoinCrates3</card>
-        <card dbid="2220">HCShipCows</card>
-        <card dbid="2262">HCShipCoureurs3</card>
-        <card dbid="1993">HCPioneers</card>
-        <card dbid="2595">HCWildernessWarfare</card>
-        <card dbid="2236">HCShipFalconets3</card>
-        <card dbid="2631">HCShipSkirmishers5</card>
-        <card dbid="10253">DEHCFrenchRoyalArmy</card>
-        <card dbid="10254">DEHCFencingSchoolFrench</card>
+        <card>DEHCREVBastilleStorming</card>
+        <card>DEHCREVGuillotine</card>
+        <card>DEHCREVRobespierre</card>
+        <card>DEHCREVCultSupremeBeing</card>
+        <card>DEHCREVCantinieres</card>
+        <card>DEHCREVShipmentRevolutionaries</card>
+        <card>DEHCMercsIrishBrigadiers</card>
+        <card>DEHCCentSuisses</card>
+        <card>DEHCColbertismTeam</card>
+        <card>DEHCRevFrenchRoyalArmy</card>
+        <card>HCShipSkirmishers1</card>
+        <card>HCShipSkirmishers3</card>
+        <card>HCXPTirailleurs</card>
+        <card>DEHCMercsArmoredPistoleers</card>
+        <card>DEHCREVClientStates</card>
+        <card>DEHCREVHorseHunters</card>
+        <card>DEHCREVShipHorseArtillery3</card>
+        <card>HCShipSkirmishers2</card>
+        <card>HCShipSkirmishers4</card>
+        <card>HCShipSkirmishers5</card>
+        <card>HCEarlySkirmishersTeam</card>
+        <card>DEHCMercsGiantGrenadiers</card>
+        <card>DEHCMercsRoyalHorseman</card>
+        <card>DEHCMercsZouaves</card>
+        <card>DEHCFrenchBattleshipCard</card>
       </cards>
     </deck>
     <deck>

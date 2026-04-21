@@ -91,9 +91,6 @@
 		<String _locID='400084'>Veteran Granadero</String>
 		<String _locID='400085'>Guard Granadero</String>
       <String _locID='400086'>Imperial Granadero</String>
-      <String _locID='400090'>Rout</String>
-      <String _locID='400091'>AI rout control for military units. Elite units refuse rout checks, and ordinary AI troops only qualify at 25% health or below once elite support is gone. Routed troops fall back toward their return point instead of changing ownership.</String>
-      <String _locID='400092'>AI rout control registered for this unit. Elite troops are excluded, and ordinary AI troops should only break at 25% health or below after elite support breaks. Player-controlled units keep manual control instead of auto-routing.</String>
      <String _locID='400093'>Observer: Water Window</String>
      <String _locID='400094'>Observer-only control. Fires the naval observation window early so docks, fishing, and fleet movement can be inspected without waiting for the normal timer.</String>
      <String _locID='400095'>Observer console: the water window was triggered manually from the Town Center.</String>

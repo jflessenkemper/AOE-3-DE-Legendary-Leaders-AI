@@ -107,7 +107,7 @@ This map should expose all of these in one run:
 - fishing is not abandoned just because land combat started
 - naval patrol and engagement still happen while commander logic is busy
 - transport or shoreline pressure can interfere with land timing in readable ways
-- surrender tracking does not stall when many units are in danger at once
+- AI rout tracking does not stall when many units are in danger at once
 
 ## Recommended Matchups
 

@@ -6,12 +6,9 @@ The `.age3Yscn` file in this folder is a binary AoE3DE scenario file, so it is n
 
 Build one small repeatable scenario that verifies the current mod behavior:
 
-- ordinary land units surrender at low health
-- elite units do not auto-surrender
-- nearby elite support prevents ordinary units from surrendering
-- surrendered units walk to the enemy prison point
-- the prison point is the first Town Center or main military shipment drop point
-- only the original owner's explorer can reclaim prisoners
+- AI non-elite units rout (fall back to their return point) at low health
+- elite AI units do not auto-rout
+- nearby elite support prevents ordinary AI units from routing
 - AI assault shape keeps regular units in front, elites behind, explorer behind both
 - if the AI explorer dies, the elite line disengages
 
@@ -26,41 +23,27 @@ Build one small repeatable scenario that verifies the current mod behavior:
 - Player 1: human
 - Player 2: AI
 
-This scenario path remains the right tool when you need exact player-triggered interactions, but it can still be run mostly as an observer map: let the pre-placed lanes fight on their own, and only intervene when you specifically need to test reclaim, support removal, or forced explorer death.
+This scenario path remains the right tool when you need exact player-triggered interactions, but it can still be run mostly as an observer map: let the pre-placed lanes fight on their own, and only intervene when you specifically need to test rout, support removal, or forced explorer death.
 
 ## Core Layout
 
-Use three lanes across the same scenario so one load can test several behaviors.
+Use two lanes across the same scenario so one load can test several behaviors.
 
-### Lane A: Human Prison Test
+### Lane A: AI Rout Test
 
 - Put Player 1 Town Center on the west side.
 - Put Player 2 Town Center on the east side.
-- Place one Player 1 explorer near the Player 1 Town Center.
-- Place one Player 2 explorer near the Player 2 Town Center.
-- Place 8 ordinary Player 1 land units in the center at roughly 15% health.
-- Place 8 ordinary Player 2 land units opposite them at full health.
+- Place 8 ordinary Player 2 (AI) land units in the center at roughly 30% health.
+- Place 8 ordinary Player 1 land units opposite them at full health.
 
 Expected result:
 
-- when combat starts, damaged ordinary Player 1 units can surrender at about 10% health
-- surrendered Player 1 units should route toward the Player 2 Town Center area
-- once they arrive, they should remain held there instead of rejoining combat
-- moving the Player 1 explorer into the prison area should reclaim them
+- when combat starts, damaged ordinary AI units rout at about 25% health
+- routed AI units fall back toward the AI return point and disengage
+- elite AI units in the same lane do not auto-rout
+- when elite support is added beside damaged AI ordinaries, those ordinaries no longer rout
 
-### Lane B: Elite Protection Test
-
-- Duplicate Lane A slightly north of center.
-- Add 2 known elite Player 1 units close to the damaged ordinary Player 1 group.
-- Keep the rest of the setup the same.
-
-Expected result:
-
-- ordinary Player 1 units should not auto-surrender while their elite support is nearby
-- the elite units themselves should not auto-surrender
-- after you manually kill or move the elite support away, ordinary units should become eligible to surrender again
-
-### Lane C: AI Formation and Explorer Test
+### Lane B: AI Formation and Explorer Test
 
 - Place a larger Player 2 force south of center:
 - 12 ordinary land units
@@ -85,16 +68,16 @@ Safe pattern:
 - ordinary unit: a common infantry or cavalry unit that is not listed as elite for that nation
 - elite unit: a unit explicitly listed in the README elite column for that nation
 
-If you want the cleanest first pass, use only one nation pair for the whole scenario and duplicate the same test geometry in all three lanes.
+If you want the cleanest first pass, use only one nation pair for the whole scenario and duplicate the same test geometry in both lanes.
 
 ## Editor Steps
 
 1. Open `Scenario/Legendary Leaders Test.age3Yscn` in the AoE3DE Scenario Editor.
 2. Set Player 1 to human and Player 2 to AI.
-3. Place one Town Center for each player first. This matters because prison routing falls back to the first Town Center when no better shipment drop building is available.
-4. Place explorers before placing combat groups so reclaim tests are easy to run.
-5. Build the three lanes above with wide spacing so tests do not interfere with each other.
-6. Lower the health of the surrender-test units so they reach the threshold almost immediately.
+3. Place one Town Center for each player first.
+4. Place explorers before placing combat groups so their behavior is easy to observe.
+5. Build the two lanes above with wide spacing so tests do not interfere with each other.
+6. Lower the health of the rout-test units so they reach the threshold almost immediately.
 7. Save the scenario and run it with the mod enabled.
 
 ## Fast Trigger Ideas
@@ -104,7 +87,6 @@ If you want to make repeated testing faster in the editor, add these optional tr
 - Intro message trigger that labels each lane so you can mostly spectate.
 - One-button unit heal trigger to reset a lane without rebuilding it.
 - One-button respawn trigger for each lane.
-- Explorer teleport trigger that moves the original owner's explorer into the prison radius.
 - AI explorer kill trigger for the elite-retreat test.
 - Observer-only trigger pads near the Player 1 Town Center so you can fire each lane reset without walking across the map.
 
@@ -112,21 +94,17 @@ Recommended observer-first pad set:
 
 - `Lane A Reset`
 - `Lane B Reset`
-- `Lane C Reset`
-- `Explorer Reclaim Test`
 - `Kill AI Explorer`
 
 That keeps the scenario useful for the exact interactions the RMS cannot assert precisely, while still avoiding normal macro play.
 
 ## Pass Checklist
 
-- Lane A: damaged ordinary units surrender and path to the enemy Town Center area.
-- Lane A: surrendered units stay in custody when they arrive.
-- Lane A: the original owner's explorer reclaims them.
-- Lane B: nearby elite support blocks ordinary-unit surrender.
-- Lane B: elite units do not auto-surrender.
-- Lane C: AI regulars lead, elites follow, explorer stays behind.
-- Lane C: killing the AI explorer causes the elite line to back off.
+- Lane A: damaged ordinary AI units rout and path back to their return point.
+- Lane A: elite AI units in the same lane do not auto-rout.
+- Lane A: nearby elite support blocks ordinary AI rout.
+- Lane B: AI regulars lead, elites follow, explorer stays behind.
+- Lane B: killing the AI explorer causes the elite line to back off.
 
 ## Limits
 

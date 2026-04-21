@@ -45,15 +45,15 @@ Useful editor-native task entry points:
 - `Validation: content + regression`
 - `Validation: live install`
 - `Validation: runtime log`
-- `Validation: sandbox prisoner bootstrap`
+- `Validation: sandbox ai rout bootstrap`
 - `Validation: sandbox elite retreat lane`
-- `Validation: sandbox support blocked surrender`
+- `Validation: sandbox elite support blocks rout`
 
 ## Runtime Passes
 
 Use a controlled environment for runtime validation instead of free-play-only testing.
 
-For deterministic prisoner and explorer mechanics:
+For deterministic AI-rout and explorer mechanics:
 
 - `Scenario/TEST_SCENARIO_SETUP.md`
 - `Scenario/CHECKLIST_AUTOMATION_MATRIX.md`
@@ -70,9 +70,9 @@ After the match or scenario finishes, validate the objective log markers:
 tools/validation/run_objective_runtime_checks.sh
 ```
 
-The runtime suites now also include `elite_support_blocks_rout`, which machine-checks the negative case where elite support correctly prevented AI non-elite rout. The older `support_blocked_surrender` name is still accepted as a compatibility alias.
+The runtime suites also include `elite_support_blocks_rout`, which machine-checks the negative case where elite support correctly prevented AI non-elite rout.
 
-`ai_rout_bootstrap` is the canonical AI-rout bootstrap suite. It verifies that the old prison hook enables AI-only non-elite rout at 25% health while elite units and player-controlled units remain outside the auto-rout path. The older `prisoner_system_bootstrap` name is still accepted as a compatibility alias.
+`ai_rout_bootstrap` is the canonical AI-rout bootstrap suite. It verifies that AI-only non-elite rout activates at 25% health while elite units and player-controlled units remain outside the auto-rout path.
 
 Or run the broader staged command against an explicit log path:
 

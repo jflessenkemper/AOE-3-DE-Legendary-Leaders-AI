@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <homecity>
   <civ>RvltModHaitians</civ>
   <name>$$80845$$</name>
@@ -1162,29 +1163,35 @@
   </cards>
   <decks>
     <deck>
-      <name>$$41682$$</name>
+      <name>Legendary Leaders</name>
       <default>
       </default>
       <cards>
-        <card>HCREVShipColonialMilitia</card>
-        <card>HCREVShipGatlingGuns</card>
-        <card>HCREVShipFortWagon</card>
-        <card>HCREVShipIronclads</card>
-        <card>DEHCREVAfricanAllies</card>
-        <card>DEHCREVCitizenshipHaiti</card>
+        <card>DEHCREVVodouCeremonies</card>
         <card>DEHCREVDahomeyAmazonsHaiti</card>
-        <card>DEHCREVHaitianBattleshipCard</card>
-        <card>DEHCREVLetterOfMarque</card>
-        <card>HCXPBloodBrothers</card>
-        <card>HCXPCaribAlliesRepeat</card>
-        <card>DEHCREVPickets</card>
         <card>DEHCREVSevites</card>
+        <card>DEHCREVAfricanAllies</card>
+        <card>DEHCAkanAllies</card>
+        <card>DEHCREVLetterOfMarque</card>
+        <card>DEHCREVPickets</card>
+        <card>HCPrivateers</card>
+        <card>DEHCMercsIrishBrigadiers</card>
+        <card>DEHCCentSuisses</card>
+        <card>DEHCColbertismTeam</card>
+        <card>DEHCREVCitizenshipHaiti</card>
+        <card>HCPrivateers2</card>
+        <card>DEHCMercsArmoredPistoleers</card>
+        <card>DEHCMercsGiantGrenadiers</card>
+        <card>DEHCREVHaitianBattleshipCard</card>
         <card>DEHCREVShipPrivateers</card>
         <card>DEHCREVShipFalconets</card>
-        <card>DEHCREVVodouCeremonies</card>
-        <card>HCSpiceTrade</card>
-        <card>HCShipCoveredWagons2</card>
+        <card>DEHCMercsRoyalHorseman</card>
+        <card>DEHCMercsZouaves</card>
+        <card>DEHCShipBattleshipRepeat</card>
+        <card>DEHCExtensiveFortificationsEuropean</card>
         <card>DEHCTheaters</card>
+        <card>HCRefrigeration</card>
+        <card>HCRoyalMint</card>
       </cards>
     </deck>
   </decks>

@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <homecity>
   <civ>RvltModCentralAmericans</civ>
   <name>$$112803$$</name>
@@ -752,13 +753,6 @@
       <prereqtech>HCNativeWarriors</prereqtech>
       <age>0</age>
     </card>
-    <!-- <card>
-      <name>DEHCIndependenceMovements</name>
-      <maxcount>1</maxcount>
-      <level>0</level>
-      <prereqtech>-1</prereqtech>
-      <age>0</age>
-    </card> -->
     <card>
       <name>HCPioneers</name>
       <maxcount>1</maxcount>
@@ -1331,31 +1325,35 @@
   </cards>
   <decks>
     <deck>
-      <name>$$71332$$Beginner</name>
+      <name>Legendary Leaders</name>
       <default>
       </default>
       <cards>
-        <card dbid="7600">DEHCAlhondigaDeGranaditas</card>
-        <card dbid="7864">DEHCBarbacoa</card>
-        <card dbid="2206">HCShipSettlers2</card>
-        <card dbid="2236">HCShipFalconets3</card>
-        <card dbid="7613">DEHCPorfiriato</card>
-        <card dbid="625">HCUnlockFactory</card>
-        <card dbid="7467">DEHCShipHaciendaWagon1</card>
-        <card dbid="7626">DEHCLiberationMarch</card>
-        <card dbid="7618">DEHCChipotles</card>
-        <card dbid="814">HCUnlockFort</card>
-        <card dbid="7588">DEHCPinatas</card>
-        <card dbid="2212">HCShipWoodCrates3</card>
-        <card dbid="2215">HCShipCoinCrates3</card>
-        <card dbid="7569">DEHCShipInsurgente1</card>
-        <card dbid="7573">DEHCShipEmboscador1</card>
-        <card dbid="7576">DEHCShipChinaco1</card>
-        <card dbid="7574">DEHCShipEmboscador2</card>
-        <card dbid="7577">DEHCShipChinaco2</card>
-        <card dbid="2192">HCShipFalconets1</card>
-        <card dbid="3382">HCXPAdvancedBalloon</card>
-        <card dbid="7599">DEHCNuevoMexico</card>
+        <card>DEHCREVMXColonialMilitia</card>
+        <card>DEHCAdvancedSaloon</card>
+        <card>DEHCREVMXShipColonialMilitia</card>
+        <card>DEHCREVFedMXSantamariaFire</card>
+        <card>DEHCREVMXFrontierDefenses</card>
+        <card>DEHCREVMXShipFalconets1</card>
+        <card>DEHCREVMXShipSettlersRepeat</card>
+        <card>DEHCREVMXShipIronclad1</card>
+        <card>DEHCREVMXFrontierDefensesRepeat</card>
+        <card>DEHCREVMXShipCulverins2</card>
+        <card>DEHCShipCapturedGalleons2</card>
+        <card>DEHCCavalryCombatMexican</card>
+        <card>DEHCGuerillaTactics</card>
+        <card>DEHCShipFrigateRepeat</card>
+        <card>DEHCAltaCalifornia</card>
+        <card>DEHCCampecheFortifications</card>
+        <card>DEHCCantinas</card>
+        <card>DEHCChapultepecCastle</card>
+        <card>DEHCREVMXTehuantepecRoute</card>
+        <card>DEHCREVMXVeteranBarracks</card>
+        <card>DEHCREVMXVeteranStable</card>
+        <card>DEHCCriollos</card>
+        <card>DEHCShipCapturedGalleons1</card>
+        <card>DEHCLeatherSoldiers</card>
+        <card>DEHCLiberationMarch</card>
       </cards>
     </deck>
     <deck>

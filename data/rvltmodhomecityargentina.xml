@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <homecity>
   <civ>RvltModArgentines</civ>
   <name>$$80850$$</name>
@@ -1463,28 +1464,35 @@
   </cards>
   <decks>
     <deck>
-      <name>$$41682$$</name>
+      <name>Legendary Leaders</name>
       <default>
       </default>
       <cards>
-        <card>HCREVShipColonialMilitia</card>
-        <card>HCREVShipGatlingGuns</card>
-        <card>HCREVShipFortWagon</card>
-        <card>HCREVShipIronclads</card>
-        <card>RvltModHCGranaderos</card>
-        <card>DEHCREVCattleDeliveryArgentina</card>
-        <card>DEHCREVCriollos</card>
-        <card>DEHCREVBlandengues</card>
         <card>DEHCREVSanMartin</card>
-        <card>DEHCREVArgentineMortars</card>
-        <card>HCXPMercsElmeti</card>
-        <card>RvltModHCBuenosAires</card>
+        <card>DEHCREVBlandengues</card>
+        <card>DEHCREVCriollos</card>
+        <card>DEHCREVCattleDeliveryArgentina</card>
+        <card>DEHCLiberationMarch</card>
+        <card>DEHCLombardy</card>
+        <card>HCCheapBarracksTeam</card>
         <card>DEHCREVTrattoria</card>
+        <card>DEHCExtensiveFortificationsEuropean</card>
+        <card>DEHCMercsIrishBrigadiers</card>
+        <card>HCFrontierDefenses</card>
+        <card>DEHCTheaters</card>
         <card>DEHCREVFlyingBattery</card>
-        <card>HCCaballeros</card>
-        <card>HCXPLandGrab</card>
-        <card>HCXPRanching</card>
-        <card>HCStockyards</card>
+        <card>DEHCHandMortar</card>
+        <card>DEHCMarvelousYear</card>
+        <card>DEHCMercsArmoredPistoleers</card>
+        <card>DEHCREVArgentineMortars</card>
+        <card>DEHCREVShipMortars</card>
+        <card>HCXPIndustrialRevolution</card>
+        <card>HCXPShipMortarsTeam</card>
+        <card>HCUnlockFort</card>
+        <card>HCHeavyFortifications</card>
+        <card>DEHCShipBattleshipRepeat</card>
+        <card>DEHCHabsburgAllies1</card>
+        <card>DEHCNewSpainViceroyalty</card>
       </cards>
     </deck>
     <fakedeck>

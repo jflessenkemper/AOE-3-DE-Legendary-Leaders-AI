@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <homecity>
   <civ>RvltModSouthAfricans</civ>
   <name>$$80827$$</name>
@@ -679,7 +680,7 @@
       <prereqtech>XPRevolution</prereqtech>
       <age>2</age>
       <displayunitcount>7</displayunitcount>
-      <infiniteinlastage>1</infiniteinlastage>	
+      <infiniteinlastage>1</infiniteinlastage>
     </card>
     <card>
       <name>DEHCREVShipHomesteadWagons</name>
@@ -1344,29 +1345,35 @@
   </cards>
   <decks>
     <deck>
-      <name>$$41682$$</name>
+      <name>Legendary Leaders</name>
       <default>
       </default>
       <cards>
-        <card>HCXPRanching</card>
-        <card>HCXPLandGrab</card>
-        <card>HCStonemasons</card>
-        <card>HCPioneers</card>
-        <card>HCColonialMilitia</card>
-        <card>DEHCExtensiveFortificationsEuropean</card>
-        <card>DEHCREVHuguenots</card>
-        <card>HCShipCoveredWagons2</card>
-        <card>DEHCREVUnlockFactory</card>
-        <card>DEHCREVRobberBarons</card>
-        <card>DEHCREVShipMilitaryWagons</card>
-        <card>DEHCREVShipHomesteadWagons</card>
-        <card>DEHCREVShipOutpostWagons</card>
-        <card>DEHCREVDiamondRush</card>
+        <card>HCXPSouthSeaBubble</card>
+        <card>DEHCFeitorias</card>
         <card>DEHCREVWanderlust</card>
-        <card>DEHCREVShipXhosaFoods</card>
+        <card>DEHCMercsIrishBrigadiers</card>
+        <card>HCXPBankWagon</card>
+        <card>DEHCBuckriders</card>
+        <card>DEHCExtensiveFortificationsEuropean</card>
         <card>DEHCREVBankWagons</card>
-        <card>DEHCREVCapitolSouthAfrica</card>
-        <card>RvltModHCREVWagonWarfare</card>
+        <card>DEHCREVShipHomesteadWagons</card>
+        <card>DEHCREVShipMilitaryWagons</card>
+        <card>DEHCREVShipOutpostWagons</card>
+        <card>DEHCMercsBosniaks</card>
+        <card>DEHCMercsPandours</card>
+        <card>DEHCREVDiamondRush</card>
+        <card>DEHCREVHuguenots</card>
+        <card>DEHCREVShipXhosaFoods</card>
+        <card>DEHCMercsAskaris</card>
+        <card>DEHCMercsMountedRiflemen</card>
+        <card>DEHCDutchBattleshipCard</card>
+        <card>DEHCShipBattleshipRepeat</card>
+        <card>DEHCBlueGuards</card>
+        <card>DEHCHabsburgAllies1</card>
+        <card>DEHCHandMortar</card>
+        <card>DEHCShipHussars2</card>
+        <card>DEHCWettinAllies2</card>
       </cards>
     </deck>
   </decks>

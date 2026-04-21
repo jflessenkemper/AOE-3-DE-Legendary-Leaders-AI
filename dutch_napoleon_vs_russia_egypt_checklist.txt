@@ -44,10 +44,10 @@ Notes:
 [ ] 13. Elite units pull back after explorer death instead of feeding into a lost fight.
 Notes:
 
-[ ] 14. Unsupported non-elite units surrender when badly damaged, while elite-supported or explorer-supported units keep fighting.
+[ ] 14. Unsupported AI non-elite units rout when badly damaged, while elite-supported AI units keep fighting.
 Notes:
 
-[ ] 15. Prisoner routing and explorer reclaim create visible tactical consequences.
+[ ] 15. AI rout fallback and elite retreat create visible tactical consequences.
 Notes:
 
 Quick Summary
@@ -56,7 +56,7 @@ Napoleon:
 Russia:
 Egyptians:
 Explorer behavior:
-Surrender behavior:
+AI rout behavior:
 Best moment:
 Biggest failure:
 Overall verdict:

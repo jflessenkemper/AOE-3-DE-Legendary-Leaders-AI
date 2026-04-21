@@ -11,9 +11,9 @@ You cannot reliably test every box with one code command after loading into a ma
 
 What you *can* automate today is the objective rule-path behavior:
 
-- prisoner system bootstrap
-- human surrender, custody, and reclaim
-- AI surrender, custody, and reclaim
+- AI non-elite rout bootstrap
+- AI rout start, move, and arrival
+- elite-support blocked rout
 - elite retreat after explorer death
 
 Run this after the scenario or skirmish test finishes:
@@ -30,7 +30,7 @@ These are already represented by runtime suites in `tools/validation/runtime_spe
 
 - Status: `Automatable`
 - Runtime suite: `elite_retreat_lane`
-- Best setup: Lane C from `Scenario/TEST_SCENARIO_SETUP.md`
+- Best setup: Lane B from `Scenario/TEST_SCENARIO_SETUP.md`
 - Fast trigger idea: one-button AI explorer kill trigger
 
 ### 14. Unsupported AI non-elite units rout while elite-supported units keep fighting

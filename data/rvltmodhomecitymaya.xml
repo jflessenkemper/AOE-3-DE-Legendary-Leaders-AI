@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <homecity>
   <civ>RvltModMayans</civ>
   <name>$$112819$$</name>
@@ -1231,31 +1232,35 @@
   </cards>
   <decks>
     <deck>
-      <name>$$71332$$Beginner</name>
+      <name>Legendary Leaders</name>
       <default>
       </default>
       <cards>
-        <card dbid="7600">DEHCAlhondigaDeGranaditas</card>
-        <card dbid="7864">DEHCBarbacoa</card>
-        <card dbid="2206">HCShipSettlers2</card>
-        <card dbid="2236">HCShipFalconets3</card>
-        <card dbid="7613">DEHCPorfiriato</card>
-        <card dbid="625">HCUnlockFactory</card>
-        <card dbid="7467">DEHCShipHaciendaWagon1</card>
-        <card dbid="7626">DEHCLiberationMarch</card>
-        <card dbid="7618">DEHCChipotles</card>
-        <card dbid="814">HCUnlockFort</card>
-        <card dbid="7588">DEHCPinatas</card>
-        <card dbid="2212">HCShipWoodCrates3</card>
-        <card dbid="2215">HCShipCoinCrates3</card>
-        <card dbid="7569">DEHCShipInsurgente1</card>
-        <card dbid="7573">DEHCShipEmboscador1</card>
-        <card dbid="7576">DEHCShipChinaco1</card>
-        <card dbid="7574">DEHCShipEmboscador2</card>
-        <card dbid="7577">DEHCShipChinaco2</card>
-        <card dbid="2192">HCShipFalconets1</card>
-        <card dbid="3382">HCXPAdvancedBalloon</card>
-        <card dbid="7599">DEHCNuevoMexico</card>
+        <card>DEHCREVMXMayaJungleVillages</card>
+        <card>DEHCREVMXMayaKowojTraditions</card>
+        <card>DEHCREVMXMayaNojPeten</card>
+        <card>DEHCREVMXJungleWarfare</card>
+        <card>DEHCREVMXBallcourts</card>
+        <card>DEHCREVMXCenotes</card>
+        <card>HCXPMayanAllies1</card>
+        <card>DEHCREVMXMayaPootsPlan</card>
+        <card>DEHCREVMXMayaYalainTraditions</card>
+        <card>DEHCREVMXMayanSupporters</card>
+        <card>DEHCREVFedMXAmparo</card>
+        <card>DEHCREVMXFrontierDefensesRepeat</card>
+        <card>DEHCREVMXHuipils</card>
+        <card>DEHCREVMXMayaArchitecture</card>
+        <card>DEHCREVMXMayaCeramics</card>
+        <card>DEHCREVFedMXHenequenIndustry</card>
+        <card>DEHCREVFedMXYucatecan</card>
+        <card>DEHCREVMXKinshipTies</card>
+        <card>DEHCREVMXMayaMariaUicab</card>
+        <card>DEHCREVMXKuchkabal</card>
+        <card>DEHCREVMXShipCruzobInfantry</card>
+        <card>DEHCREVFedMXSolisShredders</card>
+        <card>DEHCREVMXFoodSilos</card>
+        <card>HCXPMayanAllies2</card>
+        <card>DEHCShipCapturedGalleons2</card>
       </cards>
     </deck>
     <deck>

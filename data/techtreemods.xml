@@ -10853,16 +10853,6 @@
 			<Effect type ='SetName' proto ='Minuteman' culture ='none' newName ='126716'></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='LLMilitarySurrenderButtonsGlobal' type ='Normal'>
-		<DBID>39990</DBID>
-		<ResearchPoints>0.0000</ResearchPoints>
-		<Status>OBTAINABLE</Status>
-		<Flag>Shadow</Flag>
-		<Prereqs>
-			<TechStatus status ='Active'>AAStandardStartingTechs</TechStatus>
-		</Prereqs>
-		<Effects></Effects>
-	</Tech>
 	<Tech name ='LLDisableStockRevolutionsGlobal' type ='Normal'>
 		<DBID>39992</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
@@ -10898,18 +10888,6 @@
 			<Effect type ='TechStatus' status ='unobtainable'>DERevolutionMXMaya</Effect>
 			<Effect type ='TechStatus' status ='unobtainable'>DEHCFlemishRevolution</Effect>
 			<Effect type ='TechStatus' status ='unobtainable'>DEHCBelgianRevolution</Effect>
-		</Effects>
-	</Tech>
-	<Tech name ='LLMilitarySurrenderOrder' type ='Normal'>
-		<DBID>39991</DBID>
-		<DisplayNameID>400090</DisplayNameID>
-		<ResearchPoints>0.0000</ResearchPoints>
-		<Status>OBTAINABLE</Status>
-		<Icon>resources\images\icons\techs\revolution\lexington_minutemen.png</Icon>
-		<RolloverTextID>400091</RolloverTextID>
-		<Flag>YPInfiniteTech</Flag>
-		<Effects>
-			<Effect type ='TextOutput'>400092</Effect>
 		</Effects>
 	</Tech>
 	<Tech name ='LLObserverConsoleGlobal' type ='Normal'>

@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <homecity>
   <civ>RvltModBajaCalifornians</civ>
   <name>$$112807$$</name>
@@ -1399,30 +1400,35 @@
   </cards>
   <decks>
     <deck>
-      <name>$$71332$$Beginner</name>
+      <name>Legendary Leaders</name>
       <default>
       </default>
       <cards>
-        <card>DEHCREVMXForeignInvestment</card>
-        <card>DEHCREVMXRobberBarons2</card>
-        <card>DEHCREVMXShipPostWagons</card>
-        <card>DEHCREVMXShipHaciendaWagonRepeat</card>
-        <card>DEHCREVMXBajaCaliforniaTerritory</card>
-        <card>DEHCREVMXShipGoldMineWagonRepeat</card>
-        <card>DEHCREVMXExploitation</card>
         <card>DEHCREVMXCapitalism</card>
-        <card>DEHCREVMXWalkersGang</card>
-        <card>DEHCREVMXWalkersIllusions</card>
-        <card>DEHCREVMXWalkersRealities</card>
+        <card>DEHCRancheros</card>
+        <card>DEHCREVMXBajaCaliforniaTerritory</card>
+        <card>DEHCREVMXShipPostWagons</card>
+        <card>DEHCREVMXExploitation</card>
+        <card>DEHCREVMXForeignInvestment</card>
+        <card>DEHCREVMXGringos</card>
+        <card>DEHCREVMXFrontierDefensesRepeat</card>
+        <card>DEHCREVMXShipHaciendaWagonRepeat</card>
+        <card>DEHCREVFedMXTrickleEconomics</card>
+        <card>DEHCREVMXAnnexation</card>
         <card>DEHCREVMXMercsFusiliers</card>
         <card>DEHCREVMXMercsHessians</card>
-        <card>DEHCREVMXShotgunMessengers</card>
-        <card>DEHCREVMXGringos</card>
-        <card>DEHCREVMXHirePrivateers</card>
-        <card>DEHCREVMXFilibusterInvasion</card>
-        <card>DEHCREVMXAnnexation</card>
+        <card>DEHCREVMXShipGoldMineWagonRepeat</card>
         <card>DEHCREVFedMXFortuneSoldier</card>
-        <card>DEHCREVFedMXTrickleEconomics</card>
+        <card>DEHCREVMXFilibusterInvasion</card>
+        <card>DEHCAltaCalifornia</card>
+        <card>DEHCShipFrigateRepeat</card>
+        <card>DEHCREVMXRobberBarons2</card>
+        <card>DEHCREVMXWalkersGang</card>
+        <card>DEHCREVMXHirePrivateers</card>
+        <card>DEHCREVMXShotgunMessengers</card>
+        <card>DEHCREVMXWalkersIllusions</card>
+        <card>DEHCREVMXWalkersRealities</card>
+        <card>HCFrontierDefenses2</card>
       </cards>
     </deck>
     <deck>

@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <homecity>
   <civ>RvltModCanadians</civ>
   <name>$$80821$$</name>
@@ -1373,34 +1374,35 @@
   </cards>
   <decks>
     <deck>
-      <name>$$41682$$</name>
+      <name>Legendary Leaders</name>
       <default>
       </default>
       <cards>
-        <card>HCColonialMilitia</card>
-        <card>HCPioneers</card>
         <card>HCXPFurTrade</card>
-        <card>DEHCREVSpiceTrade</card>
-        <card>HCWildernessWarfare</card>
-        <card>DEHCREVFencibles</card>
-        <card>DEHCREVShipGrizzlies</card>
-        <card>DEHCREVShipElk</card>
+        <card>HCExoticHardwoods</card>
+        <card>DEHCREVCanadianOfficer</card>
         <card>DEHCREVBuffaloHunt</card>
+        <card>DEHCMercsIrishBrigadiers</card>
+        <card>DEHCExtensiveFortificationsEuropean</card>
+        <card>DEHCHanoverAllies1</card>
+        <card>DEHCREVShipWarCanoes</card>
+        <card>DEHCMercsGiantGrenadiers</card>
+        <card>HCRefrigeration</card>
+        <card>DEHCHanoverAllies2</card>
+        <card>DEHCShipRangers1</card>
+        <card>DEHCSiegeArchery</card>
+        <card>DEHCREVConscriptionCanada</card>
+        <card>DEHCREVNativeAlliesCanada</card>
+        <card>DEHCCanadianLoyalists</card>
         <card>DEHCREVNorthAmericaTrade</card>
+        <card>DEHCREVFencibles</card>
         <card>DEHCREVHighlanders</card>
+        <card>DEHCREVQuebec</card>
+        <card>DEHCREVShipElk</card>
+        <card>DEHCREVShipGrizzlies</card>
         <card>DEHCREVShipMusketeers</card>
         <card>DEHCREVShipRangers</card>
-        <card>HCREVShipIronclads</card>
-        <card>DEHCREVQuebec</card>
         <card>RvltModHCMetis</card>
-        <card>DEHCREVConscriptionCanada</card>
-        <card>DEHCREVCanadianOfficer</card>
-        <card>DEHCCanadianLoyalists</card>
-        <card>DEHCREVNativeAlliesCanada</card>
-        <card>DEHCLenapeAllies</card>
-        <card>DEHCHanoverAllies2</card>
-        <card>HCNativeChampionsDutchTeam</card>
-        <card>DEHCREVMXBloodBrothers</card>
       </cards>
     </deck>
   </decks>

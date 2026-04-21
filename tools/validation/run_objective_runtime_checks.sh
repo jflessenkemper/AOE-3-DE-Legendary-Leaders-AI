@@ -16,6 +16,5 @@ LOG_PATH="${1:-$DEFAULT_LOG_PATH}"
 "$PYTHON_BIN" "$REPO_ROOT/tools/validation/validate_runtime_logs.py" \
   --log-path "$LOG_PATH" \
   --suite ai_rout_bootstrap \
-  --suite human_prisoner_lane \
   --suite ai_rout_lane \
   --suite elite_retreat_lane

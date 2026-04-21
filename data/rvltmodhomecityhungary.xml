@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <homecity>
   <civ>RvltModHungarians</civ>
   <name>$$80824$$</name>
@@ -1088,23 +1089,35 @@
   </cards>
   <decks>
     <deck>
-      <name>$$41682$$</name>
+      <name>Legendary Leaders</name>
       <default>
       </default>
       <cards>
+        <card>HCExoticHardwoods</card>
+        <card>HCAdvancedDock</card>
+        <card>HCShipHussars1</card>
         <card>RvltModHCHajduks</card>
         <card>RvltModHCMagyarGrenadiers</card>
         <card>RvltModHCMilitaryFrontier</card>
-        <card>RvltModHCCrabats</card>
-        <card>RvltModHCPandours</card>
+        <card>DEHCExtensiveFortificationsEuropean</card>
         <card>RvltModHCMagyarHussarsAlt</card>
         <card>DEHCREVOutlawCombat</card>
-        <card>RvltModHCShipEuropeanFleet</card>
-        <card>RvltModHCShipFortWagonOutpost</card>
-        <card>DEHCREVCitizenshipOutpost</card>
-        <card>RvltModHCLegionHungarian</card>
-        <card>HCXPShipGrenadiersRepeat</card>
+        <card>DEHCMercsGiantGrenadiers</card>
+        <card>HCMercsBlackRiders</card>
+        <card>DEHCHabsburgAllies1</card>
+        <card>DEHCHandMortar</card>
         <card>DEHCREVShipFalconets</card>
+        <card>HCShipHussars3</card>
+        <card>RvltModHCLegionHungarian</card>
+        <card>RvltModHCPandours</card>
+        <card>DEHCShipBattleshipRepeat</card>
+        <card>HCXPIndustrialRevolution</card>
+        <card>DEHCHabsburgAllies2</card>
+        <card>DEHCInfantryHitpointsItalian</card>
+        <card>DEHCTheaters</card>
+        <card>HCCavalryCombatFrench</card>
+        <card>HCShipDragoons1</card>
+        <card>HCShipDragoons3</card>
       </cards>
     </deck>
   </decks>

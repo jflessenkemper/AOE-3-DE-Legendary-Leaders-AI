@@ -1,0 +1,930 @@
+{
+  "rvltmodhomecityamericans": {
+    "0": [
+      "HCPioneers",
+      "DEHCWhaleOilTeam"
+    ],
+    "1": [
+      "DEHCREVLegionSpies",
+      "HCShipMusketeers1",
+      "HCFrontierDefenses",
+      "DEHCMercsIrishBrigadiers",
+      "DEHCExtensiveFortificationsEuropean"
+    ],
+    "2": [
+      "DEHCREVWashingtonLands",
+      "DEHCREVCTrainTimeUS",
+      "DEHCREVImmigrantsEuropean",
+      "DEHCREVLegionIronPetards",
+      "DEHCREVLegionUhlans",
+      "DEHCREVPowderAlarm",
+      "DEHCREVUSACombat",
+      "DEHCShipGatlings1",
+      "HCShipMusketeers2",
+      "HCShipMusketeers4"
+    ],
+    "3": [
+      "DEHCREVLegionRegulars",
+      "DEHCREVLegionCarbines",
+      "DEHCREVLegionArtillery",
+      "DEHCREVLegionGrenadiers",
+      "DEHCREVLongRifles",
+      "DEHCREVUSAHeroBuff",
+      "DEHCREVVolunteers",
+      "HCShipMusketeers3"
+    ]
+  },
+  "rvltmodhomecityargentina": {
+    "0": [
+      "DEHCLombardy",
+      "HCCheapBarracksTeam"
+    ],
+    "1": [
+      "DEHCREVTrattoria",
+      "DEHCExtensiveFortificationsEuropean",
+      "DEHCMercsIrishBrigadiers",
+      "HCFrontierDefenses",
+      "DEHCTheaters"
+    ],
+    "2": [
+      "DEHCREVCattleDeliveryArgentina",
+      "DEHCLiberationMarch",
+      "DEHCREVFlyingBattery",
+      "DEHCHandMortar",
+      "DEHCMarvelousYear",
+      "DEHCMercsArmoredPistoleers",
+      "HCUnlockFort",
+      "DEHCHabsburgAllies1",
+      "DEHCNewSpainViceroyalty"
+    ],
+    "3": [
+      "DEHCREVSanMartin",
+      "DEHCREVBlandengues",
+      "DEHCREVCriollos",
+      "DEHCREVArgentineMortars",
+      "DEHCREVShipMortars",
+      "HCXPShipMortarsTeam",
+      "HCHeavyFortifications",
+      "DEHCShipBattleshipRepeat"
+    ],
+    "4": [
+      "HCXPIndustrialRevolution"
+    ]
+  },
+  "rvltmodhomecitybajacalifornians": {
+    "0": [
+      "DEHCREVMXCapitalism",
+      "DEHCRancheros"
+    ],
+    "1": [
+      "DEHCREVMXBajaCaliforniaTerritory",
+      "DEHCREVMXShipPostWagons",
+      "DEHCREVMXExploitation",
+      "DEHCREVMXForeignInvestment",
+      "DEHCREVMXGringos",
+      "DEHCREVMXHirePrivateers",
+      "DEHCREVMXShotgunMessengers",
+      "DEHCREVMXWalkersIllusions",
+      "DEHCREVMXWalkersRealities"
+    ],
+    "2": [
+      "DEHCREVMXFrontierDefensesRepeat",
+      "DEHCREVMXShipHaciendaWagonRepeat",
+      "DEHCREVFedMXTrickleEconomics",
+      "DEHCREVMXAnnexation",
+      "DEHCREVMXMercsFusiliers",
+      "DEHCREVMXMercsHessians",
+      "DEHCREVMXRobberBarons2",
+      "DEHCREVMXWalkersGang",
+      "HCFrontierDefenses2"
+    ],
+    "3": [
+      "DEHCREVMXShipGoldMineWagonRepeat",
+      "DEHCREVFedMXFortuneSoldier",
+      "DEHCREVMXFilibusterInvasion",
+      "DEHCAltaCalifornia",
+      "DEHCShipFrigateRepeat"
+    ]
+  },
+  "rvltmodhomecitybarbary": {
+    "0": [
+      "DEHCColonialMilitiaOttoman",
+      "DEHCSPCSaharanTrade"
+    ],
+    "1": [
+      "DEHCREVCorsairCaptain",
+      "DEHCREVDhimma",
+      "DEHCSPCBarbaryMadrasa",
+      "HCShipGalleons",
+      "DEHCExtensiveFortificationsEuropean"
+    ],
+    "2": [
+      "DEHCREVSaleRovers",
+      "DEHCREVBerberNomads",
+      "DEHCREVLoyalWarriors",
+      "DEHCREVOutlawCombat",
+      "DEHCREVShipZenataTeam",
+      "DEHCShipBerberAllies2Ottoman",
+      "DEHCMercsBosniaks"
+    ],
+    "3": [
+      "DEHCREVBarbaryCombat",
+      "DEHCREVShipBarbaryMarksman",
+      "DEHCREVShipBarbaryWarrior",
+      "DEHCREVShipBerberAllies",
+      "DEHCREVOttomanExpArmy",
+      "DEHCREVShipFalconets",
+      "DEHCREVShipXebec",
+      "DEHCREVShipXebec2",
+      "HCXPMercsCorsairsRepeat",
+      "DEHCMercsAskaris",
+      "DEHCMercsOttoman"
+    ]
+  },
+  "rvltmodhomecitybrazil": {
+    "0": [
+      "DEHCREVBonifacio",
+      "HCExoticHardwoods"
+    ],
+    "1": [
+      "DEHCREVWildlife",
+      "HCShipBandeirantes",
+      "DEHCMercsCannoneersEuropean",
+      "DEHCTheaters",
+      "DEHCWettinAllies1"
+    ],
+    "2": [
+      "DEHCREVAmazonia",
+      "DEHCREVCattleDeliveryBrazil",
+      "DEHCREVBahia",
+      "DEHCREVMinasGerais",
+      "DEHCMercsArmoredPistoleers",
+      "HCRefrigeration",
+      "DEHCCarracks",
+      "DEHCEstremozGuns",
+      "DEHCHandMortar",
+      "DEHCShipGatlings1"
+    ],
+    "3": [
+      "DEHCREVBrazilImporters",
+      "DEHCREVShipCacadores",
+      "DEHCREVShipSoldados",
+      "HCREVShipIronclads",
+      "HCUnlockFactory",
+      "DEHCPortugueseBattleshipCard",
+      "DEHCShipBattleshipRepeat",
+      "DEHCAkanAllies"
+    ]
+  },
+  "rvltmodhomecitycalifornia": {
+    "0": [
+      "DEHCREVMXCaliforniaHaciendas",
+      "DEHCRancheros",
+      "DEHCShipHaciendaWagon1"
+    ],
+    "1": [
+      "DEHCREVMXRanchos",
+      "DEHCREVMXSanDiegoPort",
+      "DEHCREVMXSanFranciscoBay",
+      "HCFrontierDefenses",
+      "DEHCShipTradingPostWagons"
+    ],
+    "2": [
+      "DEHCREVMXFrontierDefensesRepeat",
+      "DEHCREVMXShipSettlersRepeat2",
+      "DEHCREVFedMXRanching",
+      "HCFrontierDefenses2",
+      "RvltModHCREVMXCaliforniaStatehood",
+      "DEHCShipCapturedGalleons2",
+      "DEHCCavalryCombatMexican",
+      "DEHCGuerillaTactics",
+      "DEHCImmigrantsRussian"
+    ],
+    "3": [
+      "DEHCREVMXShipGoldMineWagonRepeat",
+      "DEHCREVMXCaliforniaLancers",
+      "DEHCREVMXCaliforniaRobberBarons",
+      "DEHCREVMXShipCalifornios",
+      "DEHCREVMXShipHaciendaWagonRepeat1",
+      "DEHCREVMXShipIroncladRepeat1",
+      "DEHCAltaCalifornia",
+      "DEHCShipFrigateRepeat"
+    ]
+  },
+  "rvltmodhomecitycanada": {
+    "0": [
+      "HCXPFurTrade",
+      "HCExoticHardwoods"
+    ],
+    "1": [
+      "DEHCREVCanadianOfficer",
+      "DEHCREVBuffaloHunt",
+      "DEHCMercsIrishBrigadiers",
+      "DEHCExtensiveFortificationsEuropean",
+      "DEHCHanoverAllies1"
+    ],
+    "2": [
+      "DEHCREVShipWarCanoes",
+      "DEHCMercsGiantGrenadiers",
+      "HCRefrigeration",
+      "DEHCHanoverAllies2",
+      "DEHCShipRangers1",
+      "DEHCSiegeArchery"
+    ],
+    "3": [
+      "DEHCREVConscriptionCanada",
+      "DEHCREVNativeAlliesCanada",
+      "DEHCCanadianLoyalists",
+      "DEHCREVNorthAmericaTrade",
+      "DEHCREVFencibles",
+      "DEHCREVHighlanders",
+      "DEHCREVQuebec",
+      "DEHCREVShipElk",
+      "DEHCREVShipGrizzlies",
+      "DEHCREVShipMusketeers",
+      "DEHCREVShipRangers",
+      "RvltModHCMetis"
+    ]
+  },
+  "rvltmodhomecitycentralamericans": {
+    "0": [
+      "DEHCREVMXColonialMilitia",
+      "DEHCAdvancedSaloon"
+    ],
+    "1": [
+      "DEHCREVMXShipColonialMilitia",
+      "DEHCREVFedMXSantamariaFire",
+      "DEHCREVMXFrontierDefenses",
+      "DEHCREVMXShipFalconets1",
+      "DEHCREVMXShipSettlersRepeat",
+      "DEHCREVMXTehuantepecRoute",
+      "DEHCREVMXVeteranBarracks",
+      "DEHCREVMXVeteranStable",
+      "DEHCCriollos",
+      "DEHCShipCapturedGalleons1"
+    ],
+    "2": [
+      "DEHCREVMXShipIronclad1",
+      "DEHCREVMXFrontierDefensesRepeat",
+      "DEHCREVMXShipCulverins2",
+      "DEHCShipCapturedGalleons2",
+      "DEHCCavalryCombatMexican",
+      "DEHCGuerillaTactics",
+      "DEHCLeatherSoldiers",
+      "DEHCLiberationMarch"
+    ],
+    "3": [
+      "DEHCShipFrigateRepeat",
+      "DEHCAltaCalifornia",
+      "DEHCCampecheFortifications",
+      "DEHCCantinas",
+      "DEHCChapultepecCastle"
+    ]
+  },
+  "rvltmodhomecitychile": {
+    "0": [
+      "HCStonemasons",
+      "HCExoticHardwoods"
+    ],
+    "1": [
+      "DEHCREVCitizenshipChile",
+      "DEHCREVFishingFleet",
+      "DEHCExtensiveFortificationsEuropean",
+      "DEHCMercsIrishBrigadiers",
+      "DEHCTheaters"
+    ],
+    "2": [
+      "DEHCREVSalitrera",
+      "DEHCMercsArmoredPistoleers",
+      "HCUnlockFort",
+      "HCMercsHighlanders",
+      "DEHCHabsburgAllies1",
+      "DEHCHandMortar",
+      "DEHCLiberationMarch",
+      "DEHCMarvelousYear",
+      "DEHCShipGatlings1"
+    ],
+    "3": [
+      "DEHCREVMilitaryParadeChile",
+      "HCHeavyFortifications",
+      "HCMercsHighland",
+      "DEHCShipBattleshipRepeat",
+      "DEHCBourbonAllies1",
+      "DEHCMapucheAlliesRepeat1",
+      "DEHCShipCannons1Team",
+      "DEHCShipNuestrasSenoras"
+    ],
+    "4": [
+      "HCXPIndustrialRevolution"
+    ]
+  },
+  "rvltmodhomecitycolumbia": {
+    "0": [
+      "DEHCREVNationalHero",
+      "HCAdvancedTradingPost"
+    ],
+    "1": [
+      "DEHCMercsIrishBrigadiers",
+      "DEHCExtensiveFortificationsEuropean",
+      "DEHCTheaters",
+      "HCShipSettlers2",
+      "HCShipSettlers4"
+    ],
+    "2": [
+      "DEHCREVCattleDeliveryColombia",
+      "DEHCREVShipSteamers",
+      "RvltModHCLlaneros",
+      "DEHCMercsArmoredPistoleers",
+      "DEHCHabsburgAllies1",
+      "DEHCHandMortar",
+      "DEHCLiberationMarch",
+      "DEHCMarvelousYear",
+      "DEHCShipGatlings1"
+    ],
+    "3": [
+      "DEHCREVColombianNavy",
+      "DEHCREVShipColombianRevolutionaries",
+      "DEHCREVShipIronclads",
+      "DEHCREVAlbionLegion",
+      "DEHCShipBattleshipRepeat",
+      "DEHCBourbonAllies1",
+      "DEHCShipCannons1Team",
+      "DEHCShipNuestrasSenoras"
+    ],
+    "4": [
+      "HCXPIndustrialRevolution"
+    ]
+  },
+  "rvltmodhomecityegypt": {
+    "0": [
+      "DEHCColonialMilitiaOttoman",
+      "HCExoticHardwoods"
+    ],
+    "1": [
+      "DEHCREVNileFlood",
+      "DEHCREVSuezCanal",
+      "DEHCExtensiveFortificationsEuropean",
+      "DEHCFencingSchoolOttoman",
+      "DEHCShipAzaps1"
+    ],
+    "2": [
+      "DEHCREVNizamsEgypt",
+      "DEHCREVRangedCombatEgypt",
+      "DEHCREVSudaneseAllies",
+      "RvltModHCMercsMamelukes",
+      "DEHCMercsBosniaks",
+      "DEHCHandMortarOttoman",
+      "DEHCShiAzaps2",
+      "DEHCShipBerberAllies2Ottoman"
+    ],
+    "3": [
+      "DEHCREVShipEgyptianFleet",
+      "DEHCREVGatlingCamels",
+      "DEHCREVSennarHorsemen",
+      "DEHCREVShipHorseArtillery2",
+      "DEHCREVShipStradiots",
+      "DEHCMercsAskaris",
+      "DEHCMercsOttoman",
+      "DEHCShipMercXebecOttoman",
+      "DEHCOttomanBattleshipCard",
+      "DEHCShipBattleshipRepeat"
+    ]
+  },
+  "rvltmodhomecityfinland": {
+    "0": [
+      "DEHCREVTreeSpawn",
+      "DEHCTorpTeam"
+    ],
+    "1": [
+      "DEHCREVNothernWilderness",
+      "DEHCREVSpawnStrelet",
+      "DEHCREVTurkuAcademy",
+      "DEHCContractMercsIrishBrigadiers",
+      "DEHCContractMercsLandsknechts"
+    ],
+    "2": [
+      "DEHCREVFinnishCounterArmy",
+      "DEHCREVJaegerCombat",
+      "DEHCREVSavolaxJaegers",
+      "DEHCREVBlockhouseCannon",
+      "DEHCREVCudgelWar",
+      "DEHCREVFinnhorses",
+      "DEHCContractMercsBlackRiders"
+    ],
+    "3": [
+      "DEHCREVGunboats",
+      "DEHCREVShipBalticFleet",
+      "DEHCREVShipBlockhouses",
+      "DEHCREVShipCoinCrates",
+      "DEHCREVShipCopperMines",
+      "DEHCREVShipElk",
+      "DEHCREVShipFoodCrates",
+      "DEHCREVShipHakkapelits",
+      "DEHCSoldierTorps",
+      "DEHCNorthernForests"
+    ],
+    "4": [
+      "HCXPIndustrialRevolution"
+    ]
+  },
+  "rvltmodhomecityfrenchcanada": {
+    "0": [
+      "HCFurrier",
+      "HCShipCoureurs1"
+    ],
+    "1": [
+      "DEHCREVCanadianOfficer",
+      "DEHCREVBuffaloHunt",
+      "HCShipCoureurs2",
+      "DEHCMercsIrishBrigadiers",
+      "DEHCCentSuisses"
+    ],
+    "2": [
+      "DEHCREVShipWarCanoes",
+      "DEHCMercsArmoredPistoleers",
+      "DEHCMercsGiantGrenadiers",
+      "DEHCFrenchRoyalArmy",
+      "DEHCHanoverAllies2",
+      "DEHCSPCRangedInfantryDamageFrenchTeam"
+    ],
+    "3": [
+      "DEHCREVConscriptionCanada",
+      "DEHCREVNativeAlliesCanada",
+      "DEHCREVQuebec",
+      "DEHCREVFencibles",
+      "DEHCREVHighlanders",
+      "DEHCREVNorthAmericaTrade",
+      "DEHCREVShipElk",
+      "DEHCREVShipGrizzlies",
+      "DEHCREVShipMusketeers",
+      "DEHCREVShipSkirmishers",
+      "DEHCCanadianLoyalists",
+      "RvltModHCMetisFrench"
+    ]
+  },
+  "rvltmodhomecityhaiti": {
+    "0": [
+      "DEHCREVVodouCeremonies",
+      "DEHCREVSevites"
+    ],
+    "1": [
+      "DEHCREVLetterOfMarque",
+      "HCPrivateers",
+      "DEHCMercsIrishBrigadiers",
+      "DEHCCentSuisses",
+      "DEHCColbertismTeam",
+      "DEHCExtensiveFortificationsEuropean",
+      "DEHCTheaters"
+    ],
+    "2": [
+      "DEHCREVDahomeyAmazonsHaiti",
+      "DEHCREVAfricanAllies",
+      "DEHCREVCitizenshipHaiti",
+      "HCPrivateers2",
+      "DEHCMercsArmoredPistoleers",
+      "DEHCMercsGiantGrenadiers",
+      "HCRefrigeration",
+      "HCRoyalMint"
+    ],
+    "3": [
+      "DEHCAkanAllies",
+      "DEHCREVPickets",
+      "DEHCREVHaitianBattleshipCard",
+      "DEHCREVShipPrivateers",
+      "DEHCREVShipFalconets",
+      "DEHCMercsRoyalHorseman",
+      "DEHCMercsZouaves",
+      "DEHCShipBattleshipRepeat"
+    ]
+  },
+  "rvltmodhomecityhungary": {
+    "0": [
+      "HCExoticHardwoods",
+      "HCAdvancedDock"
+    ],
+    "1": [
+      "HCShipHussars1",
+      "RvltModHCHajduks",
+      "RvltModHCMagyarGrenadiers",
+      "RvltModHCMilitaryFrontier",
+      "DEHCExtensiveFortificationsEuropean",
+      "DEHCInfantryHitpointsItalian",
+      "DEHCTheaters"
+    ],
+    "2": [
+      "RvltModHCMagyarHussarsAlt",
+      "DEHCREVOutlawCombat",
+      "DEHCMercsGiantGrenadiers",
+      "HCMercsBlackRiders",
+      "DEHCHabsburgAllies1",
+      "DEHCHandMortar",
+      "HCCavalryCombatFrench",
+      "HCShipDragoons1",
+      "HCShipDragoons3"
+    ],
+    "3": [
+      "DEHCREVShipFalconets",
+      "HCShipHussars3",
+      "RvltModHCLegionHungarian",
+      "RvltModHCPandours",
+      "DEHCShipBattleshipRepeat",
+      "DEHCHabsburgAllies2"
+    ],
+    "4": [
+      "HCXPIndustrialRevolution"
+    ]
+  },
+  "rvltmodhomecityindonesians": {
+    "0": [
+      "HCSpiceTradeTeam",
+      "DEHCFeitorias"
+    ],
+    "1": [
+      "DEHCMercsIrishBrigadiers",
+      "HCShipCaravels1",
+      "HCShipCaravels2",
+      "DEHCExtensiveFortificationsEuropean",
+      "DEHCTheaters"
+    ],
+    "2": [
+      "DEHCREVAcehExports",
+      "DEHCREVLantakas",
+      "DEHCMercenaryArmyDutch",
+      "DEHCMercsBosniaks",
+      "HCShipFrigates",
+      "DEHCBlueGuards",
+      "DEHCHabsburgAllies1"
+    ],
+    "3": [
+      "DEHCREVKratonGuards",
+      "DEHCREVShipJavaSpearman",
+      "DEHCREVShipWokouJunk",
+      "DEHCREVOttomanExpArmy",
+      "DEHCREVShipCetbang",
+      "DEHCMercsMountedRiflemen",
+      "DEHCDutchBattleshipCard",
+      "DEHCShipBattleshipRepeat",
+      "HCREVShipIronclads",
+      "HCShipMonitors",
+      "HCXPShipMonitorsTeam"
+    ]
+  },
+  "rvltmodhomecitymaya": {
+    "0": [
+      "DEHCREVMXMayaJungleVillages",
+      "DEHCREVMXMayaKowojTraditions",
+      "DEHCREVMXMayaMariaUicab",
+      "DEHCREVFedMXSolisShredders",
+      "DEHCREVMXFoodSilos"
+    ],
+    "1": [
+      "DEHCREVMXMayaNojPeten",
+      "DEHCREVMXJungleWarfare",
+      "DEHCREVMXBallcourts",
+      "DEHCREVMXCenotes",
+      "HCXPMayanAllies1"
+    ],
+    "2": [
+      "DEHCREVMXMayaPootsPlan",
+      "DEHCREVMXMayaYalainTraditions",
+      "DEHCREVMXMayanSupporters",
+      "DEHCREVFedMXAmparo",
+      "DEHCREVMXFrontierDefensesRepeat",
+      "DEHCREVMXHuipils",
+      "DEHCShipCapturedGalleons2"
+    ],
+    "3": [
+      "DEHCREVMXMayaArchitecture",
+      "DEHCREVMXMayaCeramics",
+      "DEHCREVFedMXHenequenIndustry",
+      "DEHCREVFedMXYucatecan",
+      "DEHCREVMXKinshipTies",
+      "DEHCREVMXKuchkabal",
+      "DEHCREVMXShipCruzobInfantry",
+      "HCXPMayanAllies2"
+    ]
+  },
+  "rvltmodhomecitymexicans": {
+    "0": [
+      "DEHCBarbacoa",
+      "DEHCIturbidePalace"
+    ],
+    "1": [
+      "DEHCMercsIrishBrigadiers",
+      "DEHCChipotles",
+      "DEHCExtensiveFortificationsEuropean",
+      "DEHCFedMXRanching",
+      "DEHCShipChinaco1"
+    ],
+    "2": [
+      "DEHCREVCattleDeliveryMexico",
+      "DEHCREVMXShipHaciendaWagonRepeat",
+      "DEHCREVOutlawCombat",
+      "DEHCREVShipVaqueros",
+      "DEHCMercsArmoredPistoleers",
+      "DEHCHabsburgAllies1",
+      "DEHCHandMortar",
+      "DEHCLiberationMarch",
+      "DEHCNewSpainViceroyalty",
+      "DEHCShipChinaco2",
+      "DEHCShipChinaco3",
+      "DEHCShipFalconets1Team"
+    ],
+    "3": [
+      "DEHCREVCharros",
+      "DEHCREVNativeAlliesMexico",
+      "DEHCREVShipBandidos",
+      "DEHCShipBattleshipRepeat",
+      "DEHCBourbonAllies1"
+    ],
+    "4": [
+      "HCXPIndustrialRevolution"
+    ]
+  },
+  "rvltmodhomecitynapoleon": {
+    "0": [
+      "DEHCShipBalloonsFrench",
+      "HCExoticHardwoods"
+    ],
+    "1": [
+      "DEHCREVNapoleonicWarfare",
+      "DEHCCentSuisses",
+      "DEHCTheaters",
+      "DEHCWittelsbachAllies1",
+      "HCFencingSchool"
+    ],
+    "2": [
+      "DEHCREVHundredDays",
+      "DEHCREVFlyingBattery",
+      "DEHCREVGenieTroops",
+      "DEHCREVSisterRepublics",
+      "DEHCRevFrenchRoyalArmy",
+      "DEHCREVShipmentRevolutionaries",
+      "DEHCWittelsbachAllies2",
+      "HCNavalGunners"
+    ],
+    "3": [
+      "DEHCREVImperialOldGuard",
+      "DEHCREVGrandBattery",
+      "DEHCREVHorseHunters",
+      "DEHCREVRustamsRegiment",
+      "DEHCREVClientStates",
+      "DEHCREVMercsBosniaksRepeat",
+      "DEHCREVMercsMountedRiflemenRepeat",
+      "DEHCREVShipHorseArtillery3",
+      "DEHCWittelsbachAlliesRepeat"
+    ],
+    "4": [
+      "DEHCREVContinentalBlockade"
+    ]
+  },
+  "rvltmodhomecityperu": {
+    "0": [
+      "DEHCREVAmericanAlliesPeru",
+      "DEHCAlpacaWool"
+    ],
+    "1": [
+      "DEHCREVJuninHussars",
+      "DEHCREVLima",
+      "DEHCExtensiveFortificationsEuropean",
+      "DEHCMercsIrishBrigadiers",
+      "DEHCTheaters"
+    ],
+    "2": [
+      "DEHCREVPeruvianGuard",
+      "DEHCREVCattleDelivery",
+      "DEHCREVCowboys",
+      "DEHCREVGuano",
+      "DEHCREVShipBolasWarrior",
+      "DEHCMercsArmoredPistoleers",
+      "HCUnlockFort",
+      "HCMercsHighlanders",
+      "DEHCHabsburgAllies1",
+      "DEHCLiberationMarch",
+      "DEHCMachuPicchu"
+    ],
+    "3": [
+      "DEHCREVMancoInca",
+      "DEHCREVShipFatLlamas",
+      "RvltModHCREVCuzco",
+      "HCHeavyFortifications",
+      "HCMercsHighland",
+      "DEHCShipBattleshipRepeat"
+    ],
+    "4": [
+      "HCXPIndustrialRevolution"
+    ]
+  },
+  "rvltmodhomecityrevolutionaryfrance": {
+    "0": [
+      "DEHCREVGuillotine",
+      "DEHCREVRobespierre",
+      "DEHCREVCantinieres",
+      "HCEarlySkirmishersTeam"
+    ],
+    "1": [
+      "DEHCREVBastilleStorming",
+      "DEHCREVCultSupremeBeing",
+      "DEHCMercsIrishBrigadiers",
+      "DEHCCentSuisses",
+      "DEHCColbertismTeam"
+    ],
+    "2": [
+      "DEHCREVShipmentRevolutionaries",
+      "DEHCRevFrenchRoyalArmy",
+      "HCShipSkirmishers1",
+      "HCShipSkirmishers3",
+      "HCXPTirailleurs",
+      "DEHCMercsArmoredPistoleers",
+      "DEHCMercsGiantGrenadiers"
+    ],
+    "3": [
+      "DEHCREVClientStates",
+      "DEHCREVHorseHunters",
+      "DEHCREVShipHorseArtillery3",
+      "HCShipSkirmishers2",
+      "HCShipSkirmishers4",
+      "HCShipSkirmishers5",
+      "DEHCMercsRoyalHorseman",
+      "DEHCMercsZouaves",
+      "DEHCFrenchBattleshipCard"
+    ]
+  },
+  "rvltmodhomecityriogrande": {
+    "0": [
+      "DEHCRancheros",
+      "DEHCShipHaciendaWagon1"
+    ],
+    "1": [
+      "DEHCREVMXBastimento",
+      "DEHCCriollos",
+      "HCFrontierDefenses",
+      "DEHCShipTradingPostWagons",
+      "DEHCShipCapturedGalleons1"
+    ],
+    "2": [
+      "DEHCREVMXFrontierDefensesRepeat",
+      "DEHCREVMXShipSettlersRepeat2",
+      "DEHCREVMXShipIronclad1",
+      "DEHCREVFedMXSierraMadreRepublic",
+      "DEHCREVMXShipFalconets2",
+      "DEHCREVMXVidaurriSeparatists",
+      "DEHCREVMXZapataManeuvers",
+      "HCFrontierDefenses2",
+      "HCNativeWarriors",
+      "DEHCShipCapturedGalleons2",
+      "DEHCCavalryCombatMexican"
+    ],
+    "3": [
+      "DEHCREVMXShipHaciendaWagonRepeat1",
+      "DEHCREVFedMXNuevoLeonMilitia",
+      "DEHCREVMXShipCulverins1",
+      "DEHCREVMXShipDragoon1",
+      "DEHCREVMXShipSoldado1",
+      "DEHCPresidialLancers",
+      "DEHCShipFrigateRepeat"
+    ]
+  },
+  "rvltmodhomecityromania": {
+    "0": [
+      "DEHCLandedGentry",
+      "HCStonemasons"
+    ],
+    "1": [
+      "DEHCExtensiveFortificationsEuropean",
+      "DEHCInfantryHitpointsItalian",
+      "DEHCPhanarAllies2",
+      "DEHCTheaters",
+      "HCAdvancedArsenal"
+    ],
+    "2": [
+      "RvltModHCWallachianArchers",
+      "RvltModHCSovnyaRomanian",
+      "DEHCMercsGiantGrenadiers",
+      "HCUnlockFort",
+      "DEHCHandMortar",
+      "DEHCPhanarAllies1",
+      "HCRefrigeration",
+      "HCRoyalMint",
+      "HCMercenaryLoyalty",
+      "HCMercsBlackRiders"
+    ],
+    "3": [
+      "DEHCREVShipHorseArtillery3",
+      "RvltModHCFlightArcheryRomanians",
+      "HCHeavyFortifications",
+      "DEHCShipBattleshipRepeat",
+      "HCXPUnlockFort2",
+      "HCUnlockFactory",
+      "RvltModHCShipFortWagonOutpost"
+    ],
+    "4": [
+      "HCXPIndustrialRevolution"
+    ]
+  },
+  "rvltmodhomecitysouthafricans": {
+    "0": [
+      "HCXPSouthSeaBubble",
+      "DEHCFeitorias"
+    ],
+    "1": [
+      "DEHCREVWanderlust",
+      "DEHCMercsIrishBrigadiers",
+      "HCXPBankWagon",
+      "DEHCBuckriders",
+      "DEHCExtensiveFortificationsEuropean"
+    ],
+    "2": [
+      "DEHCREVBankWagons",
+      "DEHCREVShipHomesteadWagons",
+      "DEHCREVShipMilitaryWagons",
+      "DEHCREVShipOutpostWagons",
+      "DEHCMercsBosniaks",
+      "DEHCMercsPandours",
+      "DEHCBlueGuards",
+      "DEHCHabsburgAllies1",
+      "DEHCHandMortar",
+      "DEHCShipHussars2"
+    ],
+    "3": [
+      "DEHCREVDiamondRush",
+      "DEHCREVHuguenots",
+      "DEHCREVShipXhosaFoods",
+      "DEHCMercsAskaris",
+      "DEHCMercsMountedRiflemen",
+      "DEHCDutchBattleshipCard",
+      "DEHCShipBattleshipRepeat",
+      "DEHCWettinAllies2"
+    ]
+  },
+  "rvltmodhomecitytexas": {
+    "0": [
+      "DEHCREVMXBurnetLand",
+      "DEHCShipHaciendaWagon1"
+    ],
+    "1": [
+      "HCFrontierDefenses",
+      "DEHCFedMXFortifiedHaciendas",
+      "DEHCShipCapturedGalleons1",
+      "DEHCChipotles",
+      "DEHCCopperCanyon"
+    ],
+    "2": [
+      "DEHCREVMXGonzalesGuns",
+      "DEHCREVMXFrontierDefensesRepeat",
+      "HCFrontierDefenses2",
+      "RvltModHCREVMXTexasStatehood",
+      "HCUnlockFort",
+      "DEHCShipCapturedGalleons2"
+    ],
+    "3": [
+      "DEHCREVMXTexasArmy",
+      "DEHCREVMXTexasLancers",
+      "DEHCREVMXTexasNavy",
+      "DEHCREVMXEmpresarioContracts",
+      "DEHCREVMXShipFortWagon2",
+      "DEHCREVMXIroncladsSteamers1",
+      "DEHCREVMXRobberBarons2",
+      "DEHCREVMXShipHaciendaWagonRepeat1",
+      "DEHCREVMXShipSharpshooters",
+      "DEHCREVMXHeavyFortifications",
+      "DEHCShipIroncladsRepeat1",
+      "RvltModHCREVMXTexasMarines"
+    ]
+  },
+  "rvltmodhomecityyucatan": {
+    "0": [
+      "DEHCREVFedMXSolisShredders",
+      "DEHCREVMXFoodSilos"
+    ],
+    "1": [
+      "DEHCREVMXPlanMerida",
+      "DEHCREVFedMXJungleWarfare",
+      "DEHCShipCapturedGalleons1",
+      "DEHCChipotles",
+      "DEHCCopperCanyon"
+    ],
+    "2": [
+      "DEHCREVMXMayanSupporters",
+      "DEHCREVFedMXAmparo",
+      "DEHCREVMXFrontierDefensesRepeat",
+      "DEHCREVMXShipFoodCrates4",
+      "DEHCREVMXShipSettlersRepeat2",
+      "DEHCREVMXShipWoodCrates4",
+      "DEHCREVMXhipCoinCrates4",
+      "DEHCShipCapturedGalleons2",
+      "DEHCCavalryCombatMexican",
+      "DEHCGuerillaTactics",
+      "DEHCLeatherSoldiers"
+    ],
+    "3": [
+      "DEHCREVMXShipIroncladRepeat1",
+      "DEHCREVMXShipEmboscadorRepeat",
+      "DEHCREVMXShipHaciendaWagonRepeat1",
+      "DEHCREVMXShipYucatecoInsurgentesRepeat",
+      "DEHCCampecheFortifications",
+      "HCXPMayanAllies2",
+      "DEHCShipFrigateRepeat"
+    ]
+  }
+}

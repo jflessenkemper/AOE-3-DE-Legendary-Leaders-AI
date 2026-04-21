@@ -2,61 +2,11 @@
   "suites": [
     {
       "name": "ai_rout_bootstrap",
-      "description": "Verifies that the legacy prisoner hook now enables AI-only non-elite rout while leaving elite units and player-controlled units under manual control.",
+      "description": "Verifies the AI-only non-elite rout system starts up while leaving elite units and player-controlled units under manual control.",
       "required": [
         {
           "value": "Legendary Leaders: [RULE] AI non-elite rout enabled at 25% health; elite units hold and human-controlled units keep manual control",
           "description": "AI rout enabled"
-        },
-        {
-          "value": "Legendary Leaders: prison hook remapped to AI-only rout; non-elite AI units fall back to their return point once pressure breaks them.",
-          "description": "AI rout contract logged"
-        }
-      ]
-    },
-    {
-      "name": "prisoner_system_bootstrap",
-      "description": "Legacy alias for ai_rout_bootstrap.",
-      "required": [
-        {
-          "value": "Legendary Leaders: [RULE] AI non-elite rout enabled at 25% health; elite units hold and human-controlled units keep manual control",
-          "description": "AI rout enabled"
-        },
-        {
-          "value": "Legendary Leaders: prison hook remapped to AI-only rout; non-elite AI units fall back to their return point once pressure breaks them.",
-          "description": "AI rout contract logged"
-        }
-      ]
-    },
-    {
-      "name": "human_prisoner_lane",
-      "description": "Verifies that a surrendering human unit moves into custody and can be reclaimed.",
-      "required": [
-        {
-          "value": "Legendary Leaders: [UNIT] human-surrender-move unit=",
-          "description": "human surrender move issued"
-        },
-        {
-          "value": "Legendary Leaders: [UNIT] human-surrender-arrival-move unit=",
-          "description": "human surrender arrival recorded"
-        },
-        {
-          "value": "Legendary Leaders: [UNIT] human-surrender-return unit=",
-          "description": "human prisoner reclaim recorded"
-        }
-      ],
-      "ordered": [
-        {
-          "value": "Legendary Leaders: [UNIT] human-surrender-move unit=",
-          "description": "human surrender move"
-        },
-        {
-          "value": "Legendary Leaders: [UNIT] human-surrender-arrival-move unit=",
-          "description": "human surrender arrival"
-        },
-        {
-          "value": "Legendary Leaders: [UNIT] human-surrender-return unit=",
-          "description": "human surrender reclaim"
         }
       ]
     },
@@ -96,54 +46,8 @@
       ]
     },
     {
-      "name": "ai_prisoner_lane",
-      "description": "Legacy alias for ai_rout_lane.",
-      "required": [
-        {
-          "value": "Legendary Leaders: [UNIT] ai-rout-start unit=",
-          "description": "AI rout start recorded"
-        },
-        {
-          "value": "Legendary Leaders: [UNIT] ai-rout-move unit=",
-          "description": "AI rout move issued"
-        },
-        {
-          "value": "Legendary Leaders: [UNIT] ai-rout-arrival unit=",
-          "description": "AI rout arrival recorded"
-        }
-      ],
-      "ordered": [
-        {
-          "value": "Legendary Leaders: \\[UNIT\\] ai-rout-start unit=",
-          "kind": "regex",
-          "description": "AI rout start"
-        },
-        {
-          "value": "Legendary Leaders: \\[UNIT\\] ai-rout-move unit=",
-          "kind": "regex",
-          "description": "AI rout move"
-        },
-        {
-          "value": "Legendary Leaders: \\[UNIT\\] ai-rout-arrival unit=",
-          "kind": "regex",
-          "description": "AI rout arrival"
-        }
-      ]
-    },
-    {
       "name": "elite_support_blocks_rout",
       "description": "Verifies that rout was blocked because elite support stayed nearby while under pressure.",
-      "required": [
-        {
-          "kind": "regex",
-          "value": "Legendary Leaders: \\[UNIT\\] ai-rout-blocked unit=\\d+ reason=elite-support",
-          "description": "support blocked rout"
-        }
-      ]
-    },
-    {
-      "name": "support_blocked_surrender",
-      "description": "Legacy alias for elite_support_blocks_rout.",
       "required": [
         {
           "kind": "regex",

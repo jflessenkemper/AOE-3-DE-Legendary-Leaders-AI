@@ -26,11 +26,9 @@ Status: already partially present.
 
 Base this on `Scenario/Legendary Leaders Test.age3Yscn` and keep it focused on deterministic rule verification:
 
-- surrender threshold
+- AI non-elite rout threshold
 - elite-support block
-- explorer-support block
-- prison routing
-- reclaim
+- AI rout fallback toward the return point
 - elite retreat after explorer death
 
 Required trigger actions:

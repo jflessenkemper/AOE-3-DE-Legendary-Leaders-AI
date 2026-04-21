@@ -60,11 +60,8 @@ mutable void shipGrantedHandler(int parm = -1) {}
 // Chats.
 mutable void sendStatement(int playerIDorRelation = -1, int commPromptID = -1, vector vec = cInvalidVector) {}
 mutable void sendChatLine(int playerIDorRelation = -1, string message = "") {}
-mutable void llSendPrisonAlertToPlayer(int playerID = -1, vector prisonLocation = cInvalidVector, string alertMessage = "") {}
-mutable void llSendEnemyPrisonTaunt(vector prisonLocation = cInvalidVector) {}
 mutable string llGetLegendaryLeaderInsult(void) { return (""); }
 mutable string llGetLegendaryLeaderCompliment(void) { return (""); }
-mutable string llGetEnemyPrisonTaunt(int doctrine = -1) { return (""); }
 mutable void llSendLegendaryLeaderInsultLine(int playerIDorRelation = -1, int quoteInterval = 90000) {}
 mutable void llSendLegendaryLeaderComplimentLine(int playerIDorRelation = -1, int quoteInterval = 90000) {}
 mutable void llMaybeFollowStatementWithQuote(int playerID = -1, int commPromptID = -1) {}
@@ -107,7 +104,6 @@ include "core\aiSetup.xs";
 //include "core\aiMilitaryNew.xs";
 include "core\aiBuildingsWalls.xs";
 include "core\aiChatsNew.xs";
-include "core\aiPrisoners.xs";
 include "core\aiEliteTactics.xs";
 include "core\aiMiscNew.xs";
 include "core\aiNavalVillagersUtilities.xs";
@@ -117,24 +113,6 @@ include "core\aiNavalNew.xs";
 include "core\aiArchipelago.xs";
 include "core\aiSpecialNew.xs"; // For special scenario-related code...
 include "core\aiKingOfTheHill.xs";
-
-void llSendPrisonAlertToPlayer(int playerID = -1, vector prisonLocation = cInvalidVector, string alertMessage = "")
-{
-   if (playerID < 0)
-   {
-      return;
-   }
-
-   // Keep the prison flare and text bundled behind a wrapper so aiHumanAssists can include aiPrisoners.xs safely.
-   sendStatement(playerID, cAICommPromptToAllyConfirm, prisonLocation);
-   sendChatLine(playerID, alertMessage);
-}
-
-void llSendEnemyPrisonTaunt(vector prisonLocation = cInvalidVector)
-{
-   sendStatement(cPlayerRelationEnemyNotGaia, cAICommPromptToEnemyLull, prisonLocation);
-   sendChatLine(cPlayerRelationEnemyNotGaia, llGetEnemyPrisonTaunt());
-}
 
 //==============================================================================
 // updateSettlerCounts
