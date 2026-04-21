@@ -1756,6 +1756,7 @@
       <String _locID='490102'>Open west-vs-east Texas-style test field with three land lanes and two naval lanes for fast AI validation.</String>
          <String _locID='490103'>Legendary Leaders Test Maps</String>
          <String _locID='490104'>Custom validation maps for Legendary Leaders AI skirmish testing.</String>
+         <String _locID='490200' symbol='cStringDeckLegendaryLeaders'>Legendary Leaders</String>
       </Language>
    </StringTable>
 </stringmods>
