@@ -1757,6 +1757,56 @@
          <String _locID='490103'>Legendary Leaders Test Maps</String>
          <String _locID='490104'>Custom validation maps for Legendary Leaders AI skirmish testing.</String>
          <String _locID='490200' symbol='cStringDeckLegendaryLeaders'>Legendary Leaders</String>
+         <!-- LL-LEADER-NAMES-START -->
+         <String _locID='490300' symbol='cStringLLLeader490300'>Napoleon Bonaparte</String>
+         <String _locID='490301' symbol='cStringLLLeader490301'>Maximilien Robespierre</String>
+         <String _locID='490302' symbol='cStringLLLeader490302'>Toussaint Louverture</String>
+         <String _locID='490303' symbol='cStringLLLeader490303'>Jose de San Martin</String>
+         <String _locID='490304' symbol='cStringLLLeader490304'>Pedro I of Brazil</String>
+         <String _locID='490305' symbol='cStringLLLeader490305'>Bernardo O&apos;Higgins</String>
+         <String _locID='490306' symbol='cStringLLLeader490306'>Simon Bolivar</String>
+         <String _locID='490307' symbol='cStringLLLeader490307'>Miguel Hidalgo y Costilla</String>
+         <String _locID='490308' symbol='cStringLLLeader490308'>Sam Houston</String>
+         <String _locID='490309' symbol='cStringLLLeader490309'>Mariano Guadalupe Vallejo</String>
+         <String _locID='490310' symbol='cStringLLLeader490310'>Juan Bautista Alvarado</String>
+         <String _locID='490311' symbol='cStringLLLeader490311'>Francisco Morazan</String>
+         <String _locID='490312' symbol='cStringLLLeader490312'>Jacinto Canek</String>
+         <String _locID='490313' symbol='cStringLLLeader490313'>Felipe Carrillo Puerto</String>
+         <String _locID='490314' symbol='cStringLLLeader490314'>Antonio Canales Rosillo</String>
+         <String _locID='490315' symbol='cStringLLLeader490315'>Andres de Santa Cruz</String>
+         <String _locID='490316' symbol='cStringLLLeader490316'>Louis-Joseph Papineau</String>
+         <String _locID='490317' symbol='cStringLLLeader490317'>Isaac Brock</String>
+         <String _locID='490318' symbol='cStringLLLeader490318'>Thomas Jefferson</String>
+         <String _locID='490319' symbol='cStringLLLeader490319'>Carl Gustaf Emil Mannerheim</String>
+         <String _locID='490320' symbol='cStringLLLeader490320'>Lajos Kossuth</String>
+         <String _locID='490321' symbol='cStringLLLeader490321'>Alexandru Ioan Cuza</String>
+         <String _locID='490322' symbol='cStringLLLeader490322'>Paul Kruger</String>
+         <String _locID='490323' symbol='cStringLLLeader490323'>Muhammad Ali Pasha</String>
+         <String _locID='490324' symbol='cStringLLLeader490324'>Hayreddin Barbarossa</String>
+         <String _locID='490325' symbol='cStringLLLeader490325'>Prince Diponegoro</String>
+         <String _locID='490350' symbol='cStringLLLeader490350'>Duke of Wellington</String>
+         <String _locID='490351' symbol='cStringLLLeader490351'>Louis XVIII</String>
+         <String _locID='490352' symbol='cStringLLLeader490352'>Maurice of Nassau</String>
+         <String _locID='490353' symbol='cStringLLLeader490353'>Frederick the Great</String>
+         <String _locID='490354' symbol='cStringLLLeader490354'>Suleiman the Magnificent</String>
+         <String _locID='490355' symbol='cStringLLLeader490355'>Henry the Navigator</String>
+         <String _locID='490356' symbol='cStringLLLeader490356'>Catherine the Great</String>
+         <String _locID='490357' symbol='cStringLLLeader490357'>Isabella I of Castile</String>
+         <String _locID='490358' symbol='cStringLLLeader490358'>Gustavus Adolphus</String>
+         <String _locID='490359' symbol='cStringLLLeader490359'>Menelik II</String>
+         <String _locID='490360' symbol='cStringLLLeader490360'>Usman dan Fodio</String>
+         <String _locID='490361' symbol='cStringLLLeader490361'>Giuseppe Garibaldi</String>
+         <String _locID='490362' symbol='cStringLLLeader490362'>Jean Parisot de Valette</String>
+         <String _locID='490363' symbol='cStringLLLeader490363'>Miguel Hidalgo y Costilla</String>
+         <String _locID='490364' symbol='cStringLLLeader490364'>George Washington</String>
+         <String _locID='490365' symbol='cStringLLLeader490365'>Pachacuti</String>
+         <String _locID='490366' symbol='cStringLLLeader490366'>Tokugawa Ieyasu</String>
+         <String _locID='490367' symbol='cStringLLLeader490367'>Kangxi Emperor</String>
+         <String _locID='490368' symbol='cStringLLLeader490368'>Shivaji Maharaj</String>
+         <String _locID='490369' symbol='cStringLLLeader490369'>Montezuma II</String>
+         <String _locID='490370' symbol='cStringLLLeader490370'>Crazy Horse</String>
+         <String _locID='490371' symbol='cStringLLLeader490371'>Hiawatha</String>
+         <!-- LL-LEADER-NAMES-END -->
       </Language>
    </StringTable>
 </stringmods>

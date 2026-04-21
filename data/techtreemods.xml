@@ -310,6 +310,10 @@
 				<Target type ='ProtoUnit'>deIconFemaleExplorerFRFernig</Target></Effect>
 			<Effect type ='Data2' amount ='0.00' subtype ='CopyUnitPortraitAndIcon' unittype ='Explorer' skinID ='3' relativity ='Absolute'>
 				<Target type ='ProtoUnit'>deIconFemaleExplorerFRMarianne</Target></Effect>
+		
+			<!-- LL-RENAME-START -->
+			<Effect type='SetName' proto='Explorer' culture='none' newName='490301'></Effect>
+			<!-- LL-RENAME-END -->
 		</Effects>
 	</Tech>
 	<Tech name ='RvltModAge0NapoleonicFrench' type ='Normal'>
@@ -504,6 +508,10 @@
 				<Target type ='ProtoUnit'>deIconFemaleExplorerFRFernig</Target></Effect>
 			<Effect type ='Data2' amount ='0.00' subtype ='CopyUnitPortraitAndIcon' unittype ='Explorer' skinID ='3' relativity ='Absolute'>
 				<Target type ='ProtoUnit'>deIconFemaleExplorerFRMarianne</Target></Effect>
+		
+			<!-- LL-RENAME-START -->
+			<Effect type='SetName' proto='Explorer' culture='none' newName='490300'></Effect>
+			<!-- LL-RENAME-END -->
 		</Effects>
 	</Tech>
 	<Tech name ='RvltModImperialRevolutionaries' type ='Normal'>
@@ -820,6 +828,10 @@
 			<Effect type ='TechStatus' status ='obtainable'>DEPoliticianMercContractor</Effect>
 			<Effect type ='TechStatus' status ='obtainable'>DEPoliticianInventor</Effect>
 			<Effect type ='TechStatus' status ='obtainable'>DEPoliticianRoyalistItalian</Effect>
+		
+			<!-- LL-RENAME-START -->
+			<Effect type='SetName' proto='Explorer' culture='none' newName='490318'></Effect>
+			<!-- LL-RENAME-END -->
 		</Effects>
 	</Tech>
 	<Tech name ='RvltModFortressizeAmericans' type ='Normal'>
@@ -1126,6 +1138,10 @@
 			<Effect type ='TechStatus' status ='obtainable'>DEPoliticianMercContractor</Effect>
 			<Effect type ='TechStatus' status ='obtainable'>DEPoliticianInventor</Effect>
 			<Effect type ='TechStatus' status ='obtainable'>DEPoliticianKnight</Effect>
+		
+			<!-- LL-RENAME-START -->
+			<Effect type='SetName' proto='Explorer' culture='none' newName='490307'></Effect>
+			<!-- LL-RENAME-END -->
 		</Effects>
 	</Tech>
 	<Tech name ='RvltModMexicoNewSpainShadow' type ='Normal'>
@@ -1428,6 +1444,10 @@
 			<Effect type ='TechStatus' status ='obtainable'>DEPoliticianMercContractor</Effect>
 			<Effect type ='TechStatus' status ='obtainable'>DEPoliticianKnight</Effect>
 			<Effect type ='TechStatus' status ='obtainable'>DEPoliticianBlackDukeBritish</Effect>
+		
+			<!-- LL-RENAME-START -->
+			<Effect type='SetName' proto='Explorer' culture='none' newName='490317'></Effect>
+			<!-- LL-RENAME-END -->
 		</Effects>
 	</Tech>
 	<Tech name ='RvltModColonializeCanadians' type ='Normal'>
@@ -1713,6 +1733,10 @@
 				<Target type ='ProtoUnit'>deIconFemaleExplorerFRFernig</Target></Effect>
 			<Effect type ='Data2' amount ='0.00' subtype ='CopyUnitPortraitAndIcon' unittype ='Explorer' skinID ='3' relativity ='Absolute'>
 				<Target type ='ProtoUnit'>deIconFemaleExplorerFRMarianne</Target></Effect>
+		
+			<!-- LL-RENAME-START -->
+			<Effect type='SetName' proto='Explorer' culture='none' newName='490316'></Effect>
+			<!-- LL-RENAME-END -->
 		</Effects>
 	</Tech>
 	<Tech name ='RvltModColonializeFrenchCanadians' type ='Normal'>
@@ -2012,6 +2036,10 @@
 				<Target type ='ProtoUnit'>deIconExplorerPTCangaceiro</Target></Effect>
 			
 			<!-- <Effect type ='TechStatus' status ='obtainable'>VeteranCacadoreShadow</Effect> -->
+		
+			<!-- LL-RENAME-START -->
+			<Effect type='SetName' proto='Explorer' culture='none' newName='490304'></Effect>
+			<!-- LL-RENAME-END -->
 		</Effects>
 	</Tech>
 	<Tech name ='RvltModBrazilCaribShadow' type ='Normal'>
@@ -2358,6 +2386,10 @@
 			<Effect type ='TechStatus' status ='obtainable'>DEPoliticianMercContractor</Effect>
 			<Effect type ='TechStatus' status ='obtainable'>DEPoliticianInventor</Effect>
 			<Effect type ='TechStatus' status ='obtainable'>DEPoliticianKnight</Effect>
+		
+			<!-- LL-RENAME-START -->
+			<Effect type='SetName' proto='Explorer' culture='none' newName='490303'></Effect>
+			<!-- LL-RENAME-END -->
 		</Effects>
 	</Tech>
 	<Tech name ='RvltModAge0Chileans' type ='Normal'>
@@ -2571,6 +2603,10 @@
 			<Effect type ='TechStatus' status ='obtainable'>DEPoliticianMercContractor</Effect>
 			<Effect type ='TechStatus' status ='obtainable'>DEPoliticianInventor</Effect>
 			<Effect type ='TechStatus' status ='obtainable'>DEPoliticianKnight</Effect>
+		
+			<!-- LL-RENAME-START -->
+			<Effect type='SetName' proto='Explorer' culture='none' newName='490305'></Effect>
+			<!-- LL-RENAME-END -->
 		</Effects>
 	</Tech>
 	<Tech name ='RvltModDeathHussars' type ='Normal'>
@@ -2886,6 +2922,10 @@
 			<Effect type ='TechStatus' status ='obtainable'>DEPoliticianMercContractor</Effect>
 			<Effect type ='TechStatus' status ='obtainable'>DEPoliticianInventor</Effect>
 			<Effect type ='TechStatus' status ='obtainable'>DEPoliticianKnight</Effect>
+		
+			<!-- LL-RENAME-START -->
+			<Effect type='SetName' proto='Explorer' culture='none' newName='490306'></Effect>
+			<!-- LL-RENAME-END -->
 		</Effects>
 	</Tech>
 	<Tech name ='RvltModColonializeColumbians' type ='Normal'>
@@ -3217,6 +3257,10 @@
 			<Effect type ='TechStatus' status ='obtainable'>DEPoliticianMercContractor</Effect>
 			<Effect type ='TechStatus' status ='obtainable'>DEPoliticianInventor</Effect>
 			<Effect type ='TechStatus' status ='obtainable'>DEPoliticianKnight</Effect>
+		
+			<!-- LL-RENAME-START -->
+			<Effect type='SetName' proto='Explorer' culture='none' newName='490315'></Effect>
+			<!-- LL-RENAME-END -->
 		</Effects>
 	</Tech>
 	<Tech name ='RvltModFortressizePeruvians' type ='Normal'>
@@ -3627,6 +3671,10 @@
 				<Target type ='ProtoUnit'>deIconFemaleExplorerFRFernig</Target></Effect>
 			<Effect type ='Data2' amount ='0.00' subtype ='CopyUnitPortraitAndIcon' unittype ='Explorer' skinID ='3' relativity ='Absolute'>
 				<Target type ='ProtoUnit'>deIconFemaleExplorerFRMarianne</Target></Effect>
+		
+			<!-- LL-RENAME-START -->
+			<Effect type='SetName' proto='Explorer' culture='none' newName='490302'></Effect>
+			<!-- LL-RENAME-END -->
 		</Effects>
 	</Tech>
 	<Tech name ='RvltModColonializeHaitians' type ='Normal'>
@@ -3924,7 +3972,10 @@
 			<Effect type ='TechStatus' status ='obtainable'>DEPoliticianMercContractor</Effect>
 			<Effect type ='TechStatus' status ='obtainable'>DEPoliticianKnight</Effect>
 			<Effect type ='TechStatus' status ='obtainable'>DEPoliticianRoyalistDutch</Effect>
-			
+		
+			<!-- LL-RENAME-START -->
+			<Effect type='SetName' proto='Explorer' culture='none' newName='490322'></Effect>
+			<!-- LL-RENAME-END -->
 		</Effects>
 	</Tech>
 	<Tech name ='RvltModColonializeSouthAfricans' type ='Normal'>
@@ -4256,7 +4307,10 @@
 			<Effect type ='TechStatus' status ='obtainable'>DEPoliticianMercContractor</Effect>
 			<Effect type ='TechStatus' status ='obtainable'>DEPoliticianKnight</Effect>
 			<Effect type ='TechStatus' status ='obtainable'>DEPoliticianRoyalistDutch</Effect>
-			
+		
+			<!-- LL-RENAME-START -->
+			<Effect type='SetName' proto='Explorer' culture='none' newName='490325'></Effect>
+			<!-- LL-RENAME-END -->
 		</Effects>
 	</Tech>
 	<Tech name ='RvltModHeavyCetbang' type ='Normal'>
@@ -4734,6 +4788,10 @@
 				<Target type ='ProtoUnit'>deIconFemaleExplorerSWKristina</Target></Effect>
 			<Effect type ='Data2' amount ='0.00' subtype ='CopyUnitPortraitAndIcon' unittype ='Explorer' skinID ='2' relativity ='Absolute'>
 				<Target type ='ProtoUnit'>deIconExplorerSWThor</Target></Effect>
+		
+			<!-- LL-RENAME-START -->
+			<Effect type='SetName' proto='Explorer' culture='none' newName='490319'></Effect>
+			<!-- LL-RENAME-END -->
 		</Effects>
 	</Tech>
 	<Tech name ='RvltModHCTurkuAcademy' type ='Normal'>
@@ -5176,6 +5234,10 @@
 			<Effect type ='TechStatus' status ='obtainable'>DEPoliticianMercContractor</Effect>
 			<Effect type ='TechStatus' status ='obtainable'>DEPoliticianInventor</Effect>
 			<Effect type ='TechStatus' status ='obtainable'>DEPoliticianKnight</Effect>
+		
+			<!-- LL-RENAME-START -->
+			<Effect type='SetName' proto='Explorer' culture='none' newName='490320'></Effect>
+			<!-- LL-RENAME-END -->
 		</Effects>
 	</Tech>
 	<Tech name ='RvltModMagyarHussars' type ='Normal'>
@@ -5695,6 +5757,10 @@
 			<Effect type ='TechStatus' status ='obtainable'>DEPoliticianMercContractor</Effect>
 			<Effect type ='TechStatus' status ='obtainable'>DEPoliticianInventor</Effect>
 			<Effect type ='TechStatus' status ='obtainable'>DEPoliticianKnight</Effect>
+		
+			<!-- LL-RENAME-START -->
+			<Effect type='SetName' proto='Explorer' culture='none' newName='490321'></Effect>
+			<!-- LL-RENAME-END -->
 		</Effects>
 	</Tech>
 	<Tech name ='RvltModVetWallachianShadow' type ='Normal'>
@@ -6210,6 +6276,10 @@
 			
 			<Effect type ='Data2' amount ='0.00' subtype ='CopyUnitPortraitAndIcon' unittype ='Explorer' skinID ='0' relativity ='Absolute'>
 				<Target type ='ProtoUnit'>IGCSahin</Target></Effect>
+		
+			<!-- LL-RENAME-START -->
+			<Effect type='SetName' proto='Explorer' culture='none' newName='490324'></Effect>
+			<!-- LL-RENAME-END -->
 		</Effects>
 	</Tech>
 	<Tech name='RvltModBarbWarriorNerfShadowColonial' type='Normal'>
@@ -6623,6 +6693,10 @@
 			
 			<Effect type ='Data2' amount ='0.00' subtype ='CopyUnitPortraitAndIcon' unittype ='Explorer' skinID ='0' relativity ='Absolute'>
 				<Target type ='ProtoUnit'>IGCSahin</Target></Effect>
+		
+			<!-- LL-RENAME-START -->
+			<Effect type='SetName' proto='Explorer' culture='none' newName='490323'></Effect>
+			<!-- LL-RENAME-END -->
 		</Effects>
 	</Tech>
 	<!-- <Tech name ='RvltModHCMercsMamelukes' type ='Normal'>
@@ -6934,7 +7008,10 @@
 			<Effect type ='TechStatus' status ='obtainable'>DEPoliticianFederalMXVeracruz</Effect>
 			<Effect type ='TechStatus' status ='obtainable'>DEPoliticianFederalMXPuebla</Effect>
 			<Effect type ='TechStatus' status ='obtainable'>DEPoliticianFederalMXOaxaca</Effect>
-
+		
+			<!-- LL-RENAME-START -->
+			<Effect type='SetName' proto='deGeneral' culture='none' newName='490311'></Effect>
+			<!-- LL-RENAME-END -->
 		</Effects>
 	</Tech>	 
 	<Tech name ='RvltModAddCACardsToDeck' type ='Normal'>
@@ -7280,7 +7357,10 @@
 			<Effect type ='TechStatus' status ='obtainable'>DEPoliticianFederalMXVeracruz</Effect>
 			<Effect type ='TechStatus' status ='obtainable'>DEPoliticianFederalMXPuebla</Effect>
 			<Effect type ='TechStatus' status ='obtainable'>DEPoliticianFederalMXOaxaca</Effect>
-
+		
+			<!-- LL-RENAME-START -->
+			<Effect type='SetName' proto='deGeneral' culture='none' newName='490310'></Effect>
+			<!-- LL-RENAME-END -->
 		</Effects>
 	</Tech>	 
 	<Tech name ='RvltModAddBajaCardsToDeck' type ='Normal'>
@@ -7659,7 +7739,10 @@
 			<Effect type ='TechStatus' status ='obtainable'>DEPoliticianFederalMXVeracruz</Effect>
 			<Effect type ='TechStatus' status ='obtainable'>DEPoliticianFederalMXPuebla</Effect>
 			<Effect type ='TechStatus' status ='obtainable'>DEPoliticianFederalMXOaxaca</Effect>
-
+		
+			<!-- LL-RENAME-START -->
+			<Effect type='SetName' proto='deGeneral' culture='none' newName='490313'></Effect>
+			<!-- LL-RENAME-END -->
 		</Effects>
 	</Tech>	 
 	<Tech name ='RvltModAddYucatecoCardsToDeck' type ='Normal'>
@@ -8048,7 +8131,10 @@
 			<Effect type ='TechStatus' status ='obtainable'>DEPoliticianFederalMXVeracruz</Effect>
 			<Effect type ='TechStatus' status ='obtainable'>DEPoliticianFederalMXPuebla</Effect>
 			<Effect type ='TechStatus' status ='obtainable'>DEPoliticianFederalMXOaxaca</Effect>
-
+		
+			<!-- LL-RENAME-START -->
+			<Effect type='SetName' proto='deGeneral' culture='none' newName='490314'></Effect>
+			<!-- LL-RENAME-END -->
 		</Effects>
 	</Tech>	 
 	<Tech name ='RvltModAddRioGrandeCardsToDeck' type ='Normal'>
@@ -8513,7 +8599,10 @@
 			<Effect type ='TechStatus' status ='obtainable'>DEPoliticianFederalMXVeracruz</Effect>
 			<Effect type ='TechStatus' status ='obtainable'>DEPoliticianFederalMXPuebla</Effect>
 			<Effect type ='TechStatus' status ='obtainable'>DEPoliticianFederalMXOaxaca</Effect>
-
+		
+			<!-- LL-RENAME-START -->
+			<Effect type='SetName' proto='deGeneral' culture='none' newName='490312'></Effect>
+			<!-- LL-RENAME-END -->
 		</Effects>
 	</Tech>	 
 	<Tech name ='RvltModAddMayaCardsToDeck' type ='Normal'>
@@ -9023,7 +9112,10 @@
 			<Effect type ='TechStatus' status ='obtainable'>DEPoliticianFederalMXVeracruz</Effect>
 			<Effect type ='TechStatus' status ='obtainable'>DEPoliticianFederalMXPuebla</Effect>
 			<Effect type ='TechStatus' status ='obtainable'>DEPoliticianFederalMXOaxaca</Effect>
-
+		
+			<!-- LL-RENAME-START -->
+			<Effect type='SetName' proto='deGeneral' culture='none' newName='490309'></Effect>
+			<!-- LL-RENAME-END -->
 		</Effects>
 	</Tech>	 
 	<Tech name ='RvltModAddCaliforniaCardsToDeck' type ='Normal'>
@@ -9485,7 +9577,10 @@
 			<Effect type ='TechStatus' status ='obtainable'>DEPoliticianFederalMXVeracruz</Effect>
 			<Effect type ='TechStatus' status ='obtainable'>DEPoliticianFederalMXPuebla</Effect>
 			<Effect type ='TechStatus' status ='obtainable'>DEPoliticianFederalMXOaxaca</Effect>
-
+		
+			<!-- LL-RENAME-START -->
+			<Effect type='SetName' proto='deGeneral' culture='none' newName='490308'></Effect>
+			<!-- LL-RENAME-END -->
 		</Effects>
 	</Tech>	 
 	<Tech name ='RvltModAddTexasCardsToDeck' type ='Normal'>
@@ -11017,4 +11112,227 @@
 				<Target type ='Player'></Target></Effect>
 		</Effects>
 	</Tech>
+
+	<!-- LL-STANDARD-RENAMES-START -->
+	<Tech name='LLRenameExplorerBritish' type='Normal'>
+		<Status>UNOBTAINABLE</Status>
+		<Flag>Shadow</Flag>
+		<Prereqs>
+			<TechStatus status='Active'>Age0British</TechStatus>
+		</Prereqs>
+		<Effects>
+			<Effect type='SetName' proto='Explorer' culture='none' newName='490350'></Effect>
+		</Effects>
+	</Tech>
+	<Tech name='LLRenameExplorerFrench' type='Normal'>
+		<Status>UNOBTAINABLE</Status>
+		<Flag>Shadow</Flag>
+		<Prereqs>
+			<TechStatus status='Active'>Age0French</TechStatus>
+		</Prereqs>
+		<Effects>
+			<Effect type='SetName' proto='Explorer' culture='none' newName='490351'></Effect>
+		</Effects>
+	</Tech>
+	<Tech name='LLRenameExplorerDutch' type='Normal'>
+		<Status>UNOBTAINABLE</Status>
+		<Flag>Shadow</Flag>
+		<Prereqs>
+			<TechStatus status='Active'>Age0Dutch</TechStatus>
+		</Prereqs>
+		<Effects>
+			<Effect type='SetName' proto='Explorer' culture='none' newName='490352'></Effect>
+		</Effects>
+	</Tech>
+	<Tech name='LLRenameExplorerGerman' type='Normal'>
+		<Status>UNOBTAINABLE</Status>
+		<Flag>Shadow</Flag>
+		<Prereqs>
+			<TechStatus status='Active'>Age0German</TechStatus>
+		</Prereqs>
+		<Effects>
+			<Effect type='SetName' proto='Explorer' culture='none' newName='490353'></Effect>
+		</Effects>
+	</Tech>
+	<Tech name='LLRenameExplorerOttoman' type='Normal'>
+		<Status>UNOBTAINABLE</Status>
+		<Flag>Shadow</Flag>
+		<Prereqs>
+			<TechStatus status='Active'>Age0Ottoman</TechStatus>
+		</Prereqs>
+		<Effects>
+			<Effect type='SetName' proto='Explorer' culture='none' newName='490354'></Effect>
+		</Effects>
+	</Tech>
+	<Tech name='LLRenameExplorerPortuguese' type='Normal'>
+		<Status>UNOBTAINABLE</Status>
+		<Flag>Shadow</Flag>
+		<Prereqs>
+			<TechStatus status='Active'>Age0Portuguese</TechStatus>
+		</Prereqs>
+		<Effects>
+			<Effect type='SetName' proto='Explorer' culture='none' newName='490355'></Effect>
+		</Effects>
+	</Tech>
+	<Tech name='LLRenameExplorerRussian' type='Normal'>
+		<Status>UNOBTAINABLE</Status>
+		<Flag>Shadow</Flag>
+		<Prereqs>
+			<TechStatus status='Active'>Age0Russian</TechStatus>
+		</Prereqs>
+		<Effects>
+			<Effect type='SetName' proto='Explorer' culture='none' newName='490356'></Effect>
+		</Effects>
+	</Tech>
+	<Tech name='LLRenameExplorerSpanish' type='Normal'>
+		<Status>UNOBTAINABLE</Status>
+		<Flag>Shadow</Flag>
+		<Prereqs>
+			<TechStatus status='Active'>Age0Spanish</TechStatus>
+		</Prereqs>
+		<Effects>
+			<Effect type='SetName' proto='Explorer' culture='none' newName='490357'></Effect>
+		</Effects>
+	</Tech>
+	<Tech name='LLRenameExplorerSwedish' type='Normal'>
+		<Status>UNOBTAINABLE</Status>
+		<Flag>Shadow</Flag>
+		<Prereqs>
+			<TechStatus status='Active'>DEAge0Swedish</TechStatus>
+		</Prereqs>
+		<Effects>
+			<Effect type='SetName' proto='Explorer' culture='none' newName='490358'></Effect>
+		</Effects>
+	</Tech>
+	<Tech name='LLRenameExplorerEthiopian' type='Normal'>
+		<Status>UNOBTAINABLE</Status>
+		<Flag>Shadow</Flag>
+		<Prereqs>
+			<TechStatus status='Active'>DEAge0Ethiopian</TechStatus>
+		</Prereqs>
+		<Effects>
+			<Effect type='SetName' proto='dePrince' culture='none' newName='490359'></Effect>
+		</Effects>
+	</Tech>
+	<Tech name='LLRenameExplorerHausa' type='Normal'>
+		<Status>UNOBTAINABLE</Status>
+		<Flag>Shadow</Flag>
+		<Prereqs>
+			<TechStatus status='Active'>DEAge0Hausa</TechStatus>
+		</Prereqs>
+		<Effects>
+			<Effect type='SetName' proto='deEmir' culture='none' newName='490360'></Effect>
+		</Effects>
+	</Tech>
+	<Tech name='LLRenameExplorerItalian' type='Normal'>
+		<Status>UNOBTAINABLE</Status>
+		<Flag>Shadow</Flag>
+		<Prereqs>
+			<TechStatus status='Active'>DEAge0Italian</TechStatus>
+		</Prereqs>
+		<Effects>
+			<Effect type='SetName' proto='Explorer' culture='none' newName='490361'></Effect>
+		</Effects>
+	</Tech>
+	<Tech name='LLRenameExplorerMaltese' type='Normal'>
+		<Status>UNOBTAINABLE</Status>
+		<Flag>Shadow</Flag>
+		<Prereqs>
+			<TechStatus status='Active'>DEAge0Maltese</TechStatus>
+		</Prereqs>
+		<Effects>
+			<Effect type='SetName' proto='deGrandMaster' culture='none' newName='490362'></Effect>
+		</Effects>
+	</Tech>
+	<Tech name='LLRenameExplorerMexicanStd' type='Normal'>
+		<Status>UNOBTAINABLE</Status>
+		<Flag>Shadow</Flag>
+		<Prereqs>
+			<TechStatus status='Active'>DEAge0Mexican</TechStatus>
+		</Prereqs>
+		<Effects>
+			<Effect type='SetName' proto='deGeneral' culture='none' newName='490363'></Effect>
+		</Effects>
+	</Tech>
+	<Tech name='LLRenameExplorerAmericanStd' type='Normal'>
+		<Status>UNOBTAINABLE</Status>
+		<Flag>Shadow</Flag>
+		<Prereqs>
+			<TechStatus status='Active'>DEAge0American</TechStatus>
+		</Prereqs>
+		<Effects>
+			<Effect type='SetName' proto='deGeneral' culture='none' newName='490364'></Effect>
+		</Effects>
+	</Tech>
+	<Tech name='LLRenameExplorerInca' type='Normal'>
+		<Status>UNOBTAINABLE</Status>
+		<Flag>Shadow</Flag>
+		<Prereqs>
+			<TechStatus status='Active'>DEAge0Inca</TechStatus>
+		</Prereqs>
+		<Effects>
+			<Effect type='SetName' proto='deIncaWarChief' culture='none' newName='490365'></Effect>
+		</Effects>
+	</Tech>
+	<Tech name='LLRenameExplorerJapanese' type='Normal'>
+		<Status>UNOBTAINABLE</Status>
+		<Flag>Shadow</Flag>
+		<Prereqs>
+			<TechStatus status='Active'>YPAge0Japanese</TechStatus>
+		</Prereqs>
+		<Effects>
+			<Effect type='SetName' proto='ypMonkJapanese' culture='none' newName='490366'></Effect>
+		</Effects>
+	</Tech>
+	<Tech name='LLRenameExplorerChinese' type='Normal'>
+		<Status>UNOBTAINABLE</Status>
+		<Flag>Shadow</Flag>
+		<Prereqs>
+			<TechStatus status='Active'>YPAge0Chinese</TechStatus>
+		</Prereqs>
+		<Effects>
+			<Effect type='SetName' proto='ypMonkChinese' culture='none' newName='490367'></Effect>
+		</Effects>
+	</Tech>
+	<Tech name='LLRenameExplorerIndian' type='Normal'>
+		<Status>UNOBTAINABLE</Status>
+		<Flag>Shadow</Flag>
+		<Prereqs>
+			<TechStatus status='Active'>YPAge0Indians</TechStatus>
+		</Prereqs>
+		<Effects>
+			<Effect type='SetName' proto='ypMonkIndian' culture='none' newName='490368'></Effect>
+		</Effects>
+	</Tech>
+	<Tech name='LLRenameExplorerAztec' type='Normal'>
+		<Status>UNOBTAINABLE</Status>
+		<Flag>Shadow</Flag>
+		<Prereqs>
+			<TechStatus status='Active'>Age0XPAztec</TechStatus>
+		</Prereqs>
+		<Effects>
+			<Effect type='SetName' proto='xpAztecWarchief' culture='none' newName='490369'></Effect>
+		</Effects>
+	</Tech>
+	<Tech name='LLRenameExplorerLakota' type='Normal'>
+		<Status>UNOBTAINABLE</Status>
+		<Flag>Shadow</Flag>
+		<Prereqs>
+			<TechStatus status='Active'>Age0XPSioux</TechStatus>
+		</Prereqs>
+		<Effects>
+			<Effect type='SetName' proto='xpLakotaWarchief' culture='none' newName='490370'></Effect>
+		</Effects>
+	</Tech>
+	<Tech name='LLRenameExplorerHaud' type='Normal'>
+		<Status>UNOBTAINABLE</Status>
+		<Flag>Shadow</Flag>
+		<Prereqs>
+			<TechStatus status='Active'>Age0XPIroquois</TechStatus>
+		</Prereqs>
+		<Effects>
+			<Effect type='SetName' proto='xpIroquoisWarchief' culture='none' newName='490371'></Effect>
+		</Effects>
+	</Tech>
+	<!-- LL-STANDARD-RENAMES-END -->
 </techtreemods>
