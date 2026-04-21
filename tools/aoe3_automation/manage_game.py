@@ -164,10 +164,13 @@ def cmd_open(args: argparse.Namespace) -> int:
         print("ERROR: steam binary not on PATH", file=sys.stderr)
         return 2
 
-    print(f"Launching via steam steam://rungameid/{APP_ID}")
-    # detach so we don't hold the steam client in our process tree
+    # `steam -applaunch <id>` asks the already-running Steam client to launch
+    # the game. The `steam steam://rungameid/<id>` URI form is sometimes a
+    # no-op after a recent game exit (observed on Bazzite/KDE), so prefer
+    # -applaunch.
+    print(f"Launching via steam -applaunch {APP_ID}")
     subprocess.Popen(
-        ["steam", f"steam://rungameid/{APP_ID}"],
+        ["steam", "-applaunch", str(APP_ID)],
         start_new_session=True,
         stdout=subprocess.DEVNULL,
         stderr=subprocess.DEVNULL,
