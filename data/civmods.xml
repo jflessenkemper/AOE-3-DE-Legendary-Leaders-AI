@@ -358,14 +358,14 @@
 		</EmpireWarsAgeUpRates>
 		<RandomStartingUnits>0</RandomStartingUnits>
 		<HomeCityFilename>rvltmodhomecityrevolutionaryfrance.xml</HomeCityFilename>
-		<HomeCityFlagTexture>objects\flags\french_revolution_ne</HomeCityFlagTexture>
+		<HomeCityFlagTexture>objects\flags\revolutionary_france</HomeCityFlagTexture>
 		<HomeCityFlagButtonSet>frenchFlagBtn</HomeCityFlagButtonSet>
 		<HomeCityFlagButtonSetLarge>frenchFlagBtnLarge</HomeCityFlagButtonSetLarge>
-		<PostgameFlagTexture>ui\ingame\ingame_ui_postgame_flag_french_revolution_ne</PostgameFlagTexture>
-		<PostgameFlagIconWPF>resources\images\icons\flags\Flag_French_Revolution_NE.png</PostgameFlagIconWPF>
-		<HomeCityFlagIconWPF>resources\images\icons\flags\Flag_French_Revolution_NE.png</HomeCityFlagIconWPF>
+		<PostgameFlagTexture>ui\ingame\ingame_ui_postgame_flag_revolutionary_france</PostgameFlagTexture>
+		<PostgameFlagIconWPF>resources\images\icons\flags\Flag_Revolutionary_France.png</PostgameFlagIconWPF>
+		<HomeCityFlagIconWPF>resources\images\icons\flags\Flag_Revolutionary_France.png</HomeCityFlagIconWPF>
 		<HomeCityPreviewWPF>resources/images/icons/singleplayer/cpai_avatar_revolutionary_france.png</HomeCityPreviewWPF>
-		<HomeCityFlagButtonWPF>resources\images\icons\flags\flag_hc_french_revolution_ne.png</HomeCityFlagButtonWPF>
+		<HomeCityFlagButtonWPF>resources\images\icons\flags\flag_hc_revolutionary_france.png</HomeCityFlagButtonWPF>
 		<MatchmakingTextures>
 			<BannerTexture>ui\eso\civ_flags_quick_launch</BannerTexture>
 			<BannerTextureCoords>0 0.125 0.78125 0.25</BannerTextureCoords>
