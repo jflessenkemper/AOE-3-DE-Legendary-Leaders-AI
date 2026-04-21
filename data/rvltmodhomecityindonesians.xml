@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <homecity>
   <civ>RvltModIndonesians</civ>
   <name>$$80825$$</name>
@@ -1369,28 +1370,35 @@
   </cards>
   <decks>
     <deck>
-      <name>$$41682$$</name>
+      <name>Legendary Leaders</name>
       <default>
       </default>
       <cards>
-        <card>HCREVShipColonialMilitia</card>
-        <card>HCREVShipIronclads</card>
+        <card>DEHCREVKratonGuards</card>
+        <card>DEHCREVAcehExports</card>
+        <card>DEHCREVLantakas</card>
         <card>DEHCREVShipJavaSpearman</card>
         <card>DEHCREVShipCetbang</card>
-        <card>HCREVShipFortWagon</card>
         <card>DEHCREVShipWokouJunk</card>
-        <card>RvltModHCShipWarElephant</card>
-        <card>DEHCREVAcehExports</card>
-        <card>HCAdvancedDock</card>
-        <card>HCNavalCombat</card>
-        <card>HCNativeWarriors</card>
-        <card>HCFencingSchool</card>
-        <card>DEHCREVKratonGuards</card>
-        <card>DEHCREVLantakas</card>
-        <card>DEHCBelandaHitam</card>
-        <card>DEHCREVOttomanExpArmy</card>
-        <card>DEHCImmigrantsChinese</card>
+        <card>HCSpiceTradeTeam</card>
+        <card>DEHCFeitorias</card>
+        <card>DEHCMercsIrishBrigadiers</card>
+        <card>DEHCExtensiveFortificationsEuropean</card>
+        <card>DEHCTheaters</card>
         <card>HCAdvancedArsenal</card>
+        <card>HCFrontierDefenses</card>
+        <card>DEHCMercenaryArmyDutch</card>
+        <card>DEHCMercsBosniaks</card>
+        <card>DEHCBlueGuards</card>
+        <card>DEHCHabsburgAllies1</card>
+        <card>DEHCREVOttomanExpArmy</card>
+        <card>DEHCMercsMountedRiflemen</card>
+        <card>DEHCDutchBattleshipCard</card>
+        <card>DEHCShipBattleshipRepeat</card>
+        <card>DEHCHandMortar</card>
+        <card>DEHCShipHussars2</card>
+        <card>DEHCBelandaHitam</card>
+        <card>DEHCWettinAllies2</card>
       </cards>
     </deck>
   </decks>

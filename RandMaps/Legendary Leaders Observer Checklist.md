@@ -69,10 +69,9 @@ Mark it as a practical fail if any of these dominate the run:
 
 Use the scenario instead of this random map when you need exact interaction checks for:
 
-1. surrender thresholds
-2. elite-support blocked surrender
-3. prisoner routing and arrival
-4. explorer reclaim
-5. forced explorer death and elite retreat timing
+1. AI non-elite rout thresholds
+2. elite-support blocked rout
+3. AI rout fallback toward the return point
+4. forced explorer death and elite retreat timing
 
 That scenario flow is described in `Scenario/TEST_SCENARIO_SETUP.md`.

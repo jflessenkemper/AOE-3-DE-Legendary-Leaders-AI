@@ -230,8 +230,8 @@ void main(void)
 
     rmSetStatusText("", 1.00);
 }// Legendary Leaders Test
-// Flat 2v2-oriented test arena for validating surrender, prison routing,
-// elite support, explorer reclaim, and AI attack shape.
+// Flat 2v2-oriented test arena for validating AI non-elite rout,
+// elite support blocking rout, and AI attack shape.
 
 include "mercenaries.xs";
 include "ypAsianInclude.xs";

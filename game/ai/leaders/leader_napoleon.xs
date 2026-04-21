@@ -1,7 +1,27 @@
 //==============================================================================
 /* leader_napoleon.xs
 
-   Napoleon Bonaparte - Napoleonic France master personality.
+   Napoleon Bonaparte - Emperor of the French, Grande Armée commander,
+   master of operational art personality.
+
+   Historical doctrine:
+     - Grande Armée corps system (1805 onward): Napoleon fought with
+       self-contained corps that could fix the enemy until the rest of the
+       army concentrated. Mapped to a hyper-aggressive Forward Operational
+       Line build with strong forward base posture from Colonial.
+     - Grand Battery doctrine (Friedland 1807, Wagram 1809, Borodino 1812):
+       Senarmont and Drouot pioneered massed artillery as the decisive
+       arm. Mapped to the highest artillery weight of any revolution and
+       a deep Heavy Cannon park from Fortress on.
+     - Imperial Guard infantry (Garde Impériale): line-of-the-line elite
+       infantry held in reserve until decisive moment. Mapped to a
+       Musketeer / Grenadier mass commitment from Fortress on.
+     - Cuirassier shock cavalry (Murat, Kellermann, Nansouty): heavy
+       cavalry as the breakthrough hammer. Mapped to a real Cuirassier /
+       Hussar weight that supports rather than leads the artillery.
+     - Continental System (Berlin Decree 1806): trade with Britain
+       refused. Mapped to a hard negative trade bias and zero native
+       treaty leaning. The Republic conscripts and the Emperor commands.
 */
 //==============================================================================
 
@@ -12,28 +32,87 @@ void initLeaderNapoleon(void)
    llVerboseEcho("Legendary Leaders: activating Napoleon Bonaparte personality.");
 
    llSetAggressivePersonality();
-   btRushBoom = 0.7;
-   btOffenseDefense = 0.9;
-   btBiasTrade = -0.2;
-   btBiasNative = -0.4;
-   llSetMilitaryFocus(0.2, 0.4, 0.6);
-   llSetLeaderTacticalDoctrine(0.56, 0.68, 1, 0.0);
+   btRushBoom = 0.1;              // Light boom; the campaign opens fast.
+   btOffenseDefense = 0.85;
+   btBiasTrade = -0.4;            // Continental System.
+   btBiasNative = -0.4;           // No foreign auxiliaries.
+   llSetMilitaryFocus(0.6, 0.4, 0.85);  // Artillery dominant.
 
-   cvMaxTowers = 4;
+   // LL-BUILD-STYLE-BEGIN
+   llUseForwardOperationalLineStyle(2);
+   gLLMilitaryDistanceMultiplier = 0.85;
+   llSetBuildStrongpointProfile(2, 2, 3, true);
+   // LL-BUILD-STYLE-END
+   llSetLeaderTacticalDoctrine(0.6, 0.4, 1, 3.0);
+
    cvOkToBuildForts = true;
+   cvMaxTowers = 4;
+   cvMaxArmyPop = 125;
    cvDefenseReflexRadiusActive = 80.0;
    cvDefenseReflexSearchRadius = 80.0;
    cvDefenseReflexRadiusPassive = 28.0;
-   llSetPrisonerDoctrine(cLLPrisonerDoctrineForcedLabor, 0.35, 72.0);
-   llEnablePrisonerSystem();
 
    gNapoleonRulesEnabled = true;
    llLogLeaderState("Napoleon initialized");
 }
 
+//------------------------------------------------------------------------------
+// Discovery: Convention assembly. Settler push under Continental System
+// trade refusal; the Republic conscripts before it fights.
+//------------------------------------------------------------------------------
+rule napoleonConventionAssembly
+inactive
+minInterval 60
+{
+   llLogRuleTick("napoleonConventionAssembly");
+   if (gNapoleonRulesEnabled == false)
+   {
+      xsDisableSelf();
+      return;
+   }
+
+   if (kbGetAge() <= cAge1)
+   {
+      btRushBoom = -0.1;
+      btBiasTrade = -0.4;
+      cvMinNumVills = 16;
+   }
+}
+
+//------------------------------------------------------------------------------
+// Colonial: Italian campaign tempo. Musketeer mass with light Hussar
+// screen, Field Gun trickle. Forward base immediately.
+//------------------------------------------------------------------------------
+rule napoleonItalianCampaign
+inactive
+minInterval 50
+{
+   llLogRuleTick("napoleonItalianCampaign");
+   if (gNapoleonRulesEnabled == false)
+   {
+      xsDisableSelf();
+      return;
+   }
+
+   if (kbGetAge() == cAge2)
+   {
+      btRushBoom = 0.1;
+      btOffenseDefense = 0.85;
+      btBiasInf = 0.85;
+      btBiasCav = 0.45;
+      btBiasArt = 0.5;
+      btBiasTrade = -0.6;          // Continental System hardens.
+      llEnableForwardBaseStyle();
+   }
+}
+
+//------------------------------------------------------------------------------
+// Fortress: Grand Battery. Massed Field Gun park, Musketeer / Grenadier
+// mass, Cuirassier shock reserve. The Friedland signature.
+//------------------------------------------------------------------------------
 rule napoleonGrandBattery
 inactive
-minInterval 45
+minInterval 55
 {
    llLogRuleTick("napoleonGrandBattery");
    if (gNapoleonRulesEnabled == false)
@@ -42,31 +121,46 @@ minInterval 45
       return;
    }
 
-   if (kbGetAge() >= cAge3)
+   if (kbGetAge() == cAge3)
    {
-      btBiasArt = 0.8;
-      btBiasCav = 0.3;
-      btBiasInf = 0.2;
+      btOffenseDefense = 0.9;
+      btBiasInf = 0.9;
+      btBiasCav = 0.6;             // Cuirassier reserve.
+      btBiasArt = 0.9;             // Grand Battery as decisive arm.
+      cvMaxArmyPop = 140;
    }
 }
 
-rule napoleonContinentalSystem
+//------------------------------------------------------------------------------
+// Industrial: Wagram doctrine. Heavy Cannon park, Imperial Guard mass,
+// Cuirassier wing. The corps system at full operational tempo.
+//------------------------------------------------------------------------------
+rule napoleonWagramDoctrine
 inactive
-minInterval 60
+minInterval 70
 {
-   llLogRuleTick("napoleonContinentalSystem");
+   llLogRuleTick("napoleonWagramDoctrine");
    if (gNapoleonRulesEnabled == false)
    {
       xsDisableSelf();
       return;
    }
 
-   if ((kbGetAge() >= cAge2) && (btBiasTrade > -0.6))
+   if (kbGetAge() == cAge4)
    {
-      btBiasTrade = -0.6;
+      btOffenseDefense = 0.95;
+      btBiasInf = 1.0;
+      btBiasCav = 0.7;
+      btBiasArt = 0.95;
+      cvMaxArmyPop = 160;
+      llEnableForwardBaseStyle();
    }
 }
 
+//------------------------------------------------------------------------------
+// Imperial: Empire at war - maximum Musketeer / Grenadier / Heavy Cannon
+// mass with Cuirassier wing; the Grande Armée at full pop.
+//------------------------------------------------------------------------------
 rule napoleonImperialTempo
 inactive
 minInterval 90
@@ -78,10 +172,13 @@ minInterval 90
       return;
    }
 
-   if (kbGetAge() >= cAge4)
+   if (kbGetAge() >= cAge5)
    {
-      cvMaxArmyPop = 140;
-      btRushBoom = 0.4;
+      btOffenseDefense = 1.0;
+      btBiasInf = 1.0;
+      btBiasCav = 0.75;
+      btBiasArt = 1.0;
+      cvMaxArmyPop = 180;
       llEnableForwardBaseStyle();
    }
 }
@@ -93,7 +190,9 @@ void enableLeaderNapoleonRules(void)
       return;
    }
 
+   xsEnableRule("napoleonConventionAssembly");
+   xsEnableRule("napoleonItalianCampaign");
    xsEnableRule("napoleonGrandBattery");
-   xsEnableRule("napoleonContinentalSystem");
+   xsEnableRule("napoleonWagramDoctrine");
    xsEnableRule("napoleonImperialTempo");
 }

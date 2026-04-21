@@ -51,64 +51,6 @@ bool llHasStartedBaseWalling(int mainBaseID = -1)
    return (false);
 }
 
-bool llHasOperationalPrisonStructure(void)
-{
-   if ((gLLPrisonSystemEnabled == false) || (gLLPrisonStructureType < 0) || (gLLPrisonLocation == cInvalidVector))
-   {
-      return (false);
-   }
-
-   return (getUnitCountByLocation(gLLPrisonStructureType, cMyID, cUnitStateABQ, gLLPrisonLocation, 30.0) > 0);
-}
-
-bool llHasWalledPrisonCompound(void)
-{
-   if ((gLLPrisonSystemEnabled == false) || (gLLPrisonLocation == cInvalidVector))
-   {
-      return (false);
-   }
-
-   if (getUnitCountByLocation(cUnitTypeAbstractWall, cMyID, cUnitStateABQ, gLLPrisonLocation, 20.0) < 6)
-   {
-      return (false);
-   }
-
-   if ((gLLPrisonWallPlanID >= 0) && (aiPlanGetActive(gLLPrisonWallPlanID) == true))
-   {
-      return (false);
-   }
-
-   return (true);
-}
-
-bool llEnsurePrisonCompoundBeforeAttack(void)
-{
-   if (gLLPrisonSystemEnabled == false)
-   {
-      return (true);
-   }
-
-   if (gLLPrisonLocation == cInvalidVector)
-   {
-      llLogDecision("PRISON", "holding attacks until prison anchor is established");
-      return (false);
-   }
-
-   if (llHasOperationalPrisonStructure() == false)
-   {
-      llLogDecision("PRISON", "holding attacks until prison structure is built");
-      return (false);
-   }
-
-   if (llHasWalledPrisonCompound() == false)
-   {
-      llLogDecision("PRISON", "holding attacks until prison walls are built");
-      return (false);
-   }
-
-   return (true);
-}
-
 bool llEnsureBaseWallsBeforeMajorAttack(int mainBaseID = -1)
 {
    if (cvOkToBuildWalls == false)
@@ -1681,12 +1623,6 @@ minInterval 15
       if (llIsCommanderAvailableForMajorAttack() == false)
       {
          debugMilitary("Holding major land attack until commander returns");
-         return;
-      }
-
-      if (llEnsurePrisonCompoundBeforeAttack() == false)
-      {
-         debugMilitary("Holding major land attack until prison compound is ready");
          return;
       }
 

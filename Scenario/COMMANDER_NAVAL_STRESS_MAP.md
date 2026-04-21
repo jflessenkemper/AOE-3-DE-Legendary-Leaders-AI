@@ -44,7 +44,7 @@ Primary checks:
 - commanderless major attacks do not continue
 - elite retreat still triggers under crowded fights
 - explorer ransom or recovery still queues correctly
-- surrender tracking does not collapse under multi-unit engagements
+- AI rout tracking does not collapse under multi-unit engagements
 
 ### North Water Economy Lane
 
@@ -101,7 +101,7 @@ If built as a scenario, add these fast actions:
 - reset fleets
 - kill AI explorer
 - spawn replacement fleet wave
-- teleport owner explorer into reclaim area
+- teleport owner explorer to a recovery point
 - force a dock rebuild case
 
 If built as an RMS, keep the geometry deterministic and use it as a repeatable skirmish stress surface rather than a fully scripted lab.
@@ -121,10 +121,9 @@ Do not use this map as a replacement for the deterministic Mechanics Lab Scenari
 
 Keep the mechanics lab for:
 
-- exact surrender threshold checks
-- elite-support and explorer-support negative cases
-- prison routing
-- reclaim
+- exact AI non-elite rout threshold checks
+- elite-support negative cases
+- AI rout fallback verification
 - clean elite retreat verification
 
 Use this combined map for system interaction, load, and theater competition.

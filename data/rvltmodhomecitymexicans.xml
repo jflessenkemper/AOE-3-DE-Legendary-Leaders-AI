@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <homecity>
   <civ>RvltModMexicans</civ>
   <name>$$80847$$</name>
@@ -1355,29 +1356,35 @@
   </cards>
   <decks>
     <deck>
-      <name>$$41682$$</name>
+      <name>Legendary Leaders</name>
       <default>
       </default>
       <cards>
-        <card>DEHCREVCharros</card>
-        <card>DEHCREVShipVaqueros</card>
-        <card>DEHCREVShipBandidos</card>
-        <card>HCREVShipGatlingGuns</card>
-        <card>HCREVShipFortWagon</card>
-        <card>DEHCREVCattleDeliveryMexico</card>
-        <card>DEHCREVNativeAlliesMexico</card>
-        <card>DEHCFedMXRanching</card>
         <card>DEHCCharreada</card>
         <card>DEHCBarbacoa</card>
-        <card>DEHCREVMXCaballeros</card>
-        <card>DEHCNewSpainViceroyalty</card>
-        <card>DEHCFedMXThreeGuarantees</card>
-        <card>DEHCREVMXShipHaciendaWagonRepeat</card>
-        <card>DEHCFedMXZacatecasSilver</card>
-        <card>DEHCREVOutlawCombat</card>
-        <card>DEHCChipotles</card>
         <card>DEHCIturbidePalace</card>
-        <card>DEHCFedMXPortVeracruz</card>
+        <card>DEHCMercsIrishBrigadiers</card>
+        <card>DEHCChipotles</card>
+        <card>DEHCExtensiveFortificationsEuropean</card>
+        <card>DEHCFedMXRanching</card>
+        <card>DEHCShipChinaco1</card>
+        <card>DEHCREVCattleDeliveryMexico</card>
+        <card>DEHCREVMXShipHaciendaWagonRepeat</card>
+        <card>DEHCREVOutlawCombat</card>
+        <card>DEHCREVShipVaqueros</card>
+        <card>DEHCMercsArmoredPistoleers</card>
+        <card>DEHCHabsburgAllies1</card>
+        <card>DEHCREVCharros</card>
+        <card>DEHCREVNativeAlliesMexico</card>
+        <card>DEHCREVShipBandidos</card>
+        <card>DEHCShipBattleshipRepeat</card>
+        <card>HCXPIndustrialRevolution</card>
+        <card>DEHCHandMortar</card>
+        <card>DEHCLiberationMarch</card>
+        <card>DEHCNewSpainViceroyalty</card>
+        <card>DEHCShipChinaco2</card>
+        <card>DEHCShipChinaco3</card>
+        <card>DEHCShipFalconets1Team</card>
       </cards>
     </deck>
   </decks>

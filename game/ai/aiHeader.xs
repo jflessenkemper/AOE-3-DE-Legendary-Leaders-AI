@@ -175,40 +175,6 @@ extern float   cvDefenseReflexRadiusActive = 60.0;    // When the AI is in a def
 extern float   cvDefenseReflexRadiusPassive = 30.0;   // When the AI is in a defense reflex, but hiding in its main base to regain strength, this is the main base attack range.
 extern float   cvDefenseReflexSearchRadius = 60.0;    // How far out from a base to look before triggering a defense reflex. THIS MUST NOT BE GREATER THAN 'RadiusActive' ABOVE!
 
-// Legendary Leaders prisoner doctrine identifiers.
-extern int     cLLPrisonerDoctrineStrictImprisonment = 0;
-extern int     cLLPrisonerDoctrineForcedLabor = 1;
-extern int     cLLPrisonerDoctrineExecution = 2;
-extern int     cLLPrisonerDoctrineIntegration = 3;
-extern int     cLLPrisonerDoctrineExchange = 4;
-
-extern int     gLLPrisonerDoctrine = 0;
-extern int     gLLPrisonerProxyType = -1;
-extern int     gLLPrisonStructureType = -1;
-extern int     gLLPrisonBuildPlanID = -1;
-extern int     gLLPrisonWallPlanID = -1;
-extern int     gLLPrisonGuardPlanID = -1;
-extern int     gLLPrisonLastSeenTime = -1;
-extern int     gLLPrisonLastTauntTime = -60000;
-extern int     gLLPrisonLastAllyAlertTime = -60000;
-extern int     gLLPrisonLastRescueScanTime = -60000;
-extern int     gLLEnemyPrisonPlayerID = -1;
-extern bool    gLLPrisonSystemEnabled = false;
-extern bool    gLLAIRoutEnabled = false;
-extern float   gLLPrisonEscortFraction = 0.30;
-extern float   gLLPrisonDetectionRadius = 60.0;
-extern float   gLLPrisonBuildDistance = 22.0;
-extern int     gLLNavalPrisonBuildPlanID = -1;
-extern int     gLLNavalPrisonLastSeenTime = -1;
-extern vector  gLLPrisonLocation = cInvalidVector;
-extern vector  gLLEnemyPrisonLocation = cInvalidVector;
-extern vector  gLLNavalPrisonLocation = cInvalidVector;
-extern int     gLLSurrenderUnitIDs = -1;
-extern int     gLLSurrenderTimes = -1;
-extern int     gLLSurrenderStates = -1;
-extern int     gLLSurrenderCaptors = -1;
-extern int     gLLSurrenderOriginalOwners = -1;
-
 // Legendary Leaders build-style identifiers and placement knobs.
 extern int     cLLBuildStyleCompactFortifiedCore = 1;
 extern int     cLLBuildStyleDistributedEconomicNetwork = 2;
@@ -216,6 +182,14 @@ extern int     cLLBuildStyleForwardOperationalLine = 3;
 extern int     cLLBuildStyleMobileFrontierScatter = 4;
 extern int     cLLBuildStyleShrineTradeNodeSpread = 5;
 extern int     cLLBuildStyleCivicMilitiaCenter = 6;
+extern int     cLLBuildStyleSteppeCavalryWedge = 7;          // dispersed mobile; minimal walls; cavalry-led raiding bases.
+extern int     cLLBuildStyleNavalMercantileCompound = 8;     // coastal bank/dock cluster; eco-heavy; deep harbour.
+extern int     cLLBuildStyleSiegeTrainConcentration = 9;     // clustered military; heavy artillery park; forward grand battery.
+extern int     cLLBuildStyleJungleGuerrillaNetwork = 10;     // scattered war huts; ambush approaches; no perimeter wall.
+extern int     cLLBuildStyleHighlandCitadel = 11;            // multi-ring high-walled mountain fortress; defensive masterpiece.
+extern int     cLLBuildStyleCossackVoisko = 12;              // massed barracks + blockhouse net; forward host muster.
+extern int     cLLBuildStyleRepublicanLevee = 13;            // citizen-army compound; militia centers; civic spine.
+extern int     cLLBuildStyleAndeanTerraceFortress = 14;      // terraced highland fort; tight core; tower-heavy ring.
 
 extern int     gLLBuildStyle = 0;
 extern int     gLLWallLevel = 1;

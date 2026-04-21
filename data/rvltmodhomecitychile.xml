@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <homecity>
   <civ>RvltModChileans</civ>
   <name>$$80852$$</name>
@@ -1292,23 +1293,35 @@
   </cards>
   <decks>
     <deck>
-      <name>$$41682$$</name>
+      <name>Legendary Leaders</name>
       <default>
       </default>
       <cards>
-        <card>HCREVShipColonialMilitia</card>
-        <card>HCREVShipGatlingGuns</card>
-        <card>HCREVShipFortWagon</card>
-        <card>HCREVShipIronclads</card>
-        <card>HCAdvancedMarket</card>
-        <card>HCAdvancedMill</card>
-        <card>HCAdvancedDock</card>
+        <card>DEHCExtensiveFortificationsEuropean</card>
+        <card>HCStonemasons</card>
+        <card>HCExoticHardwoods</card>
         <card>DEHCREVCitizenshipChile</card>
         <card>DEHCREVFishingFleet</card>
-        <card>DEHCREVMilitaryParadeChile</card>
+        <card>DEHCMercsIrishBrigadiers</card>
+        <card>DEHCTheaters</card>
         <card>DEHCREVSalitrera</card>
+        <card>DEHCMercsArmoredPistoleers</card>
+        <card>HCUnlockFort</card>
+        <card>HCMercsHighlanders</card>
+        <card>DEHCHabsburgAllies1</card>
+        <card>DEHCHandMortar</card>
+        <card>DEHCREVMilitaryParadeChile</card>
+        <card>HCHeavyFortifications</card>
+        <card>HCMercsHighland</card>
+        <card>DEHCShipBattleshipRepeat</card>
+        <card>DEHCBourbonAllies1</card>
+        <card>HCXPIndustrialRevolution</card>
         <card>DEHCLiberationMarch</card>
+        <card>DEHCMarvelousYear</card>
+        <card>DEHCShipGatlings1</card>
         <card>DEHCMapucheAlliesRepeat1</card>
+        <card>DEHCShipCannons1Team</card>
+        <card>DEHCShipNuestrasSenoras</card>
       </cards>
     </deck>
   </decks>

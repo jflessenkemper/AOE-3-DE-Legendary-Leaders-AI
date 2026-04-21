@@ -69,7 +69,7 @@ class ValidateRuntimeLogsTests(unittest.TestCase):
         )
 
     def test_reports_missing_required_marker(self) -> None:
-        repo_root, log_path, spec_path = self.make_inputs("Legendary Leaders: [UNIT] human-surrender-move unit=11")
+        repo_root, log_path, spec_path = self.make_inputs("Legendary Leaders: [UNIT] ai-rout-move unit=11")
         issues = validate_runtime_log(repo_root=repo_root, log_path=log_path, spec_path=spec_path, suite_names=["runtime_happy_path"])
         self.assertIn("[runtime_happy_path] missing required log marker: bootstrap", issues)
 

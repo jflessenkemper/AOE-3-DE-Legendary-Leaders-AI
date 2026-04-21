@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <homecity>
   <civ>RvltModTexians</civ>
   <name>$$112827$$</name>
@@ -553,14 +554,6 @@
       <prereqtech>-1</prereqtech>
       <age>2</age>
     </card>
-    <!--<card>
-      <name>DEHCPresidialLancers</name>
-      <maxcount>1</maxcount>
-      <level>0</level>
-      <prereqtech>-1</prereqtech>
-      <bindtotech>DEHCPresidialLancers</bindtotech>
-      <age>3</age>
-    </card>-->
     <card>
       <name>DEHCCavalryCombatMexican</name>
       <maxcount>1</maxcount>
@@ -1397,31 +1390,35 @@
   </cards>
   <decks>
     <deck>
-      <name>$$71332$$Beginner</name>
+      <name>Legendary Leaders</name>
       <default>
       </default>
       <cards>
-        <card>HCREVShipGatlingGuns</card>
+        <card>DEHCREVMXTexasArmy</card>
+        <card>DEHCREVMXTexasLancers</card>
+        <card>DEHCREVMXTexasNavy</card>
         <card>DEHCREVMXEmpresarioContracts</card>
-        <card>DEHCFedMXFortifiedHaciendas</card>
-        <card>DEHCREVMXRobberBarons2</card>
-        <card>DEHCREVMXShipHaciendaWagonRepeat1</card>
-        <card>DEHCREVMXShipHeavyCannon</card>
-        <card>DEHCREVMXShipCulverins1</card>
-        <card>DEHCREVMXShipSharpshooters</card>
-        <card>DEHCShipRegulars4</card>
-        <card>DEHCREVMXHeavyFortifications</card>
         <card>DEHCREVMXGonzalesGuns</card>
+        <card>DEHCREVMXBurnetLand</card>
+        <card>DEHCREVMXShipSharpshooters</card>
+        <card>DEHCREVMXHeavyFortifications</card>
+        <card>DEHCShipHaciendaWagon1</card>
+        <card>HCFrontierDefenses</card>
+        <card>DEHCFedMXFortifiedHaciendas</card>
+        <card>DEHCShipCapturedGalleons1</card>
+        <card>DEHCChipotles</card>
+        <card>DEHCCopperCanyon</card>
+        <card>DEHCREVMXFrontierDefensesRepeat</card>
+        <card>HCFrontierDefenses2</card>
+        <card>RvltModHCREVMXTexasStatehood</card>
+        <card>HCUnlockFort</card>
+        <card>DEHCShipCapturedGalleons2</card>
         <card>DEHCREVMXShipFortWagon2</card>
         <card>DEHCREVMXIroncladsSteamers1</card>
+        <card>DEHCREVMXRobberBarons2</card>
+        <card>DEHCREVMXShipHaciendaWagonRepeat1</card>
         <card>DEHCShipIroncladsRepeat1</card>
-        <card>DEHCLiberationMarch</card>
-        <card>DEHCREVMXTexasArmy</card>
-        <card>RvltModHCREVMXTexasStatehood</card>
         <card>RvltModHCREVMXTexasMarines</card>
-        <card>DEHCREVMXTexasNavy</card>
-        <card>DEHCREVMXBurnetLand</card>
-        <card>DEHCREVMXTexasLancers</card>
       </cards>
     </deck>
     <deck>

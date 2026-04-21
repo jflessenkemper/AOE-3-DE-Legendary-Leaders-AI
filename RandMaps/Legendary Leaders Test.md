@@ -19,11 +19,10 @@ It now also serves as the base surface for the combined commander-and-naval stre
 
 ## What To Test Here
 
-- ordinary-unit surrender at low health
-- elite units refusing to auto-surrender
-- elite support preventing nearby ordinary units from surrendering
-- prisoners routing back toward the enemy main Town Center / shipment-drop area
-- explorer reclaim of imprisoned units
+- AI non-elite units routing at low health
+- AI elite units refusing to auto-rout
+- elite support preventing nearby AI non-elite units from routing
+- routed AI units falling back to their own return point and disengaging
 - AI attack order with regulars in front, elites behind, and explorer behind both
 - elite disengage after the AI explorer dies
 - nation style differences in a more natural 2v2 flow instead of a pure duel
@@ -84,7 +83,7 @@ If you want a compact beside-the-game version, use `RandMaps/Legendary Leaders O
 3. Team 0 is placed on the west side and team 1 is placed on the east side, so slot order inside a team no longer matters.
 4. Pick civs you want to compare for style, because the open layout makes army composition and attack rhythm easy to read.
 5. Use the north and south lanes for flank pressure checks.
-6. Use the center lane for elite-protection, surrender, and larger teamfight observations.
+6. Use the center lane for elite-protection, AI-rout, and larger teamfight observations.
 7. Use the north and south water lanes for dock placement, fishing, patrol paths, and naval response checks.
 8. Use the south land lane and south water lane together when you want to see whether commander logic degrades under simultaneous naval demands.
 
@@ -119,9 +118,9 @@ If the map does not appear in the Skirmish map list, the usual cause is that the
 
 - This is a controlled skirmish map, not a hand-authored scenario.
 - The fixed 2v2 layout is tuned around exactly two teams of two; other player counts or uneven teams fall back to simpler placement.
-- It does not pre-damage units or pre-place custom prisoner states.
+- It does not pre-damage units or pre-place custom rout states.
 - The undocumented trigger/debug surface is still too thin to claim a fully automated scenario-style test harness.
 - The prior trigger-driven observer slice was removed from the live build because it caused map-load failures.
 - The observer console is currently disabled until the RMS trigger plumbing is rebuilt in a stock-safe form.
 - The naval lanes are deliberately simple test strips, meant to expose docking, fishing, and fleet pathing behavior rather than simulate a full water map.
-- This map is the practical combined-stress surface, but it is still not a full replacement for the deterministic scenario when you need exact surrender-threshold or reclaim-path assertions.
+- This map is the practical combined-stress surface, but it is still not a full replacement for the deterministic scenario when you need exact AI-rout-threshold or fallback-path assertions.

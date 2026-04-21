@@ -1,0 +1,57 @@
+name: Deploy reference site to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "LEGENDARY_LEADERS_TREE.html"
+      - "resources/images/icons/**"
+      - ".github/workflows/pages-deploy.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Stage site
+        run: |
+          mkdir -p _site/resources/images/icons
+          cp LEGENDARY_LEADERS_TREE.html _site/index.html
+          # Also keep the original filename so existing links keep working.
+          cp LEGENDARY_LEADERS_TREE.html _site/LEGENDARY_LEADERS_TREE.html
+          # Only the icon trees the HTML references — keeps the artifact small.
+          for d in cards flags singleplayer units; do
+            if [ -d "resources/images/icons/$d" ]; then
+              cp -r "resources/images/icons/$d" "_site/resources/images/icons/$d"
+            fi
+          done
+          # A tiny .nojekyll so Pages doesn't try to process the tree.
+          touch _site/.nojekyll
+          du -sh _site
+          find _site -type f | wc -l
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

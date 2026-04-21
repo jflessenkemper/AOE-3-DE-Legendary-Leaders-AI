@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <homecity>
   <civ>RvltModPeruvians</civ>
   <name>$$80849$$</name>
@@ -1341,29 +1342,35 @@
   </cards>
   <decks>
     <deck>
-      <name>$$41682$$</name>
+      <name>Legendary Leaders</name>
       <default>
       </default>
       <cards>
-        <card>HCREVShipGatlingGuns</card>
-        <card>HCREVShipFortWagon</card>
-        <card>HCREVShipIronclads</card>
+        <card>DEHCExtensiveFortificationsEuropean</card>
         <card>DEHCREVAmericanAlliesPeru</card>
+        <card>DEHCAlpacaWool</card>
+        <card>DEHCREVJuninHussars</card>
+        <card>DEHCREVLima</card>
+        <card>DEHCMercsIrishBrigadiers</card>
+        <card>DEHCTheaters</card>
+        <card>DEHCREVPeruvianGuard</card>
         <card>DEHCREVCattleDelivery</card>
         <card>DEHCREVCowboys</card>
         <card>DEHCREVGuano</card>
-        <card>DEHCREVJuninHussars</card>
-        <card>DEHCREVLima</card>
-        <card>HCCaballeros</card>
-        <card>DEHCREVMancoInca</card>
-        <card>DEHCREVPeruvianGuard</card>
         <card>DEHCREVShipBolasWarrior</card>
+        <card>DEHCMercsArmoredPistoleers</card>
+        <card>DEHCREVMancoInca</card>
         <card>DEHCREVShipFatLlamas</card>
-        <card>DEHCAlpacaWool</card>
-        <card>DEHCMachuPicchu</card>
-        <card>DEHCMonumentalArchitecture</card>
-        <card>DEHCShipPriestessRepeat2</card>
         <card>RvltModHCREVCuzco</card>
+        <card>HCHeavyFortifications</card>
+        <card>HCMercsHighland</card>
+        <card>HCXPIndustrialRevolution</card>
+        <card>HCUnlockFort</card>
+        <card>HCMercsHighlanders</card>
+        <card>DEHCShipBattleshipRepeat</card>
+        <card>DEHCHabsburgAllies1</card>
+        <card>DEHCLiberationMarch</card>
+        <card>DEHCMachuPicchu</card>
       </cards>
     </deck>
   </decks>

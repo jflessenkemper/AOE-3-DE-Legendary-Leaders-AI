@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <homecity>
   <civ>RvltModBarbary</civ>
   <name>$$80805$$</name>
@@ -1093,31 +1094,35 @@
   </cards>
   <decks>
     <deck>
-      <name>$$71332$$Beginner</name>
+      <name>Legendary Leaders</name>
       <default>
       </default>
       <cards>
-        <card>DEHCREVShipBarbaryMarksman</card>
-        <card>DEHCREVShipBarbaryWarrior</card>
-        <card>DEHCREVShipFalconets</card>
-        <card>HCREVShipFortWagon</card>
-        <card>DEHCREVDhimma</card>
-        <card>DEHCREVLoyalWarriors</card>
-        <card>DEHCREVOutlawCombat</card>
-        <card>DEHCREVBarbaryCombat</card>
         <card>DEHCREVCorsairCaptain</card>
         <card>DEHCREVSaleRovers</card>
+        <card>DEHCREVBerberNomads</card>
+        <card>DEHCREVShipBarbaryWarrior</card>
+        <card>DEHCREVShipBerberAllies</card>
+        <card>DEHCREVBarbaryCombat</card>
+        <card>DEHCColonialMilitiaOttoman</card>
+        <card>DEHCSPCSaharanTrade</card>
+        <card>DEHCREVDhimma</card>
+        <card>DEHCSPCBarbaryMadrasa</card>
+        <card>HCNavalCombat</card>
+        <card>HCShipGalleons</card>
+        <card>DEHCREVLoyalWarriors</card>
+        <card>DEHCREVOutlawCombat</card>
+        <card>DEHCREVShipZenataTeam</card>
+        <card>DEHCShipBerberAllies2Ottoman</card>
+        <card>DEHCREVShipBarbaryMarksman</card>
+        <card>DEHCREVOttomanExpArmy</card>
+        <card>DEHCREVShipFalconets</card>
         <card>DEHCREVShipXebec</card>
         <card>DEHCREVShipXebec2</card>
-        <card>DEHCREVBerberNomads</card>
-        <card>DEHCREVShipBerberAllies</card>
-        <card>DEHCREVShipZenataTeam</card>
-        <card>DEHCREVOttomanExpArmy</card>
-        <card>DEHCSPCBarbaryMadrasa</card>
-        <card>DEHCSPCBedouinHorsemenRepeat1</card>
-        <card>DEHCSPCSaharanTrade</card>
-        <card>DEHCSPCTribalHorsemenRepeat1</card>
-        <card>DEHCBedouinSupportSPC</card>
+        <card>HCXPMercsCorsairsRepeat</card>
+        <card>DEHCMercsBosniaks</card>
+        <card>DEHCMercsAskaris</card>
+        <card>DEHCMercsOttoman</card>
       </cards>
     </deck>
   </decks>

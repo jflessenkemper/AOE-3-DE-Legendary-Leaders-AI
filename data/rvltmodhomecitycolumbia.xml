@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <homecity>
   <civ>RvltModColumbians</civ>
   <name>$$80851$$</name>
@@ -1340,25 +1341,35 @@
   </cards>
   <decks>
     <deck>
-      <name>$$41682$$</name>
+      <name>Legendary Leaders</name>
       <default>
       </default>
       <cards>
-        <card>HCREVShipGatlingGuns</card>
-        <card>HCREVShipFortWagon</card>
-        <card>HCREVShipIronclads</card>
-        <card>DEHCREVAlbionLegion</card>
-        <card>DEHCREVCattleDeliveryColombia</card>
-        <card>DEHCREVColombianNavy</card>
-        <card>RvltModHCLlaneros</card>
+        <card>DEHCLiberationMarch</card>
         <card>DEHCREVNationalHero</card>
+        <card>HCCheapBarracksTeam</card>
+        <card>DEHCExtensiveFortificationsEuropean</card>
+        <card>DEHCMercsIrishBrigadiers</card>
+        <card>HCFrontierDefenses</card>
+        <card>DEHCTheaters</card>
+        <card>HCAdvancedArsenal</card>
+        <card>DEHCREVCattleDeliveryColombia</card>
+        <card>DEHCREVShipSteamers</card>
+        <card>RvltModHCLlaneros</card>
+        <card>DEHCMercsArmoredPistoleers</card>
+        <card>HCUnlockFort</card>
+        <card>DEHCREVColombianNavy</card>
         <card>DEHCREVShipColombianRevolutionaries</card>
         <card>DEHCREVShipIronclads</card>
-        <card>DEHCREVShipSteamers</card>
-        <card>HCCaballeros</card>
-        <card>DEHCLiberationMarch</card>
-        <card>HCXPCaribAlliesRepeat</card>
-        <card>HCShipCoveredWagons2</card>
+        <card>DEHCREVAlbionLegion</card>
+        <card>HCHeavyFortifications</card>
+        <card>HCXPIndustrialRevolution</card>
+        <card>DEHCShipBattleshipRepeat</card>
+        <card>DEHCHabsburgAllies1</card>
+        <card>DEHCHandMortar</card>
+        <card>DEHCMarvelousYear</card>
+        <card>DEHCShipGatlings1</card>
+        <card>DEHCBourbonAllies1</card>
       </cards>
     </deck>
   </decks>

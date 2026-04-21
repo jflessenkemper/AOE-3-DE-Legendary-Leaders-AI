@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <homecity>
   <civ>RvltModRomanians</civ>
   <name>$$80826$$</name>
@@ -1100,25 +1101,35 @@
   </cards>
   <decks>
     <deck>
-      <name>$$41682$$</name>
+      <name>Legendary Leaders</name>
       <default>
       </default>
       <cards>
-        <card>RvltModHCHajduks</card>
+        <card>DEHCLandedGentry</card>
+        <card>HCColonialMilitia</card>
+        <card>DEHCExtensiveFortificationsEuropean</card>
+        <card>DEHCInfantryHitpointsItalian</card>
+        <card>DEHCPhanarAllies2</card>
+        <card>DEHCTheaters</card>
+        <card>HCAdvancedArsenal</card>
+        <card>RvltModHCSovnyaRomanian</card>
         <card>RvltModHCWallachianArchers</card>
-        <card>RvltModHCMilitaryFrontier</card>
-        <card>RvltModHCCrabats</card>
-        <card>RvltModHCPandours</card>
+        <card>DEHCMercsGiantGrenadiers</card>
+        <card>DEHCHandMortar</card>
+        <card>DEHCPhanarAllies1</card>
+        <card>HCRefrigeration</card>
         <card>DEHCREVShipHorseArtillery3</card>
-        <card>RvltModHCShipEuropeanFleet</card>
+        <card>RvltModHCFlightArcheryRomanians</card>
+        <card>DEHCShipBattleshipRepeat</card>
+        <card>HCHeavyFortifications</card>
+        <card>HCUnlockFactory</card>
+        <card>HCXPIndustrialRevolution</card>
+        <card>HCRoyalMint</card>
+        <card>HCUnlockFort</card>
         <card>RvltModHCShipFortWagonOutpost</card>
-        <card>DEHCREVCitizenshipOutpost</card>
-        <card>RvltModHCRoshiorDragoons</card>
-        <card>HCRidingSchool</card>
-        <card>HCCavalryCombatRussian</card>
-        <card>RvltModHCPhanariotes</card>
-        <card>RvltModHCShipCavArchers</card>
-        <card>RvltModHCRussianExpArmy</card>
+        <card>HCMercenaryLoyalty</card>
+        <card>HCMercsBlackRiders</card>
+        <card>HCMercsHessians</card>
       </cards>
     </deck>
   </decks>

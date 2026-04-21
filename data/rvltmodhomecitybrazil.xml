@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <homecity>
   <civ>RvltModBrazil</civ>
   <name>$$80848$$</name>
@@ -1471,33 +1472,35 @@
   </cards>
   <decks>
     <deck>
-      <name>$$41682$$</name>
+      <name>Legendary Leaders</name>
       <default>
       </default>
       <cards>
-        <card>HCShipCoveredWagons2</card>
-        <card>HCREVShipGatlingGuns</card>
-        <card>HCREVShipIronclads</card>
-        <card>DEHCFeitorias</card>
-        <card>HCExplorerPortuguese</card>
-        <card>HCColonialMilitia</card>
         <card>DEHCREVBonifacio</card>
-        <card>HCXPLandGrab</card>
-        <card>HCShipBandeirantes</card>
-        <card>HCDonatarios</card>
-        <card>DEHCREVBahia</card>
-        <card>DEHCREVAmazonia</card>
-        <card>DEHCREVMinasGerais</card>
-        <card>DEHCREVCattleDeliveryBrazil</card>
-        <card>RvltModHCJaguncos</card>
+        <card>HCExoticHardwoods</card>
         <card>DEHCREVWildlife</card>
+        <card>HCShipBandeirantes</card>
+        <card>DEHCMercsCannoneersEuropean</card>
+        <card>DEHCTheaters</card>
+        <card>DEHCWettinAllies1</card>
+        <card>DEHCREVAmazonia</card>
+        <card>DEHCREVCattleDeliveryBrazil</card>
+        <card>DEHCREVBahia</card>
+        <card>DEHCREVMinasGerais</card>
+        <card>DEHCMercsArmoredPistoleers</card>
+        <card>HCRefrigeration</card>
+        <card>DEHCREVBrazilImporters</card>
         <card>DEHCREVShipCacadores</card>
         <card>DEHCREVShipSoldados</card>
-        <card>DEHCREVHonorGuard</card>
-        <card>DEHCREVBrazilImporters</card>
+        <card>HCREVShipIronclads</card>
+        <card>HCUnlockFactory</card>
+        <card>DEHCPortugueseBattleshipCard</card>
+        <card>DEHCShipBattleshipRepeat</card>
+        <card>DEHCCarracks</card>
+        <card>DEHCEstremozGuns</card>
+        <card>DEHCHandMortar</card>
+        <card>DEHCShipGatlings1</card>
         <card>DEHCAkanAllies</card>
-        <card>HCXPCaribAlliesRepeat</card>
-        <card>HCXPTupiAlliesRepeat</card>
       </cards>
     </deck>
     <fakedeck>

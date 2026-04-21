@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <homecity>
   <civ>RvltModFrenchCanadians</civ>
   <name>$$80821$$</name>
@@ -1384,34 +1385,35 @@
   </cards>
   <decks>
     <deck>
-      <name>$$41682$$</name>
+      <name>Legendary Leaders</name>
       <default>
       </default>
       <cards>
-        <card>HCColonialMilitia</card>
-        <card>HCPioneers</card>
-        <card>HCXPFurTrade</card>
-        <card>DEHCREVSpiceTrade</card>
-        <card>HCWildernessWarfare</card>
-        <card>DEHCREVFencibles</card>
-        <card>DEHCREVShipGrizzlies</card>
-        <card>DEHCREVShipElk</card>
+        <card>DEHCREVQuebec</card>
+        <card>DEHCREVNativeAlliesCanada</card>
+        <card>HCFurrier</card>
+        <card>HCShipCoureurs1</card>
+        <card>DEHCREVCanadianOfficer</card>
         <card>DEHCREVBuffaloHunt</card>
-        <card>DEHCREVNorthAmericaTrade</card>
+        <card>HCShipCoureurs2</card>
+        <card>DEHCMercsIrishBrigadiers</card>
+        <card>DEHCCentSuisses</card>
+        <card>DEHCREVShipWarCanoes</card>
+        <card>DEHCMercsArmoredPistoleers</card>
+        <card>DEHCMercsGiantGrenadiers</card>
+        <card>DEHCFrenchRoyalArmy</card>
+        <card>DEHCHanoverAllies2</card>
+        <card>DEHCSPCRangedInfantryDamageFrenchTeam</card>
+        <card>DEHCREVConscriptionCanada</card>
+        <card>DEHCREVFencibles</card>
         <card>DEHCREVHighlanders</card>
+        <card>DEHCREVNorthAmericaTrade</card>
+        <card>DEHCREVShipElk</card>
+        <card>DEHCREVShipGrizzlies</card>
         <card>DEHCREVShipMusketeers</card>
         <card>DEHCREVShipSkirmishers</card>
-        <card>HCREVShipIronclads</card>
-        <card>DEHCREVQuebec</card>
-        <card>RvltModHCMetisFrench</card>
-        <card>DEHCREVConscriptionCanada</card>
-        <card>DEHCREVCanadianOfficer</card>
         <card>DEHCCanadianLoyalists</card>
-        <card>DEHCREVNativeAlliesCanada</card>
-        <card>DEHCLenapeAllies</card>
-        <card>DEHCHanoverAllies2</card>
-        <card>HCNativeChampionsDutchTeam</card>
-        <card>DEHCREVMXBloodBrothers</card>
+        <card>RvltModHCMetisFrench</card>
       </cards>
     </deck>
   </decks>

@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <homecity>
   <civ>RvltModAmericans</civ>
   <name>$$80846$$</name>
@@ -1264,34 +1265,35 @@
   </cards>
   <decks>
     <deck>
-      <name>$$41682$$</name>
+      <name>Legendary Leaders</name>
       <default>
       </default>
       <cards>
-        <card>HCREVShipColonialMilitia</card>
-        <card>RvltModHCConscription</card>
-        <card>RvltModHCLegionMilitia</card>
         <card>DEHCREVPowderAlarm</card>
-        <card>DEHCFedMarionsDiversions</card>
-        <card>DEHCBourbonAllies1</card>
-        <card>DEHCREVLegionCarbines</card>
-        <card>DEHCREVVolunteers</card>
-        <card>DEHCREVLegionRegulars</card>
-        <card>DEHCREVLegionUhlans</card>
-        <card>DEHCREVLegionGrenadiers</card>
-        <card>DEHCREVLegionArtillery</card>
-        <card>DEHCREVLegionIronPetards</card>
-        <card>DEHCREVLegionSpies</card>
-        <card>HCREVShipGatlingGuns</card>
-        <card>HCREVShipIronclads</card>
-        <card>HCREVShipFortWagon</card>
-        <card>DEHCREVImmigrantsEuropean</card>
-        <card>DEHCFedFertileLowlands</card>
-        <card>DEHCREVWashingtonLands</card>
-        <card>DEHCREVUSAHeroBuff</card>
-        <card>DEHCREVCTrainTimeUS</card>
-        <card>DEHCREVUSACombat</card>
         <card>DEHCREVLongRifles</card>
+        <card>HCPioneers</card>
+        <card>DEHCWhaleOilTeam</card>
+        <card>DEHCREVLegionSpies</card>
+        <card>HCShipMusketeers1</card>
+        <card>HCFrontierDefenses</card>
+        <card>DEHCMercsIrishBrigadiers</card>
+        <card>DEHCExtensiveFortificationsEuropean</card>
+        <card>DEHCREVWashingtonLands</card>
+        <card>DEHCREVCTrainTimeUS</card>
+        <card>DEHCREVImmigrantsEuropean</card>
+        <card>DEHCREVLegionIronPetards</card>
+        <card>DEHCREVLegionUhlans</card>
+        <card>DEHCREVLegionRegulars</card>
+        <card>DEHCREVLegionCarbines</card>
+        <card>DEHCREVLegionArtillery</card>
+        <card>DEHCREVLegionGrenadiers</card>
+        <card>DEHCREVUSACombat</card>
+        <card>DEHCREVUSAHeroBuff</card>
+        <card>DEHCREVVolunteers</card>
+        <card>DEHCShipGatlings1</card>
+        <card>HCShipMusketeers2</card>
+        <card>HCShipMusketeers4</card>
+        <card>HCShipMusketeers3</card>
       </cards>
     </deck>
   </decks>

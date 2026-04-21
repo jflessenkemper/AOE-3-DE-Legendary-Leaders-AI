@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <homecity>
   <civ>RvltModRioGrande</civ>
   <name>$$112815$$</name>
@@ -695,15 +696,6 @@
       <displayunitcount>2</displayunitcount>
       <infiniteinlastage>1</infiniteinlastage>
     </card>
-    <!-- <card>
-      <name>HCShipFalconets3</name>
-      <maxcount>1</maxcount>
-      <level>10</level>
-      <prereqtech>HCShipFalconets2</prereqtech>
-      <age>2</age>
-      <displayunitcount>2</displayunitcount>
-      <infiniteinlastage>1</infiniteinlastage>
-    </card> -->
     <card>
       <name>DEHCREVMXShipFalconets2</name>
       <maxcount>1</maxcount>
@@ -1394,31 +1386,35 @@
   </cards>
   <decks>
     <deck>
-      <name>$$71332$$Beginner</name>
+      <name>Legendary Leaders</name>
       <default>
       </default>
       <cards>
-        <card>DEHCREVMXUnlockFactory</card>
-        <card>DEHCREVMXShipHaciendaWagonRepeat1</card>
+        <card>DEHCRancheros</card>
+        <card>DEHCShipHaciendaWagon1</card>
+        <card>DEHCREVMXBastimento</card>
+        <card>DEHCCriollos</card>
+        <card>HCFrontierDefenses</card>
+        <card>DEHCShipTradingPostWagons</card>
+        <card>DEHCShipCapturedGalleons1</card>
+        <card>DEHCREVMXFrontierDefensesRepeat</card>
         <card>DEHCREVMXShipSettlersRepeat2</card>
-        <card>HCREVShipColonialMilitia</card>
-        <card>HCREVShipFortWagon</card>
         <card>DEHCREVMXShipIronclad1</card>
-        <card>DEHCREVMXShipChinaco1</card>
-        <card>DEHCREVMXShipDragoon1</card>
-        <card>DEHCREVMXShipSoldado1</card>
-        <card>DEHCREVMXShipCulverins1</card>
+        <card>DEHCREVFedMXSierraMadreRepublic</card>
         <card>DEHCREVMXShipFalconets2</card>
         <card>DEHCREVMXVidaurriSeparatists</card>
-        <card>DEHCREVMXCavalryCombat</card>
-        <card>DEHCREVMXCaballeros</card>
+        <card>DEHCREVMXShipHaciendaWagonRepeat1</card>
+        <card>DEHCREVFedMXNuevoLeonMilitia</card>
+        <card>DEHCREVMXShipCulverins1</card>
+        <card>DEHCREVMXShipDragoon1</card>
+        <card>DEHCREVMXShipSoldado1</card>
         <card>DEHCREVMXZapataManeuvers</card>
         <card>DEHCPresidialLancers</card>
-        <card>DEHCLiberationMarch</card>
-        <card>DEHCREVMXBastimento</card>
-        <card>DEHCLeatherSoldiers</card>
-        <card>DEHCREVFedMXNuevoLeonMilitia</card>
-        <card>DEHCREVFedMXSierraMadreRepublic</card>
+        <card>HCFrontierDefenses2</card>
+        <card>HCNativeWarriors</card>
+        <card>DEHCShipCapturedGalleons2</card>
+        <card>DEHCShipFrigateRepeat</card>
+        <card>DEHCCavalryCombatMexican</card>
       </cards>
     </deck>
     <deck>

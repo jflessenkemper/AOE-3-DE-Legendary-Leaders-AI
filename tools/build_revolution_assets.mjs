@@ -59,7 +59,10 @@ for (const leader of manifest.leaders) {
         "-update",
         "1",
         "-vf",
-        "scale=256:256:force_original_aspect_ratio=decrease,pad=256:256:(ow-iw)/2:(oh-ih)/2:color=0x1a1a1a",
+        // Fill the 256x256 frame edge-to-edge (no letterbox bars).
+        // Scale shorter side to 256, then center-crop horizontally and bias upward
+        // so the face/head sits in the upper third like base-game cpai_avatar_*.png portraits.
+        "scale=w='if(gt(iw/ih,1),-1,256)':h='if(gt(iw/ih,1),256,-1)',crop=256:256:(in_w-256)/2:max(0\\,(in_h-256)/4)",
         wpfPath
       ],
       { cwd: root, stdio: "inherit" }

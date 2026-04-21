@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <homecity>
   <civ>RvltModCalifornians</civ>
   <name>$$112823$$</name>
@@ -1396,34 +1397,35 @@
   </cards>
   <decks>
     <deck>
-      <name>$$71332$$Beginner</name>
+      <name>Legendary Leaders</name>
       <default>
       </default>
       <cards>
-        <card>DEHCREVMXShipSettlersRepeat2</card>
-        <card>DEHCREVMXShipWoodCrates5</card>
-        <card>DEHCREVMXShipFoodCrates5</card>
-        <card>DEHCREVMXShipCoinCrates5</card>
-        <card>DEHCREVMXShipHaciendaWagonRepeat1</card>
-        <card>DEHCREVMXShipGoldMineWagonRepeat</card>
-        <card>DEHCREVMXPinatas</card>
-        <card>DEHCREVMXShipCoveredWagons2</card>
-        <card>DEHCREVMXCaliforniaRobberBarons</card>
-        <card>DEHCREVMXRanchos</card>
         <card>DEHCFedMXFortifiedHaciendas</card>
-        <card>DEHCREVMXShipCalifornios</card>
-        <card>DEHCImmigrantsRussian</card>
-        <card>DEHCREVMXSanDiegoPort</card>
-        <card>DEHCHireManilamen</card>
-        <card>DEHCREVMXSanFranciscoBay</card>
-        <card>DEHCREVMXShipIroncladRepeat1</card>
-        <card>DEHCLiberationMarch</card>
-        <card>DEHCREVFedMXRanching</card>
-        <card>DEHCREVMXBarbacoa</card>
         <card>DEHCREVMXCaliforniaHaciendas</card>
-        <card>HCStockyards</card>
+        <card>DEHCRancheros</card>
+        <card>DEHCREVMXRanchos</card>
+        <card>DEHCREVMXSanDiegoPort</card>
+        <card>DEHCREVMXSanFranciscoBay</card>
+        <card>HCFrontierDefenses</card>
+        <card>DEHCREVMXFrontierDefensesRepeat</card>
+        <card>DEHCREVFedMXRanching</card>
+        <card>DEHCREVMXShipSettlersRepeat2</card>
+        <card>HCFrontierDefenses2</card>
         <card>RvltModHCREVMXCaliforniaStatehood</card>
+        <card>HCRefrigeration</card>
         <card>DEHCREVMXCaliforniaLancers</card>
+        <card>DEHCREVMXCaliforniaRobberBarons</card>
+        <card>DEHCREVMXShipCalifornios</card>
+        <card>DEHCREVMXShipGoldMineWagonRepeat</card>
+        <card>DEHCREVMXShipIroncladRepeat1</card>
+        <card>DEHCREVMXShipHaciendaWagonRepeat1</card>
+        <card>DEHCAltaCalifornia</card>
+        <card>HCExoticHardwoods</card>
+        <card>HCUnlockFactory</card>
+        <card>DEHCShipCapturedGalleons2</card>
+        <card>DEHCShipFrigateRepeat</card>
+        <card>DEHCCavalryCombatMexican</card>
       </cards>
     </deck>
     <deck>

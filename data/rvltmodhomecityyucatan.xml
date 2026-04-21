@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <homecity>
   <civ>RvltModYucatan</civ>
   <name>$$112811$$</name>
@@ -131,15 +132,6 @@
       <infiniteinlastage>1</infiniteinlastage>
       <displayunitcount>700</displayunitcount>
     </card>
-    <!-- <card>
-      <name>HCShipFoodCrates4</name>
-      <maxcount>1</maxcount>
-      <level>10</level>
-      <prereqtech>HCShipFoodCrates3</prereqtech>
-      <age>2</age>
-      <infiniteinlastage>1</infiniteinlastage>
-      <displayunitcount>1000</displayunitcount>
-    </card> -->
     <card>
       <name>DEHCREVMXShipFoodCrates4</name>
       <maxcount>-1</maxcount>
@@ -184,15 +176,6 @@
       <displayunitcount>700</displayunitcount>
       <infiniteinlastage>1</infiniteinlastage>
     </card>
-    <!-- <card>
-      <name>HCShipWoodCrates4</name>
-      <maxcount>1</maxcount>
-      <level>10</level>
-      <prereqtech>HCShipWoodCrates3</prereqtech>
-      <age>2</age>
-      <displayunitcount>1000</displayunitcount>
-      <infiniteinlastage>1</infiniteinlastage>
-    </card> -->
     <card>
       <name>DEHCREVMXShipWoodCrates4</name>
       <maxcount>-1</maxcount>
@@ -245,15 +228,6 @@
       <displayunitcount>1</displayunitcount>
       <age>1</age>
     </card>
-    <!-- <card>
-      <name>HCShipCoinCrates4</name>
-      <maxcount>1</maxcount>
-      <level>10</level>
-      <prereqtech>HCShipWoodCrates3</prereqtech>
-      <age>2</age>
-      <displayunitcount>1000</displayunitcount>
-      <infiniteinlastage>1</infiniteinlastage>
-    </card> -->
     <card>
       <name>DEHCREVMXhipCoinCrates4</name>
       <maxcount>-1</maxcount>
@@ -1413,31 +1387,35 @@
   </cards>
   <decks>
     <deck>
-      <name>$$71332$$Beginner</name>
+      <name>Legendary Leaders</name>
       <default>
       </default>
       <cards>
-        <card>DEHCREVMXPlanMerida</card>
-        <card>DEHCREVMXUnlockFactory</card>
-        <card>DEHCREVMXShipSettlersRepeat2</card>
-        <card>DEHCREVMXShipFoodCrates4</card>
-        <card>DEHCREVMXShipWoodCrates4</card>
-        <card>DEHCREVMXhipCoinCrates4</card>
-        <card>DEHCREVMXShipHaciendaWagonRepeat1</card>
-        <card>DEHCFedMXFortifiedHaciendas</card>
-        <card>HCREVShipFortWagon</card>
-        <card>DEHCREVMXShipIroncladRepeat1</card>
-        <card>DEHCREVMXShipYucatecoInsurgentesRepeat</card>
-        <card>DEHCREVMXShipEmboscadorRepeat</card>
-        <card>DEHCREVFedMXJungleWarfare</card>
-        <card>DEHCREVMXReservistas</card>
-        <card>DEHCREVMXObservers</card>
-        <card>DEHCREVMXGuerillaTactics</card>
-        <card>DEHCREVMXMayanSupporters</card>
-        <card>DEHCREVMXTextileMills</card>
-        <card>DEHCREVMXFoodSilos</card>
-        <card>DEHCREVFedMXAmparo</card>
+        <card>DEHCCampecheFortifications</card>
         <card>DEHCREVFedMXSolisShredders</card>
+        <card>DEHCREVMXFoodSilos</card>
+        <card>DEHCREVMXPlanMerida</card>
+        <card>DEHCREVFedMXJungleWarfare</card>
+        <card>DEHCShipCapturedGalleons1</card>
+        <card>DEHCChipotles</card>
+        <card>DEHCCopperCanyon</card>
+        <card>DEHCREVMXMayanSupporters</card>
+        <card>DEHCREVFedMXAmparo</card>
+        <card>DEHCREVMXFrontierDefensesRepeat</card>
+        <card>DEHCREVMXShipFoodCrates4</card>
+        <card>DEHCREVMXShipSettlersRepeat2</card>
+        <card>DEHCREVMXShipWoodCrates4</card>
+        <card>DEHCREVMXShipIroncladRepeat1</card>
+        <card>DEHCREVMXShipEmboscadorRepeat</card>
+        <card>DEHCREVMXShipHaciendaWagonRepeat1</card>
+        <card>DEHCREVMXShipYucatecoInsurgentesRepeat</card>
+        <card>DEHCREVMXhipCoinCrates4</card>
+        <card>HCXPMayanAllies2</card>
+        <card>DEHCShipCapturedGalleons2</card>
+        <card>DEHCShipFrigateRepeat</card>
+        <card>DEHCCavalryCombatMexican</card>
+        <card>DEHCGuerillaTactics</card>
+        <card>DEHCLeatherSoldiers</card>
       </cards>
     </deck>
     <deck>
