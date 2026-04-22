@@ -1,0 +1,14 @@
+<AI>
+   <version>2</version>
+   <script>aiLoaderStandard</script>
+   <nameID>490214</nameID>
+   <tooltipID>490215</tooltipID>
+   <forcedciv>deinca</forcedciv>
+   <rushboom>0</rushboom>
+   <icon>resources/images/icons/singleplayer/cpai_avatar_inca_pachacuti.png</icon>
+   <chatset>Huayna</chatset>
+   <playerNames>
+      <nameID>490214</nameID>
+      <civ>deinca</civ>
+   </playerNames>
+</AI>

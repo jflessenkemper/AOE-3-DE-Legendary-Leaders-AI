@@ -1756,6 +1756,24 @@
       <String _locID='490102'>Open west-vs-east Texas-style test field with three land lanes and two naval lanes for fast AI validation.</String>
          <String _locID='490103'>Legendary Leaders Test Maps</String>
          <String _locID='490104'>Custom validation maps for Legendary Leaders AI skirmish testing.</String>
-      </Language>
+      <!-- BASE-CIV-LEADER-NAMES-START -->
+      <String _locID='490200'>Duke of Wellington</String>
+      <String _locID='490201'>British · line-and-logistics · Naval Mercantile Compound</String>
+      <String _locID='490202'>Usman dan Fodio</String>
+      <String _locID='490203'>Hausa · Sokoto Caliphate jihadist mobilization</String>
+      <String _locID='490204'>Catherine the Great</String>
+      <String _locID='490205'>Russian · Cossack voisko + enlightened absolutism</String>
+      <String _locID='490206'>Maurice of Nassau</String>
+      <String _locID='490207'>Dutch · mercantile drill + fortification</String>
+      <String _locID='490208'>Menelik II</String>
+      <String _locID='490209'>Ethiopian · Adwa-victorious highland defense</String>
+      <String _locID='490210'>Shivaji Bhonsle</String>
+      <String _locID='490211'>Indian · Maratha hill-fort guerilla</String>
+      <String _locID='490212'>Montezuma</String>
+      <String _locID='490213'>Aztec · tribute empire</String>
+      <String _locID='490214'>Pachacuti</String>
+      <String _locID='490215'>Inca · Andean terrace fortress</String>
+<!-- BASE-CIV-LEADER-NAMES-END -->
+</Language>
    </StringTable>
 </stringmods>
