@@ -1,0 +1,14 @@
+<AI>
+   <version>2</version>
+   <script>aiLoaderStandard</script>
+   <nameID>490238</nameID>
+   <tooltipID>490239</tooltipID>
+   <forcedciv>XPIroquois</forcedciv>
+   <rushboom>0</rushboom>
+   <icon>resources/images/icons/singleplayer/cpai_avatar_haudenosaunee_hiawatha.png</icon>
+   <chatset>Hiawatha</chatset>
+   <playerNames>
+      <nameID>490238</nameID>
+      <civ>XPIroquois</civ>
+   </playerNames>
+</AI>

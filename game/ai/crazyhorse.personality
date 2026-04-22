@@ -1,0 +1,14 @@
+<AI>
+   <version>2</version>
+   <script>aiLoaderStandard</script>
+   <nameID>490240</nameID>
+   <tooltipID>490241</tooltipID>
+   <forcedciv>XPSioux</forcedciv>
+   <rushboom>0</rushboom>
+   <icon>resources/images/icons/singleplayer/cpai_avatar_lakota_crazy_horse.png</icon>
+   <chatset>crazyhorse</chatset>
+   <playerNames>
+      <nameID>490240</nameID>
+      <civ>XPSioux</civ>
+   </playerNames>
+</AI>

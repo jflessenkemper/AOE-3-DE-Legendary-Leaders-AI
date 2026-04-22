@@ -1,0 +1,14 @@
+<AI>
+   <version>2</version>
+   <script>aiLoaderStandard</script>
+   <nameID>490226</nameID>
+   <tooltipID>490227</tooltipID>
+   <forcedciv>DEItalians</forcedciv>
+   <rushboom>0</rushboom>
+   <icon>resources/images/icons/singleplayer/cpai_avatar_italians_garibaldi.png</icon>
+   <chatset>garibaldi</chatset>
+   <playerNames>
+      <nameID>490226</nameID>
+      <civ>DEItalians</civ>
+   </playerNames>
+</AI>

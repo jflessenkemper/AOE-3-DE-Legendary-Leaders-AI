@@ -1,0 +1,14 @@
+<AI>
+   <version>2</version>
+   <script>aiLoaderStandard</script>
+   <nameID>490222</nameID>
+   <tooltipID>490223</tooltipID>
+   <forcedciv>deamericans</forcedciv>
+   <rushboom>0</rushboom>
+   <icon>resources/images/icons/singleplayer/cpai_avatar_united_states_washington.png</icon>
+   <chatset>washington</chatset>
+   <playerNames>
+      <nameID>490222</nameID>
+      <civ>deamericans</civ>
+   </playerNames>
+</AI>

@@ -1,0 +1,14 @@
+<AI>
+   <version>2</version>
+   <script>aiLoaderStandard</script>
+   <nameID>490228</nameID>
+   <tooltipID>490229</tooltipID>
+   <forcedciv>deswedish</forcedciv>
+   <rushboom>0</rushboom>
+   <icon>resources/images/icons/singleplayer/cpai_avatar_swedes_gustavus.png</icon>
+   <chatset>Gustav</chatset>
+   <playerNames>
+      <nameID>490228</nameID>
+      <civ>deswedish</civ>
+   </playerNames>
+</AI>
