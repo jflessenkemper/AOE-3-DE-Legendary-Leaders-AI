@@ -247,10 +247,22 @@ int llPlanExplorationAgeWall(int mainBaseID = -1, vector baseCenter = cInvalidVe
    return (llPlanFortressRingWall(mainBaseID, baseCenter));
 }
 
+// PERPETUAL WALLING MODEL
+// =======================
+// Walls are top-priority protection and the AI dedicates villagers to them
+// every age. We do NOT disable these rules after placing a plan — we keep
+// them ticking so:
+//   (a) if the engine evicts / completes the wall plan, we replace it;
+//   (b) if the base expands or walls are destroyed, gap-fill + new rings
+//       kick in automatically;
+//   (c) villager allocation on the standing plan stays topped up.
+// Anti-spam is enforced by aiPlanGetIDByTypeAndVariableType dedup: we never
+// create a second ring plan while one is active. MobileNoWalls doctrines
+// opt out cleanly via xsDisableSelf at rule entry.
 rule explorationAgeWalling
 inactive
 group tcComplete
-minInterval 15
+minInterval 20
 {
    if ((llShouldBuildLegendaryWalls(true) == false) || (cvOkToBuild == false))
    {
@@ -259,6 +271,8 @@ minInterval 15
       return;
    }
 
+   // Hand off to delayWallsNew (which is perpetual from Age 3 onward) once
+   // we're past Exploration — keeps responsibilities clean.
    if (kbGetAge() > cAge1)
    {
       xsDisableSelf();
@@ -271,22 +285,22 @@ minInterval 15
       return;
    }
 
+   // Anti-spam: skip while any ring plan is active or while existing walls
+   // already surround the base (gap-fill owns that case).
    if (aiPlanGetIDByTypeAndVariableType(cPlanBuildWall, cBuildWallPlanWallType, cBuildWallPlanWallTypeRing, true) >= 0)
    {
+      xsEnableRule("fillInWallGapsNew");
       return;
    }
 
    if (kbUnitCount(cMyID, cUnitTypeAbstractWall, cUnitStateABQ) > 0)
    {
-      llLogDecision("WALL", "existing walls detected during exploration age, enabling gap fill support");
       xsEnableRule("fillInWallGapsNew");
-      xsDisableSelf();
+      // Don't disable — if the plan disappears later and all walls die,
+      // we want this rule to recreate the ring instead of going silent.
       return;
    }
 
-   // Lowered 125 -> 75 so the wall plan can register earlier; it's a
-   // long-running plan and the engine will escrow additional wood as it
-   // arrives. Earlier registration = walls complete sooner.
    if (kbResourceGet(cResourceWood) < 75.0)
    {
       return;
@@ -298,18 +312,19 @@ minInterval 15
       return;
    }
 
-   // Dispatch to per-leader walling doctrine.
    int wallPlanID = llPlanExplorationAgeWall(mainBaseID, baseCenter);
    if (wallPlanID < 0)
    {
-      llLogDecision("WALL", "strategy=" + gLLWallStrategy + " declined to build walls (MobileNoWalls or plan failed)");
+      // MobileNoWalls doctrine decision is permanent.
+      llLogDecision("WALL", "strategy=" + gLLWallStrategy + " declined to build walls (MobileNoWalls)");
       xsDisableSelf();
       return;
    }
 
    llLogPlanEvent("create", wallPlanID, "exploration-wall strategy=" + gLLWallStrategy + " center=" + baseCenter);
    xsEnableRule("fillInWallGapsNew");
-   xsDisableSelf();
+   // Stay active: anti-spam dedup above prevents duplicate plans, but if
+   // this plan ever dies we want to place a fresh one.
 }
 
 //==============================================================================
@@ -333,9 +348,13 @@ minInterval 10
 //==============================================================================
 // RULE delayWallsNew
 //==============================================================================
+// Persistent Fortress+ walling. Fires every 30s from Age 3 onward for the
+// rest of the match. Anti-spam dedup prevents multiple ring plans on the
+// same base. Outer ring supplement kicks in at Age 4 so the defended
+// perimeter expands as the base grows — but only one outer ring, ever.
 rule delayWallsNew
 inactive
-minInterval 10
+minInterval 30
 {
    if (llShouldBuildLegendaryWalls(false) == false)
    {
@@ -343,20 +362,11 @@ minInterval 10
       return;
    }
 
-   // Lowered from cAge4 to cAge3 so AIs start late-game walling in Fortress
-   // rather than Industrial — gives walls time to complete before endgame
-   // army pressure instead of only starting them at t≈30m.
    if (kbGetAge() < cAge3)
    {
       return;
    }
 
-   // Respect doctrine: MobileNoWalls leaders (Napoleon's Forward Operational
-   // Line, Hiawatha's Steppe Cavalry Wedge, jungle guerrilla styles) must
-   // not get late-game walls either. Previously they did, because this rule
-   // only checked gLLWallLevel > 0 and gLLLateWallingEnabled, ignoring
-   // strategy. Verified in replay: Napoleon built walls despite
-   // earlyWalls=0 / wallStrategy=MobileNoWalls.
    if (gLLWallStrategy == cLLWallStrategyMobileNoWalls)
    {
       llLogDecision("WALL", "late walling declined — MobileNoWalls doctrine");
@@ -375,6 +385,12 @@ minInterval 10
       return;
    }
 
+   // Anti-spam: is there ALREADY an active ring plan on this base?
+   // If yes we leave it alone — no duplicate ring spam. The plan stays
+   // alive and the engine keeps placing pieces as wood allows.
+   bool ringActive = (aiPlanGetIDByTypeAndVariableType(
+      cPlanBuildWall, cBuildWallPlanWallType, cBuildWallPlanWallTypeRing, true) >= 0);
+
    // Wider outer ring for late-game walls; more gates for sally options.
    // FortressRing = symmetric; all others bias forward toward the enemy arc.
    float wallRadius = llGetLegendaryWallRadius(true);
@@ -384,36 +400,66 @@ minInterval 10
       wallCenter = llGetForwardBiasedWallCenter(baseCenter, mainBaseID, 0.18);
    }
 
-   int wallPlanID = aiPlanCreate("WallInBase", cPlanBuildWall);
-   if (wallPlanID != -1)
+   // Static flag so the outer supplement only ever fires once.
+   static int outerRingPlaced = 0;
+   bool placingOuter = false;
+
+   if (ringActive == true)
    {
-      aiPlanSetVariableInt(wallPlanID, cBuildWallPlanWallType, 0, cBuildWallPlanWallTypeRing);
-      // Tripled villager allocation so walls actually complete before the
-      // match ends (was 1–2, now 3–5).
-      aiPlanAddUnitType(wallPlanID, gEconUnit, 0, 3, 5);
-      aiPlanSetVariableVector(wallPlanID, cBuildWallPlanWallRingCenterPoint, 0, wallCenter);
-      aiPlanSetVariableFloat(wallPlanID, cBuildWallPlanWallRingRadius, 0.0, wallRadius);
-      aiPlanSetVariableInt(wallPlanID, cBuildWallPlanNumberOfGates, 0, llGetLegendaryWallGateCount(true));
-      aiPlanSetBaseID(wallPlanID, mainBaseID);
-      aiPlanSetEscrowID(wallPlanID, cEconomyEscrowID);
-      // Priority bumped 60 -> 75 so walls don't lose villager contention
-      // with economy/military plans.
-      aiPlanSetDesiredPriority(wallPlanID, 75);
-      aiPlanSetActive(wallPlanID, true);
-      xsEnableRule("fillInWallGapsNew");
-      llLogPlanEvent("create", wallPlanID,
-         "late-wall strategy=" + gLLWallStrategy +
-         " center=" + llFmtVec(wallCenter) +
-         " radius=" + wallRadius +
-         " gates=" + llGetLegendaryWallGateCount(true));
-      llProbe("plan.wall",
-         "phase=late strategy=" + gLLWallStrategy +
-         " base=" + mainBaseID +
-         " center=" + llFmtVec(wallCenter) +
-         " radius=" + wallRadius +
-         " wallLevel=" + gLLWallLevel);
+      // Main ring is already active. Consider placing the OUTER supplement
+      // when we hit Age 4 (Industrial) — a single wider ring that doubles
+      // the defended perimeter. Only once per match per AI.
+      if ((kbGetAge() >= cAge4) && (outerRingPlaced == 0))
+      {
+         placingOuter = true;
+         wallRadius = wallRadius * 1.35;  // 35% wider outer ring
+      }
+      else
+      {
+         // Nothing to do this tick — ring alive, no supplement needed yet.
+         return;
+      }
    }
-   xsDisableSelf();
+
+   int wallPlanID = aiPlanCreate(placingOuter ? "OuterWallRing" : "WallInBase", cPlanBuildWall);
+   if (wallPlanID < 0)
+   {
+      return;
+   }
+
+   aiPlanSetVariableInt(wallPlanID, cBuildWallPlanWallType, 0, cBuildWallPlanWallTypeRing);
+   // 3–5 dedicated villagers — walls are top-priority protection.
+   aiPlanAddUnitType(wallPlanID, gEconUnit, 0, 3, 5);
+   aiPlanSetVariableVector(wallPlanID, cBuildWallPlanWallRingCenterPoint, 0, wallCenter);
+   aiPlanSetVariableFloat(wallPlanID, cBuildWallPlanWallRingRadius, 0.0, wallRadius);
+   aiPlanSetVariableInt(wallPlanID, cBuildWallPlanNumberOfGates, 0, llGetLegendaryWallGateCount(true));
+   aiPlanSetBaseID(wallPlanID, mainBaseID);
+   aiPlanSetEscrowID(wallPlanID, cEconomyEscrowID);
+   // Priority 75 for primary ring, 70 for outer supplement (don't starve
+   // the main ring if wood contention arises).
+   aiPlanSetDesiredPriority(wallPlanID, placingOuter ? 70 : 75);
+   aiPlanSetActive(wallPlanID, true);
+   xsEnableRule("fillInWallGapsNew");
+
+   if (placingOuter == true)
+   {
+      outerRingPlaced = 1;
+   }
+
+   llLogPlanEvent("create", wallPlanID,
+      (placingOuter ? "outer-wall" : "late-wall") +
+      " strategy=" + gLLWallStrategy +
+      " center=" + llFmtVec(wallCenter) +
+      " radius=" + wallRadius +
+      " gates=" + llGetLegendaryWallGateCount(true));
+   llProbe("plan.wall",
+      "phase=" + (placingOuter ? "outer" : "late") +
+      " strategy=" + gLLWallStrategy +
+      " base=" + mainBaseID +
+      " center=" + llFmtVec(wallCenter) +
+      " radius=" + wallRadius +
+      " wallLevel=" + gLLWallLevel);
+   // Stay active: if this plan ever dies, re-create it next tick.
 }
 //==============================================================================
 // RULE fillInWallGapsNew
