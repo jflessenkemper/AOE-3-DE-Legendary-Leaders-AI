@@ -3033,6 +3033,8 @@ minInterval 13
       aiPlanSetActive(gLandDefendPlan0);
       debugMilitary("Creating primary land defend plan");
       llLogCombatPlanConfig("create", gLandDefendPlan0, "primary-land-defend");
+      llProbe("DEFEND", "plan=" + gLandDefendPlan0 + " base=" + mainBaseID +
+         " age=" + kbGetAge() + " armyPop=" + aiGetMilitaryPop() + " t=" + xsGetTime());
 
       gLandReservePlan = aiPlanCreate("Land Reserve Units", cPlanCombat);
       // All mil units, high MAX value to suck up all excess.

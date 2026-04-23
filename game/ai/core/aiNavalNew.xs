@@ -102,6 +102,8 @@ minInterval 15
       aiPlanSetActive(gNavyDefendPlan); 
       llVerboseEcho("Creating Naval Defense Plan at: " + gNavyVec);
       llLogPlanEvent("create", gNavyDefendPlan, "naval-defend defendPoint=" + gNavyVec + " engageRange=100 gatherDistance=40 refresh=20");
+      llProbe("NAVAL-DEF", "plan=" + gNavyDefendPlan + " pos=" + gNavyVec +
+         " warships=" + numberFound + " age=" + kbGetAge() + " t=" + xsGetTime());
    }
 
    if (((numberFound >= 3 ) && (civIsNative() == false)) ||
@@ -123,7 +125,9 @@ minInterval 15
          aiPlanSetInitialPosition(gNavyEnhancedAttackPlan, gNavyVec);
          llLogPlanEvent("create", gNavyEnhancedAttackPlan, "naval-attack targetPlayer=" + getNavalTargetPlayerId() +
             " gatherPoint=" + gNavyVec + " gatherDistance=50 refresh=5 priority=65");
-         llVerboseEcho("***** LAUNCHING NAVAL ATTACK, plan ID is " + gNavyEnhancedAttackPlan); 
+         llVerboseEcho("***** LAUNCHING NAVAL ATTACK, plan ID is " + gNavyEnhancedAttackPlan);
+         llProbe("NAVAL-ATK", "plan=" + gNavyEnhancedAttackPlan + " target=p" + getNavalTargetPlayerId() +
+            " warships=" + numberFound + " age=" + kbGetAge() + " t=" + xsGetTime());
          llSendLegendaryLeaderInsultLine(getNavalTargetPlayerId(), 150000);
          aiPlanSetActive(gNavyEnhancedAttackPlan, true);
       }
@@ -309,6 +313,8 @@ maxInterval 20
          
          debugMilitary("Creating primary navy repair plan at: " + ownDockPosition);
          aiPlanSetActive(gNavyRepairPlan);
+         llProbe("NAVAL-REP", "plan=" + gNavyRepairPlan + " dock=" + ownDockID +
+            " pos=" + ownDockPosition + " t=" + xsGetTime());
       }
       aiPlanSetVariableVector(gNavyRepairPlan, cCombatPlanTargetPoint, 0, ownDockPosition);
       aiPlanSetInitialPosition(gNavyRepairPlan, ownDockPosition);

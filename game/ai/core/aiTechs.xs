@@ -30,6 +30,14 @@ int chooseEuropeanPolitician()
    int bestChoice = 0; // Only used for Fortress -> Industrial.
    int bestScore = 0;  // Only used for Fortress -> Industrial.
 
+   llProbe("POLIST", "curAge=" + age + " toAge=" + (age + 1) +
+      " choices=" + numPoliticianChoices + " t=" + xsGetTime());
+   for (int pi = 0; pi < numPoliticianChoices; pi++)
+   {
+      int candidate = aiGetPoliticianListByIndex(age + 1, pi);
+      llProbe("POLIST-CAND", "idx=" + pi + " tech=" + candidate + " name=" + kbGetTechName(candidate));
+   }
+
    int arraySize = xsArrayGetSize(ageUpPoliticians);
    for (int i = 0; i < arraySize; i++)
    {

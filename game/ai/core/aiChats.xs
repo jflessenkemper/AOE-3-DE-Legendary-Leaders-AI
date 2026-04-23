@@ -208,6 +208,8 @@ minInterval 5
       if (getUnitByLocation(cUnitTypeUnit, cMyID, cUnitStateAlive, kbUnitGetPosition(tcID), 50.0) >= 0)
       { // I have a unit nearby, presumably I have LOS.
          sendStatement(targetPlayer, cAICommPromptToEnemyISpotHisTC, kbUnitGetPosition(tcID));
+         llProbe("CONTACT", "target=p" + targetPlayer + " tc=" + tcID +
+            " pos=" + kbUnitGetPosition(tcID) + " t=" + xsGetTime());
       }
       xsDisableSelf();
    }

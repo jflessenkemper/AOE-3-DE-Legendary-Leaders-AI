@@ -3779,6 +3779,10 @@ void shipGrantedHandler(int parm = -1) // parm is unused.
          aiSetHCGatherUnit(gatherUnitID);
       }
       debugHCCards("Choosing card: " + kbGetTechName(aiHCDeckGetCardTechID(deck, bestCard)));
+      llProbe("SHIP", "card=" + bestCard + " extended=" + bestCardIsExtended +
+         " tech=" + aiHCDeckGetCardTechID(deck, bestCard) +
+         " name=" + kbGetTechName(aiHCDeckGetCardTechID(deck, bestCard)) +
+         " value=" + bestCardValue + " age=" + kbGetAge() + " t=" + xsGetTime());
       aiHCDeckPlayCard(bestCard, bestCardIsExtended);
    }
 }

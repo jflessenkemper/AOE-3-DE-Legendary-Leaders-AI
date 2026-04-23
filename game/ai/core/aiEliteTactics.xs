@@ -666,6 +666,8 @@ void llRebuildExplorerEscortPlan(int attackPlanID = -1, vector gatherPoint = cIn
    gLLExplorerEscortLastRefreshTime = xsGetTime();
    debugLegendaryLeaders("created explorer escort plan " + planID + " for attack plan " + attackPlanID +
       " using " + addedUnits + " non-elite troops.");
+   llProbe("ESCORT", "plan=" + planID + " attackPlan=" + attackPlanID +
+      " units=" + addedUnits + " desired=" + desiredEscortCount + " escortPt=" + escortPoint);
 }
 
 vector llChooseAssaultObjectivePoint(int attackPlanID = -1, vector gatherPoint = cInvalidVector)
@@ -784,6 +786,8 @@ void llRebuildEliteGuardPlan(int anchorUnitID = -1)
    gLLEliteGuardAnchorUnitID = anchorUnitID;
    debugLegendaryLeaders("created elite guard plan " + planID + " around anchor unit " + anchorUnitID +
       " using " + addedUnits + " non-elite troops.");
+   llProbe("ELITE-GUARD", "plan=" + planID + " anchor=" + anchorUnitID +
+      " units=" + addedUnits + " pos=" + anchorLocation);
 }
 
 void llRetreatEliteCore(int anchorUnitID = -1, float radius = 36.0)
@@ -911,6 +915,7 @@ void llTryRansomExplorer(void)
 
    createProtoUnitCommandResearchPlan(cProtoUnitCommandRansomExplorer, tcID, cMilitaryEscrowID, 95, 95);
    debugLegendaryLeaders("queued explorer ransom through the town center command after losing the leader.");
+   llProbe("RANSOM", "tc=" + tcID + " fallen=" + aiGetFallenExplorerID() + " t=" + xsGetTime());
 }
 
 void llRebuildEliteSupportPlan(int attackPlanID = -1, vector gatherPoint = cInvalidVector, vector elitePoint = cInvalidVector,
@@ -989,10 +994,13 @@ void llRebuildEliteSupportPlan(int attackPlanID = -1, vector gatherPoint = cInva
    gLLEliteSupportLastRefreshTime = xsGetTime();
    debugLegendaryLeaders("created elite support plan " + planID + " for attack plan " + attackPlanID +
       " with " + addedUnits + " elite units guarding the second line.");
+   llProbe("ELITE-SUPPORT", "plan=" + planID + " attackPlan=" + attackPlanID +
+      " units=" + addedUnits + " desired=" + desiredEliteCount + " elitePt=" + elitePoint);
 }
 
 bool llHandleEliteAssaultFormation(int attackPlanID = -1)
 {
+   static int lastProbedAssaultPlan = -1;
    if (attackPlanID < 0)
    {
       llDestroyEliteSupportPlan();
@@ -1001,6 +1009,12 @@ bool llHandleEliteAssaultFormation(int attackPlanID = -1)
 
    vector gatherPoint = llGetAttackPlanGatherPoint(attackPlanID);
    vector targetPoint = llChooseAssaultObjectivePoint(attackPlanID, gatherPoint);
+   if (attackPlanID != lastProbedAssaultPlan)
+   {
+      lastProbedAssaultPlan = attackPlanID;
+      llProbe("ASSAULT", "attackPlan=" + attackPlanID + " gather=" + gatherPoint +
+         " target=" + targetPoint + " t=" + xsGetTime());
+   }
    if ((gatherPoint == cInvalidVector) || (targetPoint == cInvalidVector))
    {
       llDestroyExplorerEscortPlan();

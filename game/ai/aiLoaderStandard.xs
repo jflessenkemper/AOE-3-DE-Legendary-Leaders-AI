@@ -191,6 +191,11 @@ void postInit(void)
    // Pachacuti, Frederick) get an early ring-wall around the TC.
    xsEnableRule("explorationAgeWalling");
 
+   if (cLLReplayProbes == true)
+   {
+      xsEnableRule("llHeartbeat");
+   }
+
    enableLegendaryRevolutionSupportRules();
    enableLegendaryRevolutionCommanderRules();
    enableLeaderBourbonRules();
@@ -267,3 +272,25 @@ void postInit(void)
 	Add personality-specific or scenario-specific rules in the section below.
 */
 //==============================================================================
+
+//==============================================================================
+// llHeartbeat
+// Periodic time-series probe. Emits age, resources, pop, army, score every
+// 60s so replay analysis can chart economic/military trajectory without
+// relying on spiky event-driven probes alone.
+//==============================================================================
+rule llHeartbeat
+inactive
+minInterval 60
+{
+   llProbe("HEARTBEAT",
+      "t=" + xsGetTime() +
+      " age=" + kbGetAge() +
+      " food=" + kbResourceGet(cResourceFood) +
+      " wood=" + kbResourceGet(cResourceWood) +
+      " gold=" + kbResourceGet(cResourceGold) +
+      " pop=" + kbGetPop() +
+      " vills=" + kbUnitCount(cMyID, gEconUnit, cUnitStateAlive) +
+      " armyPop=" + aiGetMilitaryPop() +
+      " score=" + aiGetScore(cMyID));
+}
