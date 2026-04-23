@@ -34,6 +34,8 @@
 </tr>
 </table>
 
+> **Heads-up on lobby portraits.** In the pre-match lobby, the small portrait thumbnail next to each base civ (British, French, Russian, etc.) still shows the base-game leader (Queen Elizabeth for British, Ivan for Russians, etc.). This is an engine-level limit — the portrait comes from a texture inside the game's packed art archive that mods can't override. **The actual AI personality, name, in-match scoreboard portrait, chat portrait, and doctrine are all our legendary leader** (Duke of Wellington, Catherine the Great, etc.) — only that one small lobby thumbnail is stuck. Revolution civs (Chileans, Napoleonic France, Finns, etc.) use our mod's correct portrait everywhere.
+
 ## 🏳️ Elite Units and AI Rout
 
 Elite units are chosen case by case for each nation and do not auto-rout. Only AI-controlled non-elite land units are eligible to rout, and they do so at 25% health or below when enemy pressure is present and no friendly elite support is nearby. Player-controlled units keep manual control.
