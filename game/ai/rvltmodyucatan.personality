@@ -6,7 +6,7 @@
    <forcedciv>RvltModYucatan</forcedciv>
    <rushboom>0</rushboom>
    <icon>resources/images/icons/singleplayer/cpai_avatar_yucatan_carrillo_puerto.png</icon>
-   <chatset>hidalgo</chatset>
+   <chatset>rvltmodyucatan</chatset>
    <playerNames>
       <nameID>490271</nameID>
       <civ>RvltModYucatan</civ>

@@ -6,7 +6,7 @@
    <forcedciv>ottomans</forcedciv>
    <rushboom>0</rushboom>
    <icon>resources/images/icons/singleplayer/cpai_avatar_ottomans_suleiman.png</icon>
-   <chatset>Suleiman</chatset>
+   <chatset>suleiman</chatset>
    <playerNames>
       <nameID>490234</nameID>
       <civ>ottomans</civ>

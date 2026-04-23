@@ -6,7 +6,7 @@
    <forcedciv>RvltModHungarians</forcedciv>
    <rushboom>1</rushboom>
    <icon>resources/images/icons/singleplayer/cpai_avatar_hungarians_kossuth.png</icon>
-   <chatset>frederick</chatset>
+   <chatset>rvltmodhungarians</chatset>
    <playerNames>
       <nameID>490265</nameID>
       <civ>RvltModHungarians</civ>

@@ -6,7 +6,7 @@
    <forcedciv>RvltModTexians</forcedciv>
    <rushboom>-1</rushboom>
    <icon>resources/images/icons/singleplayer/cpai_avatar_texians_sam_houston.png</icon>
-   <chatset>washington</chatset>
+   <chatset>rvltmodtexians</chatset>
    <playerNames>
       <nameID>490275</nameID>
       <civ>RvltModTexians</civ>

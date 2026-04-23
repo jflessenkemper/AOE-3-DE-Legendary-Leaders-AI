@@ -6,7 +6,7 @@
    <forcedciv>RvltModSouthAfricans</forcedciv>
    <rushboom>-1</rushboom>
    <icon>resources/images/icons/singleplayer/cpai_avatar_south_africans_kruger.png</icon>
-   <chatset>maurice</chatset>
+   <chatset>rvltmodsouthafricans</chatset>
    <playerNames>
       <nameID>490263</nameID>
       <civ>RvltModSouthAfricans</civ>

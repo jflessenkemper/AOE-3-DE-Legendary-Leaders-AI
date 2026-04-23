@@ -6,7 +6,7 @@
    <forcedciv>RvltModCanadians</forcedciv>
    <rushboom>-1</rushboom>
    <icon>resources/images/icons/singleplayer/cpai_avatar_canadians_brock.png</icon>
-   <chatset>elizabeth</chatset>
+   <chatset>rvltmodcanadians</chatset>
    <playerNames>
       <nameID>490254</nameID>
       <civ>RvltModCanadians</civ>

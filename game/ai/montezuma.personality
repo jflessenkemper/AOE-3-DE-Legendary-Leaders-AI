@@ -6,7 +6,7 @@
    <forcedciv>XPAztec</forcedciv>
    <rushboom>0</rushboom>
    <icon>resources/images/icons/singleplayer/cpai_avatar_aztecs_montezuma.png</icon>
-   <chatset>cuauhtemoc</chatset>
+   <chatset>montezuma</chatset>
    <playerNames>
       <nameID>490212</nameID>
       <civ>XPAztec</civ>

@@ -6,7 +6,7 @@
    <forcedciv>RvltModRioGrande</forcedciv>
    <rushboom>1</rushboom>
    <icon>resources/images/icons/singleplayer/cpai_avatar_rio_grande_canales_rosillo.png</icon>
-   <chatset>hidalgo</chatset>
+   <chatset>rvltmodriogrande</chatset>
    <playerNames>
       <nameID>490272</nameID>
       <civ>RvltModRioGrande</civ>

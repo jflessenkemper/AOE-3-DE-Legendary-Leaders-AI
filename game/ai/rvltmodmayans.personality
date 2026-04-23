@@ -6,7 +6,7 @@
    <forcedciv>RvltModMayans</forcedciv>
    <rushboom>1</rushboom>
    <icon>resources/images/icons/singleplayer/cpai_avatar_mayans_canek.png</icon>
-   <chatset>montezuma</chatset>
+   <chatset>rvltmodmayans</chatset>
    <playerNames>
       <nameID>490273</nameID>
       <civ>RvltModMayans</civ>

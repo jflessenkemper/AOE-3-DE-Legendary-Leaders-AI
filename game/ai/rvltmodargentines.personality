@@ -6,7 +6,7 @@
    <forcedciv>RvltModArgentines</forcedciv>
    <rushboom>1</rushboom>
    <icon>resources/images/icons/singleplayer/cpai_avatar_argentines_san_martin.png</icon>
-   <chatset>isabella</chatset>
+   <chatset>rvltmodargentines</chatset>
    <playerNames>
       <nameID>490257</nameID>
       <civ>RvltModArgentines</civ>

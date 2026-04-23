@@ -6,7 +6,7 @@
    <forcedciv>RvltModCalifornians</forcedciv>
    <rushboom>-1</rushboom>
    <icon>resources/images/icons/singleplayer/cpai_avatar_californians_vallejo.png</icon>
-   <chatset>hidalgo</chatset>
+   <chatset>rvltmodcalifornians</chatset>
    <playerNames>
       <nameID>490274</nameID>
       <civ>RvltModCalifornians</civ>

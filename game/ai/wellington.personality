@@ -6,7 +6,7 @@
    <forcedciv>british</forcedciv>
    <rushboom>0</rushboom>
    <icon>resources/images/icons/singleplayer/cpai_avatar_british_wellington.png</icon>
-   <chatset>elizabeth</chatset>
+   <chatset>wellington</chatset>
    <playerNames>
       <nameID>490200</nameID>
       <civ>british</civ>

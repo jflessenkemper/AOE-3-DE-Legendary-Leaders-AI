@@ -6,7 +6,7 @@
    <forcedciv>RvltModBarbary</forcedciv>
    <rushboom>1</rushboom>
    <icon>resources/images/icons/singleplayer/cpai_avatar_barbary_barbarossa.png</icon>
-   <chatset>suleiman</chatset>
+   <chatset>rvltmodbarbary</chatset>
    <playerNames>
       <nameID>490267</nameID>
       <civ>RvltModBarbary</civ>
