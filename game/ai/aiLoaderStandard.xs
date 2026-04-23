@@ -253,14 +253,14 @@ void postInit(void)
       " okTaunt=" + cvOkToTaunt);
 
    // ── LL-ECOSNAP probe ────────────────────────────────────────────────────
-   // Initial economic state for baseline comparison on age transitions.
-   llProbe("econ.snap",
-      "age=" + kbGetAge() +
-      " food=" + kbResourceGet(cResourceFood) +
-      " wood=" + kbResourceGet(cResourceWood) +
-      " gold=" + kbResourceGet(cResourceGold) +
-      " pop=" + kbGetPop() +
-      " vills=" + kbUnitCount(cMyID, gEconUnit, cUnitStateAlive));
+   // Initial economic state snapshot — DEFERRED: postInit runs before the
+   // engine seeds starting resources/villagers, so an immediate snapshot
+   // captures all-zero garbage (verified in replay). llInitialEconSnapshot
+   // fires once after 5s when the starting bundle is populated.
+   if (cLLReplayProbes == true)
+   {
+      xsEnableRule("llInitialEconSnapshot");
+   }
 }
 
 
@@ -292,4 +292,31 @@ minInterval 60
       " vills=" + kbUnitCount(cMyID, gEconUnit, cUnitStateAlive) +
       " armyPop=" + aiGetMilitaryPop() +
       " score=" + aiGetScore(cMyID));
+}
+
+//==============================================================================
+// llInitialEconSnapshot
+// Fires once after starting resources/villagers seed. Deferred from postInit
+// because immediate emission captures zero-state garbage before the engine
+// grants the starting bundle.
+//==============================================================================
+rule llInitialEconSnapshot
+inactive
+minInterval 5
+{
+   // Wait until either starting resources or starting villagers have been
+   // granted — whichever comes first signals seeding is complete.
+   if ((kbResourceGet(cResourceFood) <= 0.0) &&
+       (kbUnitCount(cMyID, gEconUnit, cUnitStateAlive) <= 0))
+   {
+      return;
+   }
+   llProbe("econ.snap",
+      "age=" + kbGetAge() +
+      " food=" + kbResourceGet(cResourceFood) +
+      " wood=" + kbResourceGet(cResourceWood) +
+      " gold=" + kbResourceGet(cResourceGold) +
+      " pop=" + kbGetPop() +
+      " vills=" + kbUnitCount(cMyID, gEconUnit, cUnitStateAlive));
+   xsDisableSelf();
 }

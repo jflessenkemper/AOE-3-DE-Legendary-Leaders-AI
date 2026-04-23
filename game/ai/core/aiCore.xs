@@ -1067,6 +1067,21 @@ void gameOverHandler(int nothing = 0)
    // LL-GAMEOVER probe — final state. Variable 'iWon' is base-game and
    // confusingly named (it actually receives kbHasPlayerLost), so emit the
    // raw kbHasPlayerLost value instead for unambiguous outcome parsing.
+   //
+   // Guard against spurious early firings: we observed gameOverHandler
+   // running at t=20s with stale pre-init identity (DEHausa/Usman for a
+   // Napoleonic slot). The engine invokes this on any game-state reset,
+   // including lobby leaver replay. Skip emission inside the first 60s
+   // and skip when neither win nor loss is flagged — no legitimate match
+   // ends that early and parseable gameover needs a real outcome.
+   if ((xsGetTime() < 60000) ||
+       (kbHasPlayerLost(cMyID) == false && aiGetScore(cMyID) <= 0))
+   {
+      debugCore("gameOverHandler: suppressing spurious early fire (t=" +
+         xsGetTime() + " lost=" + kbHasPlayerLost(cMyID) +
+         " score=" + aiGetScore(cMyID) + ")");
+      return;
+   }
    llProbe("meta.gameover",
       "lost=" + kbHasPlayerLost(cMyID) +
       " finalAge=" + kbGetAge() +
@@ -2548,8 +2563,10 @@ minInterval 10
       gAgeUpTime = xsGetTime();
       gAgeUpPlanTime = 0;
       
-      // Walls rules...
-      //xsEnableRule("delayWallsNew");
+      // Walls rules: enable late-game walling in Fortress so walls actually
+      // complete before the match ends (was only triggered at Age 4, too
+      // late — replay showed walls barely progressing by Industrial).
+      xsEnableRule("delayWallsNew");
       //xsEnableRule("enhancedWalls");
       xsEnableRule("forwardBaseWall");
       //xsEnableRule("getBackToWork");

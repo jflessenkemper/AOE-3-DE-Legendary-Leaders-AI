@@ -900,6 +900,20 @@ void updateResourceDistribution(bool force = false)
       goldReservedRate = 0.0;
    }
 
+   // LL anti-hoard — if an actual stockpile is already well above what the
+   // reserve would guarantee, zero the reserve for that resource so gather
+   // redistribution flows to the short resources instead. Replay diagnostics
+   // showed Jean hitting Industrial with 4137 wood and Barbary with 2443
+   // food idle, while the reserve system kept budgeting more of the same.
+   // Thresholds tuned empirically: once we have >1500 of a resource we
+   // don't need to "hold back" any gather rate for it.
+   float foodStock = kbResourceGet(cResourceFood);
+   float woodStock = kbResourceGet(cResourceWood);
+   float goldStock = kbResourceGet(cResourceGold);
+   if (foodStock > 1500.0) foodReservedRate = 0.0;
+   if (woodStock > 1500.0) woodReservedRate = 0.0;
+   if (goldStock > 1500.0) goldReservedRate = 0.0;
+
    aiSetReservedGatherRate(cResourceGold, goldReservedRate);
    aiSetReservedGatherRate(cResourceWood, woodReservedRate);
    aiSetReservedGatherRate(cResourceFood, foodReservedRate);

@@ -30,11 +30,31 @@ int chooseEuropeanPolitician()
    int bestChoice = 0; // Only used for Fortress -> Industrial.
    int bestScore = 0;  // Only used for Fortress -> Industrial.
 
+   // Engine returns a doubled list for some civ/age combinations (observed:
+   // Portuguese curAge=3 toAge=4 returned choices=10 with the 5 real entries
+   // repeated). Dedupe by tech ID so the probe reflects the distinct option
+   // set. The downstream switch-cases iterate by index on the raw engine
+   // list and their conditionals filter by tech constant, so duplicates
+   // there are harmless — only the probe is affected.
+   int uniqueCount = 0;
+   int seenTechs = xsArrayCreateInt(32, -1, "tech.polist dedupe");
    llProbe("tech.polist", "curAge=" + age + " toAge=" + (age + 1) +
       " choices=" + numPoliticianChoices);
    for (int pi = 0; pi < numPoliticianChoices; pi++)
    {
       int candidate = aiGetPoliticianListByIndex(age + 1, pi);
+      bool dupe = false;
+      for (int qi = 0; qi < uniqueCount; qi++)
+      {
+         if (xsArrayGetInt(seenTechs, qi) == candidate)
+         {
+            dupe = true;
+            break;
+         }
+      }
+      if (dupe == true) continue;
+      xsArraySetInt(seenTechs, uniqueCount, candidate);
+      uniqueCount++;
       llProbe("tech.polistCand", "idx=" + pi + " tech=" + candidate +
          " name=\"" + kbGetTechName(candidate) + "\"");
    }

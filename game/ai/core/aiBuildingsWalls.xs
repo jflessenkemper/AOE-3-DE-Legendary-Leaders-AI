@@ -62,7 +62,9 @@ float llGetLegendaryWallRadius(bool lateGame = false)
 
 int llGetLegendaryWallGateCount(bool lateGame = false)
 {
-   int gateCount = lateGame == true ? 15 : 4;
+   // Raised from 4/15 to 6/18. More gates = better sally routes and the
+   // engine lays down more wall pieces per plan (each gate anchors an arc).
+   int gateCount = lateGame == true ? 18 : 6;
 
    if (gLLWallLevel == 1)
    {
@@ -77,12 +79,37 @@ int llGetLegendaryWallGateCount(bool lateGame = false)
       gateCount = gateCount - 2;
    }
 
-   if (gateCount < 2)
+   if (gateCount < 3)
    {
-      gateCount = 2;
+      gateCount = 3;
    }
 
    return (gateCount);
+}
+
+// Shift the wall ring center slightly along the base's front vector (toward
+// the likely enemy arc). A full ring still surrounds the base, but the
+// extra bias thickens wall coverage on the contested side where it matters
+// most. Returns the input unchanged if no front vector is registered.
+vector llGetForwardBiasedWallCenter(vector baseCenter = cInvalidVector,
+                                    int mainBaseID = -1,
+                                    float biasFactor = 0.25)
+{
+   if ((baseCenter == cInvalidVector) || (mainBaseID < 0))
+   {
+      return (baseCenter);
+   }
+   vector frontVec = kbBaseGetFrontVector(cMyID, mainBaseID);
+   if ((frontVec == cInvalidVector) ||
+       ((xsVectorGetX(frontVec) == 0.0) && (xsVectorGetZ(frontVec) == 0.0)))
+   {
+      return (baseCenter);
+   }
+   float radius = llGetLegendaryWallRadius(false);
+   float shift = radius * biasFactor;
+   float nx = xsVectorGetX(baseCenter) + xsVectorGetX(frontVec) * shift;
+   float nz = xsVectorGetZ(baseCenter) + xsVectorGetZ(frontVec) * shift;
+   return (xsVectorSet(nx, xsVectorGetY(baseCenter), nz));
 }
 
 //==============================================================================
@@ -92,81 +119,83 @@ int llGetLegendaryWallGateCount(bool lateGame = false)
 
 // FortressRing: full 360-degree ring wall with extra thickness/gates.
 // Valette, Pachacuti, Frederick, Suleiman, Catherine, Bourbon France.
+// Keeps symmetric center — fortress doctrine is all-around defense.
 int llPlanFortressRingWall(int mainBaseID = -1, vector baseCenter = cInvalidVector)
 {
    float radius = llGetLegendaryWallRadius(false);
    int planID = aiPlanCreate("FortressRing Wall", cPlanBuildWall);
    if (planID < 0) return (-1);
    aiPlanSetVariableInt(planID, cBuildWallPlanWallType, 0, cBuildWallPlanWallTypeRing);
-   aiPlanAddUnitType(planID, gEconUnit, 0, 2, 3);  // more villagers for thick rings
+   aiPlanAddUnitType(planID, gEconUnit, 0, 3, 5);  // heavy villager commitment for thick rings
    aiPlanSetVariableVector(planID, cBuildWallPlanWallRingCenterPoint, 0, baseCenter);
    aiPlanSetVariableFloat(planID, cBuildWallPlanWallRingRadius, 0.0, radius);
    aiPlanSetVariableInt(planID, cBuildWallPlanNumberOfGates, 0, llGetLegendaryWallGateCount(false));
    aiPlanSetBaseID(planID, mainBaseID);
    aiPlanSetEscrowID(planID, cEconomyEscrowID);
-   aiPlanSetDesiredPriority(planID, 68);  // higher priority than generic
+   aiPlanSetDesiredPriority(planID, 75);  // raised 68 -> 75 to win villager contention
    aiPlanSetActive(planID, true);
    return (planID);
 }
 
 // ChokepointSegments: walls only at natural terrain pinches (Andes/Alps/passes).
 // Shivaji (Maratha hill forts), Pachacuti (valley mouths), Kangxi (Great Wall).
-// Fallback to a tighter ring if chokepoint detection fails on flat maps.
+// Fallback to a tighter ring if chokepoint detection fails on flat maps —
+// biased forward toward enemy since chokepoints always face outward.
 int llPlanChokepointWall(int mainBaseID = -1, vector baseCenter = cInvalidVector)
 {
-   // Engine's cPlanBuildWall doesn't expose segment-only placement cleanly,
-   // so we approximate: build a smaller ring with fewer gates, tilted toward
-   // the area chokepoint via front-vector. Real chokepoint-only walling
-   // would need a custom pathfinder; this gets ~70% there.
    float radius = llGetLegendaryWallRadius(false) - 4.0;
+   vector center = llGetForwardBiasedWallCenter(baseCenter, mainBaseID, 0.35);
    int planID = aiPlanCreate("Chokepoint Wall", cPlanBuildWall);
    if (planID < 0) return (-1);
    aiPlanSetVariableInt(planID, cBuildWallPlanWallType, 0, cBuildWallPlanWallTypeRing);
-   aiPlanAddUnitType(planID, gEconUnit, 0, 1, 2);
-   aiPlanSetVariableVector(planID, cBuildWallPlanWallRingCenterPoint, 0, baseCenter);
+   aiPlanAddUnitType(planID, gEconUnit, 0, 2, 4);
+   aiPlanSetVariableVector(planID, cBuildWallPlanWallRingCenterPoint, 0, center);
    aiPlanSetVariableFloat(planID, cBuildWallPlanWallRingRadius, 0.0, radius);
-   aiPlanSetVariableInt(planID, cBuildWallPlanNumberOfGates, 0, 3);
+   aiPlanSetVariableInt(planID, cBuildWallPlanNumberOfGates, 0, 4);
    aiPlanSetBaseID(planID, mainBaseID);
    aiPlanSetEscrowID(planID, cEconomyEscrowID);
-   aiPlanSetDesiredPriority(planID, 60);
+   aiPlanSetDesiredPriority(planID, 70);
    aiPlanSetActive(planID, true);
    return (planID);
 }
 
 // CoastalBatteries: land-side partial ring (Wellington Torres Vedras, Henry Elmina).
-// Standard ring but front-facing gate + extra towers at engagement face.
+// Ring center pushed inland (away from the coast arc) so the wall covers
+// the landward approach more thickly — matches real peninsular doctrine.
 int llPlanCoastalBatteriesWall(int mainBaseID = -1, vector baseCenter = cInvalidVector)
 {
    float radius = llGetLegendaryWallRadius(false);
+   vector center = llGetForwardBiasedWallCenter(baseCenter, mainBaseID, 0.20);
    int planID = aiPlanCreate("CoastalBatteries Wall", cPlanBuildWall);
    if (planID < 0) return (-1);
    aiPlanSetVariableInt(planID, cBuildWallPlanWallType, 0, cBuildWallPlanWallTypeRing);
-   aiPlanAddUnitType(planID, gEconUnit, 0, 1, 2);
-   aiPlanSetVariableVector(planID, cBuildWallPlanWallRingCenterPoint, 0, baseCenter);
+   aiPlanAddUnitType(planID, gEconUnit, 0, 2, 4);
+   aiPlanSetVariableVector(planID, cBuildWallPlanWallRingCenterPoint, 0, center);
    aiPlanSetVariableFloat(planID, cBuildWallPlanWallRingRadius, 0.0, radius);
-   aiPlanSetVariableInt(planID, cBuildWallPlanNumberOfGates, 0, 4);
+   aiPlanSetVariableInt(planID, cBuildWallPlanNumberOfGates, 0, 6);
    aiPlanSetBaseID(planID, mainBaseID);
    aiPlanSetEscrowID(planID, cEconomyEscrowID);
-   aiPlanSetDesiredPriority(planID, 63);
+   aiPlanSetDesiredPriority(planID, 72);
    aiPlanSetActive(planID, true);
    return (planID);
 }
 
-// FrontierPalisades: quick lighter ring, more gates, less stone.
+// FrontierPalisades: quick lighter ring, many gates, less stone.
 // Washington, Jefferson, Brock, Papineau, Houston, Kruger, Mannerheim, Morazán.
 int llPlanFrontierPalisadeWall(int mainBaseID = -1, vector baseCenter = cInvalidVector)
 {
-   float radius = llGetLegendaryWallRadius(false) + 2.0;  // looser ring
+   float radius = llGetLegendaryWallRadius(false) + 2.0;
+   vector center = llGetForwardBiasedWallCenter(baseCenter, mainBaseID, 0.15);
    int planID = aiPlanCreate("FrontierPalisade Wall", cPlanBuildWall);
    if (planID < 0) return (-1);
    aiPlanSetVariableInt(planID, cBuildWallPlanWallType, 0, cBuildWallPlanWallTypeRing);
-   aiPlanAddUnitType(planID, gEconUnit, 0, 1, 2);
-   aiPlanSetVariableVector(planID, cBuildWallPlanWallRingCenterPoint, 0, baseCenter);
+   aiPlanAddUnitType(planID, gEconUnit, 0, 2, 3);
+   aiPlanSetVariableVector(planID, cBuildWallPlanWallRingCenterPoint, 0, center);
    aiPlanSetVariableFloat(planID, cBuildWallPlanWallRingRadius, 0.0, radius);
-   aiPlanSetVariableInt(planID, cBuildWallPlanNumberOfGates, 0, 6);  // many gates, militia sallies
+   aiPlanSetVariableInt(planID, cBuildWallPlanNumberOfGates, 0, 8);
    aiPlanSetBaseID(planID, mainBaseID);
    aiPlanSetEscrowID(planID, cEconomyEscrowID);
-   aiPlanSetDesiredPriority(planID, 58);  // lower priority, economy comes first
+   aiPlanSetDesiredPriority(planID, 68);  // raised 58 -> 68, wood-cheap but still worth completing
    aiPlanSetActive(planID, true);
    return (planID);
 }
@@ -174,17 +203,18 @@ int llPlanFrontierPalisadeWall(int mainBaseID = -1, vector baseCenter = cInvalid
 // UrbanBarricade: tight compact inner ring (Robespierre Paris, Garibaldi cities).
 int llPlanUrbanBarricadeWall(int mainBaseID = -1, vector baseCenter = cInvalidVector)
 {
-   float radius = llGetLegendaryWallRadius(false) - 8.0;  // much tighter
+   float radius = llGetLegendaryWallRadius(false) - 8.0;
+   vector center = llGetForwardBiasedWallCenter(baseCenter, mainBaseID, 0.15);
    int planID = aiPlanCreate("UrbanBarricade Wall", cPlanBuildWall);
    if (planID < 0) return (-1);
    aiPlanSetVariableInt(planID, cBuildWallPlanWallType, 0, cBuildWallPlanWallTypeRing);
-   aiPlanAddUnitType(planID, gEconUnit, 0, 1, 2);
-   aiPlanSetVariableVector(planID, cBuildWallPlanWallRingCenterPoint, 0, baseCenter);
+   aiPlanAddUnitType(planID, gEconUnit, 0, 2, 3);
+   aiPlanSetVariableVector(planID, cBuildWallPlanWallRingCenterPoint, 0, center);
    aiPlanSetVariableFloat(planID, cBuildWallPlanWallRingRadius, 0.0, radius);
-   aiPlanSetVariableInt(planID, cBuildWallPlanNumberOfGates, 0, 3);
+   aiPlanSetVariableInt(planID, cBuildWallPlanNumberOfGates, 0, 4);
    aiPlanSetBaseID(planID, mainBaseID);
    aiPlanSetEscrowID(planID, cEconomyEscrowID);
-   aiPlanSetDesiredPriority(planID, 60);
+   aiPlanSetDesiredPriority(planID, 70);
    aiPlanSetActive(planID, true);
    return (planID);
 }
@@ -254,7 +284,10 @@ minInterval 15
       return;
    }
 
-   if (kbResourceGet(cResourceWood) < 125.0)
+   // Lowered 125 -> 75 so the wall plan can register earlier; it's a
+   // long-running plan and the engine will escrow additional wood as it
+   // arrives. Earlier registration = walls complete sooner.
+   if (kbResourceGet(cResourceWood) < 75.0)
    {
       return;
    }
@@ -304,35 +337,82 @@ rule delayWallsNew
 inactive
 minInterval 10
 {
-   int wallPlanID=aiPlanCreate("WallInBase", cPlanBuildWall);
-   float wallRadius = llGetLegendaryWallRadius(true);
-
    if (llShouldBuildLegendaryWalls(false) == false)
    {
       xsDisableSelf();
       return;
    }
 
-   if (kbGetAge() < cAge4) {
+   // Lowered from cAge4 to cAge3 so AIs start late-game walling in Fortress
+   // rather than Industrial — gives walls time to complete before endgame
+   // army pressure instead of only starting them at t≈30m.
+   if (kbGetAge() < cAge3)
+   {
       return;
    }
 
+   // Respect doctrine: MobileNoWalls leaders (Napoleon's Forward Operational
+   // Line, Hiawatha's Steppe Cavalry Wedge, jungle guerrilla styles) must
+   // not get late-game walls either. Previously they did, because this rule
+   // only checked gLLWallLevel > 0 and gLLLateWallingEnabled, ignoring
+   // strategy. Verified in replay: Napoleon built walls despite
+   // earlyWalls=0 / wallStrategy=MobileNoWalls.
+   if (gLLWallStrategy == cLLWallStrategyMobileNoWalls)
+   {
+      llLogDecision("WALL", "late walling declined — MobileNoWalls doctrine");
+      xsDisableSelf();
+      return;
+   }
+
+   int mainBaseID = kbBaseGetMainID(cMyID);
+   if (mainBaseID < 0)
+   {
+      return;
+   }
+   vector baseCenter = kbBaseGetLocation(cMyID, mainBaseID);
+   if (baseCenter == cInvalidVector)
+   {
+      return;
+   }
+
+   // Wider outer ring for late-game walls; more gates for sally options.
+   // FortressRing = symmetric; all others bias forward toward the enemy arc.
+   float wallRadius = llGetLegendaryWallRadius(true);
+   vector wallCenter = baseCenter;
+   if (gLLWallStrategy != cLLWallStrategyFortressRing)
+   {
+      wallCenter = llGetForwardBiasedWallCenter(baseCenter, mainBaseID, 0.18);
+   }
+
+   int wallPlanID = aiPlanCreate("WallInBase", cPlanBuildWall);
    if (wallPlanID != -1)
    {
       aiPlanSetVariableInt(wallPlanID, cBuildWallPlanWallType, 0, cBuildWallPlanWallTypeRing);
-      aiPlanAddUnitType(wallPlanID, gEconUnit, 0, 1, 2);
-      aiPlanSetVariableVector(wallPlanID, cBuildWallPlanWallRingCenterPoint, 0, kbBaseGetLocation(cMyID, kbBaseGetMainID(cMyID)));
+      // Tripled villager allocation so walls actually complete before the
+      // match ends (was 1–2, now 3–5).
+      aiPlanAddUnitType(wallPlanID, gEconUnit, 0, 3, 5);
+      aiPlanSetVariableVector(wallPlanID, cBuildWallPlanWallRingCenterPoint, 0, wallCenter);
       aiPlanSetVariableFloat(wallPlanID, cBuildWallPlanWallRingRadius, 0.0, wallRadius);
       aiPlanSetVariableInt(wallPlanID, cBuildWallPlanNumberOfGates, 0, llGetLegendaryWallGateCount(true));
-      //aiPlanSetVariableInt(wallPlanID, cBuildWallPlanPieceRotations, 0, 1);
-      aiPlanSetBaseID(wallPlanID, kbBaseGetMainID(cMyID));
+      aiPlanSetBaseID(wallPlanID, mainBaseID);
       aiPlanSetEscrowID(wallPlanID, cEconomyEscrowID);
-      aiPlanSetDesiredPriority(wallPlanID, 60);
+      // Priority bumped 60 -> 75 so walls don't lose villager contention
+      // with economy/military plans.
+      aiPlanSetDesiredPriority(wallPlanID, 75);
       aiPlanSetActive(wallPlanID, true);
-      //Enable our wall gap rule, too.
       xsEnableRule("fillInWallGapsNew");
-      llVerboseEcho("Enabling Wall Plan for Base ID: "+kbBaseGetMainID(cMyID));
-   } 
+      llLogPlanEvent("create", wallPlanID,
+         "late-wall strategy=" + gLLWallStrategy +
+         " center=" + llFmtVec(wallCenter) +
+         " radius=" + wallRadius +
+         " gates=" + llGetLegendaryWallGateCount(true));
+      llProbe("plan.wall",
+         "phase=late strategy=" + gLLWallStrategy +
+         " base=" + mainBaseID +
+         " center=" + llFmtVec(wallCenter) +
+         " radius=" + wallRadius +
+         " wallLevel=" + gLLWallLevel);
+   }
    xsDisableSelf();
 }
 //==============================================================================

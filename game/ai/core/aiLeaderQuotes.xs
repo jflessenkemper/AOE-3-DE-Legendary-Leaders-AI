@@ -228,9 +228,30 @@ void enableLegendaryLeaderQuoteRules(void)
    xsEnableRule("legendaryLeaderOpeningQuote");
 }
 
+// Map kbGetCivName() internal strings (e.g. "XPIroquois", "DEMaltese") to
+// the display-name branches used by the insult/compliment tables. Without
+// this, leaders for XP/DE-prefixed civs silently get no quote, and the
+// opening-quote rule disables itself (bug observed in replay: Hiawatha/Jean
+// missing opening quotes).
+string llNormalizeCivName(string raw = "")
+{
+   if (raw == "XPIroquois")   return ("Haudenosaunee");
+   if (raw == "XPAztec")      return ("Aztecs");
+   if (raw == "XPSioux")      return ("Lakota");
+   if (raw == "DEMaltese")    return ("Maltese");
+   if (raw == "DEAmericans")  return ("UnitedStates");
+   if (raw == "DEMexicans")   return ("Mexicans");
+   if (raw == "DEItalians")   return ("Italians");
+   if (raw == "DEEthiopians") return ("Ethiopians");
+   if (raw == "DEHausa")      return ("Hausa");
+   if (raw == "DEInca")       return ("Inca");
+   if (raw == "DESwedish")    return ("Swedes");
+   return (raw);
+}
+
 string llGetLegendaryLeaderInsult(void)
 {
-   string civName = kbGetCivName(cMyCiv);
+   string civName = llNormalizeCivName(kbGetCivName(cMyCiv));
    int quoteIndex = aiRandInt(2);
 
    if (civName == "Aztecs")
@@ -289,7 +310,7 @@ string llGetLegendaryLeaderInsult(void)
       }
       return ("Leuthen required more nerve than this.");
    }
-   else if (civName == "Haudenosaunee")
+   else if ((civName == "Haudenosaunee") || (civName == "XPIroquois"))
    {
       if (quoteIndex == 0)
       {
@@ -345,7 +366,7 @@ string llGetLegendaryLeaderInsult(void)
       }
       return ("A slow hunter does not return.");
    }
-   else if (civName == "Maltese")
+   else if ((civName == "Maltese") || (civName == "DEMaltese"))
    {
       if (quoteIndex == 0)
       {
@@ -615,7 +636,7 @@ string llGetLegendaryLeaderInsult(void)
 
 string llGetLegendaryLeaderCompliment(void)
 {
-   string civName = kbGetCivName(cMyCiv);
+   string civName = llNormalizeCivName(kbGetCivName(cMyCiv));
    int quoteIndex = aiRandInt(2);
 
    if (civName == "Aztecs")
