@@ -129,7 +129,7 @@ highFrequency // Run every frame until it's disabled.
                   // AI activated (Enhanced-Land or Enhanced-Naval) and the
                   // card count. Verifies Legendary Leaders curated deck
                   // selection at runtime.
-                  llProbe("DECK", "deckID=" + premadeDeckID + " cards=" + numCardsPremadeDeck +
+                  llProbe("tech.deck", "deckID=" + premadeDeckID + " cards=" + numCardsPremadeDeck +
                      " islandMap=" + gIslandMap + " waterMap=" + gWaterMap);
                   aiHCDeckActivate(premadeDeckID);
 
@@ -152,7 +152,7 @@ highFrequency // Run every frame until it's disabled.
                   // AI activated (Enhanced-Land or Enhanced-Naval) and the
                   // card count. Verifies Legendary Leaders curated deck
                   // selection at runtime.
-                  llProbe("DECK", "deckID=" + premadeDeckID + " cards=" + numCardsPremadeDeck +
+                  llProbe("tech.deck", "deckID=" + premadeDeckID + " cards=" + numCardsPremadeDeck +
                      " islandMap=" + gIslandMap + " waterMap=" + gWaterMap);
                   aiHCDeckActivate(premadeDeckID);
 
@@ -3779,10 +3779,10 @@ void shipGrantedHandler(int parm = -1) // parm is unused.
          aiSetHCGatherUnit(gatherUnitID);
       }
       debugHCCards("Choosing card: " + kbGetTechName(aiHCDeckGetCardTechID(deck, bestCard)));
-      llProbe("SHIP", "card=" + bestCard + " extended=" + bestCardIsExtended +
+      llProbe("tech.ship", "card=" + bestCard + " extended=" + bestCardIsExtended +
          " tech=" + aiHCDeckGetCardTechID(deck, bestCard) +
-         " name=" + kbGetTechName(aiHCDeckGetCardTechID(deck, bestCard)) +
-         " value=" + bestCardValue + " age=" + kbGetAge() + " t=" + xsGetTime());
+         " value=" + bestCardValue + " age=" + kbGetAge() +
+         " name=\"" + kbGetTechName(aiHCDeckGetCardTechID(deck, bestCard)) + "\"");
       aiHCDeckPlayCard(bestCard, bestCardIsExtended);
    }
 }

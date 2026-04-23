@@ -1637,12 +1637,11 @@ minInterval 15
       // LL-ATTACK probe — first primary land attack launched. Includes target
       // player, base, age, army pop so we can correlate doctrine (btOffense,
       // gLLWallStrategy) with actual aggression.
-      llProbe("ATTACK",
+      llProbe("mil.attack",
          "target=p" + targetPlayer +
          " base=" + targetBaseID +
          " age=" + kbGetAge() +
-         " armyPop=" + aiGetMilitaryPop() +
-         " t=" + xsGetTime());
+         " armyPop=" + aiGetMilitaryPop());
       planID = aiPlanCreate("Attack Player " + targetPlayer + " Base " + targetBaseID, cPlanCombat);
 
       aiPlanSetVariableInt(planID, cCombatPlanCombatType, 0, cCombatPlanCombatTypeAttack);
@@ -3033,8 +3032,8 @@ minInterval 13
       aiPlanSetActive(gLandDefendPlan0);
       debugMilitary("Creating primary land defend plan");
       llLogCombatPlanConfig("create", gLandDefendPlan0, "primary-land-defend");
-      llProbe("DEFEND", "plan=" + gLandDefendPlan0 + " base=" + mainBaseID +
-         " age=" + kbGetAge() + " armyPop=" + aiGetMilitaryPop() + " t=" + xsGetTime());
+      llProbe("mil.defend", "plan=" + gLandDefendPlan0 + " base=" + mainBaseID +
+         " age=" + kbGetAge() + " armyPop=" + aiGetMilitaryPop());
 
       gLandReservePlan = aiPlanCreate("Land Reserve Units", cPlanCombat);
       // All mil units, high MAX value to suck up all excess.

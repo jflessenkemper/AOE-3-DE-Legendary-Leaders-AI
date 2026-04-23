@@ -241,6 +241,23 @@ void llLogEvent(string category = "EVENT", string message = "")
    regardless of recipient.
 */
 //==============================================================================
+// ─── schema v2 ──────────────────────────────────────────────────────────────
+// Lines emitted by llProbe() follow a single, machine-parseable shape:
+//
+//    [LLP v=2 t=<time> p=<pid> civ=<civ> ldr=<ldr> tag=<domain.name>] k=v k=v …
+//
+// Every field in the header bracket is atomic k=v (no spaces inside values);
+// the payload after the ']' is also space-separated k=v pairs. Regex:
+//
+//    \[LLP v=(\d+) t=(\d+) p=(\d+) civ=(\S+) ldr=(\S+) tag=(\S+)\]\s*(.*)
+//
+// then tokenise the tail with `(\w+)=(\S+)`. Tags are namespaced by domain
+// (meta / econ / tech / mil / navy / elite / plan / chat / telem) so
+// post-match filtering is `grep tag=mil\.`  etc.
+//
+// Vectors MUST be formatted via llFmtVec() so they stay atomic (x,y,z with
+// no spaces or parentheses) — default vector stringification in XS leaks
+// spaces and breaks tokenisation.
 void llProbe(string tag = "", string detail = "")
 {
    if (cLLReplayProbes == false)
@@ -251,14 +268,24 @@ void llProbe(string tag = "", string detail = "")
    {
       return;
    }
-   string line = "[LL-PROBE] p=" + cMyID + " civ=" + kbGetCivName(cMyCiv) +
-      " ldr=" + gLLLeaderKey + " | " + tag;
+   string line = "[LLP v=2 t=" + xsGetTime() +
+      " p=" + cMyID +
+      " civ=" + kbGetCivName(cMyCiv) +
+      " ldr=" + gLLLeaderKey +
+      " tag=" + tag + "]";
    if (detail != "")
    {
       line = line + " " + detail;
    }
    // Send to P1. Parser records sender+text; recipient is incidental.
    aiChat(1, line);
+}
+
+// Vectors stringify with spaces and parens by default, which breaks the
+// k=v tokenizer. Use this helper for every vector value in a probe detail.
+string llFmtVec(vector v = cInvalidVector)
+{
+   return ("" + xsVectorGetX(v) + "," + xsVectorGetY(v) + "," + xsVectorGetZ(v));
 }
 
 void llLogRuleTick(string ruleName = "")

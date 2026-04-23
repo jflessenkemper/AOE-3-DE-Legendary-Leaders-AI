@@ -1067,11 +1067,10 @@ void gameOverHandler(int nothing = 0)
    // LL-GAMEOVER probe — final state. Variable 'iWon' is base-game and
    // confusingly named (it actually receives kbHasPlayerLost), so emit the
    // raw kbHasPlayerLost value instead for unambiguous outcome parsing.
-   llProbe("GAMEOVER",
+   llProbe("meta.gameover",
       "lost=" + kbHasPlayerLost(cMyID) +
       " finalAge=" + kbGetAge() +
-      " score=" + aiGetScore(cMyID) +
-      " t=" + xsGetTime());
+      " score=" + aiGetScore(cMyID));
 
    for (pid = 1; < cNumberPlayers)
    {
@@ -2038,9 +2037,8 @@ void ageUpEventHandler(int planID = -1)
       // LL-AGED probe — pairs with LL-AGE. Includes full resource + pop
       // snapshot so post-match timelines can chart economic state at each
       // age transition per AI.
-      llProbe("AGED",
+      llProbe("econ.aged",
          "now=" + kbGetAge() +
-         " t=" + xsGetTime() +
          " food=" + kbResourceGet(cResourceFood) +
          " wood=" + kbResourceGet(cResourceWood) +
          " gold=" + kbResourceGet(cResourceGold) +

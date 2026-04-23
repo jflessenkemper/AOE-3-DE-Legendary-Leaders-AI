@@ -666,8 +666,8 @@ void llRebuildExplorerEscortPlan(int attackPlanID = -1, vector gatherPoint = cIn
    gLLExplorerEscortLastRefreshTime = xsGetTime();
    debugLegendaryLeaders("created explorer escort plan " + planID + " for attack plan " + attackPlanID +
       " using " + addedUnits + " non-elite troops.");
-   llProbe("ESCORT", "plan=" + planID + " attackPlan=" + attackPlanID +
-      " units=" + addedUnits + " desired=" + desiredEscortCount + " escortPt=" + escortPoint);
+   llProbe("elite.escort", "plan=" + planID + " attackPlan=" + attackPlanID +
+      " units=" + addedUnits + " desired=" + desiredEscortCount + " escortPt=" + llFmtVec(escortPoint));
 }
 
 vector llChooseAssaultObjectivePoint(int attackPlanID = -1, vector gatherPoint = cInvalidVector)
@@ -786,8 +786,8 @@ void llRebuildEliteGuardPlan(int anchorUnitID = -1)
    gLLEliteGuardAnchorUnitID = anchorUnitID;
    debugLegendaryLeaders("created elite guard plan " + planID + " around anchor unit " + anchorUnitID +
       " using " + addedUnits + " non-elite troops.");
-   llProbe("ELITE-GUARD", "plan=" + planID + " anchor=" + anchorUnitID +
-      " units=" + addedUnits + " pos=" + anchorLocation);
+   llProbe("elite.guard", "plan=" + planID + " anchor=" + anchorUnitID +
+      " units=" + addedUnits + " pos=" + llFmtVec(anchorLocation));
 }
 
 void llRetreatEliteCore(int anchorUnitID = -1, float radius = 36.0)
@@ -915,7 +915,7 @@ void llTryRansomExplorer(void)
 
    createProtoUnitCommandResearchPlan(cProtoUnitCommandRansomExplorer, tcID, cMilitaryEscrowID, 95, 95);
    debugLegendaryLeaders("queued explorer ransom through the town center command after losing the leader.");
-   llProbe("RANSOM", "tc=" + tcID + " fallen=" + aiGetFallenExplorerID() + " t=" + xsGetTime());
+   llProbe("elite.ransom", "tc=" + tcID + " fallen=" + aiGetFallenExplorerID());
 }
 
 void llRebuildEliteSupportPlan(int attackPlanID = -1, vector gatherPoint = cInvalidVector, vector elitePoint = cInvalidVector,
@@ -994,8 +994,8 @@ void llRebuildEliteSupportPlan(int attackPlanID = -1, vector gatherPoint = cInva
    gLLEliteSupportLastRefreshTime = xsGetTime();
    debugLegendaryLeaders("created elite support plan " + planID + " for attack plan " + attackPlanID +
       " with " + addedUnits + " elite units guarding the second line.");
-   llProbe("ELITE-SUPPORT", "plan=" + planID + " attackPlan=" + attackPlanID +
-      " units=" + addedUnits + " desired=" + desiredEliteCount + " elitePt=" + elitePoint);
+   llProbe("elite.support", "plan=" + planID + " attackPlan=" + attackPlanID +
+      " units=" + addedUnits + " desired=" + desiredEliteCount + " elitePt=" + llFmtVec(elitePoint));
 }
 
 bool llHandleEliteAssaultFormation(int attackPlanID = -1)
@@ -1012,8 +1012,8 @@ bool llHandleEliteAssaultFormation(int attackPlanID = -1)
    if (attackPlanID != lastProbedAssaultPlan)
    {
       lastProbedAssaultPlan = attackPlanID;
-      llProbe("ASSAULT", "attackPlan=" + attackPlanID + " gather=" + gatherPoint +
-         " target=" + targetPoint + " t=" + xsGetTime());
+      llProbe("elite.assault", "attackPlan=" + attackPlanID +
+         " gather=" + llFmtVec(gatherPoint) + " target=" + llFmtVec(targetPoint));
    }
    if ((gatherPoint == cInvalidVector) || (targetPoint == cInvalidVector))
    {
@@ -1116,7 +1116,7 @@ minInterval 5
    {
       // LL-GUARD probe — fires once per AI on first monitor tick, confirms
       // the elite-guard/explorer-escort rule is actually running.
-      llProbe("GUARD", "monitor-first-tick");
+      llProbe("elite.guardTick", "note=monitor-first-tick");
       probedFirstTick = 1;
    }
    llLogRuleTick("legendaryEliteGuardMonitor");
@@ -1126,7 +1126,7 @@ minInterval 5
       {
          // LL-EXPLOST probe — records the moment the AI's explorer died
          // (maps to ToAllyILoseExplorerEnemy quote trigger). One-shot.
-         llProbe("EXPLOST", "explorer=" + aiGetFallenExplorerID() + " t=" + xsGetTime());
+         llProbe("elite.explorerLost", "explorer=" + aiGetFallenExplorerID());
          probedFallenOnce = 1;
       }
       llDestroyEliteGuardPlan();

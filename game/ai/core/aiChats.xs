@@ -37,7 +37,7 @@ void sendStatement(int playerIDorRelation = -1, int commPromptID = -1, vector ve
          // parsing can confirm which triggers actually fired, at what time,
          // from which leader. Matched against chatsetsmods.xml to verify
          // quote wiring end-to-end.
-         llProbe("TAG", "commPromptID=" + commPromptID + " to=" + playerID);
+         llProbe("chat.tag", "commPromptID=" + commPromptID + " to=" + playerID);
          debugChats("Sending AI Chat to player: " + playerID + ", commPromptID: " + commPromptID + ", vector: " + vec);
          if (vec == cInvalidVector)
          {
@@ -103,7 +103,7 @@ void sendStatement(int playerIDorRelation = -1, int commPromptID = -1, vector ve
             if (send == true)
             {
                llLogChatDispatch("statement", player, "commPromptID=" + commPromptID, vec);
-               llProbe("TAG", "commPromptID=" + commPromptID + " to=" + player + " rel=" + playerIDorRelation);
+               llProbe("chat.tag", "commPromptID=" + commPromptID + " to=" + player + " rel=" + playerIDorRelation);
                if (vec == cInvalidVector)
                {
                   aiCommsSendStatement(player, commPromptID);
@@ -208,8 +208,8 @@ minInterval 5
       if (getUnitByLocation(cUnitTypeUnit, cMyID, cUnitStateAlive, kbUnitGetPosition(tcID), 50.0) >= 0)
       { // I have a unit nearby, presumably I have LOS.
          sendStatement(targetPlayer, cAICommPromptToEnemyISpotHisTC, kbUnitGetPosition(tcID));
-         llProbe("CONTACT", "target=p" + targetPlayer + " tc=" + tcID +
-            " pos=" + kbUnitGetPosition(tcID) + " t=" + xsGetTime());
+         llProbe("chat.contact", "target=p" + targetPlayer + " tc=" + tcID +
+            " pos=" + llFmtVec(kbUnitGetPosition(tcID)));
       }
       xsDisableSelf();
    }

@@ -202,8 +202,8 @@ int llPlanExplorationAgeWall(int mainBaseID = -1, vector baseCenter = cInvalidVe
    // LL-WALL probe — records which doctrine branch ran and the base center.
    // One emission per AI per match (rule self-disables after first dispatch),
    // so the replay parser can map leader → actual wall strategy exercised.
-   llProbe("WALL", "strategy=" + gLLWallStrategy + " base=" + mainBaseID +
-      " center=" + baseCenter + " wallLevel=" + gLLWallLevel +
+   llProbe("plan.wall", "strategy=" + gLLWallStrategy + " base=" + mainBaseID +
+      " center=" + llFmtVec(baseCenter) + " wallLevel=" + gLLWallLevel +
       " earlyWalls=" + gLLEarlyWallingEnabled);
 
    if (gLLWallStrategy == cLLWallStrategyFortressRing)       return (llPlanFortressRingWall(mainBaseID, baseCenter));
@@ -213,7 +213,7 @@ int llPlanExplorationAgeWall(int mainBaseID = -1, vector baseCenter = cInvalidVe
    if (gLLWallStrategy == cLLWallStrategyUrbanBarricade)     return (llPlanUrbanBarricadeWall(mainBaseID, baseCenter));
    if (gLLWallStrategy == cLLWallStrategyMobileNoWalls)      return (llPlanMobileNoWalls(mainBaseID, baseCenter));
    // Fallback — FortressRing if unknown.
-   llProbe("WALL", "fallback-FortressRing (unknown strategy=" + gLLWallStrategy + ")");
+   llProbe("plan.wall", "fallback=FortressRing unknownStrategy=" + gLLWallStrategy);
    return (llPlanFortressRingWall(mainBaseID, baseCenter));
 }
 

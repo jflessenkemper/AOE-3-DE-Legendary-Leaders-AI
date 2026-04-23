@@ -30,12 +30,13 @@ int chooseEuropeanPolitician()
    int bestChoice = 0; // Only used for Fortress -> Industrial.
    int bestScore = 0;  // Only used for Fortress -> Industrial.
 
-   llProbe("POLIST", "curAge=" + age + " toAge=" + (age + 1) +
-      " choices=" + numPoliticianChoices + " t=" + xsGetTime());
+   llProbe("tech.polist", "curAge=" + age + " toAge=" + (age + 1) +
+      " choices=" + numPoliticianChoices);
    for (int pi = 0; pi < numPoliticianChoices; pi++)
    {
       int candidate = aiGetPoliticianListByIndex(age + 1, pi);
-      llProbe("POLIST-CAND", "idx=" + pi + " tech=" + candidate + " name=" + kbGetTechName(candidate));
+      llProbe("tech.polistCand", "idx=" + pi + " tech=" + candidate +
+         " name=\"" + kbGetTechName(candidate) + "\"");
    }
 
    int arraySize = xsArrayGetSize(ageUpPoliticians);
@@ -1065,9 +1066,10 @@ maxInterval 15
             // know the Imperial politician list failed to populate (correlates
             // with the human-Dutch Imperial bug suspected to be an engine-side
             // gate rather than a mod-side tech disable).
-            llProbe("AGE", "requesting age=" + (kbGetAge() + 1) +
-               " politician=" + kbGetTechName(politician) +
-               " priority=" + ageUpPriority);
+            llProbe("tech.ageReq", "toAge=" + (kbGetAge() + 1) +
+               " priority=" + ageUpPriority +
+               " politicianTech=" + politician +
+               " politician=\"" + kbGetTechName(politician) + "\"");
             return;
          }
          else
@@ -1084,9 +1086,10 @@ maxInterval 15
                wonderToBuild, 1, 100, true, cEmergencyEscrowID, mainBaseID, 4);
             aiPlanSetDesiredResourcePriority(gAgeUpResearchPlan, ageUpPriority);
             aiPlanSetEventHandler(gAgeUpResearchPlan, cPlanEventStateChange, "ageUpEventHandler");
-            llProbe("AGE", "requesting age=" + (kbGetAge() + 1) +
-               " wonder=" + kbGetProtoUnitName(wonderToBuild) +
-               " priority=" + ageUpPriority);
+            llProbe("tech.ageReq", "toAge=" + (kbGetAge() + 1) +
+               " priority=" + ageUpPriority +
+               " wonderProto=" + wonderToBuild +
+               " wonder=\"" + kbGetProtoUnitName(wonderToBuild) + "\"");
          }
          else
          {

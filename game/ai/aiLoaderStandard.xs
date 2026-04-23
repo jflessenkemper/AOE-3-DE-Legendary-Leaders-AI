@@ -227,7 +227,7 @@ void postInit(void)
    // leader/chatset/doctrine/wall-strategy wiring at t=0 for every AI in the
    // match. Catches Barbary-blank, Napoleon-wrong-name, wrong-chatset
    // regressions immediately without needing in-match screenshots.
-   llProbe("BOOT",
+   llProbe("meta.boot",
       "chatset=" + gLLChatsetKey +
       " wallStrategy=" + gLLWallStrategy +
       " buildStyle=" + llGetBuildStyleName(gLLBuildStyle) +
@@ -243,7 +243,7 @@ void postInit(void)
    // Match-level context: game mode, difficulty, team, player count. Shared
    // context for every AI's probes so post-match analysis can normalise
    // across Supremacy/Deathmatch/Treaty/Empire-Wars runs.
-   llProbe("SETUP",
+   llProbe("meta.setup",
       "gameMode=" + aiGetGameMode() +
       " difficulty=" + cDifficultyCurrent +
       " team=" + kbGetPlayerTeam(cMyID) +
@@ -254,7 +254,7 @@ void postInit(void)
 
    // ── LL-ECOSNAP probe ────────────────────────────────────────────────────
    // Initial economic state for baseline comparison on age transitions.
-   llProbe("ECOSNAP",
+   llProbe("econ.snap",
       "age=" + kbGetAge() +
       " food=" + kbResourceGet(cResourceFood) +
       " wood=" + kbResourceGet(cResourceWood) +
@@ -283,9 +283,8 @@ rule llHeartbeat
 inactive
 minInterval 60
 {
-   llProbe("HEARTBEAT",
-      "t=" + xsGetTime() +
-      " age=" + kbGetAge() +
+   llProbe("telem.heartbeat",
+      "age=" + kbGetAge() +
       " food=" + kbResourceGet(cResourceFood) +
       " wood=" + kbResourceGet(cResourceWood) +
       " gold=" + kbResourceGet(cResourceGold) +
