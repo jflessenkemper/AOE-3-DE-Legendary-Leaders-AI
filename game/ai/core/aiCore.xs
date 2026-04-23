@@ -1064,6 +1064,14 @@ void gameOverHandler(int nothing = 0)
 {
    debugCore("GG, Game Over!");
    bool iWon = kbHasPlayerLost(cMyID);
+   // LL-GAMEOVER probe — final state. Variable 'iWon' is base-game and
+   // confusingly named (it actually receives kbHasPlayerLost), so emit the
+   // raw kbHasPlayerLost value instead for unambiguous outcome parsing.
+   llProbe("GAMEOVER",
+      "lost=" + kbHasPlayerLost(cMyID) +
+      " finalAge=" + kbGetAge() +
+      " score=" + aiGetScore(cMyID) +
+      " t=" + xsGetTime());
 
    for (pid = 1; < cNumberPlayers)
    {
@@ -2027,10 +2035,19 @@ void ageUpEventHandler(int planID = -1)
       }
 
       gAgeUpResearchPlan = -1;
-      // LL-AGED probe — pairs with LL-AGE. If we see AGE but never AGED at a
-      // given target age, the age-up plan never resolved (resource stall,
-      // politician missing, UI-gated). Timestamp narrows the cause.
-      llProbe("AGED", "now=" + kbGetAge() + " t=" + xsGetTime());
+      // LL-AGED probe — pairs with LL-AGE. Includes full resource + pop
+      // snapshot so post-match timelines can chart economic state at each
+      // age transition per AI.
+      llProbe("AGED",
+         "now=" + kbGetAge() +
+         " t=" + xsGetTime() +
+         " food=" + kbResourceGet(cResourceFood) +
+         " wood=" + kbResourceGet(cResourceWood) +
+         " gold=" + kbResourceGet(cResourceGold) +
+         " pop=" + kbGetPop() +
+         " vills=" + kbUnitCount(cMyID, gEconUnit, cUnitStateAlive) +
+         " armyPop=" + aiGetMilitaryPop() +
+         " score=" + aiGetScore(cMyID));
    }
    else if (civIsAsian() == true)
    {

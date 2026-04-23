@@ -1634,6 +1634,15 @@ minInterval 15
 
       llLogDecision("COMBAT", "launching land attack targetPlayer=" + targetPlayer + " targetBase=" + targetBaseID +
          " gatherPoint=" + gatherPoint + " targetPoint=" + targetBaseLocation);
+      // LL-ATTACK probe — first primary land attack launched. Includes target
+      // player, base, age, army pop so we can correlate doctrine (btOffense,
+      // gLLWallStrategy) with actual aggression.
+      llProbe("ATTACK",
+         "target=p" + targetPlayer +
+         " base=" + targetBaseID +
+         " age=" + kbGetAge() +
+         " armyPop=" + aiGetMilitaryPop() +
+         " t=" + xsGetTime());
       planID = aiPlanCreate("Attack Player " + targetPlayer + " Base " + targetBaseID, cPlanCombat);
 
       aiPlanSetVariableInt(planID, cCombatPlanCombatType, 0, cCombatPlanCombatTypeAttack);

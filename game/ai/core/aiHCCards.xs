@@ -125,8 +125,14 @@ highFrequency // Run every frame until it's disabled.
                      xsArraySetInt(premadeDeckTechIDs, premadeCardID, premadeCardTechID);
                   }
                   debugHCCards("Activating deck");
+                  // LL-DECK probe — records which home-city premade deck the
+                  // AI activated (Enhanced-Land or Enhanced-Naval) and the
+                  // card count. Verifies Legendary Leaders curated deck
+                  // selection at runtime.
+                  llProbe("DECK", "deckID=" + premadeDeckID + " cards=" + numCardsPremadeDeck +
+                     " islandMap=" + gIslandMap + " waterMap=" + gWaterMap);
                   aiHCDeckActivate(premadeDeckID);
-         
+
                   xsDisableSelf();
                }
             } else if (gIslandMap == true && gWaterMap == true) {
@@ -142,8 +148,14 @@ highFrequency // Run every frame until it's disabled.
                      xsArraySetInt(premadeDeckTechIDs, premadeCardID, premadeCardTechID);
                   }
                   debugHCCards("Activating deck");
+                  // LL-DECK probe — records which home-city premade deck the
+                  // AI activated (Enhanced-Land or Enhanced-Naval) and the
+                  // card count. Verifies Legendary Leaders curated deck
+                  // selection at runtime.
+                  llProbe("DECK", "deckID=" + premadeDeckID + " cards=" + numCardsPremadeDeck +
+                     " islandMap=" + gIslandMap + " waterMap=" + gWaterMap);
                   aiHCDeckActivate(premadeDeckID);
-         
+
                   xsDisableSelf();
                }
             }

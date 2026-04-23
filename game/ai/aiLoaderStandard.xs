@@ -233,6 +233,29 @@ void postInit(void)
       " inf=" + btBiasInf +
       " cav=" + btBiasCav +
       " art=" + btBiasArt);
+
+   // ── LL-SETUP probe ──────────────────────────────────────────────────────
+   // Match-level context: game mode, difficulty, team, player count. Shared
+   // context for every AI's probes so post-match analysis can normalise
+   // across Supremacy/Deathmatch/Treaty/Empire-Wars runs.
+   llProbe("SETUP",
+      "gameMode=" + aiGetGameMode() +
+      " difficulty=" + cDifficultyCurrent +
+      " team=" + kbGetPlayerTeam(cMyID) +
+      " players=" + cNumberPlayers +
+      " startAge=" + kbGetAge() +
+      " okAttack=" + cvOkToAttack +
+      " okTaunt=" + cvOkToTaunt);
+
+   // ── LL-ECOSNAP probe ────────────────────────────────────────────────────
+   // Initial economic state for baseline comparison on age transitions.
+   llProbe("ECOSNAP",
+      "age=" + kbGetAge() +
+      " food=" + kbResourceGet(cResourceFood) +
+      " wood=" + kbResourceGet(cResourceWood) +
+      " gold=" + kbResourceGet(cResourceGold) +
+      " pop=" + kbGetPop() +
+      " vills=" + kbUnitCount(cMyID, gEconUnit, cUnitStateAlive));
 }
 
 
