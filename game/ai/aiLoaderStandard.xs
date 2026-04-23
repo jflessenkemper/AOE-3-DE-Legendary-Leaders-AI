@@ -152,6 +152,7 @@ void preInit(void)
       initLegendaryRevolutionCommander();
    }
 
+   llAssignLeaderIdentity();
    llApplyBuildStyleForActiveCiv();
 
    if (aiGetGameMode() == cGameModeEconomyMode)
@@ -215,6 +216,23 @@ void postInit(void)
    enableLeaderTokugawaRules();
    enableLeaderCrazyHorseRules();
    enableLeaderGustavusRules();
+
+   // ── LL-BOOT probe ───────────────────────────────────────────────────────
+   // One-shot broadcast of this AI's identity so the replay parser records
+   // leader/chatset/doctrine/wall-strategy wiring at t=0 for every AI in the
+   // match. Catches Barbary-blank, Napoleon-wrong-name, wrong-chatset
+   // regressions immediately without needing in-match screenshots.
+   llProbe("BOOT",
+      "chatset=" + gLLChatsetKey +
+      " wallStrategy=" + gLLWallStrategy +
+      " buildStyle=" + llGetBuildStyleName(gLLBuildStyle) +
+      " wallLevel=" + gLLWallLevel +
+      " earlyWalls=" + gLLEarlyWallingEnabled +
+      " rush=" + btRushBoom +
+      " off=" + btOffenseDefense +
+      " inf=" + btBiasInf +
+      " cav=" + btBiasCav +
+      " art=" + btBiasArt);
 }
 
 

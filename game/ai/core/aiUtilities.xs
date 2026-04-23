@@ -224,6 +224,43 @@ void llLogEvent(string category = "EVENT", string message = "")
    llMirrorEventToChat(category, message);
 }
 
+//==============================================================================
+/* llProbe
+   Unthrottled, replay-parser-friendly diagnostic chat. Each AI broadcasts one
+   line per probe tagged "[LL-PROBE]", which the .age3Yrec chat stream captures
+   verbatim. Unlike llLogEvent, llProbe is NOT gated by
+   cDebugLegendaryLeadersVisible or the 12-second cooldown — we want every
+   event recorded once, not one random event every 12s.
+
+   Gate: cLLReplayProbes (aiGlobals.xs). Flip to false for release.
+
+   Format: "[LL-PROBE] p=<ID> civ=<name> ldr=<key> | <TAG> <detail>"
+
+   We broadcast to player 1 (host, human by convention). aiChat delivers once
+   per call — no per-player loop needed; the parser reads every aiChat record
+   regardless of recipient.
+*/
+//==============================================================================
+void llProbe(string tag = "", string detail = "")
+{
+   if (cLLReplayProbes == false)
+   {
+      return;
+   }
+   if (tag == "")
+   {
+      return;
+   }
+   string line = "[LL-PROBE] p=" + cMyID + " civ=" + kbGetCivName(cMyCiv) +
+      " ldr=" + gLLLeaderKey + " | " + tag;
+   if (detail != "")
+   {
+      line = line + " " + detail;
+   }
+   // Send to P1. Parser records sender+text; recipient is incidental.
+   aiChat(1, line);
+}
+
 void llLogRuleTick(string ruleName = "")
 {
    llLogEvent("RULE", ruleName + " tick @" + xsGetTime());

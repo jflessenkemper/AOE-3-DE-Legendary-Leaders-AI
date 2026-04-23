@@ -346,6 +346,74 @@ string llGetBuildStyleName(int style = 0)
    return ("Unassigned");
 }
 
+//==============================================================================
+/* llAssignLeaderIdentity
+   Populate gLLLeaderKey and gLLChatsetKey so LL-PROBE events carry the leader
+   identity into the replay chat stream. Keys match chatsetsmods.xml
+   <Chatset name="..."> so post-match parsing can cross-reference directly.
+*/
+//==============================================================================
+void llAssignLeaderIdentity(void)
+{
+   string rvltName = kbGetCivName(cMyCiv);
+
+   // Base civs (22)
+   if (cMyCiv == cCivFrench)            { gLLLeaderKey = "bourbon";     gLLChatsetKey = "bourbon"; }
+   else if (cMyCiv == cCivBritish)      { gLLLeaderKey = "wellington";  gLLChatsetKey = "wellington"; }
+   else if (cMyCiv == cCivGermans)      { gLLLeaderKey = "frederick";   gLLChatsetKey = "frederick"; }
+   else if (cMyCiv == cCivRussians)     { gLLLeaderKey = "catherine";   gLLChatsetKey = "catherine"; }
+   else if (cMyCiv == cCivSpanish)      { gLLLeaderKey = "isabella";    gLLChatsetKey = "isabella"; }
+   else if (cMyCiv == cCivOttomans)     { gLLLeaderKey = "suleiman";    gLLChatsetKey = "suleiman"; }
+   else if (cMyCiv == cCivPortuguese)   { gLLLeaderKey = "henry";       gLLChatsetKey = "henry"; }
+   else if (cMyCiv == cCivDutch)        { gLLLeaderKey = "maurice";     gLLChatsetKey = "maurice"; }
+   else if (cMyCiv == cCivDEAmericans)  { gLLLeaderKey = "washington";  gLLChatsetKey = "washington"; }
+   else if (cMyCiv == cCivDEMexicans)   { gLLLeaderKey = "hidalgo";     gLLChatsetKey = "hidalgo"; }
+   else if (cMyCiv == cCivDEItalians)   { gLLLeaderKey = "garibaldi";   gLLChatsetKey = "garibaldi"; }
+   else if (cMyCiv == cCivDEMaltese)    { gLLLeaderKey = "jean";        gLLChatsetKey = "jean"; }
+   else if (cMyCiv == cCivXPAztec)      { gLLLeaderKey = "montezuma";   gLLChatsetKey = "montezuma"; }
+   else if (cMyCiv == cCivChinese)      { gLLLeaderKey = "kangxi";      gLLChatsetKey = "kangxi"; }
+   else if (cMyCiv == cCivDEEthiopians) { gLLLeaderKey = "menelik";     gLLChatsetKey = "menelik"; }
+   else if (cMyCiv == cCivXPIroquois)   { gLLLeaderKey = "hiawatha";    gLLChatsetKey = "hiawatha"; }
+   else if (cMyCiv == cCivDEHausa)      { gLLLeaderKey = "usman";       gLLChatsetKey = "usman"; }
+   else if (cMyCiv == cCivDEInca)       { gLLLeaderKey = "pachacuti";   gLLChatsetKey = "pachacuti"; }
+   else if (cMyCiv == cCivIndians)      { gLLLeaderKey = "shivaji";     gLLChatsetKey = "shivaji"; }
+   else if (cMyCiv == cCivJapanese)     { gLLLeaderKey = "tokugawa";    gLLChatsetKey = "tokugawa"; }
+   else if (cMyCiv == cCivXPSioux)      { gLLLeaderKey = "crazyhorse";  gLLChatsetKey = "crazyhorse"; }
+   else if (cMyCiv == cCivDESwedish)    { gLLLeaderKey = "gustav";      gLLChatsetKey = "gustav"; }
+   // Revolution civs (26)
+   else if (rvltName == "RvltModAmericans")          { gLLLeaderKey = "rvltmodamericans";          gLLChatsetKey = "rvltmodamericans"; }
+   else if (rvltName == "RvltModArgentines")         { gLLLeaderKey = "rvltmodargentines";         gLLChatsetKey = "rvltmodargentines"; }
+   else if (rvltName == "RvltModBajaCalifornians")   { gLLLeaderKey = "rvltmodbajacalifornians";   gLLChatsetKey = "rvltmodbajacalifornians"; }
+   else if (rvltName == "RvltModBarbary")            { gLLLeaderKey = "rvltmodbarbary";            gLLChatsetKey = "rvltmodbarbary"; }
+   else if (rvltName == "RvltModBrazil")             { gLLLeaderKey = "rvltmodbrazil";             gLLChatsetKey = "rvltmodbrazil"; }
+   else if (rvltName == "RvltModCalifornians")       { gLLLeaderKey = "rvltmodcalifornians";       gLLChatsetKey = "rvltmodcalifornians"; }
+   else if (rvltName == "RvltModCanadians")          { gLLLeaderKey = "rvltmodcanadians";          gLLChatsetKey = "rvltmodcanadians"; }
+   else if (rvltName == "RvltModCentralAmericans")   { gLLLeaderKey = "rvltmodcentralamericans";   gLLChatsetKey = "rvltmodcentralamericans"; }
+   else if (rvltName == "RvltModChileans")           { gLLLeaderKey = "rvltmodchileans";           gLLChatsetKey = "rvltmodchileans"; }
+   else if (rvltName == "RvltModColumbians")         { gLLLeaderKey = "rvltmodcolumbians";         gLLChatsetKey = "rvltmodcolumbians"; }
+   else if (rvltName == "RvltModEgyptians")          { gLLLeaderKey = "rvltmodegyptians";          gLLChatsetKey = "rvltmodegyptians"; }
+   else if (rvltName == "RvltModFinnish")            { gLLLeaderKey = "rvltmodfinnish";            gLLChatsetKey = "rvltmodfinnish"; }
+   else if (rvltName == "RvltModFrenchCanadians")    { gLLLeaderKey = "rvltmodfrenchcanadians";    gLLChatsetKey = "rvltmodfrenchcanadians"; }
+   else if (rvltName == "RvltModHaitians")           { gLLLeaderKey = "rvltmodhaitians";           gLLChatsetKey = "rvltmodhaitians"; }
+   else if (rvltName == "RvltModHungarians")         { gLLLeaderKey = "rvltmodhungarians";         gLLChatsetKey = "rvltmodhungarians"; }
+   else if (rvltName == "RvltModIndonesians")        { gLLLeaderKey = "rvltmodindonesians";        gLLChatsetKey = "rvltmodindonesians"; }
+   else if (rvltName == "RvltModMayans")             { gLLLeaderKey = "rvltmodmayans";             gLLChatsetKey = "rvltmodmayans"; }
+   else if (rvltName == "RvltModMexicans")           { gLLLeaderKey = "rvltmodmexicans";           gLLChatsetKey = "rvltmodmexicans"; }
+   else if (rvltName == "RvltModNapoleonicFrance")   { gLLLeaderKey = "napoleon";                  gLLChatsetKey = "napoleon"; }
+   else if (rvltName == "RvltModPeruvians")          { gLLLeaderKey = "rvltmodperuvians";          gLLChatsetKey = "rvltmodperuvians"; }
+   else if (rvltName == "RvltModRevolutionaryFrance"){ gLLLeaderKey = "rvltmodrevolutionaryfrance"; gLLChatsetKey = "rvltmodrevolutionaryfrance"; }
+   else if (rvltName == "RvltModRioGrande")          { gLLLeaderKey = "rvltmodriogrande";          gLLChatsetKey = "rvltmodriogrande"; }
+   else if (rvltName == "RvltModRomanians")          { gLLLeaderKey = "rvltmodromanians";          gLLChatsetKey = "rvltmodromanians"; }
+   else if (rvltName == "RvltModSouthAfricans")      { gLLLeaderKey = "rvltmodsouthafricans";      gLLChatsetKey = "rvltmodsouthafricans"; }
+   else if (rvltName == "RvltModTexians")            { gLLLeaderKey = "rvltmodtexians";            gLLChatsetKey = "rvltmodtexians"; }
+   else if (rvltName == "RvltModYucatan")            { gLLLeaderKey = "rvltmodyucatan";            gLLChatsetKey = "rvltmodyucatan"; }
+   else
+   {
+      gLLLeaderKey = "unassigned-" + rvltName;
+      gLLChatsetKey = "unassigned-" + rvltName;
+   }
+}
+
 void llApplyBuildStyleForActiveCiv(void)
 {
    string rvltName = kbGetCivName(cMyCiv);

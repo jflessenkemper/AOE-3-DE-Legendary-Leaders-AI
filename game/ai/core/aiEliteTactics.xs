@@ -1096,9 +1096,25 @@ rule legendaryEliteGuardMonitor
 inactive
 minInterval 5
 {
+   static int probedFirstTick = 0;
+   static int probedFallenOnce = 0;
+   if (probedFirstTick == 0)
+   {
+      // LL-GUARD probe — fires once per AI on first monitor tick, confirms
+      // the elite-guard/explorer-escort rule is actually running.
+      llProbe("GUARD", "monitor-first-tick");
+      probedFirstTick = 1;
+   }
    llLogRuleTick("legendaryEliteGuardMonitor");
    if (aiGetFallenExplorerID() >= 0)
    {
+      if (probedFallenOnce == 0)
+      {
+         // LL-EXPLOST probe — records the moment the AI's explorer died
+         // (maps to ToAllyILoseExplorerEnemy quote trigger). One-shot.
+         llProbe("EXPLOST", "explorer=" + aiGetFallenExplorerID() + " t=" + xsGetTime());
+         probedFallenOnce = 1;
+      }
       llDestroyEliteGuardPlan();
       llDestroyExplorerEscortPlan();
       llDestroyEliteSupportPlan();

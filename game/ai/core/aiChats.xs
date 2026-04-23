@@ -32,7 +32,13 @@ void sendStatement(int playerIDorRelation = -1, int commPromptID = -1, vector ve
       {
          int playerID = playerIDorRelation;
          llLogChatDispatch("statement", playerID, "commPromptID=" + commPromptID, vec);
-         debugChats("Sending AI Chat to player: " + playerID + ", commPromptID: " + commPromptID + ", vector: " + vec); 
+         // LL-TAG probe — records every chatset statement fire (commPromptID
+         // maps to the <Tag name="..."> trigger, e.g. ToAllyIntro) so replay
+         // parsing can confirm which triggers actually fired, at what time,
+         // from which leader. Matched against chatsetsmods.xml to verify
+         // quote wiring end-to-end.
+         llProbe("TAG", "commPromptID=" + commPromptID + " to=" + playerID);
+         debugChats("Sending AI Chat to player: " + playerID + ", commPromptID: " + commPromptID + ", vector: " + vec);
          if (vec == cInvalidVector)
          {
             aiCommsSendStatement(playerID, commPromptID);
@@ -97,6 +103,7 @@ void sendStatement(int playerIDorRelation = -1, int commPromptID = -1, vector ve
             if (send == true)
             {
                llLogChatDispatch("statement", player, "commPromptID=" + commPromptID, vec);
+               llProbe("TAG", "commPromptID=" + commPromptID + " to=" + player + " rel=" + playerIDorRelation);
                if (vec == cInvalidVector)
                {
                   aiCommsSendStatement(player, commPromptID);

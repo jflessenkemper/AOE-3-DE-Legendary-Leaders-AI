@@ -209,6 +209,9 @@ minInterval 10
    }
 
    debugLegendaryLeaders("opening quotes firing for " + kbGetCivName(cMyCiv));
+   // LL-QUOTE probe — ensures the per-leader opening compliment/insult pair
+   // fires at ~25s and only once. Miss = legendary quote wiring broken.
+   llProbe("QUOTE", "opening t=" + xsGetTime());
    llSendLegendaryLeaderComplimentLine(cPlayerRelationAllyExcludingSelf, 0);
    llSendLegendaryLeaderInsultLine(cPlayerRelationEnemyNotGaia, 0);
    xsDisableSelf();

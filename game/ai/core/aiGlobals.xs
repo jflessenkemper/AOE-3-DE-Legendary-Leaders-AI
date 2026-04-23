@@ -527,6 +527,21 @@ extern int gXpValuePlayer8 = -1;
 //==============================================================================
 extern const bool cLLRuntimeTelemetry = true;
 extern const bool cLLVerboseDiagnostics = false;
+// Master switch for replay-capturable chat probes. When true, llProbe() emits
+// an unthrottled aiChat broadcast tagged "[LL-PROBE]" so community replay
+// parsers (e.g. @canyougiant/aoe3de-replay-parser) record every AI's boot,
+// wall dispatch, age-up, chatset-fire, rout, explorer-escort, and economy
+// snapshot events in the .age3Yrec chat stream.
+extern const bool cLLReplayProbes = true;
+// Per-AI leader identity string set by each initLeader*() in preInit(). Used
+// by the LL-BOOT probe so the replay tells us which leader module each AI
+// actually loaded — catches "Barbary blank leader" / wrong-personality
+// regressions directly.
+extern string gLLLeaderKey = "unassigned";
+// Per-AI chatset name (matches chatsetsmods.xml <Chatset name="...">). Set by
+// each initLeader*(); used in the LL-BOOT probe so we can verify the chat
+// portrait / quote wiring routed to the right chatset at runtime.
+extern string gLLChatsetKey = "unassigned";
 extern const bool cDebugUtilities = false;
 extern const bool cDebugBuildings = false;
 extern const bool cDebugTechs = false;

@@ -2027,6 +2027,10 @@ void ageUpEventHandler(int planID = -1)
       }
 
       gAgeUpResearchPlan = -1;
+      // LL-AGED probe — pairs with LL-AGE. If we see AGE but never AGED at a
+      // given target age, the age-up plan never resolved (resource stall,
+      // politician missing, UI-gated). Timestamp narrows the cause.
+      llProbe("AGED", "now=" + kbGetAge() + " t=" + xsGetTime());
    }
    else if (civIsAsian() == true)
    {

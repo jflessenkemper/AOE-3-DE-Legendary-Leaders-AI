@@ -1052,6 +1052,14 @@ maxInterval 15
                //aiPlanSetDesiredPriority(gAgeUpResearchPlan, 100);
                //aiPlanSetDesiredResourcePriority(gAgeUpResearchPlan, 100);
             aiPlanSetEventHandler(gAgeUpResearchPlan, cPlanEventStateChange, "ageUpEventHandler");
+            // LL-AGE probe — records which politician tech each AI picked per
+            // age transition. If an AI never emits LL-AGE age=4 (Imperial), we
+            // know the Imperial politician list failed to populate (correlates
+            // with the human-Dutch Imperial bug suspected to be an engine-side
+            // gate rather than a mod-side tech disable).
+            llProbe("AGE", "requesting age=" + (kbGetAge() + 1) +
+               " politician=" + kbGetTechName(politician) +
+               " priority=" + ageUpPriority);
             return;
          }
          else
@@ -1068,6 +1076,9 @@ maxInterval 15
                wonderToBuild, 1, 100, true, cEmergencyEscrowID, mainBaseID, 4);
             aiPlanSetDesiredResourcePriority(gAgeUpResearchPlan, ageUpPriority);
             aiPlanSetEventHandler(gAgeUpResearchPlan, cPlanEventStateChange, "ageUpEventHandler");
+            llProbe("AGE", "requesting age=" + (kbGetAge() + 1) +
+               " wonder=" + kbGetProtoUnitName(wonderToBuild) +
+               " priority=" + ageUpPriority);
          }
          else
          {
