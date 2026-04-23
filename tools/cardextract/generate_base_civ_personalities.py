@@ -1,14 +1,20 @@
-"""Override base AoE3 DE .personality files so every civ's AI always shows
-the mod's designated legendary leader (portrait + name).
+"""Author 22 mod-leader .personality files so the in-game Skirmish AI
+picker shows the mod's designated legendary leaders (portrait + name +
+tooltip + chatset) as distinct entries.
 
-Strategy: mod files placed at `game/ai/<basename>.personality` override the
-base-game files at `AoE3DE/Game/AI/<basename>.personality`. This script
-writes overrides at the SAME filenames the base game uses, replacing their
-content with the mod-intended leader's portrait, name, and chatset.
-
-After applying, picking any civ in Skirmish gets the mod's legendary leader
-as the AI personality — no more Queen Elizabeth / Queen Amina / Ivan when
-the mod wants Wellington / Usman / Catherine.
+Strategy (post-2026-04-22 bugfix):
+  - Eight files are renamed to LEADER-matching filenames because the
+    AoE3 DE mod loader does NOT override base-game .personality files by
+    same-filename shadowing. Evidence: with elizabeth.personality present
+    in both base game and mod, the picker rendered the BASE-GAME content.
+  - Filenames: wellington, usman, catherine, maurice, menelik, shivaji,
+    montezuma, pachacuti. These get registered in game/ai/personalities.xml
+    so the picker lists them.
+  - The remaining 14 files keep base-game filenames because their
+    mod-intended leader happens to match the base-game name (Napoleon,
+    Washington, etc.) — content is still rewritten to point to our
+    mod-owned strings for precise wording (e.g. "Isabella I of Castile"
+    instead of "Queen Isabella").
 
 Idempotent: overwrites existing mod .personality files on each run.
 """
@@ -26,15 +32,17 @@ STRING_ID_BASE = 490200
 # (base_game_filename, forcedciv, icon_filename, display_name, chatset, tooltip)
 # The filename matches AoE3 DE's base file so placing it in game/ai/ overrides.
 OVERRIDES = [
-    # Mismatches the user asked to fix:
-    ("elizabeth.personality",  "british",       "cpai_avatar_british_wellington.png",     "Duke of Wellington",          "elizabeth",  "British · line-and-logistics · Naval Mercantile Compound"),
-    ("amina.personality",      "DEHausa",       "cpai_avatar_hausa_usman.png",            "Usman dan Fodio",             "amina",      "Hausa · Sokoto Caliphate jihadist mobilization"),
-    ("Ivan.personality",       "russians",      "cpai_avatar_russians_catherine.png",     "Catherine the Great",         "Ivan",       "Russian · Cossack voisko + enlightened absolutism"),
-    ("William.personality",    "dutch",         "cpai_avatar_dutch_maurice.png",          "Maurice of Nassau",           "William",    "Dutch · mercantile drill + fortification"),
-    ("tewodros.personality",   "DEEthiopians",  "cpai_avatar_ethiopians_menelik.png",     "Menelik II",                  "tewodros",   "Ethiopian · Adwa-victorious highland defense"),
-    ("akbar.personality",      "indians",       "cpai_avatar_indians_shivaji.png",        "Shivaji Bhonsle",             "akbar",      "Indian · Maratha hill-fort guerilla"),
-    ("cuauhtemoc.personality", "XPAztec",       "cpai_avatar_aztecs_montezuma.png",       "Montezuma",                   "cuauhtemoc", "Aztec · tribute empire"),
-    ("Huayna.personality",     "DEInca",        "cpai_avatar_inca_pachacuti.png",         "Pachacuti",                   "Huayna",     "Inca · Andean terrace fortress"),
+    # Mismatches the user asked to fix — renamed to leader-matching filenames
+    # so the in-game picker displays them as distinct personalities (not just
+    # renamed versions of base-game files, which the engine doesn't override).
+    ("wellington.personality", "british",       "cpai_avatar_british_wellington.png",     "Duke of Wellington",          "elizabeth",  "British · line-and-logistics · Naval Mercantile Compound"),
+    ("usman.personality",      "DEHausa",       "cpai_avatar_hausa_usman.png",            "Usman dan Fodio",             "amina",      "Hausa · Sokoto Caliphate jihadist mobilization"),
+    ("catherine.personality",  "russians",      "cpai_avatar_russians_catherine.png",     "Catherine the Great",         "Ivan",       "Russian · Cossack voisko + enlightened absolutism"),
+    ("maurice.personality",    "dutch",         "cpai_avatar_dutch_maurice.png",          "Maurice of Nassau",           "William",    "Dutch · mercantile drill + fortification"),
+    ("menelik.personality",    "DEEthiopians",  "cpai_avatar_ethiopians_menelik.png",     "Menelik II",                  "tewodros",   "Ethiopian · Adwa-victorious highland defense"),
+    ("shivaji.personality",    "indians",       "cpai_avatar_indians_shivaji.png",        "Shivaji Bhonsle",             "akbar",      "Indian · Maratha hill-fort guerilla"),
+    ("montezuma.personality",  "XPAztec",       "cpai_avatar_aztecs_montezuma.png",       "Montezuma",                   "cuauhtemoc", "Aztec · tribute empire"),
+    ("pachacuti.personality",  "DEInca",        "cpai_avatar_inca_pachacuti.png",         "Pachacuti",                   "Huayna",     "Inca · Andean terrace fortress"),
 
     # Civs where base name already matches mod intent — override anyway to
     # guarantee the displayed name is exactly the mod's preferred wording

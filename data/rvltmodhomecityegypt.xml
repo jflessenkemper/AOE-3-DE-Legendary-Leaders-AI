@@ -1,15 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <homecity>
   <civ>RvltModEgyptians</civ>
   <name>$$80822$$</name>
   <heroname>$$43034$$</heroname>
   <gatherpointunit>HomeCityGatherFlag</gatherpointunit>
-  <visual>revolution\revolution_homecity.xml</visual>
-  <watervisual>revolution\revolution_homecity_water.xml</watervisual>
-  <backgroundvisual>revolution\revolution_background.xml</backgroundvisual>
+  <visual>ottoman\ottoman_homecity.xml</visual>
+  <watervisual>ottoman\ottoman_homecity_water.xml</watervisual>
+  <backgroundvisual>ottoman\ottoman_background.xml</backgroundvisual>
   <pathdata>revolution\pathable_area.gr2</pathdata>
-  <camera>revolution\revolution_homecity_camera.cam</camera>
-  <widescreencamera>revolution\revolution_homecity_camera.cam</widescreencamera>
+  <camera>ottoman\ottoman_homecity_camera.cam</camera>
+  <widescreencamera>ottoman\ottoman_homecity_widescreencamera.cam</widescreencamera>
   <transportroundtriptime>1</transportroundtriptime>
   <transportactivationtime>0</transportactivationtime>
   <level>1</level>
@@ -801,7 +801,7 @@
     <card>
       <name>DEHCFencingSchoolOttoman</name>
       <maxcount>1</maxcount>
-      <level>10</level>
+      <level>0</level>
       <prereqtech>-1</prereqtech>
       <age>1</age>
     </card>
@@ -1021,7 +1021,7 @@
     <card>
       <name>HCStonemasons</name>
       <maxcount>1</maxcount>
-      <level>10</level>
+      <level>0</level>
       <prereqtech>-1</prereqtech>
       <age>0</age>
     </card>
@@ -1165,7 +1165,7 @@
     <card>
       <name>DEHCMercsOttoman</name>
       <maxcount>-1</maxcount>
-      <level>25</level>
+      <level>0</level>
       <prereqtech>DEHCShipBerberAllies2Ottoman</prereqtech>
       <age>3</age>
       <displayunitcount>13</displayunitcount>
@@ -1192,7 +1192,7 @@
     <card>
       <name>DEHCMercsAskaris</name>
       <maxcount>1</maxcount>
-      <level>10</level>
+      <level>0</level>
       <prereqtech>HCMercsManchu</prereqtech>
       <age>3</age>
       <displayunitcount>11</displayunitcount>
@@ -1210,7 +1210,7 @@
     <card>
       <name>DEHCMercsBosniaks</name>
       <maxcount>1</maxcount>
-      <level>10</level>
+      <level>0</level>
       <prereqtech>-1</prereqtech>
       <age>2</age>
       <displayunitcount>6</displayunitcount>
@@ -1219,7 +1219,7 @@
     <card>
       <name>RvltModHCMercsMamelukes</name>
       <maxcount>1</maxcount>
-      <level>10</level>
+      <level>0</level>
       <prereqtech>-1</prereqtech>
       <age>2</age>
       <displayunitcount>1</displayunitcount>
@@ -1310,7 +1310,7 @@
     <card>
       <name>DEHCShipMercXebecOttoman</name>
       <maxcount>1</maxcount>
-      <level>10</level>
+      <level>0</level>
       <prereqtech>HCPrivateers</prereqtech>
       <age>3</age>
       <displayunitcount>2</displayunitcount>
@@ -1349,10 +1349,15 @@
     </card>
   </cards>
   <decks>
+
     <deck>
-      <name>Legendary Leaders</name>
+
+      <name>$$71332$$Beginner</name>
+
       <default>
+
       </default>
+
       <cards>
         <card>DEHCColonialMilitiaOttoman</card>
         <card>HCStonemasons</card>
@@ -1380,6 +1385,197 @@
         <card>DEHCHandMortarOttoman</card>
         <card>DEHCShiAzaps2</card>
       </cards>
+
+    </deck>
+
+    <deck>
+
+      <name>$$20310$$Land</name>
+
+      <default>
+
+      </default>
+
+      <cards>
+        <card>DEHCColonialMilitiaOttoman</card>
+        <card>HCStonemasons</card>
+        <card>DEHCREVNileFlood</card>
+        <card>DEHCREVSuezCanal</card>
+        <card>DEHCExtensiveFortificationsEuropean</card>
+        <card>DEHCFencingSchoolOttoman</card>
+        <card>DEHCShipAzaps1</card>
+        <card>DEHCREVNizamsEgypt</card>
+        <card>DEHCREVRangedCombatEgypt</card>
+        <card>DEHCREVSudaneseAllies</card>
+        <card>RvltModHCMercsMamelukes</card>
+        <card>DEHCMercsBosniaks</card>
+        <card>HCUnlockFort</card>
+        <card>DEHCREVShipEgyptianFleet</card>
+        <card>DEHCREVGatlingCamels</card>
+        <card>DEHCREVSennarHorsemen</card>
+        <card>DEHCREVShipHorseArtillery2</card>
+        <card>DEHCREVShipStradiots</card>
+        <card>DEHCMercsAskaris</card>
+        <card>DEHCMercsOttoman</card>
+        <card>DEHCShipMercXebecOttoman</card>
+        <card>DEHCOttomanBattleshipCard</card>
+        <card>DEHCShipBattleshipRepeat</card>
+        <card>DEHCHandMortarOttoman</card>
+        <card>DEHCShiAzaps2</card>
+      </cards>
+
+    </deck>
+
+    <deck>
+
+      <name>$$71333$$Naval</name>
+
+      <default>
+
+      </default>
+
+      <cards>
+        <card>DEHCColonialMilitiaOttoman</card>
+        <card>HCStonemasons</card>
+        <card>DEHCREVNileFlood</card>
+        <card>DEHCREVSuezCanal</card>
+        <card>DEHCExtensiveFortificationsEuropean</card>
+        <card>DEHCFencingSchoolOttoman</card>
+        <card>DEHCShipAzaps1</card>
+        <card>DEHCREVNizamsEgypt</card>
+        <card>DEHCREVRangedCombatEgypt</card>
+        <card>DEHCREVSudaneseAllies</card>
+        <card>RvltModHCMercsMamelukes</card>
+        <card>DEHCMercsBosniaks</card>
+        <card>HCUnlockFort</card>
+        <card>DEHCREVShipEgyptianFleet</card>
+        <card>DEHCREVGatlingCamels</card>
+        <card>DEHCREVSennarHorsemen</card>
+        <card>DEHCREVShipHorseArtillery2</card>
+        <card>DEHCREVShipStradiots</card>
+        <card>DEHCMercsAskaris</card>
+        <card>DEHCMercsOttoman</card>
+        <card>DEHCShipMercXebecOttoman</card>
+        <card>DEHCOttomanBattleshipCard</card>
+        <card>DEHCShipBattleshipRepeat</card>
+        <card>DEHCHandMortarOttoman</card>
+        <card>DEHCShiAzaps2</card>
+      </cards>
+
+    </deck>
+
+    <deck>
+
+      <name>$$55547$$Tycoon</name>
+
+      <default>
+
+      </default>
+
+      <cards>
+        <card>DEHCColonialMilitiaOttoman</card>
+        <card>HCStonemasons</card>
+        <card>DEHCREVNileFlood</card>
+        <card>DEHCREVSuezCanal</card>
+        <card>DEHCExtensiveFortificationsEuropean</card>
+        <card>DEHCFencingSchoolOttoman</card>
+        <card>DEHCShipAzaps1</card>
+        <card>DEHCREVNizamsEgypt</card>
+        <card>DEHCREVRangedCombatEgypt</card>
+        <card>DEHCREVSudaneseAllies</card>
+        <card>RvltModHCMercsMamelukes</card>
+        <card>DEHCMercsBosniaks</card>
+        <card>HCUnlockFort</card>
+        <card>DEHCREVShipEgyptianFleet</card>
+        <card>DEHCREVGatlingCamels</card>
+        <card>DEHCREVSennarHorsemen</card>
+        <card>DEHCREVShipHorseArtillery2</card>
+        <card>DEHCREVShipStradiots</card>
+        <card>DEHCMercsAskaris</card>
+        <card>DEHCMercsOttoman</card>
+        <card>DEHCShipMercXebecOttoman</card>
+        <card>DEHCOttomanBattleshipCard</card>
+        <card>DEHCShipBattleshipRepeat</card>
+        <card>DEHCHandMortarOttoman</card>
+        <card>DEHCShiAzaps2</card>
+      </cards>
+
+    </deck>
+
+    <deck>
+
+      <name>$$90974$$TreatyNoNat</name>
+
+      <default>
+
+      </default>
+
+      <cards>
+        <card>DEHCColonialMilitiaOttoman</card>
+        <card>HCStonemasons</card>
+        <card>DEHCREVNileFlood</card>
+        <card>DEHCREVSuezCanal</card>
+        <card>DEHCExtensiveFortificationsEuropean</card>
+        <card>DEHCFencingSchoolOttoman</card>
+        <card>DEHCShipAzaps1</card>
+        <card>DEHCREVNizamsEgypt</card>
+        <card>DEHCREVRangedCombatEgypt</card>
+        <card>DEHCREVSudaneseAllies</card>
+        <card>RvltModHCMercsMamelukes</card>
+        <card>DEHCMercsBosniaks</card>
+        <card>HCUnlockFort</card>
+        <card>DEHCREVShipEgyptianFleet</card>
+        <card>DEHCREVGatlingCamels</card>
+        <card>DEHCREVSennarHorsemen</card>
+        <card>DEHCREVShipHorseArtillery2</card>
+        <card>DEHCREVShipStradiots</card>
+        <card>DEHCMercsAskaris</card>
+        <card>DEHCMercsOttoman</card>
+        <card>DEHCShipMercXebecOttoman</card>
+        <card>DEHCOttomanBattleshipCard</card>
+        <card>DEHCShipBattleshipRepeat</card>
+        <card>DEHCHandMortarOttoman</card>
+        <card>DEHCShiAzaps2</card>
+      </cards>
+
+    </deck>
+
+    <deck>
+
+      <name>$$90975$$TreatyNative</name>
+
+      <default>
+
+      </default>
+
+      <cards>
+        <card>DEHCColonialMilitiaOttoman</card>
+        <card>HCStonemasons</card>
+        <card>DEHCREVNileFlood</card>
+        <card>DEHCREVSuezCanal</card>
+        <card>DEHCExtensiveFortificationsEuropean</card>
+        <card>DEHCFencingSchoolOttoman</card>
+        <card>DEHCShipAzaps1</card>
+        <card>DEHCREVNizamsEgypt</card>
+        <card>DEHCREVRangedCombatEgypt</card>
+        <card>DEHCREVSudaneseAllies</card>
+        <card>RvltModHCMercsMamelukes</card>
+        <card>DEHCMercsBosniaks</card>
+        <card>HCUnlockFort</card>
+        <card>DEHCREVShipEgyptianFleet</card>
+        <card>DEHCREVGatlingCamels</card>
+        <card>DEHCREVSennarHorsemen</card>
+        <card>DEHCREVShipHorseArtillery2</card>
+        <card>DEHCREVShipStradiots</card>
+        <card>DEHCMercsAskaris</card>
+        <card>DEHCMercsOttoman</card>
+        <card>DEHCShipMercXebecOttoman</card>
+        <card>DEHCOttomanBattleshipCard</card>
+        <card>DEHCShipBattleshipRepeat</card>
+        <card>DEHCHandMortarOttoman</card>
+        <card>DEHCShiAzaps2</card>
+      </cards>
+
     </deck>
   </decks>
   <building>

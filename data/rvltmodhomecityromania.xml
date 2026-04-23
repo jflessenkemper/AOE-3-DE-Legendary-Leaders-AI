@@ -1,15 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <homecity>
   <civ>RvltModRomanians</civ>
   <name>$$80826$$</name>
   <heroname>$$43030$$</heroname>
   <gatherpointunit>HomeCityGatherFlag</gatherpointunit>
-  <visual>revolution\revolution_homecity.xml</visual>
-  <watervisual>revolution\revolution_homecity_water.xml</watervisual>
-  <backgroundvisual>revolution\revolution_background.xml</backgroundvisual>
+  <visual>german\german_homecity.xml</visual>
+  <watervisual>german\german_homecity_water.xml</watervisual>
+  <backgroundvisual>german\german_background.xml</backgroundvisual>
   <pathdata>revolution\pathable_area.gr2</pathdata>
-  <camera>revolution\revolution_homecity_camera.cam</camera>
-  <widescreencamera>revolution\revolution_homecity_camera.cam</widescreencamera>
+  <camera>german\german_homecity_camera.cam</camera>
+  <widescreencamera>german\german_homecity_widescreencamera.cam</widescreencamera>
   <transportroundtriptime>1</transportroundtriptime>
   <transportactivationtime>0</transportactivationtime>
   <level>1</level>
@@ -439,7 +439,7 @@
     <card>
       <name>RvltModHCSovnyaRomanian</name>
       <maxcount>1</maxcount>
-      <level>25</level>
+      <level>0</level>
       <prereqtech>HCShipHalberdiersRussian3</prereqtech>
       <age>2</age>
     </card>
@@ -568,7 +568,7 @@
     <card>
       <name>HCHeavyFortifications</name>
       <maxcount>1</maxcount>
-      <level>25</level>
+      <level>0</level>
       <prereqtech>DEHCExtensiveFortificationsEuropean</prereqtech>
       <age>3</age>
     </card>
@@ -619,7 +619,7 @@
     <card>
       <name>HCAdvancedArsenal</name>
       <maxcount>1</maxcount>
-      <level>10</level>
+      <level>0</level>
       <prereqtech>HCColonialMilitia</prereqtech>
       <age>1</age>
     </card>
@@ -665,7 +665,7 @@
     <card>
       <name>HCXPIndustrialRevolution</name>
       <maxcount>1</maxcount>
-      <level>10</level>
+      <level>0</level>
       <prereqtech>HCUnlockFactory</prereqtech>
       <age>4</age>
       <displayunitcount>1</displayunitcount>
@@ -762,7 +762,7 @@
     <card>
       <name>HCRoyalMint</name>
       <maxcount>1</maxcount>
-      <level>25</level>
+      <level>0</level>
       <prereqtech>HCSilversmith</prereqtech>
       <age>2</age>
     </card>
@@ -783,7 +783,7 @@
     <card>
       <name>HCRefrigeration</name>
       <maxcount>1</maxcount>
-      <level>25</level>
+      <level>0</level>
       <prereqtech>HCSustainableAgriculture</prereqtech>
       <age>2</age>
     </card>
@@ -961,7 +961,7 @@
     <card>
       <name>DEHCMercsGiantGrenadiers</name>
       <maxcount>1</maxcount>
-      <level>10</level>
+      <level>0</level>
       <prereqtech>-1</prereqtech>
       <age>2</age>
       <displayunitcount>8</displayunitcount>
@@ -970,7 +970,7 @@
     <card>
       <name>HCMercsHessians</name>
       <maxcount>1</maxcount>
-      <level>10</level>
+      <level>0</level>
       <prereqtech>-1</prereqtech>
       <age>2</age>
       <displayunitcount>10</displayunitcount>
@@ -979,7 +979,7 @@
     <card>
       <name>HCMercsBlackRiders</name>
       <maxcount>1</maxcount>
-      <level>10</level>
+      <level>0</level>
       <prereqtech>HCMercsHessians</prereqtech>
       <age>2</age>
       <displayunitcount>7</displayunitcount>
@@ -1006,7 +1006,7 @@
     <card>
       <name>HCMercenaryLoyalty</name>
       <maxcount>1</maxcount>
-      <level>25</level>
+      <level>0</level>
       <prereqtech>-1</prereqtech>
       <age>2</age>
     </card>
@@ -1040,7 +1040,7 @@
     <card>
       <name>DEHCPhanarAllies1</name>
       <maxcount>1</maxcount>
-      <level>10</level>
+      <level>0</level>
       <prereqtech>HCPrivateers</prereqtech>
       <age>2</age>
       <infiniteinlastage>1</infiniteinlastage>
@@ -1100,10 +1100,15 @@
     </card>
   </cards>
   <decks>
+
     <deck>
-      <name>Legendary Leaders</name>
+
+      <name>$$71332$$Beginner</name>
+
       <default>
+
       </default>
+
       <cards>
         <card>DEHCLandedGentry</card>
         <card>HCColonialMilitia</card>
@@ -1131,6 +1136,197 @@
         <card>HCMercsBlackRiders</card>
         <card>HCMercsHessians</card>
       </cards>
+
+    </deck>
+
+    <deck>
+
+      <name>$$20310$$Land</name>
+
+      <default>
+
+      </default>
+
+      <cards>
+        <card>DEHCLandedGentry</card>
+        <card>HCColonialMilitia</card>
+        <card>DEHCExtensiveFortificationsEuropean</card>
+        <card>DEHCInfantryHitpointsItalian</card>
+        <card>DEHCPhanarAllies2</card>
+        <card>DEHCTheaters</card>
+        <card>HCAdvancedArsenal</card>
+        <card>RvltModHCSovnyaRomanian</card>
+        <card>RvltModHCWallachianArchers</card>
+        <card>DEHCMercsGiantGrenadiers</card>
+        <card>DEHCHandMortar</card>
+        <card>DEHCPhanarAllies1</card>
+        <card>HCRefrigeration</card>
+        <card>DEHCREVShipHorseArtillery3</card>
+        <card>RvltModHCFlightArcheryRomanians</card>
+        <card>DEHCShipBattleshipRepeat</card>
+        <card>HCHeavyFortifications</card>
+        <card>HCUnlockFactory</card>
+        <card>HCXPIndustrialRevolution</card>
+        <card>HCRoyalMint</card>
+        <card>HCUnlockFort</card>
+        <card>RvltModHCShipFortWagonOutpost</card>
+        <card>HCMercenaryLoyalty</card>
+        <card>HCMercsBlackRiders</card>
+        <card>HCMercsHessians</card>
+      </cards>
+
+    </deck>
+
+    <deck>
+
+      <name>$$71333$$Naval</name>
+
+      <default>
+
+      </default>
+
+      <cards>
+        <card>DEHCLandedGentry</card>
+        <card>HCColonialMilitia</card>
+        <card>DEHCExtensiveFortificationsEuropean</card>
+        <card>DEHCInfantryHitpointsItalian</card>
+        <card>DEHCPhanarAllies2</card>
+        <card>DEHCTheaters</card>
+        <card>HCAdvancedArsenal</card>
+        <card>RvltModHCSovnyaRomanian</card>
+        <card>RvltModHCWallachianArchers</card>
+        <card>DEHCMercsGiantGrenadiers</card>
+        <card>DEHCHandMortar</card>
+        <card>DEHCPhanarAllies1</card>
+        <card>HCRefrigeration</card>
+        <card>DEHCREVShipHorseArtillery3</card>
+        <card>RvltModHCFlightArcheryRomanians</card>
+        <card>DEHCShipBattleshipRepeat</card>
+        <card>HCHeavyFortifications</card>
+        <card>HCUnlockFactory</card>
+        <card>HCXPIndustrialRevolution</card>
+        <card>HCRoyalMint</card>
+        <card>HCUnlockFort</card>
+        <card>RvltModHCShipFortWagonOutpost</card>
+        <card>HCMercenaryLoyalty</card>
+        <card>HCMercsBlackRiders</card>
+        <card>HCMercsHessians</card>
+      </cards>
+
+    </deck>
+
+    <deck>
+
+      <name>$$55547$$Tycoon</name>
+
+      <default>
+
+      </default>
+
+      <cards>
+        <card>DEHCLandedGentry</card>
+        <card>HCColonialMilitia</card>
+        <card>DEHCExtensiveFortificationsEuropean</card>
+        <card>DEHCInfantryHitpointsItalian</card>
+        <card>DEHCPhanarAllies2</card>
+        <card>DEHCTheaters</card>
+        <card>HCAdvancedArsenal</card>
+        <card>RvltModHCSovnyaRomanian</card>
+        <card>RvltModHCWallachianArchers</card>
+        <card>DEHCMercsGiantGrenadiers</card>
+        <card>DEHCHandMortar</card>
+        <card>DEHCPhanarAllies1</card>
+        <card>HCRefrigeration</card>
+        <card>DEHCREVShipHorseArtillery3</card>
+        <card>RvltModHCFlightArcheryRomanians</card>
+        <card>DEHCShipBattleshipRepeat</card>
+        <card>HCHeavyFortifications</card>
+        <card>HCUnlockFactory</card>
+        <card>HCXPIndustrialRevolution</card>
+        <card>HCRoyalMint</card>
+        <card>HCUnlockFort</card>
+        <card>RvltModHCShipFortWagonOutpost</card>
+        <card>HCMercenaryLoyalty</card>
+        <card>HCMercsBlackRiders</card>
+        <card>HCMercsHessians</card>
+      </cards>
+
+    </deck>
+
+    <deck>
+
+      <name>$$90974$$TreatyNoNat</name>
+
+      <default>
+
+      </default>
+
+      <cards>
+        <card>DEHCLandedGentry</card>
+        <card>HCColonialMilitia</card>
+        <card>DEHCExtensiveFortificationsEuropean</card>
+        <card>DEHCInfantryHitpointsItalian</card>
+        <card>DEHCPhanarAllies2</card>
+        <card>DEHCTheaters</card>
+        <card>HCAdvancedArsenal</card>
+        <card>RvltModHCSovnyaRomanian</card>
+        <card>RvltModHCWallachianArchers</card>
+        <card>DEHCMercsGiantGrenadiers</card>
+        <card>DEHCHandMortar</card>
+        <card>DEHCPhanarAllies1</card>
+        <card>HCRefrigeration</card>
+        <card>DEHCREVShipHorseArtillery3</card>
+        <card>RvltModHCFlightArcheryRomanians</card>
+        <card>DEHCShipBattleshipRepeat</card>
+        <card>HCHeavyFortifications</card>
+        <card>HCUnlockFactory</card>
+        <card>HCXPIndustrialRevolution</card>
+        <card>HCRoyalMint</card>
+        <card>HCUnlockFort</card>
+        <card>RvltModHCShipFortWagonOutpost</card>
+        <card>HCMercenaryLoyalty</card>
+        <card>HCMercsBlackRiders</card>
+        <card>HCMercsHessians</card>
+      </cards>
+
+    </deck>
+
+    <deck>
+
+      <name>$$90975$$TreatyNative</name>
+
+      <default>
+
+      </default>
+
+      <cards>
+        <card>DEHCLandedGentry</card>
+        <card>HCColonialMilitia</card>
+        <card>DEHCExtensiveFortificationsEuropean</card>
+        <card>DEHCInfantryHitpointsItalian</card>
+        <card>DEHCPhanarAllies2</card>
+        <card>DEHCTheaters</card>
+        <card>HCAdvancedArsenal</card>
+        <card>RvltModHCSovnyaRomanian</card>
+        <card>RvltModHCWallachianArchers</card>
+        <card>DEHCMercsGiantGrenadiers</card>
+        <card>DEHCHandMortar</card>
+        <card>DEHCPhanarAllies1</card>
+        <card>HCRefrigeration</card>
+        <card>DEHCREVShipHorseArtillery3</card>
+        <card>RvltModHCFlightArcheryRomanians</card>
+        <card>DEHCShipBattleshipRepeat</card>
+        <card>HCHeavyFortifications</card>
+        <card>HCUnlockFactory</card>
+        <card>HCXPIndustrialRevolution</card>
+        <card>HCRoyalMint</card>
+        <card>HCUnlockFort</card>
+        <card>RvltModHCShipFortWagonOutpost</card>
+        <card>HCMercenaryLoyalty</card>
+        <card>HCMercsBlackRiders</card>
+        <card>HCMercsHessians</card>
+      </cards>
+
     </deck>
   </decks>
   <building>

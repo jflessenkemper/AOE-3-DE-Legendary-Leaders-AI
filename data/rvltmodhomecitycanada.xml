@@ -1,15 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <homecity>
   <civ>RvltModCanadians</civ>
   <name>$$80821$$</name>
   <heroname>$$43030$$</heroname>
   <gatherpointunit>HomeCityGatherFlag</gatherpointunit>
-  <visual>revolution\revolution_homecity.xml</visual>
-  <watervisual>revolution\revolution_homecity_water.xml</watervisual>
-  <backgroundvisual>revolution\revolution_background.xml</backgroundvisual>
+  <visual>british\british_homecity.xml</visual>
+  <watervisual>british\british_homecity_water.xml</watervisual>
+  <backgroundvisual>british\british_background.xml</backgroundvisual>
   <pathdata>revolution\pathable_area.gr2</pathdata>
-  <camera>revolution\revolution_homecity_camera.cam</camera>
-  <widescreencamera>revolution\revolution_homecity_camera.cam</widescreencamera>
+  <camera>british\british_homecity_camera.cam</camera>
+  <widescreencamera>british\british_homecity_widescreencamera.cam</widescreencamera>
   <transportroundtriptime>1</transportroundtriptime>
   <transportactivationtime>0</transportactivationtime>
   <level>1</level>
@@ -993,7 +993,7 @@
     <card>
       <name>HCXPFurTrade</name>
       <maxcount>1</maxcount>
-      <level>40</level>
+      <level>0</level>
       <bindtotech>HCXPFurTrade</bindtotech>
       <age>0</age>
     </card>
@@ -1080,7 +1080,7 @@
     <card>
       <name>DEHCGreenwichTime</name>
       <maxcount>1</maxcount>
-      <level>40</level>
+      <level>0</level>
       <prereqtech>-1</prereqtech>
       <age>0</age>
       <displayunitcount>1</displayunitcount>
@@ -1236,7 +1236,7 @@
     <card>
       <name>DEHCMercsGiantGrenadiers</name>
       <maxcount>1</maxcount>
-      <level>10</level>
+      <level>0</level>
       <prereqtech>-1</prereqtech>
       <age>2</age>
       <displayunitcount>8</displayunitcount>
@@ -1322,7 +1322,7 @@
     <card>
       <name>DEHCHanoverAllies1</name>
       <maxcount>1</maxcount>
-      <level>10</level>
+      <level>0</level>
       <prereqtech>-1</prereqtech>
       <age>1</age>
       <displayunitcount>7</displayunitcount>
@@ -1331,7 +1331,7 @@
     <card>
       <name>DEHCHanoverAllies2</name>
       <maxcount>1</maxcount>
-      <level>10</level>
+      <level>0</level>
       <bindtotech>DEHCHanoverAllies2</bindtotech>
       <age>2</age>
       <displayunitcount>4</displayunitcount>
@@ -1373,10 +1373,15 @@
     </card>
   </cards>
   <decks>
+
     <deck>
-      <name>Legendary Leaders</name>
+
+      <name>$$71332$$Beginner</name>
+
       <default>
+
       </default>
+
       <cards>
         <card>DEHCREVFencibles</card>
         <card>DEHCREVCanadianOfficer</card>
@@ -1404,6 +1409,197 @@
         <card>DEHCREVShipRangers</card>
         <card>RvltModHCMetis</card>
       </cards>
+
+    </deck>
+
+    <deck>
+
+      <name>$$20310$$Land</name>
+
+      <default>
+
+      </default>
+
+      <cards>
+        <card>DEHCREVFencibles</card>
+        <card>DEHCREVCanadianOfficer</card>
+        <card>DEHCREVConscriptionCanada</card>
+        <card>DEHCREVNativeAlliesCanada</card>
+        <card>DEHCCanadianLoyalists</card>
+        <card>HCXPFurTrade</card>
+        <card>DEHCGreenwichTime</card>
+        <card>DEHCREVBuffaloHunt</card>
+        <card>DEHCExtensiveFortificationsEuropean</card>
+        <card>DEHCMercsIrishBrigadiers</card>
+        <card>DEHCHanoverAllies1</card>
+        <card>DEHCREVShipWarCanoes</card>
+        <card>DEHCMercsGiantGrenadiers</card>
+        <card>HCUnlockFort</card>
+        <card>DEHCHanoverAllies2</card>
+        <card>DEHCShipRangers1</card>
+        <card>DEHCSiegeArchery</card>
+        <card>DEHCREVHighlanders</card>
+        <card>DEHCREVNorthAmericaTrade</card>
+        <card>DEHCREVQuebec</card>
+        <card>DEHCREVShipElk</card>
+        <card>DEHCREVShipGrizzlies</card>
+        <card>DEHCREVShipMusketeers</card>
+        <card>DEHCREVShipRangers</card>
+        <card>RvltModHCMetis</card>
+      </cards>
+
+    </deck>
+
+    <deck>
+
+      <name>$$71333$$Naval</name>
+
+      <default>
+
+      </default>
+
+      <cards>
+        <card>DEHCREVFencibles</card>
+        <card>DEHCREVCanadianOfficer</card>
+        <card>DEHCREVConscriptionCanada</card>
+        <card>DEHCREVNativeAlliesCanada</card>
+        <card>DEHCCanadianLoyalists</card>
+        <card>HCXPFurTrade</card>
+        <card>DEHCGreenwichTime</card>
+        <card>DEHCREVBuffaloHunt</card>
+        <card>DEHCExtensiveFortificationsEuropean</card>
+        <card>DEHCMercsIrishBrigadiers</card>
+        <card>DEHCHanoverAllies1</card>
+        <card>DEHCREVShipWarCanoes</card>
+        <card>DEHCMercsGiantGrenadiers</card>
+        <card>HCUnlockFort</card>
+        <card>DEHCHanoverAllies2</card>
+        <card>DEHCShipRangers1</card>
+        <card>DEHCSiegeArchery</card>
+        <card>DEHCREVHighlanders</card>
+        <card>DEHCREVNorthAmericaTrade</card>
+        <card>DEHCREVQuebec</card>
+        <card>DEHCREVShipElk</card>
+        <card>DEHCREVShipGrizzlies</card>
+        <card>DEHCREVShipMusketeers</card>
+        <card>DEHCREVShipRangers</card>
+        <card>RvltModHCMetis</card>
+      </cards>
+
+    </deck>
+
+    <deck>
+
+      <name>$$55547$$Tycoon</name>
+
+      <default>
+
+      </default>
+
+      <cards>
+        <card>DEHCREVFencibles</card>
+        <card>DEHCREVCanadianOfficer</card>
+        <card>DEHCREVConscriptionCanada</card>
+        <card>DEHCREVNativeAlliesCanada</card>
+        <card>DEHCCanadianLoyalists</card>
+        <card>HCXPFurTrade</card>
+        <card>DEHCGreenwichTime</card>
+        <card>DEHCREVBuffaloHunt</card>
+        <card>DEHCExtensiveFortificationsEuropean</card>
+        <card>DEHCMercsIrishBrigadiers</card>
+        <card>DEHCHanoverAllies1</card>
+        <card>DEHCREVShipWarCanoes</card>
+        <card>DEHCMercsGiantGrenadiers</card>
+        <card>HCUnlockFort</card>
+        <card>DEHCHanoverAllies2</card>
+        <card>DEHCShipRangers1</card>
+        <card>DEHCSiegeArchery</card>
+        <card>DEHCREVHighlanders</card>
+        <card>DEHCREVNorthAmericaTrade</card>
+        <card>DEHCREVQuebec</card>
+        <card>DEHCREVShipElk</card>
+        <card>DEHCREVShipGrizzlies</card>
+        <card>DEHCREVShipMusketeers</card>
+        <card>DEHCREVShipRangers</card>
+        <card>RvltModHCMetis</card>
+      </cards>
+
+    </deck>
+
+    <deck>
+
+      <name>$$90974$$TreatyNoNat</name>
+
+      <default>
+
+      </default>
+
+      <cards>
+        <card>DEHCREVFencibles</card>
+        <card>DEHCREVCanadianOfficer</card>
+        <card>DEHCREVConscriptionCanada</card>
+        <card>DEHCREVNativeAlliesCanada</card>
+        <card>DEHCCanadianLoyalists</card>
+        <card>HCXPFurTrade</card>
+        <card>DEHCGreenwichTime</card>
+        <card>DEHCREVBuffaloHunt</card>
+        <card>DEHCExtensiveFortificationsEuropean</card>
+        <card>DEHCMercsIrishBrigadiers</card>
+        <card>DEHCHanoverAllies1</card>
+        <card>DEHCREVShipWarCanoes</card>
+        <card>DEHCMercsGiantGrenadiers</card>
+        <card>HCUnlockFort</card>
+        <card>DEHCHanoverAllies2</card>
+        <card>DEHCShipRangers1</card>
+        <card>DEHCSiegeArchery</card>
+        <card>DEHCREVHighlanders</card>
+        <card>DEHCREVNorthAmericaTrade</card>
+        <card>DEHCREVQuebec</card>
+        <card>DEHCREVShipElk</card>
+        <card>DEHCREVShipGrizzlies</card>
+        <card>DEHCREVShipMusketeers</card>
+        <card>DEHCREVShipRangers</card>
+        <card>RvltModHCMetis</card>
+      </cards>
+
+    </deck>
+
+    <deck>
+
+      <name>$$90975$$TreatyNative</name>
+
+      <default>
+
+      </default>
+
+      <cards>
+        <card>DEHCREVFencibles</card>
+        <card>DEHCREVCanadianOfficer</card>
+        <card>DEHCREVConscriptionCanada</card>
+        <card>DEHCREVNativeAlliesCanada</card>
+        <card>DEHCCanadianLoyalists</card>
+        <card>HCXPFurTrade</card>
+        <card>DEHCGreenwichTime</card>
+        <card>DEHCREVBuffaloHunt</card>
+        <card>DEHCExtensiveFortificationsEuropean</card>
+        <card>DEHCMercsIrishBrigadiers</card>
+        <card>DEHCHanoverAllies1</card>
+        <card>DEHCREVShipWarCanoes</card>
+        <card>DEHCMercsGiantGrenadiers</card>
+        <card>HCUnlockFort</card>
+        <card>DEHCHanoverAllies2</card>
+        <card>DEHCShipRangers1</card>
+        <card>DEHCSiegeArchery</card>
+        <card>DEHCREVHighlanders</card>
+        <card>DEHCREVNorthAmericaTrade</card>
+        <card>DEHCREVQuebec</card>
+        <card>DEHCREVShipElk</card>
+        <card>DEHCREVShipGrizzlies</card>
+        <card>DEHCREVShipMusketeers</card>
+        <card>DEHCREVShipRangers</card>
+        <card>RvltModHCMetis</card>
+      </cards>
+
     </deck>
   </decks>
   <building>

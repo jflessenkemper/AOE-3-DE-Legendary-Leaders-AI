@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <homecity>
   <civ>RvltModMexicans</civ>
   <name>$$80847$$</name>
@@ -509,7 +509,7 @@
     <card>
       <name>DEHCShipChinaco3</name>
       <maxcount>1</maxcount>
-      <level>10</level>
+      <level>0</level>
       <prereqtech>-1</prereqtech>
       <age>2</age>
       <displayunitcount>4</displayunitcount>
@@ -518,7 +518,7 @@
     <card>
       <name>DEHCShipChinaco2</name>
       <maxcount>1</maxcount>
-      <level>10</level>
+      <level>0</level>
       <prereqtech>-1</prereqtech>
       <age>2</age>
       <displayunitcount>5</displayunitcount>
@@ -870,7 +870,7 @@
     <card>
       <name>HCXPIndustrialRevolution</name>
       <maxcount>1</maxcount>
-      <level>10</level>
+      <level>0</level>
       <prereqtech>HCUnlockFactory</prereqtech>
       <age>4</age>
       <displayunitcount>1</displayunitcount>
@@ -1195,7 +1195,7 @@
     <card>
       <name>DEHCMercsArmoredPistoleers</name>
       <maxcount>1</maxcount>
-      <level>10</level>
+      <level>0</level>
       <prereqtech>-1</prereqtech>
       <age>2</age>
       <displayunitcount>7</displayunitcount>
@@ -1283,7 +1283,7 @@
     <card>
       <name>DEHCHabsburgAllies1</name>
       <maxcount>1</maxcount>
-      <level>25</level>
+      <level>0</level>
       <prereqtech>-1</prereqtech>
       <age>2</age>
       <displayunitcount>9</displayunitcount>
@@ -1355,10 +1355,15 @@
     </card>
   </cards>
   <decks>
+
     <deck>
-      <name>Legendary Leaders</name>
+
+      <name>$$71332$$Beginner</name>
+
       <default>
+
       </default>
+
       <cards>
         <card>DEHCCharreada</card>
         <card>DEHCBarbacoa</card>
@@ -1386,6 +1391,197 @@
         <card>DEHCShipChinaco3</card>
         <card>DEHCShipFalconets1Team</card>
       </cards>
+
+    </deck>
+
+    <deck>
+
+      <name>$$20310$$Land</name>
+
+      <default>
+
+      </default>
+
+      <cards>
+        <card>DEHCCharreada</card>
+        <card>DEHCBarbacoa</card>
+        <card>DEHCIturbidePalace</card>
+        <card>DEHCMercsIrishBrigadiers</card>
+        <card>DEHCChipotles</card>
+        <card>DEHCExtensiveFortificationsEuropean</card>
+        <card>DEHCFedMXRanching</card>
+        <card>DEHCShipChinaco1</card>
+        <card>DEHCREVCattleDeliveryMexico</card>
+        <card>DEHCREVMXShipHaciendaWagonRepeat</card>
+        <card>DEHCREVOutlawCombat</card>
+        <card>DEHCREVShipVaqueros</card>
+        <card>DEHCMercsArmoredPistoleers</card>
+        <card>DEHCHabsburgAllies1</card>
+        <card>DEHCREVCharros</card>
+        <card>DEHCREVNativeAlliesMexico</card>
+        <card>DEHCREVShipBandidos</card>
+        <card>DEHCShipBattleshipRepeat</card>
+        <card>HCXPIndustrialRevolution</card>
+        <card>DEHCHandMortar</card>
+        <card>DEHCLiberationMarch</card>
+        <card>DEHCNewSpainViceroyalty</card>
+        <card>DEHCShipChinaco2</card>
+        <card>DEHCShipChinaco3</card>
+        <card>DEHCShipFalconets1Team</card>
+      </cards>
+
+    </deck>
+
+    <deck>
+
+      <name>$$71333$$Naval</name>
+
+      <default>
+
+      </default>
+
+      <cards>
+        <card>DEHCCharreada</card>
+        <card>DEHCBarbacoa</card>
+        <card>DEHCIturbidePalace</card>
+        <card>DEHCMercsIrishBrigadiers</card>
+        <card>DEHCChipotles</card>
+        <card>DEHCExtensiveFortificationsEuropean</card>
+        <card>DEHCFedMXRanching</card>
+        <card>DEHCShipChinaco1</card>
+        <card>DEHCREVCattleDeliveryMexico</card>
+        <card>DEHCREVMXShipHaciendaWagonRepeat</card>
+        <card>DEHCREVOutlawCombat</card>
+        <card>DEHCREVShipVaqueros</card>
+        <card>DEHCMercsArmoredPistoleers</card>
+        <card>DEHCHabsburgAllies1</card>
+        <card>DEHCREVCharros</card>
+        <card>DEHCREVNativeAlliesMexico</card>
+        <card>DEHCREVShipBandidos</card>
+        <card>DEHCShipBattleshipRepeat</card>
+        <card>HCXPIndustrialRevolution</card>
+        <card>DEHCHandMortar</card>
+        <card>DEHCLiberationMarch</card>
+        <card>DEHCNewSpainViceroyalty</card>
+        <card>DEHCShipChinaco2</card>
+        <card>DEHCShipChinaco3</card>
+        <card>DEHCShipFalconets1Team</card>
+      </cards>
+
+    </deck>
+
+    <deck>
+
+      <name>$$55547$$Tycoon</name>
+
+      <default>
+
+      </default>
+
+      <cards>
+        <card>DEHCCharreada</card>
+        <card>DEHCBarbacoa</card>
+        <card>DEHCIturbidePalace</card>
+        <card>DEHCMercsIrishBrigadiers</card>
+        <card>DEHCChipotles</card>
+        <card>DEHCExtensiveFortificationsEuropean</card>
+        <card>DEHCFedMXRanching</card>
+        <card>DEHCShipChinaco1</card>
+        <card>DEHCREVCattleDeliveryMexico</card>
+        <card>DEHCREVMXShipHaciendaWagonRepeat</card>
+        <card>DEHCREVOutlawCombat</card>
+        <card>DEHCREVShipVaqueros</card>
+        <card>DEHCMercsArmoredPistoleers</card>
+        <card>DEHCHabsburgAllies1</card>
+        <card>DEHCREVCharros</card>
+        <card>DEHCREVNativeAlliesMexico</card>
+        <card>DEHCREVShipBandidos</card>
+        <card>DEHCShipBattleshipRepeat</card>
+        <card>HCXPIndustrialRevolution</card>
+        <card>DEHCHandMortar</card>
+        <card>DEHCLiberationMarch</card>
+        <card>DEHCNewSpainViceroyalty</card>
+        <card>DEHCShipChinaco2</card>
+        <card>DEHCShipChinaco3</card>
+        <card>DEHCShipFalconets1Team</card>
+      </cards>
+
+    </deck>
+
+    <deck>
+
+      <name>$$90974$$TreatyNoNat</name>
+
+      <default>
+
+      </default>
+
+      <cards>
+        <card>DEHCCharreada</card>
+        <card>DEHCBarbacoa</card>
+        <card>DEHCIturbidePalace</card>
+        <card>DEHCMercsIrishBrigadiers</card>
+        <card>DEHCChipotles</card>
+        <card>DEHCExtensiveFortificationsEuropean</card>
+        <card>DEHCFedMXRanching</card>
+        <card>DEHCShipChinaco1</card>
+        <card>DEHCREVCattleDeliveryMexico</card>
+        <card>DEHCREVMXShipHaciendaWagonRepeat</card>
+        <card>DEHCREVOutlawCombat</card>
+        <card>DEHCREVShipVaqueros</card>
+        <card>DEHCMercsArmoredPistoleers</card>
+        <card>DEHCHabsburgAllies1</card>
+        <card>DEHCREVCharros</card>
+        <card>DEHCREVNativeAlliesMexico</card>
+        <card>DEHCREVShipBandidos</card>
+        <card>DEHCShipBattleshipRepeat</card>
+        <card>HCXPIndustrialRevolution</card>
+        <card>DEHCHandMortar</card>
+        <card>DEHCLiberationMarch</card>
+        <card>DEHCNewSpainViceroyalty</card>
+        <card>DEHCShipChinaco2</card>
+        <card>DEHCShipChinaco3</card>
+        <card>DEHCShipFalconets1Team</card>
+      </cards>
+
+    </deck>
+
+    <deck>
+
+      <name>$$90975$$TreatyNative</name>
+
+      <default>
+
+      </default>
+
+      <cards>
+        <card>DEHCCharreada</card>
+        <card>DEHCBarbacoa</card>
+        <card>DEHCIturbidePalace</card>
+        <card>DEHCMercsIrishBrigadiers</card>
+        <card>DEHCChipotles</card>
+        <card>DEHCExtensiveFortificationsEuropean</card>
+        <card>DEHCFedMXRanching</card>
+        <card>DEHCShipChinaco1</card>
+        <card>DEHCREVCattleDeliveryMexico</card>
+        <card>DEHCREVMXShipHaciendaWagonRepeat</card>
+        <card>DEHCREVOutlawCombat</card>
+        <card>DEHCREVShipVaqueros</card>
+        <card>DEHCMercsArmoredPistoleers</card>
+        <card>DEHCHabsburgAllies1</card>
+        <card>DEHCREVCharros</card>
+        <card>DEHCREVNativeAlliesMexico</card>
+        <card>DEHCREVShipBandidos</card>
+        <card>DEHCShipBattleshipRepeat</card>
+        <card>HCXPIndustrialRevolution</card>
+        <card>DEHCHandMortar</card>
+        <card>DEHCLiberationMarch</card>
+        <card>DEHCNewSpainViceroyalty</card>
+        <card>DEHCShipChinaco2</card>
+        <card>DEHCShipChinaco3</card>
+        <card>DEHCShipFalconets1Team</card>
+      </cards>
+
     </deck>
   </decks>
   <building>

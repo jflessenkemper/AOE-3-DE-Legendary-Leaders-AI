@@ -1,14 +1,14 @@
 <AI>
    <version>2</version>
    <script>aiLoaderStandard</script>
-   <nameID>80829</nameID>
+   <nameID>490252</nameID>
    <tooltipID>400019</tooltipID>
-   <forcedciv>rvltmodamericans</forcedciv>
+   <forcedciv>RvltModAmericans</forcedciv>
    <rushboom>0</rushboom>
    <icon>resources/images/icons/singleplayer/cpai_avatar_americans_jefferson.png</icon>
    <chatset>washington</chatset>
    <playerNames>
-      <nameID>80829</nameID>
-      <civ>rvltmodamericans</civ>
+      <nameID>490252</nameID>
+      <civ>RvltModAmericans</civ>
    </playerNames>
 </AI>

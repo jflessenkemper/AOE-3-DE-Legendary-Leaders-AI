@@ -11017,4 +11017,96 @@
 				<Target type ='Player'></Target></Effect>
 		</Effects>
 	</Tech>
+<!-- DISABLE-BASE-REVOLUTIONS-START -->
+	<Tech name='DERevolutionArgentina' type='Normal'>
+		<Status>UNOBTAINABLE</Status>
+	</Tech>
+	<Tech name='DERevolutionBarbaryStates' type='Normal'>
+		<Status>UNOBTAINABLE</Status>
+	</Tech>
+	<Tech name='DERevolutionBrazil' type='Normal'>
+		<Status>UNOBTAINABLE</Status>
+	</Tech>
+	<Tech name='DERevolutionCanadaBritish' type='Normal'>
+		<Status>UNOBTAINABLE</Status>
+	</Tech>
+	<Tech name='DERevolutionCanadaFrench' type='Normal'>
+		<Status>UNOBTAINABLE</Status>
+	</Tech>
+	<Tech name='DERevolutionChile' type='Normal'>
+		<Status>UNOBTAINABLE</Status>
+	</Tech>
+	<Tech name='DERevolutionColombia' type='Normal'>
+		<Status>UNOBTAINABLE</Status>
+	</Tech>
+	<Tech name='DERevolutionColombiaPortuguese' type='Normal'>
+		<Status>UNOBTAINABLE</Status>
+	</Tech>
+	<Tech name='DERevolutionEgypt' type='Normal'>
+		<Status>UNOBTAINABLE</Status>
+	</Tech>
+	<Tech name='DERevolutionFinland' type='Normal'>
+		<Status>UNOBTAINABLE</Status>
+	</Tech>
+	<Tech name='DERevolutionFrance' type='Normal'>
+		<Status>UNOBTAINABLE</Status>
+	</Tech>
+	<Tech name='DERevolutionFranceNE' type='Normal'>
+		<Status>UNOBTAINABLE</Status>
+	</Tech>
+	<Tech name='DERevolutionHaiti' type='Normal'>
+		<Status>UNOBTAINABLE</Status>
+	</Tech>
+	<Tech name='DERevolutionHungaryGerman' type='Normal'>
+		<Status>UNOBTAINABLE</Status>
+	</Tech>
+	<Tech name='DERevolutionHungaryMaltese' type='Normal'>
+		<Status>UNOBTAINABLE</Status>
+	</Tech>
+	<Tech name='DERevolutionHungaryOttoman' type='Normal'>
+		<Status>UNOBTAINABLE</Status>
+	</Tech>
+	<Tech name='DERevolutionHungaryRussian' type='Normal'>
+		<Status>UNOBTAINABLE</Status>
+	</Tech>
+	<Tech name='DERevolutionIndonesia' type='Normal'>
+		<Status>UNOBTAINABLE</Status>
+	</Tech>
+	<Tech name='DERevolutionMXBajaCalifornia' type='Normal'>
+		<Status>UNOBTAINABLE</Status>
+	</Tech>
+	<Tech name='DERevolutionMXCalifornia' type='Normal'>
+		<Status>UNOBTAINABLE</Status>
+	</Tech>
+	<Tech name='DERevolutionMXCentralAmerica' type='Normal'>
+		<Status>UNOBTAINABLE</Status>
+	</Tech>
+	<Tech name='DERevolutionMXMaya' type='Normal'>
+		<Status>UNOBTAINABLE</Status>
+	</Tech>
+	<Tech name='DERevolutionMXRioGrande' type='Normal'>
+		<Status>UNOBTAINABLE</Status>
+	</Tech>
+	<Tech name='DERevolutionMXTexas' type='Normal'>
+		<Status>UNOBTAINABLE</Status>
+	</Tech>
+	<Tech name='DERevolutionMXYucatan' type='Normal'>
+		<Status>UNOBTAINABLE</Status>
+	</Tech>
+	<Tech name='DERevolutionMexico' type='Normal'>
+		<Status>UNOBTAINABLE</Status>
+	</Tech>
+	<Tech name='DERevolutionPeru' type='Normal'>
+		<Status>UNOBTAINABLE</Status>
+	</Tech>
+	<Tech name='DERevolutionRomania' type='Normal'>
+		<Status>UNOBTAINABLE</Status>
+	</Tech>
+	<Tech name='DERevolutionSouthAfrica' type='Normal'>
+		<Status>UNOBTAINABLE</Status>
+	</Tech>
+	<Tech name='DERevolutionUSA' type='Normal'>
+		<Status>UNOBTAINABLE</Status>
+	</Tech>
+<!-- DISABLE-BASE-REVOLUTIONS-END -->
 </techtreemods>

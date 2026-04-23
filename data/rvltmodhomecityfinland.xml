@@ -1,15 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <homecity>
   <civ>RvltModFinnish</civ>
   <name>$$80823$$</name>
   <heroname>$$43030$$</heroname>
   <gatherpointunit>HomeCityGatherFlag</gatherpointunit>
-  <visual>revolution\revolution_homecity.xml</visual>
-  <watervisual>revolution\revolution_homecity_water.xml</watervisual>
-  <backgroundvisual>revolution\revolution_background.xml</backgroundvisual>
+  <visual>russian\russian_homecity.xml</visual>
+  <watervisual>russian\russian_homecity_water.xml</watervisual>
+  <backgroundvisual>russian\russian_background.xml</backgroundvisual>
   <pathdata>revolution\pathable_area.gr2</pathdata>
-  <camera>revolution\revolution_homecity_camera.cam</camera>
-  <widescreencamera>revolution\revolution_homecity_camera.cam</widescreencamera>
+  <camera>russian\russian_homecity_camera.cam</camera>
+  <widescreencamera>russian\russian_homecity_widescreencamera.cam</widescreencamera>
   <transportroundtriptime>1</transportroundtriptime>
   <transportactivationtime>0</transportactivationtime>
   <level>1</level>
@@ -510,7 +510,7 @@
     <card>
       <name>DEHCREVShipHakkapelits</name>
       <maxcount>-1</maxcount>
-      <level>25</level>
+      <level>0</level>
       <prereqtech>-1</prereqtech>
       <age>3</age>
       <displayunitcount>8</displayunitcount>
@@ -765,7 +765,7 @@
     <card>
       <name>HCHeavyFortifications</name>
       <maxcount>1</maxcount>
-      <level>25</level>
+      <level>0</level>
       <prereqtech>DEHCExtensiveFortificationsEuropean</prereqtech>
       <age>3</age>
     </card>
@@ -864,7 +864,7 @@
     <card>
       <name>HCXPIndustrialRevolution</name>
       <maxcount>1</maxcount>
-      <level>10</level>
+      <level>0</level>
       <prereqtech>HCUnlockFactory</prereqtech>
       <age>4</age>
       <displayunitcount>1</displayunitcount>
@@ -1138,7 +1138,7 @@
     <card>
       <name>DEHCContractMercsIrishBrigadiers</name>
       <maxcount>1</maxcount>
-      <level>40</level>
+      <level>0</level>
       <prereqtech>DEHCContractMercsGiantGrenadiers</prereqtech>
       <age>1</age>
       <displayunitcount>9</displayunitcount>
@@ -1154,7 +1154,7 @@
     <card>
       <name>DEHCContractMercsLandsknechts</name>
       <maxcount>1</maxcount>
-      <level>10</level>
+      <level>0</level>
       <prereqtech>-1</prereqtech>
       <age>1</age>
       <displayunitcount>3</displayunitcount>
@@ -1170,7 +1170,7 @@
     <card>
       <name>DEHCContractMercsBlackRiders</name>
       <maxcount>1</maxcount>
-      <level>10</level>
+      <level>0</level>
       <prereqtech>DEHCContractMercsLandsknechts</prereqtech>
       <age>2</age>
       <displayunitcount>7</displayunitcount>
@@ -1375,10 +1375,15 @@
     </card>
   </cards>
   <decks>
+
     <deck>
-      <name>Legendary Leaders</name>
+
+      <name>$$71332$$Beginner</name>
+
       <default>
+
       </default>
+
       <cards>
         <card>DEHCREVTreeSpawn</card>
         <card>DEHCTorpTeam</card>
@@ -1406,6 +1411,197 @@
         <card>HCHeavyFortifications</card>
         <card>DEHCContractMercsBlackRiders</card>
       </cards>
+
+    </deck>
+
+    <deck>
+
+      <name>$$20310$$Land</name>
+
+      <default>
+
+      </default>
+
+      <cards>
+        <card>DEHCREVTreeSpawn</card>
+        <card>DEHCTorpTeam</card>
+        <card>DEHCREVNothernWilderness</card>
+        <card>DEHCREVSpawnStrelet</card>
+        <card>DEHCREVTurkuAcademy</card>
+        <card>DEHCContractMercsIrishBrigadiers</card>
+        <card>DEHCContractMercsLandsknechts</card>
+        <card>DEHCREVFinnishCounterArmy</card>
+        <card>DEHCREVJaegerCombat</card>
+        <card>DEHCREVSavolaxJaegers</card>
+        <card>DEHCREVBlockhouseCannon</card>
+        <card>DEHCREVCudgelWar</card>
+        <card>DEHCREVFinnhorses</card>
+        <card>DEHCREVGunboats</card>
+        <card>DEHCREVShipBalticFleet</card>
+        <card>DEHCREVShipBlockhouses</card>
+        <card>DEHCREVShipCoinCrates</card>
+        <card>DEHCREVShipCopperMines</card>
+        <card>HCXPIndustrialRevolution</card>
+        <card>DEHCREVShipElk</card>
+        <card>DEHCREVShipFoodCrates</card>
+        <card>DEHCREVShipHakkapelits</card>
+        <card>DEHCSoldierTorps</card>
+        <card>HCHeavyFortifications</card>
+        <card>DEHCContractMercsBlackRiders</card>
+      </cards>
+
+    </deck>
+
+    <deck>
+
+      <name>$$71333$$Naval</name>
+
+      <default>
+
+      </default>
+
+      <cards>
+        <card>DEHCREVTreeSpawn</card>
+        <card>DEHCTorpTeam</card>
+        <card>DEHCREVNothernWilderness</card>
+        <card>DEHCREVSpawnStrelet</card>
+        <card>DEHCREVTurkuAcademy</card>
+        <card>DEHCContractMercsIrishBrigadiers</card>
+        <card>DEHCContractMercsLandsknechts</card>
+        <card>DEHCREVFinnishCounterArmy</card>
+        <card>DEHCREVJaegerCombat</card>
+        <card>DEHCREVSavolaxJaegers</card>
+        <card>DEHCREVBlockhouseCannon</card>
+        <card>DEHCREVCudgelWar</card>
+        <card>DEHCREVFinnhorses</card>
+        <card>DEHCREVGunboats</card>
+        <card>DEHCREVShipBalticFleet</card>
+        <card>DEHCREVShipBlockhouses</card>
+        <card>DEHCREVShipCoinCrates</card>
+        <card>DEHCREVShipCopperMines</card>
+        <card>HCXPIndustrialRevolution</card>
+        <card>DEHCREVShipElk</card>
+        <card>DEHCREVShipFoodCrates</card>
+        <card>DEHCREVShipHakkapelits</card>
+        <card>DEHCSoldierTorps</card>
+        <card>HCHeavyFortifications</card>
+        <card>DEHCContractMercsBlackRiders</card>
+      </cards>
+
+    </deck>
+
+    <deck>
+
+      <name>$$55547$$Tycoon</name>
+
+      <default>
+
+      </default>
+
+      <cards>
+        <card>DEHCREVTreeSpawn</card>
+        <card>DEHCTorpTeam</card>
+        <card>DEHCREVNothernWilderness</card>
+        <card>DEHCREVSpawnStrelet</card>
+        <card>DEHCREVTurkuAcademy</card>
+        <card>DEHCContractMercsIrishBrigadiers</card>
+        <card>DEHCContractMercsLandsknechts</card>
+        <card>DEHCREVFinnishCounterArmy</card>
+        <card>DEHCREVJaegerCombat</card>
+        <card>DEHCREVSavolaxJaegers</card>
+        <card>DEHCREVBlockhouseCannon</card>
+        <card>DEHCREVCudgelWar</card>
+        <card>DEHCREVFinnhorses</card>
+        <card>DEHCREVGunboats</card>
+        <card>DEHCREVShipBalticFleet</card>
+        <card>DEHCREVShipBlockhouses</card>
+        <card>DEHCREVShipCoinCrates</card>
+        <card>DEHCREVShipCopperMines</card>
+        <card>HCXPIndustrialRevolution</card>
+        <card>DEHCREVShipElk</card>
+        <card>DEHCREVShipFoodCrates</card>
+        <card>DEHCREVShipHakkapelits</card>
+        <card>DEHCSoldierTorps</card>
+        <card>HCHeavyFortifications</card>
+        <card>DEHCContractMercsBlackRiders</card>
+      </cards>
+
+    </deck>
+
+    <deck>
+
+      <name>$$90974$$TreatyNoNat</name>
+
+      <default>
+
+      </default>
+
+      <cards>
+        <card>DEHCREVTreeSpawn</card>
+        <card>DEHCTorpTeam</card>
+        <card>DEHCREVNothernWilderness</card>
+        <card>DEHCREVSpawnStrelet</card>
+        <card>DEHCREVTurkuAcademy</card>
+        <card>DEHCContractMercsIrishBrigadiers</card>
+        <card>DEHCContractMercsLandsknechts</card>
+        <card>DEHCREVFinnishCounterArmy</card>
+        <card>DEHCREVJaegerCombat</card>
+        <card>DEHCREVSavolaxJaegers</card>
+        <card>DEHCREVBlockhouseCannon</card>
+        <card>DEHCREVCudgelWar</card>
+        <card>DEHCREVFinnhorses</card>
+        <card>DEHCREVGunboats</card>
+        <card>DEHCREVShipBalticFleet</card>
+        <card>DEHCREVShipBlockhouses</card>
+        <card>DEHCREVShipCoinCrates</card>
+        <card>DEHCREVShipCopperMines</card>
+        <card>HCXPIndustrialRevolution</card>
+        <card>DEHCREVShipElk</card>
+        <card>DEHCREVShipFoodCrates</card>
+        <card>DEHCREVShipHakkapelits</card>
+        <card>DEHCSoldierTorps</card>
+        <card>HCHeavyFortifications</card>
+        <card>DEHCContractMercsBlackRiders</card>
+      </cards>
+
+    </deck>
+
+    <deck>
+
+      <name>$$90975$$TreatyNative</name>
+
+      <default>
+
+      </default>
+
+      <cards>
+        <card>DEHCREVTreeSpawn</card>
+        <card>DEHCTorpTeam</card>
+        <card>DEHCREVNothernWilderness</card>
+        <card>DEHCREVSpawnStrelet</card>
+        <card>DEHCREVTurkuAcademy</card>
+        <card>DEHCContractMercsIrishBrigadiers</card>
+        <card>DEHCContractMercsLandsknechts</card>
+        <card>DEHCREVFinnishCounterArmy</card>
+        <card>DEHCREVJaegerCombat</card>
+        <card>DEHCREVSavolaxJaegers</card>
+        <card>DEHCREVBlockhouseCannon</card>
+        <card>DEHCREVCudgelWar</card>
+        <card>DEHCREVFinnhorses</card>
+        <card>DEHCREVGunboats</card>
+        <card>DEHCREVShipBalticFleet</card>
+        <card>DEHCREVShipBlockhouses</card>
+        <card>DEHCREVShipCoinCrates</card>
+        <card>DEHCREVShipCopperMines</card>
+        <card>HCXPIndustrialRevolution</card>
+        <card>DEHCREVShipElk</card>
+        <card>DEHCREVShipFoodCrates</card>
+        <card>DEHCREVShipHakkapelits</card>
+        <card>DEHCSoldierTorps</card>
+        <card>HCHeavyFortifications</card>
+        <card>DEHCContractMercsBlackRiders</card>
+      </cards>
+
     </deck>
   </decks>
   <building>

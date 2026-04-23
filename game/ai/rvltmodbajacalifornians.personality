@@ -1,14 +1,14 @@
 <AI>
    <version>2</version>
    <script>aiLoaderStandard</script>
-   <nameID>112806</nameID>
+   <nameID>490270</nameID>
    <tooltipID>400010</tooltipID>
-   <forcedciv>rvltmodbajacalifornians</forcedciv>
+   <forcedciv>RvltModBajaCalifornians</forcedciv>
    <rushboom>1</rushboom>
    <icon>resources/images/icons/singleplayer/cpai_avatar_baja_californians_alvarado.png</icon>
    <chatset>hidalgo</chatset>
    <playerNames>
-      <nameID>112806</nameID>
-      <civ>rvltmodbajacalifornians</civ>
+      <nameID>490270</nameID>
+      <civ>RvltModBajaCalifornians</civ>
    </playerNames>
 </AI>

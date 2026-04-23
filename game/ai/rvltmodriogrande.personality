@@ -1,14 +1,14 @@
 <AI>
    <version>2</version>
    <script>aiLoaderStandard</script>
-   <nameID>112814</nameID>
+   <nameID>490272</nameID>
    <tooltipID>400022</tooltipID>
-   <forcedciv>rvltmodriogrande</forcedciv>
+   <forcedciv>RvltModRioGrande</forcedciv>
    <rushboom>1</rushboom>
    <icon>resources/images/icons/singleplayer/cpai_avatar_rio_grande_canales_rosillo.png</icon>
    <chatset>hidalgo</chatset>
    <playerNames>
-      <nameID>112814</nameID>
-      <civ>rvltmodriogrande</civ>
+      <nameID>490272</nameID>
+      <civ>RvltModRioGrande</civ>
    </playerNames>
 </AI>

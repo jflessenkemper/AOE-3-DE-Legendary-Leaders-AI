@@ -1,15 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <homecity>
   <civ>RvltModIndonesians</civ>
   <name>$$80825$$</name>
   <heroname>$$43030$$</heroname>
   <gatherpointunit>HomeCityGatherFlag</gatherpointunit>
-  <visual>revolution\revolution_homecity.xml</visual>
-  <watervisual>revolution\revolution_homecity_water.xml</watervisual>
-  <backgroundvisual>revolution\revolution_background.xml</backgroundvisual>
+  <visual>dutch\dutch_homecity.xml</visual>
+  <watervisual>dutch\dutch_homecity_water.xml</watervisual>
+  <backgroundvisual>dutch\dutch_background.xml</backgroundvisual>
   <pathdata>revolution\pathable_area.gr2</pathdata>
-  <camera>revolution\revolution_homecity_camera.cam</camera>
-  <widescreencamera>revolution\revolution_homecity_camera.cam</widescreencamera>
+  <camera>dutch\dutch_homecity_camera.cam</camera>
+  <widescreencamera>dutch\dutch_homecity_widescreencamera.cam</widescreencamera>
   <transportroundtriptime>1</transportroundtriptime>
   <transportactivationtime>0</transportactivationtime>
   <level>1</level>
@@ -328,7 +328,7 @@
     <card>
       <name>DEHCBlueGuards</name>
       <maxcount>1</maxcount>
-      <level>10</level>
+      <level>0</level>
       <prereqtech>-1</prereqtech>
       <age>2</age>
       <displayunitcount>14</displayunitcount>
@@ -711,7 +711,7 @@
     <card>
       <name>HCAdvancedArsenal</name>
       <maxcount>1</maxcount>
-      <level>10</level>
+      <level>0</level>
       <prereqtech>HCColonialMilitia</prereqtech>
       <age>1</age>
     </card>
@@ -951,7 +951,7 @@
     <card>
       <name>HCSpiceTradeTeam</name>
       <maxcount>1</maxcount>
-      <level>10</level>
+      <level>0</level>
       <prereqtech>-1</prereqtech>
       <age>0</age>
     </card>
@@ -1002,7 +1002,7 @@
     <card>
       <name>DEHCFeitorias</name>
       <maxcount>1</maxcount>
-      <level>10</level>
+      <level>0</level>
       <prereqtech>-1</prereqtech>
       <age>0</age>
       <bindtotech>DEHCFeitorias</bindtotech>
@@ -1204,7 +1204,7 @@
     <card>
       <name>DEHCMercsMountedRiflemen</name>
       <maxcount>1</maxcount>
-      <level>10</level>
+      <level>0</level>
       <prereqtech>HCMercsLandsknecht2</prereqtech>
       <age>3</age>
       <displayunitcount>7</displayunitcount>
@@ -1247,7 +1247,7 @@
     <card>
       <name>DEHCHabsburgAllies1</name>
       <maxcount>1</maxcount>
-      <level>25</level>
+      <level>0</level>
       <prereqtech>-1</prereqtech>
       <age>2</age>
       <displayunitcount>9</displayunitcount>
@@ -1256,7 +1256,7 @@
     <card>
       <name>DEHCWettinAllies2</name>
       <maxcount>1</maxcount>
-      <level>25</level>
+      <level>0</level>
       <prereqtech>-1</prereqtech>
       <age>3</age>
       <displayunitcount>9</displayunitcount>
@@ -1274,7 +1274,7 @@
     <card>
       <name>DEHCBelandaHitam</name>
       <maxcount>1</maxcount>
-      <level>25</level>
+      <level>0</level>
       <bindtotech>DEHCBelandaHitam</bindtotech>
       <age>3</age>
       <displayunitcount>12</displayunitcount>
@@ -1369,10 +1369,15 @@
     </card>
   </cards>
   <decks>
+
     <deck>
-      <name>Legendary Leaders</name>
+
+      <name>$$71332$$Beginner</name>
+
       <default>
+
       </default>
+
       <cards>
         <card>DEHCREVKratonGuards</card>
         <card>DEHCREVAcehExports</card>
@@ -1400,6 +1405,197 @@
         <card>DEHCBelandaHitam</card>
         <card>DEHCWettinAllies2</card>
       </cards>
+
+    </deck>
+
+    <deck>
+
+      <name>$$20310$$Land</name>
+
+      <default>
+
+      </default>
+
+      <cards>
+        <card>DEHCREVKratonGuards</card>
+        <card>DEHCREVAcehExports</card>
+        <card>DEHCREVLantakas</card>
+        <card>DEHCREVShipJavaSpearman</card>
+        <card>DEHCREVShipCetbang</card>
+        <card>DEHCREVShipWokouJunk</card>
+        <card>HCSpiceTradeTeam</card>
+        <card>DEHCFeitorias</card>
+        <card>DEHCMercsIrishBrigadiers</card>
+        <card>DEHCExtensiveFortificationsEuropean</card>
+        <card>DEHCTheaters</card>
+        <card>HCAdvancedArsenal</card>
+        <card>HCFrontierDefenses</card>
+        <card>DEHCMercenaryArmyDutch</card>
+        <card>DEHCMercsBosniaks</card>
+        <card>DEHCBlueGuards</card>
+        <card>DEHCHabsburgAllies1</card>
+        <card>DEHCREVOttomanExpArmy</card>
+        <card>DEHCMercsMountedRiflemen</card>
+        <card>DEHCDutchBattleshipCard</card>
+        <card>DEHCShipBattleshipRepeat</card>
+        <card>DEHCHandMortar</card>
+        <card>DEHCShipHussars2</card>
+        <card>DEHCBelandaHitam</card>
+        <card>DEHCWettinAllies2</card>
+      </cards>
+
+    </deck>
+
+    <deck>
+
+      <name>$$71333$$Naval</name>
+
+      <default>
+
+      </default>
+
+      <cards>
+        <card>DEHCREVKratonGuards</card>
+        <card>DEHCREVAcehExports</card>
+        <card>DEHCREVLantakas</card>
+        <card>DEHCREVShipJavaSpearman</card>
+        <card>DEHCREVShipCetbang</card>
+        <card>DEHCREVShipWokouJunk</card>
+        <card>HCSpiceTradeTeam</card>
+        <card>DEHCFeitorias</card>
+        <card>DEHCMercsIrishBrigadiers</card>
+        <card>DEHCExtensiveFortificationsEuropean</card>
+        <card>DEHCTheaters</card>
+        <card>HCAdvancedArsenal</card>
+        <card>HCFrontierDefenses</card>
+        <card>DEHCMercenaryArmyDutch</card>
+        <card>DEHCMercsBosniaks</card>
+        <card>DEHCBlueGuards</card>
+        <card>DEHCHabsburgAllies1</card>
+        <card>DEHCREVOttomanExpArmy</card>
+        <card>DEHCMercsMountedRiflemen</card>
+        <card>DEHCDutchBattleshipCard</card>
+        <card>DEHCShipBattleshipRepeat</card>
+        <card>DEHCHandMortar</card>
+        <card>DEHCShipHussars2</card>
+        <card>DEHCBelandaHitam</card>
+        <card>DEHCWettinAllies2</card>
+      </cards>
+
+    </deck>
+
+    <deck>
+
+      <name>$$55547$$Tycoon</name>
+
+      <default>
+
+      </default>
+
+      <cards>
+        <card>DEHCREVKratonGuards</card>
+        <card>DEHCREVAcehExports</card>
+        <card>DEHCREVLantakas</card>
+        <card>DEHCREVShipJavaSpearman</card>
+        <card>DEHCREVShipCetbang</card>
+        <card>DEHCREVShipWokouJunk</card>
+        <card>HCSpiceTradeTeam</card>
+        <card>DEHCFeitorias</card>
+        <card>DEHCMercsIrishBrigadiers</card>
+        <card>DEHCExtensiveFortificationsEuropean</card>
+        <card>DEHCTheaters</card>
+        <card>HCAdvancedArsenal</card>
+        <card>HCFrontierDefenses</card>
+        <card>DEHCMercenaryArmyDutch</card>
+        <card>DEHCMercsBosniaks</card>
+        <card>DEHCBlueGuards</card>
+        <card>DEHCHabsburgAllies1</card>
+        <card>DEHCREVOttomanExpArmy</card>
+        <card>DEHCMercsMountedRiflemen</card>
+        <card>DEHCDutchBattleshipCard</card>
+        <card>DEHCShipBattleshipRepeat</card>
+        <card>DEHCHandMortar</card>
+        <card>DEHCShipHussars2</card>
+        <card>DEHCBelandaHitam</card>
+        <card>DEHCWettinAllies2</card>
+      </cards>
+
+    </deck>
+
+    <deck>
+
+      <name>$$90974$$TreatyNoNat</name>
+
+      <default>
+
+      </default>
+
+      <cards>
+        <card>DEHCREVKratonGuards</card>
+        <card>DEHCREVAcehExports</card>
+        <card>DEHCREVLantakas</card>
+        <card>DEHCREVShipJavaSpearman</card>
+        <card>DEHCREVShipCetbang</card>
+        <card>DEHCREVShipWokouJunk</card>
+        <card>HCSpiceTradeTeam</card>
+        <card>DEHCFeitorias</card>
+        <card>DEHCMercsIrishBrigadiers</card>
+        <card>DEHCExtensiveFortificationsEuropean</card>
+        <card>DEHCTheaters</card>
+        <card>HCAdvancedArsenal</card>
+        <card>HCFrontierDefenses</card>
+        <card>DEHCMercenaryArmyDutch</card>
+        <card>DEHCMercsBosniaks</card>
+        <card>DEHCBlueGuards</card>
+        <card>DEHCHabsburgAllies1</card>
+        <card>DEHCREVOttomanExpArmy</card>
+        <card>DEHCMercsMountedRiflemen</card>
+        <card>DEHCDutchBattleshipCard</card>
+        <card>DEHCShipBattleshipRepeat</card>
+        <card>DEHCHandMortar</card>
+        <card>DEHCShipHussars2</card>
+        <card>DEHCBelandaHitam</card>
+        <card>DEHCWettinAllies2</card>
+      </cards>
+
+    </deck>
+
+    <deck>
+
+      <name>$$90975$$TreatyNative</name>
+
+      <default>
+
+      </default>
+
+      <cards>
+        <card>DEHCREVKratonGuards</card>
+        <card>DEHCREVAcehExports</card>
+        <card>DEHCREVLantakas</card>
+        <card>DEHCREVShipJavaSpearman</card>
+        <card>DEHCREVShipCetbang</card>
+        <card>DEHCREVShipWokouJunk</card>
+        <card>HCSpiceTradeTeam</card>
+        <card>DEHCFeitorias</card>
+        <card>DEHCMercsIrishBrigadiers</card>
+        <card>DEHCExtensiveFortificationsEuropean</card>
+        <card>DEHCTheaters</card>
+        <card>HCAdvancedArsenal</card>
+        <card>HCFrontierDefenses</card>
+        <card>DEHCMercenaryArmyDutch</card>
+        <card>DEHCMercsBosniaks</card>
+        <card>DEHCBlueGuards</card>
+        <card>DEHCHabsburgAllies1</card>
+        <card>DEHCREVOttomanExpArmy</card>
+        <card>DEHCMercsMountedRiflemen</card>
+        <card>DEHCDutchBattleshipCard</card>
+        <card>DEHCShipBattleshipRepeat</card>
+        <card>DEHCHandMortar</card>
+        <card>DEHCShipHussars2</card>
+        <card>DEHCBelandaHitam</card>
+        <card>DEHCWettinAllies2</card>
+      </cards>
+
     </deck>
   </decks>
   <building>

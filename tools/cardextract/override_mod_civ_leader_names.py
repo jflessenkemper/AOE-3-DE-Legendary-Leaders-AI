@@ -1,12 +1,22 @@
-"""Override the displayed personality names for the 26 mod civs to show the
-mod's designated LEADER (not the civ name).
+"""Set the PERSONALITY display name (not the civ name) for the 26 mod civs.
 
-Each mod civ .personality file already references a nameID pointing to the
-base-game string table (e.g. "Americans" for Jefferson). This script adds
-overrides in stringmods.xml at those same nameIDs so the in-game display
-shows "Thomas Jefferson" instead of "Americans" etc.
+BUGFIX (2026-04-22): the previous version overrode strings at the civ's
+DisplayNameID (80806-80835), which caused the civ picker/home-city picker
+to display the leader name INSTEAD OF the country name. That's wrong —
+the country is the civ's identity; the leader belongs to the personality.
 
-Idempotent via <!-- MOD-CIV-LEADER-NAMES-START/END --> markers.
+Correct architecture:
+  - civmods.xml <DisplayNameID> → country string (base-game default, unchanged)
+  - rvltmod*.personality <nameID> → NEW mod string (leader name)
+
+This script:
+  1. Allocates leader-name strings at IDs LEADER_ID_BASE + offset (default 490250+)
+  2. Writes those entries into stringmods.xml under MOD-CIV-LEADER-NAMES markers
+  3. REMOVES any prior overrides at the civ DisplayNameIDs (80806-80835 etc.)
+  4. Rewrites rvltmod*.personality files' <nameID> and <playerNames><nameID>
+     to point to the new leader IDs.
+
+Idempotent.
 """
 from __future__ import annotations
 
@@ -17,81 +27,114 @@ REPO = Path(__file__).resolve().parents[2]
 AI_DIR = REPO / "game" / "ai"
 STRINGS_PATH = REPO / "data" / "strings" / "english" / "stringmods.xml"
 
-# (personality_filename_stem, leader_display_name)
-# Matches the mod's HTML explorer sub-tree mapping.
-MOD_LEADERS = {
-    "rvltmodnapoleonicfrance":   "Napoleon Bonaparte",
-    "rvltmodrevolutionaryfrance": "Maximilien Robespierre",
-    "rvltmodamericans":          "Thomas Jefferson",
-    "rvltmodmexicans":           "Miguel Hidalgo",
-    "rvltmodcanadians":          "Isaac Brock",
-    "rvltmodfrenchcanadians":    "Louis-Joseph Papineau",
-    "rvltmodbrazil":             "Pedro I of Brazil",
-    "rvltmodargentines":         "José de San Martín",
-    "rvltmodchileans":           "Bernardo O'Higgins",
-    "rvltmodperuvians":          "Andrés de Santa Cruz",
-    "rvltmodcolumbians":         "Simón Bolívar",
-    "rvltmodhaitians":           "Toussaint L'Ouverture",
-    "rvltmodindonesians":        "Prince Diponegoro",
-    "rvltmodsouthafricans":      "Paul Kruger",
-    "rvltmodfinnish":            "Carl Gustaf Mannerheim",
-    "rvltmodhungarians":         "Lajos Kossuth",
-    "rvltmodromanians":          "Alexandru Ioan Cuza",
-    "rvltmodbarbary":            "Hayreddin Barbarossa",
-    "rvltmodegyptians":          "Muhammad Ali Pasha",
-    "rvltmodcentralamericans":   "Francisco Morazán",
-    "rvltmodbajacalifornians":   "Juan Bautista Alvarado",
-    "rvltmodyucatan":            "Felipe Carrillo Puerto",
-    "rvltmodriogrande":          "Antonio Canales Rosillo",
-    "rvltmodmayans":             "Jacinto Canek",
-    "rvltmodcalifornians":       "Mariano Vallejo",
-    "rvltmodtexians":            "Sam Houston",
+LEADER_ID_BASE = 490250
+
+# Strings that must PERSIST as country names (they're mod-allocated IDs
+# with no base-game fallback, unlike 80806-80835 which fall back cleanly).
+PERSIST_CIV_NAMES = {
+    490001: "Revolutionary France",
+    490003: "Napoleonic France",
 }
 
+# (personality_filename_stem, leader_display_name, civ_display_name_id_to_unoverride)
+MOD_LEADERS = [
+    ("rvltmodnapoleonicfrance",   "Napoleon Bonaparte",        490003),
+    ("rvltmodrevolutionaryfrance","Maximilien Robespierre",    490001),
+    ("rvltmodamericans",          "Thomas Jefferson",          80829),
+    ("rvltmodmexicans",           "Miguel Hidalgo",            80830),
+    ("rvltmodcanadians",          "Isaac Brock",               80807),
+    ("rvltmodfrenchcanadians",    "Louis-Joseph Papineau",     110319),
+    ("rvltmodbrazil",             "Pedro I of Brazil",         80831),
+    ("rvltmodargentines",         "José de San Martín",        80833),
+    ("rvltmodchileans",           "Bernardo O'Higgins",        80835),
+    ("rvltmodperuvians",          "Andrés de Santa Cruz",      80832),
+    ("rvltmodcolumbians",         "Simón Bolívar",             80834),
+    ("rvltmodhaitians",           "Toussaint L'Ouverture",     80828),
+    ("rvltmodindonesians",        "Prince Diponegoro",         80811),
+    ("rvltmodsouthafricans",      "Paul Kruger",               80813),
+    ("rvltmodfinnish",            "Carl Gustaf Mannerheim",    80809),
+    ("rvltmodhungarians",         "Lajos Kossuth",             80810),
+    ("rvltmodromanians",          "Alexandru Ioan Cuza",       80812),
+    ("rvltmodbarbary",            "Hayreddin Barbarossa",      80806),
+    ("rvltmodegyptians",          "Muhammad Ali Pasha",        80808),
+    ("rvltmodcentralamericans",   "Francisco Morazán",         112802),
+    ("rvltmodbajacalifornians",   "Juan Bautista Alvarado",    112806),
+    ("rvltmodyucatan",            "Felipe Carrillo Puerto",    112810),
+    ("rvltmodriogrande",          "Antonio Canales Rosillo",   112814),
+    ("rvltmodmayans",             "Jacinto Canek",             112816),
+    ("rvltmodcalifornians",       "Mariano Vallejo",           112822),
+    ("rvltmodtexians",            "Sam Houston",               112826),
+]
 
-def get_name_id(personality_stem: str) -> int | None:
-    path = AI_DIR / f"{personality_stem}.personality"
+
+def escape_xml(text: str) -> str:
+    return text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+
+
+def rewrite_personality(stem: str, new_name_id: int) -> bool:
+    """Update <nameID> and <playerNames><nameID> in a .personality file."""
+    path = AI_DIR / f"{stem}.personality"
     if not path.exists():
-        return None
-    m = re.search(r"<nameID>(\d+)</nameID>", path.read_text())
-    return int(m.group(1)) if m else None
+        return False
+    txt = path.read_text(encoding="utf-8")
+    new_txt = re.sub(r"<nameID>\d+</nameID>", f"<nameID>{new_name_id}</nameID>", txt)
+    path.write_text(new_txt, encoding="utf-8")
+    return True
 
 
 def main():
-    overrides = []
-    for stem, leader in MOD_LEADERS.items():
-        nid = get_name_id(stem)
-        if nid is None:
-            print(f"  WARN: {stem} has no nameID, skipping")
-            continue
-        overrides.append((nid, leader, stem))
-
-    # Update stringmods.xml with <!-- MOD-CIV-LEADER-NAMES --> block
     content = STRINGS_PATH.read_text(encoding="utf-8")
+
+    # 1) Clean ANY previous leader-name injections at civ DisplayNameIDs.
+    #    These are the strings that broke the civ picker.
+    for _, _, civ_id in MOD_LEADERS:
+        content = re.sub(
+            r"[ \t]*<String\s+_locID=['\"]" + str(civ_id) + r"['\"][^>]*>[^<]*</String>\s*\r?\n",
+            "", content,
+        )
+
+    # 1b) Re-inject country-name strings for IDs that have no base-game fallback.
+    persist_lines = []
+    for cid, country_name in PERSIST_CIV_NAMES.items():
+        safe = escape_xml(country_name)
+        persist_lines.append(f"      <String _locID='{cid}'>{safe}</String>")
+    if persist_lines:
+        injection = "\n".join(persist_lines) + "\n"
+        content = content.replace("</Language>", injection + "</Language>", 1)
+
+    # 2) Clean prior MOD-CIV-LEADER-NAMES markers.
     start = "<!-- MOD-CIV-LEADER-NAMES-START -->"
     end = "<!-- MOD-CIV-LEADER-NAMES-END -->"
     content = re.sub(
-        re.escape(start) + r".*?" + re.escape(end) + r"\n?",
+        re.escape(start) + r".*?" + re.escape(end) + r"\r?\n?",
         "", content, flags=re.DOTALL,
     )
-    # ALSO remove any pre-existing entries for the nameIDs we're about to
-    # inject (so we replace instead of duplicate).
-    for nid, _, _ in overrides:
-        content = re.sub(
-            r"\s*<String _locID=['\"]" + str(nid) + r"['\"][^>]*>[^<]*</String>\s*\n?",
-            "\n", content,
-        )
+
+    # 3) Allocate new leader IDs and rewrite personality files.
+    assignments = []  # (stem, leader_name, new_id)
+    for i, (stem, leader, _) in enumerate(MOD_LEADERS):
+        new_id = LEADER_ID_BASE + i
+        if not rewrite_personality(stem, new_id):
+            print(f"  WARN: {stem}.personality not found, skipping")
+            continue
+        assignments.append((stem, leader, new_id))
+
+    # 4) Inject new strings block under fresh markers before </Language>.
     lines = [start]
-    for nid, leader, stem in sorted(overrides):
-        safe = leader.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
-        lines.append(f"      <String _locID='{nid}'>{safe}</String>  <!-- {stem} -->")
+    for stem, leader, new_id in assignments:
+        safe = escape_xml(leader)
+        lines.append(f"      <String _locID='{new_id}'>{safe}</String>  <!-- {stem} -->")
     lines.append(end)
     injection = "\n".join(lines) + "\n"
     content = content.replace("</Language>", injection + "</Language>", 1)
+
     STRINGS_PATH.write_text(content, encoding="utf-8")
-    print(f"wrote {len(overrides)} mod-civ leader-name overrides to stringmods.xml")
-    for nid, leader, stem in overrides:
-        print(f"  {stem} (nameID {nid}) → {leader!r}")
+
+    print(f"wrote {len(assignments)} leader-name strings at IDs "
+          f"{LEADER_ID_BASE}-{LEADER_ID_BASE + len(assignments) - 1}")
+    print(f"restored {len(MOD_LEADERS)} civ DisplayNameID slots to base-game defaults")
+    for stem, leader, new_id in assignments:
+        print(f"  {stem}.personality  nameID={new_id}  → {leader!r}")
 
 
 if __name__ == "__main__":

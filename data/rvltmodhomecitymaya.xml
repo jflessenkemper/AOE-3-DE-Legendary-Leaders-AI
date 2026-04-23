@@ -4,12 +4,12 @@
   <name>$$112819$$</name>
   <heroname>$$112003$$</heroname>
   <gatherpointunit>HomeCityGatherFlag</gatherpointunit>
-  <visual>revolution\revolution_homecity.xml</visual>
-  <watervisual>revolution\revolution_homecity_water.xml</watervisual>
-  <backgroundvisual>revolution\revolution_background.xml</backgroundvisual>
+  <visual>mexico\mexico_homecity.xml</visual>
+  <watervisual>mexico\mexico_homecity_water.xml</watervisual>
+  <backgroundvisual>mexico\mexico_background.xml</backgroundvisual>
   <pathdata>revolution\pathable_area.gr2</pathdata>
-  <camera>revolution\revolution_homecity_camera.cam</camera>
-  <widescreencamera>revolution\revolution_homecity_camera.cam</widescreencamera>
+  <camera>mexico\mexico_homecity_camera.cam</camera>
+  <widescreencamera>mexico\mexico_homecity_widescreencamera.cam</widescreencamera>
   <transportroundtriptime>1</transportroundtriptime>
   <transportactivationtime>0</transportactivationtime>
   <level>1</level>
@@ -1231,10 +1231,20 @@
     </card>
   </cards>
   <decks>
+
+
     <deck>
-      <name>Legendary Leaders</name>
+
+
+      <name>$$71332$$Beginner</name>
+
+
       <default>
+
+
       </default>
+
+
       <cards>
         <card>DEHCREVMXMayaJungleVillages</card>
         <card>DEHCREVMXMayaKowojTraditions</card>
@@ -1262,173 +1272,229 @@
         <card>HCXPMayanAllies2</card>
         <card>DEHCShipCapturedGalleons2</card>
       </cards>
+
+
     </deck>
+
+
     <deck>
+
+
       <name>$$20310$$Land</name>
+
+
+      <default>
+
+
+      </default>
+
+
       <cards>
-        <card dbid="7600">DEHCAlhondigaDeGranaditas</card>
-        <card dbid="7864">DEHCBarbacoa</card>
-        <card dbid="2206">HCShipSettlers2</card>
-        <card dbid="7618">DEHCChipotles</card>
-        <card dbid="2236">HCShipFalconets3</card>
-        <card dbid="7613">DEHCPorfiriato</card>
-        <card dbid="625">HCUnlockFactory</card>
-        <card dbid="7467">DEHCShipHaciendaWagon1</card>
-        <card dbid="7626">DEHCLiberationMarch</card>
-        <card dbid="7599">DEHCNuevoMexico</card>
-        <card dbid="2239">HCShipCannons1</card>
-        <card dbid="7576">DEHCShipChinaco1</card>
-        <card dbid="2212">HCShipWoodCrates3</card>
-        <card dbid="2215">HCShipCoinCrates3</card>
-        <card dbid="2214">HCShipCoinCrates2</card>
-        <card dbid="7594">DEHCMexicanMint</card>
-        <card dbid="7868">DEHCRefurbishedFirearms</card>
-        <card dbid="7571">DEHCShipSoldado1</card>
-        <card dbid="7580">DEHCShipLosColoradosBattalion</card>
-        <card dbid="2591">HCShipSheep3</card>
-        <card dbid="7620">DEHCObservers</card>
-      </cards>
-    </deck>
-    <deck>
-      <name>$$71333$$Naval</name>
-      <cards>
-        <card dbid="7600">DEHCAlhondigaDeGranaditas</card>
-        <card dbid="7864">DEHCBarbacoa</card>
-        <card dbid="2206">HCShipSettlers2</card>
-        <card dbid="2236">HCShipFalconets3</card>
-        <card dbid="7613">DEHCPorfiriato</card>
-        <card dbid="625">HCUnlockFactory</card>
-        <card dbid="7626">DEHCLiberationMarch</card>
-        <card dbid="7610">DEHCPlanVeracruz</card>
-        <card dbid="7867">DEHCIturbidePalace</card>
-        <card dbid="7819">DEHCGulfOfMexicoTeam</card>
-        <card dbid="2212">HCShipWoodCrates3</card>
-        <card dbid="2211">HCShipWoodCrates2</card>
-        <card dbid="7606">DEHCPresidios</card>
-        <card dbid="7569">DEHCShipInsurgente1</card>
-        <card dbid="2215">HCShipCoinCrates3</card>
-        <card dbid="2223">HCShipFrigates</card>
-        <card dbid="2376">HCShipDragoons3</card>
-        <card dbid="7619">DEHCGuerillaTactics</card>
-        <card dbid="7040">DEHCShipSloops1</card>
-        <card dbid="7574">DEHCShipEmboscador2</card>
-        <card dbid="2239">HCShipCannons1</card>
-      </cards>
-    </deck>
-    <deck version="8">
-      <name>$$55547$$Tycoon</name>
-      <cards>
-        <card dbid="2263">HCShipWoodCrates5</card>
-        <card dbid="3521">HCShipCoinCrates5</card>
-        <card dbid="625">HCUnlockFactory</card>
-        <card dbid="2213">HCShipWoodCrates4</card>
-        <card dbid="2216">HCShipCoinCrates4</card>
-        <card dbid="814">HCUnlockFort</card>
-        <card dbid="2623">HCColonialEstancias</card>
-        <card dbid="7594">DEHCMexicanMint</card>
-        <card dbid="2206">HCShipSettlers2</card>
-        <card dbid="2208">HCShipSettlers4</card>
-        <card dbid="2212">HCShipWoodCrates3</card>
-        <card dbid="2215">HCShipCoinCrates3</card>
-        <card dbid="7600">DEHCAlhondigaDeGranaditas</card>
-        <card dbid="7607">DEHCGeneralMexicans</card>
-        <card dbid="1796">HCAdvancedTradingPost</card>
-        <card dbid="7815">DEHCCathedralConstruction</card>
-        <card dbid="2032">HCFurrier</card>
-        <card dbid="1950">HCIronmonger</card>
-        <card dbid="2041">HCRefrigeration</card>
-        <card dbid="2102">HCTextileMills</card>
-        <card dbid="474">HCCigarRoller</card>
-      </cards>
-    </deck>
-    <deck version="11">
-      <name>$$90974$$TreatyNoNat</name>
-      <cards>
-        <card dbid="7620">DEHCObservers</card>
-        <card dbid="1957">HCAdvancedArsenal</card>
-        <card dbid="2095">HCSustainableAgriculture</card>
-        <card dbid="2622">HCCaballeros</card>
-        <card dbid="7619">DEHCGuerillaTactics</card>
-        <card dbid="7858">DEHCCavalryCombatMexican</card>
-        <card dbid="7626">DEHCLiberationMarch</card>
-        <card dbid="2041">HCRefrigeration</card>
-        <card dbid="625">HCUnlockFactory</card>
-        <card dbid="7839">DEHCPresidialLancers</card>
-        <card dbid="2091">HCExoticHardwoods</card>
-        <card dbid="2090">HCSawmills</card>
-        <card dbid="7612">DEHCPlanTuxtepec</card>
-        <card dbid="7613">DEHCPorfiriato</card>
-        <card dbid="1950">HCIronmonger</card>
-        <card dbid="2043">HCSilversmith</card>
-        <card dbid="7595">DEHCCopperCanyon</card>
-        <card dbid="7594">DEHCMexicanMint</card>
-        <card dbid="7606">DEHCPresidios</card>
-        <card dbid="7602">DEHCHabaneroPeppers</card>
-        <card dbid="7601">DEHCJalapenoPeppers</card>
-      </cards>
-    </deck>
-    <deck version="11">
-      <name>$$90975$$TreatyNative</name>
-      <cards>
-        <card dbid="7620">DEHCObservers</card>
-        <card dbid="1957">HCAdvancedArsenal</card>
-        <card dbid="2095">HCSustainableAgriculture</card>
-        <card dbid="2622">HCCaballeros</card>
-        <card dbid="7619">DEHCGuerillaTactics</card>
-        <card dbid="7858">DEHCCavalryCombatMexican</card>
-        <card dbid="7626">DEHCLiberationMarch</card>
-        <card dbid="2041">HCRefrigeration</card>
-        <card dbid="625">HCUnlockFactory</card>
-        <card dbid="7839">DEHCPresidialLancers</card>
-        <card dbid="2091">HCExoticHardwoods</card>
-        <card dbid="2090">HCSawmills</card>
-        <card dbid="7596">DEHCAltaCalifornia</card>
-        <card dbid="1950">HCIronmonger</card>
-        <card dbid="2043">HCSilversmith</card>
-        <card dbid="7595">DEHCCopperCanyon</card>
-        <card dbid="7594">DEHCMexicanMint</card>
-        <card dbid="1847">HCNativeWarriors</card>
-        <card dbid="7602">DEHCHabaneroPeppers</card>
-        <card dbid="7613">DEHCPorfiriato</card>
-        <card dbid="7601">DEHCJalapenoPeppers</card>
-      </cards>
-    </deck>
-    <revoltdeck civ="DERevMXMaya">
-      <name>$$45518$$</name>
-      <cards>
-        <card>DEHCREVMXShipCruzobInfantry</card>
+        <card>DEHCREVMXMayaJungleVillages</card>
+        <card>DEHCREVMXMayaKowojTraditions</card>
+        <card>DEHCREVMXMayaNojPeten</card>
+        <card>DEHCREVMXJungleWarfare</card>
+        <card>DEHCREVMXBallcourts</card>
+        <card>DEHCREVMXCenotes</card>
+        <card>HCXPMayanAllies1</card>
+        <card>DEHCREVMXMayaPootsPlan</card>
+        <card>DEHCREVMXMayaYalainTraditions</card>
+        <card>DEHCREVMXMayanSupporters</card>
+        <card>DEHCREVFedMXAmparo</card>
+        <card>DEHCREVMXFrontierDefensesRepeat</card>
+        <card>DEHCREVMXHuipils</card>
         <card>DEHCREVMXMayaArchitecture</card>
         <card>DEHCREVMXMayaCeramics</card>
-        <card>DEHCREVMXMayaJungleVillages</card>
-        <card>DEHCREVMXCenotes</card>
-        <card>DEHCREVMXBritishWeapons</card>
-        <card>HCXPBuccaneers2</card>
-        <card>DEHCREVMXHuipils</card>
-        <card>DEHCREVMXKuchkabal</card>
-        <card>DEHCREVMXMayaKowojTraditions</card>
-        <card>DEHCREVMXMayaYalainTraditions</card>
-        <card>HCNativeCombat</card>
-        <card>DEHCREVMXNativeTreaties</card>
-        <card>DEHCREVMXBloodBrothers</card>
+        <card>DEHCREVFedMXHenequenIndustry</card>
+        <card>DEHCREVFedMXYucatecan</card>
         <card>DEHCREVMXKinshipTies</card>
-        <card>HCREVShipFortWagon</card>
-        <card>DEHCREVMXMayaNojPeten</card>
-        <card>DEHCREVExoticHardwoods</card>
-        <card>HCXPShipLightCannon2</card>
-        <card>HCXPPioneers2</card>
-        <card>HCXPBanditGangRepeat</card>
-        <card>DEHCREVMXChanSantaCruz</card>
-        <card>DEHCREVMXBallcourts</card>
-        <card>DEHCREVMXTalkingCross</card>
-        <card>HCXPAdvancedScouts</card>
-        <card>DEHCREVMXJungleWarfare</card>
-        <card>DEHCREVMXMayaPootsPlan</card>
         <card>DEHCREVMXMayaMariaUicab</card>
-        <card>HCNativeWarriors</card>
+        <card>DEHCREVMXKuchkabal</card>
+        <card>DEHCREVMXShipCruzobInfantry</card>
+        <card>DEHCREVFedMXSolisShredders</card>
         <card>DEHCREVMXFoodSilos</card>
-        <card>HCSustainableAgriculture</card>
+        <card>HCXPMayanAllies2</card>
+        <card>DEHCShipCapturedGalleons2</card>
       </cards>
-    </revoltdeck>
+
+
+    </deck>
+
+
+    <deck>
+
+
+      <name>$$71333$$Naval</name>
+
+
+      <default>
+
+
+      </default>
+
+
+      <cards>
+        <card>DEHCREVMXMayaJungleVillages</card>
+        <card>DEHCREVMXMayaKowojTraditions</card>
+        <card>DEHCREVMXMayaNojPeten</card>
+        <card>DEHCREVMXJungleWarfare</card>
+        <card>DEHCREVMXBallcourts</card>
+        <card>DEHCREVMXCenotes</card>
+        <card>HCXPMayanAllies1</card>
+        <card>DEHCREVMXMayaPootsPlan</card>
+        <card>DEHCREVMXMayaYalainTraditions</card>
+        <card>DEHCREVMXMayanSupporters</card>
+        <card>DEHCREVFedMXAmparo</card>
+        <card>DEHCREVMXFrontierDefensesRepeat</card>
+        <card>DEHCREVMXHuipils</card>
+        <card>DEHCREVMXMayaArchitecture</card>
+        <card>DEHCREVMXMayaCeramics</card>
+        <card>DEHCREVFedMXHenequenIndustry</card>
+        <card>DEHCREVFedMXYucatecan</card>
+        <card>DEHCREVMXKinshipTies</card>
+        <card>DEHCREVMXMayaMariaUicab</card>
+        <card>DEHCREVMXKuchkabal</card>
+        <card>DEHCREVMXShipCruzobInfantry</card>
+        <card>DEHCREVFedMXSolisShredders</card>
+        <card>DEHCREVMXFoodSilos</card>
+        <card>HCXPMayanAllies2</card>
+        <card>DEHCShipCapturedGalleons2</card>
+      </cards>
+
+
+    </deck>
+
+
+    <deck>
+
+
+      <name>$$55547$$Tycoon</name>
+
+
+      <default>
+
+
+      </default>
+
+
+      <cards>
+        <card>DEHCREVMXMayaJungleVillages</card>
+        <card>DEHCREVMXMayaKowojTraditions</card>
+        <card>DEHCREVMXMayaNojPeten</card>
+        <card>DEHCREVMXJungleWarfare</card>
+        <card>DEHCREVMXBallcourts</card>
+        <card>DEHCREVMXCenotes</card>
+        <card>HCXPMayanAllies1</card>
+        <card>DEHCREVMXMayaPootsPlan</card>
+        <card>DEHCREVMXMayaYalainTraditions</card>
+        <card>DEHCREVMXMayanSupporters</card>
+        <card>DEHCREVFedMXAmparo</card>
+        <card>DEHCREVMXFrontierDefensesRepeat</card>
+        <card>DEHCREVMXHuipils</card>
+        <card>DEHCREVMXMayaArchitecture</card>
+        <card>DEHCREVMXMayaCeramics</card>
+        <card>DEHCREVFedMXHenequenIndustry</card>
+        <card>DEHCREVFedMXYucatecan</card>
+        <card>DEHCREVMXKinshipTies</card>
+        <card>DEHCREVMXMayaMariaUicab</card>
+        <card>DEHCREVMXKuchkabal</card>
+        <card>DEHCREVMXShipCruzobInfantry</card>
+        <card>DEHCREVFedMXSolisShredders</card>
+        <card>DEHCREVMXFoodSilos</card>
+        <card>HCXPMayanAllies2</card>
+        <card>DEHCShipCapturedGalleons2</card>
+      </cards>
+
+
+    </deck>
+
+
+    <deck>
+
+
+      <name>$$90974$$TreatyNoNat</name>
+
+
+      <default>
+
+
+      </default>
+
+
+      <cards>
+        <card>DEHCREVMXMayaJungleVillages</card>
+        <card>DEHCREVMXMayaKowojTraditions</card>
+        <card>DEHCREVMXMayaNojPeten</card>
+        <card>DEHCREVMXJungleWarfare</card>
+        <card>DEHCREVMXBallcourts</card>
+        <card>DEHCREVMXCenotes</card>
+        <card>HCXPMayanAllies1</card>
+        <card>DEHCREVMXMayaPootsPlan</card>
+        <card>DEHCREVMXMayaYalainTraditions</card>
+        <card>DEHCREVMXMayanSupporters</card>
+        <card>DEHCREVFedMXAmparo</card>
+        <card>DEHCREVMXFrontierDefensesRepeat</card>
+        <card>DEHCREVMXHuipils</card>
+        <card>DEHCREVMXMayaArchitecture</card>
+        <card>DEHCREVMXMayaCeramics</card>
+        <card>DEHCREVFedMXHenequenIndustry</card>
+        <card>DEHCREVFedMXYucatecan</card>
+        <card>DEHCREVMXKinshipTies</card>
+        <card>DEHCREVMXMayaMariaUicab</card>
+        <card>DEHCREVMXKuchkabal</card>
+        <card>DEHCREVMXShipCruzobInfantry</card>
+        <card>DEHCREVFedMXSolisShredders</card>
+        <card>DEHCREVMXFoodSilos</card>
+        <card>HCXPMayanAllies2</card>
+        <card>DEHCShipCapturedGalleons2</card>
+      </cards>
+
+
+    </deck>
+
+
+    <deck>
+
+
+      <name>$$90975$$TreatyNative</name>
+
+
+      <default>
+
+
+      </default>
+
+
+      <cards>
+        <card>DEHCREVMXMayaJungleVillages</card>
+        <card>DEHCREVMXMayaKowojTraditions</card>
+        <card>DEHCREVMXMayaNojPeten</card>
+        <card>DEHCREVMXJungleWarfare</card>
+        <card>DEHCREVMXBallcourts</card>
+        <card>DEHCREVMXCenotes</card>
+        <card>HCXPMayanAllies1</card>
+        <card>DEHCREVMXMayaPootsPlan</card>
+        <card>DEHCREVMXMayaYalainTraditions</card>
+        <card>DEHCREVMXMayanSupporters</card>
+        <card>DEHCREVFedMXAmparo</card>
+        <card>DEHCREVMXFrontierDefensesRepeat</card>
+        <card>DEHCREVMXHuipils</card>
+        <card>DEHCREVMXMayaArchitecture</card>
+        <card>DEHCREVMXMayaCeramics</card>
+        <card>DEHCREVFedMXHenequenIndustry</card>
+        <card>DEHCREVFedMXYucatecan</card>
+        <card>DEHCREVMXKinshipTies</card>
+        <card>DEHCREVMXMayaMariaUicab</card>
+        <card>DEHCREVMXKuchkabal</card>
+        <card>DEHCREVMXShipCruzobInfantry</card>
+        <card>DEHCREVFedMXSolisShredders</card>
+        <card>DEHCREVMXFoodSilos</card>
+        <card>HCXPMayanAllies2</card>
+        <card>DEHCShipCapturedGalleons2</card>
+      </cards>
+
+
+    </deck>
   </decks>
   <building>
     <name>Estate</name>

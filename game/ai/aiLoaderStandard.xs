@@ -180,6 +180,16 @@ void preInit(void)
 void postInit(void)
 {
    llVerboseEcho("postInit() starting.");
+
+   // Per-nation walling: enable the Age-1 ring-wall rule for every leader.
+   // The rule itself checks llShouldBuildLegendaryWalls(true) which respects
+   // gLLEarlyWallingEnabled and gLLWallLevel per leader — aggressive styles
+   // (SteppeCavalryWedge / MobileFrontierScatter / JungleGuerrillaNetwork)
+   // opt out via earlyWalls=false in their style helpers, so the rule
+   // effectively no-ops for them. Defensive leaders (Wellington, Valette,
+   // Pachacuti, Frederick) get an early ring-wall around the TC.
+   xsEnableRule("explorationAgeWalling");
+
    enableLegendaryRevolutionSupportRules();
    enableLegendaryRevolutionCommanderRules();
    enableLeaderBourbonRules();

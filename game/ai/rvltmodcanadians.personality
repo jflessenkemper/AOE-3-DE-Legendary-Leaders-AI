@@ -1,14 +1,14 @@
 <AI>
    <version>2</version>
    <script>aiLoaderStandard</script>
-   <nameID>80807</nameID>
+   <nameID>490254</nameID>
    <tooltipID>400005</tooltipID>
-   <forcedciv>rvltmodcanadians</forcedciv>
+   <forcedciv>RvltModCanadians</forcedciv>
    <rushboom>-1</rushboom>
    <icon>resources/images/icons/singleplayer/cpai_avatar_canadians_brock.png</icon>
    <chatset>elizabeth</chatset>
    <playerNames>
-      <nameID>80807</nameID>
-      <civ>rvltmodcanadians</civ>
+      <nameID>490254</nameID>
+      <civ>RvltModCanadians</civ>
    </playerNames>
 </AI>

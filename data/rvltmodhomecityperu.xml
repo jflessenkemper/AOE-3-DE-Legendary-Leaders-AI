@@ -1,15 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <homecity>
   <civ>RvltModPeruvians</civ>
   <name>$$80849$$</name>
   <heroname>$$43030$$</heroname>
   <gatherpointunit>HomeCityGatherFlag</gatherpointunit>
-  <visual>revolution\revolution_homecity.xml</visual>
-  <watervisual>revolution\revolution_homecity_water.xml</watervisual>
-  <backgroundvisual>revolution\revolution_background.xml</backgroundvisual>
+  <visual>spanish\spanish_homecity.xml</visual>
+  <watervisual>spanish\spanish_homecity_water.xml</watervisual>
+  <backgroundvisual>spanish\spanish_background.xml</backgroundvisual>
   <pathdata>revolution\pathable_area.gr2</pathdata>
-  <camera>revolution\revolution_homecity_camera.cam</camera>
-  <widescreencamera>revolution\revolution_homecity_camera.cam</widescreencamera>
+  <camera>spanish\spanish_homecity_camera.cam</camera>
+  <widescreencamera>spanish\spanish_homecity_widescreencamera.cam</widescreencamera>
   <transportroundtriptime>1</transportroundtriptime>
   <transportactivationtime>0</transportactivationtime>
   <level>1</level>
@@ -719,7 +719,7 @@
     <card>
       <name>HCHeavyFortifications</name>
       <maxcount>1</maxcount>
-      <level>25</level>
+      <level>0</level>
       <prereqtech>DEHCExtensiveFortificationsEuropean</prereqtech>
       <age>3</age>
     </card>
@@ -776,7 +776,7 @@
       <age>1</age>
     </card>
     <card>
-      <name>RvltModHCREVCuzco</name>
+      <name>DEHCREVCuzco</name>
       <maxcount>1</maxcount>
       <level>0</level>
       <prereqtech>XPRevolution</prereqtech>
@@ -869,7 +869,7 @@
     <card>
       <name>HCXPIndustrialRevolution</name>
       <maxcount>1</maxcount>
-      <level>10</level>
+      <level>0</level>
       <prereqtech>HCUnlockFactory</prereqtech>
       <age>4</age>
       <displayunitcount>1</displayunitcount>
@@ -1186,7 +1186,7 @@
     <card>
       <name>DEHCMercsArmoredPistoleers</name>
       <maxcount>1</maxcount>
-      <level>10</level>
+      <level>0</level>
       <prereqtech>-1</prereqtech>
       <age>2</age>
       <displayunitcount>7</displayunitcount>
@@ -1213,7 +1213,7 @@
     <card>
       <name>HCMercsHighlanders</name>
       <maxcount>1</maxcount>
-      <level>10</level>
+      <level>0</level>
       <prereqtech>HCMercsSwissPikemen</prereqtech>
       <age>2</age>
       <displayunitcount>9</displayunitcount>
@@ -1231,7 +1231,7 @@
     <card>
       <name>HCMercsHighland</name>
       <maxcount>-1</maxcount>
-      <level>25</level>
+      <level>0</level>
       <prereqtech>HCMercsHighlanders</prereqtech>
       <age>3</age>
       <displayunitcount>18</displayunitcount>
@@ -1274,7 +1274,7 @@
     <card>
       <name>DEHCHabsburgAllies1</name>
       <maxcount>1</maxcount>
-      <level>25</level>
+      <level>0</level>
       <prereqtech>-1</prereqtech>
       <age>2</age>
       <displayunitcount>9</displayunitcount>
@@ -1341,10 +1341,15 @@
     </card>
   </cards>
   <decks>
+
     <deck>
-      <name>Legendary Leaders</name>
+
+      <name>$$71332$$Beginner</name>
+
       <default>
+
       </default>
+
       <cards>
         <card>DEHCExtensiveFortificationsEuropean</card>
         <card>DEHCREVAmericanAlliesPeru</card>
@@ -1361,7 +1366,7 @@
         <card>DEHCMercsArmoredPistoleers</card>
         <card>DEHCREVMancoInca</card>
         <card>DEHCREVShipFatLlamas</card>
-        <card>RvltModHCREVCuzco</card>
+        <card>DEHCREVCuzco</card>
         <card>HCHeavyFortifications</card>
         <card>HCMercsHighland</card>
         <card>HCXPIndustrialRevolution</card>
@@ -1372,6 +1377,197 @@
         <card>DEHCLiberationMarch</card>
         <card>DEHCMachuPicchu</card>
       </cards>
+
+    </deck>
+
+    <deck>
+
+      <name>$$20310$$Land</name>
+
+      <default>
+
+      </default>
+
+      <cards>
+        <card>DEHCExtensiveFortificationsEuropean</card>
+        <card>DEHCREVAmericanAlliesPeru</card>
+        <card>DEHCAlpacaWool</card>
+        <card>DEHCREVJuninHussars</card>
+        <card>DEHCREVLima</card>
+        <card>DEHCMercsIrishBrigadiers</card>
+        <card>DEHCTheaters</card>
+        <card>DEHCREVPeruvianGuard</card>
+        <card>DEHCREVCattleDelivery</card>
+        <card>DEHCREVCowboys</card>
+        <card>DEHCREVGuano</card>
+        <card>DEHCREVShipBolasWarrior</card>
+        <card>DEHCMercsArmoredPistoleers</card>
+        <card>DEHCREVMancoInca</card>
+        <card>DEHCREVShipFatLlamas</card>
+        <card>DEHCREVCuzco</card>
+        <card>HCHeavyFortifications</card>
+        <card>HCMercsHighland</card>
+        <card>HCXPIndustrialRevolution</card>
+        <card>HCUnlockFort</card>
+        <card>HCMercsHighlanders</card>
+        <card>DEHCShipBattleshipRepeat</card>
+        <card>DEHCHabsburgAllies1</card>
+        <card>DEHCLiberationMarch</card>
+        <card>DEHCMachuPicchu</card>
+      </cards>
+
+    </deck>
+
+    <deck>
+
+      <name>$$71333$$Naval</name>
+
+      <default>
+
+      </default>
+
+      <cards>
+        <card>DEHCExtensiveFortificationsEuropean</card>
+        <card>DEHCREVAmericanAlliesPeru</card>
+        <card>DEHCAlpacaWool</card>
+        <card>DEHCREVJuninHussars</card>
+        <card>DEHCREVLima</card>
+        <card>DEHCMercsIrishBrigadiers</card>
+        <card>DEHCTheaters</card>
+        <card>DEHCREVPeruvianGuard</card>
+        <card>DEHCREVCattleDelivery</card>
+        <card>DEHCREVCowboys</card>
+        <card>DEHCREVGuano</card>
+        <card>DEHCREVShipBolasWarrior</card>
+        <card>DEHCMercsArmoredPistoleers</card>
+        <card>DEHCREVMancoInca</card>
+        <card>DEHCREVShipFatLlamas</card>
+        <card>DEHCREVCuzco</card>
+        <card>HCHeavyFortifications</card>
+        <card>HCMercsHighland</card>
+        <card>HCXPIndustrialRevolution</card>
+        <card>HCUnlockFort</card>
+        <card>HCMercsHighlanders</card>
+        <card>DEHCShipBattleshipRepeat</card>
+        <card>DEHCHabsburgAllies1</card>
+        <card>DEHCLiberationMarch</card>
+        <card>DEHCMachuPicchu</card>
+      </cards>
+
+    </deck>
+
+    <deck>
+
+      <name>$$55547$$Tycoon</name>
+
+      <default>
+
+      </default>
+
+      <cards>
+        <card>DEHCExtensiveFortificationsEuropean</card>
+        <card>DEHCREVAmericanAlliesPeru</card>
+        <card>DEHCAlpacaWool</card>
+        <card>DEHCREVJuninHussars</card>
+        <card>DEHCREVLima</card>
+        <card>DEHCMercsIrishBrigadiers</card>
+        <card>DEHCTheaters</card>
+        <card>DEHCREVPeruvianGuard</card>
+        <card>DEHCREVCattleDelivery</card>
+        <card>DEHCREVCowboys</card>
+        <card>DEHCREVGuano</card>
+        <card>DEHCREVShipBolasWarrior</card>
+        <card>DEHCMercsArmoredPistoleers</card>
+        <card>DEHCREVMancoInca</card>
+        <card>DEHCREVShipFatLlamas</card>
+        <card>DEHCREVCuzco</card>
+        <card>HCHeavyFortifications</card>
+        <card>HCMercsHighland</card>
+        <card>HCXPIndustrialRevolution</card>
+        <card>HCUnlockFort</card>
+        <card>HCMercsHighlanders</card>
+        <card>DEHCShipBattleshipRepeat</card>
+        <card>DEHCHabsburgAllies1</card>
+        <card>DEHCLiberationMarch</card>
+        <card>DEHCMachuPicchu</card>
+      </cards>
+
+    </deck>
+
+    <deck>
+
+      <name>$$90974$$TreatyNoNat</name>
+
+      <default>
+
+      </default>
+
+      <cards>
+        <card>DEHCExtensiveFortificationsEuropean</card>
+        <card>DEHCREVAmericanAlliesPeru</card>
+        <card>DEHCAlpacaWool</card>
+        <card>DEHCREVJuninHussars</card>
+        <card>DEHCREVLima</card>
+        <card>DEHCMercsIrishBrigadiers</card>
+        <card>DEHCTheaters</card>
+        <card>DEHCREVPeruvianGuard</card>
+        <card>DEHCREVCattleDelivery</card>
+        <card>DEHCREVCowboys</card>
+        <card>DEHCREVGuano</card>
+        <card>DEHCREVShipBolasWarrior</card>
+        <card>DEHCMercsArmoredPistoleers</card>
+        <card>DEHCREVMancoInca</card>
+        <card>DEHCREVShipFatLlamas</card>
+        <card>DEHCREVCuzco</card>
+        <card>HCHeavyFortifications</card>
+        <card>HCMercsHighland</card>
+        <card>HCXPIndustrialRevolution</card>
+        <card>HCUnlockFort</card>
+        <card>HCMercsHighlanders</card>
+        <card>DEHCShipBattleshipRepeat</card>
+        <card>DEHCHabsburgAllies1</card>
+        <card>DEHCLiberationMarch</card>
+        <card>DEHCMachuPicchu</card>
+      </cards>
+
+    </deck>
+
+    <deck>
+
+      <name>$$90975$$TreatyNative</name>
+
+      <default>
+
+      </default>
+
+      <cards>
+        <card>DEHCExtensiveFortificationsEuropean</card>
+        <card>DEHCREVAmericanAlliesPeru</card>
+        <card>DEHCAlpacaWool</card>
+        <card>DEHCREVJuninHussars</card>
+        <card>DEHCREVLima</card>
+        <card>DEHCMercsIrishBrigadiers</card>
+        <card>DEHCTheaters</card>
+        <card>DEHCREVPeruvianGuard</card>
+        <card>DEHCREVCattleDelivery</card>
+        <card>DEHCREVCowboys</card>
+        <card>DEHCREVGuano</card>
+        <card>DEHCREVShipBolasWarrior</card>
+        <card>DEHCMercsArmoredPistoleers</card>
+        <card>DEHCREVMancoInca</card>
+        <card>DEHCREVShipFatLlamas</card>
+        <card>DEHCREVCuzco</card>
+        <card>HCHeavyFortifications</card>
+        <card>HCMercsHighland</card>
+        <card>HCXPIndustrialRevolution</card>
+        <card>HCUnlockFort</card>
+        <card>HCMercsHighlanders</card>
+        <card>DEHCShipBattleshipRepeat</card>
+        <card>DEHCHabsburgAllies1</card>
+        <card>DEHCLiberationMarch</card>
+        <card>DEHCMachuPicchu</card>
+      </cards>
+
     </deck>
   </decks>
   <building>
@@ -1665,7 +1861,7 @@
       <tech>DEHCMonumentalArchitecture</tech>
       <tech>DEHCREVAmericanAlliesPeru</tech>
       <tech>DEHCREVLima</tech>
-      <tech>RvltModHCREVCuzco</tech>
+      <tech>DEHCREVCuzco</tech>
       <tech>DEHCREVJuninHussars</tech>
     </obtainabletechs>
     <activetechs>
@@ -1706,7 +1902,7 @@
       <tech>DEHCMonumentalArchitecture</tech>
       <tech>DEHCREVAmericanAlliesPeru</tech>
       <tech>DEHCREVLima</tech>
-      <tech>RvltModHCREVCuzco</tech>
+      <tech>DEHCREVCuzco</tech>
       <tech>DEHCREVJuninHussars</tech>
     </activetechs>
     <validunits>

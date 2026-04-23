@@ -1,15 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <homecity>
   <civ>RvltModNapoleonicFrance</civ>
   <name>$$36885$$</name>
   <heroname>$$43031$$</heroname>
   <gatherpointunit>HomeCityGatherFlag</gatherpointunit>
-  <visual>revolution\revolution_homecity.xml</visual>
-  <watervisual>revolution\revolution_homecity_water.xml</watervisual>
-  <backgroundvisual>revolution\revolution_background.xml</backgroundvisual>
+  <visual>french\french_homecity.xml</visual>
+  <watervisual>french\french_homecity_water.xml</watervisual>
+  <backgroundvisual>french\french_background.xml</backgroundvisual>
   <pathdata>revolution\pathable_area.gr2</pathdata>
-  <camera>revolution\revolution_homecity_camera.cam</camera>
-  <widescreencamera>revolution\revolution_homecity_camera.cam</widescreencamera>
+  <camera>french\french_homecity_camera.cam</camera>
+  <widescreencamera>french\french_homecity_widescreencamera.cam</widescreencamera>
   <transportroundtriptime>1</transportroundtriptime>
   <transportactivationtime>0</transportactivationtime>
   <level>1</level>
@@ -222,7 +222,7 @@
     <card>
       <name>DEHCShipBalloonsFrench</name>
       <maxcount>1</maxcount>
-      <level>10</level>
+      <level>0</level>
       <prereqtech>-1</prereqtech>
       <age>0</age>
     </card>
@@ -261,7 +261,7 @@
       <age>1</age>
     </card>
     <card>
-      <name>DEHCRevFrenchRoyalArmy</name>
+      <name>DEHCFrenchRoyalArmy</name>
       <maxcount>1</maxcount>
       <level>0</level>
       <prereqtech>-1</prereqtech>
@@ -819,7 +819,7 @@
     <card>
       <name>HCFencingSchool</name>
       <maxcount>1</maxcount>
-      <level>10</level>
+      <level>0</level>
       <prereqtech>-1</prereqtech>
       <age>1</age>
     </card>
@@ -916,7 +916,7 @@
     <card>
       <name>DEHCREVNapoleonicWarfare</name>
       <maxcount>1</maxcount>
-      <level>1</level>
+      <level>0</level>
       <prereqtech>XPRevolution</prereqtech>
       <bindtotech>DEHCREVNapoleonicWarfare</bindtotech>
       <age>1</age>
@@ -953,7 +953,7 @@
     <card>
       <name>HCExoticHardwoods</name>
       <maxcount>1</maxcount>
-      <level>25</level>
+      <level>0</level>
       <prereqtech>HCSawmillsTeam</prereqtech>
       <age>0</age>
     </card>
@@ -1123,7 +1123,7 @@
     <card>
       <name>HCNavalGunners</name>
       <maxcount>1</maxcount>
-      <level>25</level>
+      <level>0</level>
       <prereqtech>HCAdmirality</prereqtech>
       <age>2</age>
       <bindtotech>DEHCREVNavalGunners</bindtotech>
@@ -1334,7 +1334,7 @@
     <card>
       <name>DEHCWittelsbachAllies1</name>
       <maxcount>-1</maxcount>
-      <level>10</level>
+      <level>0</level>
       <prereqtech>-1</prereqtech>
       <age>1</age>
       <infiniteinlastage>1</infiniteinlastage>
@@ -1343,7 +1343,7 @@
     <card>
       <name>DEHCWittelsbachAllies2</name>
       <maxcount>1</maxcount>
-      <level>25</level>
+      <level>0</level>
       <prereqtech>HCXPHuronAllies1</prereqtech>
       <age>2</age>
       <displayunitcount>7</displayunitcount>
@@ -1353,7 +1353,7 @@
     <card>
       <name>DEHCWittelsbachAlliesRepeat</name>
       <maxcount>-1</maxcount>
-      <level>40</level>
+      <level>0</level>
       <prereqtech>DEHCBourbonAllies1</prereqtech>
       <age>3</age>
       <displayunitcount>8</displayunitcount>
@@ -1417,10 +1417,20 @@
     </card>
   </cards>
   <decks>
+
+
     <deck>
-      <name>Legendary Leaders</name>
+
+
+      <name>$$71332$$Beginner</name>
+
+
       <default>
+
+
       </default>
+
+
       <cards>
         <card>DEHCREVImperialOldGuard</card>
         <card>DEHCREVNapoleonicWarfare</card>
@@ -1439,7 +1449,7 @@
         <card>DEHCWittelsbachAllies1</card>
         <card>HCFencingSchool</card>
         <card>DEHCREVGenieTroops</card>
-        <card>DEHCRevFrenchRoyalArmy</card>
+        <card>DEHCFrenchRoyalArmy</card>
         <card>DEHCREVShipmentRevolutionaries</card>
         <card>DEHCREVMercsBosniaksRepeat</card>
         <card>DEHCREVMercsMountedRiflemenRepeat</card>
@@ -1448,156 +1458,228 @@
         <card>DEHCWittelsbachAlliesRepeat</card>
         <card>HCNavalGunners</card>
       </cards>
+
+
     </deck>
+
+
     <deck>
+
+
       <name>$$20310$$Land</name>
+
+
+      <default>
+
+
+      </default>
+
+
       <cards>
-        <card dbid="2262">HCShipCoureurs3</card>
-        <card dbid="2261">HCShipCoureurs2</card>
-        <card dbid="2212">HCShipWoodCrates3</card>
-        <card dbid="2215">HCShipCoinCrates3</card>
-        <card dbid="2211">HCShipWoodCrates2</card>
-        <card dbid="2239">HCShipCannons1</card>
-        <card dbid="2031">HCRobberBarons</card>
-        <card dbid="625">HCUnlockFactory</card>
-        <card dbid="3387">HCXPEconomicTheory</card>
-        <card dbid="1993">HCPioneers</card>
-        <card dbid="2226">HCShipCrossbowmen1</card>
-        <card dbid="2236">HCShipFalconets3</card>
-        <card dbid="2061">HCCavalryCombatFrench</card>
-        <card dbid="2255">HCHandCavalryDamageFrenchTeam</card>
-        <card dbid="3444">HCXPThoroughbreds</card>
-        <card dbid="2213">HCShipWoodCrates4</card>
-        <card dbid="2246">HCRangedInfantryDamageFrenchTeam</card>
-        <card dbid="2038">HCRidingSchool</card>
-        <card dbid="814">HCUnlockFort</card>
-        <card dbid="2256">HCHandCavalryHitpointsFrench</card>
-        <card dbid="2041">HCRefrigeration</card>
-        <card dbid="3351">DEHCMercsRoyalHorseman</card>
-        <card dbid="2051">HCExplorerFrench</card>
-        <card dbid="2250">HCShipSkirmishers3</card>
-        <card dbid="2254">HCShipCuirassiers3</card>
+        <card>DEHCREVImperialOldGuard</card>
+        <card>DEHCREVNapoleonicWarfare</card>
+        <card>DEHCREVHundredDays</card>
+        <card>DEHCREVGrandBattery</card>
+        <card>DEHCREVFlyingBattery</card>
+        <card>DEHCREVHorseHunters</card>
+        <card>DEHCREVContinentalBlockade</card>
+        <card>DEHCREVRustamsRegiment</card>
+        <card>DEHCREVClientStates</card>
+        <card>DEHCREVSisterRepublics</card>
+        <card>DEHCShipBalloonsFrench</card>
+        <card>HCExoticHardwoods</card>
+        <card>DEHCCentSuisses</card>
+        <card>DEHCTheaters</card>
+        <card>DEHCWittelsbachAllies1</card>
+        <card>HCFencingSchool</card>
+        <card>DEHCREVGenieTroops</card>
+        <card>DEHCFrenchRoyalArmy</card>
+        <card>DEHCREVShipmentRevolutionaries</card>
+        <card>DEHCREVMercsBosniaksRepeat</card>
+        <card>DEHCREVMercsMountedRiflemenRepeat</card>
+        <card>DEHCREVShipHorseArtillery3</card>
+        <card>DEHCWittelsbachAllies2</card>
+        <card>DEHCWittelsbachAlliesRepeat</card>
+        <card>HCNavalGunners</card>
       </cards>
+
+
     </deck>
+
+
     <deck>
+
+
       <name>$$71333$$Naval</name>
+
+
+      <default>
+
+
+      </default>
+
+
       <cards>
-        <card dbid="2262">HCShipCoureurs3</card>
-        <card dbid="2261">HCShipCoureurs2</card>
-        <card dbid="2215">HCShipCoinCrates3</card>
-        <card dbid="2211">HCShipWoodCrates2</card>
-        <card dbid="2031">HCRobberBarons</card>
-        <card dbid="625">HCUnlockFactory</card>
-        <card dbid="3387">HCXPEconomicTheory</card>
-        <card dbid="2226">HCShipCrossbowmen1</card>
-        <card dbid="2236">HCShipFalconets3</card>
-        <card dbid="2246">HCRangedInfantryDamageFrenchTeam</card>
-        <card dbid="2221">HCShipCaravels2</card>
-        <card dbid="2223">HCShipFrigates</card>
-        <card dbid="2213">HCShipWoodCrates4</card>
-        <card dbid="2239">HCShipCannons1</card>
-        <card dbid="814">HCUnlockFort</card>
-        <card dbid="10425">DEHCFrenchBattleshipCard</card>
-        <card dbid="2445">HCEarlySkirmishersTeam</card>
-        <card dbid="2245">HCRangedInfantryHitpointsFrench</card>
-        <card dbid="2212">HCShipWoodCrates3</card>
-        <card dbid="2225">HCNavalCombat</card>
-        <card dbid="2323">HCNavalGunners</card>
-        <card dbid="10254">DEHCFencingSchoolFrench</card>
-        <card dbid="2093">HCRoyalMint</card>
-        <card dbid="2099">HCRenderingPlant</card>
-        <card dbid="3383">HCXPGribeauvalSystem</card>
+        <card>DEHCREVImperialOldGuard</card>
+        <card>DEHCREVNapoleonicWarfare</card>
+        <card>DEHCREVHundredDays</card>
+        <card>DEHCREVGrandBattery</card>
+        <card>DEHCREVFlyingBattery</card>
+        <card>DEHCREVHorseHunters</card>
+        <card>DEHCREVContinentalBlockade</card>
+        <card>DEHCREVRustamsRegiment</card>
+        <card>DEHCREVClientStates</card>
+        <card>DEHCREVSisterRepublics</card>
+        <card>DEHCShipBalloonsFrench</card>
+        <card>HCExoticHardwoods</card>
+        <card>DEHCCentSuisses</card>
+        <card>DEHCTheaters</card>
+        <card>DEHCWittelsbachAllies1</card>
+        <card>HCFencingSchool</card>
+        <card>DEHCREVGenieTroops</card>
+        <card>DEHCFrenchRoyalArmy</card>
+        <card>DEHCREVShipmentRevolutionaries</card>
+        <card>DEHCREVMercsBosniaksRepeat</card>
+        <card>DEHCREVMercsMountedRiflemenRepeat</card>
+        <card>DEHCREVShipHorseArtillery3</card>
+        <card>DEHCWittelsbachAllies2</card>
+        <card>DEHCWittelsbachAlliesRepeat</card>
+        <card>HCNavalGunners</card>
       </cards>
+
+
     </deck>
-    <deck version="8">
+
+
+    <deck>
+
+
       <name>$$55547$$Tycoon</name>
+
+
+      <default>
+
+
+      </default>
+
+
       <cards>
-        <card dbid="3381">HCShipCoureurs4</card>
-        <card dbid="2263">HCShipWoodCrates5</card>
-        <card dbid="625">HCUnlockFactory</card>
-        <card dbid="2031">HCRobberBarons</card>
-        <card dbid="2213">HCShipWoodCrates4</card>
-        <card dbid="2216">HCShipCoinCrates4</card>
-        <card dbid="814">HCUnlockFort</card>
-        <card dbid="2093">HCRoyalMint</card>
-        <card dbid="2041">HCRefrigeration</card>
-        <card dbid="2212">HCShipWoodCrates3</card>
-        <card dbid="2215">HCShipCoinCrates3</card>
-        <card dbid="2261">HCShipCoureurs2</card>
-        <card dbid="2262">HCShipCoureurs3</card>
-        <card dbid="1992">HCColonialMilitia</card>
-        <card dbid="1796">HCAdvancedTradingPost</card>
-        <card dbid="3387">HCXPEconomicTheory</card>
-        <card dbid="3440">HCXPDistributivism</card>
-        <card dbid="2051">HCExplorerFrench</card>
-        <card dbid="2647">HCRoyalDecreeFrench</card>
-        <card dbid="2091">HCExoticHardwoods</card>
-        <card dbid="3388">HCXPLandGrab</card>
-        <card dbid="2066">HCNorthwestPassage</card>
-        <card dbid="3504">HCXPFurTrade</card>
-        <card dbid="2102">HCTextileMills</card>
-        <card dbid="2095">HCSustainableAgriculture</card>
+        <card>DEHCREVImperialOldGuard</card>
+        <card>DEHCREVNapoleonicWarfare</card>
+        <card>DEHCREVHundredDays</card>
+        <card>DEHCREVGrandBattery</card>
+        <card>DEHCREVFlyingBattery</card>
+        <card>DEHCREVHorseHunters</card>
+        <card>DEHCREVContinentalBlockade</card>
+        <card>DEHCREVRustamsRegiment</card>
+        <card>DEHCREVClientStates</card>
+        <card>DEHCREVSisterRepublics</card>
+        <card>DEHCShipBalloonsFrench</card>
+        <card>HCExoticHardwoods</card>
+        <card>DEHCCentSuisses</card>
+        <card>DEHCTheaters</card>
+        <card>DEHCWittelsbachAllies1</card>
+        <card>HCFencingSchool</card>
+        <card>DEHCREVGenieTroops</card>
+        <card>DEHCFrenchRoyalArmy</card>
+        <card>DEHCREVShipmentRevolutionaries</card>
+        <card>DEHCREVMercsBosniaksRepeat</card>
+        <card>DEHCREVMercsMountedRiflemenRepeat</card>
+        <card>DEHCREVShipHorseArtillery3</card>
+        <card>DEHCWittelsbachAllies2</card>
+        <card>DEHCWittelsbachAlliesRepeat</card>
+        <card>HCNavalGunners</card>
       </cards>
+
+
     </deck>
-    <deck version="11">
+
+
+    <deck>
+
+
       <name>$$90974$$TreatyNoNat</name>
+
+
+      <default>
+
+
+      </default>
+
+
       <cards>
-        <card dbid="2246">HCRangedInfantryDamageFrenchTeam</card>
-        <card dbid="2061">HCCavalryCombatFrench</card>
-        <card dbid="2041">HCRefrigeration</card>
-        <card dbid="3504">HCXPFurTrade</card>
-        <card dbid="3387">HCXPEconomicTheory</card>
-        <card dbid="3383">HCXPGribeauvalSystem</card>
-        <card dbid="625">HCUnlockFactory</card>
-        <card dbid="2031">HCRobberBarons</card>
-        <card dbid="3444">HCXPThoroughbreds</card>
-        <card dbid="1957">HCAdvancedArsenal</card>
-        <card dbid="2038">HCRidingSchool</card>
-        <card dbid="2095">HCSustainableAgriculture</card>
-        <card dbid="2255">HCHandCavalryDamageFrenchTeam</card>
-        <card dbid="2595">HCWildernessWarfare</card>
-        <card dbid="2256">HCHandCavalryHitpointsFrench</card>
-        <card dbid="3421">HCXPShipCuirassiersRepeat</card>
-        <card dbid="2093">HCRoyalMint</card>
-        <card dbid="2102">HCTextileMills</card>
-        <card dbid="2101">HCRumDistillery</card>
-        <card dbid="2647">HCRoyalDecreeFrench</card>
-        <card dbid="10254">DEHCFencingSchoolFrench</card>
-        <card dbid="1847">HCNativeWarriors</card>
-        <card dbid="10256">DEHCAncienRegime</card>
-        <card dbid="2259">HCNativeCombatTeam</card>
-        <card dbid="2052">HCNativeCombat</card>
+        <card>DEHCREVImperialOldGuard</card>
+        <card>DEHCREVNapoleonicWarfare</card>
+        <card>DEHCREVHundredDays</card>
+        <card>DEHCREVGrandBattery</card>
+        <card>DEHCREVFlyingBattery</card>
+        <card>DEHCREVHorseHunters</card>
+        <card>DEHCREVContinentalBlockade</card>
+        <card>DEHCREVRustamsRegiment</card>
+        <card>DEHCREVClientStates</card>
+        <card>DEHCREVSisterRepublics</card>
+        <card>DEHCShipBalloonsFrench</card>
+        <card>HCExoticHardwoods</card>
+        <card>DEHCCentSuisses</card>
+        <card>DEHCTheaters</card>
+        <card>DEHCWittelsbachAllies1</card>
+        <card>HCFencingSchool</card>
+        <card>DEHCREVGenieTroops</card>
+        <card>DEHCFrenchRoyalArmy</card>
+        <card>DEHCREVShipmentRevolutionaries</card>
+        <card>DEHCREVMercsBosniaksRepeat</card>
+        <card>DEHCREVMercsMountedRiflemenRepeat</card>
+        <card>DEHCREVShipHorseArtillery3</card>
+        <card>DEHCWittelsbachAllies2</card>
+        <card>DEHCWittelsbachAlliesRepeat</card>
+        <card>HCNavalGunners</card>
       </cards>
+
+
     </deck>
-    <deck version="11">
+
+
+    <deck>
+
+
       <name>$$90975$$TreatyNative</name>
+
+
+      <default>
+
+
+      </default>
+
+
       <cards>
-        <card dbid="2246">HCRangedInfantryDamageFrenchTeam</card>
-        <card dbid="2061">HCCavalryCombatFrench</card>
-        <card dbid="2041">HCRefrigeration</card>
-        <card dbid="1847">HCNativeWarriors</card>
-        <card dbid="2052">HCNativeCombat</card>
-        <card dbid="3504">HCXPFurTrade</card>
-        <card dbid="3387">HCXPEconomicTheory</card>
-        <card dbid="3383">HCXPGribeauvalSystem</card>
-        <card dbid="625">HCUnlockFactory</card>
-        <card dbid="2031">HCRobberBarons</card>
-        <card dbid="3444">HCXPThoroughbreds</card>
-        <card dbid="1957">HCAdvancedArsenal</card>
-        <card dbid="2038">HCRidingSchool</card>
-        <card dbid="2095">HCSustainableAgriculture</card>
-        <card dbid="2255">HCHandCavalryDamageFrenchTeam</card>
-        <card dbid="2595">HCWildernessWarfare</card>
-        <card dbid="2259">HCNativeCombatTeam</card>
-        <card dbid="2256">HCHandCavalryHitpointsFrench</card>
-        <card dbid="2363">HCEngineeringSchool</card>
-        <card dbid="2093">HCRoyalMint</card>
-        <card dbid="2102">HCTextileMills</card>
-        <card dbid="2101">HCRumDistillery</card>
-        <card dbid="3421">HCXPShipCuirassiersRepeat</card>
-        <card dbid="2647">HCRoyalDecreeFrench</card>
-        <card dbid="10254">DEHCFencingSchoolFrench</card>
+        <card>DEHCREVImperialOldGuard</card>
+        <card>DEHCREVNapoleonicWarfare</card>
+        <card>DEHCREVHundredDays</card>
+        <card>DEHCREVGrandBattery</card>
+        <card>DEHCREVFlyingBattery</card>
+        <card>DEHCREVHorseHunters</card>
+        <card>DEHCREVContinentalBlockade</card>
+        <card>DEHCREVRustamsRegiment</card>
+        <card>DEHCREVClientStates</card>
+        <card>DEHCREVSisterRepublics</card>
+        <card>DEHCShipBalloonsFrench</card>
+        <card>HCExoticHardwoods</card>
+        <card>DEHCCentSuisses</card>
+        <card>DEHCTheaters</card>
+        <card>DEHCWittelsbachAllies1</card>
+        <card>HCFencingSchool</card>
+        <card>DEHCREVGenieTroops</card>
+        <card>DEHCFrenchRoyalArmy</card>
+        <card>DEHCREVShipmentRevolutionaries</card>
+        <card>DEHCREVMercsBosniaksRepeat</card>
+        <card>DEHCREVMercsMountedRiflemenRepeat</card>
+        <card>DEHCREVShipHorseArtillery3</card>
+        <card>DEHCWittelsbachAllies2</card>
+        <card>DEHCWittelsbachAlliesRepeat</card>
+        <card>HCNavalGunners</card>
       </cards>
+
+
     </deck>
   </decks>
   <building>
@@ -1716,7 +1798,7 @@
       <tech x="0.7" y="2.0">HCShipCrossbowmen2</tech>
       <tech x="0.7" y="3.0">HCShipCrossbowmen3</tech>
       <tech x="7.2" y="7.0">DEHCCentSuisses</tech>
-      <tech x="7.2" y="7.0">DEHCRevFrenchRoyalArmy</tech>
+      <tech x="7.2" y="7.0">DEHCFrenchRoyalArmy</tech>
       <tech x="7.2" y="7.0">DEHCREVShipmentRevolutionaries</tech>
       <tech x="7.2" y="7.0">HCREVShipColonialMilitiaFrench</tech>
       <tech x="7.2" y="7.0">DEHCREVClientStates</tech>
@@ -1772,7 +1854,7 @@
       <tech x="0.7" y="2.0">HCShipCrossbowmen2</tech>
       <tech x="0.7" y="3.0">HCShipCrossbowmen3</tech>
       <tech x="7.2" y="7.0">DEHCCentSuisses</tech>
-      <tech x="7.2" y="7.0">DEHCRevFrenchRoyalArmy</tech>
+      <tech x="7.2" y="7.0">DEHCFrenchRoyalArmy</tech>
       <tech x="7.2" y="7.0">DEHCREVShipmentRevolutionaries</tech>
       <tech x="7.2" y="7.0">HCREVShipColonialMilitiaFrench</tech>
       <tech x="7.2" y="7.0">DEHCREVClientStates</tech>

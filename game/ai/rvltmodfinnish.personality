@@ -1,14 +1,14 @@
 <AI>
    <version>2</version>
    <script>aiLoaderStandard</script>
-   <nameID>80809</nameID>
+   <nameID>490264</nameID>
    <tooltipID>400011</tooltipID>
-   <forcedciv>rvltmodfinnish</forcedciv>
+   <forcedciv>RvltModFinnish</forcedciv>
    <rushboom>-1</rushboom>
    <icon>resources/images/icons/singleplayer/cpai_avatar_finnish_mannerheim.png</icon>
    <chatset>gustav</chatset>
    <playerNames>
-      <nameID>80809</nameID>
-      <civ>rvltmodfinnish</civ>
+      <nameID>490264</nameID>
+      <civ>RvltModFinnish</civ>
    </playerNames>
 </AI>

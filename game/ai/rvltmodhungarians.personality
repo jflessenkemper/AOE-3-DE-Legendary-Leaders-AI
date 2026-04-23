@@ -1,14 +1,14 @@
 <AI>
    <version>2</version>
    <script>aiLoaderStandard</script>
-   <nameID>80810</nameID>
+   <nameID>490265</nameID>
    <tooltipID>400015</tooltipID>
-   <forcedciv>rvltmodhungarians</forcedciv>
+   <forcedciv>RvltModHungarians</forcedciv>
    <rushboom>1</rushboom>
    <icon>resources/images/icons/singleplayer/cpai_avatar_hungarians_kossuth.png</icon>
    <chatset>frederick</chatset>
    <playerNames>
-      <nameID>80810</nameID>
-      <civ>rvltmodhungarians</civ>
+      <nameID>490265</nameID>
+      <civ>RvltModHungarians</civ>
    </playerNames>
 </AI>

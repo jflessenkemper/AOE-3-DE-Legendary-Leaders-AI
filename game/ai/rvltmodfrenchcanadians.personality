@@ -1,14 +1,14 @@
 <AI>
    <version>2</version>
    <script>aiLoaderStandard</script>
-   <nameID>110319</nameID>
+   <nameID>490255</nameID>
    <tooltipID>400012</tooltipID>
-   <forcedciv>rvltmodfrenchcanadians</forcedciv>
+   <forcedciv>RvltModFrenchCanadians</forcedciv>
    <rushboom>-1</rushboom>
    <icon>resources/images/icons/singleplayer/cpai_avatar_french_canadians_papineau.png</icon>
    <chatset>napoleon</chatset>
    <playerNames>
-      <nameID>110319</nameID>
-      <civ>rvltmodfrenchcanadians</civ>
+      <nameID>490255</nameID>
+      <civ>RvltModFrenchCanadians</civ>
    </playerNames>
 </AI>

@@ -1,14 +1,14 @@
 <AI>
    <version>2</version>
    <script>aiLoaderStandard</script>
-   <nameID>490001</nameID>
+   <nameID>490251</nameID>
    <tooltipID>400020</tooltipID>
-   <forcedciv>rvltmodrevolutionaryfrance</forcedciv>
+   <forcedciv>RvltModRevolutionaryFrance</forcedciv>
    <rushboom>1</rushboom>
    <icon>resources/images/icons/singleplayer/cpai_avatar_revolutionary_france.png</icon>
    <chatset>napoleon</chatset>
    <playerNames>
-      <nameID>490001</nameID>
-      <civ>rvltmodrevolutionaryfrance</civ>
+      <nameID>490251</nameID>
+      <civ>RvltModRevolutionaryFrance</civ>
    </playerNames>
 </AI>

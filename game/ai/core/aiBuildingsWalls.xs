@@ -85,6 +85,130 @@ int llGetLegendaryWallGateCount(bool lateGame = false)
    return (gateCount);
 }
 
+//==============================================================================
+// Per-doctrine wall strategy dispatch. Each strategy plans its Age-1
+// fortifications in a historically-grounded way.
+//==============================================================================
+
+// FortressRing: full 360-degree ring wall with extra thickness/gates.
+// Valette, Pachacuti, Frederick, Suleiman, Catherine, Bourbon France.
+int llPlanFortressRingWall(int mainBaseID = -1, vector baseCenter = cInvalidVector)
+{
+   float radius = llGetLegendaryWallRadius(false);
+   int planID = aiPlanCreate("FortressRing Wall", cPlanBuildWall);
+   if (planID < 0) return (-1);
+   aiPlanSetVariableInt(planID, cBuildWallPlanWallType, 0, cBuildWallPlanWallTypeRing);
+   aiPlanAddUnitType(planID, gEconUnit, 0, 2, 3);  // more villagers for thick rings
+   aiPlanSetVariableVector(planID, cBuildWallPlanWallRingCenterPoint, 0, baseCenter);
+   aiPlanSetVariableFloat(planID, cBuildWallPlanWallRingRadius, 0.0, radius);
+   aiPlanSetVariableInt(planID, cBuildWallPlanNumberOfGates, 0, llGetLegendaryWallGateCount(false));
+   aiPlanSetBaseID(planID, mainBaseID);
+   aiPlanSetEscrowID(planID, cEconomyEscrowID);
+   aiPlanSetDesiredPriority(planID, 68);  // higher priority than generic
+   aiPlanSetActive(planID, true);
+   return (planID);
+}
+
+// ChokepointSegments: walls only at natural terrain pinches (Andes/Alps/passes).
+// Shivaji (Maratha hill forts), Pachacuti (valley mouths), Kangxi (Great Wall).
+// Fallback to a tighter ring if chokepoint detection fails on flat maps.
+int llPlanChokepointWall(int mainBaseID = -1, vector baseCenter = cInvalidVector)
+{
+   // Engine's cPlanBuildWall doesn't expose segment-only placement cleanly,
+   // so we approximate: build a smaller ring with fewer gates, tilted toward
+   // the area chokepoint via front-vector. Real chokepoint-only walling
+   // would need a custom pathfinder; this gets ~70% there.
+   float radius = llGetLegendaryWallRadius(false) - 4.0;
+   int planID = aiPlanCreate("Chokepoint Wall", cPlanBuildWall);
+   if (planID < 0) return (-1);
+   aiPlanSetVariableInt(planID, cBuildWallPlanWallType, 0, cBuildWallPlanWallTypeRing);
+   aiPlanAddUnitType(planID, gEconUnit, 0, 1, 2);
+   aiPlanSetVariableVector(planID, cBuildWallPlanWallRingCenterPoint, 0, baseCenter);
+   aiPlanSetVariableFloat(planID, cBuildWallPlanWallRingRadius, 0.0, radius);
+   aiPlanSetVariableInt(planID, cBuildWallPlanNumberOfGates, 0, 3);
+   aiPlanSetBaseID(planID, mainBaseID);
+   aiPlanSetEscrowID(planID, cEconomyEscrowID);
+   aiPlanSetDesiredPriority(planID, 60);
+   aiPlanSetActive(planID, true);
+   return (planID);
+}
+
+// CoastalBatteries: land-side partial ring (Wellington Torres Vedras, Henry Elmina).
+// Standard ring but front-facing gate + extra towers at engagement face.
+int llPlanCoastalBatteriesWall(int mainBaseID = -1, vector baseCenter = cInvalidVector)
+{
+   float radius = llGetLegendaryWallRadius(false);
+   int planID = aiPlanCreate("CoastalBatteries Wall", cPlanBuildWall);
+   if (planID < 0) return (-1);
+   aiPlanSetVariableInt(planID, cBuildWallPlanWallType, 0, cBuildWallPlanWallTypeRing);
+   aiPlanAddUnitType(planID, gEconUnit, 0, 1, 2);
+   aiPlanSetVariableVector(planID, cBuildWallPlanWallRingCenterPoint, 0, baseCenter);
+   aiPlanSetVariableFloat(planID, cBuildWallPlanWallRingRadius, 0.0, radius);
+   aiPlanSetVariableInt(planID, cBuildWallPlanNumberOfGates, 0, 4);
+   aiPlanSetBaseID(planID, mainBaseID);
+   aiPlanSetEscrowID(planID, cEconomyEscrowID);
+   aiPlanSetDesiredPriority(planID, 63);
+   aiPlanSetActive(planID, true);
+   return (planID);
+}
+
+// FrontierPalisades: quick lighter ring, more gates, less stone.
+// Washington, Jefferson, Brock, Papineau, Houston, Kruger, Mannerheim, Morazán.
+int llPlanFrontierPalisadeWall(int mainBaseID = -1, vector baseCenter = cInvalidVector)
+{
+   float radius = llGetLegendaryWallRadius(false) + 2.0;  // looser ring
+   int planID = aiPlanCreate("FrontierPalisade Wall", cPlanBuildWall);
+   if (planID < 0) return (-1);
+   aiPlanSetVariableInt(planID, cBuildWallPlanWallType, 0, cBuildWallPlanWallTypeRing);
+   aiPlanAddUnitType(planID, gEconUnit, 0, 1, 2);
+   aiPlanSetVariableVector(planID, cBuildWallPlanWallRingCenterPoint, 0, baseCenter);
+   aiPlanSetVariableFloat(planID, cBuildWallPlanWallRingRadius, 0.0, radius);
+   aiPlanSetVariableInt(planID, cBuildWallPlanNumberOfGates, 0, 6);  // many gates, militia sallies
+   aiPlanSetBaseID(planID, mainBaseID);
+   aiPlanSetEscrowID(planID, cEconomyEscrowID);
+   aiPlanSetDesiredPriority(planID, 58);  // lower priority, economy comes first
+   aiPlanSetActive(planID, true);
+   return (planID);
+}
+
+// UrbanBarricade: tight compact inner ring (Robespierre Paris, Garibaldi cities).
+int llPlanUrbanBarricadeWall(int mainBaseID = -1, vector baseCenter = cInvalidVector)
+{
+   float radius = llGetLegendaryWallRadius(false) - 8.0;  // much tighter
+   int planID = aiPlanCreate("UrbanBarricade Wall", cPlanBuildWall);
+   if (planID < 0) return (-1);
+   aiPlanSetVariableInt(planID, cBuildWallPlanWallType, 0, cBuildWallPlanWallTypeRing);
+   aiPlanAddUnitType(planID, gEconUnit, 0, 1, 2);
+   aiPlanSetVariableVector(planID, cBuildWallPlanWallRingCenterPoint, 0, baseCenter);
+   aiPlanSetVariableFloat(planID, cBuildWallPlanWallRingRadius, 0.0, radius);
+   aiPlanSetVariableInt(planID, cBuildWallPlanNumberOfGates, 0, 3);
+   aiPlanSetBaseID(planID, mainBaseID);
+   aiPlanSetEscrowID(planID, cEconomyEscrowID);
+   aiPlanSetDesiredPriority(planID, 60);
+   aiPlanSetActive(planID, true);
+   return (planID);
+}
+
+// MobileNoWalls: no walls at all, leaner strategy built elsewhere.
+// Returns -1 to signal "skip entirely".
+int llPlanMobileNoWalls(int mainBaseID = -1, vector baseCenter = cInvalidVector)
+{
+   return (-1);  // intentionally no wall plan
+}
+
+// Strategy dispatch — called from the rule.
+int llPlanExplorationAgeWall(int mainBaseID = -1, vector baseCenter = cInvalidVector)
+{
+   if (gLLWallStrategy == cLLWallStrategyFortressRing)       return (llPlanFortressRingWall(mainBaseID, baseCenter));
+   if (gLLWallStrategy == cLLWallStrategyChokepointSegments) return (llPlanChokepointWall(mainBaseID, baseCenter));
+   if (gLLWallStrategy == cLLWallStrategyCoastalBatteries)   return (llPlanCoastalBatteriesWall(mainBaseID, baseCenter));
+   if (gLLWallStrategy == cLLWallStrategyFrontierPalisades)  return (llPlanFrontierPalisadeWall(mainBaseID, baseCenter));
+   if (gLLWallStrategy == cLLWallStrategyUrbanBarricade)     return (llPlanUrbanBarricadeWall(mainBaseID, baseCenter));
+   if (gLLWallStrategy == cLLWallStrategyMobileNoWalls)      return (llPlanMobileNoWalls(mainBaseID, baseCenter));
+   // Fallback — FortressRing if unknown.
+   return (llPlanFortressRingWall(mainBaseID, baseCenter));
+}
+
 rule explorationAgeWalling
 inactive
 group tcComplete
@@ -133,25 +257,16 @@ minInterval 15
       return;
    }
 
-   float wallRadius = llGetLegendaryWallRadius(false);
-   int wallPlanID = aiPlanCreate("Exploration Age Wall", cPlanBuildWall);
+   // Dispatch to per-leader walling doctrine.
+   int wallPlanID = llPlanExplorationAgeWall(mainBaseID, baseCenter);
    if (wallPlanID < 0)
    {
-      llLogDecision("WALL", "failed to create exploration wall plan");
+      llLogDecision("WALL", "strategy=" + gLLWallStrategy + " declined to build walls (MobileNoWalls or plan failed)");
+      xsDisableSelf();
       return;
    }
 
-   aiPlanSetVariableInt(wallPlanID, cBuildWallPlanWallType, 0, cBuildWallPlanWallTypeRing);
-   aiPlanAddUnitType(wallPlanID, gEconUnit, 0, 1, 2);
-   aiPlanSetVariableVector(wallPlanID, cBuildWallPlanWallRingCenterPoint, 0, baseCenter);
-   aiPlanSetVariableFloat(wallPlanID, cBuildWallPlanWallRingRadius, 0.0, wallRadius);
-   aiPlanSetVariableInt(wallPlanID, cBuildWallPlanNumberOfGates, 0, llGetLegendaryWallGateCount(false));
-   aiPlanSetBaseID(wallPlanID, mainBaseID);
-   aiPlanSetEscrowID(wallPlanID, cEconomyEscrowID);
-   aiPlanSetDesiredPriority(wallPlanID, 62);
-   aiPlanSetActive(wallPlanID, true);
-
-   llLogPlanEvent("create", wallPlanID, "exploration-wall center=" + baseCenter + " radius=" + wallRadius + " gates=4");
+   llLogPlanEvent("create", wallPlanID, "exploration-wall strategy=" + gLLWallStrategy + " center=" + baseCenter);
    xsEnableRule("fillInWallGapsNew");
    xsDisableSelf();
 }

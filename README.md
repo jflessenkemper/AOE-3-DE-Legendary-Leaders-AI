@@ -17,7 +17,22 @@
 	<a href="https://github.com/jflessenkemper/AOE-3-DE-Legendary-Leaders-AI/actions/workflows/civmods-ui-validation.yml"><img src="https://github.com/jflessenkemper/AOE-3-DE-Legendary-Leaders-AI/actions/workflows/civmods-ui-validation.yml/badge.svg" alt="Civ UI Validation"></a>
 </p>
 
+<table>
+<tr>
+<td width="70%" valign="middle">
+
 **Legendary Leaders AI** is a standalone Age of Empires III: Definitive Edition mod that combines the base civilizations with the playable revolution roster. Each nation is mapped to a themed leader personality and a clear battlefield identity.
+
+</td>
+<td width="30%" align="right" valign="middle">
+
+<a href="https://jflessenkemper.github.io/AOE-3-DE-Legendary-Leaders-AI/">
+  <img src="https://img.shields.io/badge/%F0%9F%8F%B0%20Browse%20All%2048%20Nations-1f6feb?style=for-the-badge&logoColor=white" alt="Browse All 48 Nations">
+</a>
+
+</td>
+</tr>
+</table>
 
 ## 🏳️ Elite Units and AI Rout
 
@@ -38,13 +53,51 @@ The army tries to keep a living screen around that leader, and different nations
 
 ---
 
-<p align="center">
-  <a href="https://jflessenkemper.github.io/AOE-3-DE-Legendary-Leaders-AI/">
-    <img src="https://img.shields.io/badge/%F0%9F%93%96%20Browse%20the%20Reference%20Website-1f6feb?style=for-the-badge&logoColor=white" alt="Browse the Legendary Leaders AI reference website">
-  </a>
-</p>
+## 📦 Install (for players)
 
-<p align="center">
-  Every nation, leader, doctrine, signature unit, and curated 25-card deck &mdash; searchable on one page.
-</p>
+1. Download the latest release zip from the [GitHub Releases page](https://github.com/jflessenkemper/AOE-3-DE-Legendary-Leaders-AI/releases) (or the Steam Workshop subscription once it's live).
+2. Extract into your **local mods** folder:
+   - **Windows:** `%USERPROFILE%\Games\Age of Empires 3 DE\<steamID>\mods\local\Legendary Leaders AI\`
+   - **Linux/Proton:** `~/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/<steamID>/mods/local/Legendary Leaders AI/`
+3. Launch AoE3 DE → **Tools → Mods** → enable **Legendary Leaders AI** → restart game.
+4. Pick any civ in Skirmish / Multiplayer lobby — the AI auto-assigns the mod-intended leader (Duke of Wellington for British, Catherine the Great for Russians, etc.) and plays per the HTML reference's doctrine.
+
+**Multiplayer note:** this is intended as a host-only mod. All players in a match should have the same version installed to avoid desyncs.
+
+---
+
+## 🧠 What the mod actually does
+
+- **48 distinct civilizations**: the 22 base civs (re-skinned with historically-accurate leaders) + 26 revolution-era civs promoted to top-level pickable nations (Napoleon, Revolutionary France, Americans, Chileans, Texians, Finns, Barbary States, etc.).
+- **Per-leader AI doctrine** via XS scripts — every leader has distinct build-order priorities, military composition, and explorer-escort posture. See the [reference site](https://jflessenkemper.github.io/AOE-3-DE-Legendary-Leaders-AI/) for each civ's doctrine.
+- **Curated 25-card Legendary Leaders deck per civ** — AI-authored to match each leader's playstyle (aggressive / defensive / economic / naval).
+- **Legendary leader portraits, chat quotes, and name overrides** shown in-match for every civ.
+- **Revolutions disabled on standard civs** — since the 26 revolution nations are already pickable as top-level civs, base civs don't offer the old revolution options at age-up.
+
+---
+
+## ⚠️ Known cosmetic limitations
+
+These don't affect gameplay; they're UI-side limits of the AoE3 DE mod engine:
+
+- **Lobby slot thumbnail portraits for base civs** still show the base-game leader (Queen Elizabeth for British, Ivan the Terrible for Russians). The in-match scoreboard, chat portrait, auto-assigned name, and AI doctrine all correctly reflect our legendary leader (Duke of Wellington, Catherine the Great, etc.) — only the small lobby thumbnail is stuck.
+- **Deck Builder for base civs** shows the base-game decks (Beginner / Land / Naval / Tycoon / Treaty). The 26 revolution civs correctly show the Legendary Leaders deck. Engine-level limitation for overriding packed homecity data.
+- **"MY DECK" label** stays that way in the Deck Builder (engine stores it as a literal in the binary savegame). The deck content inside is our Legendary Leaders 25-card curation.
+
+---
+
+## 📤 Publishing to the Steam Workshop (for maintainers)
+
+1. In-game: **Tools → Mods → Mod Manager**.
+2. Select **Legendary Leaders AI** from the Local Mods list.
+3. Click **Publish** (or **Upload to Workshop**) — the dialog asks for:
+   - **Title:** `Legendary Leaders AI`
+   - **Description:** paste the short summary from the top of this README
+   - **Tags:** `AI`, `Civilizations`, `Gameplay`, `Revolutions`
+   - **Visibility:** `Public`
+   - **Thumbnail:** upload `resources/images/legendary_leaders_ai_banner.png` (or a cropped 512×512 square of it) when asked
+4. Accept the Workshop agreement, click Upload, and the mod syncs to your Workshop page.
+5. For updates: change the `version` in `modinfo.json`, re-open Mod Manager → Publish → **Update Existing** (keeps the same Workshop item ID, so subscribers get the update automatically).
+
+If you'd rather avoid the in-game flow and upload via CLI, use `steamcmd` with the `workshop_build_item` command and a VDF file referencing the mod folder — but the in-game path is simpler for first-time publishes.
 

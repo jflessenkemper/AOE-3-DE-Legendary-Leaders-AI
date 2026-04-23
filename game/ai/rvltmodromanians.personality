@@ -1,14 +1,14 @@
 <AI>
    <version>2</version>
    <script>aiLoaderStandard</script>
-   <nameID>80812</nameID>
+   <nameID>490266</nameID>
    <tooltipID>400023</tooltipID>
-   <forcedciv>rvltmodromanians</forcedciv>
+   <forcedciv>RvltModRomanians</forcedciv>
    <rushboom>-1</rushboom>
    <icon>resources/images/icons/singleplayer/cpai_avatar_romanians_cuza.png</icon>
    <chatset>frederick</chatset>
    <playerNames>
-      <nameID>80812</nameID>
-      <civ>rvltmodromanians</civ>
+      <nameID>490266</nameID>
+      <civ>RvltModRomanians</civ>
    </playerNames>
 </AI>

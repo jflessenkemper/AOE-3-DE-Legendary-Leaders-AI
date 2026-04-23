@@ -103,6 +103,9 @@ def focus_host_game_window() -> str | None:
 
 
 def focus_game_window(backend: str | None = None) -> bool:
+    # Under gamescope the nested compositor always has focus on its window.
+    if backend == "gamescope_xdotool" or (backend is None and gamescope_available()):
+        return True
     if backend == "host_xdotool" or backend is None:
         window_id = focus_host_game_window()
         return window_id is not None
@@ -216,9 +219,35 @@ def resolve_tesseract_command() -> str:
     fail("No tesseract binary found locally or on the host.")
 
 
+def gamescope_available() -> bool:
+    """True when AoE3 is running in a gamescope-nested session we can drive."""
+    gamescope_display = os.environ.get("GAMESCOPE_WAYLAND_DISPLAY", "gamescope-0")
+    socket = Path("/run/user/1000") / gamescope_display
+    if not socket.exists():
+        return False
+    if not command_exists("gamescopectl"):
+        return False
+    # Verify DISPLAY=:1 xdotool can reach the nested Xwayland
+    try:
+        env = {**os.environ, "DISPLAY": ":1"}
+        result = subprocess.run(
+            ["xdotool", "getmouselocation"],
+            env=env, capture_output=True, text=True, timeout=2,
+        )
+        return result.returncode == 0
+    except Exception:
+        return False
+
+
 def detect_input_backend(needs_vision: bool = False) -> str:
     session_type = os.environ.get("XDG_SESSION_TYPE", "").lower()
     display = os.environ.get("DISPLAY", "")
+
+    # Prefer gamescope when AoE3 is nested there — the host desktop input
+    # backends (pyautogui, host_xdotool) address :0 which is the wrong
+    # display in that topology.
+    if gamescope_available():
+        return "gamescope_xdotool"
 
     if maybe_import_pyautogui() is not None:
         return "pyautogui"
@@ -249,6 +278,8 @@ def detect_input_backend(needs_vision: bool = False) -> str:
 
 def detect_capture_backend() -> str:
     preferred_backends: list[str] = []
+    if gamescope_available():
+        preferred_backends.append("gamescopectl")
     if command_exists("gnome-screenshot"):
         preferred_backends.append("gnome-screenshot")
     if maybe_import_pyautogui() is not None:
@@ -274,6 +305,8 @@ def capture_screen(output_path: Path, region: list[int] | None = None) -> str:
     output_path.parent.mkdir(parents=True, exist_ok=True)
     normalized_region = normalize_region(region)
     backend_candidates: list[str] = []
+    if gamescope_available():
+        backend_candidates.append("gamescopectl")
     if command_exists("gnome-screenshot"):
         backend_candidates.append("gnome-screenshot")
     if maybe_import_pyautogui() is not None:
@@ -298,7 +331,37 @@ def capture_screen(output_path: Path, region: list[int] | None = None) -> str:
     capture_errors: list[str] = []
     for candidate in backend_candidates:
         try:
-            if candidate == "grim":
+            if candidate == "gamescopectl":
+                # gamescopectl writes the file ASYNC after returning rc=0.
+                # Need explicit GAMESCOPE_WAYLAND_DISPLAY env + post-call wait.
+                gs_env = {
+                    **os.environ,
+                    "GAMESCOPE_WAYLAND_DISPLAY": os.environ.get("GAMESCOPE_WAYLAND_DISPLAY", "gamescope-0"),
+                    "WAYLAND_DISPLAY": "gamescope-0",
+                    "XDG_RUNTIME_DIR": os.environ.get("XDG_RUNTIME_DIR", "/run/user/1000"),
+                }
+                last_exc: Exception | None = None
+                for _ in range(5):
+                    try: output_path.unlink()
+                    except FileNotFoundError: pass
+                    proc = subprocess.run(
+                        ["gamescopectl", "screenshot", str(output_path)],
+                        env=gs_env, capture_output=True, text=True, timeout=20,
+                    )
+                    # Poll up to 5s for the async file write to complete.
+                    deadline = time.time() + 5.0
+                    while time.time() < deadline:
+                        if output_path.exists() and output_path.stat().st_size > 50_000:
+                            last_exc = None
+                            break
+                        time.sleep(0.25)
+                    if last_exc is None and output_path.exists() and output_path.stat().st_size > 50_000:
+                        break
+                    last_exc = RuntimeError((proc.stderr or proc.stdout or "empty screenshot after async wait").strip())
+                    time.sleep(0.5)
+                if last_exc is not None:
+                    raise last_exc
+            elif candidate == "grim":
                 args = ["grim"]
                 if normalized_region is not None:
                     left, top, width, height = normalized_region
@@ -688,7 +751,22 @@ def normalize_key_name(key: str) -> str:
     return mapping.get(key.lower(), key)
 
 
+def run_gamescope_xdotool(args: list[str]) -> None:
+    env = {
+        **os.environ,
+        "DISPLAY": ":1",
+        "XAUTHORITY": os.environ.get("XAUTHORITY", ""),
+    }
+    result = subprocess.run(["xdotool", *args], env=env, capture_output=True, text=True)
+    if result.returncode != 0:
+        msg = (result.stderr or result.stdout or "unknown error").strip()
+        fail(f"gamescope xdotool failed: {msg}")
+
+
 def move_pointer(backend: str, x: int, y: int, duration: float = 0.0) -> None:
+    if backend == "gamescope_xdotool":
+        run_gamescope_xdotool(["mousemove", str(x), str(y)])
+        return
     if backend == "pyautogui":
         pyautogui = import_pyautogui()
         pyautogui.moveTo(x, y, duration=duration)
@@ -704,6 +782,10 @@ def move_pointer(backend: str, x: int, y: int, duration: float = 0.0) -> None:
 
 
 def click_pointer(backend: str, button: str = "left", presses: int = 1) -> None:
+    if backend == "gamescope_xdotool":
+        button_map = {"left": "1", "middle": "2", "right": "3"}
+        run_gamescope_xdotool(["click", "--repeat", str(max(1, presses)), button_map.get(button, "1")])
+        return
     if backend == "pyautogui":
         pyautogui = import_pyautogui()
         if presses == 2:
@@ -729,6 +811,11 @@ def click_pointer(backend: str, button: str = "left", presses: int = 1) -> None:
 
 
 def mouse_button(backend: str, button: str, pressed: bool) -> None:
+    if backend == "gamescope_xdotool":
+        button_map = {"left": "1", "middle": "2", "right": "3"}
+        action = "mousedown" if pressed else "mouseup"
+        run_gamescope_xdotool([action, button_map.get(button, "1")])
+        return
     if backend == "pyautogui":
         pyautogui = import_pyautogui()
         if pressed:
@@ -749,6 +836,13 @@ def mouse_button(backend: str, button: str, pressed: bool) -> None:
 
 
 def press_key(backend: str, key: str, presses: int = 1, interval: float = 0.05) -> None:
+    if backend == "gamescope_xdotool":
+        normalized = normalize_key_name(key)
+        for index in range(max(1, presses)):
+            run_gamescope_xdotool(["key", normalized])
+            if index + 1 < presses:
+                time.sleep(interval)
+        return
     if backend == "pyautogui":
         pyautogui = import_pyautogui()
         pyautogui.press(key, presses=presses, interval=interval)
@@ -782,6 +876,10 @@ def press_key(backend: str, key: str, presses: int = 1, interval: float = 0.05) 
 
 
 def key_state(backend: str, key: str, pressed: bool) -> None:
+    if backend == "gamescope_xdotool":
+        action = "keydown" if pressed else "keyup"
+        run_gamescope_xdotool([action, normalize_key_name(key)])
+        return
     if backend == "pyautogui":
         pyautogui = import_pyautogui()
         if pressed:
@@ -801,6 +899,10 @@ def key_state(backend: str, key: str, pressed: bool) -> None:
 
 
 def press_hotkey(backend: str, keys: list[str]) -> None:
+    if backend == "gamescope_xdotool":
+        chord = "+".join(normalize_key_name(key) for key in keys)
+        run_gamescope_xdotool(["key", chord])
+        return
     if backend == "pyautogui":
         pyautogui = import_pyautogui()
         pyautogui.hotkey(*keys)
@@ -846,6 +948,10 @@ def press_hotkey(backend: str, keys: list[str]) -> None:
 
 
 def type_text(backend: str, text: str, interval: float = 0.02) -> None:
+    if backend == "gamescope_xdotool":
+        delay_ms = max(1, int(interval * 1000))
+        run_gamescope_xdotool(["type", "--delay", str(delay_ms), text])
+        return
     if backend == "pyautogui":
         pyautogui = import_pyautogui()
         pyautogui.write(text, interval=interval)

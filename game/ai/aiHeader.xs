@@ -196,6 +196,18 @@ extern int     gLLBuildStyle = 0;
 extern int     gLLWallLevel = 1;
 extern bool    gLLEarlyWallingEnabled = true;
 extern bool    gLLLateWallingEnabled = true;
+
+// Walling strategies (per-leader historical doctrine for wall placement).
+// Selects which routine in aiBuildingsWalls.xs plans the Age-1 fortification.
+extern int     cLLWallStrategyFortressRing        = 0;  // Full double ring, all sides — Valette/Pachacuti/Frederick/Suleiman/Catherine/Bourbon
+extern int     cLLWallStrategyChokepointSegments  = 1;  // Segment walls at terrain pinches — Shivaji/Menelik/Kangxi/Andean civs
+extern int     cLLWallStrategyCoastalBatteries    = 2;  // Land-side ring, gun towers at coast — Wellington/Henry/Maurice/Isabella/Barbary
+extern int     cLLWallStrategyFrontierPalisades   = 3;  // Quick wooden ring + blockhouses — Washington/Jefferson/Brock/Kruger/Mannerheim/etc.
+extern int     cLLWallStrategyUrbanBarricade      = 4;  // Tight compact inner ring + towers — Robespierre/Garibaldi/Gustavus
+extern int     cLLWallStrategyMobileNoWalls       = 5;  // Scouts + outposts, no walls — Napoleon/Crazy Horse/Hiawatha/Montezuma/Usman
+
+extern int     gLLWallStrategy = 0;  // default = FortressRing
+
 extern float   gLLHouseDistanceMultiplier = 1.0;
 extern float   gLLEconomicDistanceMultiplier = 1.0;
 extern float   gLLMilitaryDistanceMultiplier = 1.0;

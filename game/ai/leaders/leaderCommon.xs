@@ -90,7 +90,12 @@ void llConfigureBuildStyleProfile(int style = 0, int wallLevel = 1, bool earlyWa
 {
    gLLBuildStyle = style;
    gLLWallLevel = wallLevel;
-   gLLEarlyWallingEnabled = true;
+   // Honor caller's earlyWalls preference (was hardcoded to true). Mobile/
+   // guerrilla styles that want to skirmish instead of wall early can pass
+   // earlyWalls=false via their style helper (SteppeCavalryWedge,
+   // MobileFrontierScatter, JungleGuerrillaNetwork) and get a pure mobile
+   // opening. Defensive leaders pass earlyWalls=true for ring-walls at Age 1.
+   gLLEarlyWallingEnabled = earlyWalls && (wallLevel > 0);
    gLLLateWallingEnabled = (wallLevel > 0);
    gLLHouseDistanceMultiplier = houseDistanceMultiplier;
    gLLEconomicDistanceMultiplier = economicDistanceMultiplier;
@@ -105,32 +110,44 @@ void llConfigureBuildStyleProfile(int style = 0, int wallLevel = 1, bool earlyWa
 
 void llUseCompactFortifiedCoreStyle(int wallLevel = 3, bool earlyWalls = true)
 {
+   // Bourbon France — Vauban-school star-fort doctrine. Full fortress ring.
    llConfigureBuildStyleProfile(cLLBuildStyleCompactFortifiedCore, wallLevel, earlyWalls, 0.75, 0.85, 0.85, 0.85, 3, 2, 2, false);
+   gLLWallStrategy = cLLWallStrategyFortressRing;
 }
 
 void llUseDistributedEconomicNetworkStyle(int wallLevel = 1)
 {
+   // Morazán / Central American federation — frontier palisade on scattered nodes.
    llConfigureBuildStyleProfile(cLLBuildStyleDistributedEconomicNetwork, wallLevel, false, 1.15, 1.35, 1.0, 1.35, 1, 1, 1, false);
+   gLLWallStrategy = cLLWallStrategyFrontierPalisades;
 }
 
 void llUseForwardOperationalLineStyle(int wallLevel = 1)
 {
+   // Napoleon — no early walls, move fast. Field fortifications only in Age 3+.
    llConfigureBuildStyleProfile(cLLBuildStyleForwardOperationalLine, wallLevel, false, 1.0, 1.05, 0.95, 1.1, 1, 2, 3, true);
+   gLLWallStrategy = cLLWallStrategyMobileNoWalls;
 }
 
 void llUseMobileFrontierScatterStyle(int wallLevel = 0)
 {
+   // Crazy Horse / Plains mobile — never wall, scout + intercept.
    llConfigureBuildStyleProfile(cLLBuildStyleMobileFrontierScatter, wallLevel, false, 1.35, 1.45, 1.1, 1.5, 1, 0, 1, false);
+   gLLWallStrategy = cLLWallStrategyMobileNoWalls;
 }
 
 void llUseShrineTradeNodeSpreadStyle(int wallLevel = 1)
 {
+   // Tokugawa — sakoku-era redoubts at approaches, no perimeter wall.
    llConfigureBuildStyleProfile(cLLBuildStyleShrineTradeNodeSpread, wallLevel, false, 1.0, 1.5, 0.95, 1.2, 1, 1, 1, false);
+   gLLWallStrategy = cLLWallStrategyMobileNoWalls;
 }
 
 void llUseCivicMilitiaCenterStyle(int wallLevel = 1)
 {
+   // Washington / Jefferson / Brock / Papineau — colonial frontier palisades.
    llConfigureBuildStyleProfile(cLLBuildStyleCivicMilitiaCenter, wallLevel, false, 0.95, 1.05, 0.95, 1.15, 2, 1, 2, false);
+   gLLWallStrategy = cLLWallStrategyFrontierPalisades;
 }
 
 // ── Bespoke historical archetypes ────────────────────────────────────────
@@ -138,24 +155,29 @@ void llUseCivicMilitiaCenterStyle(int wallLevel = 1)
 // camps, no perimeter, fast raiding cavalry from forward muster points.
 void llUseSteppeCavalryWedgeStyle(int wallLevel = 0)
 {
+   // Hiawatha / Crazy Horse / steppe raiders — no walls, raid mobility.
    llConfigureBuildStyleProfile(cLLBuildStyleSteppeCavalryWedge, wallLevel, false,
       1.40, 1.50, 1.15, 1.55, 1, 0, 1, false);
+   gLLWallStrategy = cLLWallStrategyMobileNoWalls;
 }
 
 // Naval Mercantile Compound — Dutch / British / Portuguese commercial empire:
 // coastal bank-and-dock spine, deep harbour batteries, money before muskets.
+// Wellington's Torres Vedras doctrine — land-side ring-wall + naval batteries.
 void llUseNavalMercantileCompoundStyle(int wallLevel = 2)
 {
-   llConfigureBuildStyleProfile(cLLBuildStyleNavalMercantileCompound, wallLevel, false,
+   llConfigureBuildStyleProfile(cLLBuildStyleNavalMercantileCompound, wallLevel, true,
       1.10, 1.30, 1.00, 1.25, 2, 2, 1, false);
+   gLLWallStrategy = cLLWallStrategyCoastalBatteries;
 }
 
 // Siege Train Concentration — Ottoman / Prussian / Swedish cannon doctrine:
-// clustered military quarter, grand battery park, forward fortified line.
+// Vauban-style bastions + clustered military quarter + forward line.
 void llUseSiegeTrainConcentrationStyle(int wallLevel = 2)
 {
    llConfigureBuildStyleProfile(cLLBuildStyleSiegeTrainConcentration, wallLevel, true,
       0.90, 1.00, 0.85, 0.95, 2, 2, 3, true);
+   gLLWallStrategy = cLLWallStrategyFortressRing;
 }
 
 // Jungle Guerrilla Network — Maya / Haitian / Aztec scout-and-ambush doctrine:
@@ -164,38 +186,46 @@ void llUseJungleGuerrillaNetworkStyle(int wallLevel = 0)
 {
    llConfigureBuildStyleProfile(cLLBuildStyleJungleGuerrillaNetwork, wallLevel, false,
       1.10, 1.30, 0.95, 1.30, 1, 0, 2, true);
+   gLLWallStrategy = cLLWallStrategyMobileNoWalls;
 }
 
 // Highland Citadel — Maltese / Egyptian Mameluk / mountain fortress: tight
 // core, multi-ring high walls, maximum towers and forts.
+// Valette's Great Siege of Malta 1565 doctrine — triple fortress ring.
 void llUseHighlandCitadelStyle(int wallLevel = 5)
 {
    llConfigureBuildStyleProfile(cLLBuildStyleHighlandCitadel, wallLevel, true,
       0.65, 0.90, 0.80, 0.70, 4, 3, 2, false);
+   gLLWallStrategy = cLLWallStrategyFortressRing;
 }
 
 // Cossack Voisko — Russian / Ukrainian host muster: massed barracks and
 // Blockhouse net, forward host camp, swarm production.
+// Catherine's Kremlin perimeter model.
 void llUseCossackVoiskoStyle(int wallLevel = 1)
 {
    llConfigureBuildStyleProfile(cLLBuildStyleCossackVoisko, wallLevel, false,
       0.90, 1.00, 0.80, 0.95, 2, 2, 3, true);
+   gLLWallStrategy = cLLWallStrategyFortressRing;
 }
 
 // Republican Levee — French Revolution / American / Mexican citizen-army:
 // civic spine of militia centers, town-center decentralised, militia first.
+// Robespierre's Paris barricades; tight inner defense only.
 void llUseRepublicanLeveeStyle(int wallLevel = 1)
 {
    llConfigureBuildStyleProfile(cLLBuildStyleRepublicanLevee, wallLevel, false,
       0.95, 1.05, 0.90, 1.10, 2, 1, 3, true);
+   gLLWallStrategy = cLLWallStrategyUrbanBarricade;
 }
 
 // Andean Terrace Fortress — Inca / Peruvian / Chilean highland doctrine:
-// tight core on terraces, tower-heavy ring, dual fort backbone.
+// walls at natural cliff edges and valley chokepoints only.
 void llUseAndeanTerraceFortressStyle(int wallLevel = 3)
 {
    llConfigureBuildStyleProfile(cLLBuildStyleAndeanTerraceFortress, wallLevel, true,
       0.80, 0.95, 0.90, 0.90, 3, 2, 2, false);
+   gLLWallStrategy = cLLWallStrategyChokepointSegments;
 }
 
 void llSetBuildStrongpointProfile(int towerLevel = 1, int fortLevel = 1, int forwardBaseTowerCount = 2,

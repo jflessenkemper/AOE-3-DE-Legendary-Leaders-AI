@@ -1754,7 +1754,37 @@
       <String _locID='490102'>Open west-vs-east Texas-style test field with three land lanes and two naval lanes for fast AI validation.</String>
          <String _locID='490103'>Legendary Leaders Test Maps</String>
          <String _locID='490104'>Custom validation maps for Legendary Leaders AI skirmish testing.</String>
-      <!-- BASE-CIV-LEADER-NAMES-START -->
+            <String _locID='490001'>Revolutionary France</String>
+      <String _locID='490003'>Napoleonic France</String>
+<!-- MOD-CIV-LEADER-NAMES-START -->
+      <String _locID='490250'>Napoleon Bonaparte</String>  <!-- rvltmodnapoleonicfrance -->
+      <String _locID='490251'>Maximilien Robespierre</String>  <!-- rvltmodrevolutionaryfrance -->
+      <String _locID='490252'>Thomas Jefferson</String>  <!-- rvltmodamericans -->
+      <String _locID='490253'>Miguel Hidalgo</String>  <!-- rvltmodmexicans -->
+      <String _locID='490254'>Isaac Brock</String>  <!-- rvltmodcanadians -->
+      <String _locID='490255'>Louis-Joseph Papineau</String>  <!-- rvltmodfrenchcanadians -->
+      <String _locID='490256'>Pedro I of Brazil</String>  <!-- rvltmodbrazil -->
+      <String _locID='490257'>José de San Martín</String>  <!-- rvltmodargentines -->
+      <String _locID='490258'>Bernardo O'Higgins</String>  <!-- rvltmodchileans -->
+      <String _locID='490259'>Andrés de Santa Cruz</String>  <!-- rvltmodperuvians -->
+      <String _locID='490260'>Simón Bolívar</String>  <!-- rvltmodcolumbians -->
+      <String _locID='490261'>Toussaint L'Ouverture</String>  <!-- rvltmodhaitians -->
+      <String _locID='490262'>Prince Diponegoro</String>  <!-- rvltmodindonesians -->
+      <String _locID='490263'>Paul Kruger</String>  <!-- rvltmodsouthafricans -->
+      <String _locID='490264'>Carl Gustaf Mannerheim</String>  <!-- rvltmodfinnish -->
+      <String _locID='490265'>Lajos Kossuth</String>  <!-- rvltmodhungarians -->
+      <String _locID='490266'>Alexandru Ioan Cuza</String>  <!-- rvltmodromanians -->
+      <String _locID='490267'>Hayreddin Barbarossa</String>  <!-- rvltmodbarbary -->
+      <String _locID='490268'>Muhammad Ali Pasha</String>  <!-- rvltmodegyptians -->
+      <String _locID='490269'>Francisco Morazán</String>  <!-- rvltmodcentralamericans -->
+      <String _locID='490270'>Juan Bautista Alvarado</String>  <!-- rvltmodbajacalifornians -->
+      <String _locID='490271'>Felipe Carrillo Puerto</String>  <!-- rvltmodyucatan -->
+      <String _locID='490272'>Antonio Canales Rosillo</String>  <!-- rvltmodriogrande -->
+      <String _locID='490273'>Jacinto Canek</String>  <!-- rvltmodmayans -->
+      <String _locID='490274'>Mariano Vallejo</String>  <!-- rvltmodcalifornians -->
+      <String _locID='490275'>Sam Houston</String>  <!-- rvltmodtexians -->
+<!-- MOD-CIV-LEADER-NAMES-END -->
+<!-- BASE-CIV-LEADER-NAMES-START -->
       <String _locID='490200'>Duke of Wellington</String>
       <String _locID='490201'>British · line-and-logistics · Naval Mercantile Compound</String>
       <String _locID='490202'>Usman dan Fodio</String>
@@ -1800,34 +1830,8 @@
       <String _locID='490242'>Frederick the Great</String>
       <String _locID='490243'>German · oblique-order Prussian drill</String>
 <!-- BASE-CIV-LEADER-NAMES-END -->
-<!-- MOD-CIV-LEADER-NAMES-START -->
-      <String _locID='80806'>Hayreddin Barbarossa</String>  <!-- rvltmodbarbary -->
-      <String _locID='80807'>Isaac Brock</String>  <!-- rvltmodcanadians -->
-      <String _locID='80808'>Muhammad Ali Pasha</String>  <!-- rvltmodegyptians -->
-      <String _locID='80809'>Carl Gustaf Mannerheim</String>  <!-- rvltmodfinnish -->
-      <String _locID='80810'>Lajos Kossuth</String>  <!-- rvltmodhungarians -->
-      <String _locID='80811'>Prince Diponegoro</String>  <!-- rvltmodindonesians -->
-      <String _locID='80812'>Alexandru Ioan Cuza</String>  <!-- rvltmodromanians -->
-      <String _locID='80813'>Paul Kruger</String>  <!-- rvltmodsouthafricans -->
-      <String _locID='80828'>Toussaint L'Ouverture</String>  <!-- rvltmodhaitians -->
-      <String _locID='80829'>Thomas Jefferson</String>  <!-- rvltmodamericans -->
-      <String _locID='80830'>Miguel Hidalgo</String>  <!-- rvltmodmexicans -->
-      <String _locID='80831'>Pedro I of Brazil</String>  <!-- rvltmodbrazil -->
-      <String _locID='80832'>Andrés de Santa Cruz</String>  <!-- rvltmodperuvians -->
-      <String _locID='80833'>José de San Martín</String>  <!-- rvltmodargentines -->
-      <String _locID='80834'>Simón Bolívar</String>  <!-- rvltmodcolumbians -->
-      <String _locID='80835'>Bernardo O'Higgins</String>  <!-- rvltmodchileans -->
-      <String _locID='110319'>Louis-Joseph Papineau</String>  <!-- rvltmodfrenchcanadians -->
-      <String _locID='112802'>Francisco Morazán</String>  <!-- rvltmodcentralamericans -->
-      <String _locID='112806'>Juan Bautista Alvarado</String>  <!-- rvltmodbajacalifornians -->
-      <String _locID='112810'>Felipe Carrillo Puerto</String>  <!-- rvltmodyucatan -->
-      <String _locID='112814'>Antonio Canales Rosillo</String>  <!-- rvltmodriogrande -->
-      <String _locID='112816'>Jacinto Canek</String>  <!-- rvltmodmayans -->
-      <String _locID='112822'>Mariano Vallejo</String>  <!-- rvltmodcalifornians -->
-      <String _locID='112826'>Sam Houston</String>  <!-- rvltmodtexians -->
-      <String _locID='490001'>Maximilien Robespierre</String>  <!-- rvltmodrevolutionaryfrance -->
-      <String _locID='490003'>Napoleon Bonaparte</String>  <!-- rvltmodnapoleonicfrance -->
-<!-- MOD-CIV-LEADER-NAMES-END -->
+      <String _locID='41682'>Legendary Leaders</String>
+      <String _locID='46758'>Legendary Leaders (%d)</String>
 </Language>
    </StringTable>
 </stringmods>

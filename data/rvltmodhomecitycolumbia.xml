@@ -1,15 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <homecity>
   <civ>RvltModColumbians</civ>
   <name>$$80851$$</name>
   <heroname>$$43030$$</heroname>
   <gatherpointunit>HomeCityGatherFlag</gatherpointunit>
-  <visual>revolution\revolution_homecity.xml</visual>
-  <watervisual>revolution\revolution_homecity_water.xml</watervisual>
-  <backgroundvisual>revolution\revolution_background.xml</backgroundvisual>
+  <visual>spanish\spanish_homecity.xml</visual>
+  <watervisual>spanish\spanish_homecity_water.xml</watervisual>
+  <backgroundvisual>spanish\spanish_background.xml</backgroundvisual>
   <pathdata>revolution\pathable_area.gr2</pathdata>
-  <camera>revolution\revolution_homecity_camera.cam</camera>
-  <widescreencamera>revolution\revolution_homecity_camera.cam</widescreencamera>
+  <camera>spanish\spanish_homecity_camera.cam</camera>
+  <widescreencamera>spanish\spanish_homecity_widescreencamera.cam</widescreencamera>
   <transportroundtriptime>1</transportroundtriptime>
   <transportactivationtime>0</transportactivationtime>
   <level>1</level>
@@ -560,7 +560,7 @@
     <card>
       <name>DEHCShipGatlings1</name>
       <maxcount>1</maxcount>
-      <level>10</level>
+      <level>0</level>
       <prereqtech>-1</prereqtech>
       <age>2</age>
       <displayunitcount>3</displayunitcount>
@@ -712,14 +712,14 @@
     <card>
       <name>HCHeavyFortifications</name>
       <maxcount>1</maxcount>
-      <level>25</level>
+      <level>0</level>
       <prereqtech>DEHCExtensiveFortificationsEuropean</prereqtech>
       <age>3</age>
     </card>
     <card>
       <name>HCAdvancedArsenal</name>
       <maxcount>1</maxcount>
-      <level>10</level>
+      <level>0</level>
       <bindtotech>HCAdvancedArsenal</bindtotech>
       <age>1</age>
     </card>
@@ -822,7 +822,7 @@
     <card>
       <name>HCXPIndustrialRevolution</name>
       <maxcount>1</maxcount>
-      <level>10</level>
+      <level>0</level>
       <prereqtech>HCUnlockFactory</prereqtech>
       <age>4</age>
       <displayunitcount>1</displayunitcount>
@@ -1187,7 +1187,7 @@
     <card>
       <name>DEHCMercsArmoredPistoleers</name>
       <maxcount>1</maxcount>
-      <level>10</level>
+      <level>0</level>
       <prereqtech>-1</prereqtech>
       <age>2</age>
       <displayunitcount>7</displayunitcount>
@@ -1283,7 +1283,7 @@
     <card>
       <name>DEHCHabsburgAllies1</name>
       <maxcount>1</maxcount>
-      <level>25</level>
+      <level>0</level>
       <prereqtech>-1</prereqtech>
       <age>2</age>
       <displayunitcount>9</displayunitcount>
@@ -1292,7 +1292,7 @@
     <card>
       <name>DEHCBourbonAllies1</name>
       <maxcount>1</maxcount>
-      <level>25</level>
+      <level>0</level>
       <prereqtech>HCXPHuronAllies1</prereqtech>
       <age>3</age>
       <displayunitcount>25</displayunitcount>
@@ -1340,10 +1340,15 @@
     </card>
   </cards>
   <decks>
+
     <deck>
-      <name>Legendary Leaders</name>
+
+      <name>$$71332$$Beginner</name>
+
       <default>
+
       </default>
+
       <cards>
         <card>DEHCLiberationMarch</card>
         <card>DEHCREVNationalHero</card>
@@ -1371,6 +1376,197 @@
         <card>DEHCShipGatlings1</card>
         <card>DEHCBourbonAllies1</card>
       </cards>
+
+    </deck>
+
+    <deck>
+
+      <name>$$20310$$Land</name>
+
+      <default>
+
+      </default>
+
+      <cards>
+        <card>DEHCLiberationMarch</card>
+        <card>DEHCREVNationalHero</card>
+        <card>HCCheapBarracksTeam</card>
+        <card>DEHCExtensiveFortificationsEuropean</card>
+        <card>DEHCMercsIrishBrigadiers</card>
+        <card>HCFrontierDefenses</card>
+        <card>DEHCTheaters</card>
+        <card>HCAdvancedArsenal</card>
+        <card>DEHCREVCattleDeliveryColombia</card>
+        <card>DEHCREVShipSteamers</card>
+        <card>RvltModHCLlaneros</card>
+        <card>DEHCMercsArmoredPistoleers</card>
+        <card>HCUnlockFort</card>
+        <card>DEHCREVColombianNavy</card>
+        <card>DEHCREVShipColombianRevolutionaries</card>
+        <card>DEHCREVShipIronclads</card>
+        <card>DEHCREVAlbionLegion</card>
+        <card>HCHeavyFortifications</card>
+        <card>HCXPIndustrialRevolution</card>
+        <card>DEHCShipBattleshipRepeat</card>
+        <card>DEHCHabsburgAllies1</card>
+        <card>DEHCHandMortar</card>
+        <card>DEHCMarvelousYear</card>
+        <card>DEHCShipGatlings1</card>
+        <card>DEHCBourbonAllies1</card>
+      </cards>
+
+    </deck>
+
+    <deck>
+
+      <name>$$71333$$Naval</name>
+
+      <default>
+
+      </default>
+
+      <cards>
+        <card>DEHCLiberationMarch</card>
+        <card>DEHCREVNationalHero</card>
+        <card>HCCheapBarracksTeam</card>
+        <card>DEHCExtensiveFortificationsEuropean</card>
+        <card>DEHCMercsIrishBrigadiers</card>
+        <card>HCFrontierDefenses</card>
+        <card>DEHCTheaters</card>
+        <card>HCAdvancedArsenal</card>
+        <card>DEHCREVCattleDeliveryColombia</card>
+        <card>DEHCREVShipSteamers</card>
+        <card>RvltModHCLlaneros</card>
+        <card>DEHCMercsArmoredPistoleers</card>
+        <card>HCUnlockFort</card>
+        <card>DEHCREVColombianNavy</card>
+        <card>DEHCREVShipColombianRevolutionaries</card>
+        <card>DEHCREVShipIronclads</card>
+        <card>DEHCREVAlbionLegion</card>
+        <card>HCHeavyFortifications</card>
+        <card>HCXPIndustrialRevolution</card>
+        <card>DEHCShipBattleshipRepeat</card>
+        <card>DEHCHabsburgAllies1</card>
+        <card>DEHCHandMortar</card>
+        <card>DEHCMarvelousYear</card>
+        <card>DEHCShipGatlings1</card>
+        <card>DEHCBourbonAllies1</card>
+      </cards>
+
+    </deck>
+
+    <deck>
+
+      <name>$$55547$$Tycoon</name>
+
+      <default>
+
+      </default>
+
+      <cards>
+        <card>DEHCLiberationMarch</card>
+        <card>DEHCREVNationalHero</card>
+        <card>HCCheapBarracksTeam</card>
+        <card>DEHCExtensiveFortificationsEuropean</card>
+        <card>DEHCMercsIrishBrigadiers</card>
+        <card>HCFrontierDefenses</card>
+        <card>DEHCTheaters</card>
+        <card>HCAdvancedArsenal</card>
+        <card>DEHCREVCattleDeliveryColombia</card>
+        <card>DEHCREVShipSteamers</card>
+        <card>RvltModHCLlaneros</card>
+        <card>DEHCMercsArmoredPistoleers</card>
+        <card>HCUnlockFort</card>
+        <card>DEHCREVColombianNavy</card>
+        <card>DEHCREVShipColombianRevolutionaries</card>
+        <card>DEHCREVShipIronclads</card>
+        <card>DEHCREVAlbionLegion</card>
+        <card>HCHeavyFortifications</card>
+        <card>HCXPIndustrialRevolution</card>
+        <card>DEHCShipBattleshipRepeat</card>
+        <card>DEHCHabsburgAllies1</card>
+        <card>DEHCHandMortar</card>
+        <card>DEHCMarvelousYear</card>
+        <card>DEHCShipGatlings1</card>
+        <card>DEHCBourbonAllies1</card>
+      </cards>
+
+    </deck>
+
+    <deck>
+
+      <name>$$90974$$TreatyNoNat</name>
+
+      <default>
+
+      </default>
+
+      <cards>
+        <card>DEHCLiberationMarch</card>
+        <card>DEHCREVNationalHero</card>
+        <card>HCCheapBarracksTeam</card>
+        <card>DEHCExtensiveFortificationsEuropean</card>
+        <card>DEHCMercsIrishBrigadiers</card>
+        <card>HCFrontierDefenses</card>
+        <card>DEHCTheaters</card>
+        <card>HCAdvancedArsenal</card>
+        <card>DEHCREVCattleDeliveryColombia</card>
+        <card>DEHCREVShipSteamers</card>
+        <card>RvltModHCLlaneros</card>
+        <card>DEHCMercsArmoredPistoleers</card>
+        <card>HCUnlockFort</card>
+        <card>DEHCREVColombianNavy</card>
+        <card>DEHCREVShipColombianRevolutionaries</card>
+        <card>DEHCREVShipIronclads</card>
+        <card>DEHCREVAlbionLegion</card>
+        <card>HCHeavyFortifications</card>
+        <card>HCXPIndustrialRevolution</card>
+        <card>DEHCShipBattleshipRepeat</card>
+        <card>DEHCHabsburgAllies1</card>
+        <card>DEHCHandMortar</card>
+        <card>DEHCMarvelousYear</card>
+        <card>DEHCShipGatlings1</card>
+        <card>DEHCBourbonAllies1</card>
+      </cards>
+
+    </deck>
+
+    <deck>
+
+      <name>$$90975$$TreatyNative</name>
+
+      <default>
+
+      </default>
+
+      <cards>
+        <card>DEHCLiberationMarch</card>
+        <card>DEHCREVNationalHero</card>
+        <card>HCCheapBarracksTeam</card>
+        <card>DEHCExtensiveFortificationsEuropean</card>
+        <card>DEHCMercsIrishBrigadiers</card>
+        <card>HCFrontierDefenses</card>
+        <card>DEHCTheaters</card>
+        <card>HCAdvancedArsenal</card>
+        <card>DEHCREVCattleDeliveryColombia</card>
+        <card>DEHCREVShipSteamers</card>
+        <card>RvltModHCLlaneros</card>
+        <card>DEHCMercsArmoredPistoleers</card>
+        <card>HCUnlockFort</card>
+        <card>DEHCREVColombianNavy</card>
+        <card>DEHCREVShipColombianRevolutionaries</card>
+        <card>DEHCREVShipIronclads</card>
+        <card>DEHCREVAlbionLegion</card>
+        <card>HCHeavyFortifications</card>
+        <card>HCXPIndustrialRevolution</card>
+        <card>DEHCShipBattleshipRepeat</card>
+        <card>DEHCHabsburgAllies1</card>
+        <card>DEHCHandMortar</card>
+        <card>DEHCMarvelousYear</card>
+        <card>DEHCShipGatlings1</card>
+        <card>DEHCBourbonAllies1</card>
+      </cards>
+
     </deck>
   </decks>
   <building>

@@ -1,15 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <homecity>
   <civ>RvltModBrazil</civ>
   <name>$$80848$$</name>
   <heroname>$$43030$$</heroname>
   <gatherpointunit>HomeCityGatherFlag</gatherpointunit>
-  <visual>revolution\revolution_homecity.xml</visual>
-  <watervisual>revolution\revolution_homecity_water.xml</watervisual>
-  <backgroundvisual>revolution\revolution_background.xml</backgroundvisual>
+  <visual>portuguese\portuguese_homecity.xml</visual>
+  <watervisual>portuguese\portuguese_homecity_water.xml</watervisual>
+  <backgroundvisual>portuguese\portuguese_background.xml</backgroundvisual>
   <pathdata>revolution\pathable_area.gr2</pathdata>
-  <camera>revolution\revolution_homecity_camera.cam</camera>
-  <widescreencamera>revolution\revolution_homecity_camera.cam</widescreencamera>
+  <camera>portuguese\portuguese_homecity_camera.cam</camera>
+  <widescreencamera>portuguese\portuguese_homecity_widescreencamera.cam</widescreencamera>
   <transportroundtriptime>1</transportroundtriptime>
   <transportactivationtime>0</transportactivationtime>
   <level>1</level>
@@ -259,7 +259,7 @@
     <card>
       <name>HCShipBandeirantes</name>
       <maxcount>1</maxcount>
-      <level>25</level>
+      <level>0</level>
       <bindtotech>HCShipBandeirantes</bindtotech>
       <age>1</age>
       <displayunitcount>1</displayunitcount>
@@ -574,7 +574,7 @@
     <card>
       <name>DEHCShipGatlings1</name>
       <maxcount>1</maxcount>
-      <level>10</level>
+      <level>0</level>
       <prereqtech>-1</prereqtech>
       <age>2</age>
       <displayunitcount>3</displayunitcount>
@@ -599,7 +599,7 @@
     <card>
       <name>DEHCEstremozGuns</name>
       <maxcount>1</maxcount>
-      <level>40</level>
+      <level>0</level>
       <prereqtech>-1</prereqtech>
       <age>2</age>
     </card>
@@ -947,7 +947,7 @@
     <card>
       <name>HCExoticHardwoods</name>
       <maxcount>1</maxcount>
-      <level>25</level>
+      <level>0</level>
       <prereqtech>HCSawmills</prereqtech>
       <age>0</age>
     </card>
@@ -1000,7 +1000,7 @@
     <card>
       <name>HCRefrigeration</name>
       <maxcount>1</maxcount>
-      <level>25</level>
+      <level>0</level>
       <prereqtech>HCSustainableAgriculture</prereqtech>
       <age>2</age>
     </card>
@@ -1104,7 +1104,7 @@
     <card>
       <name>DEHCCarracks</name>
       <maxcount>1</maxcount>
-      <level>10</level>
+      <level>0</level>
       <prereqtech>-1</prereqtech>
       <age>2</age>
     </card>
@@ -1192,7 +1192,7 @@
     <card>
       <name>DEHCMercsCannoneersEuropean</name>
       <maxcount>1</maxcount>
-      <level>10</level>
+      <level>0</level>
       <prereqtech>-1</prereqtech>
       <age>1</age>
       <displayunitcount>7</displayunitcount>
@@ -1237,7 +1237,7 @@
     <card>
       <name>DEHCMercsArmoredPistoleers</name>
       <maxcount>1</maxcount>
-      <level>10</level>
+      <level>0</level>
       <prereqtech>-1</prereqtech>
       <age>2</age>
       <displayunitcount>7</displayunitcount>
@@ -1296,7 +1296,7 @@
     <card>
       <name>DEHCWettinAllies1</name>
       <maxcount>1</maxcount>
-      <level>25</level>
+      <level>0</level>
       <prereqtech>-1</prereqtech>
       <age>1</age>
       <displayunitcount>8</displayunitcount>
@@ -1305,7 +1305,7 @@
     <card>
       <name>DEHCAkanAllies</name>
       <maxcount>1</maxcount>
-      <level>25</level>
+      <level>0</level>
       <bindtotech>DEHCAkanAllies</bindtotech>
       <age>3</age>
       <displayunitcount>24</displayunitcount>
@@ -1471,10 +1471,15 @@
     </card>
   </cards>
   <decks>
+
     <deck>
-      <name>Legendary Leaders</name>
+
+      <name>$$71332$$Beginner</name>
+
       <default>
+
       </default>
+
       <cards>
         <card>DEHCREVBonifacio</card>
         <card>HCExoticHardwoods</card>
@@ -1502,21 +1507,198 @@
         <card>DEHCShipGatlings1</card>
         <card>DEHCAkanAllies</card>
       </cards>
+
     </deck>
-    <fakedeck>
+
+    <deck>
+
+      <name>$$20310$$Land</name>
+
+      <default>
+
+      </default>
+
       <cards>
-        <card>DEBasilicaShipCardinal1</card>
-        <card>DEBasilicaShipCardinal2</card>
-        <card>DEBasilicaShipSpy1</card>
-        <card>DEBasilicaShipSpy2</card>
-        <card>DEBasilicaShipPapalGuards1</card>
-        <card>DEBasilicaShipPapalGuards2</card>
-        <card>DEBasilicaShipPandours1</card>
-        <card>DEBasilicaShipPandours2</card>
-        <card>DEBasilicaShipPapalElmeti1</card>
-        <card>DEBasilicaShipPapalZouave1</card>
+        <card>DEHCREVBonifacio</card>
+        <card>HCExoticHardwoods</card>
+        <card>DEHCREVWildlife</card>
+        <card>HCShipBandeirantes</card>
+        <card>DEHCMercsCannoneersEuropean</card>
+        <card>DEHCTheaters</card>
+        <card>DEHCWettinAllies1</card>
+        <card>DEHCREVAmazonia</card>
+        <card>DEHCREVCattleDeliveryBrazil</card>
+        <card>DEHCREVBahia</card>
+        <card>DEHCREVMinasGerais</card>
+        <card>DEHCMercsArmoredPistoleers</card>
+        <card>HCRefrigeration</card>
+        <card>DEHCREVBrazilImporters</card>
+        <card>DEHCREVShipCacadores</card>
+        <card>DEHCREVShipSoldados</card>
+        <card>HCREVShipIronclads</card>
+        <card>HCUnlockFactory</card>
+        <card>DEHCPortugueseBattleshipCard</card>
+        <card>DEHCShipBattleshipRepeat</card>
+        <card>DEHCCarracks</card>
+        <card>DEHCEstremozGuns</card>
+        <card>DEHCHandMortar</card>
+        <card>DEHCShipGatlings1</card>
+        <card>DEHCAkanAllies</card>
       </cards>
-    </fakedeck>
+
+    </deck>
+
+    <deck>
+
+      <name>$$71333$$Naval</name>
+
+      <default>
+
+      </default>
+
+      <cards>
+        <card>DEHCREVBonifacio</card>
+        <card>HCExoticHardwoods</card>
+        <card>DEHCREVWildlife</card>
+        <card>HCShipBandeirantes</card>
+        <card>DEHCMercsCannoneersEuropean</card>
+        <card>DEHCTheaters</card>
+        <card>DEHCWettinAllies1</card>
+        <card>DEHCREVAmazonia</card>
+        <card>DEHCREVCattleDeliveryBrazil</card>
+        <card>DEHCREVBahia</card>
+        <card>DEHCREVMinasGerais</card>
+        <card>DEHCMercsArmoredPistoleers</card>
+        <card>HCRefrigeration</card>
+        <card>DEHCREVBrazilImporters</card>
+        <card>DEHCREVShipCacadores</card>
+        <card>DEHCREVShipSoldados</card>
+        <card>HCREVShipIronclads</card>
+        <card>HCUnlockFactory</card>
+        <card>DEHCPortugueseBattleshipCard</card>
+        <card>DEHCShipBattleshipRepeat</card>
+        <card>DEHCCarracks</card>
+        <card>DEHCEstremozGuns</card>
+        <card>DEHCHandMortar</card>
+        <card>DEHCShipGatlings1</card>
+        <card>DEHCAkanAllies</card>
+      </cards>
+
+    </deck>
+
+    <deck>
+
+      <name>$$55547$$Tycoon</name>
+
+      <default>
+
+      </default>
+
+      <cards>
+        <card>DEHCREVBonifacio</card>
+        <card>HCExoticHardwoods</card>
+        <card>DEHCREVWildlife</card>
+        <card>HCShipBandeirantes</card>
+        <card>DEHCMercsCannoneersEuropean</card>
+        <card>DEHCTheaters</card>
+        <card>DEHCWettinAllies1</card>
+        <card>DEHCREVAmazonia</card>
+        <card>DEHCREVCattleDeliveryBrazil</card>
+        <card>DEHCREVBahia</card>
+        <card>DEHCREVMinasGerais</card>
+        <card>DEHCMercsArmoredPistoleers</card>
+        <card>HCRefrigeration</card>
+        <card>DEHCREVBrazilImporters</card>
+        <card>DEHCREVShipCacadores</card>
+        <card>DEHCREVShipSoldados</card>
+        <card>HCREVShipIronclads</card>
+        <card>HCUnlockFactory</card>
+        <card>DEHCPortugueseBattleshipCard</card>
+        <card>DEHCShipBattleshipRepeat</card>
+        <card>DEHCCarracks</card>
+        <card>DEHCEstremozGuns</card>
+        <card>DEHCHandMortar</card>
+        <card>DEHCShipGatlings1</card>
+        <card>DEHCAkanAllies</card>
+      </cards>
+
+    </deck>
+
+    <deck>
+
+      <name>$$90974$$TreatyNoNat</name>
+
+      <default>
+
+      </default>
+
+      <cards>
+        <card>DEHCREVBonifacio</card>
+        <card>HCExoticHardwoods</card>
+        <card>DEHCREVWildlife</card>
+        <card>HCShipBandeirantes</card>
+        <card>DEHCMercsCannoneersEuropean</card>
+        <card>DEHCTheaters</card>
+        <card>DEHCWettinAllies1</card>
+        <card>DEHCREVAmazonia</card>
+        <card>DEHCREVCattleDeliveryBrazil</card>
+        <card>DEHCREVBahia</card>
+        <card>DEHCREVMinasGerais</card>
+        <card>DEHCMercsArmoredPistoleers</card>
+        <card>HCRefrigeration</card>
+        <card>DEHCREVBrazilImporters</card>
+        <card>DEHCREVShipCacadores</card>
+        <card>DEHCREVShipSoldados</card>
+        <card>HCREVShipIronclads</card>
+        <card>HCUnlockFactory</card>
+        <card>DEHCPortugueseBattleshipCard</card>
+        <card>DEHCShipBattleshipRepeat</card>
+        <card>DEHCCarracks</card>
+        <card>DEHCEstremozGuns</card>
+        <card>DEHCHandMortar</card>
+        <card>DEHCShipGatlings1</card>
+        <card>DEHCAkanAllies</card>
+      </cards>
+
+    </deck>
+
+    <deck>
+
+      <name>$$90975$$TreatyNative</name>
+
+      <default>
+
+      </default>
+
+      <cards>
+        <card>DEHCREVBonifacio</card>
+        <card>HCExoticHardwoods</card>
+        <card>DEHCREVWildlife</card>
+        <card>HCShipBandeirantes</card>
+        <card>DEHCMercsCannoneersEuropean</card>
+        <card>DEHCTheaters</card>
+        <card>DEHCWettinAllies1</card>
+        <card>DEHCREVAmazonia</card>
+        <card>DEHCREVCattleDeliveryBrazil</card>
+        <card>DEHCREVBahia</card>
+        <card>DEHCREVMinasGerais</card>
+        <card>DEHCMercsArmoredPistoleers</card>
+        <card>HCRefrigeration</card>
+        <card>DEHCREVBrazilImporters</card>
+        <card>DEHCREVShipCacadores</card>
+        <card>DEHCREVShipSoldados</card>
+        <card>HCREVShipIronclads</card>
+        <card>HCUnlockFactory</card>
+        <card>DEHCPortugueseBattleshipCard</card>
+        <card>DEHCShipBattleshipRepeat</card>
+        <card>DEHCCarracks</card>
+        <card>DEHCEstremozGuns</card>
+        <card>DEHCHandMortar</card>
+        <card>DEHCShipGatlings1</card>
+        <card>DEHCAkanAllies</card>
+      </cards>
+
+    </deck>
   </decks>
   <building>
     <name>Mansion</name>

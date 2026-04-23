@@ -7578,5 +7578,20 @@
     "desc": "Wood source.",
     "icon": "hc_2x_wood_shipment_icon_64.png",
     "name": "Cords of 600 Wood"
+  },
+  "DEHCLegionHungarian": {
+    "name": "Hungarian Legion",
+    "desc": "Hussar train time, cost, and hitpoints enhanced for Hungarian cavalry legion.",
+    "icon": "hc_legion_hungarian.png"
+  },
+  "DEHCREVCuzco": {
+    "name": "Cuzco",
+    "desc": "Inca rebellion: ships 10 Kallanka native warriors and unlocks Andean allies.",
+    "icon": "hc_cuzco.png"
+  },
+  "DEHCREVFrenchRoyalArmy": {
+    "name": "French Royal Army",
+    "desc": "Revolutionary France retains pre-Republic heavy infantry regiments.",
+    "icon": "hc_french_royal_army.png"
   }
 }
