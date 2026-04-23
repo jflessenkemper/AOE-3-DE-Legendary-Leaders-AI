@@ -59,7 +59,67 @@ PERSONALITY_CHATSET = {
     "tokugawa":    "tokugawa",
 }
 
-# Map rvltmod*.personality → chatset key
+# For each leader chatset, a base-game MP3 path to use as the chat Sound.
+# Without a Sound element the engine skips the chat portrait — so we point at
+# an EXISTING base-game MP3 in the same vocal family. The quote TEXT is our
+# override; the audio is the base-game leader's generic grunt. Not ideal,
+# but restores the portrait thumbnail in the chat bubble.
+LEADER_SOUND_STUB = {
+    # Base civ overrides — use the original personality's MP3 pool
+    "wellington":  "chats\\ELIZ0000.mp3",
+    "catherine":   "chats\\IVAN0000.mp3",
+    "maurice":     "chats\\WILL0000.mp3",
+    "usman":       "chats\\AMIN0000.mp3",
+    "menelik":     "chats\\TEWO0000.mp3",
+    "shivaji":     "chats\\AKBA0000.mp3",
+    "montezuma":   "chats\\CUAU0000.mp3",
+    "pachacuti":   "chats\\HUAY0000.mp3",
+    "napoleon":    "chats\\NAPO0000.mp3",
+    "washington":  "chats\\WASH0000.mp3",
+    "isabella":    "chats\\ISAB0000.mp3",
+    "henry":       "chats\\HENR0000.mp3",
+    "Frederick":   "chats\\FRED0000.mp3",
+    "garibaldi":   "chats\\GARI0000.mp3",
+    "Gustav":      "chats\\GUST0000.mp3",
+    "hidalgo":     "chats\\HIDA0000.mp3",
+    "Hiawatha":    "chats\\HIAW0000.mp3",
+    "crazyhorse":  "chats\\CRAZ0000.mp3",
+    "jean":        "chats\\JEAN0000.mp3",
+    "kangxi":      "chats\\KANG0000.mp3",
+    "suleiman":    "chats\\SULE0000.mp3",
+    "tokugawa":    "chats\\TOKU0000.mp3",
+    # Mod civs — route to thematically-closest base-game chatset MP3 pool
+    "rvltmodnapoleonicfrance":    "chats\\NAPO0000.mp3",
+    "rvltmodrevolutionaryfrance": "chats\\NAPO0000.mp3",
+    "rvltmodamericans":           "chats\\WASH0000.mp3",
+    "rvltmodmexicans":            "chats\\HIDA0000.mp3",
+    "rvltmodcanadians":           "chats\\ELIZ0000.mp3",
+    "rvltmodfrenchcanadians":     "chats\\NAPO0000.mp3",
+    "rvltmodbrazil":              "chats\\HENR0000.mp3",
+    "rvltmodargentines":          "chats\\ISAB0000.mp3",
+    "rvltmodchileans":            "chats\\ISAB0000.mp3",
+    "rvltmodperuvians":           "chats\\ISAB0000.mp3",
+    "rvltmodcolumbians":          "chats\\ISAB0000.mp3",
+    "rvltmodhaitians":            "chats\\NAPO0000.mp3",
+    "rvltmodindonesians":         "chats\\WILL0000.mp3",
+    "rvltmodsouthafricans":       "chats\\WILL0000.mp3",
+    "rvltmodfinnish":             "chats\\IVAN0000.mp3",
+    "rvltmodhungarians":          "chats\\FRED0000.mp3",
+    "rvltmodromanians":           "chats\\FRED0000.mp3",
+    "rvltmodbarbary":             "chats\\SULE0000.mp3",
+    "rvltmodegyptians":           "chats\\SULE0000.mp3",
+    "rvltmodcentralamericans":    "chats\\ISAB0000.mp3",
+    "rvltmodbajacalifornians":    "chats\\ISAB0000.mp3",
+    "rvltmodyucatan":             "chats\\HIDA0000.mp3",
+    "rvltmodriogrande":           "chats\\HIDA0000.mp3",
+    "rvltmodmayans":              "chats\\CUAU0000.mp3",
+    "rvltmodcalifornians":        "chats\\HIDA0000.mp3",
+    "rvltmodtexians":             "chats\\WASH0000.mp3",
+}
+
+# Map rvltmod*.personality → chatset key. We keep unique chatset names
+# per leader so each gets its own quote pool — but ensure the chatset
+# name-string exists so the engine can resolve speaker identity.
 RVLT_CHATSET = {
     "rvltmodnapoleonicfrance":    "rvltmodnapoleonicfrance",
     "rvltmodrevolutionaryfrance": "rvltmodrevolutionaryfrance",
@@ -87,6 +147,46 @@ RVLT_CHATSET = {
     "rvltmodmayans":              "rvltmodmayans",
     "rvltmodcalifornians":        "rvltmodcalifornians",
     "rvltmodtexians":             "rvltmodtexians",
+}
+
+# Each rvltmod civ's civmods.xml DisplayNameID — we inject BOTH the civ-name
+# string (country) AND point the personality at its leader string (via
+# nameID). The in-match chat speaker name comes from the personality's
+# <playerNames><nameID>. Base civs work because elizabeth.personality (our
+# wellington content) is the default personality loaded when British is
+# picked — its nameID is 490200 = "Duke of Wellington".
+#
+# For mod civs the personality is auto-selected from personalities.xml by
+# matching <forcedciv>. This works but the chat speaker name depends on
+# engine precedence: some versions use civ DisplayNameID, others use
+# personality playerNames.nameID. Not fixable here without engine hook.
+RVLT_DISPLAY_IDS = {
+    "rvltmodbarbary": 80806,
+    "rvltmodcanadians": 80807,
+    "rvltmodegyptians": 80808,
+    "rvltmodfinnish": 80809,
+    "rvltmodhungarians": 80810,
+    "rvltmodindonesians": 80811,
+    "rvltmodromanians": 80812,
+    "rvltmodsouthafricans": 80813,
+    "rvltmodhaitians": 80828,
+    "rvltmodamericans": 80829,
+    "rvltmodmexicans": 80830,
+    "rvltmodbrazil": 80831,
+    "rvltmodperuvians": 80832,
+    "rvltmodargentines": 80833,
+    "rvltmodcolumbians": 80834,
+    "rvltmodchileans": 80835,
+    "rvltmodfrenchcanadians": 110319,
+    "rvltmodnapoleonicfrance": 490003,
+    "rvltmodrevolutionaryfrance": 490001,
+    "rvltmodcentralamericans": 112802,
+    "rvltmodbajacalifornians": 112806,
+    "rvltmodyucatan": 112810,
+    "rvltmodriogrande": 112814,
+    "rvltmodmayans": 112816,
+    "rvltmodcalifornians": 112822,
+    "rvltmodtexians": 112826,
 }
 
 # HTML civ-name → leader key used in quotes.json. For 48 civs.
@@ -187,6 +287,8 @@ def generate(quotes: dict) -> tuple[str, str, dict]:
             chat_lines.append(f'   <Tag type="AiChat" name="{trigger_key}" priority="Background">')
             chat_lines.append('      <Sentence>')
             chat_lines.append(f'         <String>{safe}</String>')
+            sound = LEADER_SOUND_STUB.get(leader_key, "chats\\ELIZ0000.mp3")
+            chat_lines.append(f'         <Sound>{sound}</Sound>')
             chat_lines.append(f'         <StringID>{sid}</StringID>')
             chat_lines.append('      </Sentence>')
             chat_lines.append('   </Tag>')
@@ -210,7 +312,9 @@ def inject_into_chatsets(block: str) -> None:
     txt = path.read_text(encoding="utf-8")
     pattern = re.compile(re.escape(CHAT_START) + r".*?" + re.escape(CHAT_END), re.DOTALL)
     if pattern.search(txt):
-        new_txt = pattern.sub(block, txt)
+        # Use lambda to avoid backslash-escape interpretation in `block`
+        # (DDT / MP3 paths contain \F, \N etc. which break re.sub replacement).
+        new_txt = pattern.sub(lambda _m: block, txt)
     else:
         # Insert before </root>
         if "</root>" in txt:
@@ -225,7 +329,7 @@ def inject_into_stringmods(block: str) -> None:
     txt = path.read_text(encoding="utf-8")
     pattern = re.compile(re.escape(STR_START) + r".*?" + re.escape(STR_END), re.DOTALL)
     if pattern.search(txt):
-        new_txt = pattern.sub(block, txt)
+        new_txt = pattern.sub(lambda _m: block, txt)
     else:
         new_txt = txt.replace("</Language>", block + "\n</Language>", 1)
     path.write_text(new_txt, encoding="utf-8")
