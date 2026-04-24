@@ -1,24 +1,31 @@
 //==============================================================================
 /* leader_crazy_horse.xs
 
-   Tasunke Witko (Crazy Horse) - Oglala Lakota war chief personality.
+   Phizí ("Chief Gall", Hunkpapa Lakota war chief, c. 1840-1894) - lobby-matched
+   Lakota leader. File name kept as "crazy_horse" because the engine personality
+   ID is "Crazyhorse" (personalities.xml); function and rule names preserve
+   that key for the engine's AI dispatch. All user-visible strings have been
+   rebranded to Gall's doctrine.
 
    Historical doctrine:
-     - Mounted plains warfare: Lakota war bands fought as horse archers and
-       lance cavalry. Mapped to a near-pure cavalry composition with
-       almost no static infantry weight.
-     - Little Bighorn (1876): Crazy Horse and Sitting Bull crushed Custer
-       through encirclement and overwhelming mass cavalry. Mapped to a
-       very aggressive baseline (offense bias near maximum) and a forward
-       commitment from Discovery on.
+     - Little Bighorn envelopment (June 25, 1876): Gall led the initial
+       Hunkpapa charge that broke Reno's line at the south end of the
+       Lakota camp, then wheeled north with Crow King and Iron Horn to
+       envelop Custer's detachment on Calhoun Hill. Mapped to a very
+       aggressive offensive baseline and forward commitment from Colonial
+       on, reflecting a coordinated mass-cavalry envelopment rather than
+       an individual-valor charge.
+     - Plains cavalry wedge: Lakota war bands fought as horse archers and
+       lance cavalry - Wakina Rifle Rider, Cetan Bowman, Axe Rider,
+       Tashunke Prowler. Mapped to a near-pure cavalry composition with
+       almost no static infantry weight and no artillery.
      - Buffalo economy: Lakota civ trades static structures for tipi
-       mobility and Buffalo hunts. Mapped to the Mobile Frontier Scatter
-       style and a very negative Trade Route lean.
-     - Native confederation: Cheyenne, Arapaho, and Dakota allies. Mapped
-       to a strong Native Treaty bias.
-     - Wakina Rifle, Cetan Bowman, Axe Rider, Tashunke Prowler - the
-       Lakota army is fast skirmish-cavalry through and through. No
-       artillery, no fortress doctrine.
+       mobility and Buffalo hunts. Mobile Frontier Scatter build style and
+       a very negative Trade Route lean.
+     - Hunkpapa confederation: Sitting Bull's Hunkpapa, plus Oglala,
+       Cheyenne, Arapaho, and Dakota allies. Strong Native Treaty bias.
+     - No fortress doctrine, no artillery - Lakota warfare is fast, mobile,
+       and decisive at the point of envelopment.
 */
 //==============================================================================
 
@@ -26,7 +33,7 @@ bool gCrazyHorseRulesEnabled = false;
 
 void initLeaderCrazyHorse(void)
 {
-   llVerboseEcho("Legendary Leaders: activating Crazy Horse personality.");
+   llVerboseEcho("A New World DLC: activating Chief Gall personality.");
 
    llSetAggressivePersonality();
    btRushBoom = 0.4;              // Almost no boom; the warpath opens immediately.
@@ -45,7 +52,7 @@ void initLeaderCrazyHorse(void)
    cvMaxArmyPop = 110;
 
    gCrazyHorseRulesEnabled = true;
-   llLogLeaderState("Crazy Horse initialized");
+   llLogLeaderState("Chief Gall initialized");
 }
 
 //------------------------------------------------------------------------------

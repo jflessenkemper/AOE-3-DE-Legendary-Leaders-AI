@@ -1,5 +1,5 @@
 <p align="center">
-	<img src="resources/images/legendary_leaders_ai_banner.png" alt="Legendary Leaders AI banner" width="100%">
+	<img src="resources/images/legendary_leaders_ai_banner.png" alt="AOE 3 DE - A New World DLC banner" width="100%">
 </p>
 
 <p align="center">
@@ -21,7 +21,7 @@
 <tr>
 <td width="70%" valign="middle">
 
-**Legendary Leaders AI** is a standalone Age of Empires III: Definitive Edition mod that combines the base civilizations with the playable revolution roster. Each nation is mapped to a themed leader personality and a clear battlefield identity.
+**AOE 3 DE - A New World DLC** is a standalone Age of Empires III: Definitive Edition mod that combines the base civilizations with the playable revolution roster. Each nation is mapped to a historically-accurate leader personality and a clear battlefield identity.
 
 </td>
 <td width="30%" align="right" valign="middle">
@@ -34,7 +34,7 @@
 </tr>
 </table>
 
-> **Heads-up on lobby portraits.** In the pre-match lobby, the small portrait thumbnail next to each base civ (British, French, Russian, etc.) still shows the base-game leader (Queen Elizabeth for British, Ivan for Russians, etc.). This is an engine-level limit — the portrait comes from a texture inside the game's packed art archive that mods can't override. **The actual AI personality, name, in-match scoreboard portrait, chat portrait, and doctrine are all our legendary leader** (Duke of Wellington, Catherine the Great, etc.) — only that one small lobby thumbnail is stuck. Revolution civs (Chileans, Napoleonic France, Finns, etc.) use our mod's correct portrait everywhere.
+> **Lobby-matched leader portraits.** Every base civ now uses the same historical leader that appears in the pre-match lobby thumbnail — Queen Elizabeth I for British, Ivan the Terrible for Russians, Chief Gall for Lakota, and so on — with one intentional exception: base **French** keeps a Bourbon / Ancien Régime identity (Louis XVIII) while Napoleonic France appears as a separate revolution civ led by the post-1804 Emperor. This keeps the in-match scoreboard, chat portrait, AI name, and doctrine consistent with what players already see in the lobby. Revolution civs (Chileans, Napoleonic France, Finns, etc.) use our own portraits throughout.
 
 ## 🏳️ Elite Units and AI Rout
 
@@ -59,10 +59,10 @@ The army tries to keep a living screen around that leader, and different nations
 
 1. Download the latest release zip from the [GitHub Releases page](https://github.com/jflessenkemper/AOE-3-DE-Legendary-Leaders-AI/releases) (or the Steam Workshop subscription once it's live).
 2. Extract into your **local mods** folder:
-   - **Windows:** `%USERPROFILE%\Games\Age of Empires 3 DE\<steamID>\mods\local\Legendary Leaders AI\`
-   - **Linux/Proton:** `~/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/<steamID>/mods/local/Legendary Leaders AI/`
-3. Launch AoE3 DE → **Tools → Mods** → enable **Legendary Leaders AI** → restart game.
-4. Pick any civ in Skirmish / Multiplayer lobby — the AI auto-assigns the mod-intended leader (Duke of Wellington for British, Catherine the Great for Russians, etc.) and plays per the HTML reference's doctrine.
+   - **Windows:** `%USERPROFILE%\Games\Age of Empires 3 DE\<steamID>\mods\local\AOE 3 DE - A New World DLC\`
+   - **Linux/Proton:** `~/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/<steamID>/mods/local/AOE 3 DE - A New World DLC/`
+3. Launch AoE3 DE → **Tools → Mods** → enable **AOE 3 DE - A New World DLC** → restart game.
+4. Pick any civ in Skirmish / Multiplayer lobby — the AI auto-assigns the historically-accurate leader (Queen Elizabeth I for British, Ivan the Terrible for Russians, Chief Gall for Lakota, Napoleon Bonaparte for Napoleonic France, etc.) and plays per the HTML reference's doctrine.
 
 **Multiplayer note:** this is intended as a host-only mod. All players in a match should have the same version installed to avoid desyncs.
 
@@ -72,9 +72,34 @@ The army tries to keep a living screen around that leader, and different nations
 
 - **48 distinct civilizations**: the 22 base civs (re-skinned with historically-accurate leaders) + 26 revolution-era civs promoted to top-level pickable nations (Napoleon, Revolutionary France, Americans, Chileans, Texians, Finns, Barbary States, etc.).
 - **Per-leader AI doctrine** via XS scripts — every leader has distinct build-order priorities, military composition, and explorer-escort posture. See the [reference site](https://jflessenkemper.github.io/AOE-3-DE-Legendary-Leaders-AI/) for each civ's doctrine.
-- **Curated 25-card Legendary Leaders deck per civ** — AI-authored to match each leader's playstyle (aggressive / defensive / economic / naval).
-- **Legendary leader portraits, chat quotes, and name overrides** shown in-match for every civ.
+- **Curated 25-card A New World DLC deck per civ** — AI-authored to match each leader's playstyle (aggressive / defensive / economic / naval).
+- **Historical leader portraits, chat quotes, and name overrides** shown in-match for every civ.
 - **Revolutions disabled on standard civs** — since the 26 revolution nations are already pickable as top-level civs, base civs don't offer the old revolution options at age-up.
+
+---
+
+## 🗺️ Historical Map Placement (new)
+
+Every nation is pinned to a historically-appropriate **terrain preference** and **expansion heading** that the AI actually obeys when it places buildings — not a cosmetic label.
+
+- **Terrain preferences** (9 primitives): `Any`, `Coast`, `River`, `ForestEdge`, `Plain`, `Highland`, `Wetland`, `DesertOasis`, `Jungle`. Coastal/riverine terrains bias placement toward `gNavyVec` (the map's water center); plain/highland/desert bias toward the base location.
+- **Expansion headings** (8 options): `Any`, `AlongCoast`, `Upriver`, `FrontierPush`, `IslandHop`, `OutwardRings`, `FollowTradeRoute`, `Defensive`. `Upriver` reflects the water vector across the base to push inland; frontier headings bias toward `gForwardBaseLocation` (enemy-ward).
+- **Center-anchored civic** tightens the influence distance clamp by ~0.65× for non-military/non-house/non-TC plans, producing a compact core for nations that historically built around a central plaza.
+- **Strength knobs**: `gLLTerrainBiasStrength` and `gLLHeadingBiasStrength` (0.0–1.0) control how aggressively the anchor is shifted away from the raw base location. Values are set per-nation in `llApplyBuildStyleForActiveCiv()`.
+
+The resulting anchor feeds `cBuildPlanCenterPosition` + `cBuildPlanInfluencePosition` (with `cBPIFalloffLinear`) so footprints fall where each nation's history says they should: British along the coast, Russians up the river, Lakota out on the plains, Maltese dug in on the highland, Napoleonic France pushing the frontier.
+
+### 📍 Map Placement modal (reference site)
+
+The HTML reference ([link](https://jflessenkemper.github.io/AOE-3-DE-Legendary-Leaders-AI/LEGENDARY_LEADERS_TREE.html)) now has a **Map Placement** button on every nation. It opens a single modal with:
+
+- **Left:** a shared canonical 600×600 map (coast, river, forests, jungle, highland, oasis, wetland, gold, hunt, trade route, enemy-edge marker, spawn ring) — identical for every nation, so you can compare how differently each leader builds on the *same* terrain.
+- **Right:** a 20-variable diagram (bar chart) of the tuning knobs that drive that nation's placement (terrain biases, heading biases, wall density, tower reach, civic radius, etc.).
+- **Centered toggle** below both panels: click to expand a full variable table with exact values and ranges.
+
+The nation's footprint (TC, houses, towers, forts, forward towers, wall perimeter) is drawn on top of the canonical map using the **same** terrain-anchor + heading-anchor math the XS code uses in-engine — so what you see in the modal is what the AI actually does in a match.
+
+A per-nation historical rationale for these settings lives in `docs/design/map-placement-historical-guide.md`.
 
 ---
 
@@ -82,18 +107,17 @@ The army tries to keep a living screen around that leader, and different nations
 
 These don't affect gameplay; they're UI-side limits of the AoE3 DE mod engine:
 
-- **Lobby slot thumbnail portraits for base civs** still show the base-game leader (Queen Elizabeth for British, Ivan the Terrible for Russians). The in-match scoreboard, chat portrait, auto-assigned name, and AI doctrine all correctly reflect our legendary leader (Duke of Wellington, Catherine the Great, etc.) — only the small lobby thumbnail is stuck.
-- **Deck Builder for base civs** shows the base-game decks (Beginner / Land / Naval / Tycoon / Treaty). The 26 revolution civs correctly show the Legendary Leaders deck. Engine-level limitation for overriding packed homecity data.
-- **"MY DECK" label** stays that way in the Deck Builder (engine stores it as a literal in the binary savegame). The deck content inside is our Legendary Leaders 25-card curation.
+- **Deck Builder for base civs** shows the base-game decks (Beginner / Land / Naval / Tycoon / Treaty). The 26 revolution civs correctly show the A New World DLC deck. Engine-level limitation for overriding packed homecity data.
+- **"MY DECK" label** stays that way in the Deck Builder (engine stores it as a literal in the binary savegame). The deck content inside is our A New World DLC 25-card curation.
 
 ---
 
 ## 📤 Publishing to the Steam Workshop (for maintainers)
 
 1. In-game: **Tools → Mods → Mod Manager**.
-2. Select **Legendary Leaders AI** from the Local Mods list.
+2. Select **AOE 3 DE - A New World DLC** from the Local Mods list.
 3. Click **Publish** (or **Upload to Workshop**) — the dialog asks for:
-   - **Title:** `Legendary Leaders AI`
+   - **Title:** `AOE 3 DE - A New World DLC`
    - **Description:** paste the short summary from the top of this README
    - **Tags:** `AI`, `Civilizations`, `Gameplay`, `Revolutions`
    - **Visibility:** `Public`

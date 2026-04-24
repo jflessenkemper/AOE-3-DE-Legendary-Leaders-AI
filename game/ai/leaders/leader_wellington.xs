@@ -1,26 +1,31 @@
 //==============================================================================
 /* leader_wellington.xs
 
-   Arthur Wellesley, 1st Duke of Wellington - British line-and-logistics
-   personality.
+   Queen Elizabeth I of England (Tudor, r. 1558-1603) - lobby-matched British
+   leader. File name kept as "wellington" because the engine personality ID
+   is "Wellington" (personalities.xml); the function and rule names preserve
+   that key for the engine's AI dispatch. All user-visible strings, knobs,
+   and portraits have been rebranded to Elizabeth's doctrine.
 
    Historical doctrine:
-     - Thin red line: two-deep volley fire and hollow infantry squares
-       against cavalry. Translates to overwhelming line-infantry mass
-       (Musketeer / Longbowman) anchored by drilled discipline.
-     - Reverse slope: deployed line infantry behind hill crests to shelter
-       from enemy artillery, then crested at point-blank range. Mapped
-       here to defensive posture with strong forward-base anchors instead
-       of open-field assaults.
-     - Logistics first: never advanced without supply secured (Lines of
-       Torres Vedras, Iberian campaign). Mapped to a heavy Manor economy
-       and fortification investment.
-     - Combined arms: Light Division riflemen screened, line infantry
-       held the centre, KGL hussars and dragoons counter-charged, and
-       Royal Artillery served the flanks.
-     - Iron Duke temperament: cool, methodical, allergic to wasted men.
-       Mapped to a defensive personality with high army efficiency and
-       low willingness to commit elites first.
+     - Sea Dogs and privateer fleet: Drake, Hawkins, Frobisher - English
+       sea power broke the Spanish Armada in 1588 and harried the Spanish
+       silver line through Elizabeth's reign. Mapped to a very heavy naval
+       and trade bias and a coastal sprawl economy.
+     - Trained Bands militia: Tudor England had no standing army; defense
+       was the county levy of yeoman longbowmen and billmen. Mapped to
+       Longbowman emphasis and modest professional force size, rather than
+       Wellington's continental Redcoat mass.
+     - Merchant Adventurers and Royal Exchange (1566): Elizabethan England
+       ran on chartered trading companies (Muscovy 1555, Levant 1581, East
+       India 1600). Mapped to strong Trade Route lean and mercantile
+       compound build style.
+     - Armada defense posture: insular and cautious, committing the fleet
+       to decisive naval action but avoiding continental land adventure.
+       Mapped to a defensive baseline that only leans offensive late.
+     - Tudor artillery was modest (shipboard more than field); Elizabeth
+       did not fight Napoleonic-style gun lines. Mapped to reduced artillery
+       share compared with the prior Wellington tuning.
 */
 //==============================================================================
 
@@ -28,27 +33,38 @@ bool gWellingtonRulesEnabled = false;
 
 void initLeaderWellington(void)
 {
-   llVerboseEcho("Legendary Leaders: activating Duke of Wellington personality.");
+   llVerboseEcho("A New World DLC: activating Queen Elizabeth I personality.");
 
    llSetDefensivePersonality();
-   btRushBoom = -0.35;            // Boom over rush; secure the supply line.
-   btOffenseDefense = 0.25;       // Defensive baseline; scales up by age.
-   btBiasTrade = 0.3;             // Royal Navy / commerce bias.
-   btBiasNative = -0.2;           // Wellington trusted Iberian regulars more than auxiliaries.
-   llSetMilitaryFocus(0.7, 0.05, 0.25);  // Infantry-led, modest cavalry, real artillery.
+   btRushBoom = -0.4;             // Tudor boom; island kingdom grows behind the fleet.
+   btOffenseDefense = 0.2;        // Defensive baseline; Elizabeth avoided continental war.
+   btBiasTrade = 0.7;             // Muscovy / Levant / East India Co. mercantile chartering.
+   btBiasNative = -0.1;           // Regulars and trained bands; sparing use of auxiliaries.
+   llSetMilitaryFocus(0.75, 0.10, 0.15); // Longbow + Musketeer primacy; minimal field artillery.
 
    // LL-BUILD-STYLE-BEGIN
    llUseNavalMercantileCompoundStyle(2);
-   gLLEconomicDistanceMultiplier = 1.30;
+   gLLEconomicDistanceMultiplier = 1.40;         // Coastal-sprawl eco network.
+   gLLTownCenterDistanceMultiplier = 1.25;       // Spread TCs along shoreline.
+   gLLEarlyWallingEnabled = false;               // Island identity - navy guards early,
+                                                 // no inland continental wall rings.
+                                                 // Late walls still fire via CoastalBatteries.
    // LL-BUILD-STYLE-END
    llSetLeaderTacticalDoctrine(0.82, 0.18, 2, 4.0);   // Leader well behind the firing line.
 
    cvOkToBuildForts = true;
-   cvMaxTowers = 6;
+   cvOkToFish = true;                            // Explicit maritime identity - North Sea fishing fleet.
+   cvMaxTowers = 8;                              // Martello chain base (scales up by age).
    cvMaxArmyPop = 110;
+   cvMaxCivPop = 120;                            // Manor economy supports large vill pop.
+
+   // Reverse-slope defense: hold the line firmly, don't chase.
+   cvDefenseReflexRadiusActive = 70.0;           // Strong defensive perimeter.
+   cvDefenseReflexRadiusPassive = 25.0;          // Don't overextend when regrouping.
+   cvDefenseReflexSearchRadius = 70.0;           // Detect at perimeter edge.
 
    gWellingtonRulesEnabled = true;
-   llLogLeaderState("Wellington initialized");
+   llLogLeaderState("Elizabeth I initialized");
 }
 
 //------------------------------------------------------------------------------
@@ -174,12 +190,12 @@ minInterval 90
 
    if (kbGetAge() >= cAge5)
    {
-      btRushBoom = -0.05;         // Still some eco growth, mostly army.
-      btOffenseDefense = 0.85;
+      btRushBoom = -0.1;          // Still growing; Tudor reign preferred eco strength.
+      btOffenseDefense = 0.65;    // Measured offensive - Armada-year resolve, not blitz.
       btBiasInf = 1.0;
-      btBiasCav = 0.4;
-      btBiasArt = 0.9;            // Maximum artillery commitment.
-      cvMaxArmyPop = 160;
+      btBiasCav = 0.3;
+      btBiasArt = 0.4;            // Modest artillery - Tudor doctrine, not Napoleonic gun line.
+      cvMaxArmyPop = 150;
       llEnableForwardBaseStyle();
    }
 }

@@ -311,6 +311,112 @@ float llGetBuildStyleDistanceMultiplier(int puid = -1)
    return ((gLLHouseDistanceMultiplier + gLLEconomicDistanceMultiplier + gLLMilitaryDistanceMultiplier) / 3.0);
 }
 
+//==============================================================================
+// Legendary Leaders — terrain / heading anchor resolution.
+//
+// Given a nation's preferred terrain (coast/river/forest/plain/highland/
+// wetland/desert-oasis/jungle) and expansion heading (along-coast / upriver
+// / frontier-push / island-hop / outward-rings / follow-trade-route /
+// defensive), compute a biased anchor vector. The anchor is a weighted
+// blend between the base center and the feature vector so every build
+// plan's influence-gradient lands on the historically correct feature.
+//
+// Feature vectors:
+//   Coast / Wetland / Island-Hop    → gNavyVec (water center)
+//   River / ForestEdge / Jungle     → gNavyVec at reduced strength
+//                                     (no engine primitive for inland river
+//                                      distinct from coast; we blend half
+//                                      so inland civs still lean "toward
+//                                      water" without plastering to shore)
+//   Plain / Highland / DesertOasis  → baseLocation (no water drag)
+//   AlongCoast / IslandHop heading  → gNavyVec
+//   Upriver heading                 → invert gNavyVec vector (push inland)
+//   FrontierPush heading            → gForwardBaseLocation (enemy-ward)
+//   OutwardRings heading            → baseLocation (stay concentric)
+//   FollowTradeRoute                → gForwardBaseLocation mid-strength
+//   Defensive                       → baseLocation pulled in tight
+//==============================================================================
+vector llGetTerrainFeatureVector(int terrain = 0, vector baseLocation = cInvalidVector)
+{
+   if (terrain == cLLTerrainCoast) { return (gNavyVec); }
+   if (terrain == cLLTerrainWetland) { return (gNavyVec); }
+   if (terrain == cLLTerrainRiver) { return (gNavyVec); }
+   if (terrain == cLLTerrainJungle) { return (gNavyVec); }
+   if (terrain == cLLTerrainForestEdge) { return (gNavyVec); }
+   // Plain / Highland / DesertOasis / Any — no external feature; anchor on base.
+   return (baseLocation);
+}
+
+vector llGetHeadingFeatureVector(int heading = 0, vector baseLocation = cInvalidVector)
+{
+   if (heading == cLLHeadingAlongCoast) { return (gNavyVec); }
+   if (heading == cLLHeadingIslandHop) { return (gNavyVec); }
+   if (heading == cLLHeadingFrontierPush) { return (gForwardBaseLocation); }
+   if (heading == cLLHeadingFollowTradeRoute) { return (gForwardBaseLocation); }
+   if (heading == cLLHeadingUpriver)
+   {
+      // Push inland: reflect gNavyVec across baseLocation so the anchor is
+      // on the opposite side of the base from the water.
+      if ((gNavyVec != cInvalidVector) && (baseLocation != cInvalidVector))
+      {
+         return (xsVectorSet(
+            2.0 * xsVectorGetX(baseLocation) - xsVectorGetX(gNavyVec),
+            xsVectorGetY(baseLocation),
+            2.0 * xsVectorGetZ(baseLocation) - xsVectorGetZ(gNavyVec)));
+      }
+   }
+   // OutwardRings / Defensive / Any — stay on the base.
+   return (baseLocation);
+}
+
+vector llBlendAnchor(vector baseLocation = cInvalidVector, vector featureLocation = cInvalidVector, float strength = 0.0)
+{
+   if (baseLocation == cInvalidVector) { return (featureLocation); }
+   if (featureLocation == cInvalidVector) { return (baseLocation); }
+   if (strength <= 0.0) { return (baseLocation); }
+   if (strength >= 1.0) { return (featureLocation); }
+   float inv = 1.0 - strength;
+   return (xsVectorSet(
+      xsVectorGetX(baseLocation) * inv + xsVectorGetX(featureLocation) * strength,
+      xsVectorGetY(baseLocation) * inv + xsVectorGetY(featureLocation) * strength,
+      xsVectorGetZ(baseLocation) * inv + xsVectorGetZ(featureLocation) * strength));
+}
+
+vector llGetPlacementBiasedCenter(vector baseLocation = cInvalidVector, int puid = -1)
+{
+   vector center = baseLocation;
+
+   // Primary terrain drag.
+   if (gLLPreferredTerrainPrimary != cLLTerrainAny)
+   {
+      vector feature = llGetTerrainFeatureVector(gLLPreferredTerrainPrimary, baseLocation);
+      center = llBlendAnchor(center, feature, gLLTerrainBiasStrength);
+   }
+   // Secondary terrain drag (half strength).
+   if (gLLPreferredTerrainSecondary != cLLTerrainAny)
+   {
+      vector feature2 = llGetTerrainFeatureVector(gLLPreferredTerrainSecondary, baseLocation);
+      center = llBlendAnchor(center, feature2, gLLTerrainBiasStrength * 0.5);
+   }
+
+   // Heading drag — only biases non-house economic/military spreads so the
+   // TC-relative house ring stays intact. Houses still go near TC.
+   if ((gLLExpansionHeading != cLLHeadingAny) && (gLLExpansionHeading != cLLHeadingDefensive))
+   {
+      if ((puid != cUnitTypedeHouseAfrican) && (puid != cUnitTypeHouse) &&
+          (puid != cUnitTypeypVillage) && (puid != cUnitTypeypHouseIndian) &&
+          (puid != cUnitTypeManor) && (puid != cUnitTypeHouseEast) &&
+          (puid != cUnitTypeHouseMed) && (puid != cUnitTypeLonghouse) &&
+          (puid != cUnitTypeHouseAztec) && (puid != cUnitTypedeHouseInca))
+      {
+         vector heading = llGetHeadingFeatureVector(gLLExpansionHeading, baseLocation);
+         center = llBlendAnchor(center, heading, gLLHeadingBiasStrength);
+      }
+   }
+
+   return (center);
+}
+
 void llApplyLegendaryBaseInfluence(int planID = -1, int baseID = -1, int puid = -1,
    float defaultCenterDistance = 30.0, float defaultInfluenceDistance = 100.0, float defaultInfluenceValue = 200.0)
 {
@@ -327,13 +433,39 @@ void llApplyLegendaryBaseInfluence(int planID = -1, int baseID = -1, int puid = 
    }
 
    float distanceMultiplier = llGetBuildStyleDistanceMultiplier(puid);
+
+   // Center-anchored civic: tight radius on non-house, non-military, non-TC
+   // plans (markets, churches, plaza buildings). Aztec/Inca/Ottoman/
+   // Kangxi/Valette/Tokugawa/Isabella historically built these right on the
+   // plaza rather than scattered.
+   if ((gLLCenterAnchorCivic == true) &&
+       (puid != cUnitTypeTownCenter) &&
+       (llIsMilitaryBuildStyleStructure(puid) == false) &&
+       (puid != cUnitTypedeHouseAfrican) && (puid != cUnitTypeHouse) &&
+       (puid != cUnitTypeypVillage) && (puid != cUnitTypeypHouseIndian) &&
+       (puid != cUnitTypeManor) && (puid != cUnitTypeHouseEast) &&
+       (puid != cUnitTypeHouseMed) && (puid != cUnitTypeLonghouse) &&
+       (puid != cUnitTypeHouseAztec) && (puid != cUnitTypedeHouseInca))
+   {
+      distanceMultiplier = distanceMultiplier * 0.65;
+      if (distanceMultiplier < 0.45)
+      {
+         distanceMultiplier = 0.45;
+      }
+   }
+
    float centerDistance = llClampBuildValue(defaultCenterDistance * distanceMultiplier, 8.0, 90.0);
    float influenceDistance = llClampBuildValue(defaultInfluenceDistance * distanceMultiplier, 35.0, 220.0);
    float influenceValue = llClampBuildValue(defaultInfluenceValue / distanceMultiplier, 60.0, 320.0);
 
-   aiPlanSetVariableVector(planID, cBuildPlanCenterPosition, 0, baseLocation);
+   // Terrain + heading-biased anchor. The influence center is dragged
+   // toward the feature so the probability-weighted build site actually
+   // lands on coast/river/frontier-forward etc. instead of the base center.
+   vector anchor = llGetPlacementBiasedCenter(baseLocation, puid);
+
+   aiPlanSetVariableVector(planID, cBuildPlanCenterPosition, 0, anchor);
    aiPlanSetVariableFloat(planID, cBuildPlanCenterPositionDistance, 0, centerDistance);
-   aiPlanSetVariableVector(planID, cBuildPlanInfluencePosition, 0, baseLocation);
+   aiPlanSetVariableVector(planID, cBuildPlanInfluencePosition, 0, anchor);
    aiPlanSetVariableFloat(planID, cBuildPlanInfluencePositionDistance, 0, influenceDistance);
    aiPlanSetVariableFloat(planID, cBuildPlanInfluencePositionValue, 0, influenceValue);
    aiPlanSetVariableInt(planID, cBuildPlanInfluencePositionFalloff, 0, cBPIFalloffLinear);
@@ -940,6 +1072,26 @@ void selectTCBuildPlanPosition(int buildPlan = -1, int baseID = -1)
          }
          loc = kbUnitGetPosition(unitID);
       }
+   }
+
+   // Legendary Leaders — expansion-heading bias on secondary TC placement.
+   // If the leader has a directional heading (AlongCoast / Upriver /
+   // FrontierPush / IslandHop / FollowTradeRoute), blend the mine-anchored
+   // location toward the heading vector so the secondary TC lands on the
+   // historical axis. OutwardRings / Defensive / Any leave loc as-is.
+   vector mainBaseLoc = kbBaseGetLocation(cMyID, kbBaseGetMainID(cMyID));
+   if ((gLLExpansionHeading != cLLHeadingAny) &&
+       (gLLExpansionHeading != cLLHeadingOutwardRings) &&
+       (gLLExpansionHeading != cLLHeadingDefensive) &&
+       (loc != cInvalidVector))
+   {
+      vector heading = llGetHeadingFeatureVector(gLLExpansionHeading, mainBaseLoc);
+      loc = llBlendAnchor(loc, heading, gLLHeadingBiasStrength);
+   }
+   else if (gLLExpansionHeading == cLLHeadingDefensive)
+   {
+      // Defensive leaders pull secondary TCs inward toward main base.
+      loc = llBlendAnchor(loc, mainBaseLoc, 0.5);
    }
 
    gTCSearchVector = loc;

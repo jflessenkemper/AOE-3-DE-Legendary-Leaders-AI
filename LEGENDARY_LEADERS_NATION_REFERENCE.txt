@@ -37,14 +37,14 @@ Shared tactical quote set: see the header of this document.
 ------------------------------------------------------------------------
 Nation: British
 Civilization ID: British
-Leader: Duke of Wellington
-Portrait asset: resources/images/icons/singleplayer/cpai_avatar_british_wellington.png
-Portrait description: Duke of Wellington portrait
+Leader: Queen Elizabeth I
+Portrait asset: resources/images/icons/singleplayer/cpai_avatar_british_elizabeth.png
+Portrait description: Queen Elizabeth I portrait
 Flag asset: base-game asset (not overridden in this repo)
 Flag description: United Kingdom flag
 Elite units: Musketeer
 Non-elite units: Longbowman, Hussar, Dragoon, Grenadier, Ranger, artillery.
-Expected playstyle: Defensive manor-and-musketeer play with reliable artillery scaling.
+Expected playstyle: Tudor naval-mercantile boom; trained-bands Longbow and Musket line behind a coastal/Dock-first economy, privateer fleet on the flanks, restrained artillery.
 Expected buildstyle: Distributed Economic Network
 Leader encouragement quotes:
 - Hold the line. After that, the rest is arithmetic.
@@ -277,14 +277,14 @@ Shared tactical quote set: see the header of this document.
 ------------------------------------------------------------------------
 Nation: Lakota
 Civilization ID: Lakota
-Leader: Crazy Horse
-Portrait asset: resources/images/icons/singleplayer/cpai_avatar_lakota_crazy_horse.png
-Portrait description: Crazy Horse portrait
+Leader: Chief Gall
+Portrait asset: resources/images/icons/singleplayer/cpai_avatar_lakota_gall.png
+Portrait description: Chief Gall portrait
 Flag asset: base-game asset (not overridden in this repo)
 Flag description: Lakota banner
 Elite units: Axe Rider, Rifle Rider
 Non-elite units: Bow Rider, Wakina Rifle, Tashunke Prowler, Club Warrior.
-Expected playstyle: Aggressive mounted mobility with constant raiding and map control.
+Expected playstyle: Little Bighorn envelopment - aggressive mounted mobility with coordinated mass-cavalry pressure and constant raiding.
 Expected buildstyle: Mobile Frontier Scatter
 Leader encouragement quotes:
 - Hit fast and keep moving.
@@ -377,9 +377,9 @@ Shared tactical quote set: see the header of this document.
 ------------------------------------------------------------------------
 Nation: Russians
 Civilization ID: Russians
-Leader: Catherine the Great
-Portrait asset: resources/images/icons/singleplayer/cpai_avatar_russians_catherine.png
-Portrait description: Catherine the Great portrait
+Leader: Ivan the Terrible
+Portrait asset: resources/images/icons/singleplayer/cpai_avatar_russians_ivan.png
+Portrait description: Ivan the Terrible portrait
 Flag asset: base-game asset (not overridden in this repo)
 Flag description: Russian flag
 Elite units: Grenadier, Cavalry Archer

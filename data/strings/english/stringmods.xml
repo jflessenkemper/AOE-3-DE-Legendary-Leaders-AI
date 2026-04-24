@@ -1785,12 +1785,12 @@
       <String _locID='490275'>Sam Houston</String>  <!-- rvltmodtexians -->
 <!-- MOD-CIV-LEADER-NAMES-END -->
 <!-- BASE-CIV-LEADER-NAMES-START -->
-      <String _locID='490200'>Duke of Wellington</String>
-      <String _locID='490201'>British · line-and-logistics · Naval Mercantile Compound</String>
+      <String _locID='490200'>Queen Elizabeth I</String>
+      <String _locID='490201'>British · Tudor privateer navy + Manor mercantile</String>
       <String _locID='490202'>Usman dan Fodio</String>
       <String _locID='490203'>Hausa · Sokoto Caliphate jihadist mobilization</String>
-      <String _locID='490204'>Catherine the Great</String>
-      <String _locID='490205'>Russian · Cossack voisko + enlightened absolutism</String>
+      <String _locID='490204'>Ivan the Terrible</String>
+      <String _locID='490205'>Russian · Oprichnik terror + Streltsy consolidation</String>
       <String _locID='490206'>Maurice of Nassau</String>
       <String _locID='490207'>Dutch · mercantile drill + fortification</String>
       <String _locID='490208'>Menelik II</String>
@@ -1803,8 +1803,8 @@
       <String _locID='490215'>Inca · Andean terrace fortress</String>
       <String _locID='490216'>Isabella I of Castile</String>
       <String _locID='490217'>Spanish · conquistador crown</String>
-      <String _locID='490218'>Napoleon Bonaparte</String>
-      <String _locID='490219'>French · Grande Armee forward operational line</String>
+      <String _locID='490218'>Louis XVIII</String>
+      <String _locID='490219'>French · Bourbon Ancien Régime · Restoration court and gendarmerie</String>
       <String _locID='490220'>Miguel Hidalgo</String>
       <String _locID='490221'>Mexican · Grito de Dolores clergy-led revolution</String>
       <String _locID='490222'>George Washington</String>
@@ -1825,13 +1825,13 @@
       <String _locID='490237'>Japanese · Sakoku consolidated shogunate</String>
       <String _locID='490238'>Hiawatha</String>
       <String _locID='490239'>Haudenosaunee · Confederacy council</String>
-      <String _locID='490240'>Crazy Horse</String>
-      <String _locID='490241'>Lakota · steppe cavalry wedge</String>
+      <String _locID='490240'>Chief Gall</String>
+      <String _locID='490241'>Lakota · Little Bighorn envelopment · Plains cavalry wedge</String>
       <String _locID='490242'>Frederick the Great</String>
       <String _locID='490243'>German · oblique-order Prussian drill</String>
 <!-- BASE-CIV-LEADER-NAMES-END -->
-      <String _locID='41682'>Legendary Leaders</String>
-      <String _locID='46758'>Legendary Leaders (%d)</String>
+      <String _locID='41682'>A New World DLC</String>
+      <String _locID='46758'>A New World DLC (%d)</String>
 <!-- LL-QUOTE-STRINGS-START -->
       <String _locID='491000'>Always outnumbered, never outfought. We march.</String>
       <String _locID='491001'>You are neither Austrian nor French. I shall have to improvise.</String>

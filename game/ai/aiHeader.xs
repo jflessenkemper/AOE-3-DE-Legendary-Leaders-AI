@@ -217,6 +217,82 @@ extern int     gLLFortLevel = 1;
 extern int     gLLForwardBaseTowerCount = 2;
 extern bool    gLLPreferForwardFortifiedBase = false;
 
+// ---------------------------------------------------------------------------
+// Legendary Leaders — terrain + expansion-heading enforcement.
+//
+// These are the "EXACTLY how the AI plays" knobs. Each standard/revolution
+// nation receives one primary and one secondary terrain preference plus a
+// compass heading for expansion. The placement pipeline in aiBuildings.xs
+// reads these to bias the influence-gradient center so that houses, eco,
+// and secondary TCs actually land on the historically correct feature.
+//
+// Terrain primitives (8 + Any):
+//   Coast       — shoreline clusters (Royal Navy, Portuguese feitoria, Dutch,
+//                 Barbary, Japanese, British, Baja Californian mission ports).
+//   River       — near fresh water / inland river plains (Swedish Göta Älv,
+//                 Russian Volga, Hausa Niger, Indian Ganges, Ethiopian
+//                 Abbay, Ottoman Danube, French Seine, Italian Po).
+//   ForestEdge  — woodland skirt (Iroquois confederacy, Canadian St Lawrence,
+//                 Finnish taiga, Maya Petén, Haitian colline).
+//   Plain       — open grassland / steppe (Lakota, Hungarian puszta,
+//                 Argentine pampas, Rio Grande, Texian prairie,
+//                 Californian valley).
+//   Highland    — mountain / citadel (Inca Sacsayhuamán, Peruvian altiplano,
+//                 Chilean Andes, Maltese St Elmo, Egyptian citadel,
+//                 Ethiopian Entoto, Indian Western Ghats, Swiss/Romanian).
+//   Wetland     — marsh/delta (Aztec chinampas, Dutch polder, South
+//                 African Drakensberg foothill wetlands).
+//   DesertOasis — arid oasis (Spanish Reconquista flank, Mexican Bajío,
+//                 Central American dry corridor).
+//   Jungle      — tropical canopy (Yucatec, Brazilian Mata Atlântica,
+//                 Indonesian Java, Columbian, Mayan Caste War).
+extern int     cLLTerrainAny          = 0;
+extern int     cLLTerrainCoast        = 1;
+extern int     cLLTerrainRiver        = 2;
+extern int     cLLTerrainForestEdge   = 3;
+extern int     cLLTerrainPlain        = 4;
+extern int     cLLTerrainHighland     = 5;
+extern int     cLLTerrainWetland      = 6;
+extern int     cLLTerrainDesertOasis  = 7;
+extern int     cLLTerrainJungle       = 8;
+
+// Expansion headings (7):
+//   AlongCoast       — secondary TC/dock string hugs the shore
+//                      (Naval Mercantile compounds, Portuguese, Dutch,
+//                      British, Japanese, Barbary, South African).
+//   Upriver          — march inland along rivers (Russian, Swedish,
+//                      Hausa, French, Italian, Chinese).
+//   FrontierPush     — outward along a single compass axis, enemy-ward
+//                      (Napoleonic France, Texian, Argentine, Bolivarian,
+//                      Mexican insurgent, Spanish Reconquista, Hungarian).
+//   IslandHop        — leapfrog bases across water chokes (Maltese,
+//                      Indonesian, Baja Californian, Barbary).
+//   OutwardRings     — concentric expansion around a fortified core
+//                      (Inca, Aztec, Chinese, Maltese, Finnish, Egyptian,
+//                      Ottoman, Kangxi, Pachacuti).
+//   FollowTradeRoute — along a mercantile axis (Dutch VOC,
+//                      Portuguese Carrack, Iroquois Haudenosaunee trail,
+//                      Hausa trans-Saharan, Tokugawa Nakasendō,
+//                      Californian gold camps).
+//   Defensive        — no expansion, consolidate inside perimeter
+//                      (Valette 1565, Menelik Magdala, Mannerheim
+//                      Line, Robespierre Paris, Gall post-1876).
+extern int     cLLHeadingAny              = 0;
+extern int     cLLHeadingAlongCoast       = 1;
+extern int     cLLHeadingUpriver          = 2;
+extern int     cLLHeadingFrontierPush     = 3;
+extern int     cLLHeadingIslandHop        = 4;
+extern int     cLLHeadingOutwardRings     = 5;
+extern int     cLLHeadingFollowTradeRoute = 6;
+extern int     cLLHeadingDefensive        = 7;
+
+extern int     gLLPreferredTerrainPrimary   = 0;  // cLLTerrainAny
+extern int     gLLPreferredTerrainSecondary = 0;  // cLLTerrainAny
+extern int     gLLExpansionHeading          = 0;  // cLLHeadingAny
+extern bool    gLLCenterAnchorCivic         = false;  // if true, markets/churches snap tight to TC
+extern float   gLLTerrainBiasStrength       = 0.35; // 0.0=off, 1.0=full drag to feature
+extern float   gLLHeadingBiasStrength       = 0.30; // 0.0=off, 1.0=full drag along heading
+
 int createInvalidBaseAttackRoute(int playerID = -1, int baseID = -1) { return(-1); }
 extern int(int, int) cvCreateBaseAttackRoute = createInvalidBaseAttackRoute; // Creates an attack route used by attack plans, if this is not set, we let the plan automatically manage it.
                                                                              // Look inside of age3zHB11p06.xs to see how it's used (AI for Historical Battle Grito de Dolores).

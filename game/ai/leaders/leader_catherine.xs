@@ -1,24 +1,34 @@
 //==============================================================================
 /* leader_catherine.xs
 
-   Yekaterina Alexeyevna Romanova - Catherine II "the Great" of Russia,
-   enlightened-absolutist personality at the height of imperial expansion.
+   Ivan IV Vasilyevich ("Ivan the Terrible", Tsar 1547-1584) - lobby-matched
+   Russian leader. File name kept as "catherine" because the engine personality
+   ID is "Catherine" (personalities.xml); function and rule names preserve
+   that key for the engine's AI dispatch. All user-visible strings, knobs,
+   and portraits have been rebranded to Ivan's doctrine.
 
    Historical doctrine:
-     - Russo-Turkish wars (1768-1792): Catherine's armies under Rumyantsev
-       and Suvorov bulldozed the southern frontier with line-infantry mass
-       and combined-arms columns. Mapped to a deep infantry bias and a
-       moderate cavalry weight (Cossack hetmans on the wings).
-     - Streltsy and Musketeer block: Russian civ trains infantry in cheap
-       blocks rather than singletons. Mapped to a very high infantry mass
-       cap and a strong infantry weight from Colonial on.
-     - Cossack frontier cavalry: irregular hetmans guarding the steppe.
-       Mapped to a real cavalry share that supports rather than leads.
-     - Pomestnoye estate economy: serfs feed the army through landed
-       gentry. Mapped to a Distributed Economic Network style and a
-       moderate Trade Route lean.
-     - Enlightenment statecraft: tolerance for non-Russian peoples on the
-       expansion frontier. Mapped to a small Native Treaty lean.
+     - Streltsy corps (founded 1550): Ivan institutionalised Russia's first
+       permanent musket-armed infantry, the Streltsy, wielding the
+       characteristic berdiche axe-rest. Mapped to an extreme infantry mass
+       bias and Streltsy-block composition earlier and heavier than
+       Catherine's more balanced line.
+     - Siege of Kazan (1552) and Astrakhan (1556): Ivan's conquest pattern
+       was methodical siege warfare, tall mobile towers, and the reduction
+       of fortified Khanate cities. Mapped to early fort commitment,
+       higher siege bias than the prior tuning, and patient forward-base
+       posture.
+     - Oprichnina terror state (1565-1572): Ivan's black-cloaked Oprichnik
+       cavalry were a dedicated shock corps whose remit was internal terror
+       and frontier raiding. Mapped to a sharper Oprichnik-shock cavalry
+       weight, especially at Fortress.
+     - Pomestnoye cadre economy: hereditary service-class landlords (Ivan
+       formalised the pomestie grant) feed the host. Kept - same Russian
+       estate pattern as before, with a slightly more military-leaning
+       tilt (Ivan did not run an Enlightenment court).
+     - Livonian War (1558-1583): the reign's grinding northwest front.
+       Mapped to sustained Imperial-age pressure rather than a burst
+       campaign.
 */
 //==============================================================================
 
@@ -26,14 +36,14 @@ bool gCatherineRulesEnabled = false;
 
 void initLeaderCatherine(void)
 {
-   llVerboseEcho("Legendary Leaders: activating Catherine the Great personality.");
+   llVerboseEcho("A New World DLC: activating Ivan the Terrible personality.");
 
    llSetBalancedPersonality();
-   btRushBoom = -0.2;             // Moderate boom; Russian blocks come cheap.
-   btOffenseDefense = 0.45;
-   btBiasTrade = 0.3;
-   btBiasNative = 0.1;
-   llSetMilitaryFocus(0.85, 0.35, 0.4);  // Infantry-led, supporting cavalry, real artillery.
+   btRushBoom = -0.15;            // Slightly earlier army than Catherine's tuning.
+   btOffenseDefense = 0.55;       // More openly offensive - Ivan was a conqueror, not an administrator.
+   btBiasTrade = 0.2;             // Less mercantile than Catherine; war pays for war.
+   btBiasNative = 0.05;           // Sparse - Ivan absorbed Tatar Khanates by sword, not treaty.
+   llSetMilitaryFocus(0.9, 0.45, 0.45);  // Streltsy mass + Oprichnik shock + siege train.
 
    // LL-BUILD-STYLE-BEGIN
    llUseCossackVoiskoStyle(1);
@@ -46,7 +56,7 @@ void initLeaderCatherine(void)
    cvMaxArmyPop = 130;            // Russian mass.
 
    gCatherineRulesEnabled = true;
-   llLogLeaderState("Catherine initialized");
+   llLogLeaderState("Ivan the Terrible initialized");
 }
 
 //------------------------------------------------------------------------------

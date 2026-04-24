@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PlayerColors>
-  <!-- Authoritative Legendary Leaders color palette.
+  <!-- Authoritative AOE 3 DE - A New World DLC color palette.
        AoE3 DE appears to store active slot colors in the user profile rather than a discovered stock mod XML hook,
        so this file is the mod-owned source of truth for civ-to-RGB mapping. -->
-  <Color civ="French" leader="Napoleon Bonaparte" r="0" g="51" b="102" />
-  <Color civ="British" leader="Duke of Wellington" r="153" g="0" b="0" />
+  <Color civ="French" leader="Louis XVIII" r="0" g="51" b="102" />
+  <Color civ="British" leader="Queen Elizabeth I" r="153" g="0" b="0" />
   <Color civ="Germans" leader="Frederick the Great" r="25" g="25" b="112" />
-  <Color civ="Russians" leader="Catherine the Great" r="0" g="100" b="0" />
+  <Color civ="Russians" leader="Ivan the Terrible" r="0" g="100" b="0" />
   <Color civ="Spanish" leader="Isabella I" r="204" g="51" b="0" />
   <Color civ="Ottomans" leader="Suleiman the Magnificent" r="0" g="153" b="76" />
   <Color civ="Portuguese" leader="Prince Henry the Navigator" r="0" g="102" b="204" />
@@ -20,7 +20,7 @@
   <Color civ="Aztecs" leader="Montezuma II" r="0" g="204" b="153" />
   <Color civ="Haudenosaunee" leader="Hiawatha" r="139" g="0" b="0" />
   <Color civ="Inca" leader="Pachacuti" r="204" g="172" b="0" />
-  <Color civ="Lakota" leader="Crazy Horse" r="240" g="240" b="240" />
+  <Color civ="Lakota" leader="Chief Gall" r="240" g="240" b="240" />
   <Color civ="UnitedStates" leader="George Washington" r="0" g="51" b="102" />
   <Color civ="Mexicans" leader="Miguel Hidalgo" r="0" g="153" b="51" />
   <Color civ="Ethiopians" leader="Menelik II" r="0" g="128" b="0" />
