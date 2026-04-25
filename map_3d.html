@@ -61,11 +61,11 @@ const app = document.getElementById('app');
 const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
 renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.setClearColor(0x6ec6ff);
+renderer.setClearColor(0x000000);  // pure black so the map is the focus
 app.appendChild(renderer.domElement);
 
 const scene = new THREE.Scene();
-scene.fog = new THREE.Fog(0x6ec6ff, 700, 1400);
+// No fog — user wants full map visible at any zoom level.
 
 /* === Camera + touch controls — RTS-style top-down with slight tilt === */
 const camera = new THREE.PerspectiveCamera(45, window.innerWidth/window.innerHeight, 1, 2500);
@@ -80,11 +80,14 @@ controls.minDistance = 180;
 controls.maxDistance = 1000;
 controls.target.set(0, 0, 0);
 
-/* === Lighting === */
-scene.add(new THREE.HemisphereLight(0xfff5e0, 0x556b2f, 0.85));
-const sun = new THREE.DirectionalLight(0xffffff, 1.0);
-sun.position.set(220, 480, 240);
+/* === Lighting — warm AoE3-style ambient + low-angle sun === */
+scene.add(new THREE.HemisphereLight(0xffe6c2, 0x4a5d2a, 0.95));
+const sun = new THREE.DirectionalLight(0xfff2dc, 1.15);
+sun.position.set(180, 360, 180);
 scene.add(sun);
+const fill = new THREE.DirectionalLight(0xa8c2e8, 0.25);  // cool sky fill
+fill.position.set(-200, 250, -180);
+scene.add(fill);
 
 /* === Coord helpers ===
    2D modal uses (x: 0..600 left-right, y: 0..600 top-bottom).
@@ -184,30 +187,43 @@ for(let i=0; i<pos.count; i++){
   colors[i*3]=c[0]; colors[i*3+1]=c[1]; colors[i*3+2]=c[2];
 }
 terrainGeom.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-const terrainMat = new THREE.MeshLambertMaterial({ vertexColors: true, flatShading: true });
+/* Smooth-shaded terrain (no flatShading) — AoE3 ground reads as soft, not faceted.
+   Per-vertex color is jittered slightly so the plain isn't a uniform tile. */
+{
+  const cAttr = terrainGeom.attributes.color;
+  for(let i=0; i<cAttr.count; i++){
+    const j = (Math.sin(i*12.9898) * 43758.5453) % 1;
+    const wob = (j - 0.5) * 0.05;
+    cAttr.setXYZ(i, cAttr.getX(i)+wob, cAttr.getY(i)+wob*0.7, cAttr.getZ(i)+wob*0.4);
+  }
+}
+const terrainMat = new THREE.MeshLambertMaterial({ vertexColors: true });
 const terrain = new THREE.Mesh(terrainGeom, terrainMat);
 scene.add(terrain);
 
-/* === Open Gulf — N coast === */
+/* === Open Gulf — N coast (deeper Gulf-blue) === */
 const seaGeom = new THREE.PlaneGeometry(MAP_SIZE * 1.4, 80);
 seaGeom.rotateX(-Math.PI/2);
-const seaMat = new THREE.MeshPhongMaterial({ color: 0x1976d2, transparent: true, opacity: 0.88, shininess: 90 });
+const seaMat = new THREE.MeshPhongMaterial({ color: 0x1c5078, transparent: true, opacity: 0.92, shininess: 80 });
 const sea = new THREE.Mesh(seaGeom, seaMat);
 sea.position.set(0, -3, -HALF + 30);
 scene.add(sea);
 /* Deep-water NW Gulf bulge */
 const deepGulfGeom = new THREE.CircleGeometry(110, 24);
 deepGulfGeom.rotateX(-Math.PI/2);
-const deepGulfMat = new THREE.MeshPhongMaterial({ color: 0x0d47a1, transparent: true, opacity: 0.9 });
+const deepGulfMat = new THREE.MeshPhongMaterial({ color: 0x103552, transparent: true, opacity: 0.95 });
 const deepGulf = new THREE.Mesh(deepGulfGeom, deepGulfMat);
 const dg = to3(70, 50);
 deepGulf.position.set(dg.x, -3.5, dg.z);
 scene.add(deepGulf);
 
-/* === Tiny oasis pool inside the W sand barrier === */
+/* Bayou-brown water for the inlet and oasis (muddy swamp tone) */
+const inletMat = new THREE.MeshPhongMaterial({ color: 0x4a3a22, transparent: true, opacity: 0.92, shininess: 25 });
+
+/* === Tiny oasis pool inside the W sand barrier (still bluish — desert oasis is fresh) === */
 const oasisGeom = new THREE.CircleGeometry(13, 18);
 oasisGeom.rotateX(-Math.PI/2);
-const oasis = new THREE.Mesh(oasisGeom, seaMat.clone());
+const oasis = new THREE.Mesh(oasisGeom, new THREE.MeshPhongMaterial({ color: 0x2780b6, transparent: true, opacity: 0.92, shininess: 100 }));
 const oa = to3(55, 225);
 oasis.position.set(oa.x, -1.5, oa.z);
 scene.add(oasis);
@@ -237,7 +253,7 @@ function addRiver(){
     const angle = Math.atan2(dz, dx);
     const seg = new THREE.Mesh(
       new THREE.PlaneGeometry(len + 6, 36),
-      seaMat.clone()
+      inletMat
     );
     seg.rotation.x = -Math.PI/2;
     seg.rotation.z = -angle;
@@ -247,29 +263,46 @@ function addRiver(){
 }
 addRiver();
 
-/* === Trees (instanced) === */
+/* === Cypress trees (instanced) — layered canopy reads as shaggy foliage,
+       not a sharp cone. Three stacked cones of decreasing radius give a
+       rougher silhouette closer to AoE3 cypress. */
 function addForest(positions, trunkColor, canopyColor, scale){
-  const tg = new THREE.CylinderGeometry(1.4, 2.2, 7, 6);
-  const cg = new THREE.ConeGeometry(7, 18, 8);
+  const N = positions.length;
+  const tg = new THREE.CylinderGeometry(1.3, 2.4, 8, 6);
+  const cgLow  = new THREE.ConeGeometry(8.5, 9, 8);
+  const cgMid  = new THREE.ConeGeometry(6.5, 9, 8);
+  const cgHigh = new THREE.ConeGeometry(4.5, 8, 8);
   const tm = new THREE.MeshLambertMaterial({ color: trunkColor });
-  const cm = new THREE.MeshLambertMaterial({ color: canopyColor });
-  const trunk = new THREE.InstancedMesh(tg, tm, positions.length);
-  const canopy = new THREE.InstancedMesh(cg, cm, positions.length);
+  // Slight color variance per layer makes the canopy read as deeper
+  const cmLow  = new THREE.MeshLambertMaterial({ color: canopyColor });
+  const cmMid  = new THREE.MeshLambertMaterial({ color: scaleColor(canopyColor, 1.10) });
+  const cmHigh = new THREE.MeshLambertMaterial({ color: scaleColor(canopyColor, 0.85) });
+  const trunk = new THREE.InstancedMesh(tg, tm, N);
+  const cLow  = new THREE.InstancedMesh(cgLow, cmLow, N);
+  const cMid  = new THREE.InstancedMesh(cgMid, cmMid, N);
+  const cHigh = new THREE.InstancedMesh(cgHigh, cmHigh, N);
   const dummy = new THREE.Object3D();
-  for(let i=0; i<positions.length; i++){
+  for(let i=0; i<N; i++){
     const w = to3(positions[i][0], positions[i][1]);
     const h = biomeHeight(w.x, w.z);
-    const s = scale * (0.85 + Math.random()*0.3);
-    dummy.position.set(w.x, h + 3*s, w.z);
+    const s = scale * (0.80 + Math.random()*0.45);
+    const yaw = Math.random() * Math.PI * 2;
     dummy.scale.set(s, s, s);
-    dummy.rotation.y = Math.random() * Math.PI * 2;
-    dummy.updateMatrix();
-    trunk.setMatrixAt(i, dummy.matrix);
-    dummy.position.set(w.x, h + 13*s, w.z);
-    dummy.updateMatrix();
-    canopy.setMatrixAt(i, dummy.matrix);
+    dummy.rotation.y = yaw;
+    dummy.position.set(w.x, h + 4*s, w.z);
+    dummy.updateMatrix(); trunk.setMatrixAt(i, dummy.matrix);
+    dummy.position.set(w.x, h + 11*s, w.z);
+    dummy.updateMatrix(); cLow.setMatrixAt(i, dummy.matrix);
+    dummy.position.set(w.x, h + 16*s, w.z);
+    dummy.updateMatrix(); cMid.setMatrixAt(i, dummy.matrix);
+    dummy.position.set(w.x, h + 21*s, w.z);
+    dummy.updateMatrix(); cHigh.setMatrixAt(i, dummy.matrix);
   }
-  scene.add(trunk); scene.add(canopy);
+  scene.add(trunk); scene.add(cLow); scene.add(cMid); scene.add(cHigh);
+}
+function scaleColor(hex, mult){
+  const r = ((hex>>16)&0xff)*mult, g = ((hex>>8)&0xff)*mult, b = (hex&0xff)*mult;
+  return (Math.min(255,r|0)<<16) | (Math.min(255,g|0)<<8) | Math.min(255,b|0);
 }
 
 const neForest = [];
