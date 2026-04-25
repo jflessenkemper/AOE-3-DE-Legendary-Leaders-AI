@@ -5,7 +5,9 @@ on:
     branches: [main]
     paths:
       - "LEGENDARY_LEADERS_TREE.html"
+      - "map_3d.html"
       - "resources/images/icons/**"
+      - "resources/3d/**"
       - ".github/workflows/pages-deploy.yml"
   workflow_dispatch:
 
@@ -30,6 +32,15 @@ jobs:
           cp LEGENDARY_LEADERS_TREE.html _site/index.html
           # Also keep the original filename so existing links keep working.
           cp LEGENDARY_LEADERS_TREE.html _site/LEGENDARY_LEADERS_TREE.html
+          # 3D viewer
+          if [ -f map_3d.html ]; then
+            cp map_3d.html _site/map_3d.html
+          fi
+          # 3D asset directory (CC0 models, textures) — only if present.
+          if [ -d resources/3d ]; then
+            mkdir -p _site/resources/3d
+            cp -r resources/3d/. _site/resources/3d/
+          fi
           # Only the icon trees the HTML references — keeps the artifact small.
           for d in cards flags singleplayer units; do
             if [ -d "resources/images/icons/$d" ]; then
