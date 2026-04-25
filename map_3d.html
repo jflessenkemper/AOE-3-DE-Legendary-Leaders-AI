@@ -43,6 +43,7 @@
 <script type="module">
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { FBXLoader } from 'three/addons/loaders/FBXLoader.js';
 
 /* ====================================================================
    Legendary Leaders — 3D Map Placement scene
@@ -88,6 +89,61 @@ scene.add(sun);
 const fill = new THREE.DirectionalLight(0xa8c2e8, 0.25);  // cool sky fill
 fill.position.set(-200, 250, -180);
 scene.add(fill);
+
+/* === Kenney CC0 model registry ===
+   FBX models from the Castle Kit + Nature Kit (kenney.nl, CC0). Loaded once
+   at startup, cloned per placement. Each model is normalized so its tallest
+   axis equals 1.0 unit; we then scale it to a target height in world units.
+==================================================================== */
+const MODEL_FILES = [
+  'tower_base','tower_mid','tower_top_roof',
+  'house_body','house_roof',
+  'outpost_base','outpost_top',
+  'wall','wall_corner','gate','flag',
+  'tree_oak','tree_palm','tree_cypress',
+  'cliff_block','cliff_top','rock_large','bush'
+];
+const MODELS = {};
+const fbxLoader = new FBXLoader();
+
+async function loadModels(){
+  await Promise.all(MODEL_FILES.map(async (name) => {
+    const root = await fbxLoader.loadAsync('resources/3d/models/' + name + '.fbx');
+    // Normalize so the model's bounding-box tallest axis = 1 unit.
+    const bbox = new THREE.Box3().setFromObject(root);
+    const size = new THREE.Vector3(); bbox.getSize(size);
+    const tallest = Math.max(size.x, size.y, size.z) || 1;
+    root.scale.multiplyScalar(1 / tallest);
+    // Recenter on XZ, ground on Y=0.
+    const c = new THREE.Vector3(); bbox.getCenter(c);
+    root.position.set(-c.x/tallest, -bbox.min.y/tallest, -c.z/tallest);
+    // Wrap in a container so the centering offsets don't get lost on clone.
+    const wrap = new THREE.Group();
+    wrap.add(root);
+    wrap.traverse((c) => {
+      if(c.isMesh){
+        c.castShadow = false; c.receiveShadow = false;
+        // Kenney materials are usually MeshPhongMaterial; ensure they obey
+        // our scene lighting (they do by default).
+      }
+    });
+    MODELS[name] = wrap;
+  }));
+}
+
+/* Spawn one instance of a model into a parent group, anchored on terrain.
+   targetSize is the desired world-unit *height* of the model. */
+function spawn(parent, key, modX, modY, targetSize, opts){
+  const tpl = MODELS[key];
+  if(!tpl){ console.warn('missing model:', key); return null; }
+  const m = tpl.clone(true);
+  const p = to3(modX, modY);
+  m.scale.setScalar(targetSize);
+  m.rotation.y = (opts && opts.rotY !== undefined) ? opts.rotY : Math.random() * Math.PI * 2;
+  m.position.set(p.x, biomeHeight(p.x, p.z) + (opts && opts.yOffset || 0), p.z);
+  parent.add(m);
+  return m;
+}
 
 /* === Coord helpers ===
    2D modal uses (x: 0..600 left-right, y: 0..600 top-bottom).
@@ -263,219 +319,99 @@ function addRiver(){
 }
 addRiver();
 
-/* === Cypress trees (instanced) — layered canopy reads as shaggy foliage,
-       not a sharp cone. Three stacked cones of decreasing radius give a
-       rougher silhouette closer to AoE3 cypress. */
-function addForest(positions, trunkColor, canopyColor, scale){
-  const N = positions.length;
-  const tg = new THREE.CylinderGeometry(1.3, 2.4, 8, 6);
-  const cgLow  = new THREE.ConeGeometry(8.5, 9, 8);
-  const cgMid  = new THREE.ConeGeometry(6.5, 9, 8);
-  const cgHigh = new THREE.ConeGeometry(4.5, 8, 8);
-  const tm = new THREE.MeshLambertMaterial({ color: trunkColor });
-  // Slight color variance per layer makes the canopy read as deeper
-  const cmLow  = new THREE.MeshLambertMaterial({ color: canopyColor });
-  const cmMid  = new THREE.MeshLambertMaterial({ color: scaleColor(canopyColor, 1.10) });
-  const cmHigh = new THREE.MeshLambertMaterial({ color: scaleColor(canopyColor, 0.85) });
-  const trunk = new THREE.InstancedMesh(tg, tm, N);
-  const cLow  = new THREE.InstancedMesh(cgLow, cmLow, N);
-  const cMid  = new THREE.InstancedMesh(cgMid, cmMid, N);
-  const cHigh = new THREE.InstancedMesh(cgHigh, cmHigh, N);
-  const dummy = new THREE.Object3D();
-  for(let i=0; i<N; i++){
-    const w = to3(positions[i][0], positions[i][1]);
-    const h = biomeHeight(w.x, w.z);
-    const s = scale * (0.80 + Math.random()*0.45);
-    const yaw = Math.random() * Math.PI * 2;
-    dummy.scale.set(s, s, s);
-    dummy.rotation.y = yaw;
-    dummy.position.set(w.x, h + 4*s, w.z);
-    dummy.updateMatrix(); trunk.setMatrixAt(i, dummy.matrix);
-    dummy.position.set(w.x, h + 11*s, w.z);
-    dummy.updateMatrix(); cLow.setMatrixAt(i, dummy.matrix);
-    dummy.position.set(w.x, h + 16*s, w.z);
-    dummy.updateMatrix(); cMid.setMatrixAt(i, dummy.matrix);
-    dummy.position.set(w.x, h + 21*s, w.z);
-    dummy.updateMatrix(); cHigh.setMatrixAt(i, dummy.matrix);
-  }
-  scene.add(trunk); scene.add(cLow); scene.add(cMid); scene.add(cHigh);
-}
-function scaleColor(hex, mult){
-  const r = ((hex>>16)&0xff)*mult, g = ((hex>>8)&0xff)*mult, b = (hex&0xff)*mult;
-  return (Math.min(255,r|0)<<16) | (Math.min(255,g|0)<<8) | Math.min(255,b|0);
-}
-
-const neForest = [];
-for(let i=0; i<28; i++) neForest.push([410 + Math.random()*150, 75 + Math.random()*145]);
-addForest(neForest, 0x5d4037, 0x4a7d35, 1.0);  // bayou cypress — slightly more saturated
-
-const swForest = [];
-for(let i=0; i<14; i++) swForest.push([80 + Math.random()*105, 430 + Math.random()*100]);
-addForest(swForest, 0x5d4037, 0x4a7d35, 0.9);
-
-/* === Dense southern cypress band (jungle anchor) */
-const junglePos = [];
-for(let i=0; i<22; i++) junglePos.push([245 + Math.random()*260, 520 + Math.random()*55]);
-function addPalms(positions){
-  const tg = new THREE.CylinderGeometry(0.9, 1.6, 16, 5);
-  const cg = new THREE.ConeGeometry(11, 5, 8);
-  const tm = new THREE.MeshLambertMaterial({ color: 0x6d4c41 });
-  const cm = new THREE.MeshLambertMaterial({ color: 0x2e7d32 });
-  const trunk = new THREE.InstancedMesh(tg, tm, positions.length);
-  const fronds = new THREE.InstancedMesh(cg, cm, positions.length);
-  const dummy = new THREE.Object3D();
-  for(let i=0; i<positions.length; i++){
-    const w = to3(positions[i][0], positions[i][1]);
-    const h = biomeHeight(w.x, w.z);
-    dummy.position.set(w.x, h + 8, w.z);
-    dummy.scale.set(1,1,1);
-    dummy.rotation.set(0, Math.random()*Math.PI*2, 0);
-    dummy.updateMatrix();
-    trunk.setMatrixAt(i, dummy.matrix);
-    dummy.position.set(w.x, h + 17, w.z);
-    dummy.updateMatrix();
-    fronds.setMatrixAt(i, dummy.matrix);
-  }
-  scene.add(trunk); scene.add(fronds);
-}
-addPalms(junglePos);
-
-/* === Highland — terrain heightmap already raises the plateau in two
-   sections. We add subtle plateau-top slabs so the cliff edge reads
-   sharply, and rocky boulders for texture. */
-function addPlateauSlab(modX, modY, w, d){
-  const top = new THREE.MeshLambertMaterial({ color: 0x9e7b66, flatShading: true });
-  const slab = new THREE.Mesh(new THREE.BoxGeometry(w, 2, d), top);
-  const p = to3(modX, modY);
-  slab.position.set(p.x, biomeHeight(p.x, p.z) + 1, p.z);
-  scene.add(slab);
-}
-addPlateauSlab(515, 240, 100, 80);   // N limestone plateau
-addPlateauSlab(515, 365, 100, 70);   // S limestone plateau
-
-function addBoulder(modX, modY, size){
-  const p = to3(modX, modY);
-  const m = new THREE.Mesh(
-    new THREE.IcosahedronGeometry(size, 0),
-    new THREE.MeshLambertMaterial({ color: 0x6d4c41, flatShading: true })
-  );
-  m.position.set(p.x, biomeHeight(p.x, p.z) + size*0.6, p.z);
-  m.rotation.set(Math.random()*Math.PI, Math.random()*Math.PI, Math.random()*Math.PI);
-  scene.add(m);
-}
-addBoulder(490, 220, 6); addBoulder(545, 270, 5);
-addBoulder(495, 345, 5); addBoulder(545, 380, 6);
-
-/* === Resource markers === */
-function addGoldDeposit(modX, modY){
-  const p = to3(modX, modY);
-  const base = new THREE.Mesh(
-    new THREE.BoxGeometry(22, 4, 22),
-    new THREE.MeshLambertMaterial({ color: 0x2c2520 })
-  );
-  base.position.set(p.x, 2 + biomeHeight(p.x, p.z), p.z);
-  scene.add(base);
-  const mat = new THREE.MeshLambertMaterial({ color: 0xffd54f });
-  for(let i=0; i<3; i++){
-    const nug = new THREE.Mesh(new THREE.IcosahedronGeometry(3, 0), mat);
-    nug.position.set(p.x + (i-1)*5, 5 + biomeHeight(p.x, p.z), p.z + (i%2)*4 - 2);
-    scene.add(nug);
+/* === Forests now use Kenney tree models (cloned per instance).
+       Tree size in world units is set via spawn()'s targetSize. */
+function placeForest(positions, modelKey, baseSize){
+  for(const p of positions){
+    const s = baseSize * (0.85 + Math.random()*0.4);
+    spawn(scene, modelKey, p[0], p[1], s);
   }
 }
-addGoldDeposit(115, 285);   // wetland/desert edge
-addGoldDeposit(395, 130);   // NE forest edge
-addGoldDeposit(425, 460);   // between river and S highland
 
-function addHuntable(modX, modY){
-  const p = to3(modX, modY);
-  const m = new THREE.Mesh(
-    new THREE.SphereGeometry(3.5, 8, 6),
-    new THREE.MeshLambertMaterial({ color: 0x5d4037 })
-  );
-  m.scale.set(1.6, 1, 1);
-  m.position.set(p.x, 3 + biomeHeight(p.x, p.z), p.z);
-  scene.add(m);
-}
-[[330,215],[355,230],[345,250],[170,410],[195,425]].forEach(p => addHuntable(p[0], p[1]));
+/* === All decorative scatter — runs after Kenney models load === */
+function placeDecorations(){
+  /* Cypress forests at the two land clusters + dense southern band (jungle) */
+  const ne = [];
+  for(let i=0; i<28; i++) ne.push([410 + Math.random()*150, 75 + Math.random()*145]);
+  placeForest(ne, 'tree_cypress', 26);
 
-function addBerry(modX, modY){
-  const p = to3(modX, modY);
-  const bush = new THREE.Mesh(
-    new THREE.SphereGeometry(5, 8, 6),
-    new THREE.MeshLambertMaterial({ color: 0x2e5c2e })
-  );
-  bush.position.set(p.x, 3 + biomeHeight(p.x, p.z), p.z);
-  scene.add(bush);
-  const berryMat = new THREE.MeshLambertMaterial({ color: 0xc62828 });
-  for(let i=0; i<5; i++){
-    const b = new THREE.Mesh(new THREE.SphereGeometry(0.9, 6, 4), berryMat);
-    b.position.set(p.x + Math.cos(i)*3, 5 + biomeHeight(p.x, p.z), p.z + Math.sin(i)*3);
-    scene.add(b);
+  const sw = [];
+  for(let i=0; i<14; i++) sw.push([80 + Math.random()*105, 430 + Math.random()*100]);
+  placeForest(sw, 'tree_oak', 24);
+
+  const jungle = [];
+  for(let i=0; i<22; i++) jungle.push([245 + Math.random()*260, 520 + Math.random()*55]);
+  placeForest(jungle, 'tree_palm', 30);
+
+  /* Highland plateau — Kenney cliff blocks at the cliff edges */
+  const cliffN = [
+    [475,210],[495,210],[515,210],[540,212],[560,215],
+    [475,260],[505,265],[540,270],[565,260],
+    [475,290],[510,290]
+  ];
+  const cliffS = [
+    [475,330],[505,330],[540,330],[570,335],
+    [475,365],[510,365],[545,365],[575,365],
+    [475,395],[510,395],[545,395]
+  ];
+  for(const c of cliffN) spawn(scene, 'cliff_block', c[0], c[1], 38);
+  for(const c of cliffS) spawn(scene, 'cliff_block', c[0], c[1], 38);
+  /* Cliff top capstones at exposed corners for sharp silhouette */
+  for(const c of [[490,210],[540,210],[565,260],[490,395],[545,395]]){
+    spawn(scene, 'cliff_top', c[0], c[1], 16, { yOffset: 36 });
   }
-}
-addBerry(395, 320); addBerry(410, 335);
+  /* Loose boulders along cliff base */
+  for(const c of [[465,225],[465,275],[465,360],[465,395],[585,255],[585,365]]){
+    spawn(scene, 'rock_large', c[0], c[1], 14);
+  }
 
-function addTradeSocket(modX, modY){
-  const p = to3(modX, modY);
-  const stone = new THREE.Mesh(
-    new THREE.BoxGeometry(20, 5, 20),
-    new THREE.MeshLambertMaterial({ color: 0x5d4037 })
-  );
-  stone.position.set(p.x, 2.5 + biomeHeight(p.x, p.z), p.z);
-  scene.add(stone);
-  const flag = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.5, 0.5, 14, 5),
-    new THREE.MeshLambertMaterial({ color: 0xffb74d })
-  );
-  flag.position.set(p.x, 12 + biomeHeight(p.x, p.z), p.z);
-  scene.add(flag);
-}
-addTradeSocket(90, 540); addTradeSocket(330, 330); addTradeSocket(555, 120);
+  /* Gold deposits — rock cluster + bush (no Kenney "gold mine" model) */
+  for(const g of [[115,285],[395,130],[425,460]]){
+    spawn(scene, 'rock_large', g[0], g[1], 18);
+    /* Three small rocks around it for visual mass */
+    for(let i=0;i<3;i++){
+      spawn(scene, 'rock_large', g[0] + (i-1)*8, g[1] + (i%2)*6 - 3, 8);
+    }
+  }
 
-function addNativeVillage(modX, modY){
-  const p = to3(modX, modY);
-  const huts = [[0,-6],[-9,5],[9,5]];
-  for(let i=0; i<huts.length; i++){
-    const hx = p.x + huts[i][0], hz = p.z + huts[i][1];
-    const base = new THREE.Mesh(
-      new THREE.BoxGeometry(8, 5, 8),
-      new THREE.MeshLambertMaterial({ color: 0x8d6e63 })
+  /* Hunt herds — small bushes as a simple stand-in for animal silhouettes
+     (Kenney nature-kit doesn't ship with deer/bison) */
+  for(const h of [[330,215],[355,230],[345,250],[170,410],[195,425]]){
+    spawn(scene, 'bush', h[0], h[1], 6);
+  }
+
+  /* Berry bushes */
+  spawn(scene, 'bush', 395, 320, 8);
+  spawn(scene, 'bush', 410, 335, 8);
+
+  /* Trade sockets — gate model (looks like a stone arch / waypoint marker) */
+  for(const ts of [[90,540],[330,330],[555,120]]){
+    spawn(scene, 'gate', ts[0], ts[1], 18, { rotY: Math.PI/4 });
+  }
+
+  /* Native settlements — 3 small house buildings clustered */
+  for(const n of [[135,290],[265,530],[440,360]]){
+    const offsets = [[0,-7],[-9,5],[9,5]];
+    for(const o of offsets){
+      spawn(scene, 'house_body', n[0]+o[0], n[1]+o[1], 9, { rotY: Math.random()*Math.PI*2 });
+      spawn(scene, 'house_roof', n[0]+o[0], n[1]+o[1], 9, { yOffset: 9 });
+    }
+  }
+
+  /* Gulf barrier islands NW (Bayou convention) */
+  function addBarrierIsland(modX, modY, r){
+    const p = to3(modX, modY);
+    const isl = new THREE.Mesh(
+      new THREE.CylinderGeometry(r*0.85, r, 6, 16),
+      new THREE.MeshLambertMaterial({ color: 0x6a8a48 })
     );
-    base.position.set(hx, 2.5 + biomeHeight(hx, hz), hz);
-    scene.add(base);
-    const roof = new THREE.Mesh(
-      new THREE.ConeGeometry(6.5, 4, 4),
-      new THREE.MeshLambertMaterial({ color: 0xbcaaa4 })
-    );
-    roof.rotation.y = Math.PI/4;
-    roof.position.set(hx, 7 + biomeHeight(hx, hz), hz);
-    scene.add(roof);
+    isl.position.set(p.x, -2, p.z);
+    scene.add(isl);
   }
+  addBarrierIsland(55, 35, 26);
+  addBarrierIsland(115, 50, 14);
+  spawn(scene, 'tree_palm', 55, 35, 22, { yOffset: 6 });
 }
-addNativeVillage(135, 290);  // NW plain hummock
-addNativeVillage(265, 530);  // S jungle edge
-addNativeVillage(440, 360);  // E highland foot
-
-/* === Gulf barrier islands NW (Bayou map convention) === */
-function addBarrierIsland(modX, modY, r){
-  const p = to3(modX, modY);
-  const isl = new THREE.Mesh(
-    new THREE.CylinderGeometry(r*0.85, r, 6, 16),
-    new THREE.MeshLambertMaterial({ color: 0x6a8a48 })
-  );
-  isl.position.set(p.x, -2, p.z);
-  scene.add(isl);
-}
-addBarrierIsland(55, 35, 26);
-addBarrierIsland(115, 50, 14);
-/* Single tree on the larger island */
-const islTree = new THREE.Mesh(
-  new THREE.ConeGeometry(5, 12, 6),
-  new THREE.MeshLambertMaterial({ color: 0x4a8c3d })
-);
-const islTp = to3(55, 35);
-islTree.position.set(islTp.x, 8, islTp.z);
-scene.add(islTree);
 
 /* === Spawn marker (subtle ring on the ground) === */
 function addSpawnMarker(){
@@ -503,136 +439,50 @@ function clearBuildings(){
   }
 }
 
-/* Building primitives — placeholder boxes until Kenney models swap in */
+/* Building placement — Kenney Castle Kit FBX models, cloned per render. */
 function placeTC(modX, modY){
-  const p = to3(modX, modY);
-  const h = biomeHeight(p.x, p.z);
-  const base = new THREE.Mesh(
-    new THREE.BoxGeometry(60, 32, 60),
-    new THREE.MeshLambertMaterial({ color: 0xb71c1c })
-  );
-  base.position.set(p.x, 16 + h, p.z);
-  buildingGroup.add(base);
-  // 4 corner towers
-  const cols = [[-26,-26],[26,-26],[-26,26],[26,26]];
-  for(const c of cols){
-    const t = new THREE.Mesh(
-      new THREE.BoxGeometry(10, 44, 10),
-      new THREE.MeshLambertMaterial({ color: 0x7f0000 })
-    );
-    t.position.set(p.x + c[0], 22 + h, p.z + c[1]);
-    buildingGroup.add(t);
-  }
-  // Banner pole
-  const pole = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.7, 0.7, 24, 6),
-    new THREE.MeshLambertMaterial({ color: 0xfff8e1 })
-  );
-  pole.position.set(p.x, 44 + h, p.z);
-  buildingGroup.add(pole);
+  /* Stack: tower_base + tower_mid + tower_top_roof + flag */
+  spawn(buildingGroup, 'tower_base',     modX, modY, 22);
+  spawn(buildingGroup, 'tower_mid',      modX, modY, 22, { yOffset: 22 });
+  spawn(buildingGroup, 'tower_top_roof', modX, modY, 22, { yOffset: 44 });
+  spawn(buildingGroup, 'flag',           modX, modY, 18, { yOffset: 56 });
 }
 function placeHouse(modX, modY){
-  const p = to3(modX, modY);
-  const h = biomeHeight(p.x, p.z);
-  const base = new THREE.Mesh(
-    new THREE.BoxGeometry(20, 12, 20),
-    new THREE.MeshLambertMaterial({ color: 0xbcaaa4 })
-  );
-  base.position.set(p.x, 6 + h, p.z);
-  buildingGroup.add(base);
-  const roof = new THREE.Mesh(
-    new THREE.ConeGeometry(15, 8, 4),
-    new THREE.MeshLambertMaterial({ color: 0xfdd835 })
-  );
-  roof.rotation.y = Math.PI/4;
-  roof.position.set(p.x, 16 + h, p.z);
-  buildingGroup.add(roof);
+  spawn(buildingGroup, 'house_body', modX, modY, 14);
+  spawn(buildingGroup, 'house_roof', modX, modY, 14, { yOffset: 14 });
 }
 function placeMill(modX, modY){
-  const p = to3(modX, modY);
-  const h = biomeHeight(p.x, p.z);
-  const base = new THREE.Mesh(
-    new THREE.BoxGeometry(24, 14, 24),
-    new THREE.MeshLambertMaterial({ color: 0xa1887f })
-  );
-  base.position.set(p.x, 7 + h, p.z);
-  buildingGroup.add(base);
-  const roof = new THREE.Mesh(
-    new THREE.ConeGeometry(18, 10, 4),
-    new THREE.MeshLambertMaterial({ color: 0x43a047 })
-  );
-  roof.rotation.y = Math.PI/4;
-  roof.position.set(p.x, 19 + h, p.z);
-  buildingGroup.add(roof);
+  /* Bigger house silhouette stands in for production building. */
+  spawn(buildingGroup, 'house_body', modX, modY, 18);
+  spawn(buildingGroup, 'house_roof', modX, modY, 18, { yOffset: 18 });
 }
 function placeBarracks(modX, modY){
-  const p = to3(modX, modY);
-  const h = biomeHeight(p.x, p.z);
-  const base = new THREE.Mesh(
-    new THREE.BoxGeometry(30, 14, 22),
-    new THREE.MeshLambertMaterial({ color: 0x1e88e5 })
-  );
-  base.position.set(p.x, 7 + h, p.z);
-  buildingGroup.add(base);
-  const banner = new THREE.Mesh(
-    new THREE.BoxGeometry(34, 4, 26),
-    new THREE.MeshLambertMaterial({ color: 0x0d47a1 })
-  );
-  banner.position.set(p.x, 16 + h, p.z);
-  buildingGroup.add(banner);
+  /* Wider tower base + flag = barracks-like presence. */
+  const m = spawn(buildingGroup, 'tower_base', modX, modY, 18);
+  if(m) m.scale.set(22, 18, 22);  // squash wider
+  spawn(buildingGroup, 'flag', modX, modY, 16, { yOffset: 18 });
 }
-function placeOutpost(modX, modY, color){
-  const p = to3(modX, modY);
-  const h = biomeHeight(p.x, p.z);
-  const base = new THREE.Mesh(
-    new THREE.BoxGeometry(14, 28, 14),
-    new THREE.MeshLambertMaterial({ color: color || 0xb39ddb })
-  );
-  base.position.set(p.x, 14 + h, p.z);
-  buildingGroup.add(base);
-  const cap = new THREE.Mesh(
-    new THREE.BoxGeometry(18, 4, 18),
-    new THREE.MeshLambertMaterial({ color: color === 0xffb74d ? 0xbf360c : 0x311b92 })
-  );
-  cap.position.set(p.x, 30 + h, p.z);
-  buildingGroup.add(cap);
+function placeOutpost(modX, modY, isFwd){
+  spawn(buildingGroup, 'outpost_base', modX, modY, 16);
+  spawn(buildingGroup, 'outpost_top',  modX, modY, 16, { yOffset: 16 });
+  if(isFwd){
+    /* Forward tower gets a flag to distinguish from regular outpost */
+    spawn(buildingGroup, 'flag', modX, modY, 12, { yOffset: 32 });
+  }
 }
 function placeFort(modX, modY){
-  const p = to3(modX, modY);
-  const h = biomeHeight(p.x, p.z);
-  const base = new THREE.Mesh(
-    new THREE.BoxGeometry(75, 28, 75),
-    new THREE.MeshLambertMaterial({ color: 0x4e342e })
-  );
-  base.position.set(p.x, 14 + h, p.z);
-  buildingGroup.add(base);
-  // Bastions at corners
-  const cols = [[-32,-32],[32,-32],[-32,32],[32,32]];
-  for(const c of cols){
-    const b = new THREE.Mesh(
-      new THREE.OctahedronGeometry(10),
-      new THREE.MeshLambertMaterial({ color: 0x3e2723 })
-    );
-    b.position.set(p.x + c[0], 28 + h, p.z + c[1]);
-    buildingGroup.add(b);
+  /* Star-fort silhouette: 4 wall corners + central tower stack */
+  const corners = [[-22,-22],[22,-22],[-22,22],[22,22]];
+  for(const c of corners){
+    spawn(buildingGroup, 'wall_corner', modX + c[0], modY + c[1], 16, { rotY: Math.atan2(c[1], c[0]) });
   }
-  // Inner keep
-  const keep = new THREE.Mesh(
-    new THREE.BoxGeometry(28, 22, 28),
-    new THREE.MeshLambertMaterial({ color: 0x6d4c41 })
-  );
-  keep.position.set(p.x, 39 + h, p.z);
-  buildingGroup.add(keep);
+  spawn(buildingGroup, 'tower_base',     modX, modY, 24);
+  spawn(buildingGroup, 'tower_mid',      modX, modY, 24, { yOffset: 24 });
+  spawn(buildingGroup, 'tower_top_roof', modX, modY, 24, { yOffset: 48 });
+  spawn(buildingGroup, 'flag',           modX, modY, 20, { yOffset: 62 });
 }
 function placeWallSeg(modX, modY){
-  const p = to3(modX, modY);
-  const h = biomeHeight(p.x, p.z);
-  const w = new THREE.Mesh(
-    new THREE.BoxGeometry(7, 8, 7),
-    new THREE.MeshLambertMaterial({ color: 0x9e9e9e })
-  );
-  w.position.set(p.x, 4 + h, p.z);
-  buildingGroup.add(w);
+  spawn(buildingGroup, 'wall', modX, modY, 9, { rotY: 0 });
 }
 function placeHeadingArrow(modX, modY, ang){
   const p = to3(modX, modY);
@@ -783,7 +633,7 @@ function renderProfile(profile){
   if(v.fwdTowers > 0 && headingAngle !== null){
     for(let t=0; t<v.fwdTowers; t++){
       const td = wallR*0.95 + t*30;
-      placeOutpost(cx + Math.cos(headingAngle)*td, cy + Math.sin(headingAngle)*td, 0xffb74d);
+      placeOutpost(cx + Math.cos(headingAngle)*td, cy + Math.sin(headingAngle)*td, true);
     }
   }
 
@@ -826,6 +676,13 @@ async function loadProfiles(){
   return window.NATION_PROFILES;
 }
 
+/* Load Kenney FBX models, then place all decorative scatter, then load
+   profile data. Loading screen stays up until everything is in. */
+document.getElementById('loading').textContent = 'Loading 3D models…';
+await loadModels();
+document.getElementById('loading').textContent = 'Building map…';
+placeDecorations();
+document.getElementById('loading').textContent = 'Loading nation data…';
 const profiles = await loadProfiles();
 
 const sel = document.getElementById('nationSelect');
