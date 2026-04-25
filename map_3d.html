@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>Legendary Leaders — 3D Map Placement</title>
+<style>
+  html,body{margin:0;padding:0;background:#0a0a0a;color:#fff;font-family:system-ui,-apple-system,sans-serif;overflow:hidden;height:100%;}
+  #app{position:fixed;inset:0;}
+  canvas{display:block;touch-action:none;}
+  #hud{position:fixed;top:8px;left:8px;right:8px;background:rgba(0,0,0,0.65);backdrop-filter:blur(6px);padding:8px 12px;border-radius:8px;font-size:13px;z-index:10;max-width:520px;}
+  #hud strong{color:#ffcc80;}
+  #hud .small{font-size:11px;opacity:0.7;margin-top:4px;}
+  #picker{position:fixed;bottom:14px;left:8px;right:8px;z-index:10;display:flex;gap:8px;align-items:center;}
+  select{flex:1;font-family:inherit;font-size:14px;padding:9px 10px;background:#1a1a1a;color:#fff;border:1px solid #555;border-radius:6px;-webkit-appearance:none;appearance:none;}
+  #back{padding:9px 14px;background:#37474f;color:#fff;border:1px solid #555;border-radius:6px;font-family:inherit;font-size:14px;cursor:pointer;text-decoration:none;}
+  #loading{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#0a0a0a;z-index:100;font-size:16px;color:#aaa;}
+  #fps{position:fixed;top:8px;right:8px;background:rgba(0,0,0,0.5);padding:3px 7px;border-radius:4px;font-size:11px;z-index:10;font-family:monospace;color:#9e9e9e;}
+</style>
+</head>
+<body>
+<div id="loading">Loading 3D scene…</div>
+<div id="app"></div>
+<div id="hud">
+  <div><strong id="hudTitle">—</strong></div>
+  <div class="small" id="hudSubtitle">One-finger rotate · Two-finger pan · Pinch to zoom</div>
+</div>
+<div id="fps">— fps</div>
+<div id="picker">
+  <select id="nationSelect"></select>
+  <a href="LEGENDARY_LEADERS_TREE.html" id="back">← Back</a>
+</div>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+/* ====================================================================
+   Legendary Leaders — 3D Map Placement scene
+   World coordinates mirror the 2D modal exactly: 600x600 unit canvas.
+   2D (x, y) maps to 3D (x - 300, _, y - 300) with Y as up.
+   This keeps the placement math (terrainAnchor / headingAnchor / blend)
+   bit-identical to LEGENDARY_LEADERS_TREE.html so all 48 profiles render
+   in the same positions in 3D as they do in the 2D modal.
+==================================================================== */
+
+const MAP_SIZE = 600;
+const HALF = MAP_SIZE / 2;
+
+/* === Renderer === */
+const app = document.getElementById('app');
+const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setClearColor(0x6ec6ff);
+app.appendChild(renderer.domElement);
+
+const scene = new THREE.Scene();
+scene.fog = new THREE.Fog(0x6ec6ff, 700, 1400);
+
+/* === Camera + touch controls === */
+const camera = new THREE.PerspectiveCamera(50, window.innerWidth/window.innerHeight, 1, 2500);
+camera.position.set(280, 380, 480);
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.08;
+controls.maxPolarAngle = Math.PI/2 - 0.04;
+controls.minDistance = 120;
+controls.maxDistance = 1100;
+controls.target.set(0, 0, 0);
+
+/* === Lighting === */
+scene.add(new THREE.HemisphereLight(0xfff5e0, 0x556b2f, 0.85));
+const sun = new THREE.DirectionalLight(0xffffff, 1.0);
+sun.position.set(220, 480, 240);
+scene.add(sun);
+
+/* === Coord helpers ===
+   2D modal uses (x: 0..600 left-right, y: 0..600 top-bottom).
+   3D uses (x left-right, z front-back).
+   We map: world.x = mod.x - 300; world.z = mod.y - 300.
+   So the 2D "spawn" at (300, 330) becomes 3D (0, _, 30).             */
+function to3(modX, modY){ return { x: modX - HALF, z: modY - HALF }; }
+
+/* === Terrain heightmap ===
+   Biome-driven elevation: highland raised, oasis dipped, coast at sea level.
+   Procedural color per vertex so each biome reads instantly.            */
+const TERRAIN_SEG = 96;
+const terrainGeom = new THREE.PlaneGeometry(MAP_SIZE, MAP_SIZE, TERRAIN_SEG, TERRAIN_SEG);
+terrainGeom.rotateX(-Math.PI/2);
+
+function biomeHeight(wx, wz){
+  const x = wx + HALF, z = wz + HALF;
+  // SE highland (around 510, 470) — raised plateau
+  const dh = Math.hypot(x-510, z-470);
+  const highland = Math.max(0, 1 - dh/130) * 38;
+  // Highland gap (chokepoint) — drop a bit between two cliffs
+  const gapDist = Math.abs((x-510) + (z-470)) / 2;  // diagonal gap line
+  const gapDip = (dh < 130 && gapDist < 18) ? -8 : 0;
+  // Desert dunes (rolling)
+  const dd = Math.hypot(x-100, z-290);
+  const dune = Math.max(0, 1 - dd/130) * 4 * Math.sin((x+z)*0.04);
+  // Coast: drop below sea level
+  const coast = z < 85 ? -8 - (85 - z) * 0.15 : 0;
+  // Oasis depression
+  const doa = Math.hypot(x-100, z-290);
+  const oasis = doa < 22 ? -3 : 0;
+  // Wetland slight dip
+  const dw = Math.hypot(x-180, z-125);
+  const wetland = dw < 70 ? -1.5 : 0;
+  return highland + gapDip + dune + coast + oasis + wetland;
+}
+
+const pos = terrainGeom.attributes.position;
+for(let i=0; i<pos.count; i++){
+  const x = pos.getX(i), z = pos.getZ(i);
+  pos.setY(i, biomeHeight(x, z));
+}
+terrainGeom.computeVertexNormals();
+
+const colors = new Float32Array(pos.count * 3);
+function biomeColor(wx, wz){
+  const x = wx + HALF, z = wz + HALF;
+  if(z < 85) return [0.10, 0.42, 0.78];
+  // Desert
+  if(Math.hypot(x-100, z-290) < 110) return [0.83, 0.71, 0.42];
+  // Highland (by elevation)
+  if(biomeHeight(wx, wz) > 14) return [0.42, 0.30, 0.22];
+  // Wetland NW
+  if(Math.hypot(x-180, z-125) < 70) return [0.25, 0.36, 0.29];
+  // Jungle S
+  if(z > 490 && x > 200 && x < 470) return [0.11, 0.30, 0.18];
+  // NE forest floor
+  if(x > 430 && z < 240 && z > 90) return [0.20, 0.36, 0.20];
+  // SW forest floor
+  if(x < 170 && z > 400 && z < 510) return [0.20, 0.36, 0.20];
+  // Plain default
+  return [0.36, 0.49, 0.27];
+}
+for(let i=0; i<pos.count; i++){
+  const c = biomeColor(pos.getX(i), pos.getZ(i));
+  colors[i*3]=c[0]; colors[i*3+1]=c[1]; colors[i*3+2]=c[2];
+}
+terrainGeom.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+const terrainMat = new THREE.MeshLambertMaterial({ vertexColors: true, flatShading: true });
+const terrain = new THREE.Mesh(terrainGeom, terrainMat);
+scene.add(terrain);
+
+/* === Sea (north coast) === */
+const seaGeom = new THREE.PlaneGeometry(MAP_SIZE * 1.4, 110);
+seaGeom.rotateX(-Math.PI/2);
+const seaMat = new THREE.MeshPhongMaterial({ color: 0x1976d2, transparent: true, opacity: 0.88, shininess: 90 });
+const sea = new THREE.Mesh(seaGeom, seaMat);
+sea.position.set(0, -3, -HALF + 50);
+scene.add(sea);
+
+/* === Oasis pool === */
+const oasisGeom = new THREE.CircleGeometry(20, 24);
+oasisGeom.rotateX(-Math.PI/2);
+const oasis = new THREE.Mesh(oasisGeom, seaMat.clone());
+const oa = to3(100, 290);
+oasis.position.set(oa.x, -1.5, oa.z);
+scene.add(oasis);
+
+/* === River (curved water strip) ===
+   Approximates the 2D Bezier "M 280 85 Q 360 200 420 290 T 580 480"
+   by sampling points along the curve and extruding a flat strip. */
+const riverPath = [];
+for(let t=0; t<=1.001; t+=0.05){
+  // Quadratic + extension; rough approximation
+  const u = t;
+  const x = (1-u)*(1-u)*280 + 2*(1-u)*u*360 + u*u*420;
+  const y = (1-u)*(1-u)*85  + 2*(1-u)*u*200 + u*u*290;
+  riverPath.push([x, y]);
+}
+for(let t=0.05; t<=1.001; t+=0.05){
+  // Second segment from (420,290) toward (580,480)
+  const u = t;
+  const x = 420 + (580-420)*u;
+  const y = 290 + (480-290)*u;
+  riverPath.push([x, y]);
+}
+function addRiver(){
+  for(let i=0; i<riverPath.length-1; i++){
+    const a = riverPath[i], b = riverPath[i+1];
+    const aw = to3(a[0], a[1]), bw = to3(b[0], b[1]);
+    const dx = bw.x - aw.x, dz = bw.z - aw.z;
+    const len = Math.hypot(dx, dz);
+    if(len < 0.5) continue;
+    const angle = Math.atan2(dz, dx);
+    const seg = new THREE.Mesh(
+      new THREE.PlaneGeometry(len + 4, 26),
+      seaMat.clone()
+    );
+    seg.rotation.x = -Math.PI/2;
+    seg.rotation.z = -angle;
+    seg.position.set((aw.x+bw.x)/2, -1, (aw.z+bw.z)/2);
+    scene.add(seg);
+  }
+}
+addRiver();
+
+/* === Trees (instanced) === */
+function addForest(positions, trunkColor, canopyColor, scale){
+  const tg = new THREE.CylinderGeometry(1.4, 2.2, 7, 6);
+  const cg = new THREE.ConeGeometry(7, 18, 8);
+  const tm = new THREE.MeshLambertMaterial({ color: trunkColor });
+  const cm = new THREE.MeshLambertMaterial({ color: canopyColor });
+  const trunk = new THREE.InstancedMesh(tg, tm, positions.length);
+  const canopy = new THREE.InstancedMesh(cg, cm, positions.length);
+  const dummy = new THREE.Object3D();
+  for(let i=0; i<positions.length; i++){
+    const w = to3(positions[i][0], positions[i][1]);
+    const h = biomeHeight(w.x, w.z);
+    const s = scale * (0.85 + Math.random()*0.3);
+    dummy.position.set(w.x, h + 3*s, w.z);
+    dummy.scale.set(s, s, s);
+    dummy.rotation.y = Math.random() * Math.PI * 2;
+    dummy.updateMatrix();
+    trunk.setMatrixAt(i, dummy.matrix);
+    dummy.position.set(w.x, h + 13*s, w.z);
+    dummy.updateMatrix();
+    canopy.setMatrixAt(i, dummy.matrix);
+  }
+  scene.add(trunk); scene.add(canopy);
+}
+
+const neForest = [];
+for(let i=0; i<28; i++) neForest.push([440 + Math.random()*145, 100 + Math.random()*155]);
+addForest(neForest, 0x5d4037, 0x4a8c3d, 1.0);
+
+const swForest = [];
+for(let i=0; i<12; i++) swForest.push([45 + Math.random()*135, 405 + Math.random()*110]);
+addForest(swForest, 0x5d4037, 0x4a8c3d, 0.9);
+
+/* === Jungle (palms — taller trunks, fronds = flat fan) === */
+const junglePos = [];
+for(let i=0; i<18; i++) junglePos.push([220 + Math.random()*220, 505 + Math.random()*65]);
+function addPalms(positions){
+  const tg = new THREE.CylinderGeometry(0.9, 1.6, 16, 5);
+  const cg = new THREE.ConeGeometry(11, 5, 8);
+  const tm = new THREE.MeshLambertMaterial({ color: 0x6d4c41 });
+  const cm = new THREE.MeshLambertMaterial({ color: 0x2e7d32 });
+  const trunk = new THREE.InstancedMesh(tg, tm, positions.length);
+  const fronds = new THREE.InstancedMesh(cg, cm, positions.length);
+  const dummy = new THREE.Object3D();
+  for(let i=0; i<positions.length; i++){
+    const w = to3(positions[i][0], positions[i][1]);
+    const h = biomeHeight(w.x, w.z);
+    dummy.position.set(w.x, h + 8, w.z);
+    dummy.scale.set(1,1,1);
+    dummy.rotation.set(0, Math.random()*Math.PI*2, 0);
+    dummy.updateMatrix();
+    trunk.setMatrixAt(i, dummy.matrix);
+    dummy.position.set(w.x, h + 17, w.z);
+    dummy.updateMatrix();
+    fronds.setMatrixAt(i, dummy.matrix);
+  }
+  scene.add(trunk); scene.add(fronds);
+}
+addPalms(junglePos);
+
+/* === Cliffs (highland) — two raised blocks with a chokepoint gap === */
+function addCliffBlock(modX, modY, w, h, d, rot){
+  const mat = new THREE.MeshLambertMaterial({ color: 0x6d4c41, flatShading: true });
+  const top = new THREE.MeshLambertMaterial({ color: 0x8d6e63, flatShading: true });
+  const blk = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat);
+  const p = to3(modX, modY);
+  blk.position.set(p.x, h/2 + biomeHeight(p.x, p.z), p.z);
+  if(rot) blk.rotation.y = rot;
+  scene.add(blk);
+  // Roof slab to read as plateau
+  const roof = new THREE.Mesh(new THREE.BoxGeometry(w*0.9, 2, d*0.9), top);
+  roof.position.set(p.x, h + biomeHeight(p.x, p.z) + 1, p.z);
+  if(rot) roof.rotation.y = rot;
+  scene.add(roof);
+}
+addCliffBlock(490, 410, 110, 32, 55, 0.1);
+addCliffBlock(515, 530, 130, 38, 70, -0.1);
+
+/* === Resource markers === */
+function addGoldDeposit(modX, modY){
+  const p = to3(modX, modY);
+  const base = new THREE.Mesh(
+    new THREE.BoxGeometry(22, 4, 22),
+    new THREE.MeshLambertMaterial({ color: 0x2c2520 })
+  );
+  base.position.set(p.x, 2 + biomeHeight(p.x, p.z), p.z);
+  scene.add(base);
+  const mat = new THREE.MeshLambertMaterial({ color: 0xffd54f });
+  for(let i=0; i<3; i++){
+    const nug = new THREE.Mesh(new THREE.IcosahedronGeometry(3, 0), mat);
+    nug.position.set(p.x + (i-1)*5, 5 + biomeHeight(p.x, p.z), p.z + (i%2)*4 - 2);
+    scene.add(nug);
+  }
+}
+addGoldDeposit(140, 285);
+addGoldDeposit(360, 320);
+addGoldDeposit(180, 480);
+
+function addHuntable(modX, modY){
+  const p = to3(modX, modY);
+  const m = new THREE.Mesh(
+    new THREE.SphereGeometry(3.5, 8, 6),
+    new THREE.MeshLambertMaterial({ color: 0x5d4037 })
+  );
+  m.scale.set(1.6, 1, 1);
+  m.position.set(p.x, 3 + biomeHeight(p.x, p.z), p.z);
+  scene.add(m);
+}
+[[255,215],[275,230],[245,240],[195,415],[215,430]].forEach(p => addHuntable(p[0], p[1]));
+
+function addBerry(modX, modY){
+  const p = to3(modX, modY);
+  const bush = new THREE.Mesh(
+    new THREE.SphereGeometry(5, 8, 6),
+    new THREE.MeshLambertMaterial({ color: 0x2e5c2e })
+  );
+  bush.position.set(p.x, 3 + biomeHeight(p.x, p.z), p.z);
+  scene.add(bush);
+  const berryMat = new THREE.MeshLambertMaterial({ color: 0xc62828 });
+  for(let i=0; i<5; i++){
+    const b = new THREE.Mesh(new THREE.SphereGeometry(0.9, 6, 4), berryMat);
+    b.position.set(p.x + Math.cos(i)*3, 5 + biomeHeight(p.x, p.z), p.z + Math.sin(i)*3);
+    scene.add(b);
+  }
+}
+addBerry(395, 290); addBerry(410, 305);
+
+function addTradeSocket(modX, modY){
+  const p = to3(modX, modY);
+  const stone = new THREE.Mesh(
+    new THREE.BoxGeometry(20, 5, 20),
+    new THREE.MeshLambertMaterial({ color: 0x5d4037 })
+  );
+  stone.position.set(p.x, 2.5 + biomeHeight(p.x, p.z), p.z);
+  scene.add(stone);
+  const flag = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.5, 0.5, 14, 5),
+    new THREE.MeshLambertMaterial({ color: 0xffb74d })
+  );
+  flag.position.set(p.x, 12 + biomeHeight(p.x, p.z), p.z);
+  scene.add(flag);
+}
+addTradeSocket(95, 510); addTradeSocket(330, 345); addTradeSocket(555, 180);
+
+function addNativeVillage(modX, modY){
+  const p = to3(modX, modY);
+  const huts = [[0,-6],[-9,5],[9,5]];
+  for(let i=0; i<huts.length; i++){
+    const hx = p.x + huts[i][0], hz = p.z + huts[i][1];
+    const base = new THREE.Mesh(
+      new THREE.BoxGeometry(8, 5, 8),
+      new THREE.MeshLambertMaterial({ color: 0x8d6e63 })
+    );
+    base.position.set(hx, 2.5 + biomeHeight(hx, hz), hz);
+    scene.add(base);
+    const roof = new THREE.Mesh(
+      new THREE.ConeGeometry(6.5, 4, 4),
+      new THREE.MeshLambertMaterial({ color: 0xbcaaa4 })
+    );
+    roof.rotation.y = Math.PI/4;
+    roof.position.set(hx, 7 + biomeHeight(hx, hz), hz);
+    scene.add(roof);
+  }
+}
+addNativeVillage(220, 395);
+addNativeVillage(140, 555);
+addNativeVillage(440, 425);
+
+/* === Island (NW deep water) === */
+function addIsland(){
+  const p = to3(80, 32);
+  const isl = new THREE.Mesh(
+    new THREE.CylinderGeometry(20, 28, 6, 16),
+    new THREE.MeshLambertMaterial({ color: 0x6a8a48 })
+  );
+  isl.position.set(p.x, -2, p.z);
+  scene.add(isl);
+  const tree = new THREE.Mesh(
+    new THREE.ConeGeometry(5, 12, 6),
+    new THREE.MeshLambertMaterial({ color: 0x4a8c3d })
+  );
+  tree.position.set(p.x, 8, p.z);
+  scene.add(tree);
+}
+addIsland();
+
+/* === Spawn marker (subtle ring on the ground) === */
+function addSpawnMarker(){
+  const ring = new THREE.Mesh(
+    new THREE.RingGeometry(38, 42, 48),
+    new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.35, side: THREE.DoubleSide })
+  );
+  ring.rotation.x = -Math.PI/2;
+  const p = to3(300, 330);
+  ring.position.set(p.x, biomeHeight(p.x, p.z) + 0.3, p.z);
+  scene.add(ring);
+}
+addSpawnMarker();
+
+/* === Per-nation building group (cleared and rebuilt per profile) === */
+const buildingGroup = new THREE.Group();
+scene.add(buildingGroup);
+
+function clearBuildings(){
+  while(buildingGroup.children.length){
+    const c = buildingGroup.children[0];
+    buildingGroup.remove(c);
+    if(c.geometry) c.geometry.dispose();
+    if(c.material) c.material.dispose();
+  }
+}
+
+/* Building primitives — placeholder boxes until Kenney models swap in */
+function placeTC(modX, modY){
+  const p = to3(modX, modY);
+  const h = biomeHeight(p.x, p.z);
+  const base = new THREE.Mesh(
+    new THREE.BoxGeometry(60, 32, 60),
+    new THREE.MeshLambertMaterial({ color: 0xb71c1c })
+  );
+  base.position.set(p.x, 16 + h, p.z);
+  buildingGroup.add(base);
+  // 4 corner towers
+  const cols = [[-26,-26],[26,-26],[-26,26],[26,26]];
+  for(const c of cols){
+    const t = new THREE.Mesh(
+      new THREE.BoxGeometry(10, 44, 10),
+      new THREE.MeshLambertMaterial({ color: 0x7f0000 })
+    );
+    t.position.set(p.x + c[0], 22 + h, p.z + c[1]);
+    buildingGroup.add(t);
+  }
+  // Banner pole
+  const pole = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.7, 0.7, 24, 6),
+    new THREE.MeshLambertMaterial({ color: 0xfff8e1 })
+  );
+  pole.position.set(p.x, 44 + h, p.z);
+  buildingGroup.add(pole);
+}
+function placeHouse(modX, modY){
+  const p = to3(modX, modY);
+  const h = biomeHeight(p.x, p.z);
+  const base = new THREE.Mesh(
+    new THREE.BoxGeometry(20, 12, 20),
+    new THREE.MeshLambertMaterial({ color: 0xbcaaa4 })
+  );
+  base.position.set(p.x, 6 + h, p.z);
+  buildingGroup.add(base);
+  const roof = new THREE.Mesh(
+    new THREE.ConeGeometry(15, 8, 4),
+    new THREE.MeshLambertMaterial({ color: 0xfdd835 })
+  );
+  roof.rotation.y = Math.PI/4;
+  roof.position.set(p.x, 16 + h, p.z);
+  buildingGroup.add(roof);
+}
+function placeMill(modX, modY){
+  const p = to3(modX, modY);
+  const h = biomeHeight(p.x, p.z);
+  const base = new THREE.Mesh(
+    new THREE.BoxGeometry(24, 14, 24),
+    new THREE.MeshLambertMaterial({ color: 0xa1887f })
+  );
+  base.position.set(p.x, 7 + h, p.z);
+  buildingGroup.add(base);
+  const roof = new THREE.Mesh(
+    new THREE.ConeGeometry(18, 10, 4),
+    new THREE.MeshLambertMaterial({ color: 0x43a047 })
+  );
+  roof.rotation.y = Math.PI/4;
+  roof.position.set(p.x, 19 + h, p.z);
+  buildingGroup.add(roof);
+}
+function placeBarracks(modX, modY){
+  const p = to3(modX, modY);
+  const h = biomeHeight(p.x, p.z);
+  const base = new THREE.Mesh(
+    new THREE.BoxGeometry(30, 14, 22),
+    new THREE.MeshLambertMaterial({ color: 0x1e88e5 })
+  );
+  base.position.set(p.x, 7 + h, p.z);
+  buildingGroup.add(base);
+  const banner = new THREE.Mesh(
+    new THREE.BoxGeometry(34, 4, 26),
+    new THREE.MeshLambertMaterial({ color: 0x0d47a1 })
+  );
+  banner.position.set(p.x, 16 + h, p.z);
+  buildingGroup.add(banner);
+}
+function placeOutpost(modX, modY, color){
+  const p = to3(modX, modY);
+  const h = biomeHeight(p.x, p.z);
+  const base = new THREE.Mesh(
+    new THREE.BoxGeometry(14, 28, 14),
+    new THREE.MeshLambertMaterial({ color: color || 0xb39ddb })
+  );
+  base.position.set(p.x, 14 + h, p.z);
+  buildingGroup.add(base);
+  const cap = new THREE.Mesh(
+    new THREE.BoxGeometry(18, 4, 18),
+    new THREE.MeshLambertMaterial({ color: color === 0xffb74d ? 0xbf360c : 0x311b92 })
+  );
+  cap.position.set(p.x, 30 + h, p.z);
+  buildingGroup.add(cap);
+}
+function placeFort(modX, modY){
+  const p = to3(modX, modY);
+  const h = biomeHeight(p.x, p.z);
+  const base = new THREE.Mesh(
+    new THREE.BoxGeometry(75, 28, 75),
+    new THREE.MeshLambertMaterial({ color: 0x4e342e })
+  );
+  base.position.set(p.x, 14 + h, p.z);
+  buildingGroup.add(base);
+  // Bastions at corners
+  const cols = [[-32,-32],[32,-32],[-32,32],[32,32]];
+  for(const c of cols){
+    const b = new THREE.Mesh(
+      new THREE.OctahedronGeometry(10),
+      new THREE.MeshLambertMaterial({ color: 0x3e2723 })
+    );
+    b.position.set(p.x + c[0], 28 + h, p.z + c[1]);
+    buildingGroup.add(b);
+  }
+  // Inner keep
+  const keep = new THREE.Mesh(
+    new THREE.BoxGeometry(28, 22, 28),
+    new THREE.MeshLambertMaterial({ color: 0x6d4c41 })
+  );
+  keep.position.set(p.x, 39 + h, p.z);
+  buildingGroup.add(keep);
+}
+function placeWallSeg(modX, modY){
+  const p = to3(modX, modY);
+  const h = biomeHeight(p.x, p.z);
+  const w = new THREE.Mesh(
+    new THREE.BoxGeometry(7, 8, 7),
+    new THREE.MeshLambertMaterial({ color: 0x9e9e9e })
+  );
+  w.position.set(p.x, 4 + h, p.z);
+  buildingGroup.add(w);
+}
+function placeHeadingArrow(modX, modY, ang){
+  const p = to3(modX, modY);
+  const h = biomeHeight(p.x, p.z);
+  const len = 90;
+  const shaft = new THREE.Mesh(
+    new THREE.BoxGeometry(len, 2, 4),
+    new THREE.MeshBasicMaterial({ color: 0xffeb3b, transparent: true, opacity: 0.85 })
+  );
+  shaft.position.set(p.x + Math.cos(ang)*len/2, h + 1, p.z + Math.sin(ang)*len/2);
+  shaft.rotation.y = -ang;
+  buildingGroup.add(shaft);
+  const head = new THREE.Mesh(
+    new THREE.ConeGeometry(8, 14, 4),
+    new THREE.MeshBasicMaterial({ color: 0xffeb3b, transparent: true, opacity: 0.9 })
+  );
+  head.rotation.z = -Math.PI/2;
+  head.rotation.y = -ang;
+  head.position.set(p.x + Math.cos(ang)*len, h + 1, p.z + Math.sin(ang)*len);
+  buildingGroup.add(head);
+}
+
+/* === Placement math — bit-identical to LEGENDARY_LEADERS_TREE.html === */
+const SPAWN_TC = { x: 300, y: 330 };
+const FEATURE = {
+  coast:    { x: 320, y:  50 },
+  river:    { x: 410, y: 270 },
+  forest:   { x: 510, y: 160 },
+  plain:    { x: 280, y: 330 },
+  highland: { x: 510, y: 470 },
+  wetland:  { x: 180, y: 125 },
+  desert:   { x: 110, y: 295 },
+  jungle:   { x: 320, y: 540 }
+};
+const HEADING_TARGET = {
+  alongCoast: { x: 540, y:  45 },
+  upriver:    { x: 555, y: 410 },
+  frontier:   { x: 570, y: 330 },
+  islandHop:  { x:  85, y:  35 },
+  outward:    null,
+  trade:      { x:  95, y: 510 },
+  defensive:  null
+};
+function terrainAnchor(tId){
+  if(tId===1) return FEATURE.coast;
+  if(tId===2) return FEATURE.river;
+  if(tId===3) return FEATURE.forest;
+  if(tId===4) return FEATURE.plain;
+  if(tId===5) return FEATURE.highland;
+  if(tId===6) return FEATURE.wetland;
+  if(tId===7) return FEATURE.desert;
+  if(tId===8) return FEATURE.jungle;
+  return SPAWN_TC;
+}
+function headingAnchor(hId){
+  if(hId===1) return HEADING_TARGET.alongCoast;
+  if(hId===2) return HEADING_TARGET.upriver;
+  if(hId===3) return HEADING_TARGET.frontier;
+  if(hId===4) return HEADING_TARGET.islandHop;
+  if(hId===6) return HEADING_TARGET.trade;
+  return null;
+}
+function blend(a, b, s){
+  if(!a) return b; if(!b) return a;
+  return { x: a.x*(1-s) + b.x*s, y: a.y*(1-s) + b.y*s };
+}
+
+function renderProfile(profile){
+  clearBuildings();
+  const v = profile.v;
+
+  let anchor = { x: SPAWN_TC.x, y: SPAWN_TC.y };
+  const t1 = terrainAnchor(v.terrainPrimary);
+  if(t1 && v.terrainPrimary !== 0) anchor = blend(anchor, t1, v.terrainBias);
+  const t2 = terrainAnchor(v.terrainSecondary);
+  if(t2 && v.terrainSecondary !== 0) anchor = blend(anchor, t2, v.terrainBias * 0.5);
+  const hA = headingAnchor(v.heading);
+  if(hA) anchor = blend(anchor, hA, v.headingBias);
+
+  const cx = anchor.x, cy = anchor.y;
+  let headingAngle = null;
+  if(hA){
+    const dx = hA.x - cx, dy = hA.y - cy;
+    headingAngle = Math.atan2(dy, dx);
+  }
+
+  const houseR = 75 * v.houseMult;
+  const ecoR   = 120 * v.ecoMult;
+  const milR   = 160 * v.milMult;
+  const wallR  = 195 * v.tcMult;
+
+  // Walls first (under buildings)
+  if(v.wallStrategy !== 5 && v.wallLevel > 0){
+    const segCount = Math.max(20, Math.round(2*Math.PI*wallR/22));
+    const ws = v.wallStrategy;
+    const hAng = headingAngle || 0;
+    for(let s=0; s<segCount; s++){
+      const ang = s*(2*Math.PI/segCount);
+      let keep = false;
+      if(ws===0) keep = true;
+      else if(ws===1){
+        const rel = ((ang - hAng)%(2*Math.PI) + 2*Math.PI)%(2*Math.PI);
+        keep = (rel<0.7) || (rel>2.0 && rel<2.7) || (rel>4.0 && rel<4.7);
+      } else if(ws===2){
+        keep = Math.sin(ang) > -0.15;
+      } else if(ws===3){
+        const relF = ((ang - hAng)%(2*Math.PI) + 2*Math.PI)%(2*Math.PI);
+        keep = (relF < 1.4) || (relF > (2*Math.PI - 1.4));
+      } else if(ws===4){
+        keep = true;
+      }
+      if(!keep) continue;
+      const r = (ws===4) ? wallR*0.75 : wallR;
+      placeWallSeg(cx + Math.cos(ang)*r, cy + Math.sin(ang)*r);
+    }
+  }
+
+  // Forts
+  if(v.fortLevel > 0){
+    for(let f=0; f<v.fortLevel; f++){
+      const a = f*(2*Math.PI/v.fortLevel) + 1.7 + (headingAngle || 0);
+      placeFort(cx + Math.cos(a)*milR*1.1, cy + Math.sin(a)*milR*1.1);
+    }
+  }
+
+  // Barracks
+  for(let b=0; b<3; b++){
+    const a = b*(2*Math.PI/3) + 0.5 + (headingAngle || 0);
+    placeBarracks(cx + Math.cos(a)*milR, cy + Math.sin(a)*milR);
+  }
+
+  // Mills
+  for(let e=0; e<4; e++){
+    const a = e*(2*Math.PI/4) + 0.8;
+    placeMill(cx + Math.cos(a)*ecoR, cy + Math.sin(a)*ecoR);
+  }
+
+  // Outposts
+  if(v.towerLevel > 0){
+    const n = v.towerLevel + 1;
+    for(let t=0; t<n; t++){
+      const a = t*(2*Math.PI/n) + 1.4;
+      placeOutpost(cx + Math.cos(a)*ecoR*1.05, cy + Math.sin(a)*ecoR*1.05);
+    }
+  }
+
+  // Forward towers along heading
+  if(v.fwdTowers > 0 && headingAngle !== null){
+    for(let t=0; t<v.fwdTowers; t++){
+      const td = wallR*0.95 + t*30;
+      placeOutpost(cx + Math.cos(headingAngle)*td, cy + Math.sin(headingAngle)*td, 0xffb74d);
+    }
+  }
+
+  // Houses
+  for(let h=0; h<6; h++){
+    const a = h*(2*Math.PI/6) + 0.3;
+    placeHouse(cx + Math.cos(a)*houseR, cy + Math.sin(a)*houseR);
+  }
+
+  // Heading arrow on the ground
+  if(headingAngle !== null){
+    placeHeadingArrow(cx, cy, headingAngle);
+  }
+
+  // Town Center last
+  placeTC(cx, cy);
+
+  // HUD
+  document.getElementById('hudTitle').textContent = profile.name + ' — ' + profile.leader;
+  document.getElementById('hudSubtitle').innerHTML =
+    '<strong>Terrain:</strong> ' + profile.terrainLabel +
+    ' &nbsp;<strong>Heading:</strong> ' + profile.headingLabel +
+    '<br/><strong>Walls:</strong> ' + profile.wallLabel +
+    ' &nbsp;<strong>Style:</strong> ' + profile.style +
+    '<br/><span style="opacity:.55">One-finger rotate · Two-finger pan · Pinch to zoom</span>';
+
+  // Recenter the camera on the new TC position
+  controls.target.set(to3(cx, cy).x, 8, to3(cx, cy).z);
+}
+
+/* === Profile data — fetch from main HTML === */
+async function loadProfiles(){
+  const res = await fetch('LEGENDARY_LEADERS_TREE.html', { cache: 'no-cache' });
+  const txt = await res.text();
+  const start = txt.indexOf('window.NATION_PROFILES');
+  const end = txt.indexOf('})();', start) + 5;
+  const code = txt.substring(start, end);
+  // Run in this scope to populate window.NATION_PROFILES
+  new Function(code)();
+  return window.NATION_PROFILES;
+}
+
+const profiles = await loadProfiles();
+
+const sel = document.getElementById('nationSelect');
+const standard = ["Aztecs","British","Chinese","Dutch","Ethiopians","French","Germans","Iroquois","Hausa","Inca","Indians","Italians","Japanese","Lakota","Maltese","Mexicans","Ottomans","Portuguese","Russians","Spanish","Swedish","Americans"];
+function addOptGroup(label, keys){
+  const og = document.createElement('optgroup');
+  og.label = label;
+  keys.forEach(k => {
+    if(!profiles[k]) return;
+    const o = document.createElement('option');
+    o.value = k;
+    o.textContent = profiles[k].name + ' — ' + profiles[k].leader;
+    og.appendChild(o);
+  });
+  sel.appendChild(og);
+}
+addOptGroup('Standard civs', standard);
+const revolutionKeys = Object.keys(profiles).filter(k => standard.indexOf(k)<0);
+addOptGroup('Revolutions', revolutionKeys);
+
+sel.addEventListener('change', () => renderProfile(profiles[sel.value]));
+
+// Read ?nation=Foo from URL if present (so the modal can deep-link)
+const initial = new URLSearchParams(location.search).get('nation') || 'Aztecs';
+sel.value = profiles[initial] ? initial : 'Aztecs';
+renderProfile(profiles[sel.value]);
+
+document.getElementById('loading').style.display = 'none';
+
+/* === Resize === */
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+/* === Animation loop with FPS counter === */
+const fpsEl = document.getElementById('fps');
+let frames = 0, last = performance.now();
+function tick(){
+  requestAnimationFrame(tick);
+  controls.update();
+  renderer.render(scene, camera);
+  frames++;
+  const now = performance.now();
+  if(now - last > 1000){
+    fpsEl.textContent = Math.round(frames * 1000 / (now - last)) + ' fps';
+    frames = 0; last = now;
+  }
+}
+tick();
+</script>
+</body>
+</html>
