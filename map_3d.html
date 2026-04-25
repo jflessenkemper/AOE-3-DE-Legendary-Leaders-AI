@@ -67,16 +67,17 @@ app.appendChild(renderer.domElement);
 const scene = new THREE.Scene();
 scene.fog = new THREE.Fog(0x6ec6ff, 700, 1400);
 
-/* === Camera + touch controls === */
-const camera = new THREE.PerspectiveCamera(50, window.innerWidth/window.innerHeight, 1, 2500);
-camera.position.set(280, 380, 480);
+/* === Camera + touch controls — RTS-style top-down with slight tilt === */
+const camera = new THREE.PerspectiveCamera(45, window.innerWidth/window.innerHeight, 1, 2500);
+camera.position.set(0, 520, 360);
 
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 controls.dampingFactor = 0.08;
-controls.maxPolarAngle = Math.PI/2 - 0.04;
-controls.minDistance = 120;
-controls.maxDistance = 1100;
+controls.maxPolarAngle = Math.PI/2 - 0.15;  // never go fully horizontal
+controls.minPolarAngle = 0.2;                // and not straight down either
+controls.minDistance = 180;
+controls.maxDistance = 1000;
 controls.target.set(0, 0, 0);
 
 /* === Lighting === */
@@ -100,25 +101,53 @@ const terrainGeom = new THREE.PlaneGeometry(MAP_SIZE, MAP_SIZE, TERRAIN_SEG, TER
 terrainGeom.rotateX(-Math.PI/2);
 
 function biomeHeight(wx, wz){
+  // Bayou layout: 2D-space coords match LEGENDARY_LEADERS_TREE.html exactly.
   const x = wx + HALF, z = wz + HALF;
-  // SE highland (around 510, 470) — raised plateau
-  const dh = Math.hypot(x-510, z-470);
-  const highland = Math.max(0, 1 - dh/130) * 38;
-  // Highland gap (chokepoint) — drop a bit between two cliffs
-  const gapDist = Math.abs((x-510) + (z-470)) / 2;  // diagonal gap line
-  const gapDip = (dh < 130 && gapDist < 18) ? -8 : 0;
-  // Desert dunes (rolling)
-  const dd = Math.hypot(x-100, z-290);
-  const dune = Math.max(0, 1 - dd/130) * 4 * Math.sin((x+z)*0.04);
-  // Coast: drop below sea level
-  const coast = z < 85 ? -8 - (85 - z) * 0.15 : 0;
-  // Oasis depression
-  const doa = Math.hypot(x-100, z-290);
-  const oasis = doa < 22 ? -3 : 0;
-  // Wetland slight dip
-  const dw = Math.hypot(x-180, z-125);
-  const wetland = dw < 70 ? -1.5 : 0;
-  return highland + gapDip + dune + coast + oasis + wetland;
+  // E limestone bluff in TWO sections with chokepoint gap at z=290..325
+  const inHighlandX = x > 460 && x < 580;
+  let highland = 0;
+  if(inHighlandX){
+    if(z > 195 && z < 290){
+      const t = Math.min((z-195)/40, (290-z)/40, (580-x)/40, (x-460)/40);
+      highland = Math.max(0, t) * 36;
+    } else if(z > 325 && z < 400){
+      const t = Math.min((z-325)/40, (400-z)/40, (580-x)/40, (x-460)/40);
+      highland = Math.max(0, t) * 36;
+    }
+  }
+  // NW sand barrier dunes (small, near-coast)
+  const dd = Math.hypot(x-55, z-220);
+  const dune = Math.max(0, 1 - dd/55) * 3 * Math.sin((x+z)*0.05);
+  // Open Gulf coast: drop below sea level (z<60)
+  const coast = z < 60 ? -8 - (60 - z) * 0.18 : 0;
+  // Bayou inlet — main waterway, dropped below grade in a band along the curve
+  // Approximate the curve "M 90 60 Q 130 150 200 220 Q 250 290 280 380 Q 320 480 380 600"
+  // with several piecewise center points and a per-point distance check.
+  const inletPts = [
+    [90,60],[130,150],[200,220],[250,290],[280,380],[320,480],[380,600]
+  ];
+  let inletDip = 0;
+  for(let i=0;i<inletPts.length-1;i++){
+    const ax=inletPts[i][0], az=inletPts[i][1];
+    const bx=inletPts[i+1][0], bz=inletPts[i+1][1];
+    // distance from point (x,z) to line segment a-b
+    const lx=bx-ax, lz=bz-az;
+    const len2=lx*lx+lz*lz;
+    let t = ((x-ax)*lx + (z-az)*lz) / Math.max(len2, 1);
+    if(t<0) t=0; else if(t>1) t=1;
+    const px=ax+lx*t, pz=az+lz*t;
+    const d = Math.hypot(x-px, z-pz);
+    if(d < 18){
+      const dipHere = -3 - (18 - d) * 0.25;
+      if(dipHere < inletDip) inletDip = dipHere;
+    }
+  }
+  // Wetland marsh — broad NW patch
+  const dw1 = Math.hypot(x-180, z-190);
+  const dw2 = Math.hypot(x-160, z-135);
+  const dw3 = Math.hypot(x-270, z-350);
+  const wetland = Math.min(dw1, dw2, dw3) < 60 ? -1.2 : 0;
+  return highland + dune + coast + inletDip + wetland;
 }
 
 const pos = terrainGeom.attributes.position;
@@ -131,21 +160,24 @@ terrainGeom.computeVertexNormals();
 const colors = new Float32Array(pos.count * 3);
 function biomeColor(wx, wz){
   const x = wx + HALF, z = wz + HALF;
-  if(z < 85) return [0.10, 0.42, 0.78];
-  // Desert
-  if(Math.hypot(x-100, z-290) < 110) return [0.83, 0.71, 0.42];
-  // Highland (by elevation)
-  if(biomeHeight(wx, wz) > 14) return [0.42, 0.30, 0.22];
-  // Wetland NW
-  if(Math.hypot(x-180, z-125) < 70) return [0.25, 0.36, 0.29];
-  // Jungle S
-  if(z > 490 && x > 200 && x < 470) return [0.11, 0.30, 0.18];
-  // NE forest floor
-  if(x > 430 && z < 240 && z > 90) return [0.20, 0.36, 0.20];
-  // SW forest floor
-  if(x < 170 && z > 400 && z < 510) return [0.20, 0.36, 0.20];
-  // Plain default
-  return [0.36, 0.49, 0.27];
+  // Open Gulf water
+  if(z < 60) return [0.10, 0.42, 0.78];
+  // NW sand barrier (small "desert" pocket)
+  if(Math.hypot(x-55, z-220) < 55) return [0.83, 0.71, 0.42];
+  // Highland by elevation
+  if(biomeHeight(wx, wz) > 10) return [0.42, 0.30, 0.22];
+  // Bayou wetland (broad NW + along inlet)
+  if(Math.hypot(x-180, z-190) < 75) return [0.22, 0.34, 0.27];
+  if(Math.hypot(x-160, z-135) < 50) return [0.22, 0.34, 0.27];
+  if(Math.hypot(x-270, z-350) < 45) return [0.22, 0.34, 0.27];
+  // S dense cypress (jungle)
+  if(z > 515 && x > 240 && x < 510) return [0.11, 0.30, 0.18];
+  // NE cypress floor
+  if(x > 410 && x < 560 && z > 70 && z < 220) return [0.18, 0.34, 0.20];
+  // SW cypress floor
+  if(x > 75 && x < 180 && z > 425 && z < 525) return [0.18, 0.34, 0.20];
+  // Default bayou plain — slightly darker than open prairie
+  return [0.32, 0.42, 0.24];
 }
 for(let i=0; i<pos.count; i++){
   const c = biomeColor(pos.getX(i), pos.getZ(i));
@@ -156,39 +188,44 @@ const terrainMat = new THREE.MeshLambertMaterial({ vertexColors: true, flatShadi
 const terrain = new THREE.Mesh(terrainGeom, terrainMat);
 scene.add(terrain);
 
-/* === Sea (north coast) === */
-const seaGeom = new THREE.PlaneGeometry(MAP_SIZE * 1.4, 110);
+/* === Open Gulf — N coast === */
+const seaGeom = new THREE.PlaneGeometry(MAP_SIZE * 1.4, 80);
 seaGeom.rotateX(-Math.PI/2);
 const seaMat = new THREE.MeshPhongMaterial({ color: 0x1976d2, transparent: true, opacity: 0.88, shininess: 90 });
 const sea = new THREE.Mesh(seaGeom, seaMat);
-sea.position.set(0, -3, -HALF + 50);
+sea.position.set(0, -3, -HALF + 30);
 scene.add(sea);
+/* Deep-water NW Gulf bulge */
+const deepGulfGeom = new THREE.CircleGeometry(110, 24);
+deepGulfGeom.rotateX(-Math.PI/2);
+const deepGulfMat = new THREE.MeshPhongMaterial({ color: 0x0d47a1, transparent: true, opacity: 0.9 });
+const deepGulf = new THREE.Mesh(deepGulfGeom, deepGulfMat);
+const dg = to3(70, 50);
+deepGulf.position.set(dg.x, -3.5, dg.z);
+scene.add(deepGulf);
 
-/* === Oasis pool === */
-const oasisGeom = new THREE.CircleGeometry(20, 24);
+/* === Tiny oasis pool inside the W sand barrier === */
+const oasisGeom = new THREE.CircleGeometry(13, 18);
 oasisGeom.rotateX(-Math.PI/2);
 const oasis = new THREE.Mesh(oasisGeom, seaMat.clone());
-const oa = to3(100, 290);
+const oa = to3(55, 225);
 oasis.position.set(oa.x, -1.5, oa.z);
 scene.add(oasis);
 
-/* === River (curved water strip) ===
-   Approximates the 2D Bezier "M 280 85 Q 360 200 420 290 T 580 480"
-   by sampling points along the curve and extruding a flat strip. */
+/* === Bayou inlet — main waterway. NW Gulf (90,60) -> SE exit. === */
 const riverPath = [];
-for(let t=0; t<=1.001; t+=0.05){
-  // Quadratic + extension; rough approximation
-  const u = t;
-  const x = (1-u)*(1-u)*280 + 2*(1-u)*u*360 + u*u*420;
-  const y = (1-u)*(1-u)*85  + 2*(1-u)*u*200 + u*u*290;
-  riverPath.push([x, y]);
-}
-for(let t=0.05; t<=1.001; t+=0.05){
-  // Second segment from (420,290) toward (580,480)
-  const u = t;
-  const x = 420 + (580-420)*u;
-  const y = 290 + (480-290)*u;
-  riverPath.push([x, y]);
+const bayouCurves = [
+  [[90,60],[130,150],[200,220]],
+  [[200,220],[250,290],[280,380]],
+  [[280,380],[320,480],[380,600]]
+];
+for(const c of bayouCurves){
+  for(let t=0; t<=1.001; t+=0.05){
+    const u = t;
+    const x = (1-u)*(1-u)*c[0][0] + 2*(1-u)*u*c[1][0] + u*u*c[2][0];
+    const y = (1-u)*(1-u)*c[0][1] + 2*(1-u)*u*c[1][1] + u*u*c[2][1];
+    riverPath.push([x, y]);
+  }
 }
 function addRiver(){
   for(let i=0; i<riverPath.length-1; i++){
@@ -199,7 +236,7 @@ function addRiver(){
     if(len < 0.5) continue;
     const angle = Math.atan2(dz, dx);
     const seg = new THREE.Mesh(
-      new THREE.PlaneGeometry(len + 4, 26),
+      new THREE.PlaneGeometry(len + 6, 36),
       seaMat.clone()
     );
     seg.rotation.x = -Math.PI/2;
@@ -236,16 +273,16 @@ function addForest(positions, trunkColor, canopyColor, scale){
 }
 
 const neForest = [];
-for(let i=0; i<28; i++) neForest.push([440 + Math.random()*145, 100 + Math.random()*155]);
-addForest(neForest, 0x5d4037, 0x4a8c3d, 1.0);
+for(let i=0; i<28; i++) neForest.push([410 + Math.random()*150, 75 + Math.random()*145]);
+addForest(neForest, 0x5d4037, 0x4a7d35, 1.0);  // bayou cypress — slightly more saturated
 
 const swForest = [];
-for(let i=0; i<12; i++) swForest.push([45 + Math.random()*135, 405 + Math.random()*110]);
-addForest(swForest, 0x5d4037, 0x4a8c3d, 0.9);
+for(let i=0; i<14; i++) swForest.push([80 + Math.random()*105, 430 + Math.random()*100]);
+addForest(swForest, 0x5d4037, 0x4a7d35, 0.9);
 
-/* === Jungle (palms — taller trunks, fronds = flat fan) === */
+/* === Dense southern cypress band (jungle anchor) */
 const junglePos = [];
-for(let i=0; i<18; i++) junglePos.push([220 + Math.random()*220, 505 + Math.random()*65]);
+for(let i=0; i<22; i++) junglePos.push([245 + Math.random()*260, 520 + Math.random()*55]);
 function addPalms(positions){
   const tg = new THREE.CylinderGeometry(0.9, 1.6, 16, 5);
   const cg = new THREE.ConeGeometry(11, 5, 8);
@@ -270,23 +307,31 @@ function addPalms(positions){
 }
 addPalms(junglePos);
 
-/* === Cliffs (highland) — two raised blocks with a chokepoint gap === */
-function addCliffBlock(modX, modY, w, h, d, rot){
-  const mat = new THREE.MeshLambertMaterial({ color: 0x6d4c41, flatShading: true });
-  const top = new THREE.MeshLambertMaterial({ color: 0x8d6e63, flatShading: true });
-  const blk = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat);
+/* === Highland — terrain heightmap already raises the plateau in two
+   sections. We add subtle plateau-top slabs so the cliff edge reads
+   sharply, and rocky boulders for texture. */
+function addPlateauSlab(modX, modY, w, d){
+  const top = new THREE.MeshLambertMaterial({ color: 0x9e7b66, flatShading: true });
+  const slab = new THREE.Mesh(new THREE.BoxGeometry(w, 2, d), top);
   const p = to3(modX, modY);
-  blk.position.set(p.x, h/2 + biomeHeight(p.x, p.z), p.z);
-  if(rot) blk.rotation.y = rot;
-  scene.add(blk);
-  // Roof slab to read as plateau
-  const roof = new THREE.Mesh(new THREE.BoxGeometry(w*0.9, 2, d*0.9), top);
-  roof.position.set(p.x, h + biomeHeight(p.x, p.z) + 1, p.z);
-  if(rot) roof.rotation.y = rot;
-  scene.add(roof);
+  slab.position.set(p.x, biomeHeight(p.x, p.z) + 1, p.z);
+  scene.add(slab);
 }
-addCliffBlock(490, 410, 110, 32, 55, 0.1);
-addCliffBlock(515, 530, 130, 38, 70, -0.1);
+addPlateauSlab(515, 240, 100, 80);   // N limestone plateau
+addPlateauSlab(515, 365, 100, 70);   // S limestone plateau
+
+function addBoulder(modX, modY, size){
+  const p = to3(modX, modY);
+  const m = new THREE.Mesh(
+    new THREE.IcosahedronGeometry(size, 0),
+    new THREE.MeshLambertMaterial({ color: 0x6d4c41, flatShading: true })
+  );
+  m.position.set(p.x, biomeHeight(p.x, p.z) + size*0.6, p.z);
+  m.rotation.set(Math.random()*Math.PI, Math.random()*Math.PI, Math.random()*Math.PI);
+  scene.add(m);
+}
+addBoulder(490, 220, 6); addBoulder(545, 270, 5);
+addBoulder(495, 345, 5); addBoulder(545, 380, 6);
 
 /* === Resource markers === */
 function addGoldDeposit(modX, modY){
@@ -304,9 +349,9 @@ function addGoldDeposit(modX, modY){
     scene.add(nug);
   }
 }
-addGoldDeposit(140, 285);
-addGoldDeposit(360, 320);
-addGoldDeposit(180, 480);
+addGoldDeposit(115, 285);   // wetland/desert edge
+addGoldDeposit(395, 130);   // NE forest edge
+addGoldDeposit(425, 460);   // between river and S highland
 
 function addHuntable(modX, modY){
   const p = to3(modX, modY);
@@ -318,7 +363,7 @@ function addHuntable(modX, modY){
   m.position.set(p.x, 3 + biomeHeight(p.x, p.z), p.z);
   scene.add(m);
 }
-[[255,215],[275,230],[245,240],[195,415],[215,430]].forEach(p => addHuntable(p[0], p[1]));
+[[330,215],[355,230],[345,250],[170,410],[195,425]].forEach(p => addHuntable(p[0], p[1]));
 
 function addBerry(modX, modY){
   const p = to3(modX, modY);
@@ -335,7 +380,7 @@ function addBerry(modX, modY){
     scene.add(b);
   }
 }
-addBerry(395, 290); addBerry(410, 305);
+addBerry(395, 320); addBerry(410, 335);
 
 function addTradeSocket(modX, modY){
   const p = to3(modX, modY);
@@ -352,7 +397,7 @@ function addTradeSocket(modX, modY){
   flag.position.set(p.x, 12 + biomeHeight(p.x, p.z), p.z);
   scene.add(flag);
 }
-addTradeSocket(95, 510); addTradeSocket(330, 345); addTradeSocket(555, 180);
+addTradeSocket(90, 540); addTradeSocket(330, 330); addTradeSocket(555, 120);
 
 function addNativeVillage(modX, modY){
   const p = to3(modX, modY);
@@ -374,27 +419,30 @@ function addNativeVillage(modX, modY){
     scene.add(roof);
   }
 }
-addNativeVillage(220, 395);
-addNativeVillage(140, 555);
-addNativeVillage(440, 425);
+addNativeVillage(135, 290);  // NW plain hummock
+addNativeVillage(265, 530);  // S jungle edge
+addNativeVillage(440, 360);  // E highland foot
 
-/* === Island (NW deep water) === */
-function addIsland(){
-  const p = to3(80, 32);
+/* === Gulf barrier islands NW (Bayou map convention) === */
+function addBarrierIsland(modX, modY, r){
+  const p = to3(modX, modY);
   const isl = new THREE.Mesh(
-    new THREE.CylinderGeometry(20, 28, 6, 16),
+    new THREE.CylinderGeometry(r*0.85, r, 6, 16),
     new THREE.MeshLambertMaterial({ color: 0x6a8a48 })
   );
   isl.position.set(p.x, -2, p.z);
   scene.add(isl);
-  const tree = new THREE.Mesh(
-    new THREE.ConeGeometry(5, 12, 6),
-    new THREE.MeshLambertMaterial({ color: 0x4a8c3d })
-  );
-  tree.position.set(p.x, 8, p.z);
-  scene.add(tree);
 }
-addIsland();
+addBarrierIsland(55, 35, 26);
+addBarrierIsland(115, 50, 14);
+/* Single tree on the larger island */
+const islTree = new THREE.Mesh(
+  new THREE.ConeGeometry(5, 12, 6),
+  new THREE.MeshLambertMaterial({ color: 0x4a8c3d })
+);
+const islTp = to3(55, 35);
+islTree.position.set(islTp.x, 8, islTp.z);
+scene.add(islTree);
 
 /* === Spawn marker (subtle ring on the ground) === */
 function addSpawnMarker(){
@@ -575,24 +623,24 @@ function placeHeadingArrow(modX, modY, ang){
 }
 
 /* === Placement math — bit-identical to LEGENDARY_LEADERS_TREE.html === */
-const SPAWN_TC = { x: 300, y: 330 };
+const SPAWN_TC = { x: 300, y: 300 };
 const FEATURE = {
-  coast:    { x: 320, y:  50 },
-  river:    { x: 410, y: 270 },
-  forest:   { x: 510, y: 160 },
-  plain:    { x: 280, y: 330 },
-  highland: { x: 510, y: 470 },
-  wetland:  { x: 180, y: 125 },
-  desert:   { x: 110, y: 295 },
-  jungle:   { x: 320, y: 540 }
+  coast:    { x: 300, y:  35 },
+  river:    { x: 250, y: 290 },
+  forest:   { x: 470, y: 130 },
+  plain:    { x: 300, y: 300 },
+  highland: { x: 520, y: 290 },
+  wetland:  { x: 180, y: 200 },
+  desert:   { x:  60, y: 220 },
+  jungle:   { x: 370, y: 545 }
 };
 const HEADING_TARGET = {
-  alongCoast: { x: 540, y:  45 },
-  upriver:    { x: 555, y: 410 },
-  frontier:   { x: 570, y: 330 },
-  islandHop:  { x:  85, y:  35 },
+  alongCoast: { x: 555, y:  35 },
+  upriver:    { x: 380, y: 560 },
+  frontier:   { x: 575, y: 300 },
+  islandHop:  { x:  55, y:  35 },
   outward:    null,
-  trade:      { x:  95, y: 510 },
+  trade:      { x:  90, y: 540 },
   defensive:  null
 };
 function terrainAnchor(tId){

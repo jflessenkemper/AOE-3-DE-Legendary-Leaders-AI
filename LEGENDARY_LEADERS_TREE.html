@@ -3879,27 +3879,29 @@ window.NATION_PROFILES = (function(){
      No visible tile grid — AoE3 DE places buildings in continuous space.
   ─────────────────────────────────────────────────────────────────── */
   var MAP_W = 600, MAP_H = 600;
-  var SPAWN_TC = { x: 300, y: 330 };
-  // Feature anchor vectors (where the biased center drags toward).
-  // Each anchor sits ON a visible patch of that biome.
+  var SPAWN_TC = { x: 300, y: 300 };  // TRUE CENTER — Bayou "Mid Island" convention
+  /* Layout follows base-game Bayou: Gulf on N, bayou inlet snaking from NW
+     Gulf south through map, dry hummock at center, cypress clumps, limestone
+     bluff on E, native settlements at compass points. Anchors are placed on
+     visible patches of each biome so the AI's bias drag lands somewhere
+     readable. */
   var FEATURE = {
-    coast:    { x: 320, y:  50 },
-    river:    { x: 410, y: 270 },
-    forest:   { x: 510, y: 160 },
-    plain:    { x: 280, y: 330 },   // == spawn (no drag)
-    highland: { x: 510, y: 470 },
-    wetland:  { x: 180, y: 125 },
-    desert:   { x: 110, y: 295 },
-    jungle:   { x: 320, y: 540 }
+    coast:    { x: 300, y:  35 },   // open Gulf to the N
+    river:    { x: 250, y: 290 },   // on the bayou inlet, just W of spawn
+    forest:   { x: 470, y: 130 },   // NE cypress dense
+    plain:    { x: 300, y: 300 },   // spawn hummock (no drag)
+    highland: { x: 520, y: 290 },   // E limestone bluff (between cliffs)
+    wetland:  { x: 180, y: 200 },   // NW marsh body, broad
+    desert:   { x:  60, y: 220 },   // W coastal sand barrier
+    jungle:   { x: 370, y: 545 }    // S dense cypress band
   };
-  // Heading target vectors (where forward towers / secondary TCs drift).
   var HEADING_TARGET = {
-    alongCoast: { x: 540, y:  45 },
-    upriver:    { x: 555, y: 410 },
-    frontier:   { x: 570, y: 330 },
-    islandHop:  { x:  85, y:  35 },
+    alongCoast: { x: 555, y:  35 },  // E along Gulf coast
+    upriver:    { x: 380, y: 560 },  // S end of bayou inlet
+    frontier:   { x: 575, y: 300 },  // due E enemy edge (through chokepoint)
+    islandHop:  { x:  55, y:  35 },  // NW Gulf island
     outward:    null,
-    trade:      { x:  95, y: 510 },
+    trade:      { x:  90, y: 540 },  // SW trade socket
     defensive:  null
   };
   var TERRAIN_NAME = ["any","coast","river","forest","plain","highland","wetland","desert","jungle"];
@@ -4070,134 +4072,143 @@ window.NATION_PROFILES = (function(){
     return '<rect x="'+(x-5)+'" y="'+(y-5)+'" width="10" height="10" fill="#9e9e9e" stroke="#424242" stroke-width="1"/>';
   }
 
-  // Draw the fixed base map (identical for every nation).
+  /* Draw the fixed base map (identical for every nation).
+     Bayou-themed: open Gulf to the N, bayou inlet snaking from NW Gulf
+     south through the map, dry hummock at center (spawn), extensive
+     wetland marsh, cypress clumps, limestone bluff on E with a real
+     chokepoint gap, NW Gulf barrier dunes (small "desert" pocket), south
+     dense cypress band acts as jungle. Trade route SW->NE diagonal,
+     3 native villages at compass-point hummocks per Bayou convention. */
   function baseMapMarkup(){
     var p = [];
 
-    /* Background = plain (light pasture green) */
-    p.push('<rect x="0" y="0" width="'+MAP_W+'" height="'+MAP_H+'" fill="#5b7d3e"/>');
+    /* Land base: marshy bayou green */
+    p.push('<rect x="0" y="0" width="'+MAP_W+'" height="'+MAP_H+'" fill="#536b3a"/>');
 
-    /* North coast — shallow blue */
-    p.push('<rect x="0" y="0" width="'+MAP_W+'" height="85" fill="#1976d2"/>');
-    /* Deep water NW corner — darker, signals islandHop target zone */
-    p.push('<polygon points="0,0 220,0 150,85 0,85" fill="#0d47a1"/>');
-    /* Wave hatching on coast */
+    /* Open Gulf — north band, deeper on the W side */
+    p.push('<rect x="0" y="0" width="'+MAP_W+'" height="60" fill="#1976d2"/>');
+    /* Deep water NW corner (Gulf) */
+    p.push('<polygon points="0,0 200,0 110,75 0,90" fill="#0d47a1"/>');
+    /* Wave hatching */
     for(var w=0;w<6;w++){
-      p.push('<path d="M '+(w*110)+' '+(28+w%2*22)+' q 28 -10 56 0 t 56 0" fill="none" stroke="#90caf9" stroke-width="1.2" opacity="0.55"/>');
+      p.push('<path d="M '+(w*110)+' '+(20+w%2*20)+' q 28 -10 56 0 t 56 0" fill="none" stroke="#90caf9" stroke-width="1.2" opacity="0.55"/>');
     }
-    /* Shoreline beach band */
-    p.push('<path d="M 0 85 L '+MAP_W+' 85" stroke="#fbc02d" stroke-width="3" opacity="0.6"/>');
-    p.push('<path d="M 0 88 Q 100 95 200 90 T 400 92 T 600 90" stroke="#e6c08a" stroke-width="6" fill="none" opacity="0.45"/>');
+    /* Beach */
+    p.push('<path d="M 0 60 L '+MAP_W+' 60" stroke="#fbc02d" stroke-width="3" opacity="0.55"/>');
+    p.push('<path d="M 0 64 Q 100 70 200 66 T 400 68 T 600 65" stroke="#e6c08a" stroke-width="6" fill="none" opacity="0.45"/>');
 
-    /* Island NW (in deep water) — IslandHop target lands here */
-    p.push('<ellipse cx="80" cy="32" rx="34" ry="14" fill="#6a8a48"/>');
-    p.push('<polygon points="80,18 73,30 87,30" fill="#4a8c3d"/>');
-    p.push('<rect x="78" y="28" width="3" height="5" fill="#5d4037"/>');
-    /* Whale pod NW */
-    p.push(gWhale(38, 60));
-    /* Fish school NE coast */
-    p.push(gFish(450, 40));
-    p.push(gFish(475, 55));
-    p.push(gFish(500, 38));
-    p.push(gFish(525, 52));
+    /* Gulf barrier islands NW (Bayou: "Mid Small Island", "King's Island"
+       chain). Doubles as the IslandHop target. */
+    p.push('<ellipse cx="55" cy="35" rx="36" ry="14" fill="#6a8a48"/>');
+    p.push('<polygon points="55,18 48,32 62,32" fill="#4a8c3d"/>');
+    p.push('<rect x="53" y="30" width="3" height="5" fill="#5d4037"/>');
+    p.push('<ellipse cx="115" cy="50" rx="20" ry="8" fill="#6a8a48"/>');
+    /* Whale + fish */
+    p.push(gWhale(35, 75));
+    p.push(gFish(420, 25));
+    p.push(gFish(460, 38));
+    p.push(gFish(495, 22));
+    p.push(gFish(530, 36));
 
-    /* River — curves NW coast → SE corner. Stroke gives banks; arrows show flow */
-    p.push('<path d="M 280 85 Q 360 200 420 290 T 580 480" fill="none" stroke="#4fc3f7" stroke-width="26" opacity="0.7" stroke-linecap="round"/>');
-    p.push('<path d="M 280 85 Q 360 200 420 290 T 580 480" fill="none" stroke="#1976d2" stroke-width="2" opacity="0.7"/>');
-    /* Flow arrows along river */
-    var flow=[[330,170],[400,260],[490,365],[560,440]];
+    /* Bayou inlet — main waterway. Enters NW Gulf at (90, 60), winds south
+       to (250, 290) past spawn, then SE to S edge. */
+    p.push('<path d="M 90 60 Q 130 150 200 220 Q 250 290 280 380 Q 320 480 380 600" fill="none" stroke="#4fc3f7" stroke-width="34" opacity="0.65" stroke-linecap="round"/>');
+    p.push('<path d="M 90 60 Q 130 150 200 220 Q 250 290 280 380 Q 320 480 380 600" fill="none" stroke="#1976d2" stroke-width="2" opacity="0.7"/>');
+    /* Flow arrows downstream (S/SE) */
+    var flow=[[155,170],[225,260],[265,330],[300,440],[345,520]];
     for(var fi=0;fi<flow.length;fi++){
       var fx=flow[fi][0], fy=flow[fi][1];
-      p.push('<polygon points="'+fx+','+(fy-4)+' '+(fx+8)+','+fy+' '+fx+','+(fy+4)+'" fill="#bbdefb" opacity="0.9"/>');
+      p.push('<polygon points="'+(fx-4)+','+fy+' '+fx+','+(fy+8)+' '+(fx+4)+','+fy+'" fill="#bbdefb" opacity="0.85"/>');
     }
 
-    /* Wetland NW marsh (just inland of coast at river mouth) */
-    p.push('<ellipse cx="180" cy="125" rx="78" ry="28" fill="#3f5d4a" opacity="0.85"/>');
-    p.push(gReed(150,128));
-    p.push(gReed(180,122));
-    p.push(gReed(210,128));
+    /* Bayou wetland — extensive marsh wrapping the inlet, especially NW */
+    p.push('<ellipse cx="180" cy="190" rx="115" ry="70" fill="#3f5d4a" opacity="0.85"/>');
+    p.push('<ellipse cx="160" cy="135" rx="70" ry="35" fill="#3f5d4a" opacity="0.7"/>');
+    p.push('<ellipse cx="270" cy="350" rx="65" ry="35" fill="#3f5d4a" opacity="0.65"/>');
+    p.push(gReed(130,175));
+    p.push(gReed(180,185));
+    p.push(gReed(220,200));
+    p.push(gReed(155,235));
+    p.push(gReed(265,360));
 
-    /* Desert/oasis west — sand patch with palm + oasis water */
-    p.push('<ellipse cx="100" cy="290" rx="100" ry="80" fill="#d4b56b" opacity="0.85"/>');
-    p.push('<ellipse cx="100" cy="290" rx="100" ry="80" fill="none" stroke="#b8924a" stroke-width="1.5" stroke-dasharray="4 5" opacity="0.5"/>');
-    /* sand dune ridges */
-    p.push('<path d="M 30 260 Q 70 245 110 258 T 180 265" stroke="#a87f3d" stroke-width="2" fill="none" opacity="0.5"/>');
-    p.push('<path d="M 40 320 Q 80 305 130 318 T 190 325" stroke="#a87f3d" stroke-width="2" fill="none" opacity="0.5"/>');
-    /* oasis pool */
-    p.push('<ellipse cx="100" cy="290" rx="22" ry="14" fill="#29b6f6" opacity="0.95"/>');
-    p.push('<ellipse cx="100" cy="290" rx="22" ry="14" fill="none" stroke="#0277bd" stroke-width="1.5"/>');
-    p.push(gPalm(75, 280));
-    p.push(gPalm(125, 285));
+    /* W coastal sand barrier — small Gulf-side dune (our "desert") */
+    p.push('<ellipse cx="55" cy="220" rx="50" ry="55" fill="#d4b56b" opacity="0.85"/>');
+    p.push('<ellipse cx="55" cy="220" rx="50" ry="55" fill="none" stroke="#b8924a" stroke-width="1.5" stroke-dasharray="4 5" opacity="0.5"/>');
+    p.push('<path d="M 8 195 Q 35 188 65 195 T 110 200" stroke="#a87f3d" stroke-width="2" fill="none" opacity="0.5"/>');
+    p.push(gPalm(35, 215));
+    p.push(gPalm(80, 225));
+    /* Tiny oasis pool */
+    p.push('<ellipse cx="55" cy="225" rx="14" ry="9" fill="#29b6f6" opacity="0.9"/>');
+    p.push('<ellipse cx="55" cy="225" rx="14" ry="9" fill="none" stroke="#0277bd" stroke-width="1.2"/>');
 
-    /* NE forest (mature canopy) */
-    var neForest = [ [445,115],[475,135],[510,108],[540,128],[565,150],[470,170],[505,180],[540,205],[565,180],[455,200],[495,220],[525,225] ];
-    for(var f=0;f<neForest.length;f++){
-      p.push(gTree(neForest[f][0], neForest[f][1]));
-    }
+    /* NE cypress dense (forest anchor) */
+    var neForest = [ [415,85],[445,110],[480,90],[510,115],[440,135],[475,150],[510,135],[540,125],[420,165],[455,180],[490,175],[520,165],[460,210],[500,205] ];
+    for(var f=0;f<neForest.length;f++) p.push(gTree(neForest[f][0], neForest[f][1]));
 
-    /* SW smaller forest stand */
-    var swForest = [ [60,420],[95,440],[125,420],[75,470],[110,485],[145,460] ];
-    for(var f2=0;f2<swForest.length;f2++){
-      p.push(gTree(swForest[f2][0], swForest[f2][1]));
-    }
+    /* SW cypress (smaller stand) */
+    var swForest = [ [110,440],[145,460],[85,475],[125,485],[160,470],[100,500],[145,510] ];
+    for(var f2=0;f2<swForest.length;f2++) p.push(gTree(swForest[f2][0], swForest[f2][1]));
 
-    /* South-center jungle — darker green plate + palms */
-    p.push('<ellipse cx="320" cy="540" rx="160" ry="55" fill="#1b4d2e" opacity="0.95"/>');
-    var palms=[[230,545],[270,535],[310,548],[350,535],[390,545],[420,535]];
+    /* South dense cypress band — reads as jungle */
+    p.push('<ellipse cx="370" cy="555" rx="160" ry="42" fill="#1b4d2e" opacity="0.95"/>');
+    var palms=[[280,560],[320,548],[360,558],[400,548],[440,560],[470,548]];
     for(var pi=0;pi<palms.length;pi++) p.push(gPalm(palms[pi][0], palms[pi][1]));
 
-    /* SE highland cliffs — TWO polygons with explicit chokepoint gap */
-    /* North cliff face */
-    p.push('<polygon points="430,395 480,375 540,395 555,440 470,445" fill="#5d4037"/>');
-    p.push('<polygon points="445,402 478,386 525,402 540,430 480,435" fill="#795548"/>');
-    /* South cliff face — separated by ~30px gap */
-    p.push('<polygon points="455,485 520,475 580,500 580,570 460,575" fill="#5d4037"/>');
-    p.push('<polygon points="468,490 515,482 565,505 565,560 470,562" fill="#795548"/>');
-    /* Gap chokepoint indicator (subtle dotted line marking the pass) */
-    p.push('<path d="M 470 460 Q 510 470 555 465" stroke="#bcaaa4" stroke-width="2" fill="none" stroke-dasharray="3 4" opacity="0.6"/>');
+    /* Highland — E limestone bluff in TWO sections with chokepoint gap
+       at y=290..325. The river curves around its W side. */
+    /* North cliff (above gap) */
+    p.push('<polygon points="450,200 500,180 565,200 580,260 580,290 470,290" fill="#5d4037"/>');
+    p.push('<polygon points="465,210 498,192 555,210 565,255 565,283 478,283" fill="#795548"/>');
+    p.push('<polygon points="485,222 510,208 535,222 545,250 525,275 495,272" fill="#8d6e63"/>');
+    /* South cliff */
+    p.push('<polygon points="470,325 530,308 580,325 580,400 460,400" fill="#5d4037"/>');
+    p.push('<polygon points="478,335 525,318 570,335 570,390 470,388" fill="#795548"/>');
+    p.push('<polygon points="495,346 520,332 545,346 553,375 510,377" fill="#8d6e63"/>');
+    /* Chokepoint pass — only land path eastward */
+    p.push('<path d="M 458 305 Q 510 310 575 305" stroke="#bcaaa4" stroke-width="2.5" fill="none" stroke-dasharray="3 5" opacity="0.7"/>');
 
-    /* Gold deposits — 3 of them in different biomes */
-    p.push(gGoldMine(140, 285));   // in desert
-    p.push(gGoldMine(360, 320));   // central plain near river
-    p.push(gGoldMine(180, 480));   // near SW forest
+    /* Gold deposits — on dry hummocks */
+    p.push(gGoldMine(115, 285));   // wetland/desert edge
+    p.push(gGoldMine(395, 130));   // NE forest edge
+    p.push(gGoldMine(425, 460));   // between river and S highland
 
-    /* Hunt herds — bison on plain north of spawn, deer at SW forest edge */
-    p.push(gHunt(255, 215));
-    p.push(gHunt(275, 230));
-    p.push(gHunt(245, 240));
-    p.push(gHunt(195, 415));
-    p.push(gHunt(215, 430));
+    /* Hunt herds — turkey on plain near spawn, deer at SW forest edge */
+    p.push(gHunt(330, 215));
+    p.push(gHunt(355, 230));
+    p.push(gHunt(345, 250));
+    p.push(gHunt(170, 410));
+    p.push(gHunt(195, 425));
 
-    /* Berry bush patch */
-    p.push(gBerry(395, 290));
-    p.push(gBerry(410, 305));
+    /* Berry patch */
+    p.push(gBerry(395, 320));
+    p.push(gBerry(410, 335));
 
-    /* Trade route SW→NE: 3 sockets connected by dashed road */
-    p.push('<line x1="95" y1="510" x2="555" y2="180" stroke="#8d6e63" stroke-width="3" stroke-dasharray="9 7" opacity="0.7"/>');
-    p.push(gTradeSocket(95, 510));
-    p.push(gTradeSocket(330, 345));
-    p.push(gTradeSocket(555, 180));
+    /* Trade route SW->NE diagonal */
+    p.push('<line x1="90" y1="540" x2="555" y2="120" stroke="#8d6e63" stroke-width="3" stroke-dasharray="9 7" opacity="0.7"/>');
+    p.push(gTradeSocket(90, 540));
+    p.push(gTradeSocket(330, 330));
+    p.push(gTradeSocket(555, 120));
 
-    /* Native settlements — one per biome */
-    p.push(gNativeVillage(220, 395));   // plain west of spawn
-    p.push(gNativeVillage(140, 555));   // jungle/SW edge
-    p.push(gNativeVillage(440, 425));   // highland foot
+    /* Native settlements — Bayou puts them on island hummocks at compass
+       points. We do 3: NW plain, S jungle edge, E highland foot. */
+    p.push(gNativeVillage(135, 290));  // NW plain hummock
+    p.push(gNativeVillage(265, 530));  // S jungle edge
+    p.push(gNativeVillage(440, 360));  // E highland foot
 
-    /* Treasures scattered */
-    p.push(gTreasure(260, 285));
-    p.push(gTreasure(420, 200));
-    p.push(gTreasure(385, 460));
+    /* Treasures (neutral guarded resource piles) */
+    p.push(gTreasure(330, 130));
+    p.push(gTreasure(415, 235));
+    p.push(gTreasure(225, 410));
 
-    /* East frontier marker (enemy approach) */
+    /* East enemy frontier — vertical red band */
     p.push('<line x1="'+(MAP_W-5)+'" y1="0" x2="'+(MAP_W-5)+'" y2="'+(MAP_H-46)+'" stroke="#b71c1c" stroke-width="5" stroke-dasharray="11 9" opacity="0.75"/>');
-    /* Subtle arrow heads pointing inward to signal enemy attack vector */
     for(var ei=80;ei<MAP_H-70;ei+=110){
       p.push('<polygon points="'+(MAP_W-12)+','+ei+' '+(MAP_W-22)+','+(ei-6)+' '+(MAP_W-22)+','+(ei+6)+'" fill="#ef5350" opacity="0.65"/>');
     }
 
-    /* Spawn TC marker — subtle ring + dot */
-    p.push('<circle cx="'+SPAWN_TC.x+'" cy="'+SPAWN_TC.y+'" r="60" fill="none" stroke="#ffffff" stroke-width="1" stroke-dasharray="3 8" opacity="0.25"/>');
-    p.push('<circle cx="'+SPAWN_TC.x+'" cy="'+SPAWN_TC.y+'" r="3" fill="#ffffff" opacity="0.55"/>');
+    /* Spawn TC marker — subtle ring + dot at TRUE CENTER */
+    p.push('<circle cx="'+SPAWN_TC.x+'" cy="'+SPAWN_TC.y+'" r="65" fill="none" stroke="#ffffff" stroke-width="1" stroke-dasharray="3 8" opacity="0.3"/>');
+    p.push('<circle cx="'+SPAWN_TC.x+'" cy="'+SPAWN_TC.y+'" r="3" fill="#ffffff" opacity="0.6"/>');
 
     return p.join("");
   }
