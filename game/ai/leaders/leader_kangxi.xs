@@ -46,6 +46,7 @@ void initLeaderKangxi(void)
 
    gKangxiRulesEnabled = true;
    llLogLeaderState("Kangxi initialized");
+   llProbe("meta.leader_init", "leader=kangxi");
 }
 
 //------------------------------------------------------------------------------

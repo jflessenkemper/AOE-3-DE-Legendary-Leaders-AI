@@ -49,6 +49,7 @@ void initLeaderGustavus(void)
 
    gGustavusRulesEnabled = true;
    llLogLeaderState("Gustavus initialized");
+   llProbe("meta.leader_init", "leader=gustav");
 }
 
 //------------------------------------------------------------------------------

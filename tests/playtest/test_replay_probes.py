@@ -10,7 +10,7 @@ if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
 
 from tools.playtest.expectations import load_expectations
-from tools.playtest.replay_probes import parse_probes, validate
+from tools.playtest.replay_probes import coverage_report, parse_probes, validate
 
 
 def _probe(t: int, p: int, civ: str, ldr: str, tag: str, tail: str = "") -> str:
@@ -58,6 +58,8 @@ class TestValidator(unittest.TestCase):
 
     def _good_pair(self, pid: int, exp) -> str:
         return "\n".join([
+            _probe(30, pid, exp.label, exp.leader_key, "meta.leader_init",
+                   f"leader={exp.leader_key}"),
             _probe(60, pid, exp.label, exp.leader_key, "meta.leader_assigned",
                    f"civ_id=0 civ_name={exp.label} leader={exp.leader_key} chatset={exp.leader_key}"),
             _probe(120, pid, exp.label, exp.leader_key, "meta.buildstyle",
@@ -83,7 +85,7 @@ class TestValidator(unittest.TestCase):
 
     def test_unassigned_fallback_flagged(self) -> None:
         text = self._good_pair(1, self.british).replace(
-            "leader=wellington", "leader=unassigned-British", 1
+            "leader=wellington", "leader=unassigned-British"
         )
         issues, _ = validate(parse_probes(text.encode()))
         self.assertTrue(any("unassigned fallback" in i for i in issues), issues)
@@ -102,6 +104,81 @@ class TestValidator(unittest.TestCase):
         issues, _ = validate(parse_probes(text.encode()))
         self.assertTrue(any("missing meta.buildstyle" in i for i in issues), issues)
 
+    def test_missing_leader_init_flagged(self) -> None:
+        # Drop the meta.leader_init line entirely.
+        text = "\n".join(
+            line for line in self._good_pair(1, self.british).splitlines()
+            if "tag=meta.leader_init" not in line
+        )
+        issues, _ = validate(parse_probes(text.encode()))
+        self.assertTrue(
+            any("missing meta.leader_init" in i for i in issues), issues
+        )
+
+    def test_leader_init_mismatch_flagged(self) -> None:
+        # leader_assigned says wellington, leader_init says napoleon.
+        text = self._good_pair(1, self.british).replace(
+            "tag=meta.leader_init] leader=wellington",
+            "tag=meta.leader_init] leader=napoleon",
+        )
+        issues, _ = validate(parse_probes(text.encode()))
+        self.assertTrue(
+            any("meta.leader_init mismatch" in i for i in issues), issues
+        )
+
+    def test_leader_init_accepts_rvlt_prefix(self) -> None:
+        # Revolution commander shares one init for many civs — any rvlt_*
+        # leader_init key must satisfy the cross-check.
+        text = self._good_pair(1, self.british).replace(
+            "tag=meta.leader_init] leader=wellington",
+            "tag=meta.leader_init] leader=rvlt_RvltModBrazil",
+        )
+        issues, _ = validate(parse_probes(text.encode()))
+        self.assertFalse(
+            any("meta.leader_init mismatch" in i for i in issues), issues
+        )
+
+    def test_heartbeat_without_plan_snap_flagged(self) -> None:
+        text = self._good_pair(1, self.british) + "\n" + "\n".join(
+            _probe(60 * n, 1, "British", "wellington", "telem.heartbeat",
+                   f"hb_seq={n}")
+            for n in (1, 2, 3)
+        )
+        issues, _ = validate(parse_probes(text.encode()))
+        self.assertTrue(
+            any("mil.plan_snap never did" in i for i in issues), issues
+        )
+
+    def test_heartbeat_with_plan_snap_clean(self) -> None:
+        text = self._good_pair(1, self.british) + "\n" + "\n".join([
+            _probe(60, 1, "British", "wellington", "telem.heartbeat", "hb_seq=1"),
+            _probe(60, 1, "British", "wellington", "mil.plan_snap",
+                   "combat=0 attack=0 defend=0"),
+        ])
+        issues, _ = validate(parse_probes(text.encode()))
+        self.assertFalse(
+            any("mil.plan_snap never did" in i for i in issues), issues
+        )
+
+
+class TestCoverageReport(unittest.TestCase):
+    def test_coverage_counts_per_tag(self) -> None:
+        text = "\n".join([
+            _probe(60, 1, "British", "wellington", "telem.heartbeat", "hb_seq=1"),
+            _probe(120, 1, "British", "wellington", "telem.heartbeat", "hb_seq=2"),
+            _probe(120, 1, "British", "wellington", "mil.plan_snap", "combat=0"),
+        ])
+        out = "\n".join(coverage_report(parse_probes(text.encode())))
+        self.assertIn("telem.heartbeat", out)
+        self.assertIn("mil.plan_snap", out)
+        self.assertIn("2", out)  # heartbeat fired twice
+        self.assertIn("1", out)  # plan_snap fired once
+
+    def test_coverage_empty_returns_no_lines(self) -> None:
+        self.assertEqual(coverage_report([]), [])
+
+
+class TestNoProbes(unittest.TestCase):
     def test_no_probes_at_all_returns_helpful_error(self) -> None:
         issues, _ = validate(parse_probes(b"no probes in this file"))
         self.assertTrue(any("no [LLP v=2] probes" in i for i in issues), issues)

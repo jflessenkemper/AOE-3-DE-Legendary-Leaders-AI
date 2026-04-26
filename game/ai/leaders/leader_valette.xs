@@ -50,6 +50,7 @@ void initLeaderValette(void)
 
    gValetteRulesEnabled = true;
    llLogLeaderState("Valette initialized");
+   llProbe("meta.leader_init", "leader=jean");
 }
 
 //------------------------------------------------------------------------------

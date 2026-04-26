@@ -50,6 +50,7 @@ void initLeaderSuleiman(void)
 
    gSuleimanRulesEnabled = true;
    llLogLeaderState("Suleiman initialized");
+   llProbe("meta.leader_init", "leader=suleiman");
 }
 
 //------------------------------------------------------------------------------

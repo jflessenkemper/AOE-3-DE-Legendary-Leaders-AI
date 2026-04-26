@@ -48,6 +48,7 @@ void initLeaderMenelik(void)
 
    gMenelikRulesEnabled = true;
    llLogLeaderState("Menelik initialized");
+   llProbe("meta.leader_init", "leader=menelik");
 }
 
 //------------------------------------------------------------------------------

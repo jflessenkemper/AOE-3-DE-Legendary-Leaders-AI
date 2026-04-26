@@ -194,6 +194,7 @@ void postInit(void)
    if (cLLReplayProbes == true)
    {
       xsEnableRule("llHeartbeat");
+      xsEnableRule("llPlanSnapshot");
    }
 
    enableLegendaryRevolutionSupportRules();
@@ -292,6 +293,54 @@ minInterval 60
       " vills=" + kbUnitCount(cMyID, gEconUnit, cUnitStateAlive) +
       " armyPop=" + aiGetMilitaryPop() +
       " score=" + aiGetScore(cMyID));
+}
+
+//==============================================================================
+// llPlanSnapshot
+// Phase-2 periodic snapshot of the AI's active plan inventory. Fires every
+// 60s alongside the heartbeat. Three probes per tick:
+//   * mil.plan_snap   — combat plan count (offense + defense)
+//   * plan.build_snap — build plans (incl. wall plans), repair, gather
+//   * navy.fleet_snap — naval unit and transport-plan inventory
+// We use periodic snapshots rather than instrumenting all 91 aiPlanCreate
+// call sites — equivalent ground truth, far less integration risk.
+//==============================================================================
+rule llPlanSnapshot
+inactive
+minInterval 60
+{
+   int combatPlans = aiPlanGetNumber(cPlanCombat, -1, true);
+   int attackPlans = aiPlanGetNumber(cPlanAttack, -1, true);
+   int defendPlans = aiPlanGetNumber(cPlanDefend, -1, true);
+   int buildPlans = aiPlanGetNumber(cPlanBuild, -1, true);
+   int wallPlans = aiPlanGetNumber(cPlanBuildWall, -1, true);
+   int repairPlans = aiPlanGetNumber(cPlanRepair, -1, true);
+   int gatherPlans = aiPlanGetNumber(cPlanGather, -1, true);
+   int researchPlans = aiPlanGetNumber(cPlanResearch, -1, true);
+   int transportPlans = aiPlanGetNumber(cPlanTransport, -1, true);
+   int explorePlans = aiPlanGetNumber(cPlanExplore, -1, true);
+
+   llProbe("mil.plan_snap",
+      "combat=" + combatPlans +
+      " attack=" + attackPlans +
+      " defend=" + defendPlans +
+      " explore=" + explorePlans +
+      " militaryPop=" + aiGetMilitaryPop());
+
+   llProbe("plan.build_snap",
+      "build=" + buildPlans +
+      " walls=" + wallPlans +
+      " repair=" + repairPlans +
+      " gather=" + gatherPlans +
+      " research=" + researchPlans +
+      " tcs=" + kbUnitCount(cMyID, gTownCenterUnit, cUnitStateABQ) +
+      " houses=" + kbUnitCount(cMyID, gHouseUnit, cUnitStateABQ));
+
+   llProbe("navy.fleet_snap",
+      "transports=" + transportPlans +
+      " warships=" + kbUnitCount(cMyID, cUnitTypeAbstractWarShip, cUnitStateAlive) +
+      " fishing=" + kbUnitCount(cMyID, gFishingBoatUnit, cUnitStateAlive) +
+      " docks=" + kbUnitCount(cMyID, gDockUnit, cUnitStateABQ));
 }
 
 //==============================================================================

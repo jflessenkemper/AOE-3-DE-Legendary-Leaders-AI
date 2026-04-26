@@ -101,13 +101,32 @@ def _expect_index() -> dict[str, CivExpectation]:
     return out
 
 
+# Tags expected exactly once per AI (assignment / loadout events).
+ONE_SHOT_TAGS = (
+    "meta.leader_assigned",
+    "meta.buildstyle",
+    "meta.leader_init",
+    "meta.boot",
+    "meta.setup",
+)
+
+# Tags expected to fire periodically (one per 60s heartbeat tick).
+PERIODIC_TAGS = (
+    "telem.heartbeat",
+    "mil.plan_snap",
+    "plan.build_snap",
+    "navy.fleet_snap",
+)
+
+
 def validate(probes: list[ProbeRecord]) -> tuple[list[str], list[str]]:
     """Return (issues, summary_lines)."""
     expected = _expect_index()
 
-    by_player: dict[int, dict[str, ProbeRecord]] = defaultdict(dict)
+    # by_player[pid][tag] -> list of all probes with that tag
+    by_player: dict[int, dict[str, list[ProbeRecord]]] = defaultdict(lambda: defaultdict(list))
     for p in probes:
-        by_player[p.player][p.tag] = p
+        by_player[p.player][p.tag].append(p)
 
     issues: list[str] = []
     summary: list[str] = []
@@ -118,8 +137,10 @@ def validate(probes: list[ProbeRecord]) -> tuple[list[str], list[str]]:
 
     for pid in sorted(by_player):
         tags = by_player[pid]
-        leader_p = tags.get("meta.leader_assigned")
-        build_p = tags.get("meta.buildstyle")
+        leader_assigned_list = tags.get("meta.leader_assigned", [])
+        build_list = tags.get("meta.buildstyle", [])
+        leader_p = leader_assigned_list[-1] if leader_assigned_list else None
+        build_p = build_list[-1] if build_list else None
 
         civ_label = (leader_p or build_p).civ if (leader_p or build_p) else "?"
         line = f"  p{pid}  civ={civ_label}"
@@ -186,15 +207,67 @@ def validate(probes: list[ProbeRecord]) -> tuple[list[str], list[str]]:
         except ValueError:
             issues.append(f"p{pid} {civ_label}: heading_bias not numeric ({b.get('heading_bias')!r})")
 
+        # Cross-check meta.leader_init against meta.leader_assigned —
+        # confirms the dispatched leader's init function actually ran.
+        init_list = tags.get("meta.leader_init", [])
+        if not init_list:
+            issues.append(
+                f"p{pid} {civ_label}: missing meta.leader_init probe "
+                f"— initLeader<X>() never executed"
+            )
+        else:
+            init_keys = {p.fields.get("leader", "") for p in init_list}
+            # Revolution commander shares one init for many civs, so accept
+            # either the exact leader key or the rvlt_<rvltName> form.
+            ok = (
+                exp.leader_key in init_keys
+                or any(k.startswith("rvlt_") for k in init_keys)
+            )
+            if not ok:
+                issues.append(
+                    f"p{pid} {civ_label}: meta.leader_init mismatch "
+                    f"(expected {exp.leader_key!r}, saw {sorted(init_keys)})"
+                )
+
+        # Periodic probes: confirm each one fired at least once. For a
+        # short replay (<60s) the heartbeat may not have ticked yet, so
+        # only flag absence as a soft warning, not a fail.
+        heartbeat_count = len(tags.get("telem.heartbeat", []))
+        plan_count = len(tags.get("mil.plan_snap", []))
+        build_count = len(tags.get("plan.build_snap", []))
+        fleet_count = len(tags.get("navy.fleet_snap", []))
+        ship_count = len(tags.get("tech.ship", []))
+        if heartbeat_count and plan_count == 0:
+            issues.append(
+                f"p{pid} {civ_label}: telem.heartbeat fired {heartbeat_count}x "
+                f"but mil.plan_snap never did — was llPlanSnapshot enabled?"
+            )
+
         summary.append(
             f"  p{pid}  {CIV_LABELS.get(exp.civ_id, exp.label):<24s}  "
             f"ldr={leader_name:<22s}  "
             f"terr={b.get('terrain_primary','?')}+{b.get('terrain_secondary','?')} "
             f"({b.get('terrain_bias','?')})  "
-            f"head={b.get('heading','?')} ({b.get('heading_bias','?')})"
+            f"head={b.get('heading','?')} ({b.get('heading_bias','?')})  "
+            f"hb={heartbeat_count} planSnap={plan_count} "
+            f"buildSnap={build_count} fleetSnap={fleet_count} ships={ship_count}"
         )
 
     return issues, summary
+
+
+def coverage_report(probes: list[ProbeRecord]) -> list[str]:
+    """Per-tag tally across all AI players. Quick visibility into which
+    probe domains fired vs. went silent across the recorded match."""
+    by_tag: dict[str, int] = defaultdict(int)
+    for p in probes:
+        by_tag[p.tag] += 1
+    if not by_tag:
+        return []
+    out = ["", "Probe coverage (count across all AIs):"]
+    for tag in sorted(by_tag):
+        out.append(f"  {tag:<26s} {by_tag[tag]:>5}")
+    return out
 
 
 def main() -> int:
@@ -221,6 +294,10 @@ def main() -> int:
         for line in summary:
             print(line)
         print()
+
+    for line in coverage_report(probes):
+        print(line)
+    print()
 
     if not probes:
         return 2

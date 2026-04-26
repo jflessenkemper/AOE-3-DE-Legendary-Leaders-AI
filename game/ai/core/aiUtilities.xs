@@ -291,6 +291,13 @@ string llFmtVec(vector v = cInvalidVector)
 void llLogRuleTick(string ruleName = "")
 {
    llLogEvent("RULE", ruleName + " tick @" + xsGetTime());
+   // Phase-3: gated by cLLDebugRuleFires. When on, every rule tick also
+   // emits a structured probe so the replay parser can rebuild a per-rule
+   // firing timeline. Default off — high volume.
+   if (cLLDebugRuleFires == true)
+   {
+      llProbe("rule.fired", "name=" + ruleName);
+   }
 }
 
 void llLogRuleDisable(string ruleName = "", string reason = "")

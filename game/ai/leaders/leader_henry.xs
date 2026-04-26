@@ -51,6 +51,7 @@ void initLeaderHenry(void)
 
    gHenryRulesEnabled = true;
    llLogLeaderState("Henry initialized");
+   llProbe("meta.leader_init", "leader=henry");
 }
 
 //------------------------------------------------------------------------------

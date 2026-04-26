@@ -48,6 +48,7 @@ void initLeaderPachacuti(void)
 
    gPachacutiRulesEnabled = true;
    llLogLeaderState("Pachacuti initialized");
+   llProbe("meta.leader_init", "leader=pachacuti");
 }
 
 //------------------------------------------------------------------------------

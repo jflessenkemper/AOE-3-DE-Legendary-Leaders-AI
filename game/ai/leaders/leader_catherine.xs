@@ -57,6 +57,7 @@ void initLeaderCatherine(void)
 
    gCatherineRulesEnabled = true;
    llLogLeaderState("Ivan the Terrible initialized");
+   llProbe("meta.leader_init", "leader=catherine");
 }
 
 //------------------------------------------------------------------------------

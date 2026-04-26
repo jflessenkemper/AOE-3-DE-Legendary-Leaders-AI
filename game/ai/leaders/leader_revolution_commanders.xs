@@ -526,6 +526,10 @@ void initLegendaryRevolutionCommander(void)
    debugLegendaryLeaders("revolution commander initialized for " + rvltName + " (civId " + gRvltCivId + ")");
    gLegendaryRevolutionCommanderEnabled = true;
    llLogLeaderState("revolution commander initialized for " + rvltName);
+   // Replay probe: confirms which revolution commander block ran. The civ
+   // name is the only stable key here (gLLLeaderKey is set later by
+   // llAssignLeaderIdentity). gRvltCivId is the per-block ordinal.
+   llProbe("meta.leader_init", "leader=rvlt_" + rvltName + " rvltCivId=" + gRvltCivId);
 }
 
 //------------------------------------------------------------------------------

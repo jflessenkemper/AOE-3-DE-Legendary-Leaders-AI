@@ -46,6 +46,7 @@ void initLeaderUsman(void)
 
    gUsmanRulesEnabled = true;
    llLogLeaderState("Usman initialized");
+   llProbe("meta.leader_init", "leader=usman");
 }
 
 //------------------------------------------------------------------------------

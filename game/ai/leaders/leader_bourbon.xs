@@ -55,6 +55,7 @@ void initLeaderBourbon(void)
 
    gBourbonRulesEnabled = true;
    llLogLeaderState("Bourbon initialized");
+   llProbe("meta.leader_init", "leader=bourbon");
 }
 
 //------------------------------------------------------------------------------

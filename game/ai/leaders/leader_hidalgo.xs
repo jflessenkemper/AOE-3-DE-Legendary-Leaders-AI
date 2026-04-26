@@ -47,6 +47,7 @@ void initLeaderHidalgo(void)
 
    gHidalgoRulesEnabled = true;
    llLogLeaderState("Hidalgo initialized");
+   llProbe("meta.leader_init", "leader=hidalgo");
 }
 
 //------------------------------------------------------------------------------

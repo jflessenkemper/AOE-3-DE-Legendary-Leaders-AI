@@ -533,6 +533,11 @@ extern const bool cLLVerboseDiagnostics = false;
 // wall dispatch, age-up, chatset-fire, rout, explorer-escort, and economy
 // snapshot events in the .age3Yrec chat stream.
 extern const bool cLLReplayProbes = true;
+// Phase-3 firehose: when true, every llLogRuleTick() also emits a per-rule
+// `rule.fired` probe. Enables fine-grained per-rule timeline reconstruction
+// from replays at the cost of high chat-stream volume — keep off for
+// release builds, flip on only when chasing a specific rule-firing bug.
+extern const bool cLLDebugRuleFires = false;
 // Per-AI leader identity string set by each initLeader*() in preInit(). Used
 // by the LL-BOOT probe so the replay tells us which leader module each AI
 // actually loaded — catches "Barbary blank leader" / wrong-personality

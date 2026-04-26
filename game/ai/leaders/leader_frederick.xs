@@ -50,6 +50,7 @@ void initLeaderFrederick(void)
 
    gFrederickRulesEnabled = true;
    llLogLeaderState("Frederick initialized");
+   llProbe("meta.leader_init", "leader=frederick");
 }
 
 //------------------------------------------------------------------------------

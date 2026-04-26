@@ -54,6 +54,7 @@ void initLeaderNapoleon(void)
 
    gNapoleonRulesEnabled = true;
    llLogLeaderState("Napoleon initialized");
+   llProbe("meta.leader_init", "leader=napoleon");
 }
 
 //------------------------------------------------------------------------------

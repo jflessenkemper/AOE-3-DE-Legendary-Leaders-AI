@@ -50,6 +50,7 @@ void initLeaderShivaji(void)
 
    gShivajiRulesEnabled = true;
    llLogLeaderState("Shivaji initialized");
+   llProbe("meta.leader_init", "leader=shivaji");
 }
 
 //------------------------------------------------------------------------------

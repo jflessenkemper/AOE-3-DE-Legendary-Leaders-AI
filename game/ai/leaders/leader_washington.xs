@@ -49,6 +49,7 @@ void initLeaderWashington(void)
 
    gWashingtonRulesEnabled = true;
    llLogLeaderState("Washington initialized");
+   llProbe("meta.leader_init", "leader=washington");
 }
 
 //------------------------------------------------------------------------------
