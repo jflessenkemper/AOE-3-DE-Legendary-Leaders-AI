@@ -71,9 +71,9 @@ app.appendChild(renderer.domElement);
 const scene = new THREE.Scene();
 // No fog — user wants full map visible at any zoom level.
 
-/* === Camera + touch controls — RTS-style top-down with slight tilt === */
+/* === Camera + touch controls — RTS-style with strong tilt for depth === */
 const camera = new THREE.PerspectiveCamera(38, window.innerWidth/window.innerHeight, 1, 2500);
-camera.position.set(0, 420, 320);
+camera.position.set(0, 300, 380);  // ~38° down from horizontal — AoE3-ish
 
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
