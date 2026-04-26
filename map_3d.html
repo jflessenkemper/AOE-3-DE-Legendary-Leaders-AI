@@ -107,28 +107,39 @@ const MODELS = {};
 const fbxLoader = new FBXLoader();
 
 async function loadModels(){
-  await Promise.all(MODEL_FILES.map(async (name) => {
-    const root = await fbxLoader.loadAsync('resources/3d/models/' + name + '.fbx');
-    // Normalize so the model's bounding-box tallest axis = 1 unit.
-    const bbox = new THREE.Box3().setFromObject(root);
-    const size = new THREE.Vector3(); bbox.getSize(size);
-    const tallest = Math.max(size.x, size.y, size.z) || 1;
-    root.scale.multiplyScalar(1 / tallest);
-    // Recenter on XZ, ground on Y=0.
-    const c = new THREE.Vector3(); bbox.getCenter(c);
-    root.position.set(-c.x/tallest, -bbox.min.y/tallest, -c.z/tallest);
-    // Wrap in a container so the centering offsets don't get lost on clone.
-    const wrap = new THREE.Group();
-    wrap.add(root);
-    wrap.traverse((c) => {
-      if(c.isMesh){
-        c.castShadow = false; c.receiveShadow = false;
-        // Kenney materials are usually MeshPhongMaterial; ensure they obey
-        // our scene lighting (they do by default).
+  // Sequential load so we can see exactly which one fails.
+  // A single bad FBX won't hang the whole app — falls back to a tagged
+  // empty group so spawn() still works (the building/decoration is just absent).
+  for(let i = 0; i < MODEL_FILES.length; i++){
+    const name = MODEL_FILES[i];
+    const status = document.getElementById('loading');
+    if(status) status.textContent = `Loading model ${i+1}/${MODEL_FILES.length}: ${name}`;
+    try {
+      const root = await fbxLoader.loadAsync('resources/3d/models/' + name + '.fbx');
+      const bbox = new THREE.Box3().setFromObject(root);
+      const size = new THREE.Vector3(); bbox.getSize(size);
+      const tallest = Math.max(size.x, size.y, size.z) || 1;
+      root.scale.multiplyScalar(1 / tallest);
+      const c = new THREE.Vector3(); bbox.getCenter(c);
+      root.position.set(-c.x/tallest, -bbox.min.y/tallest, -c.z/tallest);
+      const wrap = new THREE.Group();
+      wrap.add(root);
+      wrap.traverse((c) => { if(c.isMesh){ c.castShadow=false; c.receiveShadow=false; } });
+      MODELS[name] = wrap;
+    } catch(err){
+      console.error('FBX load failed:', name, err);
+      const errEl = document.getElementById('loading');
+      if(errEl){
+        errEl.style.background = '#3a1010';
+        errEl.style.padding = '16px';
+        errEl.innerHTML = `<div style="color:#ff8a80">Failed to load <b>${name}.fbx</b></div><div style="font-size:11px;margin-top:6px;color:#aaa">${(err && err.message) || err}</div><div style="font-size:11px;margin-top:6px;color:#aaa">Continuing without it…</div>`;
       }
-    });
-    MODELS[name] = wrap;
-  }));
+      // Fallback so spawn() doesn't error
+      MODELS[name] = new THREE.Group();
+      // Brief pause so the error is visible, then continue
+      await new Promise(r => setTimeout(r, 800));
+    }
+  }
 }
 
 /* Spawn one instance of a model into a parent group, anchored on terrain.
