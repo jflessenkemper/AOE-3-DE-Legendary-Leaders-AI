@@ -70,26 +70,28 @@ const scene = new THREE.Scene();
 // No fog — user wants full map visible at any zoom level.
 
 /* === Camera + touch controls — RTS-style top-down with slight tilt === */
-const camera = new THREE.PerspectiveCamera(45, window.innerWidth/window.innerHeight, 1, 2500);
-camera.position.set(0, 520, 360);
+const camera = new THREE.PerspectiveCamera(38, window.innerWidth/window.innerHeight, 1, 2500);
+camera.position.set(0, 420, 320);
 
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 controls.dampingFactor = 0.08;
 controls.maxPolarAngle = Math.PI/2 - 0.15;  // never go fully horizontal
 controls.minPolarAngle = 0.2;                // and not straight down either
-controls.minDistance = 180;
+controls.minDistance = 150;
 controls.maxDistance = 1000;
 controls.target.set(0, 0, 0);
 
-/* === Lighting — warm AoE3-style ambient + low-angle sun === */
-scene.add(new THREE.HemisphereLight(0xffe6c2, 0x4a5d2a, 0.95));
-const sun = new THREE.DirectionalLight(0xfff2dc, 1.15);
+/* === Lighting — bright warm golden-hour for AoE3 feel === */
+scene.add(new THREE.HemisphereLight(0xfff0d4, 0x4a5d2a, 1.5));
+const sun = new THREE.DirectionalLight(0xfff2dc, 1.8);
 sun.position.set(180, 360, 180);
 scene.add(sun);
-const fill = new THREE.DirectionalLight(0xa8c2e8, 0.25);  // cool sky fill
+const fill = new THREE.DirectionalLight(0xb0c8e8, 0.45);  // cool sky fill
 fill.position.set(-200, 250, -180);
 scene.add(fill);
+const ambient = new THREE.AmbientLight(0xffe6b8, 0.35);
+scene.add(ambient);
 
 /* === Kenney CC0 model registry ===
    FBX models from the Castle Kit + Nature Kit (kenney.nl, CC0). Loaded once
@@ -377,15 +379,38 @@ const dg = to3(70, 50);
 deepGulf.position.set(dg.x, -2.5, dg.z);
 scene.add(deepGulf);
 
-/* Bayou inlet — kept as a chain of tinted plane segments (Water per-segment
-   would render reflection N times per frame and tank phone perf). Muddier
-   green-brown so it reads as actual water rather than wood. */
+/* Bayou inlet — chain of tinted plane segments. Real Water per-segment
+   would render reflection N times per frame and torch phone perf, so
+   instead we use Phong with the water normal map for cheap shimmer.
+   The normalMap UV offset is animated in the render loop. */
+const _inletNormal = _texLoader.load('resources/3d/textures/waternormals.jpg', (t) => {
+  t.wrapS = t.wrapT = THREE.RepeatWrapping;
+  t.repeat.set(2, 2);
+});
 const inletMat = new THREE.MeshPhongMaterial({
-  color: 0x32412a, transparent: true, opacity: 0.92, shininess: 70, specular: 0x88a070
+  color: 0x32412a, transparent: true, opacity: 0.93, shininess: 110,
+  specular: 0x9ab070, normalMap: _inletNormal, normalScale: new THREE.Vector2(0.7, 0.7)
 });
 
+/* Wide bayou pool at the central section of the inlet — using Water shader
+   here gives visible ripples + reflection where the player will be looking. */
+const inletPoolGeom = new THREE.CircleGeometry(75, 32);
+const inletPool = new Water(inletPoolGeom, {
+  textureWidth: 256, textureHeight: 256,
+  waterNormals: _waterNormals,
+  sunDirection: new THREE.Vector3(0.4, 0.8, 0.4).normalize(),
+  sunColor: 0xfff2dc,
+  waterColor: 0x3d4f2a,            // muddy bayou green
+  distortionScale: 2.2,
+  fog: false
+});
+inletPool.rotation.x = -Math.PI/2;
+const ip = to3(245, 290);
+inletPool.position.set(ip.x, -2, ip.z);
+scene.add(inletPool);
+
 /* Track all Water instances so the animation loop can advance their time */
-const _waters = [sea, deepGulf];
+const _waters = [sea, deepGulf, inletPool];
 
 /* === Tiny oasis pool inside the W sand barrier (still bluish — desert oasis is fresh) === */
 const oasisGeom = new THREE.CircleGeometry(13, 18);
@@ -889,6 +914,11 @@ function tick(){
     if(w.material && w.material.uniforms && w.material.uniforms['time']){
       w.material.uniforms['time'].value += 1/60;
     }
+  }
+  // Drift the inlet normal map for cheap "flowing water" shimmer
+  if(_inletNormal && _inletNormal.offset){
+    _inletNormal.offset.x = (_inletNormal.offset.x + 0.0008) % 1;
+    _inletNormal.offset.y = (_inletNormal.offset.y + 0.0003) % 1;
   }
   renderer.render(scene, camera);
   frames++;
