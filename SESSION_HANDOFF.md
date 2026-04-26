@@ -2,10 +2,10 @@
 
 **Last updated:** 2026-04-24
 **Origin session ID (desktop, reference only):** `7673ed5b-19c9-4704-b3d6-3a4e62a3bef3`
-**Repo:** `jflessenkemper/AOE-3-DE-Legendary-Leaders-AI`
+**Repo:** `jflessenkemper/AOE-3-DE-A-New-World-DLC`
 **Branch everything is on:** `claude/hungry-banzai-e122dc` (the active worktree branch; merge / FF to `main` to publish)
 **GitHub Pages live URL for the reference site:**
-<https://jflessenkemper.github.io/AOE-3-DE-Legendary-Leaders-AI/LEGENDARY_LEADERS_TREE.html>
+<https://jflessenkemper.github.io/AOE-3-DE-A-New-World-DLC/LEGENDARY_LEADERS_TREE.html>
 
 ---
 
