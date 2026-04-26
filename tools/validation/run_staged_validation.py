@@ -103,15 +103,19 @@ def run_content_stage(repo_root: Path, strict_display_name_ids: bool = False) ->
 
 
 def run_regression_stage(repo_root: Path) -> StageResult:
+    # Discover both the validator regression tests and the playtest
+    # harness tests in a single pass so anything under tests/ is run.
     command = [
         sys.executable,
         "-m",
         "unittest",
         "discover",
         "-s",
-        "tests/validation",
+        "tests",
         "-p",
         "test_*.py",
+        "-t",
+        ".",
     ]
     completed = subprocess.run(command, cwd=repo_root, capture_output=True, text=True)
     output_lines = [line.rstrip() for line in (completed.stdout + completed.stderr).splitlines() if line.strip()]

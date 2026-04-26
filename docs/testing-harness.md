@@ -60,13 +60,24 @@ checks against the packaged tree. Slowest stage; skip with
 
 ## What the harness does **not** cover
 
-In-engine playtesting. The `tools/aoe3_automation/` folder
-(intentionally not committed — see `SESSION_HANDOFF.md`) drives the
-real game via UI automation: `np_wel_1v1_observer.py`,
-`civ_matrix_*.py`, `wall_verify.py`, etc. Those rely on a running AoE3
-DE install, RDP, and Proton, and they're how you validate that the AI
-actually builds along the coast for British, hunkers down on the
-highland for Maltese, and so on.
+Full in-engine playtesting (build-order pacing, card pick order, combat
+micro). The `tools/aoe3_automation/` folder (intentionally not
+committed — see `SESSION_HANDOFF.md`) drives the real game via UI
+automation: `np_wel_1v1_observer.py`, `civ_matrix_*.py`,
+`wall_verify.py`, etc. Those rely on a running AoE3 DE install, RDP,
+and Proton.
+
+**However**, two complementary checks now ship with the repo:
+
+- `tools/test.sh --preflight` prints a per-civ ground-truth table
+  (leader, deck, terrain, heading, derived bias) so you have an
+  answer key while playing.
+- `tools/test.sh --layout-spot-check DIR` walks a folder of in-game
+  screenshots, segments the minimap, and verifies that each civ's
+  building cluster lands on the side of the map its declared
+  `cLLTerrain*` bias says it should.
+
+See [`playtest-harness.md`](playtest-harness.md) for the full flow.
 
 When you have the rig connected, run:
 

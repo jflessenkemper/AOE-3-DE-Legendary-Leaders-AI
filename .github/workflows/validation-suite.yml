@@ -14,8 +14,10 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.x"
-      - name: Run validator regression tests
-        run: python -m unittest discover -s tests/validation -p 'test_*.py'
+      - name: Install Pillow (playtest harness dep)
+        run: python -m pip install --upgrade pip Pillow
+      - name: Run validator + playtest regression tests
+        run: python -m unittest discover -s tests -p 'test_*.py' -t .
       - name: Run packaged validation
         run: python tools/validation/validate_packaged_mod.py --report-file .validation-reports/package-validation-report.txt
       - name: Run content validation suite

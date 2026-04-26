@@ -12,6 +12,17 @@
 #   --strict-locids     Treat unresolved DisplayNameID locIDs as fatal
 #   --report PATH       Write the staged report to PATH
 #
+# Standalone helpers (return early, don't run staged checks):
+#   --preflight         Print the per-civ runtime ground-truth table
+#                       (leader, deck, terrain, heading, derived bias).
+#                       Use this as a checklist while playing.
+#   --layout-spot-check DIR
+#                       Run tools/playtest/spot_check.py over DIR.
+#                       Verifies in-game building layout per civ from
+#                       screenshots. Add --team COLOR if not blue.
+#   --team COLOR        Player team color for --layout-spot-check
+#                       (blue/red/yellow/green/cyan/purple/orange/pink).
+#
 # Returns 0 if everything passes, 1 otherwise.
 
 set -u
@@ -24,6 +35,9 @@ run_regression=1
 run_packaged=1
 strict_locids=0
 report_path=""
+preflight=0
+layout_dir=""
+team="blue"
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
@@ -32,8 +46,12 @@ while [[ $# -gt 0 ]]; do
     --no-packaged)   run_packaged=0 ;;
     --strict-locids) strict_locids=1 ;;
     --report)        shift; report_path="$1" ;;
+    --preflight)     preflight=1 ;;
+    --layout-spot-check)
+                     shift; layout_dir="$1" ;;
+    --team)          shift; team="$1" ;;
     -h|--help)
-      sed -n '2,18p' "$0" | sed 's/^# //; s/^#//'
+      sed -n '2,28p' "$0" | sed 's/^# //; s/^#//'
       exit 0
       ;;
     *)
@@ -43,6 +61,17 @@ while [[ $# -gt 0 ]]; do
   esac
   shift
 done
+
+# Standalone helpers run and exit before the staged sweep.
+if [[ $preflight -eq 1 ]]; then
+  exec python3 -m tools.playtest.preflight
+fi
+
+if [[ -n "$layout_dir" ]]; then
+  layout_args=("$layout_dir" --team "$team")
+  [[ -n "$report_path" ]] && layout_args+=(--report "$report_path")
+  exec python3 -m tools.playtest.spot_check "${layout_args[@]}"
+fi
 
 echo "━━━ AOE3 DE A New World DLC — local test harness ━━━"
 echo "repo: $REPO_ROOT"
