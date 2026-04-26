@@ -454,7 +454,18 @@ void llAssignLeaderIdentity(void)
    {
       gLLLeaderKey = "unassigned-" + rvltName;
       gLLChatsetKey = "unassigned-" + rvltName;
+      // Loud, replay-parseable failure marker so a missing dispatch entry is
+      // never silent. Emitted before llProbe() below so the probe also flags
+      // it via the leader= field carrying the "unassigned-" prefix.
+      llLogEvent("LEADER", "UNASSIGNED civ=" + rvltName + " — add a dispatch entry to llAssignLeaderIdentity().");
    }
+
+   // Replay probe: one atomic line per AI captured into the .age3Yrec chat
+   // stream. Lets the post-match validator confirm every CPU loaded the
+   // expected leader key for its civ.
+   llProbe("meta.leader_assigned",
+      "civ_id=" + cMyCiv + " civ_name=" + rvltName +
+      " leader=" + gLLLeaderKey + " chatset=" + gLLChatsetKey);
 }
 
 void llApplyBuildStyleForActiveCiv(void)
@@ -911,4 +922,17 @@ void llApplyBuildStyleForActiveCiv(void)
       " terrainPrimary=" + gLLPreferredTerrainPrimary + " terrainSecondary=" + gLLPreferredTerrainSecondary +
       " heading=" + gLLExpansionHeading + " terrainBias=" + gLLTerrainBiasStrength +
       " headingBias=" + gLLHeadingBiasStrength + " civicAnchor=" + gLLCenterAnchorCivic);
+
+   // Replay probe: structured snapshot of the resolved build profile. Same
+   // information as the BUILDSTYLE event log, but in the v=2 schema so the
+   // post-match validator can tokenise it without parsing free-form text.
+   llProbe("meta.buildstyle",
+      "style=" + gLLBuildStyle +
+      " walls=" + gLLWallLevel +
+      " terrain_primary=" + gLLPreferredTerrainPrimary +
+      " terrain_secondary=" + gLLPreferredTerrainSecondary +
+      " terrain_bias=" + gLLTerrainBiasStrength +
+      " heading=" + gLLExpansionHeading +
+      " heading_bias=" + gLLHeadingBiasStrength +
+      " civic_anchor=" + gLLCenterAnchorCivic);
 }
