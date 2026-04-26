@@ -91,16 +91,17 @@ The resulting anchor feeds `cBuildPlanCenterPosition` + `cBuildPlanInfluencePosi
 
 ### 📜 Playstyle panel (reference site)
 
-The HTML reference ([link](https://jflessenkemper.github.io/AOE-3-DE-Legendary-Leaders-AI/LEGENDARY_LEADERS_TREE.html)) has a **Playstyle** button on every nation. It opens a textual panel grouped into six sections:
+The HTML reference ([link](https://jflessenkemper.github.io/AOE-3-DE-Legendary-Leaders-AI/LEGENDARY_LEADERS_TREE.html)) has a **Playstyle** button on every nation (all 48). It opens a textual modal that absorbed the old `Playstyle:` and `Buildstyle:` subtrees so each nation's reference card now has just one place to look. The panel reads in plain English — no internal multipliers, no `level n/5` notation:
 
-- **Terrain & expansion** — anchor terrain, fallback terrain, heading, terrain/heading pull strength, civic-anchor flag
-- **Build tempo** — Rush vs Boom, eco spread, house spread
-- **Combat doctrine** — Aggressive / Forward-leaning / Defensive / Reactive, military-building density
-- **Military composition** — infantry / cavalry / artillery weight, native-ally use
-- **Economy posture** — trade-route focus, TC count
-- **Defensive layer** — wall doctrine + level, tower coverage, fort tier, forward-tower count
+- **Pills** — terrain, heading, wall doctrine, and a "Tight civic core" flag for nations that build around a central plaza.
+- **How they build** — short paragraph describing each nation's build order and base shape.
+- **Strategy by age** — five sub-cards (Discovery / Colonial / Fortress / Industrial / Imperial) covering what the AI is trying to accomplish at each tier.
+- **Combat doctrine** — Aggressive / Forward-leaning / Defensive / Reactive, in one sentence.
+- **Military composition** — infantry / cavalry / artillery weight, native-ally use.
+- **Economy posture** — eco spread, trade-route focus, TC count.
+- **Defensive layer** — wall doctrine, tower coverage, fort tier, forward-tower line.
 
-A toggle below the sections expands a raw 20-variable table with the exact XS knob values. Every bullet is generated deterministically from the same `NATION_PROFILES` data that mirrors the XS code, so the panel describes *exactly* what the AI does in-engine.
+Per-nation data lives in `window.NATION_PLAYSTYLE` keyed by each `.nation-node[data-name]`; bullets are pre-derived qualitatively from the underlying XS knobs.
 
 A per-nation historical rationale for the underlying terrain/heading picks lives in `docs/design/map-placement-historical-guide.md`.
 
