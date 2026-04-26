@@ -263,12 +263,32 @@ for(let i=0; i<pos.count; i++){
 terrainGeom.computeVertexNormals();
 
 const colors = new Float32Array(pos.count * 3);
+/* Distance to the bayou inlet path — used to brown-mottle the ground
+   anywhere near the water. This is what makes the surrounding land
+   read as marshy/silty rather than uniform prairie. */
+const _inletPts = [[90,60],[130,150],[200,220],[250,290],[280,380],[320,480],[380,600]];
+function distToInlet(x, z){
+  let best = 1e9;
+  for(let i=0;i<_inletPts.length-1;i++){
+    const ax=_inletPts[i][0], az=_inletPts[i][1];
+    const bx=_inletPts[i+1][0], bz=_inletPts[i+1][1];
+    const lx=bx-ax, lz=bz-az;
+    const len2=lx*lx+lz*lz;
+    let t = ((x-ax)*lx + (z-az)*lz) / Math.max(len2, 1);
+    if(t<0) t=0; else if(t>1) t=1;
+    const px=ax+lx*t, pz=az+lz*t;
+    const d = Math.hypot(x-px, z-pz);
+    if(d < best) best = d;
+  }
+  return best;
+}
+
 function biomeColor(wx, wz){
   const x = wx + HALF, z = wz + HALF;
   // Open Gulf water
-  if(z < 60) return [0.10, 0.42, 0.78];
+  if(z < 60) return [0.21, 0.36, 0.36];
   // NW sand barrier (small "desert" pocket)
-  if(Math.hypot(x-55, z-220) < 55) return [0.83, 0.71, 0.42];
+  if(Math.hypot(x-55, z-220) < 55) return [0.78, 0.66, 0.40];
   // Highland by elevation
   if(biomeHeight(wx, wz) > 10) return [0.42, 0.30, 0.22];
   // Bayou wetland (broad NW + along inlet)
@@ -276,12 +296,21 @@ function biomeColor(wx, wz){
   if(Math.hypot(x-160, z-135) < 50) return [0.22, 0.34, 0.27];
   if(Math.hypot(x-270, z-350) < 45) return [0.22, 0.34, 0.27];
   // S dense cypress (jungle)
-  if(z > 515 && x > 240 && x < 510) return [0.11, 0.30, 0.18];
+  if(z > 515 && x > 240 && x < 510) return [0.11, 0.28, 0.16];
   // NE cypress floor
-  if(x > 410 && x < 560 && z > 70 && z < 220) return [0.18, 0.34, 0.20];
+  if(x > 410 && x < 560 && z > 70 && z < 220) return [0.18, 0.32, 0.18];
   // SW cypress floor
-  if(x > 75 && x < 180 && z > 425 && z < 525) return [0.18, 0.34, 0.20];
-  // Default bayou plain — slightly darker than open prairie
+  if(x > 75 && x < 180 && z > 425 && z < 525) return [0.18, 0.32, 0.18];
+  // Mottle ground near the inlet with marsh-brown for bayou character
+  const dInlet = distToInlet(x, z);
+  if(dInlet < 60){
+    const w = 1 - dInlet/60;
+    // Blend darker bayou-brown into the plain green
+    const r = 0.32*(1-w*0.7) + 0.41*w*0.7;
+    const g = 0.42*(1-w*0.7) + 0.32*w*0.7;
+    const b = 0.24*(1-w*0.7) + 0.18*w*0.7;
+    return [r, g, b];
+  }
   return [0.32, 0.42, 0.24];
 }
 for(let i=0; i<pos.count; i++){
@@ -303,23 +332,23 @@ const terrainMat = new THREE.MeshLambertMaterial({ vertexColors: true });
 const terrain = new THREE.Mesh(terrainGeom, terrainMat);
 scene.add(terrain);
 
-/* === Open Gulf — N coast (deeper Gulf-blue) === */
+/* === Open Gulf — N coast — desaturated coastal water (brackish bay) === */
 const seaGeom = new THREE.PlaneGeometry(MAP_SIZE * 1.4, 80);
 seaGeom.rotateX(-Math.PI/2);
-const seaMat = new THREE.MeshPhongMaterial({ color: 0x1c5078, transparent: true, opacity: 0.92, shininess: 80 });
+const seaMat = new THREE.MeshPhongMaterial({ color: 0x355c5b, transparent: true, opacity: 0.92, shininess: 60 });
 const sea = new THREE.Mesh(seaGeom, seaMat);
 sea.position.set(0, -3, -HALF + 30);
 scene.add(sea);
-/* Deep-water NW Gulf bulge */
+/* Deep-water NW Gulf bulge — slightly darker green-blue */
 const deepGulfGeom = new THREE.CircleGeometry(110, 24);
 deepGulfGeom.rotateX(-Math.PI/2);
-const deepGulfMat = new THREE.MeshPhongMaterial({ color: 0x103552, transparent: true, opacity: 0.95 });
+const deepGulfMat = new THREE.MeshPhongMaterial({ color: 0x1f3e3d, transparent: true, opacity: 0.95 });
 const deepGulf = new THREE.Mesh(deepGulfGeom, deepGulfMat);
 const dg = to3(70, 50);
 deepGulf.position.set(dg.x, -3.5, dg.z);
 scene.add(deepGulf);
 
-/* Bayou-brown water for the inlet and oasis (muddy swamp tone) */
+/* Bayou-brown water for the inlet (muddy swamp tone) */
 const inletMat = new THREE.MeshPhongMaterial({ color: 0x4a3a22, transparent: true, opacity: 0.92, shininess: 25 });
 
 /* === Tiny oasis pool inside the W sand barrier (still bluish — desert oasis is fresh) === */
@@ -455,6 +484,58 @@ function placeDecorations(){
   addBarrierIsland(55, 35, 26);
   addBarrierIsland(115, 50, 14);
   spawn(scene, 'tree_palm', 55, 35, 22, { yOffset: 6 });
+
+  /* Cypress standing IN the bayou inlet — signature bayou silhouette.
+     Sample points along the inlet curve and place trees with random
+     lateral offset, accepting submerged trunks. */
+  const inletStandingTrees = [];
+  for(let s=0; s<bayouCurves.length; s++){
+    const c = bayouCurves[s];
+    for(let t=0.12; t<=0.92; t+=0.18){
+      const u = t;
+      const cx = (1-u)*(1-u)*c[0][0] + 2*(1-u)*u*c[1][0] + u*u*c[2][0];
+      const cy = (1-u)*(1-u)*c[0][1] + 2*(1-u)*u*c[1][1] + u*u*c[2][1];
+      // Two trees per sample, on opposite sides of the channel
+      const dx = c[2][0] - c[0][0], dy = c[2][1] - c[0][1];
+      const norm = Math.hypot(dx, dy) || 1;
+      const nx = -dy/norm, ny = dx/norm;
+      const off = 12 + Math.random()*6;
+      inletStandingTrees.push([cx + nx*off, cy + ny*off]);
+      inletStandingTrees.push([cx - nx*off, cy - ny*off]);
+    }
+  }
+  for(const p of inletStandingTrees){
+    spawn(scene, 'tree_cypress', p[0], p[1], 22 * (0.85 + Math.random()*0.3), { yOffset: -2 });
+  }
+
+  /* Reed/grass tufts along all water edges */
+  const reedBeds = [];
+  // Along bayou inlet — close to water but on land
+  for(let s=0; s<bayouCurves.length; s++){
+    const c = bayouCurves[s];
+    for(let t=0.05; t<=0.95; t+=0.10){
+      const u = t;
+      const cx = (1-u)*(1-u)*c[0][0] + 2*(1-u)*u*c[1][0] + u*u*c[2][0];
+      const cy = (1-u)*(1-u)*c[0][1] + 2*(1-u)*u*c[1][1] + u*u*c[2][1];
+      const dx = c[2][0] - c[0][0], dy = c[2][1] - c[0][1];
+      const norm = Math.hypot(dx, dy) || 1;
+      const nx = -dy/norm, ny = dx/norm;
+      reedBeds.push([cx + nx*22 + (Math.random()-0.5)*8, cy + ny*22 + (Math.random()-0.5)*8]);
+      reedBeds.push([cx - nx*22 + (Math.random()-0.5)*8, cy - ny*22 + (Math.random()-0.5)*8]);
+    }
+  }
+  // Coast strip (north shore beach)
+  for(let i=0; i<14; i++){
+    reedBeds.push([40 + i*42 + (Math.random()-0.5)*10, 65 + (Math.random()-0.5)*6]);
+  }
+  // Around oasis
+  for(let r=0;r<6;r++){
+    const a = r*Math.PI/3;
+    reedBeds.push([55 + Math.cos(a)*22, 225 + Math.sin(a)*22]);
+  }
+  for(const r of reedBeds){
+    spawn(scene, 'bush', r[0], r[1], 4, { tint: 0x6b7d3c });
+  }
 }
 
 /* === Spawn marker (subtle ring on the ground) === */
