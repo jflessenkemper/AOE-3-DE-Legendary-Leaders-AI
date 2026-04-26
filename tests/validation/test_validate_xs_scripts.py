@@ -294,6 +294,79 @@ bool addBuilderToPlan(int planID = -1, int puid = -1, int numberBuilders = 1)
             issues,
         )
 
+    def test_flags_undefined_g_variable(self) -> None:
+        # Regression for the gTownCenterUnit / gFishingBoatUnit typos that
+        # crashed the AI with "XS Error 0172: '<name>' is not a valid operator".
+        repo_temp = tempfile.TemporaryDirectory()
+        self.addCleanup(repo_temp.cleanup)
+
+        repo_root = Path(repo_temp.name)
+        ai_root = repo_root / "game" / "ai" / "core"
+        ai_root.mkdir(parents=True)
+        (ai_root / "uses.xs").write_text(
+            "void f()\n"
+            "{\n"
+            "   int n = kbUnitCount(0, gTownCenterUnit, 1);\n"
+            "}\n",
+            encoding="utf-8",
+        )
+
+        issues = validate_xs_scripts(repo_root)
+        self.assertTrue(
+            any(
+                "undefined g-variable 'gTownCenterUnit'" in i and "uses.xs:3" in i
+                for i in issues
+            ),
+            issues,
+        )
+
+    def test_allows_declared_g_variable(self) -> None:
+        repo_temp = tempfile.TemporaryDirectory()
+        self.addCleanup(repo_temp.cleanup)
+
+        repo_root = Path(repo_temp.name)
+        ai_root = repo_root / "game" / "ai" / "core"
+        ai_root.mkdir(parents=True)
+        (ai_root / "globals.xs").write_text(
+            "extern int gFishingUnit = 0;\n",
+            encoding="utf-8",
+        )
+        (ai_root / "uses.xs").write_text(
+            "void f()\n"
+            "{\n"
+            "   int n = kbUnitCount(0, gFishingUnit, 1);\n"
+            "}\n",
+            encoding="utf-8",
+        )
+
+        issues = validate_xs_scripts(repo_root)
+        self.assertFalse(
+            any("undefined g-variable" in i for i in issues), issues
+        )
+
+    def test_allows_static_g_variable_inside_function(self) -> None:
+        # AI files use ``static int gFoo = ...`` for function-local persistent
+        # state with the g-prefix convention.
+        repo_temp = tempfile.TemporaryDirectory()
+        self.addCleanup(repo_temp.cleanup)
+
+        repo_root = Path(repo_temp.name)
+        ai_root = repo_root / "game" / "ai" / "core"
+        ai_root.mkdir(parents=True)
+        (ai_root / "naval.xs").write_text(
+            "void tick()\n"
+            "{\n"
+            "   static int gPlanCreationTime = -1;\n"
+            "   if (gPlanCreationTime > 0) { gPlanCreationTime = 0; }\n"
+            "}\n",
+            encoding="utf-8",
+        )
+
+        issues = validate_xs_scripts(repo_root)
+        self.assertFalse(
+            any("undefined g-variable" in i for i in issues), issues
+        )
+
     def test_allows_non_ascii_in_comments(self) -> None:
         repo_temp = tempfile.TemporaryDirectory()
         self.addCleanup(repo_temp.cleanup)

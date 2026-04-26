@@ -381,6 +381,13 @@ CV_DECL_RE = re.compile(
 )
 CV_USE_RE = re.compile(r"\b(cv[A-Z][A-Za-z0-9_]*)\b")
 
+G_DECL_RE = re.compile(
+    r"^\s*(?:mutable\s+|extern\s+|const\s+|extern\s+const\s+|static\s+)*"
+    r"(?:int|bool|float|string|vector)\s+"
+    r"(g[A-Z][A-Za-z0-9_]*)\s*(?:=|;|\[)"
+)
+G_USE_RE = re.compile(r"\bg[A-Z][A-Za-z0-9_]*\b")
+
 
 def collect_declared_cv_vars(ai_root: Path) -> set[str]:
     """Collect cv-prefixed civ-variable declarations including function-pointer
@@ -441,6 +448,75 @@ def check_undefined_cv_vars(repo_root: Path) -> list[str]:
                 if name not in declared:
                     issues.append(
                         f"{rel_path}:{index}: undefined cv-variable '{name}' — not declared as extern int/bool/float/string/vector in the mod or base game"
+                    )
+
+    return issues
+
+
+def collect_declared_g_vars(ai_root: Path) -> set[str]:
+    """Collect g-prefixed module-global declarations. Convention: g[A-Z]\\w+
+    in this codebase always names a module global (never a local), so a use
+    of an undeclared g-symbol is a typo that the engine rejects with
+    ``XS Error 0172: '<name>' IS NOT A VALID OPERATOR``."""
+    declared: set[str] = set()
+    for file_path in iter_xs_files(ai_root):
+        lines = file_path.read_text(encoding="utf-8", errors="replace").splitlines()
+        in_block_comment = False
+        for line in lines:
+            code, in_block_comment = strip_inline_block_comments(line, in_block_comment)
+            code = strip_string_literals(code)
+            if match := G_DECL_RE.match(code):
+                declared.add(match.group(1))
+            for match in FUNCTION_PTR_DECL_RE.finditer(code):
+                name = match.group(1)
+                if (
+                    len(name) >= 2
+                    and name[0] == "g"
+                    and name[1].isupper()
+                ):
+                    declared.add(name)
+    return declared
+
+
+def check_undefined_g_vars(repo_root: Path) -> list[str]:
+    """Flag g-prefixed symbol uses that have no declaration in the mod or
+    base-game AI. Catches typos like ``gTownCenterUnit`` (real symbol is
+    ``cUnitTypeTownCenter``) or ``gFishingBoatUnit`` (real symbol is
+    ``gFishingUnit``) before they crash the AI at runtime."""
+    ai_root = repo_root / "game" / "ai"
+    if not ai_root.exists():
+        return []
+
+    declared = collect_declared_g_vars(ai_root)
+    base_root = resolve_base_game_ai_root()
+    if base_root is not None:
+        try:
+            declared |= collect_declared_g_vars(base_root)
+        except OSError:
+            pass
+
+    issues: list[str] = []
+    for file_path in iter_xs_files(ai_root):
+        lines = file_path.read_text(encoding="utf-8", errors="replace").splitlines()
+        in_block_comment = False
+        rel_path = repo_relative(file_path, repo_root)
+
+        for index, line in enumerate(lines, start=1):
+            uncommented, in_block_comment = strip_inline_block_comments(line, in_block_comment)
+            code = uncommented.split("//", 1)[0]
+            # Skip the declaration line itself.
+            if G_DECL_RE.match(code):
+                continue
+            scan_target = strip_string_literals(code)
+            if not scan_target.strip():
+                continue
+            for match in G_USE_RE.finditer(scan_target):
+                name = match.group(0)
+                if name not in declared:
+                    issues.append(
+                        f"{rel_path}:{index}: undefined g-variable '{name}' "
+                        f"— not declared as extern int/bool/float/string/vector "
+                        f"in the mod or base game"
                     )
 
     return issues
@@ -562,6 +638,7 @@ def validate_xs_scripts(repo_root: Path = REPO_ROOT) -> list[str]:
 
     issues.extend(check_undefined_helper_calls(repo_root))
     issues.extend(check_undefined_cv_vars(repo_root))
+    issues.extend(check_undefined_g_vars(repo_root))
     issues.extend(check_unresolved_loader_calls(repo_root))
 
     return issues
