@@ -30,6 +30,8 @@ jobs:
           python tools/validation/validate_xml_well_formed.py
           python tools/validation/validate_xs_scripts.py
           python tools/validation/validate_personality_overrides.py
+          python tools/validation/validate_terrain_heading.py
+          python tools/validation/validate_playstyle_modal.py
       - name: Publish packaged validation summary
         if: always()
         run: |

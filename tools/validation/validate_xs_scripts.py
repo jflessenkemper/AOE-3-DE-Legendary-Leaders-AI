@@ -80,6 +80,7 @@ STOCK_XS_CALLS = {
     "xsSetRuleMinInterval",
     "xsSetRuleMinIntervalSelf",
     "xsVectorGetX",
+    "xsVectorGetY",
     "xsVectorGetZ",
     "xsVectorLength",
     "xsVectorNormalize",
