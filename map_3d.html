@@ -186,6 +186,53 @@ function spawn(parent, key, modX, modY, targetSize, opts){
   return m;
 }
 
+/* === Label sprites — float above each cluster so user knows what they're
+   looking at without a key. CanvasTexture for crisp text on any device. */
+function makeLabel(text, color){
+  const dpr = 2;
+  const w = 280 * dpr, h = 64 * dpr;
+  const canvas = document.createElement('canvas');
+  canvas.width = w; canvas.height = h;
+  const ctx = canvas.getContext('2d');
+  ctx.scale(dpr, dpr);
+  // Pill background
+  const pillW = 280, pillH = 44, pillX = 0, pillY = 12, pillR = 22;
+  ctx.fillStyle = 'rgba(0, 0, 0, 0.78)';
+  ctx.beginPath();
+  ctx.moveTo(pillX + pillR, pillY);
+  ctx.arcTo(pillX + pillW, pillY, pillX + pillW, pillY + pillH, pillR);
+  ctx.arcTo(pillX + pillW, pillY + pillH, pillX, pillY + pillH, pillR);
+  ctx.arcTo(pillX, pillY + pillH, pillX, pillY, pillR);
+  ctx.arcTo(pillX, pillY, pillX + pillW, pillY, pillR);
+  ctx.closePath();
+  ctx.fill();
+  // Color stripe on left edge
+  ctx.fillStyle = color || '#ffd54f';
+  ctx.fillRect(pillX + 6, pillY + 8, 5, pillH - 16);
+  // Text
+  ctx.font = '600 22px system-ui, -apple-system, sans-serif';
+  ctx.fillStyle = '#ffffff';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText(text, pillW/2 + 4, pillY + pillH/2);
+  const tex = new THREE.CanvasTexture(canvas);
+  tex.colorSpace = THREE.SRGBColorSpace;
+  const mat = new THREE.SpriteMaterial({ map: tex, depthTest: false, transparent: true });
+  const sprite = new THREE.Sprite(mat);
+  // World-unit size — visible at typical RTS zoom
+  sprite.scale.set(60, 14, 1);
+  sprite.renderOrder = 999;  // draw on top of buildings
+  return sprite;
+}
+
+function addLabel(parent, modX, modY, yOffset, text, color){
+  const s = makeLabel(text, color);
+  const p = to3(modX, modY);
+  s.position.set(p.x, biomeHeight(p.x, p.z) + yOffset, p.z);
+  parent.add(s);
+  return s;
+}
+
 /* Per-building palette — picks a recognizable color per type so a
    glance at the scene tells you what's what. Materials are tinted on
    the cloned PBR base, so the texture detail still shows through. */
@@ -214,15 +261,20 @@ const TINT = {
 function to3(modX, modY){ return { x: modX - HALF, z: modY - HALF }; }
 
 /* === Terrain heightmap ===
-   Biome-driven elevation: highland raised, oasis dipped, coast at sea level.
-   Procedural color per vertex so each biome reads instantly.            */
-const TERRAIN_SEG = 96;
-const terrainGeom = new THREE.PlaneGeometry(MAP_SIZE, MAP_SIZE, TERRAIN_SEG, TERRAIN_SEG);
+   Biome-driven elevation in the central 600x600 area; the plane is
+   extended to 1200x1200 so plain green continues past the visible
+   biomes — user never sees the map "edge" floating in void. */
+const TERRAIN_SEG = 128;
+const TERRAIN_EXTENT = MAP_SIZE * 2;   // 1200 wide
+const terrainGeom = new THREE.PlaneGeometry(TERRAIN_EXTENT, TERRAIN_EXTENT, TERRAIN_SEG, TERRAIN_SEG);
 terrainGeom.rotateX(-Math.PI/2);
 
 function biomeHeight(wx, wz){
   // Bayou layout: 2D-space coords match LEGENDARY_LEADERS_TREE.html exactly.
   const x = wx + HALF, z = wz + HALF;
+  // Outside central 600x600: just plain (no biome features extend to the
+  // expanded terrain ring used to hide the map edge).
+  if(x < 0 || x > 600 || z < 0 || z > 600) return 0;
   // E limestone bluff in TWO sections with chokepoint gap at z=290..325
   const inHighlandX = x > 460 && x < 580;
   let highland = 0;
@@ -300,6 +352,8 @@ function distToInlet(x, z){
 
 function biomeColor(wx, wz){
   const x = wx + HALF, z = wz + HALF;
+  // Outside central 600x600: plain green only (extended terrain ring).
+  if(x < 0 || x > 600 || z < 0 || z > 600) return [0.32, 0.42, 0.24];
   // Open Gulf water
   if(z < 60) return [0.21, 0.36, 0.36];
   // NW sand barrier (small "desert" pocket)
@@ -402,7 +456,11 @@ const _inletNormal = _texLoader.load('resources/3d/textures/waternormals.jpg', (
 });
 const inletMat = new THREE.MeshPhongMaterial({
   color: 0x32412a, transparent: true, opacity: 0.93, shininess: 110,
-  specular: 0x9ab070, normalMap: _inletNormal, normalScale: new THREE.Vector2(0.7, 0.7)
+  specular: 0x9ab070, normalMap: _inletNormal, normalScale: new THREE.Vector2(0.7, 0.7),
+  // Push the water plane slightly forward in depth so it never z-fights
+  // with the terrain heightmap dip beneath it.
+  polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -2,
+  depthWrite: false
 });
 
 /* Wide bayou pool at the central section of the inlet — using Water shader
@@ -514,12 +572,13 @@ function placeDecorations(){
     spawn(scene, 'rock_large', c[0], c[1], 14);
   }
 
-  /* Gold deposits — bright yellow rock cluster (you can spot them) */
+  /* Gold deposits — bright yellow rock cluster + label */
   for(const g of [[115,285],[395,130],[425,460]]){
     spawn(scene, 'rock_large', g[0], g[1], 18, { tint: TINT.GOLD });
     for(let i=0;i<3;i++){
       spawn(scene, 'rock_large', g[0] + (i-1)*8, g[1] + (i%2)*6 - 3, 8, { tint: TINT.GOLD });
     }
+    addLabel(scene, g[0], g[1], 14, 'Gold', '#ffd54f');
   }
 
   /* Hunt herds — brown-tinted bushes stand in for animals */
@@ -531,18 +590,21 @@ function placeDecorations(){
   spawn(scene, 'bush', 395, 320, 8, { tint: TINT.BERRY });
   spawn(scene, 'bush', 410, 335, 8, { tint: TINT.BERRY });
 
-  /* Trade sockets — gold-tinted gates so they read as commerce */
+  /* Trade sockets — small gold flag-posts (gate model was reading as a
+     random door). Plus a label so user knows what they are. */
   for(const ts of [[90,540],[330,330],[555,120]]){
-    spawn(scene, 'gate', ts[0], ts[1], 18, { rotY: Math.PI/4, tint: TINT.TRADE });
+    spawn(scene, 'flag', ts[0], ts[1], 9, { rotY: 0, tint: TINT.TRADE });
+    addLabel(scene, ts[0], ts[1], 14, 'Trade Post', '#ffb74d');
   }
 
-  /* Native settlements — tan-tinted small houses, distinct from player builds */
+  /* Native settlements — tan-tinted small houses + label */
   for(const n of [[135,290],[265,530],[440,360]]){
     const offsets = [[0,-7],[-9,5],[9,5]];
     for(const o of offsets){
       spawn(scene, 'house_body', n[0]+o[0], n[1]+o[1], 9, { rotY: Math.random()*Math.PI*2, tint: TINT.NATIVE });
       spawn(scene, 'house_roof', n[0]+o[0], n[1]+o[1], 9, { yOffset: 9, tint: TINT.NATIVE });
     }
+    addLabel(scene, n[0], n[1], 22, 'Native Settlement', '#a1887f');
   }
 
   /* Gulf barrier islands NW (Bayou convention) */
@@ -860,6 +922,29 @@ function renderProfile(profile){
 
   // Town Center last
   placeTC(cx, cy);
+
+  /* === Per-type labels — one floating tag per cluster so user knows what
+     each colored building represents at a glance. */
+  addLabel(buildingGroup, cx, cy, 90, 'Town Center', '#ff6e6e');
+  addLabel(buildingGroup, cx + Math.cos(0.3)*houseR, cy + Math.sin(0.3)*houseR, 30, 'Houses ×8', '#ffb74d');
+  addLabel(buildingGroup, cx + Math.cos(0.8)*ecoR, cy + Math.sin(0.8)*ecoR, 38, 'Mills ×4', '#a5d684');
+  addLabel(buildingGroup, cx + Math.cos(0.5 + (headingAngle||0))*milR, cy + Math.sin(0.5 + (headingAngle||0))*milR, 38, 'Barracks ×3', '#64b5f6');
+  if(v.towerLevel > 0){
+    const n = v.towerLevel + 1;
+    addLabel(buildingGroup, cx + Math.cos(1.4)*ecoR*1.05, cy + Math.sin(1.4)*ecoR*1.05, 50, 'Outpost ×'+n, '#b39ddb');
+  }
+  if(v.fortLevel > 0){
+    const fA = 1.7 + (headingAngle||0);
+    addLabel(buildingGroup, cx + Math.cos(fA)*milR*1.1, cy + Math.sin(fA)*milR*1.1, 80, 'Fort ×'+v.fortLevel, '#bcaaa4');
+  }
+  if(v.fwdTowers > 0 && headingAngle !== null){
+    const td = wallR*0.95 + (v.fwdTowers - 1)*15;
+    addLabel(buildingGroup, cx + Math.cos(headingAngle)*td, cy + Math.sin(headingAngle)*td, 50, 'Fwd Towers ×'+v.fwdTowers, '#ffb74d');
+  }
+  if(v.wallStrategy !== 5 && v.wallLevel > 0){
+    const labelAng = (headingAngle||0) + Math.PI;  // opposite the heading direction
+    addLabel(buildingGroup, cx + Math.cos(labelAng)*wallR*1.05, cy + Math.sin(labelAng)*wallR*1.05, 25, 'Walls — ' + profile.wallLabel, '#cfd8dc');
+  }
 
   // HUD
   document.getElementById('hudTitle').textContent = profile.name + ' — ' + profile.leader;
