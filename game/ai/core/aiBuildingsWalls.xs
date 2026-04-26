@@ -369,7 +369,7 @@ minInterval 30
 
    if (gLLWallStrategy == cLLWallStrategyMobileNoWalls)
    {
-      llLogDecision("WALL", "late walling declined — MobileNoWalls doctrine");
+      llLogDecision("WALL", "late walling declined - MobileNoWalls doctrine");
       xsDisableSelf();
       return;
    }

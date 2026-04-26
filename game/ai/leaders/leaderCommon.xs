@@ -457,7 +457,7 @@ void llAssignLeaderIdentity(void)
       // Loud, replay-parseable failure marker so a missing dispatch entry is
       // never silent. Emitted before llProbe() below so the probe also flags
       // it via the leader= field carrying the "unassigned-" prefix.
-      llLogEvent("LEADER", "UNASSIGNED civ=" + rvltName + " — add a dispatch entry to llAssignLeaderIdentity().");
+      llLogEvent("LEADER", "UNASSIGNED civ=" + rvltName + " - add a dispatch entry to llAssignLeaderIdentity().");
    }
 
    // Replay probe: one atomic line per AI captured into the .age3Yrec chat

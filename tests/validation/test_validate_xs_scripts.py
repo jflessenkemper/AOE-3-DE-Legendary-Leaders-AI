@@ -265,3 +265,53 @@ bool addBuilderToPlan(int planID = -1, int puid = -1, int numberBuilders = 1)
             "game/ai/core/aiUtilities.xs:3: helper call 'addBuilderToPlan' appears before any declaration in aiLoaderStandard include order",
             issues,
         )
+
+    def test_flags_non_ascii_inside_string_literals(self) -> None:
+        # Regression: a U+2014 em-dash inside a quoted log message caused the
+        # AoE3 DE XS tokenizer to crash with "Token Error 0008: STRING NOT
+        # TERMINATED" mid-game. Comments are still allowed to contain Unicode.
+        repo_temp = tempfile.TemporaryDirectory()
+        self.addCleanup(repo_temp.cleanup)
+
+        repo_root = Path(repo_temp.name)
+        ai_root = repo_root / "game" / "ai" / "core"
+        ai_root.mkdir(parents=True)
+        (ai_root / "bad.xs").write_text(
+            "// em-dash in comment is fine \u2014 ok\n"
+            "void f()\n"
+            "{\n"
+            "   aiChat(\"oops \u2014 bad\");\n"
+            "}\n",
+            encoding="utf-8",
+        )
+
+        issues = validate_xs_scripts(repo_root)
+        self.assertTrue(
+            any(
+                "non-ASCII character" in i and "U+2014" in i and "bad.xs:4" in i
+                for i in issues
+            ),
+            issues,
+        )
+
+    def test_allows_non_ascii_in_comments(self) -> None:
+        repo_temp = tempfile.TemporaryDirectory()
+        self.addCleanup(repo_temp.cleanup)
+
+        repo_root = Path(repo_temp.name)
+        ai_root = repo_root / "game" / "ai" / "core"
+        ai_root.mkdir(parents=True)
+        (ai_root / "ok.xs").write_text(
+            "// Wellington \u2014 Torres Vedras doctrine\n"
+            "/* multi-line \u2014 also fine */\n"
+            "void f()\n"
+            "{\n"
+            "   aiChat(\"plain ascii only\");\n"
+            "}\n",
+            encoding="utf-8",
+        )
+
+        issues = validate_xs_scripts(repo_root)
+        self.assertFalse(
+            any("non-ASCII" in i for i in issues), issues
+        )

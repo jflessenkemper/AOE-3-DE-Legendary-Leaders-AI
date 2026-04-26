@@ -273,6 +273,47 @@ def check_unsupported_builtins(file_path: Path, lines: list[str], repo_root: Pat
     return issues
 
 
+def check_non_ascii_in_strings(file_path: Path, lines: list[str], repo_root: Path) -> list[str]:
+    """The AoE3 DE XS tokenizer bails on non-ASCII bytes inside double-quoted
+    string literals — it raises ``Token Error 0008: STRING NOT TERMINATED`` and
+    the whole script fails to compile (see issues with em-dashes inside
+    log messages). We allow non-ASCII in comments, but reject it inside
+    string literals so this never reaches the runtime again."""
+
+    issues: list[str] = []
+    rel_path = repo_relative(file_path, repo_root)
+    in_block_comment = False
+
+    for index, line in enumerate(lines, start=1):
+        code, in_block_comment = strip_inline_block_comments(line, in_block_comment)
+        if "//" in code:
+            code = code.split("//", 1)[0]
+        # Walk only the parts inside double-quoted strings.
+        i = 0
+        in_string = False
+        while i < len(code):
+            ch = code[i]
+            if in_string:
+                if ch == "\\" and i + 1 < len(code):
+                    i += 2
+                    continue
+                if ch == '"':
+                    in_string = False
+                elif ord(ch) > 0x7E or ord(ch) < 0x20:
+                    issues.append(
+                        f"{rel_path}:{index}: non-ASCII character {ch!r} (U+{ord(ch):04X}) "
+                        f"inside string literal — XS tokenizer rejects multi-byte chars"
+                    )
+                    break  # one issue per line is enough
+                i += 1
+                continue
+            if ch == '"':
+                in_string = True
+            i += 1
+
+    return issues
+
+
 def check_unknown_xs_calls(file_path: Path, lines: list[str], repo_root: Path) -> list[str]:
     issues: list[str] = []
     rel_path = repo_relative(file_path, repo_root)
@@ -517,6 +558,7 @@ def validate_xs_scripts(repo_root: Path = REPO_ROOT) -> list[str]:
         issues.extend(check_duplicate_locals(file_path, lines, repo_root))
         issues.extend(check_unsupported_builtins(file_path, lines, repo_root))
         issues.extend(check_unknown_xs_calls(file_path, lines, repo_root))
+        issues.extend(check_non_ascii_in_strings(file_path, lines, repo_root))
 
     issues.extend(check_undefined_helper_calls(repo_root))
     issues.extend(check_undefined_cv_vars(repo_root))
