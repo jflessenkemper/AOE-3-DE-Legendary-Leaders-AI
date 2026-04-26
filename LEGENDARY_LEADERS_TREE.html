@@ -3659,57 +3659,48 @@ html.is-loading body>:not(#preloader){visibility:hidden}
 </script>
 <!-- PRELOADER-JS-END -->
 
-<!-- MAP-PLACEMENT-MODAL-START -->
+<!-- PLAYSTYLE-MODAL-START -->
 <style>
-.mp-btn{margin-left:10px;display:inline-flex;align-items:center;gap:6px;background:var(--accent2);color:var(--text);border:1px solid var(--border);padding:4px 10px;border-radius:4px;cursor:pointer;font-size:.78rem;vertical-align:middle;font-family:inherit;transition:background .12s,border-color .12s}
-.mp-btn:hover{background:var(--accent);color:#000;border-color:var(--accent)}
-.mp-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.78);backdrop-filter:blur(4px);z-index:2000;display:none;align-items:center;justify-content:center;padding:24px}
-.mp-backdrop.is-open{display:flex}
-.mp-dialog{background:#161616;border:1px solid var(--border);border-radius:8px;max-width:1320px;width:100%;max-height:94vh;overflow-y:auto;padding:22px;color:var(--text);box-shadow:0 14px 48px rgba(0,0,0,.6);position:relative}
-.mp-close{position:absolute;top:10px;right:14px;background:none;border:none;color:var(--text);font-size:1.4rem;cursor:pointer;line-height:1;padding:4px 8px;border-radius:4px}
-.mp-close:hover{background:var(--accent);color:#000}
-.mp-title{color:var(--accent);font-size:1.25rem;margin-bottom:2px}
-.mp-subtitle{color:var(--dim);font-size:.85rem;margin-bottom:14px}
-.mp-columns{display:grid;grid-template-columns:minmax(440px,1.4fr) minmax(340px,1fr);gap:18px;margin-bottom:14px}
-@media(max-width:820px){.mp-columns{grid-template-columns:1fr}}
-.mp-panel{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:12px}
-.mp-panel h3{font-size:.82rem;text-transform:uppercase;letter-spacing:.06em;color:var(--accent);margin-bottom:8px}
-.mp-grid-svg,.mp-diagram-svg{width:100%;height:auto;display:block;background:#0d0d0d;border:1px solid var(--border);border-radius:4px}
-.mp-legend{display:flex;flex-wrap:wrap;gap:6px 12px;margin-top:8px;font-size:.75rem;color:var(--dim)}
-.mp-legend span{display:inline-flex;align-items:center;gap:5px}
-.mp-legend i{display:inline-block;width:10px;height:10px;border-radius:2px}
-.mp-toggle-row{text-align:center;margin:14px 0 0}
-.mp-toggle-btn{background:var(--accent2);color:var(--text);border:1px solid var(--border);padding:8px 22px;border-radius:4px;cursor:pointer;font-size:.9rem;font-family:inherit;transition:background .12s,border-color .12s}
-.mp-toggle-btn:hover{background:var(--accent);color:#000;border-color:var(--accent)}
-.mp-table-wrap{display:none;margin-top:14px}
-.mp-table-wrap.is-open{display:block}
-.mp-table{width:100%;border-collapse:collapse;font-size:.82rem;font-family:'Cascadia Code','Fira Code',monospace}
-.mp-table th,.mp-table td{border:1px solid var(--border);padding:5px 10px;text-align:left}
-.mp-table th{background:#202020;color:var(--accent);font-weight:600;text-transform:uppercase;letter-spacing:.04em;font-size:.72rem}
-.mp-table td.mp-val{color:var(--tag-text)}
-.mp-table tr:hover td{background:#1c1c1c}
+.ps-btn{margin-left:10px;display:inline-flex;align-items:center;gap:6px;background:var(--accent2);color:var(--text);border:1px solid var(--border);padding:4px 10px;border-radius:4px;cursor:pointer;font-size:.78rem;vertical-align:middle;font-family:inherit;transition:background .12s,border-color .12s}
+.ps-btn:hover{background:var(--accent);color:#000;border-color:var(--accent)}
+.ps-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.78);backdrop-filter:blur(4px);z-index:2000;display:none;align-items:center;justify-content:center;padding:24px}
+.ps-backdrop.is-open{display:flex}
+.ps-dialog{background:#161616;border:1px solid var(--border);border-radius:8px;max-width:760px;width:100%;max-height:94vh;overflow-y:auto;padding:22px;color:var(--text);box-shadow:0 14px 48px rgba(0,0,0,.6);position:relative}
+.ps-close{position:absolute;top:10px;right:14px;background:none;border:none;color:var(--text);font-size:1.4rem;cursor:pointer;line-height:1;padding:4px 8px;border-radius:4px}
+.ps-close:hover{background:var(--accent);color:#000}
+.ps-title{color:var(--accent);font-size:1.25rem;margin-bottom:2px}
+.ps-subtitle{color:var(--dim);font-size:.85rem;margin-bottom:14px}
+.ps-pills{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.ps-pill{background:var(--accent2);color:var(--text);border:1px solid var(--border);border-radius:12px;padding:3px 10px;font-size:.72rem;letter-spacing:.04em}
+.ps-section{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:10px}
+.ps-section h3{font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:var(--accent);margin:0 0 6px}
+.ps-section ul{margin:0;padding-left:18px}
+.ps-section li{font-size:.88rem;line-height:1.45;color:var(--text);margin-bottom:3px}
+.ps-section li b{color:var(--accent);font-weight:600}
+.ps-toggle-row{text-align:center;margin:14px 0 0}
+.ps-toggle-btn{background:var(--accent2);color:var(--text);border:1px solid var(--border);padding:8px 22px;border-radius:4px;cursor:pointer;font-size:.9rem;font-family:inherit;transition:background .12s,border-color .12s}
+.ps-toggle-btn:hover{background:var(--accent);color:#000;border-color:var(--accent)}
+.ps-table-wrap{display:none;margin-top:14px}
+.ps-table-wrap.is-open{display:block}
+.ps-table{width:100%;border-collapse:collapse;font-size:.82rem;font-family:'Cascadia Code','Fira Code',monospace}
+.ps-table th,.ps-table td{border:1px solid var(--border);padding:5px 10px;text-align:left}
+.ps-table th{background:#202020;color:var(--accent);font-weight:600;text-transform:uppercase;letter-spacing:.04em;font-size:.72rem}
+.ps-table td.ps-val{color:var(--tag-text)}
+.ps-table tr:hover td{background:#1c1c1c}
 </style>
 
-<div class="mp-backdrop" id="mpBackdrop" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="mpTitle">
-  <div class="mp-dialog" id="mpDialog">
-    <button class="mp-close" type="button" aria-label="Close" id="mpClose">&times;</button>
-    <div class="mp-title" id="mpTitle">Map Placement</div>
-    <div class="mp-subtitle" id="mpSubtitle"></div>
-    <div class="mp-columns">
-      <div class="mp-panel">
-        <h3>Enforced placement grid</h3>
-        <svg class="mp-grid-svg" id="mpGrid" viewBox="0 0 600 600" preserveAspectRatio="xMidYMid meet" aria-label="AI placement grid"></svg>
-      </div>
-      <div class="mp-panel">
-        <h3>20-variable tuning diagram</h3>
-        <svg class="mp-diagram-svg" id="mpDiagram" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid meet" aria-label="20-variable tuning diagram"></svg>
-      </div>
+<div class="ps-backdrop" id="psBackdrop" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="psTitle">
+  <div class="ps-dialog" id="psDialog">
+    <button class="ps-close" type="button" aria-label="Close" id="psClose">&times;</button>
+    <div class="ps-title" id="psTitle">Playstyle</div>
+    <div class="ps-subtitle" id="psSubtitle"></div>
+    <div class="ps-pills" id="psPills"></div>
+    <div id="psSections"></div>
+    <div class="ps-toggle-row">
+      <button class="ps-toggle-btn" type="button" id="psToggleTable">Show raw variable table</button>
     </div>
-    <div class="mp-toggle-row">
-      <button class="mp-toggle-btn" type="button" id="mpToggleTable">Show variable table</button>
-    </div>
-    <div class="mp-table-wrap" id="mpTableWrap">
-      <table class="mp-table" id="mpTable"></table>
+    <div class="ps-table-wrap" id="psTableWrap">
+      <table class="ps-table" id="psTable"></table>
     </div>
   </div>
 </div>
@@ -3823,12 +3814,14 @@ window.NATION_PROFILES = (function(){
 </script>
 
 <script>
-/* MAP-PLACEMENT-UI
-   Renders grid + diagram + table for the currently-selected nation.
-   Looks up profiles by leader key (data-leader attribute injected into
-   each .nation-node or by match against the summary's visible text).
+/* PLAYSTYLE-UI
+   Reads window.NATION_PROFILES (defined above) and renders a textual
+   playstyle panel for the selected nation. Bullets are derived
+   deterministically from the same XS-mirrored variables that drive
+   the AI in-engine, so what the panel says is what the AI does.
 */
 (function(){
+  // raw-variable table labels (mirrors XS knob inventory)
   var VAR_LABELS = [
     ["rushBoom","Rush→Boom",-1,1],
     ["offenseDefense","Offense→Defense",-1,1],
@@ -3847,625 +3840,161 @@ window.NATION_PROFILES = (function(){
     ["wallLevel","Wall level",0,5],
     ["wallStrategy","Wall strategy",0,5],
     ["terrainPrimary","Terrain primary",0,8],
+    ["terrainSecondary","Terrain secondary",0,8],
     ["heading","Expansion heading",0,7],
     ["terrainBias","Terrain bias",0,1],
     ["headingBias","Heading bias",0,1]
   ];
+  var TERR=["Any","Coast","River","Forest edge","Plain","Highland","Wetland","Desert/Oasis","Jungle"];
+  var HEAD=["Any","Along coast","Upriver","Frontier push","Island hop","Outward rings","Follow trade route","Defensive"];
+  var WALL=["Fortress ring","Chokepoint segments","Coastal batteries","Frontier palisades","Urban barricade","No walls (mobile)"];
 
-  function norm(v,lo,hi){ if(hi===lo) return 0; var n=(v-lo)/(hi-lo); if(n<0)n=0; if(n>1)n=1; return n; }
-  function esc(s){ return String(s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
-
-  /* ────────────────────────────────────────────────────────────────────
-     SHARED CANONICAL MAP — continuous space (AoE3 DE has no tile grid).
-     600x600 viewport. Every terrain biome and resource type the AI can
-     prefer is on the canvas, so any nation's profile renders meaningfully:
-       • Deep water NW + island + whale pod (IslandHop heading target)
-       • Shallow north coast with fish school (naval civs, AlongCoast)
-       • River NW→SE with explicit upstream direction (Upriver heading)
-       • NW wetland marsh
-       • W desert band with oasis (Desert/Oasis terrain)
-       • NE mature forest, SW smaller stand (Forest edge terrain)
-       • S jungle with palms (Jungle terrain)
-       • SE highland cliffs with a chokepoint gap (Highland terrain;
-         supports Chokepoint-segment wall strategy visually)
-       • 3 gold deposits, 2 hunt herds, 1 berry patch
-       • Trade route SW→NE with 3 sockets (FollowTradeRoute, Trade-Node)
-       • 3 native settlements (one per biome)
-       • East-edge enemy frontier marker (FrontierPush heading)
-       • Spawn TC at (300, 330) — every AI starts here; biased anchor slides
-         toward the nation's preferred terrain, then the heading bias adds
-         a directional drift. Buildings render at AoE3 footprint sizes
-         (TC 80x80, House 28x28, Outpost 24x32, Fort 90x90, Wall 10x10).
-     No visible tile grid — AoE3 DE places buildings in continuous space.
-  ─────────────────────────────────────────────────────────────────── */
-  var MAP_W = 600, MAP_H = 600;
-  var SPAWN_TC = { x: 300, y: 300 };  // TRUE CENTER — Bayou "Mid Island" convention
-  /* Layout follows base-game Bayou: Gulf on N, bayou inlet snaking from NW
-     Gulf south through map, dry hummock at center, cypress clumps, limestone
-     bluff on E, native settlements at compass points. Anchors are placed on
-     visible patches of each biome so the AI's bias drag lands somewhere
-     readable. */
-  var FEATURE = {
-    coast:    { x: 300, y:  35 },   // open Gulf to the N
-    river:    { x: 250, y: 290 },   // on the bayou inlet, just W of spawn
-    forest:   { x: 470, y: 130 },   // NE cypress dense
-    plain:    { x: 300, y: 300 },   // spawn hummock (no drag)
-    highland: { x: 520, y: 290 },   // E limestone bluff (between cliffs)
-    wetland:  { x: 180, y: 200 },   // NW marsh body, broad
-    desert:   { x:  60, y: 220 },   // W coastal sand barrier
-    jungle:   { x: 370, y: 545 }    // S dense cypress band
-  };
-  var HEADING_TARGET = {
-    alongCoast: { x: 555, y:  35 },  // E along Gulf coast
-    upriver:    { x: 380, y: 560 },  // S end of bayou inlet
-    frontier:   { x: 575, y: 300 },  // due E enemy edge (through chokepoint)
-    islandHop:  { x:  55, y:  35 },  // NW Gulf island
-    outward:    null,
-    trade:      { x:  90, y: 540 },  // SW trade socket
-    defensive:  null
-  };
-  var TERRAIN_NAME = ["any","coast","river","forest","plain","highland","wetland","desert","jungle"];
-
-  function terrainAnchor(tId){
-    if(tId===1) return FEATURE.coast;
-    if(tId===2) return FEATURE.river;
-    if(tId===3) return FEATURE.forest;
-    if(tId===4) return FEATURE.plain;
-    if(tId===5) return FEATURE.highland;
-    if(tId===6) return FEATURE.wetland;
-    if(tId===7) return FEATURE.desert;
-    if(tId===8) return FEATURE.jungle;
-    return SPAWN_TC;
+  // Bullet generators per section. Deterministic, from numeric knobs.
+  function bulletsTerrain(p){
+    var v=p.v, out=[];
+    out.push("Anchors on <b>"+TERR[v.terrainPrimary]+"</b> with <b>"+TERR[v.terrainSecondary]+"</b> as fallback.");
+    out.push("Expands <b>"+HEAD[v.heading]+"</b> from the spawn TC.");
+    var tStr = v.terrainBias>=0.5?"strong":(v.terrainBias>=0.3?"moderate":(v.terrainBias>=0.15?"light":"minimal"));
+    var hStr = v.headingBias>=0.5?"strong":(v.headingBias>=0.3?"moderate":(v.headingBias>=0.15?"light":"minimal"));
+    out.push("Terrain pull is <b>"+tStr+"</b> ("+v.terrainBias.toFixed(2)+"), heading pull is <b>"+hStr+"</b> ("+v.headingBias.toFixed(2)+").");
+    if(v.civicAnchor) out.push("Civic core is <b>tight</b> — non-military, non-house, non-TC plans cluster ~0.65× closer to the TC than default.");
+    return out;
   }
-  function headingAnchor(hId){
-    if(hId===1) return HEADING_TARGET.alongCoast;
-    if(hId===2) return HEADING_TARGET.upriver;
-    if(hId===3) return HEADING_TARGET.frontier;
-    if(hId===4) return HEADING_TARGET.islandHop;
-    if(hId===6) return HEADING_TARGET.trade;
-    return null; // any / outward / defensive → no heading drag
+  function bulletsTempo(p){
+    var v=p.v, out=[];
+    if(v.rushBoom>=0.3) out.push("<b>Rushes</b> — Age-1/2 military pressure prioritized over economy.");
+    else if(v.rushBoom>=0.05) out.push("<b>Mixed tempo</b> — slight aggression but won't sacrifice eco.");
+    else if(v.rushBoom<=-0.3) out.push("<b>Booms</b> — bunkers economy and ages up before fighting.");
+    else out.push("<b>Standard tempo</b> — balanced economy/military through Age 2.");
+    if(v.ecoMult>=1.3) out.push("Spreads economy <b>wide</b> ("+v.ecoMult.toFixed(2)+"×) — many small gathering nodes.");
+    else if(v.ecoMult<=0.9) out.push("Keeps economy <b>compact</b> ("+v.ecoMult.toFixed(2)+"×) — easier to defend, fewer raid surfaces.");
+    if(v.houseMult>=1.2) out.push("Houses scatter widely ("+v.houseMult.toFixed(2)+"×) — pop curve catches up after expansion.");
+    else if(v.houseMult<=0.8) out.push("Houses cluster near TC ("+v.houseMult.toFixed(2)+"×) — civilian core is dense.");
+    return out;
   }
-  function blend(a, b, s){
-    if(!a) return b; if(!b) return a;
-    return { x: a.x*(1-s) + b.x*s, y: a.y*(1-s) + b.y*s };
+  function bulletsCombat(p){
+    var v=p.v, out=[];
+    if(v.offenseDefense>=0.6) out.push("<b>Aggressive doctrine</b> — looks for fights, leaves the wall to attack.");
+    else if(v.offenseDefense>=0.3) out.push("<b>Forward-leaning</b> — controls the map but doesn't overcommit.");
+    else if(v.offenseDefense<=0.0) out.push("<b>Defensive doctrine</b> — turtles and counterpunches.");
+    else out.push("<b>Reactive</b> — pushes when it scouts a weak opponent, holds otherwise.");
+    if(v.milMult<=0.85) out.push("Military buildings are <b>tight</b> ("+v.milMult.toFixed(2)+"×) — barracks/stables stack near production core.");
+    else if(v.milMult>=1.1) out.push("Military buildings spread out ("+v.milMult.toFixed(2)+"×) — multiple production fronts.");
+    return out;
+  }
+  function bulletsComp(p){
+    var v=p.v, out=[];
+    var picks=[];
+    if(v.biasInf>=0.75) picks.push("<b>infantry-heavy</b>");
+    else if(v.biasInf>=0.5) picks.push("solid infantry line");
+    if(v.biasCav>=0.6) picks.push("<b>cavalry wedge</b>");
+    else if(v.biasCav>=0.4) picks.push("cavalry support");
+    if(v.biasArt>=0.7) picks.push("<b>artillery train</b>");
+    else if(v.biasArt>=0.4) picks.push("siege support");
+    else if(v.biasArt<=0.0) picks.push("minimal artillery");
+    if(picks.length===0) picks.push("balanced composition");
+    out.push("Composition: "+picks.join(", ")+".");
+    if(v.biasNative>=0.4) out.push("Heavy <b>native ally</b> use ("+v.biasNative.toFixed(2)+") — recruits from trading posts.");
+    else if(v.biasNative<=-0.2) out.push("Avoids native units — sticks to colonial roster.");
+    return out;
+  }
+  function bulletsEcon(p){
+    var v=p.v, out=[];
+    if(v.biasTrade>=0.5) out.push("<b>Trade-route focused</b> ("+v.biasTrade.toFixed(2)+") — trading posts are a top-3 build target.");
+    else if(v.biasTrade<=-0.3) out.push("Largely <b>ignores trade routes</b> ("+v.biasTrade.toFixed(2)+") — gathers from villagers + crates.");
+    if(v.tcMult>=1.3) out.push("Sets up <b>extra Town Centers</b> aggressively ("+v.tcMult.toFixed(2)+"×) — wide map presence.");
+    else if(v.tcMult<=0.9) out.push("Keeps to <b>one or two TCs</b> ("+v.tcMult.toFixed(2)+"×) — concentrated economy.");
+    return out;
+  }
+  function bulletsDef(p){
+    var v=p.v, out=[];
+    var towerStr=["no towers","scout-line towers only","Age-2 perimeter towers","heavy tower coverage","fortified tower belt"][Math.min(4,v.towerLevel)];
+    var fortStr=["no forts","late-game outpost fort","Age-3 forward fort","fortress chain"][Math.min(3,v.fortLevel)];
+    out.push("Wall doctrine: <b>"+WALL[v.wallStrategy]+"</b> at level <b>"+v.wallLevel+"/5</b>.");
+    out.push("Static defense: "+towerStr+" + "+fortStr+".");
+    if(v.fwdTowers>=3) out.push("Plants <b>"+v.fwdTowers+" forward towers</b> on the enemy-ward edge of the base.");
+    else if(v.fwdTowers>=1) out.push(v.fwdTowers+" forward tower"+(v.fwdTowers>1?"s":"")+" on the push axis.");
+    return out;
   }
 
-  /* ── Reusable SVG glyphs ─────────────────────────────────────────── */
-  function gTree(x,y){
-    return '<rect x="'+(x-2)+'" y="'+(y+2)+'" width="4" height="6" fill="#5d4037"/>'+
-           '<polygon points="'+x+','+(y-12)+' '+(x-9)+','+(y+4)+' '+(x+9)+','+(y+4)+'" fill="#4a8c3d"/>'+
-           '<polygon points="'+x+','+(y-6)+' '+(x-7)+','+(y+2)+' '+(x+7)+','+(y+2)+'" fill="#5fa050"/>';
-  }
-  function gPalm(x,y){
-    var s=[];
-    s.push('<rect x="'+(x-2)+'" y="'+(y-2)+'" width="3" height="14" fill="#6d4c41"/>');
-    // four fronds radiating
-    var a=[-0.6,-1.4,-1.9,-2.5];
-    for(var i=0;i<a.length;i++){
-      var fx = x + Math.cos(a[i])*14, fy = y - 4 + Math.sin(a[i])*8;
-      s.push('<path d="M '+x+' '+(y-3)+' Q '+((x+fx)/2)+' '+((y-9)+Math.sin(a[i])*4)+' '+fx+' '+fy+'" stroke="#43a047" stroke-width="3" fill="none" stroke-linecap="round"/>');
-    }
-    return s.join("");
-  }
-  function gHunt(x,y){
-    return '<ellipse cx="'+x+'" cy="'+y+'" rx="9" ry="5" fill="#5d4037"/>'+
-           '<rect x="'+(x-7)+'" y="'+(y+3)+'" width="2" height="4" fill="#3e2723"/>'+
-           '<rect x="'+(x+5)+'" y="'+(y+3)+'" width="2" height="4" fill="#3e2723"/>'+
-           '<circle cx="'+(x-8)+'" cy="'+(y-2)+'" r="3" fill="#5d4037"/>';
-  }
-  function gFish(x,y){
-    return '<path d="M '+x+' '+y+' q 8 -4 14 0 q -6 4 -14 0 z" fill="#80deea" opacity="0.85"/>'+
-           '<polygon points="'+x+','+y+' '+(x-5)+','+(y-3)+' '+(x-5)+','+(y+3)+'" fill="#80deea" opacity="0.85"/>';
-  }
-  function gWhale(x,y){
-    return '<ellipse cx="'+x+'" cy="'+y+'" rx="22" ry="9" fill="#37474f"/>'+
-           '<polygon points="'+(x-22)+','+y+' '+(x-30)+','+(y-7)+' '+(x-30)+','+(y+7)+'" fill="#37474f"/>'+
-           '<path d="M '+(x+8)+' '+(y-5)+' q -2 -8 4 -10" stroke="#b0bec5" stroke-width="2" fill="none" stroke-linecap="round"/>';
-  }
-  function gBerry(x,y){
-    var s=['<circle cx="'+x+'" cy="'+y+'" r="9" fill="#2e5c2e"/>'];
-    var d=[[0,-3],[-4,1],[4,1],[-2,4],[2,4]];
-    for(var i=0;i<d.length;i++){
-      s.push('<circle cx="'+(x+d[i][0])+'" cy="'+(y+d[i][1])+'" r="2" fill="#c62828"/>');
-    }
-    return s.join("");
-  }
-  function gGoldMine(x,y){
-    // 24x24 footprint
-    return '<rect x="'+(x-12)+'" y="'+(y-12)+'" width="24" height="24" rx="3" fill="#2c2520" stroke="#1a1410" stroke-width="1.5"/>'+
-           '<polygon points="'+(x-7)+','+(y-4)+' '+(x-2)+','+(y-7)+' '+(x+1)+','+(y-2)+' '+(x-3)+','+(y+1)+'" fill="#ffd54f"/>'+
-           '<polygon points="'+(x+1)+','+(y+2)+' '+(x+7)+','+(y)+' '+(x+8)+','+(y+6)+' '+(x+2)+','+(y+8)+'" fill="#ffc107"/>'+
-           '<polygon points="'+(x-8)+','+(y+5)+' '+(x-3)+','+(y+4)+' '+(x-2)+','+(y+9)+' '+(x-8)+','+(y+9)+'" fill="#ffb300"/>';
-  }
-  function gTradeSocket(x,y){
-    // 28x28 stone socket with X
-    return '<rect x="'+(x-14)+'" y="'+(y-14)+'" width="28" height="28" rx="2" fill="#5d4037" stroke="#3e2723" stroke-width="2"/>'+
-           '<line x1="'+(x-9)+'" y1="'+(y-9)+'" x2="'+(x+9)+'" y2="'+(y+9)+'" stroke="#ffb74d" stroke-width="3"/>'+
-           '<line x1="'+(x+9)+'" y1="'+(y-9)+'" x2="'+(x-9)+'" y2="'+(y+9)+'" stroke="#ffb74d" stroke-width="3"/>';
-  }
-  function gNativeVillage(x,y){
-    // 3 small huts in a triangle
-    var s=[];
-    var huts=[[0,-6],[-9,5],[9,5]];
-    for(var i=0;i<huts.length;i++){
-      var hx = x + huts[i][0], hy = y + huts[i][1];
-      s.push('<rect x="'+(hx-6)+'" y="'+(hy-3)+'" width="12" height="8" fill="#8d6e63"/>');
-      s.push('<polygon points="'+hx+','+(hy-9)+' '+(hx-7)+','+(hy-3)+' '+(hx+7)+','+(hy-3)+'" fill="#bcaaa4"/>');
-    }
-    return s.join("");
-  }
-  function gTreasure(x,y){
-    return '<polygon points="'+x+','+(y-7)+' '+(x+2)+','+(y-2)+' '+(x+7)+','+(y-2)+' '+(x+3)+','+(y+1)+' '+(x+5)+','+(y+6)+' '+x+','+(y+3)+' '+(x-5)+','+(y+6)+' '+(x-3)+','+(y+1)+' '+(x-7)+','+(y-2)+' '+(x-2)+','+(y-2)+'" fill="#ffd54f" stroke="#bf8f00" stroke-width="1"/>';
-  }
-  function gReed(x,y){
-    var s=[];
-    for(var i=0;i<4;i++){
-      s.push('<line x1="'+(x-8+i*5)+'" y1="'+(y+5)+'" x2="'+(x-9+i*5)+'" y2="'+(y-7)+'" stroke="#8bc34a" stroke-width="2"/>');
-    }
-    return s.join("");
-  }
-  // Buildings — true AoE3 footprint proportions.
-  function gTC(x,y){
-    var s=[];
-    // 80x80 footprint, anchor at center
-    s.push('<rect x="'+(x-40)+'" y="'+(y-40)+'" width="80" height="80" rx="2" fill="#b71c1c" stroke="#fff8e1" stroke-width="3"/>');
-    // corner towers
-    var corners=[[-32,-32],[32,-32],[-32,32],[32,32]];
-    for(var i=0;i<corners.length;i++){
-      var cx=x+corners[i][0], cy=y+corners[i][1];
-      s.push('<rect x="'+(cx-7)+'" y="'+(cy-7)+'" width="14" height="14" fill="#7f0000" stroke="#fff8e1" stroke-width="1.5"/>');
-    }
-    // central banner pole
-    s.push('<line x1="'+x+'" y1="'+(y-22)+'" x2="'+x+'" y2="'+(y+22)+'" stroke="#fff8e1" stroke-width="2"/>');
-    s.push('<polygon points="'+x+','+(y-22)+' '+(x+14)+','+(y-18)+' '+x+','+(y-14)+'" fill="#fff8e1"/>');
-    s.push('<text x="'+x+'" y="'+(y+5)+'" fill="#fff8e1" font-family="monospace" font-size="13" font-weight="bold" text-anchor="middle">TC</text>');
-    return s.join("");
-  }
-  function gHouse(x,y){
-    // 28x28, base + roof
-    return '<rect x="'+(x-14)+'" y="'+(y-7)+'" width="28" height="21" fill="#bcaaa4" stroke="#4e342e" stroke-width="1.2"/>'+
-           '<polygon points="'+x+','+(y-15)+' '+(x-16)+','+(y-7)+' '+(x+16)+','+(y-7)+'" fill="#fdd835" stroke="#4e342e" stroke-width="1.2"/>'+
-           '<rect x="'+(x-3)+'" y="'+(y+4)+'" width="6" height="10" fill="#4e342e"/>';
-  }
-  function gMill(x,y){
-    // 32x32 economy building
-    return '<rect x="'+(x-16)+'" y="'+(y-12)+'" width="32" height="24" fill="#a1887f" stroke="#3e2723" stroke-width="1.2"/>'+
-           '<polygon points="'+(x-16)+','+(y-12)+' '+x+','+(y-22)+' '+(x+16)+','+(y-12)+'" fill="#43a047" stroke="#1b5e20" stroke-width="1.2"/>'+
-           '<circle cx="'+(x+12)+'" cy="'+y+'" r="7" fill="none" stroke="#3e2723" stroke-width="1.5"/>'+
-           '<line x1="'+(x+12)+'" y1="'+(y-7)+'" x2="'+(x+12)+'" y2="'+(y+7)+'" stroke="#3e2723" stroke-width="1.5"/>'+
-           '<line x1="'+(x+5)+'" y1="'+y+'" x2="'+(x+19)+'" y2="'+y+'" stroke="#3e2723" stroke-width="1.5"/>';
-  }
-  function gBarracks(x,y){
-    // 36x28 military
-    return '<rect x="'+(x-18)+'" y="'+(y-10)+'" width="36" height="20" fill="#1e88e5" stroke="#0d47a1" stroke-width="1.5"/>'+
-           '<rect x="'+(x-22)+'" y="'+(y-14)+'" width="44" height="6" fill="#0d47a1"/>'+
-           '<line x1="'+(x-9)+'" y1="'+(y-3)+'" x2="'+(x+9)+'" y2="'+(y+5)+'" stroke="#fff8e1" stroke-width="2"/>'+
-           '<line x1="'+(x+9)+'" y1="'+(y-3)+'" x2="'+(x-9)+'" y2="'+(y+5)+'" stroke="#fff8e1" stroke-width="2"/>';
-  }
-  function gOutpost(x,y){
-    // 24x32 tall tower
-    return '<rect x="'+(x-12)+'" y="'+(y-16)+'" width="24" height="32" fill="#b39ddb" stroke="#311b92" stroke-width="1.5"/>'+
-           '<rect x="'+(x-14)+'" y="'+(y-19)+'" width="28" height="5" fill="#311b92"/>'+
-           '<polygon points="'+(x-14)+','+(y-19)+' '+(x-10)+','+(y-23)+' '+(x-6)+','+(y-19)+' '+(x-2)+','+(y-23)+' '+(x+2)+','+(y-19)+' '+(x+6)+','+(y-23)+' '+(x+10)+','+(y-19)+' '+(x+14)+','+(y-23)+'" fill="#311b92"/>'+
-           '<rect x="'+(x-3)+'" y="'+(y-3)+'" width="6" height="10" fill="#311b92"/>';
-  }
-  function gFwdTower(x,y){
-    return '<rect x="'+(x-10)+'" y="'+(y-13)+'" width="20" height="26" fill="#ffb74d" stroke="#bf360c" stroke-width="1.5"/>'+
-           '<rect x="'+(x-12)+'" y="'+(y-16)+'" width="24" height="4" fill="#bf360c"/>'+
-           '<polygon points="'+(x-12)+','+(y-16)+' '+(x-8)+','+(y-19)+' '+(x-4)+','+(y-16)+' '+x+','+(y-19)+' '+(x+4)+','+(y-16)+' '+(x+8)+','+(y-19)+' '+(x+12)+','+(y-16)+'" fill="#bf360c"/>';
-  }
-  function gFort(x,y){
-    var s=[];
-    // 90x90 with corner bastions
-    s.push('<rect x="'+(x-45)+'" y="'+(y-45)+'" width="90" height="90" rx="4" fill="#4e342e" stroke="#fff8e1" stroke-width="3"/>');
-    // 4 angular corner bastions (star-fort style)
-    var cs=[[-45,-45],[45,-45],[-45,45],[45,45]];
-    for(var i=0;i<cs.length;i++){
-      var bx=x+cs[i][0], by=y+cs[i][1];
-      s.push('<polygon points="'+bx+','+(by-12)+' '+(bx+12)+','+by+' '+bx+','+(by+12)+' '+(bx-12)+','+by+'" fill="#3e2723" stroke="#fff8e1" stroke-width="1.5"/>');
-    }
-    s.push('<rect x="'+(x-18)+'" y="'+(y-18)+'" width="36" height="36" fill="#6d4c41" stroke="#fff8e1" stroke-width="1.5"/>');
-    s.push('<text x="'+x+'" y="'+(y+5)+'" fill="#fff8e1" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">FORT</text>');
-    return s.join("");
-  }
-  function gWallSeg(x,y){
-    return '<rect x="'+(x-5)+'" y="'+(y-5)+'" width="10" height="10" fill="#9e9e9e" stroke="#424242" stroke-width="1"/>';
-  }
-
-  /* Draw the fixed base map (identical for every nation).
-     Bayou-themed: open Gulf to the N, bayou inlet snaking from NW Gulf
-     south through the map, dry hummock at center (spawn), extensive
-     wetland marsh, cypress clumps, limestone bluff on E with a real
-     chokepoint gap, NW Gulf barrier dunes (small "desert" pocket), south
-     dense cypress band acts as jungle. Trade route SW->NE diagonal,
-     3 native villages at compass-point hummocks per Bayou convention. */
-  function baseMapMarkup(){
-    var p = [];
-
-    /* Land base: marshy bayou green */
-    p.push('<rect x="0" y="0" width="'+MAP_W+'" height="'+MAP_H+'" fill="#536b3a"/>');
-
-    /* Open Gulf — north band, deeper on the W side */
-    p.push('<rect x="0" y="0" width="'+MAP_W+'" height="60" fill="#1976d2"/>');
-    /* Deep water NW corner (Gulf) */
-    p.push('<polygon points="0,0 200,0 110,75 0,90" fill="#0d47a1"/>');
-    /* Wave hatching */
-    for(var w=0;w<6;w++){
-      p.push('<path d="M '+(w*110)+' '+(20+w%2*20)+' q 28 -10 56 0 t 56 0" fill="none" stroke="#90caf9" stroke-width="1.2" opacity="0.55"/>');
-    }
-    /* Beach */
-    p.push('<path d="M 0 60 L '+MAP_W+' 60" stroke="#fbc02d" stroke-width="3" opacity="0.55"/>');
-    p.push('<path d="M 0 64 Q 100 70 200 66 T 400 68 T 600 65" stroke="#e6c08a" stroke-width="6" fill="none" opacity="0.45"/>');
-
-    /* Gulf barrier islands NW (Bayou: "Mid Small Island", "King's Island"
-       chain). Doubles as the IslandHop target. */
-    p.push('<ellipse cx="55" cy="35" rx="36" ry="14" fill="#6a8a48"/>');
-    p.push('<polygon points="55,18 48,32 62,32" fill="#4a8c3d"/>');
-    p.push('<rect x="53" y="30" width="3" height="5" fill="#5d4037"/>');
-    p.push('<ellipse cx="115" cy="50" rx="20" ry="8" fill="#6a8a48"/>');
-    /* Whale + fish */
-    p.push(gWhale(35, 75));
-    p.push(gFish(420, 25));
-    p.push(gFish(460, 38));
-    p.push(gFish(495, 22));
-    p.push(gFish(530, 36));
-
-    /* Bayou inlet — main waterway. Enters NW Gulf at (90, 60), winds south
-       to (250, 290) past spawn, then SE to S edge. */
-    p.push('<path d="M 90 60 Q 130 150 200 220 Q 250 290 280 380 Q 320 480 380 600" fill="none" stroke="#4fc3f7" stroke-width="34" opacity="0.65" stroke-linecap="round"/>');
-    p.push('<path d="M 90 60 Q 130 150 200 220 Q 250 290 280 380 Q 320 480 380 600" fill="none" stroke="#1976d2" stroke-width="2" opacity="0.7"/>');
-    /* Flow arrows downstream (S/SE) */
-    var flow=[[155,170],[225,260],[265,330],[300,440],[345,520]];
-    for(var fi=0;fi<flow.length;fi++){
-      var fx=flow[fi][0], fy=flow[fi][1];
-      p.push('<polygon points="'+(fx-4)+','+fy+' '+fx+','+(fy+8)+' '+(fx+4)+','+fy+'" fill="#bbdefb" opacity="0.85"/>');
-    }
-
-    /* Bayou wetland — extensive marsh wrapping the inlet, especially NW */
-    p.push('<ellipse cx="180" cy="190" rx="115" ry="70" fill="#3f5d4a" opacity="0.85"/>');
-    p.push('<ellipse cx="160" cy="135" rx="70" ry="35" fill="#3f5d4a" opacity="0.7"/>');
-    p.push('<ellipse cx="270" cy="350" rx="65" ry="35" fill="#3f5d4a" opacity="0.65"/>');
-    p.push(gReed(130,175));
-    p.push(gReed(180,185));
-    p.push(gReed(220,200));
-    p.push(gReed(155,235));
-    p.push(gReed(265,360));
-
-    /* W coastal sand barrier — small Gulf-side dune (our "desert") */
-    p.push('<ellipse cx="55" cy="220" rx="50" ry="55" fill="#d4b56b" opacity="0.85"/>');
-    p.push('<ellipse cx="55" cy="220" rx="50" ry="55" fill="none" stroke="#b8924a" stroke-width="1.5" stroke-dasharray="4 5" opacity="0.5"/>');
-    p.push('<path d="M 8 195 Q 35 188 65 195 T 110 200" stroke="#a87f3d" stroke-width="2" fill="none" opacity="0.5"/>');
-    p.push(gPalm(35, 215));
-    p.push(gPalm(80, 225));
-    /* Tiny oasis pool */
-    p.push('<ellipse cx="55" cy="225" rx="14" ry="9" fill="#29b6f6" opacity="0.9"/>');
-    p.push('<ellipse cx="55" cy="225" rx="14" ry="9" fill="none" stroke="#0277bd" stroke-width="1.2"/>');
-
-    /* NE cypress dense (forest anchor) */
-    var neForest = [ [415,85],[445,110],[480,90],[510,115],[440,135],[475,150],[510,135],[540,125],[420,165],[455,180],[490,175],[520,165],[460,210],[500,205] ];
-    for(var f=0;f<neForest.length;f++) p.push(gTree(neForest[f][0], neForest[f][1]));
-
-    /* SW cypress (smaller stand) */
-    var swForest = [ [110,440],[145,460],[85,475],[125,485],[160,470],[100,500],[145,510] ];
-    for(var f2=0;f2<swForest.length;f2++) p.push(gTree(swForest[f2][0], swForest[f2][1]));
-
-    /* South dense cypress band — reads as jungle */
-    p.push('<ellipse cx="370" cy="555" rx="160" ry="42" fill="#1b4d2e" opacity="0.95"/>');
-    var palms=[[280,560],[320,548],[360,558],[400,548],[440,560],[470,548]];
-    for(var pi=0;pi<palms.length;pi++) p.push(gPalm(palms[pi][0], palms[pi][1]));
-
-    /* Highland — E limestone bluff in TWO sections with chokepoint gap
-       at y=290..325. The river curves around its W side. */
-    /* North cliff (above gap) */
-    p.push('<polygon points="450,200 500,180 565,200 580,260 580,290 470,290" fill="#5d4037"/>');
-    p.push('<polygon points="465,210 498,192 555,210 565,255 565,283 478,283" fill="#795548"/>');
-    p.push('<polygon points="485,222 510,208 535,222 545,250 525,275 495,272" fill="#8d6e63"/>');
-    /* South cliff */
-    p.push('<polygon points="470,325 530,308 580,325 580,400 460,400" fill="#5d4037"/>');
-    p.push('<polygon points="478,335 525,318 570,335 570,390 470,388" fill="#795548"/>');
-    p.push('<polygon points="495,346 520,332 545,346 553,375 510,377" fill="#8d6e63"/>');
-    /* Chokepoint pass — only land path eastward */
-    p.push('<path d="M 458 305 Q 510 310 575 305" stroke="#bcaaa4" stroke-width="2.5" fill="none" stroke-dasharray="3 5" opacity="0.7"/>');
-
-    /* Gold deposits — on dry hummocks */
-    p.push(gGoldMine(115, 285));   // wetland/desert edge
-    p.push(gGoldMine(395, 130));   // NE forest edge
-    p.push(gGoldMine(425, 460));   // between river and S highland
-
-    /* Hunt herds — turkey on plain near spawn, deer at SW forest edge */
-    p.push(gHunt(330, 215));
-    p.push(gHunt(355, 230));
-    p.push(gHunt(345, 250));
-    p.push(gHunt(170, 410));
-    p.push(gHunt(195, 425));
-
-    /* Berry patch */
-    p.push(gBerry(395, 320));
-    p.push(gBerry(410, 335));
-
-    /* Trade route SW->NE diagonal */
-    p.push('<line x1="90" y1="540" x2="555" y2="120" stroke="#8d6e63" stroke-width="3" stroke-dasharray="9 7" opacity="0.7"/>');
-    p.push(gTradeSocket(90, 540));
-    p.push(gTradeSocket(330, 330));
-    p.push(gTradeSocket(555, 120));
-
-    /* Native settlements — Bayou puts them on island hummocks at compass
-       points. We do 3: NW plain, S jungle edge, E highland foot. */
-    p.push(gNativeVillage(135, 290));  // NW plain hummock
-    p.push(gNativeVillage(265, 530));  // S jungle edge
-    p.push(gNativeVillage(440, 360));  // E highland foot
-
-    /* Treasures (neutral guarded resource piles) */
-    p.push(gTreasure(330, 130));
-    p.push(gTreasure(415, 235));
-    p.push(gTreasure(225, 410));
-
-    /* East enemy frontier — vertical red band */
-    p.push('<line x1="'+(MAP_W-5)+'" y1="0" x2="'+(MAP_W-5)+'" y2="'+(MAP_H-46)+'" stroke="#b71c1c" stroke-width="5" stroke-dasharray="11 9" opacity="0.75"/>');
-    for(var ei=80;ei<MAP_H-70;ei+=110){
-      p.push('<polygon points="'+(MAP_W-12)+','+ei+' '+(MAP_W-22)+','+(ei-6)+' '+(MAP_W-22)+','+(ei+6)+'" fill="#ef5350" opacity="0.65"/>');
-    }
-
-    /* Spawn TC marker — subtle ring + dot at TRUE CENTER */
-    p.push('<circle cx="'+SPAWN_TC.x+'" cy="'+SPAWN_TC.y+'" r="65" fill="none" stroke="#ffffff" stroke-width="1" stroke-dasharray="3 8" opacity="0.3"/>');
-    p.push('<circle cx="'+SPAWN_TC.x+'" cy="'+SPAWN_TC.y+'" r="3" fill="#ffffff" opacity="0.6"/>');
-
-    return p.join("");
-  }
-
-  function renderGrid(profile){
-    var svg = document.getElementById("mpGrid");
-    var v = profile.v;
-
-    /* Compute the AI's actual anchor by dragging spawn toward primary +
-       secondary terrain + heading, mirroring aiBuildings.xs::
-       llGetPlacementBiasedCenter exactly. */
-    var anchor = { x: SPAWN_TC.x, y: SPAWN_TC.y };
-    var t1 = terrainAnchor(v.terrainPrimary);
-    if(t1 && v.terrainPrimary!==0) anchor = blend(anchor, t1, v.terrainBias);
-    var t2 = terrainAnchor(v.terrainSecondary);
-    if(t2 && v.terrainSecondary!==0) anchor = blend(anchor, t2, v.terrainBias*0.5);
-    var hAnchor = headingAnchor(v.heading);
-    if(hAnchor) anchor = blend(anchor, hAnchor, v.headingBias);
-    var cx = anchor.x, cy = anchor.y;
-
-    /* Heading angle from the actual anchor toward heading target. */
-    var headingAngle = null;
-    if(hAnchor){
-      var dx = hAnchor.x - cx, dy = hAnchor.y - cy;
-      headingAngle = Math.atan2(dy, dx);
-    }
-
-    /* Distance multipliers → real footprint placement radii. Tuned so 80px
-       TC + 28px houses + 32px mills + 36px barracks fit without overlap. */
-    var houseR = 75 * v.houseMult;
-    var ecoR   = 120 * v.ecoMult;
-    var milR   = 160 * v.milMult;
-    var wallR  = 195 * v.tcMult;
-
-    var p = [ baseMapMarkup() ];
-
-    /* Subtle drag arrow showing terrain pull from spawn → anchor. */
-    if(Math.abs(cx-SPAWN_TC.x)>3 || Math.abs(cy-SPAWN_TC.y)>3){
-      p.push('<line x1="'+SPAWN_TC.x+'" y1="'+SPAWN_TC.y+'" x2="'+cx+'" y2="'+cy+'" stroke="#ffffff" stroke-width="2" stroke-dasharray="5 5" opacity="0.5"/>');
-    }
-
-    /* Walls — drawn as actual 1x1 stone segments along the appropriate
-       perimeter shape, 22px spacing. */
-    if(v.wallStrategy!==5 && v.wallLevel>0){
-      var segCount = Math.max(20, Math.round(2*Math.PI*wallR/22));
-      var ws = v.wallStrategy;
-      var hAng = headingAngle || 0;
-      for(var s=0;s<segCount;s++){
-        var ang = s*(2*Math.PI/segCount);
-        var keep = false;
-        if(ws===0){
-          /* Fortress ring: full perimeter */
-          keep = true;
-        } else if(ws===1){
-          /* Chokepoint segments: 3 arcs centered on cardinals, gaps between */
-          var rel = ((ang - hAng) % (2*Math.PI) + 2*Math.PI) % (2*Math.PI);
-          var inArc = (rel<0.7) || (rel>2.0 && rel<2.7) || (rel>4.0 && rel<4.7);
-          keep = inArc;
-        } else if(ws===2){
-          /* Coastal batteries: only land-facing semicircle (south half) */
-          keep = (Math.sin(ang) > -0.15);
-        } else if(ws===3){
-          /* Frontier palisades: arc facing heading */
-          var relF = ((ang - hAng) % (2*Math.PI) + 2*Math.PI) % (2*Math.PI);
-          keep = (relF < 1.4) || (relF > (2*Math.PI - 1.4));
-        } else if(ws===4){
-          /* Urban barricade: tighter square outline (every segment but pulled in) */
-          keep = true;
-        }
-        if(!keep) continue;
-        var r = (ws===4) ? wallR*0.75 : wallR;
-        var wx = cx + Math.cos(ang)*r, wy = cy + Math.sin(ang)*r;
-        p.push(gWallSeg(wx, wy));
-      }
-    }
-
-    /* Forts — placed at outer ring, fortLevel of them */
-    if(v.fortLevel>0){
-      for(var ff=0;ff<v.fortLevel;ff++){
-        var fA = ff*(2*Math.PI/v.fortLevel) + 1.7 + (headingAngle||0);
-        var fR = milR*1.1;
-        var fX = cx + Math.cos(fA)*fR, fY = cy + Math.sin(fA)*fR;
-        p.push(gFort(fX, fY));
-      }
-    }
-
-    /* Barracks (military) — 3 placed evenly around military ring */
-    var barCount = 3;
-    for(var b=0;b<barCount;b++){
-      var bA = b*(2*Math.PI/barCount) + 0.5 + (headingAngle||0);
-      var bX = cx + Math.cos(bA)*milR, bY = cy + Math.sin(bA)*milR;
-      p.push(gBarracks(bX, bY));
-    }
-
-    /* Mills (economy) — 4 placed around economy ring */
-    var millCount = 4;
-    for(var e=0;e<millCount;e++){
-      var eA = e*(2*Math.PI/millCount) + 0.8;
-      var eX = cx + Math.cos(eA)*ecoR, eY = cy + Math.sin(eA)*ecoR;
-      p.push(gMill(eX, eY));
-    }
-
-    /* Outposts — towerLevel + 1 of them, scattered between mills */
-    if(v.towerLevel>0){
-      var towerCount = v.towerLevel + 1;
-      for(var tw=0;tw<towerCount;tw++){
-        var tA = tw*(2*Math.PI/towerCount) + 1.4;
-        var tR = ecoR*1.05;
-        var ttx = cx + Math.cos(tA)*tR, tty = cy + Math.sin(tA)*tR;
-        p.push(gOutpost(ttx, tty));
-      }
-    }
-
-    /* Forward towers along heading vector */
-    if(v.fwdTowers>0 && headingAngle!==null){
-      for(var t=0;t<v.fwdTowers;t++){
-        var td = wallR*0.95 + t*30;
-        var tx = cx + Math.cos(headingAngle)*td, ty = cy + Math.sin(headingAngle)*td;
-        p.push(gFwdTower(tx, ty));
-      }
-    }
-
-    /* Houses — 6 around TC at tight radius */
-    var houseCount = 6;
-    for(var h=0;h<houseCount;h++){
-      var ha = h*(2*Math.PI/houseCount) + 0.3;
-      var hx = cx + Math.cos(ha)*houseR, hy = cy + Math.sin(ha)*houseR;
-      p.push(gHouse(hx, hy));
-    }
-
-    /* Heading arrow (drawn before TC so TC sits on top) */
-    if(headingAngle!==null){
-      var arrowLen = Math.min(140, Math.sqrt(Math.pow(hAnchor.x-cx,2)+Math.pow(hAnchor.y-cy,2))*0.85);
-      var aex = cx + Math.cos(headingAngle)*arrowLen;
-      var aey = cy + Math.sin(headingAngle)*arrowLen;
-      p.push('<line x1="'+cx+'" y1="'+cy+'" x2="'+aex+'" y2="'+aey+'" stroke="#fff8e1" stroke-width="4" opacity="0.9"/>');
-      var hx1 = aex - Math.cos(headingAngle-0.4)*14, hy1 = aey - Math.sin(headingAngle-0.4)*14;
-      var hx2 = aex - Math.cos(headingAngle+0.4)*14, hy2 = aey - Math.sin(headingAngle+0.4)*14;
-      p.push('<polygon points="'+aex+','+aey+' '+hx1+','+hy1+' '+hx2+','+hy2+'" fill="#fff8e1"/>');
-    }
-
-    /* Town Center — drawn last so it sits on top */
-    p.push(gTC(cx, cy));
-
-    /* Footer caption (single dim band) */
-    p.push('<rect x="0" y="'+(MAP_H-46)+'" width="'+MAP_W+'" height="46" fill="#000" opacity="0.65"/>');
-    p.push('<text x="10" y="'+(MAP_H-28)+'" fill="#e0e0e0" font-family="monospace" font-size="11">Terrain: '+esc(profile.terrainLabel)+'  ·  Heading: '+esc(profile.headingLabel)+'</text>');
-    p.push('<text x="10" y="'+(MAP_H-12)+'" fill="#e0e0e0" font-family="monospace" font-size="11">Walls: '+esc(profile.wallLabel)+' (lvl '+v.wallLevel+')  ·  Style: '+esc(profile.style)+'</text>');
-
-    svg.setAttribute("viewBox","0 0 "+MAP_W+" "+MAP_H);
-    svg.innerHTML = p.join("");
-  }
-
-  function renderDiagram(profile){
-    var svg = document.getElementById("mpDiagram");
-    var W=400,H=400, pad=14, rowH=(H-2*pad)/VAR_LABELS.length;
-    var v = profile.v;
-    var parts = [];
-    parts.push('<rect x="0" y="0" width="'+W+'" height="'+H+'" fill="#0d0d0d"/>');
-    for(var i=0;i<VAR_LABELS.length;i++){
-      var spec=VAR_LABELS[i];
-      var key=spec[0], label=spec[1], lo=spec[2], hi=spec[3];
-      var val=v[key];
-      var n=norm(val,lo,hi);
-      var y=pad+i*rowH;
-      var barX=180;
-      var barW=(W-barX-pad-20);
-      parts.push('<text x="170" y="'+(y+rowH*0.6)+'" fill="#bbb" font-family="monospace" font-size="9" text-anchor="end">'+esc(label)+'</text>');
-      parts.push('<rect x="'+barX+'" y="'+(y+rowH*0.25)+'" width="'+barW+'" height="'+(rowH*0.45)+'" fill="#222" stroke="#333" stroke-width="0.5"/>');
-      parts.push('<rect x="'+barX+'" y="'+(y+rowH*0.25)+'" width="'+(barW*n)+'" height="'+(rowH*0.45)+'" fill="#00e5ff"/>');
-      // numeric annotation
-      var vs = (typeof val==="number" && Math.abs(val-Math.round(val))>1e-6) ? val.toFixed(2) : String(val);
-      parts.push('<text x="'+(W-pad-2)+'" y="'+(y+rowH*0.6)+'" fill="#80cbc4" font-family="monospace" font-size="9" text-anchor="end">'+esc(vs)+'</text>');
-    }
-    svg.innerHTML = parts.join("");
-  }
-
-  function renderTable(profile){
-    var v = profile.v;
-    var rows = [
-      ["Leader",profile.leader],
-      ["Build style",profile.style],
-      ["Wall strategy",profile.wallLabel+" (code "+v.wallStrategy+")"],
-      ["Terrain primary",profile.terrainLabel.split(" / ")[0]],
-      ["Terrain secondary",profile.terrainLabel.split(" / ")[1]],
-      ["Expansion heading",profile.headingLabel],
-      ["Rush→Boom (btRushBoom)",v.rushBoom],
-      ["Offense→Defense",v.offenseDefense],
-      ["Infantry bias",v.biasInf],
-      ["Cavalry bias",v.biasCav],
-      ["Artillery bias",v.biasArt],
-      ["Trade bias",v.biasTrade],
-      ["Native treaty",v.biasNative],
-      ["House spread mult",v.houseMult],
-      ["Economic spread mult",v.ecoMult],
-      ["Military spread mult",v.milMult],
-      ["TC spread mult",v.tcMult],
-      ["Tower level",v.towerLevel],
-      ["Fort level",v.fortLevel],
-      ["Forward tower count",v.fwdTowers],
-      ["Wall level",v.wallLevel],
-      ["Terrain bias strength",v.terrainBias],
-      ["Heading bias strength",v.headingBias],
-      ["Center-anchored civic",v.civicAnchor?"yes":"no"]
+  function renderPlaystyle(profile){
+    var v=profile.v;
+    document.getElementById("psTitle").textContent = "Playstyle — "+profile.name+" · "+profile.leader;
+    document.getElementById("psSubtitle").textContent = profile.style+" doctrine.";
+    var pillsHtml = [
+      '<span class="ps-pill">'+TERR[v.terrainPrimary]+' / '+TERR[v.terrainSecondary]+'</span>',
+      '<span class="ps-pill">'+HEAD[v.heading]+'</span>',
+      '<span class="ps-pill">'+WALL[v.wallStrategy]+'</span>'
     ];
-    var html = '<thead><tr><th>Variable</th><th>Value</th></tr></thead><tbody>';
-    for(var i=0;i<rows.length;i++){
-      var val = rows[i][1];
-      if(typeof val==="number" && Math.abs(val-Math.round(val))>1e-6) val=val.toFixed(2);
-      html += '<tr><td>'+esc(rows[i][0])+'</td><td class="mp-val">'+esc(val)+'</td></tr>';
+    if(v.civicAnchor) pillsHtml.push('<span class="ps-pill">Center-anchored civic</span>');
+    document.getElementById("psPills").innerHTML = pillsHtml.join("");
+    var sections = [
+      ["Terrain & expansion", bulletsTerrain(profile)],
+      ["Build tempo", bulletsTempo(profile)],
+      ["Combat doctrine", bulletsCombat(profile)],
+      ["Military composition", bulletsComp(profile)],
+      ["Economy posture", bulletsEcon(profile)],
+      ["Defensive layer", bulletsDef(profile)]
+    ];
+    var html = "";
+    for(var i=0;i<sections.length;i++){
+      var name=sections[i][0], bullets=sections[i][1];
+      html += '<div class="ps-section"><h3>'+name+'</h3><ul>';
+      for(var j=0;j<bullets.length;j++) html += '<li>'+bullets[j]+'</li>';
+      html += '</ul></div>';
     }
-    html += '</tbody>';
-    document.getElementById("mpTable").innerHTML = html;
+    document.getElementById("psSections").innerHTML = html;
+    var rows = '<tr><th>Variable</th><th>Value</th><th>Range</th></tr>';
+    for(var k=0;k<VAR_LABELS.length;k++){
+      var spec=VAR_LABELS[k], val=v[spec[0]];
+      var pretty=val;
+      if(spec[0]==="terrainPrimary"||spec[0]==="terrainSecondary") pretty=TERR[val]+" ("+val+")";
+      else if(spec[0]==="heading") pretty=HEAD[val]+" ("+val+")";
+      else if(spec[0]==="wallStrategy") pretty=WALL[val]+" ("+val+")";
+      else if(typeof val==="number") pretty=val.toFixed(2);
+      else if(typeof val==="boolean") pretty=val?"yes":"no";
+      rows += '<tr><td>'+spec[1]+'</td><td class="ps-val">'+pretty+'</td><td>'+spec[2]+' → '+spec[3]+'</td></tr>';
+    }
+    document.getElementById("psTable").innerHTML = rows;
+    document.getElementById("psTableWrap").classList.remove("is-open");
+    document.getElementById("psToggleTable").textContent = "Show raw variable table";
   }
 
   function openModal(profile){
-    if(!profile) return;
-    document.getElementById("mpTitle").textContent = "Map Placement — "+profile.name+" · "+profile.leader;
-    document.getElementById("mpSubtitle").textContent = profile.style+" · "+profile.wallLabel;
-    renderGrid(profile);
-    renderDiagram(profile);
-    renderTable(profile);
-    document.getElementById("mpTableWrap").classList.remove("is-open");
-    document.getElementById("mpToggleTable").textContent = "Show variable table";
-    var bd = document.getElementById("mpBackdrop");
+    renderPlaystyle(profile);
+    var bd = document.getElementById("psBackdrop");
     bd.classList.add("is-open");
     bd.setAttribute("aria-hidden","false");
   }
   function closeModal(){
-    var bd = document.getElementById("mpBackdrop");
+    var bd = document.getElementById("psBackdrop");
     bd.classList.remove("is-open");
     bd.setAttribute("aria-hidden","true");
   }
-  document.getElementById("mpClose").addEventListener("click", closeModal);
-  document.getElementById("mpBackdrop").addEventListener("click", function(e){
-    if(e.target.id==="mpBackdrop") closeModal();
+  document.getElementById("psClose").addEventListener("click", closeModal);
+  document.getElementById("psBackdrop").addEventListener("click", function(e){
+    if(e.target.id==="psBackdrop") closeModal();
   });
-  document.addEventListener("keydown", function(e){ if(e.key==="Escape") closeModal(); });
-  document.getElementById("mpToggleTable").addEventListener("click", function(){
-    var wrap = document.getElementById("mpTableWrap");
-    var isOpen = wrap.classList.toggle("is-open");
-    this.textContent = isOpen ? "Hide variable table" : "Show variable table";
+  document.addEventListener("keydown", function(e){
+    if(e.key==="Escape") closeModal();
+  });
+  document.getElementById("psToggleTable").addEventListener("click", function(){
+    var w = document.getElementById("psTableWrap");
+    var b = document.getElementById("psToggleTable");
+    var open = w.classList.toggle("is-open");
+    b.textContent = open ? "Hide raw variable table" : "Show raw variable table";
   });
 
-  // Auto-inject a Map Placement button into each nation summary.
-  // Match by leader name token in the summary text against profile keys.
+  // Auto-inject a Playstyle button into each nation summary.
   var profiles = window.NATION_PROFILES || {};
   function findProfileForSummary(text){
     text = text.toLowerCase();
-    // priority exact leader-name match (handles Napoleonic vs base French)
     var keys = Object.keys(profiles);
     for(var i=0;i<keys.length;i++){
       var p = profiles[keys[i]];
       var lead = (p.leader||"").toLowerCase();
       if(lead && text.indexOf(lead.split(" ")[lead.split(" ").length-1])>-1 && text.indexOf(p.name.toLowerCase())>-1) return p;
     }
-    // fallback: nation name match
     for(var j=0;j<keys.length;j++){
       var p2 = profiles[keys[j]];
       if(text.indexOf(p2.name.toLowerCase())>-1) return p2;
@@ -4480,8 +4009,8 @@ window.NATION_PROFILES = (function(){
     if(!profile) return;
     var btn = document.createElement("button");
     btn.type = "button";
-    btn.className = "mp-btn";
-    btn.textContent = "Map Placement";
+    btn.className = "ps-btn";
+    btn.textContent = "Playstyle";
     btn.addEventListener("click", function(e){
       e.preventDefault();
       e.stopPropagation();
@@ -4492,7 +4021,7 @@ window.NATION_PROFILES = (function(){
   });
 })();
 </script>
-<!-- MAP-PLACEMENT-MODAL-END -->
+<!-- PLAYSTYLE-MODAL-END -->
 
 </body>
 </html>

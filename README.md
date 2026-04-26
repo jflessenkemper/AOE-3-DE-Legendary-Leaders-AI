@@ -89,17 +89,20 @@ Every nation is pinned to a historically-appropriate **terrain preference** and 
 
 The resulting anchor feeds `cBuildPlanCenterPosition` + `cBuildPlanInfluencePosition` (with `cBPIFalloffLinear`) so footprints fall where each nation's history says they should: British along the coast, Russians up the river, Lakota out on the plains, Maltese dug in on the highland, Napoleonic France pushing the frontier.
 
-### 📍 Map Placement modal (reference site)
+### 📜 Playstyle panel (reference site)
 
-The HTML reference ([link](https://jflessenkemper.github.io/AOE-3-DE-Legendary-Leaders-AI/LEGENDARY_LEADERS_TREE.html)) now has a **Map Placement** button on every nation. It opens a single modal with:
+The HTML reference ([link](https://jflessenkemper.github.io/AOE-3-DE-Legendary-Leaders-AI/LEGENDARY_LEADERS_TREE.html)) has a **Playstyle** button on every nation. It opens a textual panel grouped into six sections:
 
-- **Left:** a shared canonical 600×600 map (coast, river, forests, jungle, highland, oasis, wetland, gold, hunt, trade route, enemy-edge marker, spawn ring) — identical for every nation, so you can compare how differently each leader builds on the *same* terrain.
-- **Right:** a 20-variable diagram (bar chart) of the tuning knobs that drive that nation's placement (terrain biases, heading biases, wall density, tower reach, civic radius, etc.).
-- **Centered toggle** below both panels: click to expand a full variable table with exact values and ranges.
+- **Terrain & expansion** — anchor terrain, fallback terrain, heading, terrain/heading pull strength, civic-anchor flag
+- **Build tempo** — Rush vs Boom, eco spread, house spread
+- **Combat doctrine** — Aggressive / Forward-leaning / Defensive / Reactive, military-building density
+- **Military composition** — infantry / cavalry / artillery weight, native-ally use
+- **Economy posture** — trade-route focus, TC count
+- **Defensive layer** — wall doctrine + level, tower coverage, fort tier, forward-tower count
 
-The nation's footprint (TC, houses, towers, forts, forward towers, wall perimeter) is drawn on top of the canonical map using the **same** terrain-anchor + heading-anchor math the XS code uses in-engine — so what you see in the modal is what the AI actually does in a match.
+A toggle below the sections expands a raw 20-variable table with the exact XS knob values. Every bullet is generated deterministically from the same `NATION_PROFILES` data that mirrors the XS code, so the panel describes *exactly* what the AI does in-engine.
 
-A per-nation historical rationale for these settings lives in `docs/design/map-placement-historical-guide.md`.
+A per-nation historical rationale for the underlying terrain/heading picks lives in `docs/design/map-placement-historical-guide.md`.
 
 ---
 

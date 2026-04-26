@@ -22,13 +22,13 @@
    - Water-adjacent terrains bias toward `gNavyVec`; land terrains toward baseLocation; `Upriver` reflects water vector across base; frontier headings bias toward `gForwardBaseLocation`
    - TC placement (`selectTCBuildPlanPosition`) blends mine-anchored TC toward heading before committing `gTCSearchVector`
 
-2. **Map Placement modal** — `LEGENDARY_LEADERS_TREE.html`
-   - Per-nation "Map Placement" button opens a single 1320px dialog
-   - **Left:** shared canonical 600×600 map (coast N, river NW→SE, NE+SW forests, S jungle, SE highland, W desert/oasis, NW wetland, gold, hunt, trade route, enemy-edge marker, spawn ring) — identical for every nation so you can compare
-   - **Right:** 20-variable bar diagram (`VAR_LABELS` array)
-   - **Centered toggle** below both panels expands the full variable table
-   - Nation footprint (TC, houses, towers, forts, forward towers, wall perimeter) drawn on top using the same terrain-anchor + heading-anchor math the XS runs in-engine
-   - `window.NATION_PROFILES` has all 48 `P(...)` entries (validated via Node vm)
+2. **Playstyle panel** — `LEGENDARY_LEADERS_TREE.html` (replaced the earlier "Map Placement" SVG modal)
+   - Per-nation "Playstyle" button opens a 760px textual modal
+   - 6 sections: Terrain & expansion, Build tempo, Combat doctrine, Military composition, Economy posture, Defensive layer
+   - Bullets generated deterministically from `window.NATION_PROFILES` (same data structure as before)
+   - Toggle button below sections expands a raw 20-variable table
+   - All markers in HTML are now `PLAYSTYLE-MODAL-START` / `PLAYSTYLE-MODAL-END`
+   - The earlier canonical 600×600 SVG map was scrapped — it looked impressive but the abstraction was misleading and the textual panel carries the actual signal
 
 3. **Rebrand to "AOE 3 DE - A New World DLC"** across README, modinfo, stringtables, playercolors, nation reference
 
