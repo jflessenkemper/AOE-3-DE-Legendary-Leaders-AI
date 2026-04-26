@@ -797,32 +797,44 @@ function renderProfile(profile){
     }
   }
 
+  // Deterministic per-instance jitter so the cluster looks organic, not
+  // perfectly ringed. Uses a hash of the building's index so the same
+  // nation always lands the same spots (reproducible playback later).
+  function jitter(seed, scale){
+    const j = (Math.sin(seed * 12.9898) * 43758.5453) % 1;
+    return ((j < 0 ? j + 1 : j) - 0.5) * scale;
+  }
+
   // Forts
   if(v.fortLevel > 0){
     for(let f=0; f<v.fortLevel; f++){
       const a = f*(2*Math.PI/v.fortLevel) + 1.7 + (headingAngle || 0);
-      placeFort(cx + Math.cos(a)*milR*1.1, cy + Math.sin(a)*milR*1.1);
+      const r = milR*1.1 + jitter(f+1, 14);
+      placeFort(cx + Math.cos(a)*r, cy + Math.sin(a)*r);
     }
   }
 
-  // Barracks
+  // Barracks (jittered radius + small angle wobble)
   for(let b=0; b<3; b++){
-    const a = b*(2*Math.PI/3) + 0.5 + (headingAngle || 0);
-    placeBarracks(cx + Math.cos(a)*milR, cy + Math.sin(a)*milR);
+    const a = b*(2*Math.PI/3) + 0.5 + (headingAngle || 0) + jitter(b+10, 0.18);
+    const r = milR + jitter(b+11, 18);
+    placeBarracks(cx + Math.cos(a)*r, cy + Math.sin(a)*r);
   }
 
   // Mills
   for(let e=0; e<4; e++){
-    const a = e*(2*Math.PI/4) + 0.8;
-    placeMill(cx + Math.cos(a)*ecoR, cy + Math.sin(a)*ecoR);
+    const a = e*(2*Math.PI/4) + 0.8 + jitter(e+20, 0.22);
+    const r = ecoR + jitter(e+21, 16);
+    placeMill(cx + Math.cos(a)*r, cy + Math.sin(a)*r);
   }
 
   // Outposts
   if(v.towerLevel > 0){
     const n = v.towerLevel + 1;
     for(let t=0; t<n; t++){
-      const a = t*(2*Math.PI/n) + 1.4;
-      placeOutpost(cx + Math.cos(a)*ecoR*1.05, cy + Math.sin(a)*ecoR*1.05);
+      const a = t*(2*Math.PI/n) + 1.4 + jitter(t+30, 0.15);
+      const r = ecoR*1.05 + jitter(t+31, 14);
+      placeOutpost(cx + Math.cos(a)*r, cy + Math.sin(a)*r);
     }
   }
 
@@ -834,10 +846,11 @@ function renderProfile(profile){
     }
   }
 
-  // Houses
-  for(let h=0; h<6; h++){
-    const a = h*(2*Math.PI/6) + 0.3;
-    placeHouse(cx + Math.cos(a)*houseR, cy + Math.sin(a)*houseR);
+  // Houses (8 not 6, with strong jitter — should look like a hamlet)
+  for(let h=0; h<8; h++){
+    const a = h*(2*Math.PI/8) + 0.3 + jitter(h+40, 0.30);
+    const r = houseR + jitter(h+41, 22);
+    placeHouse(cx + Math.cos(a)*r, cy + Math.sin(a)*r);
   }
 
   // Heading arrow on the ground
