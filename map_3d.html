@@ -44,6 +44,7 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { Water } from 'three/addons/objects/Water.js';
 
 /* ====================================================================
    Legendary Leaders — 3D Map Placement scene
@@ -318,8 +319,10 @@ for(let i=0; i<pos.count; i++){
   colors[i*3]=c[0]; colors[i*3+1]=c[1]; colors[i*3+2]=c[2];
 }
 terrainGeom.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-/* Smooth-shaded terrain (no flatShading) — AoE3 ground reads as soft, not faceted.
-   Per-vertex color is jittered slightly so the plain isn't a uniform tile. */
+/* Smooth-shaded terrain with a tiled CC0 grass texture multiplied by the
+   biome vertex colors. The texture provides the missing ground detail
+   (grass blades, dirt patches); the vertex color tints it per biome
+   (sand pockets shift tan, marsh shifts darker, etc.). */
 {
   const cAttr = terrainGeom.attributes.color;
   for(let i=0; i<cAttr.count; i++){
@@ -328,28 +331,61 @@ terrainGeom.setAttribute('color', new THREE.BufferAttribute(colors, 3));
     cAttr.setXYZ(i, cAttr.getX(i)+wob, cAttr.getY(i)+wob*0.7, cAttr.getZ(i)+wob*0.4);
   }
 }
-const terrainMat = new THREE.MeshLambertMaterial({ vertexColors: true });
+const _texLoader = new THREE.TextureLoader();
+const _grassTex = _texLoader.load('resources/3d/textures/aerial_grass_rock_512.jpg');
+_grassTex.wrapS = _grassTex.wrapT = THREE.RepeatWrapping;
+_grassTex.repeat.set(12, 12);   // tile across the terrain
+_grassTex.colorSpace = THREE.SRGBColorSpace;
+const terrainMat = new THREE.MeshLambertMaterial({
+  vertexColors: true,
+  map: _grassTex
+});
 const terrain = new THREE.Mesh(terrainGeom, terrainMat);
 scene.add(terrain);
 
-/* === Open Gulf — N coast — desaturated coastal water (brackish bay) === */
+/* === Open Gulf — three.js Water shader (animated ripples + reflection) === */
+const _waterNormals = _texLoader.load('resources/3d/textures/waternormals.jpg', (t) => {
+  t.wrapS = t.wrapT = THREE.RepeatWrapping;
+});
 const seaGeom = new THREE.PlaneGeometry(MAP_SIZE * 1.4, 80);
-seaGeom.rotateX(-Math.PI/2);
-const seaMat = new THREE.MeshPhongMaterial({ color: 0x355c5b, transparent: true, opacity: 0.92, shininess: 60 });
-const sea = new THREE.Mesh(seaGeom, seaMat);
-sea.position.set(0, -3, -HALF + 30);
+const sea = new Water(seaGeom, {
+  textureWidth: 256, textureHeight: 256,
+  waterNormals: _waterNormals,
+  sunDirection: new THREE.Vector3(0.4, 0.8, 0.4).normalize(),
+  sunColor: 0xfff2dc,
+  waterColor: 0x1d4a48,           // brackish green-grey — bayou Gulf tone
+  distortionScale: 2.4,
+  fog: false
+});
+sea.rotation.x = -Math.PI/2;
+sea.position.set(0, -2, -HALF + 30);
 scene.add(sea);
-/* Deep-water NW Gulf bulge — slightly darker green-blue */
-const deepGulfGeom = new THREE.CircleGeometry(110, 24);
-deepGulfGeom.rotateX(-Math.PI/2);
-const deepGulfMat = new THREE.MeshPhongMaterial({ color: 0x1f3e3d, transparent: true, opacity: 0.95 });
-const deepGulf = new THREE.Mesh(deepGulfGeom, deepGulfMat);
+
+/* Deep-water NW Gulf bulge — second Water instance with darker tone */
+const deepGulfGeom = new THREE.CircleGeometry(110, 32);
+const deepGulf = new Water(deepGulfGeom, {
+  textureWidth: 128, textureHeight: 128,
+  waterNormals: _waterNormals,
+  sunDirection: new THREE.Vector3(0.4, 0.8, 0.4).normalize(),
+  sunColor: 0xfff2dc,
+  waterColor: 0x0c2826,
+  distortionScale: 1.8,
+  fog: false
+});
+deepGulf.rotation.x = -Math.PI/2;
 const dg = to3(70, 50);
-deepGulf.position.set(dg.x, -3.5, dg.z);
+deepGulf.position.set(dg.x, -2.5, dg.z);
 scene.add(deepGulf);
 
-/* Bayou-brown water for the inlet (muddy swamp tone) */
-const inletMat = new THREE.MeshPhongMaterial({ color: 0x4a3a22, transparent: true, opacity: 0.92, shininess: 25 });
+/* Bayou inlet — kept as a chain of tinted plane segments (Water per-segment
+   would render reflection N times per frame and tank phone perf). Muddier
+   green-brown so it reads as actual water rather than wood. */
+const inletMat = new THREE.MeshPhongMaterial({
+  color: 0x32412a, transparent: true, opacity: 0.92, shininess: 70, specular: 0x88a070
+});
+
+/* Track all Water instances so the animation loop can advance their time */
+const _waters = [sea, deepGulf];
 
 /* === Tiny oasis pool inside the W sand barrier (still bluish — desert oasis is fresh) === */
 const oasisGeom = new THREE.CircleGeometry(13, 18);
@@ -848,6 +884,12 @@ let frames = 0, last = performance.now();
 function tick(){
   requestAnimationFrame(tick);
   controls.update();
+  // Advance the Water shaders' time uniform so ripples animate
+  for(const w of _waters){
+    if(w.material && w.material.uniforms && w.material.uniforms['time']){
+      w.material.uniforms['time'].value += 1/60;
+    }
+  }
   renderer.render(scene, camera);
   frames++;
   const now = performance.now();
