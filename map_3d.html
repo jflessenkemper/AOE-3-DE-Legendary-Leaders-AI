@@ -142,7 +142,9 @@ async function loadModels(){
 }
 
 /* Spawn one instance of a model into a parent group, anchored on terrain.
-   targetSize is the desired world-unit *height* of the model. */
+   targetSize is the desired world-unit *height* of the model.
+   opts.tint applies a per-instance color (must clone material first since
+   three.js shares materials across clones by default). */
 function spawn(parent, key, modX, modY, targetSize, opts){
   const tpl = MODELS[key];
   if(!tpl){ console.warn('missing model:', key); return null; }
@@ -151,9 +153,43 @@ function spawn(parent, key, modX, modY, targetSize, opts){
   m.scale.setScalar(targetSize);
   m.rotation.y = (opts && opts.rotY !== undefined) ? opts.rotY : Math.random() * Math.PI * 2;
   m.position.set(p.x, biomeHeight(p.x, p.z) + (opts && opts.yOffset || 0), p.z);
+  if(opts && opts.tint !== undefined){
+    const t = new THREE.Color(opts.tint);
+    m.traverse((c) => {
+      if(c.isMesh && c.material){
+        const mats = Array.isArray(c.material) ? c.material : [c.material];
+        for(let i=0;i<mats.length;i++){
+          const cloned = mats[i].clone();
+          if(cloned.color) cloned.color.copy(t);
+          if(Array.isArray(c.material)) c.material[i] = cloned;
+          else c.material = cloned;
+        }
+      }
+    });
+  }
   parent.add(m);
   return m;
 }
+
+/* Per-building palette — picks a recognizable color per type so a
+   glance at the scene tells you what's what. Materials are tinted on
+   the cloned PBR base, so the texture detail still shows through. */
+const TINT = {
+  TC:        0xc62828,  // red — Town Center
+  HOUSE:     0xffb74d,  // warm yellow — houses
+  MILL:      0x7cb342,  // green roof — economy
+  BARRACKS:  0x1976d2,  // military blue
+  OUTPOST:   0x7e57c2,  // purple — defensive
+  FWD_TOWER: 0xfb8c00,  // orange — forward push
+  FORT:      0x4e342e,  // dark stone — heavy fortification
+  WALL:      0x9e9e9e,  // grey stone
+  GOLD:      0xffd54f,  // gold
+  HUNT:      0x6d4c41,  // brown — animal silhouette stand-in
+  BERRY:     0xc62828,  // red — berries
+  TRADE:     0xffb74d,  // gold/orange — trade post
+  NATIVE:    0xa1887f,  // tan — native settlement
+  FLAG:      0xfff59d,  // pale flag cloth
+};
 
 /* === Coord helpers ===
    2D modal uses (x: 0..600 left-right, y: 0..600 top-bottom).
@@ -375,36 +411,34 @@ function placeDecorations(){
     spawn(scene, 'rock_large', c[0], c[1], 14);
   }
 
-  /* Gold deposits — rock cluster + bush (no Kenney "gold mine" model) */
+  /* Gold deposits — bright yellow rock cluster (you can spot them) */
   for(const g of [[115,285],[395,130],[425,460]]){
-    spawn(scene, 'rock_large', g[0], g[1], 18);
-    /* Three small rocks around it for visual mass */
+    spawn(scene, 'rock_large', g[0], g[1], 18, { tint: TINT.GOLD });
     for(let i=0;i<3;i++){
-      spawn(scene, 'rock_large', g[0] + (i-1)*8, g[1] + (i%2)*6 - 3, 8);
+      spawn(scene, 'rock_large', g[0] + (i-1)*8, g[1] + (i%2)*6 - 3, 8, { tint: TINT.GOLD });
     }
   }
 
-  /* Hunt herds — small bushes as a simple stand-in for animal silhouettes
-     (Kenney nature-kit doesn't ship with deer/bison) */
+  /* Hunt herds — brown-tinted bushes stand in for animals */
   for(const h of [[330,215],[355,230],[345,250],[170,410],[195,425]]){
-    spawn(scene, 'bush', h[0], h[1], 6);
+    spawn(scene, 'bush', h[0], h[1], 6, { tint: TINT.HUNT });
   }
 
-  /* Berry bushes */
-  spawn(scene, 'bush', 395, 320, 8);
-  spawn(scene, 'bush', 410, 335, 8);
+  /* Berry bushes — red-tinted */
+  spawn(scene, 'bush', 395, 320, 8, { tint: TINT.BERRY });
+  spawn(scene, 'bush', 410, 335, 8, { tint: TINT.BERRY });
 
-  /* Trade sockets — gate model (looks like a stone arch / waypoint marker) */
+  /* Trade sockets — gold-tinted gates so they read as commerce */
   for(const ts of [[90,540],[330,330],[555,120]]){
-    spawn(scene, 'gate', ts[0], ts[1], 18, { rotY: Math.PI/4 });
+    spawn(scene, 'gate', ts[0], ts[1], 18, { rotY: Math.PI/4, tint: TINT.TRADE });
   }
 
-  /* Native settlements — 3 small house buildings clustered */
+  /* Native settlements — tan-tinted small houses, distinct from player builds */
   for(const n of [[135,290],[265,530],[440,360]]){
     const offsets = [[0,-7],[-9,5],[9,5]];
     for(const o of offsets){
-      spawn(scene, 'house_body', n[0]+o[0], n[1]+o[1], 9, { rotY: Math.random()*Math.PI*2 });
-      spawn(scene, 'house_roof', n[0]+o[0], n[1]+o[1], 9, { yOffset: 9 });
+      spawn(scene, 'house_body', n[0]+o[0], n[1]+o[1], 9, { rotY: Math.random()*Math.PI*2, tint: TINT.NATIVE });
+      spawn(scene, 'house_roof', n[0]+o[0], n[1]+o[1], 9, { yOffset: 9, tint: TINT.NATIVE });
     }
   }
 
@@ -449,50 +483,48 @@ function clearBuildings(){
   }
 }
 
-/* Building placement — Kenney Castle Kit FBX models, cloned per render. */
+/* Building placement — Kenney Castle Kit GLB models, cloned + tinted
+   per type so the scene is glance-readable. */
 function placeTC(modX, modY){
-  /* Stack: tower_base + tower_mid + tower_top_roof + flag */
-  spawn(buildingGroup, 'tower_base',     modX, modY, 22);
-  spawn(buildingGroup, 'tower_mid',      modX, modY, 22, { yOffset: 22 });
-  spawn(buildingGroup, 'tower_top_roof', modX, modY, 22, { yOffset: 44 });
-  spawn(buildingGroup, 'flag',           modX, modY, 18, { yOffset: 56 });
+  spawn(buildingGroup, 'tower_base',     modX, modY, 22, { tint: TINT.TC });
+  spawn(buildingGroup, 'tower_mid',      modX, modY, 22, { yOffset: 22, tint: TINT.TC });
+  spawn(buildingGroup, 'tower_top_roof', modX, modY, 22, { yOffset: 44, tint: TINT.TC });
+  spawn(buildingGroup, 'flag',           modX, modY, 18, { yOffset: 56, tint: TINT.FLAG });
 }
 function placeHouse(modX, modY){
-  spawn(buildingGroup, 'house_body', modX, modY, 14);
-  spawn(buildingGroup, 'house_roof', modX, modY, 14, { yOffset: 14 });
+  spawn(buildingGroup, 'house_body', modX, modY, 14, { tint: TINT.HOUSE });
+  spawn(buildingGroup, 'house_roof', modX, modY, 14, { yOffset: 14, tint: TINT.HOUSE });
 }
 function placeMill(modX, modY){
-  /* Bigger house silhouette stands in for production building. */
-  spawn(buildingGroup, 'house_body', modX, modY, 18);
-  spawn(buildingGroup, 'house_roof', modX, modY, 18, { yOffset: 18 });
+  spawn(buildingGroup, 'house_body', modX, modY, 18, { tint: TINT.MILL });
+  spawn(buildingGroup, 'house_roof', modX, modY, 18, { yOffset: 18, tint: TINT.MILL });
 }
 function placeBarracks(modX, modY){
-  /* Wider tower base + flag = barracks-like presence. */
-  const m = spawn(buildingGroup, 'tower_base', modX, modY, 18);
-  if(m) m.scale.set(22, 18, 22);  // squash wider
-  spawn(buildingGroup, 'flag', modX, modY, 16, { yOffset: 18 });
+  const m = spawn(buildingGroup, 'tower_base', modX, modY, 18, { tint: TINT.BARRACKS });
+  if(m) m.scale.set(22, 18, 22);
+  spawn(buildingGroup, 'flag', modX, modY, 16, { yOffset: 18, tint: TINT.BARRACKS });
 }
 function placeOutpost(modX, modY, isFwd){
-  spawn(buildingGroup, 'outpost_base', modX, modY, 16);
-  spawn(buildingGroup, 'outpost_top',  modX, modY, 16, { yOffset: 16 });
+  const tint = isFwd ? TINT.FWD_TOWER : TINT.OUTPOST;
+  spawn(buildingGroup, 'outpost_base', modX, modY, 16, { tint });
+  spawn(buildingGroup, 'outpost_top',  modX, modY, 16, { yOffset: 16, tint });
   if(isFwd){
-    /* Forward tower gets a flag to distinguish from regular outpost */
-    spawn(buildingGroup, 'flag', modX, modY, 12, { yOffset: 32 });
+    spawn(buildingGroup, 'flag', modX, modY, 12, { yOffset: 32, tint: TINT.FWD_TOWER });
   }
 }
 function placeFort(modX, modY){
-  /* Star-fort silhouette: 4 wall corners + central tower stack */
+  /* Star-fort: 4 corner walls + central tower stack, all in fort tone */
   const corners = [[-22,-22],[22,-22],[-22,22],[22,22]];
   for(const c of corners){
-    spawn(buildingGroup, 'wall_corner', modX + c[0], modY + c[1], 16, { rotY: Math.atan2(c[1], c[0]) });
+    spawn(buildingGroup, 'wall_corner', modX + c[0], modY + c[1], 16, { rotY: Math.atan2(c[1], c[0]), tint: TINT.FORT });
   }
-  spawn(buildingGroup, 'tower_base',     modX, modY, 24);
-  spawn(buildingGroup, 'tower_mid',      modX, modY, 24, { yOffset: 24 });
-  spawn(buildingGroup, 'tower_top_roof', modX, modY, 24, { yOffset: 48 });
-  spawn(buildingGroup, 'flag',           modX, modY, 20, { yOffset: 62 });
+  spawn(buildingGroup, 'tower_base',     modX, modY, 24, { tint: TINT.FORT });
+  spawn(buildingGroup, 'tower_mid',      modX, modY, 24, { yOffset: 24, tint: TINT.FORT });
+  spawn(buildingGroup, 'tower_top_roof', modX, modY, 24, { yOffset: 48, tint: TINT.FORT });
+  spawn(buildingGroup, 'flag',           modX, modY, 20, { yOffset: 62, tint: TINT.FLAG });
 }
 function placeWallSeg(modX, modY){
-  spawn(buildingGroup, 'wall', modX, modY, 9, { rotY: 0 });
+  spawn(buildingGroup, 'wall', modX, modY, 9, { rotY: 0, tint: TINT.WALL });
 }
 function placeHeadingArrow(modX, modY, ang){
   const p = to3(modX, modY);
