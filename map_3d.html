@@ -833,6 +833,11 @@ function renderProfile(profile){
   const milR   = 160 * v.milMult;
   const wallR  = 195 * v.tcMult;
 
+  /* Per-leader counts from the bespoke XS init values (cvMaxArmyPop,
+     cvMinNumVills, cvMaxTowers, cvOkToBuildForts) so each leader's
+     footprint reflects what their actual code says. */
+  const cnt = countsFor(profile);
+
   // Walls first (under buildings)
   if(v.wallStrategy !== 5 && v.wallLevel > 0){
     const segCount = Math.max(20, Math.round(2*Math.PI*wallR/22));
@@ -867,40 +872,40 @@ function renderProfile(profile){
     return ((j < 0 ? j + 1 : j) - 0.5) * scale;
   }
 
-  // Forts
-  if(v.fortLevel > 0){
-    for(let f=0; f<v.fortLevel; f++){
-      const a = f*(2*Math.PI/v.fortLevel) + 1.7 + (headingAngle || 0);
+  // Forts (count from cvOkToBuildForts + scaled army pop)
+  if(cnt.forts > 0){
+    for(let f=0; f<cnt.forts; f++){
+      const a = f*(2*Math.PI/cnt.forts) + 1.7 + (headingAngle || 0);
       const r = milR*1.1 + jitter(f+1, 14);
       placeFort(cx + Math.cos(a)*r, cy + Math.sin(a)*r);
     }
   }
 
-  // Barracks (jittered radius + small angle wobble)
-  for(let b=0; b<3; b++){
-    const a = b*(2*Math.PI/3) + 0.5 + (headingAngle || 0) + jitter(b+10, 0.18);
+  // Barracks (count scales with cvMaxArmyPop + offense bias)
+  for(let b=0; b<cnt.barracks; b++){
+    const a = b*(2*Math.PI/Math.max(cnt.barracks,3)) + 0.5 + (headingAngle || 0) + jitter(b+10, 0.18);
     const r = milR + jitter(b+11, 18);
     placeBarracks(cx + Math.cos(a)*r, cy + Math.sin(a)*r);
   }
 
-  // Mills
-  for(let e=0; e<4; e++){
-    const a = e*(2*Math.PI/4) + 0.8 + jitter(e+20, 0.22);
+  // Mills (count scales with cvMinNumVills)
+  for(let e=0; e<cnt.mills; e++){
+    const a = e*(2*Math.PI/Math.max(cnt.mills,3)) + 0.8 + jitter(e+20, 0.22);
     const r = ecoR + jitter(e+21, 16);
     placeMill(cx + Math.cos(a)*r, cy + Math.sin(a)*r);
   }
 
-  // Outposts
-  if(v.towerLevel > 0){
-    const n = v.towerLevel + 1;
-    for(let t=0; t<n; t++){
-      const a = t*(2*Math.PI/n) + 1.4 + jitter(t+30, 0.15);
+  // Outposts (count = cvMaxTowers from XS)
+  if(cnt.towers > 0){
+    for(let t=0; t<cnt.towers; t++){
+      const a = t*(2*Math.PI/Math.max(cnt.towers,3)) + 1.4 + jitter(t+30, 0.15);
       const r = ecoR*1.05 + jitter(t+31, 14);
       placeOutpost(cx + Math.cos(a)*r, cy + Math.sin(a)*r);
     }
   }
 
-  // Forward towers along heading
+  // Forward towers along heading (still from profile.fwdTowers — that's
+  // a placement-style flag, not a count cap)
   if(v.fwdTowers > 0 && headingAngle !== null){
     for(let t=0; t<v.fwdTowers; t++){
       const td = wallR*0.95 + t*30;
@@ -908,9 +913,9 @@ function renderProfile(profile){
     }
   }
 
-  // Houses (8 not 6, with strong jitter — should look like a hamlet)
-  for(let h=0; h<8; h++){
-    const a = h*(2*Math.PI/8) + 0.3 + jitter(h+40, 0.30);
+  // Houses (count derived from cvMaxArmyPop pop budget)
+  for(let h=0; h<cnt.houses; h++){
+    const a = h*(2*Math.PI/cnt.houses) + 0.3 + jitter(h+40, 0.30);
     const r = houseR + jitter(h+41, 22);
     placeHouse(cx + Math.cos(a)*r, cy + Math.sin(a)*r);
   }
@@ -923,36 +928,41 @@ function renderProfile(profile){
   // Town Center last
   placeTC(cx, cy);
 
-  /* === Per-type labels — one floating tag per cluster so user knows what
-     each colored building represents at a glance. */
+  /* === Per-type labels — counts come from each leader's actual XS init
+     values when available (cnt.accurate), or generic fallback otherwise. */
   addLabel(buildingGroup, cx, cy, 90, 'Town Center', '#ff6e6e');
-  addLabel(buildingGroup, cx + Math.cos(0.3)*houseR, cy + Math.sin(0.3)*houseR, 30, 'Houses ×8', '#ffb74d');
-  addLabel(buildingGroup, cx + Math.cos(0.8)*ecoR, cy + Math.sin(0.8)*ecoR, 38, 'Mills ×4', '#a5d684');
-  addLabel(buildingGroup, cx + Math.cos(0.5 + (headingAngle||0))*milR, cy + Math.sin(0.5 + (headingAngle||0))*milR, 38, 'Barracks ×3', '#64b5f6');
-  if(v.towerLevel > 0){
-    const n = v.towerLevel + 1;
-    addLabel(buildingGroup, cx + Math.cos(1.4)*ecoR*1.05, cy + Math.sin(1.4)*ecoR*1.05, 50, 'Outpost ×'+n, '#b39ddb');
+  addLabel(buildingGroup, cx + Math.cos(0.3)*houseR, cy + Math.sin(0.3)*houseR, 30, 'Houses ×'+cnt.houses, '#ffb74d');
+  addLabel(buildingGroup, cx + Math.cos(0.8)*ecoR, cy + Math.sin(0.8)*ecoR, 38, 'Mills ×'+cnt.mills, '#a5d684');
+  addLabel(buildingGroup, cx + Math.cos(0.5 + (headingAngle||0))*milR, cy + Math.sin(0.5 + (headingAngle||0))*milR, 38, 'Barracks ×'+cnt.barracks, '#64b5f6');
+  if(cnt.towers > 0){
+    addLabel(buildingGroup, cx + Math.cos(1.4)*ecoR*1.05, cy + Math.sin(1.4)*ecoR*1.05, 50, 'Outpost ×'+cnt.towers, '#b39ddb');
   }
-  if(v.fortLevel > 0){
+  if(cnt.forts > 0){
     const fA = 1.7 + (headingAngle||0);
-    addLabel(buildingGroup, cx + Math.cos(fA)*milR*1.1, cy + Math.sin(fA)*milR*1.1, 80, 'Fort ×'+v.fortLevel, '#bcaaa4');
+    addLabel(buildingGroup, cx + Math.cos(fA)*milR*1.1, cy + Math.sin(fA)*milR*1.1, 80, 'Fort ×'+cnt.forts, '#bcaaa4');
   }
   if(v.fwdTowers > 0 && headingAngle !== null){
     const td = wallR*0.95 + (v.fwdTowers - 1)*15;
     addLabel(buildingGroup, cx + Math.cos(headingAngle)*td, cy + Math.sin(headingAngle)*td, 50, 'Fwd Towers ×'+v.fwdTowers, '#ffb74d');
   }
   if(v.wallStrategy !== 5 && v.wallLevel > 0){
-    const labelAng = (headingAngle||0) + Math.PI;  // opposite the heading direction
+    const labelAng = (headingAngle||0) + Math.PI;
     addLabel(buildingGroup, cx + Math.cos(labelAng)*wallR*1.05, cy + Math.sin(labelAng)*wallR*1.05, 25, 'Walls — ' + profile.wallLabel, '#cfd8dc');
   }
+  // XS-accuracy indicator on the HUD
+  window._lastCounts = cnt;
 
   // HUD
   document.getElementById('hudTitle').textContent = profile.name + ' — ' + profile.leader;
+  const xsBadge = cnt.accurate
+    ? '<span style="color:#69f0ae">● XS-accurate</span> (counts from this leader\'s leader_*.xs)'
+    : '<span style="color:#ffb74d">● Generic</span> (no bespoke leader file — using shared revolution defaults)';
   document.getElementById('hudSubtitle').innerHTML =
     '<strong>Terrain:</strong> ' + profile.terrainLabel +
     ' &nbsp;<strong>Heading:</strong> ' + profile.headingLabel +
     '<br/><strong>Walls:</strong> ' + profile.wallLabel +
     ' &nbsp;<strong>Style:</strong> ' + profile.style +
+    '<br/>' + xsBadge +
     '<br/><span style="opacity:.55">One-finger rotate · Two-finger pan · Pinch to zoom</span>';
 
   // Recenter the camera on the new TC position
@@ -971,6 +981,49 @@ async function loadProfiles(){
   return window.NATION_PROFILES;
 }
 
+/* === Per-leader XS knobs — extracted from each bespoke leader_*.xs file
+   by tools/colorize_bw_portraits.py's sister script (commit message
+   references it). Building counts in renderProfile come from these
+   actual values when available, falling back to generic counts otherwise. */
+let LEADER_KNOBS = {};
+async function loadLeaderKnobs(){
+  try {
+    const r = await fetch('resources/leader_xs_knobs.json', { cache: 'no-cache' });
+    if(r.ok) LEADER_KNOBS = await r.json();
+  } catch(e){ console.warn('leader knobs unavailable:', e); }
+}
+
+/* Derive per-type building counts from the leader's actual XS init values.
+   Only the 23 bespoke leaders have knobs; revolution civs without bespoke
+   files use the previous generic counts. */
+function countsFor(profile){
+  const k = LEADER_KNOBS[profile.leader];
+  if(!k){
+    // Generic fallback
+    return { houses: 8, mills: 4, barracks: 3,
+             towers: profile.v.towerLevel + 1, forts: profile.v.fortLevel,
+             accurate: false };
+  }
+  const armyPop = k.cvMaxArmyPop || 100;
+  const minVills = k.cvMinNumVills || 14;
+  const maxTowers = k.cvMaxTowers || 0;
+  const okForts = k.cvOkToBuildForts ? 1 : 0;
+  const offense = k.btOffenseDefense || 0;
+  // Houses: AoE3 houses give ~10 pop each. Pop budget = army + civ (~30 vills).
+  // 1 TC gives 20 pop. Houses needed = ceil((armyPop + 30 - 20) / 10).
+  const houses = Math.max(4, Math.min(14, Math.ceil((armyPop + 30 - 20) / 10)));
+  // Mills: roughly minVills / 5 (each mill supports ~5 vills gathering food).
+  const mills = Math.max(2, Math.min(6, Math.round(minVills / 5)));
+  // Barracks: scale with army pop and offense bias. High-army aggressive
+  // leaders run 3-4 production buildings; defensive ones 1-2.
+  const barracks = Math.max(1, Math.min(5, Math.round(1 + armyPop/40 + offense*1.5)));
+  // Towers: cap directly from cvMaxTowers
+  const towers = Math.max(0, Math.min(8, Math.round(maxTowers)));
+  // Forts: 0 if cvOkToBuildForts=false, otherwise scale with army (1-3).
+  const forts = okForts ? Math.max(1, Math.min(3, Math.ceil(armyPop / 60))) : 0;
+  return { houses, mills, barracks, towers, forts, accurate: true };
+}
+
 /* Load Kenney FBX models, then place all decorative scatter, then load
    profile data. Loading screen stays up until everything is in. */
 document.getElementById('loading').textContent = 'Loading 3D models…';
@@ -978,7 +1031,7 @@ await loadModels();
 document.getElementById('loading').textContent = 'Building map…';
 placeDecorations();
 document.getElementById('loading').textContent = 'Loading nation data…';
-const profiles = await loadProfiles();
+const [profiles] = await Promise.all([loadProfiles(), loadLeaderKnobs()]);
 
 const sel = document.getElementById('nationSelect');
 const standard = ["Aztecs","British","Chinese","Dutch","Ethiopians","French","Germans","Iroquois","Hausa","Inca","Indians","Italians","Japanese","Lakota","Maltese","Mexicans","Ottomans","Portuguese","Russians","Spanish","Swedish","Americans"];
