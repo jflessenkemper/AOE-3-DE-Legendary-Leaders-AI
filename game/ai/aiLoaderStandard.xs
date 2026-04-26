@@ -333,13 +333,13 @@ minInterval 60
       " repair=" + repairPlans +
       " gather=" + gatherPlans +
       " research=" + researchPlans +
-      " tcs=" + kbUnitCount(cMyID, gTownCenterUnit, cUnitStateABQ) +
+      " tcs=" + kbUnitCount(cMyID, cUnitTypeTownCenter, cUnitStateABQ) +
       " houses=" + kbUnitCount(cMyID, gHouseUnit, cUnitStateABQ));
 
    llProbe("navy.fleet_snap",
       "transports=" + transportPlans +
       " warships=" + kbUnitCount(cMyID, cUnitTypeAbstractWarShip, cUnitStateAlive) +
-      " fishing=" + kbUnitCount(cMyID, gFishingBoatUnit, cUnitStateAlive) +
+      " fishing=" + kbUnitCount(cMyID, gFishingUnit, cUnitStateAlive) +
       " docks=" + kbUnitCount(cMyID, gDockUnit, cUnitStateABQ));
 }
 
