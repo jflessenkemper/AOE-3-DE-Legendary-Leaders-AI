@@ -6,7 +6,7 @@
 		<Portrait>objects\flags\french</Portrait>
 		<Culture>WesternEurope</Culture>
 		<SettlerProtoName>Settler</SettlerProtoName>
-		<DisplayNameID>490003</DisplayNameID>
+		<DisplayNameID>494001</DisplayNameID>
 		<RolloverNameID>490002</RolloverNameID>
 		<AlliedID>26446</AlliedID>
 		<AlliedOtherID>26445</AlliedOtherID>
@@ -273,7 +273,7 @@
 		<Portrait>objects\flags/french</Portrait>
 		<Culture>WesternEurope</Culture>
 		<SettlerProtoName>Settler</SettlerProtoName>
-		<DisplayNameID>490001</DisplayNameID>
+		<DisplayNameID>494002</DisplayNameID>
 		<RolloverNameID>400020</RolloverNameID>
 		<AlliedID>26446</AlliedID>
 		<AlliedOtherID>26445</AlliedOtherID>
@@ -540,7 +540,7 @@
 		<Portrait>objects\flags\british</Portrait>
 		<Culture>WesternEurope</Culture>
 		<SettlerProtoName>Settler</SettlerProtoName>
-		<DisplayNameID>80829</DisplayNameID>
+		<DisplayNameID>494003</DisplayNameID>
 		<RolloverNameID>400019</RolloverNameID>
 		<AlliedID>26446</AlliedID>
 		<AlliedOtherID>26445</AlliedOtherID>
@@ -810,7 +810,7 @@
 		<Portrait>objects\flags\spanish</Portrait>
 		<Culture>Mediterranean</Culture>
 		<SettlerProtoName>Settler</SettlerProtoName>
-		<DisplayNameID>80830</DisplayNameID>
+		<DisplayNameID>494004</DisplayNameID>
 		<RolloverNameID>400021</RolloverNameID>
 		<AlliedID>26446</AlliedID>
 		<AlliedOtherID>26445</AlliedOtherID>
@@ -1066,7 +1066,7 @@
 		<Portrait>objects\flags\british</Portrait>
 		<Culture>WesternEurope</Culture>
 		<SettlerProtoName>Settler</SettlerProtoName>
-		<DisplayNameID>80807</DisplayNameID>
+		<DisplayNameID>494005</DisplayNameID>
 		<RolloverNameID>400005</RolloverNameID>
 		<AlliedID>26446</AlliedID>
 		<AlliedOtherID>26445</AlliedOtherID>
@@ -1336,7 +1336,7 @@
 		<Portrait>objects\flags\spc_canadians</Portrait>
 		<Culture>WesternEurope</Culture>
 		<SettlerProtoName>Settler</SettlerProtoName>
-		<DisplayNameID>110319</DisplayNameID>
+		<DisplayNameID>494006</DisplayNameID>
 		<RolloverNameID>400012</RolloverNameID>
 		<AlliedID>26446</AlliedID>
 		<AlliedOtherID>26445</AlliedOtherID>
@@ -1603,7 +1603,7 @@
 		<Portrait>objects\flags\portuguese</Portrait>
 		<Culture>Mediterranean</Culture>
 		<SettlerProtoName>Settler</SettlerProtoName>
-		<DisplayNameID>80831</DisplayNameID>
+		<DisplayNameID>494007</DisplayNameID>
 		<RolloverNameID>400003</RolloverNameID>
 		<AlliedID>26446</AlliedID>
 		<AlliedOtherID>26445</AlliedOtherID>
@@ -1875,7 +1875,7 @@
 		<Portrait>objects\flags\spanish</Portrait>
 		<Culture>Mediterranean</Culture>
 		<SettlerProtoName>Settler</SettlerProtoName>
-		<DisplayNameID>80833</DisplayNameID>
+		<DisplayNameID>494008</DisplayNameID>
 		<RolloverNameID>400001</RolloverNameID>
 		<AlliedID>26446</AlliedID>
 		<AlliedOtherID>26445</AlliedOtherID>
@@ -2131,7 +2131,7 @@
 		<Portrait>objects\flags\spanish</Portrait>
 		<Culture>Mediterranean</Culture>
 		<SettlerProtoName>Settler</SettlerProtoName>
-		<DisplayNameID>80835</DisplayNameID>
+		<DisplayNameID>494009</DisplayNameID>
 		<RolloverNameID>400007</RolloverNameID>
 		<AlliedID>26446</AlliedID>
 		<AlliedOtherID>26445</AlliedOtherID>
@@ -2387,7 +2387,7 @@
 		<Portrait>objects\flags\spanish</Portrait>
 		<Culture>Mediterranean</Culture>
 		<SettlerProtoName>Settler</SettlerProtoName>
-		<DisplayNameID>80832</DisplayNameID>
+		<DisplayNameID>494010</DisplayNameID>
 		<RolloverNameID>400018</RolloverNameID>
 		<AlliedID>26446</AlliedID>
 		<AlliedOtherID>26445</AlliedOtherID>
@@ -2649,7 +2649,7 @@
 		<Portrait>objects\flags\spanish</Portrait>
 		<Culture>Mediterranean</Culture>
 		<SettlerProtoName>Settler</SettlerProtoName>
-		<DisplayNameID>80834</DisplayNameID>
+		<DisplayNameID>494011</DisplayNameID>
 		<RolloverNameID>400008</RolloverNameID>
 		<AlliedID>26446</AlliedID>
 		<AlliedOtherID>26445</AlliedOtherID>
@@ -2905,7 +2905,7 @@
 		<Portrait>objects\flags\british</Portrait>
 		<Culture>WesternEurope</Culture>
 		<SettlerProtoName>Settler</SettlerProtoName>
-		<DisplayNameID>80828</DisplayNameID>
+		<DisplayNameID>494012</DisplayNameID>
 		<RolloverNameID>400014</RolloverNameID>
 		<AlliedID>26446</AlliedID>
 		<AlliedOtherID>26445</AlliedOtherID>
@@ -3187,7 +3187,7 @@
 		<Portrait>objects\flags\british</Portrait>
 		<Culture>WesternEurope</Culture>
 		<SettlerProtoName>Settler</SettlerProtoName>
-		<DisplayNameID>80811</DisplayNameID>
+		<DisplayNameID>494013</DisplayNameID>
 		<RolloverNameID>400016</RolloverNameID>
 		<AlliedID>26446</AlliedID>
 		<AlliedOtherID>26445</AlliedOtherID>
@@ -3457,7 +3457,7 @@
 		<Portrait>objects\flags\british</Portrait>
 		<Culture>WesternEurope</Culture>
 		<SettlerProtoName>Settler</SettlerProtoName>
-		<DisplayNameID>80813</DisplayNameID>
+		<DisplayNameID>494014</DisplayNameID>
 		<RolloverNameID>400024</RolloverNameID>
 		<AlliedID>26446</AlliedID>
 		<AlliedOtherID>26445</AlliedOtherID>
@@ -3726,7 +3726,7 @@
 		<Portrait>objects\flags\swedish</Portrait>
 		<Culture>EasternEurope</Culture>
 		<SettlerProtoName>Settler</SettlerProtoName>
-		<DisplayNameID>80809</DisplayNameID>
+		<DisplayNameID>494015</DisplayNameID>
 		<RolloverNameID>400011</RolloverNameID>
 		<AlliedID>26446</AlliedID>
 		<AlliedOtherID>26445</AlliedOtherID>
@@ -3985,7 +3985,7 @@
 		<Portrait>objects\flags\swedish</Portrait>
 		<Culture>EasternEurope</Culture>
 		<SettlerProtoName>Settler</SettlerProtoName>
-		<DisplayNameID>80810</DisplayNameID>
+		<DisplayNameID>494016</DisplayNameID>
 		<RolloverNameID>400015</RolloverNameID>
 		<AlliedID>26446</AlliedID>
 		<AlliedOtherID>26445</AlliedOtherID>
@@ -4245,7 +4245,7 @@
 		<Portrait>objects\flags\swedish</Portrait>
 		<Culture>EasternEurope</Culture>
 		<SettlerProtoName>Settler</SettlerProtoName>
-		<DisplayNameID>80812</DisplayNameID>
+		<DisplayNameID>494017</DisplayNameID>
 		<RolloverNameID>400023</RolloverNameID>
 		<AlliedID>26446</AlliedID>
 		<AlliedOtherID>26445</AlliedOtherID>
@@ -4505,7 +4505,7 @@
 		<Portrait>objects\flags\ottomans</Portrait>
 		<Culture>Mediterranean</Culture>
 		<SettlerProtoName>Settler</SettlerProtoName>
-		<DisplayNameID>80806</DisplayNameID>
+		<DisplayNameID>494018</DisplayNameID>
 		<RolloverNameID>400002</RolloverNameID>
 		<AlliedID>26446</AlliedID>
 		<AlliedOtherID>26445</AlliedOtherID>
@@ -4751,7 +4751,7 @@
 		<Portrait>objects\flags\ottomans</Portrait>
 		<Culture>Mediterranean</Culture>
 		<SettlerProtoName>Settler</SettlerProtoName>
-		<DisplayNameID>80808</DisplayNameID>
+		<DisplayNameID>494019</DisplayNameID>
 		<RolloverNameID>400009</RolloverNameID>
 		<AlliedID>26446</AlliedID>
 		<AlliedOtherID>26445</AlliedOtherID>
@@ -4999,7 +4999,7 @@
 		<Portrait>objects\flags\mx_central_american</Portrait>
 		<Culture>Mediterranean</Culture>
 		<SettlerProtoName>Settler</SettlerProtoName>
-		<DisplayNameID>112802</DisplayNameID>
+		<DisplayNameID>494020</DisplayNameID>
 		<RolloverNameID>400006</RolloverNameID>
 		<AlliedID>26446</AlliedID>
 		<AlliedOtherID>26445</AlliedOtherID>
@@ -5452,7 +5452,7 @@
 		<Portrait>objects\flags\mx_central_american</Portrait>
 		<Culture>Mediterranean</Culture>
 		<SettlerProtoName>Settler</SettlerProtoName>
-		<DisplayNameID>112806</DisplayNameID>
+		<DisplayNameID>494021</DisplayNameID>
 		<RolloverNameID>400010</RolloverNameID>
 		<AlliedID>26446</AlliedID>
 		<AlliedOtherID>26445</AlliedOtherID>
@@ -5905,7 +5905,7 @@
 		<Portrait>objects\flags\mx_central_american</Portrait>
 		<Culture>Mediterranean</Culture>
 		<SettlerProtoName>Settler</SettlerProtoName>
-		<DisplayNameID>112810</DisplayNameID>
+		<DisplayNameID>494022</DisplayNameID>
 		<RolloverNameID>400026</RolloverNameID>
 		<AlliedID>26446</AlliedID>
 		<AlliedOtherID>26445</AlliedOtherID>
@@ -6358,7 +6358,7 @@
 		<Portrait>objects\flags\mx_central_american</Portrait>
 		<Culture>Mediterranean</Culture>
 		<SettlerProtoName>Settler</SettlerProtoName>
-		<DisplayNameID>112814</DisplayNameID>
+		<DisplayNameID>494023</DisplayNameID>
 		<RolloverNameID>400022</RolloverNameID>
 		<AlliedID>26446</AlliedID>
 		<AlliedOtherID>26445</AlliedOtherID>
@@ -6811,7 +6811,7 @@
 		<Portrait>objects\flags\mx_central_american</Portrait>
 		<Culture>Mediterranean</Culture>
 		<SettlerProtoName>Settler</SettlerProtoName>
-		<DisplayNameID>112816</DisplayNameID>
+		<DisplayNameID>494024</DisplayNameID>
 		<RolloverNameID>400017</RolloverNameID>
 		<AlliedID>26446</AlliedID>
 		<AlliedOtherID>26445</AlliedOtherID>
@@ -7264,7 +7264,7 @@
 		<Portrait>objects\flags\mx_central_american</Portrait>
 		<Culture>Mediterranean</Culture>
 		<SettlerProtoName>Settler</SettlerProtoName>
-		<DisplayNameID>112822</DisplayNameID>
+		<DisplayNameID>494025</DisplayNameID>
 		<RolloverNameID>400004</RolloverNameID>
 		<AlliedID>26446</AlliedID>
 		<AlliedOtherID>26445</AlliedOtherID>
@@ -7717,7 +7717,7 @@
 		<Portrait>objects\flags\mx_central_american</Portrait>
 		<Culture>Mediterranean</Culture>
 		<SettlerProtoName>Settler</SettlerProtoName>
-		<DisplayNameID>112826</DisplayNameID>
+		<DisplayNameID>494026</DisplayNameID>
 		<RolloverNameID>400025</RolloverNameID>
 		<AlliedID>26446</AlliedID>
 		<AlliedOtherID>26445</AlliedOtherID>

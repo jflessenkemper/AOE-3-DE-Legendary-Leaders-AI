@@ -2122,6 +2122,36 @@
       <String _locID='493362'>A gentleman is down. Pity — and advance.</String>
       <String _locID='493365'>As expected. Brought up the Guards, brought up the Hussars, and that was that.</String>
 <!-- LL-QUOTE-STRINGS-END -->
+<!-- LL-COUNTRY-NAMES: nameplate / loading-screen / score-panel labels.
+     Each revolution civ shows its country/state name (e.g. "Hungary")
+     instead of the demonym ("Hungarians") or the leader's name. -->
+<String _locID='494001'>French Empire</String>
+<String _locID='494002'>French Republic</String>
+<String _locID='494003'>United States</String>
+<String _locID='494004'>Mexico</String>
+<String _locID='494005'>Canada</String>
+<String _locID='494006'>Lower Canada</String>
+<String _locID='494007'>Brazil</String>
+<String _locID='494008'>Argentina</String>
+<String _locID='494009'>Chile</String>
+<String _locID='494010'>Peru</String>
+<String _locID='494011'>Gran Colombia</String>
+<String _locID='494012'>Haiti</String>
+<String _locID='494013'>Indonesia</String>
+<String _locID='494014'>South Africa</String>
+<String _locID='494015'>Finland</String>
+<String _locID='494016'>Hungary</String>
+<String _locID='494017'>Romania</String>
+<String _locID='494018'>Barbary States</String>
+<String _locID='494019'>Egypt</String>
+<String _locID='494020'>Central America</String>
+<String _locID='494021'>Baja California</String>
+<String _locID='494022'>Yucatán</String>
+<String _locID='494023'>Rio Grande</String>
+<String _locID='494024'>Maya</String>
+<String _locID='494025'>California</String>
+<String _locID='494026'>Texas</String>
+<!-- LL-COUNTRY-NAMES-END -->
 </Language>
    </StringTable>
 </stringmods>
