@@ -2152,6 +2152,35 @@
 <String _locID='494025'>California</String>
 <String _locID='494026'>Texas</String>
 <!-- LL-COUNTRY-NAMES-END -->
+<!-- LL-BASE-CIV-OVERRIDES: same intent for the 22 base-game civs.
+     Each <String _locID='X'> here re-points an existing base-game string ID
+     to the country/state form. The engine reads stringmods.xml after the
+     base stringtables, so the mod entry wins. Pure cosmetic: only labels
+     change, no civ logic touched.
+     IDs sourced from base civs.xml's <DisplayNameID> per civ.
+     Lakota (43631) and United States (110000) already read as wanted, so
+     no override row is shipped for them. -->
+<String _locID='22861'>Britain</String>              <!-- British      -->
+<String _locID='22862'>France</String>               <!-- French       -->
+<String _locID='22863'>Netherlands</String>          <!-- Dutch        -->
+<String _locID='22864'>Spain</String>                <!-- Spanish      -->
+<String _locID='22865'>Portugal</String>             <!-- Portuguese   -->
+<String _locID='22866'>Germany</String>              <!-- Germans      -->
+<String _locID='22867'>Russia</String>               <!-- Russians     -->
+<String _locID='22868'>Ottoman Empire</String>       <!-- Ottomans     -->
+<String _locID='22872'>Aztec Empire</String>         <!-- Aztecs       -->
+<String _locID='22879'>Iroquois Confederacy</String> <!-- Haudenosaunee -->
+<String _locID='60001'>Japan</String>                <!-- Japanese     -->
+<String _locID='60002'>China</String>                <!-- Chinese      -->
+<String _locID='60003'>Mughal India</String>         <!-- Indians      -->
+<String _locID='80001'>Inca Empire</String>          <!-- Inca         -->
+<String _locID='91500'>Sweden</String>               <!-- Swedes       -->
+<String _locID='101000'>Ethiopia</String>            <!-- Ethiopians   -->
+<String _locID='101010'>Sokoto</String>              <!-- Hausa        -->
+<String _locID='112000'>Mexico</String>              <!-- Mexicans     -->
+<String _locID='122000'>Italy</String>               <!-- Italians     -->
+<String _locID='122010'>Malta</String>               <!-- Maltese      -->
+<!-- LL-BASE-CIV-OVERRIDES-END -->
 </Language>
    </StringTable>
 </stringmods>
