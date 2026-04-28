@@ -27,8 +27,8 @@
     }
   },
   "civ_picker": {
-    "_doc": "Opened by clicking lobby.p1_civ_picker. List shows 10 civs at a time, alphabetical. Scroll wheel down at scroll_anchor scrolls 1 row per click.",
-    "row_y_start": 316,
+    "_doc": "Opened by clicking lobby.p1_civ_picker. List shows 10 civs at a time, alphabetical. Wheel-down at scroll_anchor scrolls ~0.74 rows per click (use picker_scroll_table.json for accurate scroll counts). Row label centers empirically detected at Y=284, 348, 412, ..., 860 with spacing 64.",
+    "row_y_start": 296,
     "row_spacing": 64,
     "row_count_visible": 10,
     "row_x_center": 440,

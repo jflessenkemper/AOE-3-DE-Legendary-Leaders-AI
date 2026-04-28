@@ -29,32 +29,75 @@ from typing import Optional
 
 ROOT = Path(__file__).resolve().parents[2]
 COORDS_PATH = Path(__file__).parent / "lobby_coords.json"
+SCROLL_TABLE_PATH = Path(__file__).parent / "picker_scroll_table.json"
 RAW_DIR = Path(__file__).parent / "templates" / "matrix" / "_raw"
 CLEAN_LOBBY_REF = RAW_DIR / "05_skirmish_lobby.png"
 ARTIFACT_DIR = Path(__file__).parent / "artifacts" / "lobby_driver"
 ARTIFACT_DIR.mkdir(parents=True, exist_ok=True)
 
-# 0-indexed civ row in the picker. Pulled from civ_picker_v2.png:
-# (Random Personality at index 0, alphabetical thereafter).
-# This is the OBSERVED order — rebuild from a fresh picker capture if
-# the game updates and reorders.
-CIV_ORDER = [
-    "Random Personality",     # 0
-    "American Republic",      # 1   (United States)
-    "Argentines",             # 2   (Argentina)
-    "Aztecs",                 # 3   (Aztec Empire)
-    "Baja Californians",      # 4   (Baja California)
-    "Barbary",                # 5   (Barbary States)
-    "Brazilians",             # 6   (Brazil)
-    "British",                # 7   (Britain)
-    "Californians",           # 8   (California)
-    "Canadians",              # 9   (Canada)
-    # rows 10..47 still need to be confirmed by scrolling — use --map-civs
-]
+# Authoritative civ order — sourced from picker_scroll_table.json["civ_names"].
+# Loaded lazily so the driver still works for non-civ-select commands.
+CIV_ORDER: list[str] | None = None
+
+
+def get_civ_order() -> list[str]:
+    global CIV_ORDER
+    if CIV_ORDER is None:
+        CIV_ORDER = list(load_scroll_table()["civ_names"])
+    return CIV_ORDER
 
 
 def load_coords() -> dict:
     return json.loads(COORDS_PATH.read_text())
+
+
+def load_scroll_table() -> dict:
+    """Load picker_scroll_table.json — empirically built mapping
+    scroll_count → top visible civ_index. The picker advances ~0.74
+    rows per wheel-down click (NOT 1:1), so we can't compute scrolls
+    needed analytically; we look it up.
+    """
+    return json.loads(SCROLL_TABLE_PATH.read_text())
+
+
+def find_scrolls_for_civ(table: dict, civ_idx: int) -> tuple[int, int]:
+    """Given a target civ_idx, return (scrolls_needed, click_row_within_visible).
+
+    Targets a STABLE click row (0..rows_visible-3) — never the bottom 2 rows,
+    because empirically the picker sometimes only fully renders 9/10 rows
+    during a scroll animation, so row=9 (and sometimes row=8) can be missing.
+
+    Strategy:
+      - Prefer scroll counts where civ_idx lands at row in [0..7]
+      - Among those, pick the smallest scroll count (least scrolling work)
+      - Fall back to row 8 then 9 for civs near the very end of the list
+        that have no choice (the picker has already saturated)
+    """
+    rows_visible = int(table["rows_visible"])  # 10
+    safe_max_row = rows_visible - 3            # 7
+    s2t = table["scroll_to_top_idx"]
+    candidates: list[tuple[int, int, int]] = []  # (preference, n, click_row)
+    for n_str in sorted(s2t.keys(), key=int):
+        n = int(n_str)
+        top = int(s2t[n_str])
+        if top <= civ_idx <= top + rows_visible - 1:
+            click_row = civ_idx - top
+            # Prefer rows 0..7 (safe), else row 8, else row 9
+            if click_row <= safe_max_row:
+                pref = 0
+            elif click_row == rows_visible - 2:
+                pref = 1
+            else:
+                pref = 2
+            candidates.append((pref, n, click_row))
+    if not candidates:
+        raise ValueError(
+            f"civ_idx {civ_idx} not reachable; max top in table is "
+            f"{max(int(v) for v in s2t.values())}"
+        )
+    candidates.sort(key=lambda t: (t[0], t[1]))
+    _, scrolls, click_row = candidates[0]
+    return scrolls, click_row
 
 
 def sh(cmd: str, *, check: bool = True) -> str:
@@ -117,12 +160,17 @@ def move_mouse_off(x: int = 100, y: int = 500) -> None:
 
 
 def scroll_down(coords: dict, n: int = 1) -> None:
+    """Wheel-down at the picker's scroll anchor. Re-anchors every iter
+    because empirically the cursor sometimes drifts (or a hover-tooltip
+    shifts focus) and the next wheel event gets dropped. Re-anchoring is
+    cheap and makes the scroll deterministic.
+    """
     sa = coords["civ_picker"]["scroll_anchor"]
-    xdo(f"mousemove {sa[0]} {sa[1]}")
-    time.sleep(0.2)
     for _ in range(n):
+        xdo(f"mousemove {sa[0]} {sa[1]}")
+        time.sleep(0.12)
         xdo("click 5")  # button 5 = wheel-down
-        time.sleep(0.15)
+        time.sleep(0.25)
 
 
 # ---- state checks ---------------------------------------------------------
@@ -146,15 +194,26 @@ def is_picker_open(coords: dict) -> bool:
 # ---- high-level operations ------------------------------------------------
 
 
-def open_civ_picker(coords: dict, *, attempts: int = 3) -> None:
+def open_civ_picker(coords: dict, *, attempts: int = 3, settle: float = 2.0) -> None:
+    """Click P1 civ '?' to open the picker; verify by pixel-diff vs clean lobby.
+
+    The picker animation can take 1.5-2s to fully render. We wait `settle` s
+    after each click, then sample. If the picker is already open (e.g. from
+    a leftover state), the second click will close it — handle that by
+    re-clicking until detection is positive.
+    """
     cx, cy = coords["lobby"]["p1_civ_picker"]
     for i in range(attempts):
         click(cx, cy)
-        time.sleep(1.4)
+        time.sleep(settle)
+        if is_picker_open(coords):
+            return
+        # Wait a bit more in case animation was slow, before retry
+        time.sleep(0.8)
         if is_picker_open(coords):
             return
         print(f"  open_civ_picker: attempt {i+1} did not open picker, retrying")
-    raise RuntimeError("Failed to open civ picker")
+    raise RuntimeError("Failed to open civ picker after multiple attempts")
 
 
 def cancel_civ_picker(coords: dict) -> None:
@@ -165,27 +224,37 @@ def cancel_civ_picker(coords: dict) -> None:
 
 
 def select_civ_in_picker(coords: dict, civ_index: int) -> None:
-    """With picker open + list scrolled to top, click row at civ_index.
+    """With picker open + scrolled to top, scroll then click target row.
 
-    For civ_index < row_count_visible: click directly at row Y.
-    For civ_index >= row_count_visible: scroll down (civ_index - last_visible_row)
-    times to bring target row to the bottom of the visible window, then click
-    the bottom-row Y. Each wheel-down click scrolls exactly 1 row in this
-    AoE3 DE build (verified empirically 2026-04-28).
+    Uses picker_scroll_table.json to look up exact scroll count, since each
+    wheel-down advances ~0.74 rows (NOT 1:1) on this build.
+
+    For civs at/near the saturation boundary (last few rows where the
+    picker can't scroll further), we over-scroll well past saturation
+    (~+8 extra wheel-downs) so the row positions stabilize on the
+    "fully-saturated" layout (matches picker_scroll_53 empirical Ys).
+    Without this, fractional scroll variance leaves rows at unpredictable
+    pixel offsets between consecutive scroll counts at the same top_idx.
     """
     cp = coords["civ_picker"]
     if civ_index < 0:
         raise ValueError(f"civ_index must be >= 0, got {civ_index}")
-    last_visible = cp["row_count_visible"] - 1  # 9
-    if civ_index <= last_visible:
-        target_row_y = cp["row_y_start"] + civ_index * cp["row_spacing"]
-    else:
-        # Scroll so that civ_index lands at the bottom (row last_visible)
-        scrolls_needed = civ_index - last_visible
-        scroll_down(coords, n=scrolls_needed)
-        target_row_y = cp["row_y_start"] + last_visible * cp["row_spacing"]
-    click(cp["row_x_center"], target_row_y, settle=0.3)
-    time.sleep(0.5)
+    table = load_scroll_table()
+    scrolls_needed, click_row = find_scrolls_for_civ(table, civ_index)
+    # If we'd be clicking near the bottom of a saturated picker, over-scroll
+    # to stabilize the layout. Cheap insurance: ~8 extra wheel events.
+    s2t = table["scroll_to_top_idx"]
+    max_top = max(int(v) for v in s2t.values())
+    top_at_n = int(s2t[str(scrolls_needed)])
+    overscroll = 0
+    if top_at_n == max_top and click_row >= 7:
+        overscroll = 10  # past saturation; the wheel events are safe no-ops
+    total_scrolls = scrolls_needed + overscroll
+    if total_scrolls > 0:
+        scroll_down(coords, n=total_scrolls)
+    target_row_y = cp["row_y_start"] + click_row * cp["row_spacing"]
+    click(cp["row_x_center"], target_row_y, settle=0.4)
+    time.sleep(0.6)
 
 
 def confirm_civ_selection(coords: dict) -> None:
@@ -232,19 +301,22 @@ def cmd_check_state(coords: dict) -> int:
 
 
 def cmd_select_civ(coords: dict, name: str) -> int:
+    order = get_civ_order()
     norm = name.strip().lower()
-    matches = [i for i, c in enumerate(CIV_ORDER) if c.lower() == norm]
+    matches = [i for i, c in enumerate(order) if c.lower() == norm]
     if not matches:
-        # also accept startswith
-        matches = [i for i, c in enumerate(CIV_ORDER) if c.lower().startswith(norm)]
+        matches = [i for i, c in enumerate(order) if c.lower().startswith(norm)]
     if not matches:
-        print(f"Unknown civ: {name!r}. Known: {CIV_ORDER}")
+        matches = [i for i, c in enumerate(order) if norm in c.lower()]
+    if not matches:
+        print(f"Unknown civ: {name!r}. Known: {order}")
         return 2
     idx = matches[0]
-    print(f"Selecting civ #{idx}: {CIV_ORDER[idx]}")
+    print(f"Selecting civ #{idx}: {order[idx]}")
     set_civ_by_index(coords, idx)
     print("Done. Capturing post-selection state…")
-    p = ARTIFACT_DIR / f"after_select_{CIV_ORDER[idx].replace(' ', '_')}.png"
+    safe = re.sub(r"[^A-Za-z0-9]+", "_", order[idx]).strip("_")
+    p = ARTIFACT_DIR / f"after_select_{safe}.png"
     screenshot(p)
     print(f"saved: {p}")
     return 0
@@ -266,6 +338,89 @@ def cmd_play(coords: dict) -> int:
     return 0
 
 
+def cmd_map_picker(coords: dict, max_scrolls: int = 60) -> int:
+    """Open civ picker, scroll through entire list, save each state.
+
+    Detects end of list when two consecutive scrolls produce the same
+    pixel-equal screenshot (no further scrolling possible). Saves each
+    distinct state as picker_scroll_NN.png and writes
+    picker_states.json with metadata.
+    """
+    out_dir = ARTIFACT_DIR / "picker_map"
+    out_dir.mkdir(parents=True, exist_ok=True)
+    # Clean any old captures
+    for p in out_dir.glob("picker_scroll_*.png"):
+        p.unlink()
+
+    open_civ_picker(coords)
+    print("Picker open. Capturing scroll states...")
+
+    cap0 = out_dir / "picker_scroll_00.png"
+    screenshot(cap0)
+    states = [{"scroll": 0, "path": str(cap0)}]
+    print(f"  scroll=0 → {cap0.name}")
+    last_path = cap0
+    consecutive_zero = 0
+
+    for i in range(1, max_scrolls + 1):
+        scroll_down(coords, n=1)
+        time.sleep(0.55)  # longer settle so list state is stable when we capture
+        cap = out_dir / f"picker_scroll_{i:02d}.png"
+        screenshot(cap)
+        d = diff_pixels(last_path, cap)
+        states.append({"scroll": i, "path": str(cap), "diff_from_prev": d})
+        # End-of-list detection: 3 consecutive zero-diffs. A single zero-diff
+        # can be a race (screenshot taken before scroll finished propagating);
+        # only treat sustained no-change as "we hit the bottom".
+        if d <= coords["diff_thresholds"]["noise_floor"]:
+            consecutive_zero += 1
+            print(f"  scroll={i} → {cap.name}  (diff={d}, zero-streak={consecutive_zero})")
+            if consecutive_zero >= 3:
+                print(f"  hit bottom (3 consecutive zero-diffs at scroll={i})")
+                break
+        else:
+            consecutive_zero = 0
+            print(f"  scroll={i} → {cap.name}  (diff={d})")
+        last_path = cap
+
+    # Cancel out
+    cancel_civ_picker(coords)
+
+    meta_path = out_dir / "picker_states.json"
+    meta_path.write_text(json.dumps({
+        "row_count_visible": coords["civ_picker"]["row_count_visible"],
+        "row_y_start": coords["civ_picker"]["row_y_start"],
+        "row_spacing": coords["civ_picker"]["row_spacing"],
+        "states": states,
+        "last_scroll_idx": states[-1]["scroll"],
+    }, indent=2))
+
+    last = states[-1]["scroll"]
+    visible = coords["civ_picker"]["row_count_visible"]
+    print(f"\nMapped picker. Last scroll={last}, visible={visible}.")
+    print(f"Estimated total civs: {last + visible}")
+    print(f"States saved: {out_dir}/picker_scroll_*.png")
+    print(f"Metadata: {meta_path}")
+    return 0
+
+
+def cmd_full_run_dry(coords: dict, civ_idx: int) -> int:
+    """Dry-run: select civ at idx, capture state, reset. Don't click PLAY."""
+    print(f"[1/3] Verifying clean lobby state…")
+    if not is_clean_lobby(coords):
+        print("WARN: not at clean lobby; attempting Cancel + Escape recovery…")
+        cancel_civ_picker(coords)
+    print(f"[2/3] Selecting civ index {civ_idx}…")
+    set_civ_by_index(coords, civ_idx)
+    p = ARTIFACT_DIR / f"dryrun_civ_{civ_idx:02d}.png"
+    screenshot(p)
+    print(f"  saved: {p}")
+    print(f"[3/3] Resetting to Random Personality…")
+    reset_p1_to_random(coords)
+    print("Done.")
+    return 0
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--check-state", action="store_true",
@@ -276,6 +431,12 @@ def main() -> int:
                     help="Reset P1 to Random Personality")
     ap.add_argument("--play", action="store_true",
                     help="Click PLAY (requires clean-lobby state)")
+    ap.add_argument("--map-picker", action="store_true",
+                    help="Open civ picker, scroll through entire list, save each scroll-state PNG to artifacts/lobby_driver/picker_map/")
+    ap.add_argument("--select-civ-by-idx", type=int, metavar="N",
+                    help="Select civ at picker index N (0-based; 0=Random)")
+    ap.add_argument("--dry-run-civ", type=int, metavar="N",
+                    help="Select civ at index N, capture, reset (no PLAY)")
     args = ap.parse_args()
 
     coords = load_coords()
@@ -288,6 +449,17 @@ def main() -> int:
         return cmd_select_civ(coords, args.select_civ)
     if args.play:
         return cmd_play(coords)
+    if args.map_picker:
+        return cmd_map_picker(coords)
+    if args.select_civ_by_idx is not None:
+        print(f"Selecting civ_index {args.select_civ_by_idx}…")
+        set_civ_by_index(coords, args.select_civ_by_idx)
+        p = ARTIFACT_DIR / f"after_select_idx{args.select_civ_by_idx:02d}.png"
+        screenshot(p)
+        print(f"saved: {p}")
+        return 0
+    if args.dry_run_civ is not None:
+        return cmd_full_run_dry(coords, args.dry_run_civ)
 
     ap.print_help()
     return 0
