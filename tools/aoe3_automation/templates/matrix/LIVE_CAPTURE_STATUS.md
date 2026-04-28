@@ -26,13 +26,62 @@ _Captured against `Age of Empires III: Definitive Edition v100.15.59076.0 P2`, m
 
 ## Confirmed click coordinates (1920×1080 lobby and main menu)
 
+All coords are now in **`tools/aoe3_automation/lobby_coords.json`** and
+driven by **`tools/aoe3_automation/lobby_driver.py`**. Verified end-to-end
+2026-04-28 by `--select-civ aztecs` selecting Aztec Empire and the P1 slot
+showing the Aztec portrait.
+
 | Element | (x, y) center | How verified |
 |---------|---------------|--------------|
 | Main menu → Skirmish item | `(130, 488)` | mouse click → lobby opened |
-| Main menu → Down-arrow keynav | `Down × 4 + Return` | landed on Historical Battles (item 4 from Continue=1) |
-| Lobby → Player 1 team color dropdown ("1") | `(1060, 140)` | mouse click → opened color picker |
-| Lobby → PLAY button | approx `(1700, 1030)` | not yet clicked, but visually clear |
+| Lobby → Player 1 civ "?" picker | `(630, 170)` | click → 2.06M-pixel diff vs clean = picker open ✅ |
+| Lobby → Player 1 team color dropdown | `(1015, 170)` | yellow-pixel scan; click opens color picker |
+| Lobby → Map (Great Lakes) | `(1645, 430)` | click → fullscreen Select Map dialog opens ✅ |
+| Lobby → Difficulty (Hard) | `(1645, 729)` | click → dropdown opens with Easy/Std/Mod/Hard/Hardest/Extreme ✅ |
+| Lobby → Game Speed (Fast) | `(1645, 825)` | click → popup opens with Slow/Medium/Fast (no Fastest) ✅ |
+| Lobby → PLAY button | `(1700, 1029)` | template-cropped, coord-confirmed |
+| Civ picker → row N | `(440, 316 + 64·N)` | click row 3 (y=508) → Aztec selected ✅ |
+| Civ picker → OK | `(215, 962)` | bright-pixel scan + empirical click confirms |
+| Civ picker → Deck Builder | `(425, 962)` | bright-pixel scan |
+| Civ picker → Cancel | `(645, 962)` | click → returns to clean lobby with no change ✅ |
+| Map dialog → Cancel | `(1340, 990)` | click → returns to clean lobby ✅ |
 | Lobby → Back (top-left) | `Escape` key works (returns to main menu) |
+
+## Civ picker mechanics
+
+- Opens by clicking the `?` icon (or anywhere in the civ slot box) at
+  P1 row.
+- Shows 10 civs at a time, alphabetical, with "Random Personality" at
+  the very top.
+- **Mouse scroll-wheel down** scrolls the list **one row per click**
+  (anchor at any y inside the picker). Letter-jump (typing 'z') and
+  arrow-key navigation **do not** move the highlight.
+- Mouse hover sets the highlight; clicking a row selects it. OK button
+  confirms; Cancel discards.
+- **Escape does NOT close the picker** — must use Cancel button.
+
+## Game Speed dropdown
+
+- Has only **3 options** in this build: Slow / Medium / Fast.
+- "Fast" IS the maximum (no Fastest exists), so the matrix needs no
+  change from the lobby default.
+
+## Defaults that match matrix needs
+
+The fresh Skirmish lobby already has:
+
+- 8 players, Free For All, P1 = Flessenkemper / `?` civ
+- Map: Great Lakes
+- Game Mode: Supremacy
+- Game Rules: Standard
+- Starting Age: Nomad, Ending Age: Imperial Age
+- Difficulty: **Hard** ✅
+- Starting Resources: Standard
+- Game Speed: **Fast** ✅ (= max)
+
+So for the matrix flow, the only required action per iteration is:
+**open civ picker → select target civ → OK → click PLAY → wait for
+Victory/Defeat → continue → reset to Random → repeat**.
 
 ## Coordinates that need empirical confirmation
 
