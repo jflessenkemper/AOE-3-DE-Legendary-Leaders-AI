@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import unittest
 
-from tools.aoe3_automation.aoe3_ui_automation import collect_text_box_matches, locate_text_box
+from tools.aoe3_automation.aoe3_ui_automation import collect_text_box_matches, locate_text_box, _interpolate_step
 
 
 def make_entry(text: str, left: int, top: int, word: int, line: int = 1) -> dict[str, object]:
@@ -57,3 +57,43 @@ class Aoe3UiAutomationOcrTests(unittest.TestCase):
         match = locate_text_box(entries, targets=["Skirmish"], partial=True, match_index=2)
 
         self.assertIsNone(match)
+
+class InterpolateStepTests(unittest.TestCase):
+    """Tests for the ${VAR} env-var substitution helper."""
+
+    def setUp(self):
+        import os
+        os.environ["TEST_CIV"] = "British"
+        os.environ["TEST_LDR"] = "Elizabeth"
+
+    def tearDown(self):
+        import os
+        os.environ.pop("TEST_CIV", None)
+        os.environ.pop("TEST_LDR", None)
+
+    def test_string_value_interpolated(self):
+        step = {"action": "click_text", "image": "${TEST_CIV}"}
+        result = _interpolate_step(step)
+        self.assertEqual(result["image"], "British")
+
+    def test_list_values_interpolated(self):
+        step = {"action": "click_text", "texts": ["${TEST_CIV}", "${TEST_LDR}"]}
+        result = _interpolate_step(step)
+        self.assertEqual(result["texts"], ["British", "Elizabeth"])
+
+    def test_missing_var_kept_as_is(self):
+        step = {"action": "click_text", "image": "${NONEXISTENT_VAR}"}
+        result = _interpolate_step(step)
+        self.assertEqual(result["image"], "${NONEXISTENT_VAR}")
+
+    def test_non_string_value_unchanged(self):
+        step = {"action": "sleep", "seconds": 5}
+        result = _interpolate_step(step)
+        self.assertEqual(result["seconds"], 5)
+
+    def test_mixed_list_non_strings_unchanged(self):
+        step = {"action": "test", "items": ["${TEST_CIV}", 42, None]}
+        result = _interpolate_step(step)
+        self.assertEqual(result["items"][0], "British")
+        self.assertEqual(result["items"][1], 42)
+        self.assertIsNone(result["items"][2])

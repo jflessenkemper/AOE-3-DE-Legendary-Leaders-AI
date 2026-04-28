@@ -20,6 +20,7 @@ from tools.validation.validate_playercolors import validate_playercolors
 from tools.validation.validate_playstyle_modal import validate_playstyle_modal
 from tools.validation.validate_protomods import validate_protomods
 from tools.validation.validate_runtime_logs import DEFAULT_LOG_PATH, validate_runtime_log
+from tools.playtest.coverage_v2 import run_all_checks as _cov2_run_all_checks
 from tools.validation.validate_stringtables import validate_stringtables
 from tools.validation.validate_techtree import validate_techtree
 from tools.validation.validate_terrain_heading import validate_terrain_heading
@@ -195,7 +196,12 @@ def run_live_stage(repo_root: Path, live_root: Path | None = None) -> StageResul
     )
 
 
-def run_runtime_stage(repo_root: Path, log_path: Path, suite_names: list[str]) -> StageResult:
+_COV2_SUITES = {"pacing_v2", "shipment_order_v2", "escort_v2"}
+_COV2_ALL = sorted(_COV2_SUITES)
+
+
+def run_runtime_stage(repo_root: Path, log_path: Path, suite_names: list[str],
+                      all_runtime_suites: bool = False) -> StageResult:
     if not log_path.exists():
         summary = f"runtime log not found at {repo_relative(log_path, repo_root)}"
         details = [
@@ -208,6 +214,28 @@ def run_runtime_stage(repo_root: Path, log_path: Path, suite_names: list[str]) -
         return StageResult(name="Runtime Log Validation", status="skipped", summary=summary, details=details)
 
     issues = validate_runtime_log(repo_root=repo_root, log_path=log_path, suite_names=suite_names)
+
+    # Run coverage_v2 suites if requested via --all-runtime-suites or explicit
+    # suite names (pacing_v2 / shipment_order_v2 / escort_v2).
+    cov2_suites = [s for s in suite_names if s in _COV2_SUITES]
+    if all_runtime_suites:
+        cov2_suites = _COV2_ALL
+    if cov2_suites:
+        text = log_path.read_text(encoding="utf-8", errors="replace")
+        cov2_errors, cov2_warnings = _cov2_run_all_checks(text)
+        # Filter to requested suites
+        wanted = set(cov2_suites)
+        def _suite_tag(msg: str) -> str:
+            import re as _re
+            m = _re.search(r"\[(\w+_v2)\]", msg)
+            return m.group(1) if m else ""
+        for e in cov2_errors:
+            if not wanted or _suite_tag(e) in wanted:
+                issues.append(e)
+        for w in cov2_warnings:
+            if not wanted or _suite_tag(w) in wanted:
+                issues.append(f"WARN: {w}")
+
     if issues:
         return StageResult(
             name="Runtime Log Validation",
@@ -217,6 +245,8 @@ def run_runtime_stage(repo_root: Path, log_path: Path, suite_names: list[str]) -
         )
 
     suite_summary = ", ".join(suite_names) if suite_names else "all suites"
+    if all_runtime_suites:
+        suite_summary += " + pacing_v2,shipment_order_v2,escort_v2"
     return StageResult(
         name="Runtime Log Validation",
         status="pass",
@@ -257,6 +287,12 @@ def main() -> int:
         help="Runtime suite name to validate during the runtime stage. Repeat to validate multiple suites.",
     )
     parser.add_argument(
+        "--all-runtime-suites",
+        action="store_true",
+        default=False,
+        help="Run all runtime suites including pacing_v2, shipment_order_v2, and escort_v2.",
+    )
+    parser.add_argument(
         "--live-root",
         type=Path,
         help="Explicit active Proton local-mod root for the live stage.",
@@ -292,6 +328,7 @@ def main() -> int:
                     repo_root,
                     log_path=args.runtime_log_path.resolve(),
                     suite_names=args.runtime_suite,
+                    all_runtime_suites=args.all_runtime_suites,
                 )
             )
         else:

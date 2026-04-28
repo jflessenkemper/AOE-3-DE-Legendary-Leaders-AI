@@ -1140,6 +1140,37 @@ minInterval 5
    int attackPlanID = llGetPrimaryLandAttackPlanID();
    if (attackPlanID >= 0)
    {
+      // mil.escort_check — emitted every monitor tick while an attack plan
+      // is active. Records how far the leader/explorer unit is from the
+      // nearest friendly land-military unit so the offline validator can
+      // assert the leader stays within 30 m of the army during attacks.
+      int explorerID = aiGetExplorerID();
+      vector explorerPos = cInvalidVector;
+      float nearestDist = -1.0;
+      if (explorerID >= 0)
+      {
+         explorerPos = kbUnitGetPosition(explorerID);
+      }
+      if (explorerPos != cInvalidVector)
+      {
+         int milQueryID = createSimpleUnitQuery(cUnitTypeLogicalTypeLandMilitary, cMyID, cUnitStateAlive,
+            explorerPos, 60.0, false);
+         int milCount = kbUnitQueryExecute(milQueryID);
+         for (mi = 0; < milCount)
+         {
+            int milUnit = kbUnitQueryGetResult(milQueryID, mi);
+            float d = distance(explorerPos, kbUnitGetPosition(milUnit));
+            if ((nearestDist < 0.0) || (d < nearestDist))
+            {
+               nearestDist = d;
+            }
+         }
+      }
+      llProbe("mil.escort_check",
+         "attack_active=1" +
+         " leader_dist=" + nearestDist +
+         " explorerID=" + explorerID +
+         " attackPlan=" + attackPlanID);
       llDestroyEliteGuardPlan();
       if (llHandleEliteAssaultFormation(attackPlanID) == true)
       {

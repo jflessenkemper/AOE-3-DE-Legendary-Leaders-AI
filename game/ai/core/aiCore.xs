@@ -2049,6 +2049,11 @@ void ageUpEventHandler(int planID = -1)
       }
 
       gAgeUpResearchPlan = -1;
+      // event.age_up — pacing-budget probe; records the wall-clock time
+      // (ms) at which this AI completed aging up to the new age.
+      llProbe("event.age_up",
+         "age=" + kbGetAge() +
+         " t=" + xsGetTime());
       // LL-AGED probe — pairs with LL-AGE. Includes full resource + pop
       // snapshot so post-match timelines can chart economic state at each
       // age transition per AI.

@@ -1138,6 +1138,33 @@ def locate_image(pyautogui, image_path: Path, timeout: float, confidence: float,
     return None
 
 
+def _interpolate_step(step: dict[str, Any]) -> dict[str, Any]:
+    """Return a shallow copy of *step* with ``${VAR}`` placeholders in all
+    string values replaced with the matching environment variable.
+
+    Only string values are interpolated; nested lists of strings (e.g.
+    the ``texts`` list) are interpolated element-by-element.  If a
+    referenced variable is not set in the environment the placeholder is
+    left as-is so downstream validators can surface the issue clearly.
+    """
+    def _sub(s: str) -> str:
+        return re.sub(
+            r"\$\{([^}]+)\}",
+            lambda m: os.environ.get(m.group(1), m.group(0)),
+            s,
+        )
+
+    out: dict[str, Any] = {}
+    for key, value in step.items():
+        if isinstance(value, str):
+            out[key] = _sub(value)
+        elif isinstance(value, list):
+            out[key] = [_sub(v) if isinstance(v, str) else v for v in value]
+        else:
+            out[key] = value
+    return out
+
+
 def run_flow(flow_path: Path, dry_run: bool) -> None:
     if not dry_run:
         detect_input_backend()
@@ -1152,6 +1179,8 @@ def run_flow(flow_path: Path, dry_run: bool) -> None:
     for index, step in enumerate(steps, start=1):
         if not isinstance(step, dict):
             fail(f"flow step {index} is not an object")
+        # Apply ${VAR} substitution from environment before processing.
+        step = _interpolate_step(step)
         action = step.get("action")
         if not isinstance(action, str):
             fail(f"flow step {index} is missing an action")

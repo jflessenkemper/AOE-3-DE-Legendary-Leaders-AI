@@ -1,0 +1,45 @@
+{
+  "notes": [
+    "One-shot setup flow: launch AoE3, dismiss any update dialog, navigate to Skirmish.",
+    "Run this once before the matrix loop. After it completes the game is on the Skirmish lobby.",
+    "Resolution, UI scale, and locale must be fixed (English). Confidence 0.90 throughout.",
+    "Templates needed: see HARNESS_EXTENSIONS.md#templates-to-capture"
+  ],
+  "steps": [
+    {
+      "action": "launch",
+      "command": "xdg-open steam://run/933110"
+    },
+    {
+      "action": "sleep",
+      "seconds": 15
+    },
+    {
+      "action": "click_image",
+      "image": "../templates/matrix/dismiss_update.png",
+      "timeout": 10,
+      "confidence": 0.88,
+      "optional": true
+    },
+    {
+      "action": "click_image",
+      "image": "../templates/matrix/single_player_button.png",
+      "timeout": 60,
+      "confidence": 0.90
+    },
+    {
+      "action": "click_image",
+      "image": "../templates/matrix/skirmish_button.png",
+      "timeout": 30,
+      "confidence": 0.90
+    },
+    {
+      "action": "sleep",
+      "seconds": 2
+    },
+    {
+      "action": "screenshot",
+      "path": "../artifacts/matrix_setup_lobby.png"
+    }
+  ]
+}
