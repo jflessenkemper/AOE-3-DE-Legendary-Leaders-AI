@@ -7,7 +7,7 @@
   <visual>german\german_homecity.xml</visual>
   <watervisual>german\german_homecity_water.xml</watervisual>
   <backgroundvisual>german\german_background.xml</backgroundvisual>
-  <pathdata>revolution\pathable_area.gr2</pathdata>
+  <pathdata>german\pathable_area_object.gr2</pathdata>
   <camera>german\german_homecity_camera.cam</camera>
   <widescreencamera>german\german_homecity_widescreencamera.cam</widescreencamera>
   <transportroundtriptime>1</transportroundtriptime>

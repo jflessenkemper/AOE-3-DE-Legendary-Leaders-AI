@@ -97,7 +97,7 @@
 		<PostgameFlagTexture>ui\ingame\ingame_ui_postgame_flag_french_revolution_ne</PostgameFlagTexture>
 		<PostgameFlagIconWPF>resources\images\icons\flags\Flag_French_Revolution_NE.png</PostgameFlagIconWPF>
 		<HomeCityFlagIconWPF>resources\images\icons\flags\Flag_French_Revolution_NE.png</HomeCityFlagIconWPF>
-		<HomeCityPreviewWPF>resources/images/icons/singleplayer/cpai_avatar_napoleonic_france.png</HomeCityPreviewWPF>
+		<HomeCityPreviewWPF>resources/images/icons/singleplayer/cpai_avatar_napoleonic_france_napoleon.png</HomeCityPreviewWPF>
 		<HomeCityFlagButtonWPF>resources\images\icons\flags\flag_hc_french_revolution_ne.png</HomeCityFlagButtonWPF>
 		<MatchmakingTextures>
 			<BannerTexture>ui\eso\civ_flags_quick_launch</BannerTexture>
@@ -902,7 +902,7 @@
 		<HomeCityFlagTexture>objects\flags\mexican_rev</HomeCityFlagTexture>
 		<HomeCityFlagButtonSet>hidalgoFlagBtn</HomeCityFlagButtonSet>
 		<HomeCityFlagButtonSetLarge>hidalgoFlagBtnLarge</HomeCityFlagButtonSetLarge>
-		<PostgameFlagTexture>ui\ingame\ingame_ui_postgame_flag_mexican</PostgameFlagTexture>
+		<PostgameFlagTexture>ui\ingame\ingame_ui_postgame_flag_mexican_rev</PostgameFlagTexture>
 		<PostgameFlagIconWPF>resources/images/icons/flags/Flag_Mexican_Rev.png</PostgameFlagIconWPF>
 		<HomeCityFlagIconWPF>resources/images/icons/flags/Flag_Mexican_Rev.png</HomeCityFlagIconWPF>
 		<HomeCityPreviewWPF>resources/images/icons/singleplayer/cpai_avatar_mexicans_hidalgo.png</HomeCityPreviewWPF>

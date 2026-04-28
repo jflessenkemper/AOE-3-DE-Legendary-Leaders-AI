@@ -13,8 +13,10 @@ from tools.validation.validate_civ_crossrefs import validate_civ_crossrefs
 from tools.validation.validate_civ_homecities import validate_civ_homecities
 from tools.validation.validate_civmods_ui import validate_civmods_ui
 from tools.validation.validate_homecity_cards import validate_homecity_cards
+from tools.validation.validate_homecity_visuals import validate_homecity_visuals
 from tools.validation.validate_packaged_mod import validate_packaged_mod_with_options
 from tools.validation.validate_live_mod_install import validate_live_mod_install
+from tools.validation.validate_playercolors import validate_playercolors
 from tools.validation.validate_playstyle_modal import validate_playstyle_modal
 from tools.validation.validate_protomods import validate_protomods
 from tools.validation.validate_runtime_logs import DEFAULT_LOG_PATH, validate_runtime_log
@@ -68,6 +70,7 @@ def build_content_checks(repo_root: Path, strict_display_name_ids: bool = False)
         ValidationCheckResult("Civ Crossrefs", validate_civ_crossrefs(repo_root, validate_display_name_ids=strict_display_name_ids)),
         ValidationCheckResult("Civ HomeCities", validate_civ_homecities(repo_root)),
         ValidationCheckResult("HomeCity Cards", validate_homecity_cards(repo_root)),
+        ValidationCheckResult("HomeCity Visuals", validate_homecity_visuals(repo_root)),
         ValidationCheckResult("Civ UI", validate_civmods_ui(repo_root)),
         ValidationCheckResult("Proto", validate_protomods(repo_root)),
         ValidationCheckResult("StringTables", validate_stringtables(repo_root)),
@@ -75,7 +78,17 @@ def build_content_checks(repo_root: Path, strict_display_name_ids: bool = False)
         ValidationCheckResult("XML Well-Formedness", validate_xml_well_formed(repo_root)),
         ValidationCheckResult("XS", validate_xs_scripts(repo_root)),
         ValidationCheckResult("Terrain/Heading Wiring", validate_terrain_heading(repo_root)),
-        ValidationCheckResult("Playstyle Modal", validate_playstyle_modal(repo_root)),
+        ValidationCheckResult(
+            "Playstyle Modal",
+            validate_playstyle_modal(
+                repo_root,
+                # Auto-enable imperial-peer enforcement once the data file
+                # has been authored. Until then we only require the base
+                # civ-doctrine fields.
+                require_imperial=(repo_root / "tools" / "playstyle" / "imperial_data.py").is_file(),
+            ),
+        ),
+        ValidationCheckResult("Player Colors", validate_playercolors(repo_root)),
     ]
 
 

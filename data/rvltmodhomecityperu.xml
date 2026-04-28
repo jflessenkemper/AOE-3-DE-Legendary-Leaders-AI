@@ -7,7 +7,7 @@
   <visual>spanish\spanish_homecity.xml</visual>
   <watervisual>spanish\spanish_homecity_water.xml</watervisual>
   <backgroundvisual>spanish\spanish_background.xml</backgroundvisual>
-  <pathdata>revolution\pathable_area.gr2</pathdata>
+  <pathdata>spanish\pathable_area_object.gr2</pathdata>
   <camera>spanish\spanish_homecity_camera.cam</camera>
   <widescreencamera>spanish\spanish_homecity_widescreencamera.cam</widescreencamera>
   <transportroundtriptime>1</transportroundtriptime>

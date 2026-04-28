@@ -35,6 +35,7 @@ every validator under `tools/validation/`:
 | Civ Crossrefs | Every civ in `civmods.xml` has a leader XS file, leader portrait, and matching homecity binding. |
 | Civ HomeCities | Every `<HomeCityFilename>` in `civmods.xml` resolves to a real `data/*.xml` and the inner `<civ>` matches. |
 | HomeCity Cards | Every `<card>` inside a homecity references a real card name and is well-formed. |
+| HomeCity Visuals | Every home-city XML (48 total) keeps `<visual>` / `<watervisual>` / `<backgroundvisual>` / `<pathdata>` / `<camera>` / `<widescreencamera>` in the same art namespace. Regression guard for the "floating citizens" bug — a pathdata namespace mismatch makes units snap to the wrong heightmap. |
 | Civ UI | `civmods.xml` UI fields (icon, banner, deck) point at files that exist. |
 | Proto | `protomods.xml` overrides reference real protounits. |
 | StringTables | Every `$$NNNN$$` reference in the mod resolves either to a base-game ID or to one defined in `stringmods.xml`. |
@@ -42,7 +43,8 @@ every validator under `tools/validation/`:
 | XML Well-Formedness | Every `*.xml` / `*.tactics` / `*.material` / `*.dmg` in the repo parses. |
 | XS | Every `*.xs` script uses only the documented stock AoE3 XS surface (allowlist-based). |
 | Terrain/Heading Wiring | Every of the 48 civs has a branch in `llApplyBuildStyleForActiveCiv()` that calls `llSetPreferredTerrain` + `llSetExpansionHeading` with valid constants and in-range strengths. |
-| Playstyle Modal | Every `.nation-node[data-name]` in `LEGENDARY_LEADERS_TREE.html` has a `window.NATION_PLAYSTYLE` entry with all required fields populated and no internal jargon (multipliers, level n/N, raw `gLL*` / `cLL*` constants) leaking into end-user prose. |
+| Playstyle Modal | Every `.nation-node[data-name]` in `LEGENDARY_LEADERS_TREE.html` has a `window.NATION_PLAYSTYLE` entry with all required base-doctrine and **imperial-peer doctrine** fields populated (each civ now carries an `imperialPsTitle` + `imperialAges{Discovery..Imperial}` + imperial bullet sets, anchored on its historical leader from `data/playercolors.xml`). No internal jargon (multipliers, level n/N, raw `gLL*` / `cLL*` constants) may leak into end-user prose. |
+| Player Colors | `data/playercolors.xml` is well-formed, has unique civ + leader entries with valid 0..255 RGB channels, and binds every revolution civ declared in `civmods.xml`. |
 
 ### 2. Validator regression tests (Python unittest)
 

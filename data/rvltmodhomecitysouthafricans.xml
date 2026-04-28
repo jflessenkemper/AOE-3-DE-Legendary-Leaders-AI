@@ -7,7 +7,7 @@
   <visual>dutch\dutch_homecity.xml</visual>
   <watervisual>dutch\dutch_homecity_water.xml</watervisual>
   <backgroundvisual>dutch\dutch_background.xml</backgroundvisual>
-  <pathdata>revolution\pathable_area.gr2</pathdata>
+  <pathdata>dutch\dutch_homecity_pathable.gr2</pathdata>
   <camera>dutch\dutch_homecity_camera.cam</camera>
   <widescreencamera>dutch\dutch_homecity_widescreencamera.cam</widescreencamera>
   <transportroundtriptime>1</transportroundtriptime>
