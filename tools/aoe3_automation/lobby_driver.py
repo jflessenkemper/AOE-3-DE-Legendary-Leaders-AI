@@ -140,11 +140,21 @@ def diff_pixels(a: Path, b: Path) -> int:
         f"magick compare -metric AE {a} {b} null: 2>&1 || true",
         check=False,
     )
-    m = re.search(r"\(([0-9.eE+-]+)\)", out)
+    # Numeric pattern must start with a digit so we don't catch lone 'e' / 'E'
+    # / '+' / '-' tokens from words like "error" in magick's stderr output.
+    num_re = r"\d[\d.]*(?:[eE][+-]?\d+)?"
+    m = re.search(rf"\(({num_re})\)", out)
     if m:
-        return int(float(m.group(1)))
-    nums = re.findall(r"[0-9.eE+-]+", out)
-    return int(float(nums[0])) if nums else 0
+        try:
+            return int(float(m.group(1)))
+        except ValueError:
+            pass
+    for cand in re.findall(num_re, out):
+        try:
+            return int(float(cand))
+        except ValueError:
+            continue
+    return 0
 
 
 def click(x: int, y: int, *, settle: float = 0.2) -> None:
