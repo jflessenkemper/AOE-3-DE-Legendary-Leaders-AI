@@ -31,12 +31,22 @@ def _probe(t: int, p: int, civ: str, ldr: str, tag: str, tail: str = "") -> str:
 
 
 def _civ_token(exp) -> str:
-    """Sanitise multi-word labels (e.g. 'French (Bourbon)') for the
-    space-delimited probe kv format. The engine emits a single-token civ
-    name here; tests use a parens/space-stripped variant of the label so
-    every civ in the matrix exercises the same kv parser path."""
-    token = exp.label.replace("(", "").replace(")", "").replace(" ", "_")
-    return token
+    """Engine-faithful civ token for synthetic probes.
+
+    `kbGetCivName()` (which the engine emits as ``civ=<name>`` on every
+    probe) returns the civ_id with any ``cCiv``/``cCivDE``/``cCivXP``
+    prefix stripped (e.g. ``cCivBritish`` → ``British``,
+    ``cCivXPSioux`` → ``Sioux``). Revolutions arrive as their full
+    rvltName (``RvltModBrazil``). Mirroring that here keeps the test
+    independent of any decorative additions to ``CIV_LABELS``
+    (``"British (Elizabeth I)"`` etc.) — labels are for human display,
+    the probe payload is the engine name."""
+    import re as _re
+    cid = exp.civ_id
+    m = _re.match(r"^cCiv(?:DE|XP)?(.*)$", cid)
+    if m:
+        return m.group(1)
+    return cid
 
 
 def _good_pair(pid: int, exp) -> str:

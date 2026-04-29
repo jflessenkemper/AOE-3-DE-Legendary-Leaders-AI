@@ -217,6 +217,21 @@ extern int     gLLFortLevel = 1;
 extern int     gLLForwardBaseTowerCount = 2;
 extern bool    gLLPreferForwardFortifiedBase = false;
 
+// Per-doctrine military building placement preference. Engine accepts 0..3
+// (Front/Back/Left/Right) via cBuildPlanLocationPreference. -1 = legacy
+// random (the engine default). Set per build-style in leaderCommon.xs so
+// barracks/stables/foundry land where the doctrine wants them, not in a
+// random cardinal each time.
+extern int     gLLMilitaryPlacementPreference = -1;
+
+// When > 0, lowers the gate that delays AI forward-base creation. Engine
+// default in aiBuildings.xs is "Expert difficulty AND time >= 20 min". For
+// expansionist doctrines (ForwardOperationalLine, SiegeTrainConcentration,
+// CossackVoisko, RepublicanLevee) we drop the time gate and remove the
+// difficulty gate so the AI actually expands within a normal-length match.
+extern int     gLLForwardBaseEarliestMs = 1200000;  // engine default
+extern bool    gLLForwardBaseAnyDifficulty = false; // require Expert by default
+
 // ---------------------------------------------------------------------------
 // Legendary Leaders — terrain + expansion-heading enforcement.
 //
@@ -292,6 +307,12 @@ extern int     gLLExpansionHeading          = 0;  // cLLHeadingAny
 extern bool    gLLCenterAnchorCivic         = false;  // if true, markets/churches snap tight to TC
 extern float   gLLTerrainBiasStrength       = 0.35; // 0.0=off, 1.0=full drag to feature
 extern float   gLLHeadingBiasStrength       = 0.30; // 0.0=off, 1.0=full drag along heading
+
+// Set true at the very end of postInit() so gameOverHandler can distinguish a
+// real end-of-match fire from the engine's spurious early-fire during lobby
+// load (where identity is still stale). Avoids the 60s wall-clock fudge that
+// blocked --observe-seconds=10 smoke runs from ever flushing probes.
+extern bool    gLLPostInitFired             = false;
 
 int createInvalidBaseAttackRoute(int playerID = -1, int baseID = -1) { return(-1); }
 extern int(int, int) cvCreateBaseAttackRoute = createInvalidBaseAttackRoute; // Creates an attack route used by attack plans, if this is not set, we let the plan automatically manage it.

@@ -1060,6 +1060,137 @@ minInterval 20
 }
 
 //==============================================================================
+// llWritePersonalityProbe — write probe data to the AI's personality file.
+//
+// 2026-04-29 BREAKTHROUGH:  AoE3-DE's personality serialiser silently drops
+// ANY <uservars> entry whose key is not on a hardcoded engine whitelist.
+// Verified empirically: after a clean game-over with `aiPersonalitySetPlayerUserVar`
+// calls for both whitelisted keys (`iWonLastGame`) and our custom keys
+// (`ll_pid`, `ll_preinit_marker`, etc.), only the whitelisted keys appear in
+// the .personality file.  The whitelist (gleaned from a real flushed file):
+//
+//    iWonLastGame, iBeatHimLastTime, heBeatMeLastTime, iCarriedHimLastTime,
+//    heCarriedMeLastTime, lastGameDifficulty, myAllyCount, myEnemyCount,
+//    wasMyAllyLastGame, lastMapID
+//
+// Workaround: bit-pack our probe data into the *numeric* whitelisted slots.
+// Side-effect — these values are read by the engine on the NEXT match start
+// (taunts, "we played here last time" prompts, ally-team-up logic).  The
+// matrix runner wipes Game/AI personality files between runs to keep behaviour
+// clean; for one-off play this would corrupt taunts until next clean save.
+//
+// Pack layout (each slot is one float, IEEE-754 32-bit, 23-bit safe mantissa):
+//
+//   myAllyCount        bit  23     = sentinel = 1   (probe-written marker)
+//                      bits 22..18 = pid            (5 bits, 0..31)
+//                      bits 17..13 = style          (5 bits, 0..31)
+//                      bits 12..09 = walls          (4 bits, 0..15)
+//                      bits 08..06 = wall_strat     (3 bits, 0..7)
+//                      bits 05..00 = terr_p         (5 bits in 6-bit field)
+//
+//   myEnemyCount       bits 20..16 = terr_s         (5 bits)
+//                      bits 15..11 = heading        (5 bits)
+//                      bits 10..08 = age            (3 bits, 1..5)
+//                      bits 07..00 = civ            (8 bits, 0..255)
+//
+//   lastMapID          score, clamped to 0..(2^23 - 1) = ~8.3M
+//
+//   lastGameDifficulty match_seconds = match_ms / 1000, clamped to 0..2^23
+//
+//   wasMyAllyLastGame  bits 15..08 = terr_bias_q8   (uint8, 0..255 = 0.0..1.0)
+//                      bits 07..00 = head_bias_q8   (uint8, 0..255 = 0.0..1.0)
+//
+// Sentinel: bit 23 (= 8388608) of myAllyCount is set whenever our probe
+// wrote.  Engine never produces values that high for myAllyCount (max ~8 in
+// 8-player matches), so the reader uses this to distinguish a probe write
+// from engine-native data.
+//==============================================================================
+void llWritePersonalityProbe(int nothing = 0)
+{
+   // Probe-disable shortcut.
+   if (cLLReplayProbes == false)
+   {
+      return;
+   }
+
+   // ── Bit-pack the probe state into engine-whitelisted numeric uservars ────
+   // (See header block above for the canonical layout.)  All masks bound the
+   // values to the field width so an out-of-range global never spills bits.
+
+   int pid_b     = cMyID                          & 31;     // 5 bits
+   int style_b   = gLLBuildStyle                  & 31;     // 5 bits
+   int walls_b   = gLLWallLevel                   & 15;     // 4 bits
+   int wstrat_b  = gLLWallStrategy                & 7;      // 3 bits
+   int terrp_b   = gLLPreferredTerrainPrimary     & 31;     // 5 bits in 6-bit slot
+   int terrs_b   = gLLPreferredTerrainSecondary   & 31;     // 5 bits
+   int heading_b = gLLExpansionHeading            & 31;     // 5 bits
+   int age_b     = kbGetAge()                     & 7;      // 3 bits
+   int civ_b     = kbGetCiv()                     & 255;    // 8 bits
+
+   int sentinel  = 1 << 23;
+   int allyPack  = sentinel
+                 | (pid_b    << 18)
+                 | (style_b  << 13)
+                 | (walls_b  << 9)
+                 | (wstrat_b << 6)
+                 |  terrp_b;
+
+   int enemyPack = (terrs_b   << 16)
+                 | (heading_b << 11)
+                 | (age_b     << 8)
+                 |  civ_b;
+
+   // 23-bit safe mantissa clamp (~8.3M) so float storage is lossless.
+   int score_b = aiGetScore(cMyID);
+   if (score_b < 0)        score_b = 0;
+   if (score_b > 8388607)  score_b = 8388607;
+
+   int secs_b = xsGetTime() / 1000;
+   if (secs_b < 0)         secs_b = 0;
+   if (secs_b > 8388607)   secs_b = 8388607;
+
+   // Quantise float biases [0..1] -> uint8 [0..255].  XS truncates float
+   // assignment to int, so multiply then assign.
+   int tbias_q8 = gLLTerrainBiasStrength * 255.0;
+   if (tbias_q8 < 0)   tbias_q8 = 0;
+   if (tbias_q8 > 255) tbias_q8 = 255;
+   int hbias_q8 = gLLHeadingBiasStrength * 255.0;
+   if (hbias_q8 < 0)   hbias_q8 = 0;
+   if (hbias_q8 > 255) hbias_q8 = 255;
+   int biasPack = (tbias_q8 << 8) | hbias_q8;
+
+   debugCore("llWritePersonalityProbe: ally=" + allyPack +
+      " enemy=" + enemyPack + " score=" + score_b +
+      " secs=" + secs_b + " bias=" + biasPack);
+
+   // Write the packed values to every opponent's player-history record.
+   // Whichever .personality file the post-match parser opens, it'll find
+   // exactly one block carrying the sentinel bit (cf. probes_from_replay.py).
+   for (pid = 1; < cNumberPlayers)
+   {
+      if (pid == cMyID)
+      {
+         continue;
+      }
+      string playerName = kbGetPlayerName(pid);
+      int playerHistoryID = aiPersonalityGetPlayerHistoryIndex(playerName);
+      if (playerHistoryID == -1)
+      {
+         playerHistoryID = aiPersonalityCreatePlayerHistory(playerName);
+      }
+      if (playerHistoryID == -1)
+      {
+         continue;
+      }
+      aiPersonalitySetPlayerUserVar(playerHistoryID, "myAllyCount",        allyPack);
+      aiPersonalitySetPlayerUserVar(playerHistoryID, "myEnemyCount",       enemyPack);
+      aiPersonalitySetPlayerUserVar(playerHistoryID, "lastMapID",          score_b);
+      aiPersonalitySetPlayerUserVar(playerHistoryID, "lastGameDifficulty", secs_b);
+      aiPersonalitySetPlayerUserVar(playerHistoryID, "wasMyAllyLastGame",  biasPack);
+   }
+}
+
+//==============================================================================
 void gameOverHandler(int nothing = 0)
 {
    debugCore("GG, Game Over!");
@@ -1074,10 +1205,15 @@ void gameOverHandler(int nothing = 0)
    // including lobby leaver replay. Skip emission inside the first 60s
    // and skip when neither win nor loss is flagged — no legitimate match
    // ends that early and parseable gameover needs a real outcome.
-   if ((xsGetTime() < 60000) ||
-       (kbHasPlayerLost(cMyID) == false && aiGetScore(cMyID) <= 0))
+   // Suppression gate: skip while the AI is still mid-load. gLLPostInitFired
+   // flips true at the tail of postInit(), so any earlier engine-driven
+   // self-fire (lobby load, identity still stale) gets dropped here.
+   // The earlier 60s wall-clock guard blocked legitimate observe<60s smoke
+   // runs from ever flushing probes — this gate is identity-correct without
+   // that side effect.
+   if (gLLPostInitFired == false)
    {
-      debugCore("gameOverHandler: suppressing spurious early fire (t=" +
+      debugCore("gameOverHandler: suppressing pre-postInit fire (t=" +
          xsGetTime() + " lost=" + kbHasPlayerLost(cMyID) +
          " score=" + aiGetScore(cMyID) + ")");
       return;
@@ -1164,6 +1300,37 @@ void gameOverHandler(int nothing = 0)
          aiPersonalitySetPlayerUserVar(playerHistoryID, "heCarriedMeLastTime", 0.0);
       }
    }
+
+   // ── Personality probe channel (non-dev-mode side channel) ─────────────────
+   // aiEcho() is stripped in FINAL_RELEASE builds, but personality uservars ARE
+   // written to Game/AI/<leader>.personality without dev mode.  We write key
+   // diagnostic fields here so the post-match Python parser can read them even
+   // when Age3Log.txt yields zero probe lines.
+   //
+   // Encoding: every field is a float stored under a descriptive key.
+   // The parser reads the <uservars> block of the SELF player's personality
+   // file (keyed by "Flessenkemper" or whoever the human opponent is).
+   // Keys prefixed "ll_" are Legendary Leaders probe fields.
+   //
+   // Fields written:
+   //   ll_pid          – cMyID (player slot 2..8 for AI)
+   //   ll_style        – gLLBuildStyle (int 0..14)
+   //   ll_walls        – gLLWallLevel (int)
+   //   ll_wall_strat   – gLLWallStrategy (int 0..5)
+   //   ll_terr_p       – gLLPreferredTerrainPrimary (int)
+   //   ll_terr_s       – gLLPreferredTerrainSecondary (int)
+   //   ll_terr_bias    – gLLTerrainBiasStrength (float)
+   //   ll_heading      – gLLExpansionHeading (int)
+   //   ll_head_bias    – gLLHeadingBiasStrength (float)
+   //   ll_civ          – kbGetCiv() (engine civ ID int)
+   //   ll_age          – kbGetAge() at game end
+   //   ll_score        – aiGetScore(cMyID) at game end
+   //   ll_match_ms     – xsGetTime() at game end (ms)
+   //
+   // NOTE: personality uservars are per-opponent-player.  We write to the
+   // first opponent slot so there is always exactly one record per AI per
+   // match regardless of how many opponents exist.
+   llWritePersonalityProbe();
 }
 
 //==============================================================================

@@ -98,7 +98,12 @@ def focus_host_game_window() -> str | None:
     window_id = find_host_game_window()
     if not window_id:
         return None
-    run_host_command(["xdotool", "windowactivate", "--sync", window_id])
+    # Guard: only windowactivate if this window isn't already the active one,
+    # to avoid stealing focus from CoH2 or other foreground apps.
+    active_res = run_host_command(["xdotool", "getactivewindow"], capture_output=True)
+    if active_res.returncode == 0 and active_res.stdout.strip() == window_id:
+        return window_id  # already focused — no-op
+    run_host_command(["xdotool", "windowactivate", window_id])
     return window_id
 
 

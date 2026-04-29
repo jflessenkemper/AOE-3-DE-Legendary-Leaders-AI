@@ -271,6 +271,51 @@ def set_civ_by_index(coords: dict, civ_index: int) -> None:
     confirm_civ_selection(coords)
 
 
+def open_opponent_picker(coords: dict, slot: int, *, attempts: int = 3,
+                         settle: float = 2.0) -> None:
+    """Open the civ picker for AI slot `slot` (1..7, mapping to P2..P8).
+
+    Uses the same picker UI as P1, just clicked from a different row. The
+    coords come from lobby.opponent_civ_pickers (P2..P8). State verification
+    is the same pixel-diff against clean lobby — picker_open == significant
+    change.
+    """
+    if not (1 <= slot <= 7):
+        raise ValueError(f"opponent slot must be 1..7 (P2..P8), got {slot}")
+    pickers = coords["lobby"]["opponent_civ_pickers"]
+    cx, cy = pickers[slot - 1]
+    for i in range(attempts):
+        click(cx, cy)
+        time.sleep(settle)
+        if is_picker_open(coords):
+            return
+        time.sleep(0.8)
+        if is_picker_open(coords):
+            return
+        print(f"  open_opponent_picker(slot={slot}): attempt {i+1} did not open picker, retrying")
+    raise RuntimeError(f"Failed to open opponent picker for slot {slot}")
+
+
+def set_opponent_civ_by_index(coords: dict, slot: int, civ_index: int) -> None:
+    """Set AI slot `slot` (1..7) to civ_index in the picker. Same flow as P1
+    but opens via the opponent's row button instead of P1's."""
+    open_opponent_picker(coords, slot)
+    select_civ_in_picker(coords, civ_index)
+    confirm_civ_selection(coords)
+
+
+def set_opponent_civs(coords: dict, civ_indices: list[int]) -> None:
+    """Set up to 7 opponent civs (P2..P8) in one pass.
+
+    civ_indices is in slot order: civ_indices[0] = P2, [1] = P3, … [6] = P8.
+    Pass 0 (Random Personality) for any slot you want to skip.
+    """
+    if len(civ_indices) > 7:
+        raise ValueError(f"max 7 opponent slots, got {len(civ_indices)}")
+    for i, civ_idx in enumerate(civ_indices, start=1):
+        set_opponent_civ_by_index(coords, i, civ_idx)
+
+
 def reset_p1_to_random(coords: dict) -> None:
     set_civ_by_index(coords, 0)
 

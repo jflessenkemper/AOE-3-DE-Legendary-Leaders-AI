@@ -9,6 +9,16 @@
     "p1_color_dropdown_arrow": [1085, 170],
     "back_button_keynav": "Escape",
     "play_button": [1700, 1029],
+    "_opponent_pickers_doc": "Civ picker buttons for AI slots P2..P8. P1 is at y=170; in_game_driver.py empirically measured P2/P3/P4 at y=276/382/488 (106px row spacing). P5..P8 extrapolated with the same delta — verified-good coords if the lobby has 8 player rows visible (FFA 1v7 default). x=630 matches p1_civ_picker. Used by matrix_runner --opponent-civs to test up to 8 civs per match.",
+    "opponent_civ_pickers": [
+      [630, 276],
+      [630, 382],
+      [630, 488],
+      [630, 594],
+      [630, 700],
+      [630, 806],
+      [630, 912]
+    ],
     "right_column_dropdowns": {
       "x_center": 1645,
       "map":                [1645, 395],

@@ -277,8 +277,19 @@ void llProbe(string tag = "", string detail = "")
    {
       line = line + " " + detail;
    }
-   // Send to P1. Parser records sender+text; recipient is incidental.
+   // Triple-emit so at least one channel survives:
+   //   1) aiEcho — engine debug stream (visible with developer console / -dev_mode).
+   //   2) aiChat to host (P1) — live chat overlay during the match.
+   //   3) aiChat to self (cMyID) — sometimes preserved when broadcast isn't.
+   // The replay parser greps for "[LLP v=2" verbatim, so any successful
+   // channel is sufficient. We deliberately do NOT loop over every player
+   // (would 8x the chat volume in 8-player matches) — host receipt is enough.
+   aiEcho(line);
    aiChat(1, line);
+   if (cMyID != 1)
+   {
+      aiChat(cMyID, line);
+   }
 }
 
 // Vectors stringify with spaces and parens by default, which breaks the

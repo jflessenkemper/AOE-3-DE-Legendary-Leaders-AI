@@ -17,6 +17,8 @@ from tools.validation.validate_homecity_visuals import validate_homecity_visuals
 from tools.validation.validate_packaged_mod import validate_packaged_mod_with_options
 from tools.validation.validate_live_mod_install import validate_live_mod_install
 from tools.validation.validate_playercolors import validate_playercolors
+from tools.validation.validate_html_reference import validate_html_reference
+from tools.validation.validate_html_vs_mod import validate_html_vs_mod
 from tools.validation.validate_playstyle_modal import validate_playstyle_modal
 from tools.validation.validate_protomods import validate_protomods
 from tools.validation.validate_runtime_logs import DEFAULT_LOG_PATH, validate_runtime_log
@@ -90,6 +92,8 @@ def build_content_checks(repo_root: Path, strict_display_name_ids: bool = False)
             ),
         ),
         ValidationCheckResult("Player Colors", validate_playercolors(repo_root)),
+        ValidationCheckResult("HTML Reference Structure", validate_html_reference(repo_root)),
+        ValidationCheckResult("HTML vs Mod Consistency", validate_html_vs_mod(repo_root)),
     ]
 
 

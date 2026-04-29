@@ -15,6 +15,7 @@ void llResetLeaderBiases(void)
    btBiasArt = 0.0;
    btBiasInf = 0.0;
    llLogEvent("LEADER", "reset leader biases to neutral defaults.");
+   llProbe("event.personality.applied", "kind=reset rush=0.0 offDef=0.0");
 }
 
 void llSetBalancedPersonality(void)
@@ -23,6 +24,7 @@ void llSetBalancedPersonality(void)
    btRushBoom = 0.0;
    btOffenseDefense = 0.0;
    llLogLeaderState("balanced personality applied");
+   llProbe("event.personality.applied", "kind=balanced rush=" + btRushBoom + " offDef=" + btOffenseDefense);
 }
 
 void llSetAggressivePersonality(void)
@@ -31,6 +33,7 @@ void llSetAggressivePersonality(void)
    btRushBoom = 0.8;
    btOffenseDefense = 0.8;
    llLogLeaderState("aggressive personality applied");
+   llProbe("event.personality.applied", "kind=aggressive rush=" + btRushBoom + " offDef=" + btOffenseDefense);
 }
 
 void llSetDefensivePersonality(void)
@@ -39,6 +42,7 @@ void llSetDefensivePersonality(void)
    btRushBoom = -0.4;
    btOffenseDefense = -0.6;
    llLogLeaderState("defensive personality applied");
+   llProbe("event.personality.applied", "kind=defensive rush=" + btRushBoom + " offDef=" + btOffenseDefense);
 }
 
 void llSetMilitaryFocus(float infantryBias = 0.0, float cavalryBias = 0.0, float artilleryBias = 0.0)
@@ -47,6 +51,7 @@ void llSetMilitaryFocus(float infantryBias = 0.0, float cavalryBias = 0.0, float
    btBiasCav = cavalryBias;
    btBiasArt = artilleryBias;
    llLogLeaderState("military focus updated");
+   llProbe("event.personality.applied", "kind=military inf=" + infantryBias + " cav=" + cavalryBias + " art=" + artilleryBias);
 }
 
 void llEnableForwardBaseStyle(void)
@@ -55,6 +60,7 @@ void llEnableForwardBaseStyle(void)
    cvDefenseReflexRadiusActive = 75.0;
    cvDefenseReflexSearchRadius = 75.0;
    llLogLeaderState("forward-base style enabled");
+   llProbe("event.style.feature", "kind=forwardBase reflexRadius=75.0");
 }
 
 void llEnableDeepDefenseStyle(void)
@@ -63,6 +69,7 @@ void llEnableDeepDefenseStyle(void)
    cvMaxTowers = 7;
    cvDefenseReflexRadiusPassive = 40.0;
    llLogLeaderState("deep-defense style enabled");
+   llProbe("event.style.feature", "kind=deepDefense maxTowers=" + cvMaxTowers + " passiveRadius=40.0");
 }
 
 void llResetBuildStyleProfile(void)
@@ -101,6 +108,8 @@ void llSetPreferredTerrain(int primary = 0, int secondary = 0, float strength = 
    gLLPreferredTerrainPrimary = primary;
    gLLPreferredTerrainSecondary = secondary;
    gLLTerrainBiasStrength = strength;
+   llProbe("event.terrain.preference",
+      "primary=" + primary + " secondary=" + secondary + " strength=" + strength);
 }
 
 // llSetExpansionHeading — compass/vector bias for secondary-TC and forward-
@@ -113,6 +122,7 @@ void llSetExpansionHeading(int heading = 0, float strength = 0.30)
 {
    gLLExpansionHeading = heading;
    gLLHeadingBiasStrength = strength;
+   llProbe("event.heading.preference", "heading=" + heading + " strength=" + strength);
 }
 
 // llEnableCenterAnchoredCivic — some civs (Aztec, Inca, Ottoman, Kangxi,
@@ -123,6 +133,7 @@ void llSetExpansionHeading(int heading = 0, float strength = 0.30)
 void llEnableCenterAnchoredCivic(bool enabled = true)
 {
    gLLCenterAnchorCivic = enabled;
+   llProbe("event.style.feature", "kind=civicAnchor enabled=" + enabled);
 }
 
 void llConfigureBuildStyleProfile(int style = 0, int wallLevel = 1, bool earlyWalls = false,
@@ -149,6 +160,32 @@ void llConfigureBuildStyleProfile(int style = 0, int wallLevel = 1, bool earlyWa
    gLLForwardBaseTowerCount = forwardBaseTowerCount;
    gLLPreferForwardFortifiedBase = preferForwardFortifiedBase;
    cvOkToBuildWalls = true;
+   // Reset placement preference; specific style helpers below set it. -1 keeps
+   // the engine's legacy random-cardinal behaviour for any style that does
+   // not assert a doctrine.
+   gLLMilitaryPlacementPreference = -1;
+   gLLForwardBaseEarliestMs = 1200000;
+   gLLForwardBaseAnyDifficulty = false;
+   llProbe("event.style.applied",
+      "style=" + style + " wallLevel=" + wallLevel +
+      " earlyWalls=" + gLLEarlyWallingEnabled +
+      " hMul=" + houseDistanceMultiplier +
+      " eMul=" + economicDistanceMultiplier +
+      " mMul=" + militaryDistanceMultiplier +
+      " tcMul=" + townCenterDistanceMultiplier +
+      " towerL=" + towerLevel + " fortL=" + fortLevel +
+      " fwdTowers=" + forwardBaseTowerCount +
+      " preferFwd=" + preferForwardFortifiedBase);
+}
+
+// Helper: every doctrine that "expands forward" calls this so we don't
+// duplicate the gate-lowering line in every style.
+void llEnableEarlyForwardBase(int earliestMs = 360000)
+{
+   gLLForwardBaseEarliestMs = earliestMs;       // default: 6 min instead of 20
+   gLLForwardBaseAnyDifficulty = true;          // remove Expert-only gate
+   gLLPreferForwardFortifiedBase = true;
+   llProbe("event.style.feature", "kind=earlyFwdBase earliestMs=" + earliestMs);
 }
 
 void llUseCompactFortifiedCoreStyle(int wallLevel = 3, bool earlyWalls = true)
@@ -156,6 +193,7 @@ void llUseCompactFortifiedCoreStyle(int wallLevel = 3, bool earlyWalls = true)
    // Bourbon France — Vauban-school star-fort doctrine. Full fortress ring.
    llConfigureBuildStyleProfile(cLLBuildStyleCompactFortifiedCore, wallLevel, earlyWalls, 0.75, 0.85, 0.85, 0.85, 3, 2, 2, false);
    gLLWallStrategy = cLLWallStrategyFortressRing;
+   gLLMilitaryPlacementPreference = cBuildingPlacementPreferenceBack;  // tight core
 }
 
 void llUseDistributedEconomicNetworkStyle(int wallLevel = 1)
@@ -163,6 +201,8 @@ void llUseDistributedEconomicNetworkStyle(int wallLevel = 1)
    // Morazán / Central American federation — frontier palisade on scattered nodes.
    llConfigureBuildStyleProfile(cLLBuildStyleDistributedEconomicNetwork, wallLevel, false, 1.15, 1.35, 1.0, 1.35, 1, 1, 1, false);
    gLLWallStrategy = cLLWallStrategyFrontierPalisades;
+   gLLMilitaryPlacementPreference = -1;  // genuine spread
+   llEnableEarlyForwardBase(420000);     // 7 min — distributed nodes need time
 }
 
 void llUseForwardOperationalLineStyle(int wallLevel = 1)
@@ -170,6 +210,8 @@ void llUseForwardOperationalLineStyle(int wallLevel = 1)
    // Napoleon — no early walls, move fast. Field fortifications only in Age 3+.
    llConfigureBuildStyleProfile(cLLBuildStyleForwardOperationalLine, wallLevel, false, 1.0, 1.05, 0.95, 1.1, 1, 2, 3, true);
    gLLWallStrategy = cLLWallStrategyMobileNoWalls;
+   gLLMilitaryPlacementPreference = cBuildingPlacementPreferenceFront;  // forward line
+   llEnableEarlyForwardBase(300000);     // 5 min — Napoleonic operational tempo
 }
 
 void llUseMobileFrontierScatterStyle(int wallLevel = 0)
@@ -177,6 +219,8 @@ void llUseMobileFrontierScatterStyle(int wallLevel = 0)
    // Crazy Horse / Plains mobile — never wall, scout + intercept.
    llConfigureBuildStyleProfile(cLLBuildStyleMobileFrontierScatter, wallLevel, false, 1.35, 1.45, 1.1, 1.5, 1, 0, 1, false);
    gLLWallStrategy = cLLWallStrategyMobileNoWalls;
+   gLLMilitaryPlacementPreference = cBuildingPlacementPreferenceFront;
+   llEnableEarlyForwardBase(360000);
 }
 
 void llUseShrineTradeNodeSpreadStyle(int wallLevel = 1)
@@ -184,6 +228,8 @@ void llUseShrineTradeNodeSpreadStyle(int wallLevel = 1)
    // Tokugawa — sakoku-era redoubts at approaches, no perimeter wall.
    llConfigureBuildStyleProfile(cLLBuildStyleShrineTradeNodeSpread, wallLevel, false, 1.0, 1.5, 0.95, 1.2, 1, 1, 1, false);
    gLLWallStrategy = cLLWallStrategyMobileNoWalls;
+   gLLMilitaryPlacementPreference = -1;  // shrines/trade post spread
+   llEnableEarlyForwardBase(480000);
 }
 
 void llUseCivicMilitiaCenterStyle(int wallLevel = 1)
@@ -191,6 +237,8 @@ void llUseCivicMilitiaCenterStyle(int wallLevel = 1)
    // Washington / Jefferson / Brock / Papineau — colonial frontier palisades.
    llConfigureBuildStyleProfile(cLLBuildStyleCivicMilitiaCenter, wallLevel, false, 0.95, 1.05, 0.95, 1.15, 2, 1, 2, false);
    gLLWallStrategy = cLLWallStrategyFrontierPalisades;
+   gLLMilitaryPlacementPreference = cBuildingPlacementPreferenceFront;  // militia at frontier
+   llEnableEarlyForwardBase(420000);
 }
 
 // ── Bespoke historical archetypes ────────────────────────────────────────
@@ -202,6 +250,8 @@ void llUseSteppeCavalryWedgeStyle(int wallLevel = 0)
    llConfigureBuildStyleProfile(cLLBuildStyleSteppeCavalryWedge, wallLevel, false,
       1.40, 1.50, 1.15, 1.55, 1, 0, 1, false);
    gLLWallStrategy = cLLWallStrategyMobileNoWalls;
+   gLLMilitaryPlacementPreference = cBuildingPlacementPreferenceFront;  // forward muster
+   llEnableEarlyForwardBase(300000);
 }
 
 // Naval Mercantile Compound — Dutch / British / Portuguese commercial empire:
@@ -212,6 +262,7 @@ void llUseNavalMercantileCompoundStyle(int wallLevel = 2)
    llConfigureBuildStyleProfile(cLLBuildStyleNavalMercantileCompound, wallLevel, true,
       1.10, 1.30, 1.00, 1.25, 2, 2, 1, false);
    gLLWallStrategy = cLLWallStrategyCoastalBatteries;
+   gLLMilitaryPlacementPreference = cBuildingPlacementPreferenceBack;  // tucked behind harbor
 }
 
 // Siege Train Concentration — Ottoman / Prussian / Swedish cannon doctrine:
@@ -221,6 +272,8 @@ void llUseSiegeTrainConcentrationStyle(int wallLevel = 2)
    llConfigureBuildStyleProfile(cLLBuildStyleSiegeTrainConcentration, wallLevel, true,
       0.90, 1.00, 0.85, 0.95, 2, 2, 3, true);
    gLLWallStrategy = cLLWallStrategyFortressRing;
+   gLLMilitaryPlacementPreference = cBuildingPlacementPreferenceFront;  // grand battery line
+   llEnableEarlyForwardBase(360000);
 }
 
 // Jungle Guerrilla Network — Maya / Haitian / Aztec scout-and-ambush doctrine:
@@ -230,6 +283,8 @@ void llUseJungleGuerrillaNetworkStyle(int wallLevel = 0)
    llConfigureBuildStyleProfile(cLLBuildStyleJungleGuerrillaNetwork, wallLevel, false,
       1.10, 1.30, 0.95, 1.30, 1, 0, 2, true);
    gLLWallStrategy = cLLWallStrategyMobileNoWalls;
+   gLLMilitaryPlacementPreference = cBuildingPlacementPreferenceFront;
+   llEnableEarlyForwardBase(360000);
 }
 
 // Highland Citadel — Maltese / Egyptian Mameluk / mountain fortress: tight
@@ -240,6 +295,7 @@ void llUseHighlandCitadelStyle(int wallLevel = 5)
    llConfigureBuildStyleProfile(cLLBuildStyleHighlandCitadel, wallLevel, true,
       0.65, 0.90, 0.80, 0.70, 4, 3, 2, false);
    gLLWallStrategy = cLLWallStrategyFortressRing;
+   gLLMilitaryPlacementPreference = cBuildingPlacementPreferenceBack;  // citadel core
 }
 
 // Cossack Voisko — Russian / Ukrainian host muster: massed barracks and
@@ -250,6 +306,8 @@ void llUseCossackVoiskoStyle(int wallLevel = 1)
    llConfigureBuildStyleProfile(cLLBuildStyleCossackVoisko, wallLevel, false,
       0.90, 1.00, 0.80, 0.95, 2, 2, 3, true);
    gLLWallStrategy = cLLWallStrategyFortressRing;
+   gLLMilitaryPlacementPreference = cBuildingPlacementPreferenceFront;  // host muster forward
+   llEnableEarlyForwardBase(360000);
 }
 
 // Republican Levee — French Revolution / American / Mexican citizen-army:
@@ -260,6 +318,8 @@ void llUseRepublicanLeveeStyle(int wallLevel = 1)
    llConfigureBuildStyleProfile(cLLBuildStyleRepublicanLevee, wallLevel, false,
       0.95, 1.05, 0.90, 1.10, 2, 1, 3, true);
    gLLWallStrategy = cLLWallStrategyUrbanBarricade;
+   gLLMilitaryPlacementPreference = cBuildingPlacementPreferenceFront;  // levee marches outward
+   llEnableEarlyForwardBase(360000);
 }
 
 // Andean Terrace Fortress — Inca / Peruvian / Chilean highland doctrine:
@@ -269,6 +329,7 @@ void llUseAndeanTerraceFortressStyle(int wallLevel = 3)
    llConfigureBuildStyleProfile(cLLBuildStyleAndeanTerraceFortress, wallLevel, true,
       0.80, 0.95, 0.90, 0.90, 3, 2, 2, false);
    gLLWallStrategy = cLLWallStrategyChokepointSegments;
+   gLLMilitaryPlacementPreference = cBuildingPlacementPreferenceBack;
 }
 
 void llSetBuildStrongpointProfile(int towerLevel = 1, int fortLevel = 1, int forwardBaseTowerCount = 2,
@@ -278,6 +339,10 @@ void llSetBuildStrongpointProfile(int towerLevel = 1, int fortLevel = 1, int for
    gLLFortLevel = fortLevel;
    gLLForwardBaseTowerCount = forwardBaseTowerCount;
    gLLPreferForwardFortifiedBase = preferForwardFortifiedBase;
+   llProbe("event.strongpoint.profile",
+      "towerL=" + towerLevel + " fortL=" + fortLevel +
+      " fwdTowers=" + forwardBaseTowerCount +
+      " preferFwd=" + preferForwardFortifiedBase);
 }
 
 int llGetWantedFortCount(void)
@@ -525,8 +590,10 @@ void llApplyBuildStyleForActiveCiv(void)
    }
    else if (cMyCiv == cCivFrench)
    {
-      // Louis XVIII — Bourbon Restoration, Ancien Régime river-valley estates.
-      llUseForwardOperationalLineStyle(2);
+      // Louis XVIII Bourbon — Vauban star-fort doctrine, compact fortified core.
+      // Per LEGENDARY_LEADERS_TREE.html: "Compact Fortified Core" not Forward
+      // Operational Line (that's Napoleon's revolution variant).
+      llUseCompactFortifiedCoreStyle(2);
       gLLMilitaryDistanceMultiplier = 0.85;
       llSetBuildStrongpointProfile(2, 2, 3, true);
       llSetPreferredTerrain(cLLTerrainRiver, cLLTerrainPlain, 0.35);
@@ -534,8 +601,11 @@ void llApplyBuildStyleForActiveCiv(void)
    }
    else if (cMyCiv == cCivGermans)
    {
-      // Frederick the Great — Prussian siege train and oblique order.
-      llUseSiegeTrainConcentrationStyle(2);
+      // Frederick the Great — Prussian republican-levee + oblique-order march.
+      // HTML reference promises Republican Levee (citizen-soldier brigade), not
+      // Siege Train; the doctrine still gets its signature heavy guns through
+      // gLLMilitaryDistanceMultiplier and strongpoint profile below.
+      llUseRepublicanLeveeStyle(2);
       gLLMilitaryDistanceMultiplier = 0.85;
       llSetBuildStrongpointProfile(2, 2, 2, true);
       // Oder/Elbe plain — river-and-plain advance, enemy-ward.
@@ -552,7 +622,9 @@ void llApplyBuildStyleForActiveCiv(void)
    }
    else if (cMyCiv == cCivDEHausa)
    {
-      // Usman dan Fodio — Sokoto caliphate trans-Saharan trade-and-cavalry.
+      // Muhammadu Kanta of Kebbi — Hausa Surame-fortress doctrine, riding
+      // the trans-Saharan caravan lattice. (Engine key remains "usman" for
+      // dispatch stability; lore is Kanta — see leader_usman.xs header.)
       llUseDistributedEconomicNetworkStyle(2);
       gLLEconomicDistanceMultiplier = 1.30;
       llSetPreferredTerrain(cLLTerrainDesertOasis, cLLTerrainRiver, 0.25);
@@ -570,8 +642,11 @@ void llApplyBuildStyleForActiveCiv(void)
    }
    else if (cMyCiv == cCivIndians)
    {
-      // Shivaji — Maratha hill-fort guerrilla and Sacred Field economy.
-      llUseShrineTradeNodeSpreadStyle(2);
+      // Shivaji — Maratha hill-fort citadel doctrine. HTML reference promises
+      // Highland Citadel (gad-fort network on the Sahyadri spurs), not Shrine
+      // Trade Node; the Sacred Field economy is preserved via the strongpoint
+      // profile and heading bias below.
+      llUseHighlandCitadelStyle(5);
       gLLEconomicDistanceMultiplier = 1.10;
       llSetBuildStrongpointProfile(2, 1, 2, false);
       llSetPreferredTerrain(cLLTerrainHighland, cLLTerrainJungle, 0.30);
@@ -659,8 +734,11 @@ void llApplyBuildStyleForActiveCiv(void)
    }
    else if (cMyCiv == cCivDESwedish)
    {
-      // Gustavus Adolphus — Lion of the North, mobile field artillery, Baltic.
-      llUseSiegeTrainConcentrationStyle(1);
+      // Gustavus Adolphus — Lion of the North. HTML reference promises Forward
+      // Operational Line (the famous Swedish thin-line tercio + drive-the-front
+      // assault), not Siege Train; mobile field artillery is still expressed via
+      // gLLMilitaryDistanceMultiplier (0.85) and the FrontierPush heading.
+      llUseForwardOperationalLineStyle(1);
       gLLMilitaryDistanceMultiplier = 0.85;
       llSetBuildStrongpointProfile(2, 2, 3, true);
       llSetPreferredTerrain(cLLTerrainCoast, cLLTerrainForestEdge, 0.35);
@@ -814,8 +892,11 @@ void llApplyBuildStyleForActiveCiv(void)
    }
    else if (rvltName == "RvltModIndonesians")
    {
-      // Diponegoro — Java War shrine & pesantren network, island archipelago.
-      llUseShrineTradeNodeSpreadStyle(1);
+      // Diponegoro — Java War jungle-guerrilla campaign (Perang Diponegoro,
+      // 1825-1830). HTML reference promises Jungle Guerrilla Network, not
+      // Shrine Trade; the pesantren-village character is still encoded in
+      // gLLEconomicDistanceMultiplier (1.40) + IslandHop heading.
+      llUseJungleGuerrillaNetworkStyle(0);
       gLLEconomicDistanceMultiplier = 1.40;
       llSetPreferredTerrain(cLLTerrainJungle, cLLTerrainCoast, 0.40);
       llSetExpansionHeading(cLLHeadingIslandHop, 0.35);

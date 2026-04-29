@@ -1263,7 +1263,6 @@
     </card>
   </cards>
   <decks>
-
     <deck>
       <name>A New World</name>
       <default />
@@ -1278,18 +1277,18 @@
         <card>HCXPShipEagleKnights3</card>
         <card>DEHCChichimecaRebellion</card>
         <card>DEHCZapotecAlliesTeam</card>
-        <card>HCXPCoinCratesAztec3</card>
+        <card>HCXPExtensiveFortificationsAztec</card>
         <card>HCXPShipJaguars2</card>
         <card>HCXPShipJaguarsTeam</card>
         <card>HCXPShipMacehualtins1</card>
         <card>HCXPShipMacehualtins3</card>
         <card>HCXPWarChiefAztec2</card>
         <card>DEHCShipMedicineMen3Aztec</card>
-        <card>HCXPCoinCratesAztec5</card>
+        <card>HCXPChinampa2</card>
         <card>HCXPWarChiefAztec1</card>
-        <card>DEHCTeamCoinCratesAztec</card>
+        <card>HCXPGreatTempleHuitzilopochtli</card>
         <card>HCXPAztecMining</card>
-        <card>HCXPCoinCratesAztec4</card>
+        <card>HCXPTempleCenteotl</card>
         <card>HCXPShipEagleKnights1</card>
         <card>HCXPShipJaguarKnights1</card>
         <card>HCXPShipJaguarKnights3</card>

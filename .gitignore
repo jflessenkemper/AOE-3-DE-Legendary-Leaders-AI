@@ -7,3 +7,18 @@ reference-mods/
 __pycache__/
 *.pyc
 .validation-reports/
+
+# Claude Code session/agent state
+.claude/
+tools/.claude/
+
+# Local automation artifacts (large binary screenshots, sandbox runs, replays)
+artifacts/
+tools/aoe3_automation/artifacts/
+tools/aoe3_automation/smoke_test_baseline/
+tools/aoe3_automation/ui_map/
+tools/aoe3_automation/templates/matrix/_raw/
+
+# Compiled local binaries
+tools/aoe3_automation/ei_inject
+

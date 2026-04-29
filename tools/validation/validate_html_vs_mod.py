@@ -134,6 +134,72 @@ def deck_summary_cards(summary: dict, civ_key: str) -> list[str] | None:
     return cards
 
 
+# Civs whose HTML section is intentionally deferred (revolution civs
+# that share parent-civ XML and have no dedicated HTML section yet).
+# Tracked in tools/validation/validate_html_reference.py:_DEFERRED_SECTION.
+_DEFERRED_HTML_SECTION: set[str] = {"Americans", "Mexicans (Revolution)"}
+
+
+def validate_html_vs_mod(repo_root: Path | None = None) -> list[str]:
+    """Library-friendly entrypoint. Returns the issue list (empty = OK)."""
+    repo = Path(repo_root) if repo_root else REPO
+    html_path = repo / "LEGENDARY_LEADERS_TREE.html"
+    data = repo / "data"
+    text = html_path.read_text(encoding="utf-8")
+    leg = json.loads((data / "decks_legendary.json").read_text())
+    std = json.loads((data / "decks_standard.json").read_text())
+    cards_meta = json.loads((data / "cards.json").read_text())
+
+    name_to_id: dict[str, list[str]] = {}
+    for cid, meta in cards_meta.items():
+        nm = (meta.get("name") or "").strip()
+        if nm:
+            name_to_id.setdefault(nm, []).append(cid)
+
+    html_decks = html_decks_per_civ(text)
+    html_assets = html_assets_per_civ(text)
+
+    errors: list[str] = []
+    for slug, (basename, std_key) in CIV_TO_HOMECITY.items():
+        if slug in _DEFERRED_HTML_SECTION:
+            # HTML section not authored yet; skip chip-count check but
+            # still verify the home-city XML exists.
+            xml = data / f"{basename}.xml"
+            if not xml.exists():
+                errors.append(f"{slug}: missing home-city XML at data/{basename}.xml")
+            continue
+        xml = data / f"{basename}.xml"
+        if not xml.exists():
+            errors.append(f"{slug}: missing home-city XML at data/{basename}.xml")
+            continue
+        if std_key:
+            summary_cards = deck_summary_cards(std, std_key)
+            src = "decks_standard.json"
+            key = std_key
+        else:
+            summary_cards = deck_summary_cards(leg, basename)
+            src = "decks_legendary.json"
+            key = basename
+        if summary_cards is None:
+            errors.append(f"{slug}: no entry '{key}' in {src}")
+            continue
+        rendered = html_decks.get(slug, [])
+        if len(rendered) != len(summary_cards):
+            errors.append(
+                f"{slug}: HTML deck has {len(rendered)} chips, summary has {len(summary_cards)}"
+            )
+        if len(summary_cards) != 25:
+            errors.append(f"{slug}: summary has {len(summary_cards)} cards (expected 25)")
+        for chip_name in rendered:
+            if chip_name not in name_to_id:
+                errors.append(f"{slug}: chip '{chip_name}' has no matching card_id in cards.json")
+        for kind in ("portrait", "flag"):
+            p = html_assets.get(slug, {}).get(kind, "")
+            if p and not (repo / p).is_file():
+                errors.append(f"{slug}: {kind} image missing on disk: {p}")
+    return errors
+
+
 def main() -> int:
     text = HTML.read_text(encoding="utf-8")
     leg = json.loads((DATA / "decks_legendary.json").read_text())

@@ -9,6 +9,14 @@ bool llShouldBuildLegendaryWalls(bool earlyGame = false)
       return (false);
    }
 
+   // Doctrine veto: MobileNoWalls (Napoleon / Crazy Horse / Hiawatha /
+   // Montezuma / Usman) overrides everything. No early walls, no late walls,
+   // no gap fills, no upgrades. Their playstyle is open-field manoeuvre.
+   if (gLLWallStrategy == cLLWallStrategyMobileNoWalls)
+   {
+      return (false);
+   }
+
    if (earlyGame == true)
    {
       return (gLLEarlyWallingEnabled);
@@ -126,14 +134,22 @@ int llPlanFortressRingWall(int mainBaseID = -1, vector baseCenter = cInvalidVect
    int planID = aiPlanCreate("FortressRing Wall", cPlanBuildWall);
    if (planID < 0) return (-1);
    aiPlanSetVariableInt(planID, cBuildWallPlanWallType, 0, cBuildWallPlanWallTypeRing);
-   aiPlanAddUnitType(planID, gEconUnit, 0, 3, 5);  // heavy villager commitment for thick rings
+   // Heavy villager commitment — a ~264-unit perimeter at radius 42 needs a
+   // sustained pool, not a 3–5 starter crew that finishes its first segment
+   // and goes home. Bumped 3,5 -> 6,12 so the ring actually closes.
+   // min=2 (was 6): a stalled plan only locks 2 villagers idle, not 6.
+   // max=12: still scales up when there are wall pieces to place.
+   aiPlanAddUnitType(planID, gEconUnit, 0, 2, 12);
    aiPlanSetVariableVector(planID, cBuildWallPlanWallRingCenterPoint, 0, baseCenter);
    aiPlanSetVariableFloat(planID, cBuildWallPlanWallRingRadius, 0.0, radius);
-   aiPlanSetVariableInt(planID, cBuildWallPlanNumberOfGates, 0, llGetLegendaryWallGateCount(false));
+   // Fewer gates = fewer gaps. Fortress doctrine wants a dense wall.
+   aiPlanSetVariableInt(planID, cBuildWallPlanNumberOfGates, 0, 4);
    aiPlanSetBaseID(planID, mainBaseID);
    aiPlanSetEscrowID(planID, cEconomyEscrowID);
-   aiPlanSetDesiredPriority(planID, 75);  // raised 68 -> 75 to win villager contention
+   aiPlanSetDesiredPriority(planID, 88);  // raised 75 -> 88 so wall wins over barracks/houses
    aiPlanSetActive(planID, true);
+   llProbe("plan.wall.create", "type=FortressRing radius=" + radius +
+      " gates=4 vils=6-12 priority=88 plan=" + planID);
    return (planID);
 }
 
@@ -148,14 +164,16 @@ int llPlanChokepointWall(int mainBaseID = -1, vector baseCenter = cInvalidVector
    int planID = aiPlanCreate("Chokepoint Wall", cPlanBuildWall);
    if (planID < 0) return (-1);
    aiPlanSetVariableInt(planID, cBuildWallPlanWallType, 0, cBuildWallPlanWallTypeRing);
-   aiPlanAddUnitType(planID, gEconUnit, 0, 2, 4);
+   aiPlanAddUnitType(planID, gEconUnit, 0, 2, 10);  // min=2 to release idlers when plan stalls
    aiPlanSetVariableVector(planID, cBuildWallPlanWallRingCenterPoint, 0, center);
    aiPlanSetVariableFloat(planID, cBuildWallPlanWallRingRadius, 0.0, radius);
-   aiPlanSetVariableInt(planID, cBuildWallPlanNumberOfGates, 0, 4);
+   aiPlanSetVariableInt(planID, cBuildWallPlanNumberOfGates, 0, 3);
    aiPlanSetBaseID(planID, mainBaseID);
    aiPlanSetEscrowID(planID, cEconomyEscrowID);
-   aiPlanSetDesiredPriority(planID, 70);
+   aiPlanSetDesiredPriority(planID, 85);
    aiPlanSetActive(planID, true);
+   llProbe("plan.wall.create", "type=Chokepoint radius=" + radius +
+      " gates=3 vils=5-10 priority=85 plan=" + planID);
    return (planID);
 }
 
@@ -169,14 +187,16 @@ int llPlanCoastalBatteriesWall(int mainBaseID = -1, vector baseCenter = cInvalid
    int planID = aiPlanCreate("CoastalBatteries Wall", cPlanBuildWall);
    if (planID < 0) return (-1);
    aiPlanSetVariableInt(planID, cBuildWallPlanWallType, 0, cBuildWallPlanWallTypeRing);
-   aiPlanAddUnitType(planID, gEconUnit, 0, 2, 4);
+   aiPlanAddUnitType(planID, gEconUnit, 0, 2, 10);  // min=2 to release idlers when plan stalls
    aiPlanSetVariableVector(planID, cBuildWallPlanWallRingCenterPoint, 0, center);
    aiPlanSetVariableFloat(planID, cBuildWallPlanWallRingRadius, 0.0, radius);
-   aiPlanSetVariableInt(planID, cBuildWallPlanNumberOfGates, 0, 6);
+   aiPlanSetVariableInt(planID, cBuildWallPlanNumberOfGates, 0, 4);
    aiPlanSetBaseID(planID, mainBaseID);
    aiPlanSetEscrowID(planID, cEconomyEscrowID);
-   aiPlanSetDesiredPriority(planID, 72);
+   aiPlanSetDesiredPriority(planID, 86);
    aiPlanSetActive(planID, true);
+   llProbe("plan.wall.create", "type=CoastalBatteries radius=" + radius +
+      " gates=4 vils=6-10 priority=86 plan=" + planID);
    return (planID);
 }
 
@@ -189,14 +209,16 @@ int llPlanFrontierPalisadeWall(int mainBaseID = -1, vector baseCenter = cInvalid
    int planID = aiPlanCreate("FrontierPalisade Wall", cPlanBuildWall);
    if (planID < 0) return (-1);
    aiPlanSetVariableInt(planID, cBuildWallPlanWallType, 0, cBuildWallPlanWallTypeRing);
-   aiPlanAddUnitType(planID, gEconUnit, 0, 2, 3);
+   aiPlanAddUnitType(planID, gEconUnit, 0, 2, 8);   // min=2 to release idlers when plan stalls
    aiPlanSetVariableVector(planID, cBuildWallPlanWallRingCenterPoint, 0, center);
    aiPlanSetVariableFloat(planID, cBuildWallPlanWallRingRadius, 0.0, radius);
-   aiPlanSetVariableInt(planID, cBuildWallPlanNumberOfGates, 0, 8);
+   aiPlanSetVariableInt(planID, cBuildWallPlanNumberOfGates, 0, 5);
    aiPlanSetBaseID(planID, mainBaseID);
    aiPlanSetEscrowID(planID, cEconomyEscrowID);
-   aiPlanSetDesiredPriority(planID, 68);  // raised 58 -> 68, wood-cheap but still worth completing
+   aiPlanSetDesiredPriority(planID, 82);  // wood-cheap palisades, complete first
    aiPlanSetActive(planID, true);
+   llProbe("plan.wall.create", "type=FrontierPalisade radius=" + radius +
+      " gates=5 vils=4-8 priority=82 plan=" + planID);
    return (planID);
 }
 
@@ -208,14 +230,16 @@ int llPlanUrbanBarricadeWall(int mainBaseID = -1, vector baseCenter = cInvalidVe
    int planID = aiPlanCreate("UrbanBarricade Wall", cPlanBuildWall);
    if (planID < 0) return (-1);
    aiPlanSetVariableInt(planID, cBuildWallPlanWallType, 0, cBuildWallPlanWallTypeRing);
-   aiPlanAddUnitType(planID, gEconUnit, 0, 2, 3);
+   aiPlanAddUnitType(planID, gEconUnit, 0, 2, 8);   // min=2 to release idlers when plan stalls
    aiPlanSetVariableVector(planID, cBuildWallPlanWallRingCenterPoint, 0, center);
    aiPlanSetVariableFloat(planID, cBuildWallPlanWallRingRadius, 0.0, radius);
-   aiPlanSetVariableInt(planID, cBuildWallPlanNumberOfGates, 0, 4);
+   aiPlanSetVariableInt(planID, cBuildWallPlanNumberOfGates, 0, 3);
    aiPlanSetBaseID(planID, mainBaseID);
    aiPlanSetEscrowID(planID, cEconomyEscrowID);
-   aiPlanSetDesiredPriority(planID, 70);
+   aiPlanSetDesiredPriority(planID, 84);
    aiPlanSetActive(planID, true);
+   llProbe("plan.wall.create", "type=UrbanBarricade radius=" + radius +
+      " gates=3 vils=4-8 priority=84 plan=" + planID);
    return (planID);
 }
 
@@ -264,9 +288,26 @@ inactive
 group tcComplete
 minInterval 20
 {
-   if ((llShouldBuildLegendaryWalls(true) == false) || (cvOkToBuild == false))
+   // LL-WALL-GATE probe — fires every tick of the rule, so the replay parser
+   // sees exactly which gate causes the rule to bail. Compact tag because
+   // this can fire many times per match per AI.
+   static int gateTickProbe = 0;
+   gateTickProbe = gateTickProbe + 1;
+
+   if (cvOkToBuild == false)
    {
-      llLogDecision("WALL", "exploration walling disabled by config");
+      llProbe("wall.gate", "tick=" + gateTickProbe + " bail=cvOkToBuild");
+      llLogDecision("WALL", "exploration walling disabled by config (cvOkToBuild)");
+      xsDisableSelf();
+      return;
+   }
+   if (llShouldBuildLegendaryWalls(true) == false)
+   {
+      llProbe("wall.gate", "tick=" + gateTickProbe +
+         " bail=llShould early=" + gLLEarlyWallingEnabled +
+         " level=" + gLLWallLevel +
+         " okWalls=" + cvOkToBuildWalls);
+      llLogDecision("WALL", "exploration walling disabled by config (llShould)");
       xsDisableSelf();
       return;
    }
@@ -275,6 +316,7 @@ minInterval 20
    // we're past Exploration — keeps responsibilities clean.
    if (kbGetAge() > cAge1)
    {
+      llProbe("wall.gate", "tick=" + gateTickProbe + " bail=ageOver age=" + kbGetAge());
       xsDisableSelf();
       return;
    }
@@ -282,27 +324,34 @@ minInterval 20
    int mainBaseID = kbBaseGetMainID(cMyID);
    if (mainBaseID < 0)
    {
+      llProbe("wall.gate", "tick=" + gateTickProbe + " bail=noMainBase");
       return;
    }
 
    // Anti-spam: skip while any ring plan is active or while existing walls
    // already surround the base (gap-fill owns that case).
-   if (aiPlanGetIDByTypeAndVariableType(cPlanBuildWall, cBuildWallPlanWallType, cBuildWallPlanWallTypeRing, true) >= 0)
+   int existingRingPlan = aiPlanGetIDByTypeAndVariableType(cPlanBuildWall, cBuildWallPlanWallType, cBuildWallPlanWallTypeRing, true);
+   if (existingRingPlan >= 0)
    {
+      llProbe("wall.gate", "tick=" + gateTickProbe + " skip=ringActive plan=" + existingRingPlan);
       xsEnableRule("fillInWallGapsNew");
       return;
    }
 
-   if (kbUnitCount(cMyID, cUnitTypeAbstractWall, cUnitStateABQ) > 0)
+   int existingWalls = kbUnitCount(cMyID, cUnitTypeAbstractWall, cUnitStateABQ);
+   if (existingWalls > 0)
    {
+      llProbe("wall.gate", "tick=" + gateTickProbe + " skip=wallsExist count=" + existingWalls);
       xsEnableRule("fillInWallGapsNew");
       // Don't disable — if the plan disappears later and all walls die,
       // we want this rule to recreate the ring instead of going silent.
       return;
    }
 
-   if (kbResourceGet(cResourceWood) < 75.0)
+   float wood = kbResourceGet(cResourceWood);
+   if (wood < 75.0)
    {
+      llProbe("wall.gate", "tick=" + gateTickProbe + " wait=lowWood wood=" + wood);
       return;
    }
 
@@ -476,6 +525,17 @@ rule fillInWallGapsNew
       return;
    }
 
+   // Doctrine gate: MobileNoWalls leaders (Napoleon, Crazy Horse, Hiawatha,
+   // Montezuma, Usman) must NEVER build walls. delayWallsNew already honours
+   // this; fillInWallGapsNew used to leak through and that's what produced
+   // Napoleon's walls in the 16:27 replay.
+   if (gLLWallStrategy == cLLWallStrategyMobileNoWalls)
+   {
+      llLogDecision("WALL", "gap-fill declined - MobileNoWalls doctrine");
+      xsDisableSelf();
+      return;
+   }
+
   if(aiPlanGetIDByTypeAndVariableType(cPlanBuildWall, cBuildWallPlanWallType, cBuildWallPlanWallTypeRing, true) >= 1)
       return;
 
@@ -493,6 +553,49 @@ rule fillInWallGapsNew
          aiPlanSetActive(wallPlanID, true);
    }
 }
+//==============================================================================
+// RULE wallPlanStallWatchdog
+// Wall plans hold gEconUnit villagers exclusively. When a plan can't make
+// progress (no buildable arc, wood-starved, base relocated), the held
+// villagers go IDLE — that's the bug the user observed in the 16:27 replay.
+// This rule walks every active wall plan, ages it via a static map, and
+// destroys plans that haven't completed in `cWallPlanMaxAgeSec`. The next
+// walling rule tick will recreate a fresh plan with a fresh layout.
+//==============================================================================
+const int cWallPlanMaxAgeSec = 240;  // 4 min — enough for a normal ring to complete
+
+rule wallPlanStallWatchdog
+inactive
+minInterval 30
+{
+   int planID = aiPlanGetIDByTypeAndVariableType(cPlanBuildWall,
+                    cBuildWallPlanWallType, cBuildWallPlanWallTypeRing, true);
+   if (planID < 0) { return; }
+
+   // User-variable slot 0 holds the creation timestamp (ms). aiPlan user
+   // vars default to 0, so a never-stamped plan reads back 0 — we stamp on
+   // first sight, then evaluate stall on subsequent ticks.
+   int created = aiPlanGetUserVariableInt(planID, 0, 0);
+   int now     = xsGetTime();
+
+   if (created == 0)
+   {
+      aiPlanSetUserVariableInt(planID, 0, 0, now);
+      return;
+   }
+
+   int ageMs = now - created;
+   if (ageMs < (cWallPlanMaxAgeSec * 1000)) { return; }
+
+   // Stalled. Destroy so the held villagers free up and the perpetual
+   // rule recreates a fresh plan with a recomputed layout.
+   llProbe("plan.wall.stall", "plan=" + planID + " ageMs=" + ageMs +
+      " strategy=" + gLLWallStrategy);
+   llLogPlanEvent("destroy-stalled", planID,
+      "ageSec=" + (ageMs / 1000) + " strategy=" + gLLWallStrategy);
+   aiPlanDestroy(planID);
+}
+
 //==============================================================================
 // RULE bastionUpgradeMonitor
 // Make sure we research bastion so our walls are stronger.
