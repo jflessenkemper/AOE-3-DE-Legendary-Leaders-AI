@@ -29,9 +29,7 @@ All source images obtained from Wikimedia Commons.
 ## Muhammadu Kanta of Kebbi (Hausa)
 
 - **File:** `resources/images/icons/singleplayer/cpai_avatar_hausa_usman.png`
-- **Source:** [File:The Sword of Muhammadu Kanta.jpg](https://commons.wikimedia.org/wiki/File:The_Sword_of_Muhammadu_Kanta.jpg) on Wikimedia Commons
-- **Subject:** The surviving sword of Muhammadu Kanta (d. ~1556), founder of the Kebbi Empire (the last of the Hausa states); victor over Songhai at the Battle of Tabkin Kwatto (1517). No portraits of Kanta exist; he predates photography by ~300 years. The sword — an iconic surviving artefact — is used by Wikipedia as the lead image on his article.
-- **Author:** Department of Antiquities of Nigeria
-- **Source citation:** Bivar, A.D.H. *Nigerian Panoply: Arms and Armour of the Northern Region* (1964).
-- **License:** **Public domain** (Nigerian copyright expired; first published in 1964, public-domain term of 50 years for photographic works under Nigerian law has elapsed).
-- **Cropping/resizing:** square center-crop emphasising the carved hilt, resized to 256×256.
+- **Source:** [File:Sarkin Kano Abdullahi Bayero.jpg](https://commons.wikimedia.org/wiki/File:Sarkin_Kano_Abdullahi_Bayero.jpg) on Wikimedia Commons
+- **Subject:** Period photograph of Sarkin Kano Abdullahi Bayero (Emir of Kano, r. 1926–1953) and members of his royal court in traditional Hausa regalia — turbans, ceremonial robes, royal beads. Used here as a **figure cipher** for Muhammadu Kanta of Kebbi (d. ~1556, founder of the Kebbi kingdom). No contemporary portraits of Kanta exist; he predates photography by ~300 years. This image of a later Hausa royal court is the closest visual analogue available, conveying the office and dress of a Hausa sovereign rather than the man himself.
+- **License:** **Public domain** (originally published in Nigeria; Nigerian copyright term has elapsed).
+- **Cropping/resizing:** centered crop on the emir (central figure) and immediate retinue, resized to 256×256.
