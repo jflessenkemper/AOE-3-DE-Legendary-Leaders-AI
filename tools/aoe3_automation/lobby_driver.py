@@ -172,7 +172,42 @@ def diff_pixels(a: Path, b: Path) -> int:
     return -1
 
 
+_GAMESCOPE_WID: Optional[str] = None
+
+
+def _ensure_window_focus() -> None:
+    """Activate the gamescope Xwayland window before sending input.
+
+    Clicks via xdotool reach the X server fine, but gamescope's nested
+    compositor silently drops them if the window has lost activation
+    (which happens intermittently when host-side processes — flatpak-spawn,
+    kwin notifications, the Claude runtime — steal focus). Without this,
+    individual clicks succeed in isolation but stop registering after a
+    few iterations of confirm_civ_selection() → move_mouse_off().
+    """
+    global _GAMESCOPE_WID
+    if _GAMESCOPE_WID is None:
+        # Find the AoE3 window by name — gamescope exposes several toplevels
+        # (847, 6291457, …) and the unnamed ones are gamescope chrome, not the
+        # game itself. Activating the wrong one leaves the game unfocused.
+        try:
+            out = sh(
+                "DISPLAY=:1 xdotool search --name 'Age of Empires III' 2>/dev/null | head -1",
+                check=False,
+            ).strip()
+            _GAMESCOPE_WID = out or ""
+        except Exception:
+            _GAMESCOPE_WID = ""
+    if _GAMESCOPE_WID:
+        try:
+            sh(f"DISPLAY=:1 xdotool windowactivate {_GAMESCOPE_WID} 2>/dev/null || true",
+               check=False)
+        except Exception:
+            pass
+
+
 def click(x: int, y: int, *, settle: float = 0.2) -> None:
+    _ensure_window_focus()
     xdo(f"mousemove {x} {y}")
     time.sleep(settle)
     xdo("click 1")
@@ -220,6 +255,23 @@ def is_picker_open(coords: dict) -> bool:
     return d >= coords["diff_thresholds"]["significant_change"]
 
 
+def picker_opened_since(baseline: Path, coords: dict) -> bool:
+    """Picker open relative to a fresh pre-click baseline.
+
+    The clean-lobby reference goes stale once opponent civs are assigned
+    (each non-default opponent adds ~10-30k pixels of drift), so checking
+    `is_picker_open` alone false-negatives on later slots. Comparing
+    against a baseline taken immediately before the click isolates the
+    delta caused by the picker overlay only.
+    """
+    p = ARTIFACT_DIR / "_state_postclick.png"
+    screenshot(p)
+    d = diff_pixels(baseline, p)
+    if d < 0:
+        return False
+    return d >= coords["diff_thresholds"]["significant_change"]
+
+
 # ---- high-level operations ------------------------------------------------
 
 
@@ -232,14 +284,15 @@ def open_civ_picker(coords: dict, *, attempts: int = 3, settle: float = 2.0) -> 
     re-clicking until detection is positive.
     """
     cx, cy = coords["lobby"]["p1_civ_picker"]
+    baseline = ARTIFACT_DIR / "_baseline_p1.png"
     for i in range(attempts):
+        screenshot(baseline)
         click(cx, cy)
         time.sleep(settle)
-        if is_picker_open(coords):
+        if picker_opened_since(baseline, coords):
             return
-        # Wait a bit more in case animation was slow, before retry
         time.sleep(0.8)
-        if is_picker_open(coords):
+        if picker_opened_since(baseline, coords):
             return
         print(f"  open_civ_picker: attempt {i+1} did not open picker, retrying")
     raise RuntimeError("Failed to open civ picker after multiple attempts")
@@ -300,7 +353,7 @@ def set_civ_by_index(coords: dict, civ_index: int) -> None:
     confirm_civ_selection(coords)
 
 
-def open_opponent_picker(coords: dict, slot: int, *, attempts: int = 3,
+def open_opponent_picker(coords: dict, slot: int, *, attempts: int = 4,
                          settle: float = 2.0) -> None:
     """Open the civ picker for AI slot `slot` (1..7, mapping to P2..P8).
 
@@ -312,16 +365,33 @@ def open_opponent_picker(coords: dict, slot: int, *, attempts: int = 3,
     if not (1 <= slot <= 7):
         raise ValueError(f"opponent slot must be 1..7 (P2..P8), got {slot}")
     pickers = coords["lobby"]["opponent_civ_pickers"]
-    cx, cy = pickers[slot - 1]
+    cx, cy_base = pickers[slot - 1]
+    baseline = ARTIFACT_DIR / f"_baseline_opp{slot}.png"
+    # Each previously-assigned opponent expands its row by ~14px (the leader
+    # name takes more vertical space than "Random Personality"), pushing
+    # subsequent rows DOWN. Nudge the click y by that cumulative shift,
+    # assuming opponent slots are filled in order (the standard pattern
+    # for both set_opponent_civs and the matrix runner).
+    PER_SLOT_SHIFT = 14
+    nudges = [
+        (slot - 1) * PER_SLOT_SHIFT,           # primary: assume in-order fill
+        (slot - 1) * PER_SLOT_SHIFT + 7,       # try halfway between rows
+        0,                                     # fall back to original coord
+        (slot - 1) * PER_SLOT_SHIFT - 7,       # try slightly higher
+    ]
     for i in range(attempts):
+        nudge = nudges[i % len(nudges)]
+        cy = cy_base + nudge
+        screenshot(baseline)
         click(cx, cy)
         time.sleep(settle)
-        if is_picker_open(coords):
+        if picker_opened_since(baseline, coords):
             return
         time.sleep(0.8)
-        if is_picker_open(coords):
+        if picker_opened_since(baseline, coords):
             return
-        print(f"  open_opponent_picker(slot={slot}): attempt {i+1} did not open picker, retrying")
+        print(f"  open_opponent_picker(slot={slot}): attempt {i+1} (y={cy}) "
+              f"did not open picker, retrying")
     raise RuntimeError(f"Failed to open opponent picker for slot {slot}")
 
 
