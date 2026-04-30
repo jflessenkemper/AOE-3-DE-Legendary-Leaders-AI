@@ -254,15 +254,37 @@ def cycle_game() -> bool:
     return rc == 0
 
 
-def ensure_lobby(coords: dict, *, attempts: int = 3) -> bool:
+def _wait_for_lobby(coords: dict, total_wait: float = 12.0,
+                    poll_interval: float = 1.0) -> bool:
+    """Poll is_clean_lobby for up to total_wait seconds. Returns True as soon
+    as the lobby is detected. Used to absorb slow-render / cold-launch latency
+    after clicking Skirmish — the lobby can take 4-8s to fully render on a
+    fresh game, much longer than the previous fixed 2.5s sleep allowed for."""
+    deadline = time.monotonic() + total_wait
+    while time.monotonic() < deadline:
+        try:
+            if lobby.is_clean_lobby(coords):
+                return True
+        except Exception:
+            pass
+        time.sleep(poll_interval)
+    return False
+
+
+def ensure_lobby(coords: dict, *, attempts: int = 4) -> bool:
     """Make best-effort attempt to land at a clean Skirmish lobby.
 
     Strategy (each attempt):
       1. If clean lobby → done.
       2. Try cancelling any open civ-picker.
       3. If the game is in a match (HUD detected by GameDriver) → resign.
-      4. Click Skirmish from main menu.
+      4. Click Skirmish from main menu, then poll up to 12s for lobby render.
     Last resort: cycle (close + relaunch) the game.
+
+    2026-04-30: bumped from fixed 2.5s post-click sleep to a 12s poll because
+    cold-launched games (first matrix iter after cycle) can take 6-8s to
+    render the lobby; the old fixed sleep was missing the lobby on slow
+    iterations and triggering cascade failures downstream.
     """
     for i in range(attempts):
         try:
@@ -292,40 +314,36 @@ def ensure_lobby(coords: dict, *, attempts: int = 3) -> bool:
         if picker_open:
             try:
                 lobby.cancel_civ_picker(coords)
+                time.sleep(1.0)
+                if lobby.is_clean_lobby(coords):
+                    return True
             except Exception:
                 pass
         # From main menu (or a sub-screen), Escape backs out, then Skirmish
         # enters the lobby.
         try:
             lobby.xdo("key Escape")
-            time.sleep(0.6)
+            time.sleep(0.8)
         except Exception:
             pass
         try:
             sk = coords["main_menu"]["skirmish_button"]
             lobby.click(sk[0], sk[1])
-            time.sleep(2.5)
         except Exception:
             pass
-        try:
-            if lobby.is_clean_lobby(coords):
-                return True
-        except Exception:
-            pass
+        if _wait_for_lobby(coords, total_wait=12.0, poll_interval=1.0):
+            return True
     # Last resort: cycle the game
     print("  ensure_lobby: attempting cycle_game last-resort recovery")
     if cycle_game():
-        time.sleep(3.0)
+        time.sleep(5.0)
         try:
             sk = coords["main_menu"]["skirmish_button"]
             lobby.click(sk[0], sk[1])
-            time.sleep(3.0)
         except Exception:
             pass
-        try:
-            return lobby.is_clean_lobby(coords)
-        except Exception:
-            return False
+        if _wait_for_lobby(coords, total_wait=20.0, poll_interval=1.0):
+            return True
     return False
 
 

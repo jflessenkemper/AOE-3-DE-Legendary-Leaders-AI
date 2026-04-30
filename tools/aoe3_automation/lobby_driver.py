@@ -120,13 +120,23 @@ def xdo(cmd: str) -> None:
 
 
 def screenshot(out_path: Path, *, retries: int = 5) -> Path:
-    """gamescopectl screenshot, with retry — first call after a click is flaky."""
+    """gamescopectl screenshot, with retry + parseability check.
+
+    gamescopectl writes async; an immediate read can hit a partial file. We
+    retry until the file exists with non-zero size AND magick can parse it
+    (catches truncated PNGs that would otherwise cause downstream `magick
+    compare` to silently produce empty output and diff_pixels to return 0).
+    """
     out_path.unlink(missing_ok=True)
     for i in range(retries):
         sh(f"DISPLAY=:1 gamescopectl screenshot {out_path}", check=False)
-        time.sleep(0.4)
-        if out_path.exists() and out_path.stat().st_size > 0:
+        time.sleep(0.6)
+        if not (out_path.exists() and out_path.stat().st_size > 1000):
+            continue
+        verify = sh(f"magick identify {out_path} 2>&1 || true", check=False)
+        if "PNG" in verify and "1920x1080" in verify and "error" not in verify.lower():
             return out_path
+        # else: file truncated or unreadable, retry
     raise RuntimeError(f"screenshot failed after {retries} retries: {out_path}")
 
 
@@ -135,11 +145,16 @@ def diff_pixels(a: Path, b: Path) -> int:
 
     Uses 'magick compare -metric AE'. Output format is '<sum-sq> (<n_pixels>)';
     we want the n_pixels in parens (the raw number of differing pixels).
+    Returns -1 on error (so callers can distinguish "couldn't compare" from
+    "compared and got 0 differences"). Both is_clean_lobby and is_picker_open
+    treat negative returns as "unknown" (False, conservatively).
     """
     out = sh(
         f"magick compare -metric AE {a} {b} null: 2>&1 || true",
         check=False,
     )
+    if not out.strip():
+        return -1
     # Numeric pattern must start with a digit so we don't catch lone 'e' / 'E'
     # / '+' / '-' tokens from words like "error" in magick's stderr output.
     num_re = r"\d[\d.]*(?:[eE][+-]?\d+)?"
@@ -154,7 +169,7 @@ def diff_pixels(a: Path, b: Path) -> int:
             return int(float(cand))
         except ValueError:
             continue
-    return 0
+    return -1
 
 
 def click(x: int, y: int, *, settle: float = 0.2) -> None:
@@ -190,6 +205,8 @@ def is_clean_lobby(coords: dict) -> bool:
     p = ARTIFACT_DIR / "_state.png"
     screenshot(p)
     d = diff_pixels(CLEAN_LOBBY_REF, p)
+    if d < 0:
+        return False  # error → don't claim clean lobby
     return d <= coords["diff_thresholds"]["noise_floor"]
 
 
@@ -198,6 +215,8 @@ def is_picker_open(coords: dict) -> bool:
     p = ARTIFACT_DIR / "_state.png"
     screenshot(p)
     d = diff_pixels(CLEAN_LOBBY_REF, p)
+    if d < 0:
+        return False  # error → don't claim picker open
     return d >= coords["diff_thresholds"]["significant_change"]
 
 
