@@ -38,6 +38,59 @@ include "leaders\leader_crazy_horse.xs";
 include "leaders\leader_gustavus.xs";
 
 
+//==============================================================================
+/*  Runtime-resolved abstract proto-type IDs.
+
+    The XS engine exposes only a fixed enum of cUnitType* identifiers (e.g.
+    cUnitTypeBarracks, cUnitTypeTownCenter). Many "Abstract*" proto types
+    that appear in protoy.xml (AbstractStables, AbstractArtilleryFoundry,
+    AbstractInfantry, etc.) are NOT in that enum, so referring to them as
+    cUnitTypeAbstractXxx is a parse error: "X is not a valid operator"
+    (XS Error 0172).
+
+    Workaround: at preInit() we look each proto up by NAME via
+    kbGetProtoUnitID("AbstractXxx") and cache the int ID in a global.
+    All probe call-sites use the cached g* below. If the engine doesn't
+    know a name, kbGetProtoUnitID returns -1; kbUnitCount with proto=-1
+    returns 0, so probes degrade gracefully instead of crashing.
+
+    NOTE: this is a probe/diagnostic concern only. The core/ AI files
+    (aiTechs.xs, aiMilitary.xs, etc.) reference the same Abstract*
+    constants but live in conditionally-compiled scopes (rules / func
+    bodies that the parser only resolves when invoked) — they don't blow
+    up at load time. The compliance probes in this file are at top-level
+    rule scope and DO get parsed eagerly.
+*/
+//==============================================================================
+extern int gLLAbstractWarShip            = -1;
+extern int gLLAbstractStables            = -1;
+extern int gLLAbstractArtilleryFoundry   = -1;
+extern int gLLAbstractWall               = -1;
+extern int gLLAbstractTradingPost        = -1;
+extern int gLLAbstractMonastery          = -1;
+extern int gLLAbstractInfantry           = -1;
+extern int gLLAbstractCavalry            = -1;
+extern int gLLAbstractArtillery          = -1;
+extern int gLLAbstractNativeWarrior      = -1;
+extern int gLLMercenary                  = -1;
+extern int gLLHero                       = -1;
+
+void llResolveAbstractTypes(void)
+{
+   gLLAbstractWarShip          = kbGetProtoUnitID("AbstractWarShip");
+   gLLAbstractStables          = kbGetProtoUnitID("AbstractStables");
+   gLLAbstractArtilleryFoundry = kbGetProtoUnitID("AbstractArtilleryFoundry");
+   gLLAbstractWall             = kbGetProtoUnitID("AbstractWall");
+   gLLAbstractTradingPost      = kbGetProtoUnitID("AbstractTradingPost");
+   gLLAbstractMonastery        = kbGetProtoUnitID("AbstractMonastery");
+   gLLAbstractInfantry         = kbGetProtoUnitID("AbstractInfantry");
+   gLLAbstractCavalry          = kbGetProtoUnitID("AbstractCavalry");
+   gLLAbstractArtillery        = kbGetProtoUnitID("AbstractArtillery");
+   gLLAbstractNativeWarrior    = kbGetProtoUnitID("AbstractNativeWarrior");
+   gLLMercenary                = kbGetProtoUnitID("Mercenary");
+   gLLHero                     = kbGetProtoUnitID("Hero");
+}
+
 
 //==============================================================================
 /*	preInit()
@@ -50,6 +103,10 @@ include "leaders\leader_gustavus.xs";
 void preInit(void)
 {
    llVerboseEcho("preInit() starting.");
+
+   // Resolve Abstract* proto IDs that aren't exposed as cUnitType* enum
+   // values. Must run BEFORE any rule/probe that uses the gLL* cache.
+   llResolveAbstractTypes();
 
    // ── DIAGNOSTIC: bulletproof load-marker. Write to AI's OWN slot (history
    // index 0), before any other XS code that could fail. If this var ever
@@ -218,6 +275,9 @@ void postInit(void)
       xsEnableRule("llRuleHealthSnapshot");
       xsEnableRule("llTacticsComplianceSnapshot");
       xsEnableRule("llEventDeltaSnapshot");
+      // Per-civ playstyle-fidelity probes (milestones + comp/posture
+      // snapshots) consumed by tools/validation/validate_doctrine_compliance.py.
+      xsEnableRule("llDoctrineProbes");
    }
 
    enableLegendaryRevolutionSupportRules();
@@ -286,6 +346,16 @@ void postInit(void)
       xsEnableRule("llInitialEconSnapshot");
    }
 
+   // ── LL-TEST-AUTO-RESIGN ────────────────────────────────────────────────
+   // When the harness sets cLLTestModeAutoResignMs > 0 (via sed before sync),
+   // arm a rule that resigns this AI as soon as the wall-clock threshold
+   // hits. Bounds match length so 47-civ coverage runs in minutes, not hours.
+   if (cLLTestModeAutoResignMs > 0)
+   {
+      xsEnableRule("llTestModeAutoResign");
+      llProbe("test.armed", "resignAtMs=" + cLLTestModeAutoResignMs);
+   }
+
    // ── LL-PERSONALITY-PROBE (early write) ──────────────────────────────────
    // aiEcho()→Age3Log path is dead in retail FINAL_RELEASE builds. The
    // personality-uservar channel does NOT need dev mode and persists writes
@@ -332,6 +402,34 @@ minInterval 60
 }
 
 //==============================================================================
+// llTestModeAutoResign
+// Test-harness rule. When cLLTestModeAutoResignMs > 0 and the wall-clock
+// crosses that threshold, dump a final state snapshot then call aiResign().
+// Released builds (cLLTestModeAutoResignMs == 0) never enable this rule.
+//==============================================================================
+rule llTestModeAutoResign
+inactive
+minInterval 5
+{
+   if (xsGetTime() < cLLTestModeAutoResignMs)
+   {
+      return;
+   }
+   llProbe("test.resign",
+      "atMs=" + xsGetTime() +
+      " age=" + kbGetAge() +
+      " pop=" + kbGetPop() +
+      " vills=" + kbUnitCount(cMyID, gEconUnit, cUnitStateAlive) +
+      " armyPop=" + aiGetMilitaryPop() +
+      " score=" + aiGetScore(cMyID) +
+      " food=" + kbResourceGet(cResourceFood) +
+      " wood=" + kbResourceGet(cResourceWood) +
+      " gold=" + kbResourceGet(cResourceGold));
+   aiResign();
+   xsDisableSelf();
+}
+
+//==============================================================================
 // llPlanSnapshot
 // Phase-2 periodic snapshot of the AI's active plan inventory. Fires every
 // 60s alongside the heartbeat. Three probes per tick:
@@ -374,9 +472,35 @@ minInterval 60
 
    llProbe("navy.fleet_snap",
       "transports=" + transportPlans +
-      " warships=" + kbUnitCount(cMyID, cUnitTypeAbstractWarShip, cUnitStateAlive) +
+      " warships=" + kbUnitCount(cMyID, gLLAbstractWarShip, cUnitStateAlive) +
       " fishing=" + kbUnitCount(cMyID, gFishingUnit, cUnitStateAlive) +
       " docks=" + kbUnitCount(cMyID, gDockUnit, cUnitStateABQ));
+}
+
+//==============================================================================
+// llPersonalitySnapshot
+// Periodic re-fire of the personality-channel probe so the .personality
+// file on disk reflects mid-game / end-of-observe state instead of just
+// the postInit init-time snapshot. Crucial for the matrix's deep-mode
+// axes (combat_engaged, age_up_fired, walls_built, etc.) which need
+// behavioural ground truth captured AFTER the AI has had time to run.
+//
+// Pairs with the postInit + gameOverHandler writes already in place:
+//   * postInit       — t≈3 s,  initial bias / map / difficulty fields.
+//   * llPersonalitySnapshot — t = 60, 120, 180, …, current state each time.
+//   * gameOverHandler — final write at resign / defeat with outcome flags.
+//
+// Last writer wins on disk, so the matrix harvester (which reads the file
+// post-run) sees the most recent behavioural snapshot — exactly what the
+// deep axes want. Enabled unconditionally because llWritePersonalityProbe
+// is cheap and gated internally on gLLPostInitFired.
+//==============================================================================
+rule llPersonalitySnapshot
+active
+minInterval 60
+{
+   if (gLLPostInitFired == false) return;
+   llWritePersonalityProbe();
 }
 
 //==============================================================================
@@ -469,19 +593,19 @@ minInterval 60
       " houseDist=" + gLLHouseDistanceMultiplier);
 
    // ── 2. Building census ─────────────────────────────────────────────────
-   int milBarracks  = kbUnitCount(cMyID, cUnitTypeAbstractBarracks, cUnitStateABQ);
-   int milStables   = kbUnitCount(cMyID, cUnitTypeAbstractStables, cUnitStateABQ);
-   int milArtillery = kbUnitCount(cMyID, cUnitTypeAbstractArtilleryFoundry, cUnitStateABQ);
+   int milBarracks  = kbUnitCount(cMyID, cUnitTypeBarracks, cUnitStateABQ);
+   int milStables   = kbUnitCount(cMyID, gLLAbstractStables, cUnitStateABQ);
+   int milArtillery = kbUnitCount(cMyID, gLLAbstractArtilleryFoundry, cUnitStateABQ);
    int defOutposts  = kbUnitCount(cMyID, gTowerUnit, cUnitStateABQ);
    int defForts     = kbUnitCount(cMyID, gFortUnit, cUnitStateABQ);
-   int wallSegs     = kbUnitCount(cMyID, cUnitTypeAbstractWall, cUnitStateABQ);
+   int wallSegs     = kbUnitCount(cMyID, gLLAbstractWall, cUnitStateABQ);
    int navDocks     = kbUnitCount(cMyID, gDockUnit, cUnitStateABQ);
    int ecoMills     = kbUnitCount(cMyID, gFarmUnit, cUnitStateABQ);
    int ecoMarkets   = kbUnitCount(cMyID, gMarketUnit, cUnitStateABQ);
-   int ecoTPosts    = kbUnitCount(cMyID, cUnitTypeAbstractTradingPost, cUnitStateABQ);
+   int ecoTPosts    = kbUnitCount(cMyID, gLLAbstractTradingPost, cUnitStateABQ);
    int civHouses    = kbUnitCount(cMyID, gHouseUnit, cUnitStateABQ);
    int civTCs       = kbUnitCount(cMyID, cUnitTypeTownCenter, cUnitStateABQ);
-   int civMonast    = kbUnitCount(cMyID, cUnitTypeAbstractMonastery, cUnitStateABQ);
+   int civMonast    = kbUnitCount(cMyID, gLLAbstractMonastery, cUnitStateABQ);
 
    llProbe("compliance.bldg",
       "barracks=" + milBarracks +
@@ -499,13 +623,13 @@ minInterval 60
       " monasteries=" + civMonast);
 
    // ── 3. Army composition ────────────────────────────────────────────────
-   int armyInf   = kbUnitCount(cMyID, cUnitTypeAbstractInfantry, cUnitStateAlive);
-   int armyCav   = kbUnitCount(cMyID, cUnitTypeAbstractCavalry, cUnitStateAlive);
-   int armyArt   = kbUnitCount(cMyID, cUnitTypeAbstractArtillery, cUnitStateAlive);
-   int armyNav   = kbUnitCount(cMyID, cUnitTypeAbstractWarShip, cUnitStateAlive);
-   int armyMerc  = kbUnitCount(cMyID, cUnitTypeMercenary, cUnitStateAlive);
-   int armyNat   = kbUnitCount(cMyID, cUnitTypeAbstractNativeWarrior, cUnitStateAlive);
-   int armyHero  = kbUnitCount(cMyID, cUnitTypeHero, cUnitStateAlive);
+   int armyInf   = kbUnitCount(cMyID, gLLAbstractInfantry, cUnitStateAlive);
+   int armyCav   = kbUnitCount(cMyID, gLLAbstractCavalry, cUnitStateAlive);
+   int armyArt   = kbUnitCount(cMyID, gLLAbstractArtillery, cUnitStateAlive);
+   int armyNav   = kbUnitCount(cMyID, gLLAbstractWarShip, cUnitStateAlive);
+   int armyMerc  = kbUnitCount(cMyID, gLLMercenary, cUnitStateAlive);
+   int armyNat   = kbUnitCount(cMyID, gLLAbstractNativeWarrior, cUnitStateAlive);
+   int armyHero  = kbUnitCount(cMyID, gLLHero, cUnitStateAlive);
 
    llProbe("compliance.army",
       "inf=" + armyInf +
@@ -537,7 +661,7 @@ minInterval 60
       {
          float fx = xsVectorGetX(frontVec);
          float fz = xsVectorGetZ(frontVec);
-         int q = createSimpleUnitQuery(cUnitTypeAbstractBarracks, cMyID, cUnitStateABQ);
+         int q = createSimpleUnitQuery(cUnitTypeBarracks, cMyID, cUnitStateABQ);
          int n = kbUnitQueryExecute(q);
          for (i = 0; < n)
          {
@@ -576,7 +700,7 @@ minInterval 60
    // distinction reduces to in the engine.
    int waterAdj = 0;
    int inland   = 0;
-   int qB = createSimpleUnitQuery(cUnitTypeAbstractBarracks, cMyID, cUnitStateABQ);
+   int qB = createSimpleUnitQuery(cUnitTypeBarracks, cMyID, cUnitStateABQ);
    int nB = kbUnitQueryExecute(qB);
    for (i = 0; < nB)
    {
@@ -761,7 +885,10 @@ minInterval 90
 //
 // One probe per building type, so the parser can index by `bldg=<type>`.
 //==============================================================================
-void llTallyBuildingQuadrants(int bldgType = -1, string label = "?")
+// `label` is a reserved keyword in XS (goto-style label syntax) — using
+// it as a parameter name parses as `parseExpression2 → 'LABEL' is not a
+// valid operator` at the first reference. Renamed to `bldgLabel`.
+void llTallyBuildingQuadrants(int bldgType = -1, string bldgLabel = "?")
 {
    int mainBaseID = kbBaseGetMainID(cMyID);
    if (mainBaseID < 0) { return; }
@@ -801,7 +928,7 @@ void llTallyBuildingQuadrants(int bldgType = -1, string label = "?")
    if ((frontC + backC + leftC + rightC) == 0) { return; }
 
    llProbe("compliance.placeAll",
-      "bldg=" + label +
+      "bldg=" + bldgLabel +
       " front=" + frontC +
       " back=" + backC +
       " left=" + leftC +
@@ -816,11 +943,11 @@ minInterval 90
    llTallyBuildingQuadrants(gMarketUnit,                    "market");
    llTallyBuildingQuadrants(gDockUnit,                      "dock");
    llTallyBuildingQuadrants(gFarmUnit,                      "mill");
-   llTallyBuildingQuadrants(cUnitTypeAbstractMonastery,     "monastery");
+   llTallyBuildingQuadrants(gLLAbstractMonastery,     "monastery");
    llTallyBuildingQuadrants(gTowerUnit,                     "outpost");
-   llTallyBuildingQuadrants(cUnitTypeAbstractStables,       "stables");
-   llTallyBuildingQuadrants(cUnitTypeAbstractArtilleryFoundry, "foundry");
-   llTallyBuildingQuadrants(cUnitTypeAbstractTradingPost,   "tpost");
+   llTallyBuildingQuadrants(gLLAbstractStables,       "stables");
+   llTallyBuildingQuadrants(gLLAbstractArtilleryFoundry, "foundry");
+   llTallyBuildingQuadrants(gLLAbstractTradingPost,   "tpost");
 }
 
 //==============================================================================
@@ -839,7 +966,7 @@ minInterval 90
    vector basePos = kbBaseGetLocation(cMyID, mainBaseID);
    if (basePos == cInvalidVector) { return; }
 
-   int q = createSimpleUnitQuery(cUnitTypeAbstractWall, cMyID, cUnitStateAlive);
+   int q = createSimpleUnitQuery(gLLAbstractWall, cMyID, cUnitStateAlive);
    int n = kbUnitQueryExecute(q);
    float minDist = 99999.0;
    float maxDist = 0.0;
@@ -883,8 +1010,8 @@ rule llDiplomacyComplianceSnapshot
 inactive
 minInterval 90
 {
-   int  tposts      = kbUnitCount(cMyID, cUnitTypeAbstractTradingPost, cUnitStateABQ);
-   int  nativeWar   = kbUnitCount(cMyID, cUnitTypeAbstractNativeWarrior, cUnitStateAlive);
+   int  tposts      = kbUnitCount(cMyID, gLLAbstractTradingPost, cUnitStateABQ);
+   int  nativeWar   = kbUnitCount(cMyID, gLLAbstractNativeWarrior, cUnitStateAlive);
    int  age         = kbGetAge();
    // Revolution detection without civIsRevolted(): post-revolt players hit
    // age 5 with cvMaxAge==cAge5; we proxy via "did we reach an age past
@@ -963,7 +1090,7 @@ minInterval 60
    int  bases    = kbBaseGetNumber(cMyID);
    int  fwdBase  = gForwardBaseID;
    int  fwdState = gForwardBaseState;
-   int  heroes   = kbUnitCount(cMyID, cUnitTypeHero, cUnitStateAlive);
+   int  heroes   = kbUnitCount(cMyID, gLLHero, cUnitStateAlive);
    int  explore  = aiPlanGetNumber(cPlanExplore, -1, true);
    int  transp   = aiPlanGetNumber(cPlanTransport, -1, true);
    int  repair   = aiPlanGetNumber(cPlanRepair, -1, true);
@@ -1000,14 +1127,14 @@ minInterval 30
    static int lastShipsTotal  = 0;
    static int lastHeroes      = 0;
 
-   int tposts = kbUnitCount(cMyID, cUnitTypeAbstractTradingPost, cUnitStateABQ);
+   int tposts = kbUnitCount(cMyID, gLLAbstractTradingPost, cUnitStateABQ);
    int bases  = kbBaseGetNumber(cMyID);
    int fwd    = gForwardBaseID;
    int atk    = aiPlanGetNumber(cPlanCombat, -1, true);
    // Shipments-total proxy: sum of "ships sent" if engine exposes; otherwise
    // approximate by current XP (monotonic) — simpler is just to record the
    // count of distinct tech.ship probes via heartbeat counter.
-   int heroes = kbUnitCount(cMyID, cUnitTypeHero, cUnitStateAlive);
+   int heroes = kbUnitCount(cMyID, gLLHero, cUnitStateAlive);
 
    bool moved = false;
    int  dTP   = tposts - lastTPosts;

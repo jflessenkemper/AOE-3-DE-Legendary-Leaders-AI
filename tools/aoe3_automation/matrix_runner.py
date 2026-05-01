@@ -271,7 +271,7 @@ def _wait_for_lobby(coords: dict, total_wait: float = 12.0,
     return False
 
 
-def ensure_lobby(coords: dict, *, attempts: int = 4) -> bool:
+def ensure_lobby(coords: dict, *, attempts: int = 2) -> bool:
     """Make best-effort attempt to land at a clean Skirmish lobby.
 
     Strategy (each attempt):
@@ -320,29 +320,61 @@ def ensure_lobby(coords: dict, *, attempts: int = 4) -> bool:
             except Exception:
                 pass
         # From main menu (or a sub-screen), Escape backs out, then Skirmish
-        # enters the lobby.
+        # enters the lobby. 2026-05-01: cold-launch failures traced to the
+        # window-activate→click cadence. Explicit 2.5s settle after escape
+        # gives the menu animation time to finish, then re-activate the
+        # window again right before click so gamescope routes the input
+        # to the now-rendered menu.
         try:
+            lobby._ensure_window_focus()
+            time.sleep(0.5)
             lobby.xdo("key Escape")
-            time.sleep(0.8)
+            time.sleep(2.5)
         except Exception:
             pass
         try:
             sk = coords["main_menu"]["skirmish_button"]
-            lobby.click(sk[0], sk[1])
+            lobby._ensure_window_focus()
+            time.sleep(0.5)
+            lobby.click(sk[0], sk[1], settle=0.5)
+            # Belt-and-braces: a second click after a short pause. Idempotent
+            # if the lobby is already loading, recovers if first click was
+            # dropped by gamescope on the activation transition.
+            time.sleep(1.5)
+            lobby.click(sk[0], sk[1], settle=0.5)
         except Exception:
             pass
-        if _wait_for_lobby(coords, total_wait=12.0, poll_interval=1.0):
+        if _wait_for_lobby(coords, total_wait=25.0, poll_interval=1.0):
             return True
-    # Last resort: cycle the game
+        # Diagnostic: dump current state so a human can see WHERE we got stuck
+        try:
+            diag = ARTIFACT_DIR / "_recovery" / f"ensure_lobby_attempt{i}_failed.png"
+            diag.parent.mkdir(parents=True, exist_ok=True)
+            lobby.screenshot(diag)
+            print(f"  ensure_lobby: attempt {i+1} failed; diag → {diag.name}")
+        except Exception:
+            pass
+        # Stuck-state heuristic: after one failed attempt the screen is almost
+        # certainly NOT one of the recoverable states (postgame banner, error
+        # dialog, esc-menu sub-screen). Retrying the same Escape→Skirmish dance
+        # 3 more times wastes ~75s and rarely helps. Skip straight to cycle.
+        if i == 0:
+            break
+    # Cycle the game — only deterministic way to escape postgame screens,
+    # error dialogs, or wedged menus.
     print("  ensure_lobby: attempting cycle_game last-resort recovery")
     if cycle_game():
-        time.sleep(5.0)
+        time.sleep(8.0)  # cold-launch settle for menu render
         try:
             sk = coords["main_menu"]["skirmish_button"]
-            lobby.click(sk[0], sk[1])
+            lobby._ensure_window_focus()
+            time.sleep(0.5)
+            lobby.click(sk[0], sk[1], settle=0.5)
+            time.sleep(1.5)
+            lobby.click(sk[0], sk[1], settle=0.5)
         except Exception:
             pass
-        if _wait_for_lobby(coords, total_wait=20.0, poll_interval=1.0):
+        if _wait_for_lobby(coords, total_wait=30.0, poll_interval=1.0):
             return True
     return False
 
@@ -797,11 +829,22 @@ def run_one_civ(
                             f"doctrineOK={n_doc}"
                         )
                     else:
-                        _annotate("deep-mode behavioural axes: 0 AIs parsed "
-                                  "from match.log (no [LLP v=2] probes "
-                                  "captured — was dev mode active?)")
+                        # match.log carries engine ModeTrack/preload lines but
+                        # NOT aiEcho/aiChat output on retail FINAL_RELEASE
+                        # builds (proven non-functional 2026-04-29 — dev tokens
+                        # are inert despite user.cfg parsing them). The mid-
+                        # game [LLP v=2] stream is therefore expected-empty in
+                        # match.log; useful behavioural signal lives in the
+                        # personality channel (see personality_probes above).
+                        # This annotation is informational only, not a failure.
+                        _annotate("deep-mode behavioural axes: match.log "
+                                  "[LLP v=2] stream empty (expected on retail "
+                                  "DE — see personality_probes for captured "
+                                  "behaviour data)")
                 else:
-                    _annotate("deep-mode behavioural axes: match.log empty/missing")
+                    _annotate("deep-mode behavioural axes: match.log empty/missing "
+                              "(expected — engine doesn't mirror AI output to "
+                              "match.log on retail DE)")
             except Exception as e:
                 _annotate(f"deep-mode behavioural axes warn: {e}")
 
@@ -868,6 +911,34 @@ def run_one_civ(
                           f"{res.leaders_initialised}")
         except Exception as e:
             _annotate(f"leader-init harvest warn: {e}")
+
+        # 8f.2. Personality-channel fallback for leaders_initialised.
+        #
+        # The match.log regex above is the historical/preferred path, but
+        # the [LLP v=2] aiEcho channel is inert on retail FINAL_RELEASE DE
+        # (proven 2026-04-29 — see NIGHT_JOURNAL.md). The personality
+        # channel's doctrine_records, however, encode leader_key per AI as
+        # a side-effect of the doctrine setup that runs DURING leader_init.
+        # If a doctrine record exists for an AI, its leader_init fired by
+        # construction. Treat each unique leader_key in the harvested
+        # doctrine_records as a leader_init witness so the axis isn't
+        # permanently red on retail builds.
+        try:
+            if not res.leaders_initialised:
+                doc_leaders: set[str] = set()
+                for rec in (getattr(res, "doctrine_records", []) or []):
+                    lk = (rec.get("leader_key") or "").strip().lower()
+                    if lk:
+                        doc_leaders.add(lk)
+                if doc_leaders:
+                    res.leaders_initialised = sorted(doc_leaders)
+                    _annotate(
+                        "leaders_initialised: derived "
+                        f"{len(doc_leaders)} key(s) from personality channel "
+                        f"doctrine_records (match.log inert on retail DE)"
+                    )
+        except Exception as e:
+            _annotate(f"leader-init personality fallback warn: {e}")
 
         # 8g. Vision review queue + verdict pickup.
         #
@@ -1078,9 +1149,19 @@ def run_matrix(
         else:
             print(f"=== [{i+1}/{n_matches}] civ_idx={civ_idx} {civ_name} ===")
 
-        # Make sure the game is even up
-        if not game_is_running():
-            print("  game not running — cycling")
+        # Make sure the game is even up AND in a recoverable state. If the
+        # game is running but stuck on a postgame banner / error dialog from
+        # a prior session, ensure_lobby's Skirmish-click dance can't reach the
+        # lobby — only a cycle does. On the very first iteration, force-cycle
+        # if not already at a clean lobby, to guarantee deterministic startup.
+        need_cycle = not game_is_running()
+        if not need_cycle and i == 0:
+            try:
+                need_cycle = not lobby.is_clean_lobby(coords)
+            except Exception:
+                need_cycle = True
+        if need_cycle:
+            print("  game not at clean lobby — cycling")
             if not cycle_game():
                 print("  ERROR: cycle_game failed; aborting matrix")
                 if abort_on_crash:
@@ -1231,6 +1312,29 @@ def main() -> int:
                          "at the cost of the ai_scripts_loaded telemetry "
                          "field. Personality-probe + behavioural axes still "
                          "prove AI loaded.")
+    ap.add_argument("--auto-resign-ms", type=int, default=0,
+                    help="If > 0, rewrite cLLTestModeAutoResignMs in "
+                         "game/ai/core/aiGlobals.xs to this value before "
+                         "sync, so every AI calls aiResign() once "
+                         "xsGetTime() crosses the threshold. Bounds match "
+                         "length (matches end at this+~5s). Reset to 0 on "
+                         "exit. Use 90000 (90s game-time) for 47-civ "
+                         "deterministic coverage in ~10min wall-clock.")
+    ap.add_argument("--validate-doctrine", action="store_true",
+                    help="After the matrix completes, run "
+                         "tools/validation/validate_doctrine_compliance.py "
+                         "across every match.log under "
+                         "artifacts/matrix_runner/*/match.log and write "
+                         "doctrine_compliance.{txt,json} next to matrix_report.*. "
+                         "Exit code stays 0 on doctrine failures (the matrix "
+                         "report itself owns CI gating); the file artifacts "
+                         "are the source of truth.")
+    ap.add_argument("--doctrine-spec", type=Path,
+                    default=ROOT / "playstyle_spec.json",
+                    help="Path to playstyle_spec.json consumed by "
+                         "--validate-doctrine. Default: <repo>/playstyle_spec.json. "
+                         "Regenerate via tools/playtest/extract_playstyle_spec.py "
+                         "whenever LEGENDARY_LEADERS_TREE.html changes.")
     ap.add_argument("--deep", action="store_true",
                     help="Deep behavioural-axis mode. Raises observe-seconds "
                          "(if left at the default 10) to 300 so compliance.* / "
@@ -1252,21 +1356,126 @@ def main() -> int:
         # seconds explicitly to override.
         args.observe_seconds = 180
 
+    # ── Auto-resign toggle ──────────────────────────────────────────────────
+    # Rewrite cLLTestModeAutoResignMs in aiGlobals.xs in-place. Reset to 0 on
+    # exit so a release sync doesn't ship a test build by accident.
+    globals_xs = ROOT / "game" / "ai" / "core" / "aiGlobals.xs"
+    _restore_globals = None
+    if args.auto_resign_ms > 0:
+        original = globals_xs.read_text()
+        new = re.sub(
+            r"extern const int cLLTestModeAutoResignMs = \d+;",
+            f"extern const int cLLTestModeAutoResignMs = {args.auto_resign_ms};",
+            original,
+        )
+        if new == original:
+            print("WARN: --auto-resign-ms set but no cLLTestModeAutoResignMs "
+                  "line found in aiGlobals.xs; auto-resign will not arm.",
+                  file=sys.stderr)
+        else:
+            globals_xs.write_text(new)
+            print(f"  [auto-resign] cLLTestModeAutoResignMs = "
+                  f"{args.auto_resign_ms} (will reset to 0 on exit)")
+            def _restore_globals():  # noqa: E306
+                cur = globals_xs.read_text()
+                cur = re.sub(
+                    r"extern const int cLLTestModeAutoResignMs = \d+;",
+                    "extern const int cLLTestModeAutoResignMs = 0;",
+                    cur,
+                )
+                globals_xs.write_text(cur)
+                print("  [auto-resign] reset cLLTestModeAutoResignMs = 0")
+
     civ_names = [c.strip() for c in args.civs.split(",") if c.strip()]
-    return run_matrix(
-        observe_seconds=args.observe_seconds,
-        in_game_timeout=args.in_game_timeout,
-        speed_tick=args.speed_tick,
-        start_idx=args.start_idx,
-        end_idx=args.end_idx,
-        civ_names=civ_names or None,
-        dry_run=args.dry_run,
-        abort_on_crash=args.abort_on_crash,
-        batch_size=args.batch_size,
-        deep_mode=args.deep,
-        adaptive_observe=not args.no_adaptive_observe,
-        skip_replay_diag=args.skip_replay_diag,
-    )
+    try:
+        rc = run_matrix(
+            observe_seconds=args.observe_seconds,
+            in_game_timeout=args.in_game_timeout,
+            speed_tick=args.speed_tick,
+            start_idx=args.start_idx,
+            end_idx=args.end_idx,
+            civ_names=civ_names or None,
+            dry_run=args.dry_run,
+            abort_on_crash=args.abort_on_crash,
+            batch_size=args.batch_size,
+            deep_mode=args.deep,
+            adaptive_observe=not args.no_adaptive_observe,
+            skip_replay_diag=args.skip_replay_diag,
+        )
+    finally:
+        if _restore_globals is not None:
+            _restore_globals()
+
+    # ── Optional: doctrine-compliance pass ─────────────────────────────────
+    # Glob every per-civ match.log under artifacts/matrix_runner/*/match.log
+    # and run validate_doctrine_compliance against playstyle_spec.json. The
+    # validator's exit code is informational here — the matrix report still
+    # owns CI gating, but the doctrine report shows up alongside it as a
+    # second-pass quality bar.
+    if args.validate_doctrine:
+        if not args.doctrine_spec.exists():
+            print(f"[doctrine] spec missing at {args.doctrine_spec}; skipping. "
+                  f"Run: python3 tools/playtest/extract_playstyle_spec.py",
+                  file=sys.stderr)
+        else:
+            sys.path.insert(0, str(ROOT / "tools" / "validation"))
+            try:
+                import validate_doctrine_compliance as vdc
+            except Exception as exc:  # pragma: no cover — import-time failure
+                print(f"[doctrine] failed to import validator: {exc}",
+                      file=sys.stderr)
+            else:
+                logs = sorted(ARTIFACT_DIR.glob("*/match.log"))
+                if not logs:
+                    print(f"[doctrine] no match.log files under {ARTIFACT_DIR}",
+                          file=sys.stderr)
+                else:
+                    print(f"[doctrine] scanning {len(logs)} match.log files…")
+                    spec = json.loads(args.doctrine_spec.read_text(encoding="utf-8"))
+                    probes = vdc.parse_probes(logs)
+                    from collections import defaultdict
+                    per_actor = defaultdict(list)
+                    for p in probes:
+                        per_actor[(p.civ, p.ldr)].append(p)
+                    per_civ: dict[str, list] = {}
+                    for (civ, ldr), plist in per_actor.items():
+                        spec_key = vdc._resolve_spec_key(civ, ldr, spec)
+                        if not spec_key:
+                            continue
+                        claims = spec["civs"][spec_key].get("claims", {})
+                        if not claims:
+                            continue
+                        per_civ[spec_key] = vdc.evaluate_civ(spec_key, claims, plist)
+                    text = vdc.render_text(per_civ)
+                    txt_out = ARTIFACT_DIR / "doctrine_compliance.txt"
+                    json_out = ARTIFACT_DIR / "doctrine_compliance.json"
+                    txt_out.write_text(text + "\n", encoding="utf-8")
+                    json_out.write_text(
+                        json.dumps(vdc.render_json(per_civ), indent=2),
+                        encoding="utf-8",
+                    )
+                    fails = sum(1 for rs in per_civ.values()
+                                if vdc._verdict_for(rs) == vdc.FAIL)
+                    print(f"[doctrine] wrote {txt_out} and {json_out} "
+                          f"({len(per_civ)} civs, {fails} fail)")
+
+                # Consolidated single-file report — one place to scan
+                # instead of opening matrix_report.md + every match.log
+                # + doctrine_compliance.txt one by one.
+                try:
+                    import compile_playtest_report as cpr
+                    consolidated = ARTIFACT_DIR / "playtest_report.txt"
+                    sys.argv = [
+                        "compile_playtest_report.py",
+                        "--matrix-dir", str(ARTIFACT_DIR),
+                        "--spec",       str(args.doctrine_spec),
+                        "--out",        str(consolidated),
+                    ]
+                    cpr.main()
+                except Exception as exc:  # pragma: no cover
+                    print(f"[doctrine] consolidated report failed: {exc}",
+                          file=sys.stderr)
+    return rc
 
 
 if __name__ == "__main__":

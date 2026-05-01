@@ -25,9 +25,10 @@ prose to runtime probe expectations:
     "cavalry-heavy"/"horse"                    → expect btBiasCav > 0 (proxy via personality)
     "infantry"/"musketeer-heavy"               → expect btBiasInf > 0
 
-Numeric mapping must match cLLWallStrategy* constants in aiGlobals.xs:
-    1=FortressRing 2=CoastalBatteries 3=ChokepointSegments
-    4=FrontierPalisades 5=MobileNoWalls 6=UrbanBarricade
+Numeric mapping must match cLLWallStrategy* constants in aiHeader.xs
+(verified against game/ai/aiHeader.xs:202-207):
+    0=FortressRing 1=ChokepointSegments 2=CoastalBatteries
+    3=FrontierPalisades 4=UrbanBarricade 5=MobileNoWalls
 
 Usage:
     from tools.playtest.html_reference import load_doctrine_contracts
@@ -41,13 +42,17 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Optional
 
-# Wall-strategy ints from aiGlobals.xs cLLWallStrategy*.
-WALL_FORTRESS_RING       = 1
+# Wall-strategy ints from aiHeader.xs cLLWallStrategy* (NOT aiGlobals.xs).
+# Verified against game/ai/aiHeader.xs:202-207. Earlier versions of this
+# file had these off-by-one (1..6); that silently broke every wall-strategy
+# assertion in tools/playtest/replay_probes.py because the runtime emits
+# 0..5 from gLLWallStrategy.
+WALL_FORTRESS_RING       = 0
+WALL_CHOKEPOINT_SEGMENTS = 1
 WALL_COASTAL_BATTERIES   = 2
-WALL_CHOKEPOINT_SEGMENTS = 3
-WALL_FRONTIER_PALISADES  = 4
+WALL_FRONTIER_PALISADES  = 3
+WALL_URBAN_BARRICADE     = 4
 WALL_MOBILE_NO_WALLS     = 5
-WALL_URBAN_BARRICADE     = 6
 
 # Phrase → expected wall strategy. Order matters: more specific first.
 WALL_PHRASES = [
@@ -143,9 +148,45 @@ def _classify(prose: str) -> tuple[Optional[int], dict[str, bool], list[str]]:
     return wall_strategy, flags, hits
 
 
+# Civs whose first whitespace-separated token in `data-name` collides with
+# another nation node (revolutions vs. base civs of the same root). For
+# these we widen the civ_label to the first TWO tokens so the key remains
+# unique. Anything not in this set keeps the legacy single-token key for
+# backwards compatibility with existing callers (matrix runner, replay
+# validator).
+MULTI_TOKEN_CIVS = frozenset({
+    "French Canadians", "French Louis",
+    "Baja Californians",
+    "Central Americans",
+    "Napoleonic France",
+    "Revolutionary France",
+    "Rio Grande",
+    "South Africans",
+    "United States",
+})
+
+
+def _civ_label_for(full_name: str) -> tuple[str, str]:
+    """Return (civ_label, leader_label).
+
+    Multi-word civs (revolutions whose root collides with a base civ —
+    French Canadians vs. French; Napoleonic France vs. French Louis) get a
+    two-token civ_label so they don't overwrite each other in the
+    contracts dict. Single-token civs keep their first-token key
+    (e.g. 'British', 'Aztecs', 'Haudenosaunee')."""
+    bits = full_name.split()
+    if len(bits) >= 2:
+        two = f"{bits[0]} {bits[1]}"
+        if two in MULTI_TOKEN_CIVS:
+            return two, " ".join(bits[2:])
+    return bits[0], " ".join(bits[1:]) if len(bits) > 1 else ""
+
+
 def load_doctrine_contracts(html_path: Path) -> dict[str, DoctrineContract]:
     """Read LEGENDARY_LEADERS_TREE.html and return contracts keyed by civ
-    label (the first token of data-name, e.g. 'British', 'Aztecs')."""
+    label. Single-token for unique civs ('British', 'Aztecs'), two-token
+    for revolutions whose root collides with a base civ ('French Louis',
+    'Napoleonic France', 'South Africans')."""
     text = html_path.read_text(encoding="utf-8", errors="replace")
     contracts: dict[str, DoctrineContract] = {}
 
@@ -154,11 +195,7 @@ def load_doctrine_contracts(html_path: Path) -> dict[str, DoctrineContract]:
         data_search = m.group(2)
         portrait = m.group(3)
 
-        # Civ label = first whitespace-separated token (e.g. "Haudenosaunee").
-        # Leader label = remainder, raw.
-        bits = full_name.split(maxsplit=1)
-        civ_label = bits[0]
-        leader_label = bits[1] if len(bits) > 1 else ""
+        civ_label, leader_label = _civ_label_for(full_name)
 
         prose = _extract_doctrine_prose(data_search)
         wall_strat, flags, hits = _classify(prose)
@@ -191,7 +228,7 @@ if __name__ == "__main__":
     for c in sorted(contracts.values(), key=lambda x: x.civ_label):
         ws = c.expected_wall_strategy
         ws_name = {
-            1: "FortressRing", 2: "CoastalBatteries", 3: "ChokepointSegments",
-            4: "FrontierPalisades", 5: "MobileNoWalls", 6: "UrbanBarricade",
+            0: "FortressRing", 1: "ChokepointSegments", 2: "CoastalBatteries",
+            3: "FrontierPalisades", 4: "UrbanBarricade", 5: "MobileNoWalls",
         }.get(ws, "—")
         print(f"  {c.civ_label:<22s}  wall={ws_name:<18s}  hits={','.join(c.keyword_hits) or '∅'}")

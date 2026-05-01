@@ -103,6 +103,7 @@ include "core\aiSetup.xs";
 //include "core\aiEconomyNew.xs";
 //include "core\aiMilitaryNew.xs";
 include "core\aiBuildingsWalls.xs";
+include "core\aiDoctrineProbes.xs";
 include "core\aiChatsNew.xs";
 include "core\aiEliteTactics.xs";
 include "core\aiMiscNew.xs";

@@ -38,7 +38,10 @@ void initLeaderShivaji(void)
    llSetMilitaryFocus(0.55, 0.6, 0.2);  // Cavalry-leaning composition.
 
    // LL-BUILD-STYLE-BEGIN
-   llUseShrineTradeNodeSpreadStyle(2);
+   // Spec doctrine = Highland Citadel (hill-fort fortress ring). Shivaji's
+   // Maratha hill-fort network maps to the Citadel helper, not the Shrine
+   // helper (which leaves walls off entirely).
+   llUseHighlandCitadelStyle(2);
    gLLEconomicDistanceMultiplier = 1.10;
    llSetBuildStrongpointProfile(2, 1, 2, false);
    // LL-BUILD-STYLE-END
