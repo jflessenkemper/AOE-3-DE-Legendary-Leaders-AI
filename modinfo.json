@@ -2,12 +2,12 @@
   "name": "AOE 3 DE - A New World DLC",
   "description": "A historical AI overhaul for Age of Empires III: DE with authentic leader personalities, per-nation doctrine, and the full revolution roster promoted to top-level pickable civilizations.",
   "author": "A New World DLC Team",
-  "version": "0.1.5",
-  "date": "2026-04-17",
+  "version": "1.0.0",
+  "date": "2026-05-04",
   "url": "https://github.com/jflessenkemper/AOE-3-DE-A-New-World-DLC",
   "gameVersion": "100.15.x",
   "bigFileVersion": 9,
-  "status": "working",
+  "status": "release",
   "modules": [
     {
       "type": "game",

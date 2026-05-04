@@ -1,0 +1,94 @@
+Matrix run: 48 civ(s) in 6 match(es) (batch_size=8)
+   1/6: P1=idx=01 American Republic  P2..=Argentina, Aztec Empire, Baja California, Barbary States, Brazil, Britain, California
+   2/6: P1=idx=09 Canada  P2..=Central America, Chile, China, Egypt, Ethiopia, Finland, France
+   3/6: P1=idx=17 French Empire  P2..=French Republic, Germany, Gran Colombia, Haiti, Hungary, Inca Empire, Indonesia
+   4/6: P1=idx=25 Iroquois Confederacy  P2..=Italy, Japan, Lakota, Lower Canada, Malta, Maya, Mexico (Mexico City)
+   5/6: P1=idx=33 Mexico (Ciudad de Mexico)  P2..=Mughal India, Netherlands, Ottoman Empire, Peru, Portugal, Rio Grande, Romania
+   6/6: P1=idx=41 Russia  P2..=Sokoto, South Africa, Spain, Sweden, Texas, United States, Yucatan
+
+=== [1/6] P1=idx=01 American Republic + 7 opponents ===
+  [civ 01 American Republic] selecting civ_idx=1
+  [civ 01 American Republic] selecting opponents P2..P8: Argentina,Aztec Empire,Baja California,Barbary States,Brazil,Britain,California
+  [civ 01 American Republic] clicking PLAY
+[gamescope_detect] AoE3 detected: DISPLAY=:1  GAMESCOPE_WAYLAND_DISPLAY=gamescope-0
+  [civ 01 American Republic] loading-screen capture missed (PrintScreen ignored during load); will rely on in_game capture instead
+  [civ 01 American Republic] in-game; setting speed
+  [civ 01 American Republic] observe done: max-observe reached (180s)
+  [civ 01 American Republic] scoreboard capture missed
+  [civ 01 American Republic] resigning
+[RESIGN] step 1: focus + Escape
+[DBG 00_pre] menu=(0, 0, 0) yes=(176, 132, 43) hud=(214, 196, 109)
+[DBG 01_post_esc] menu=(82, 34, 17) yes=(176, 132, 43) hud=(214, 196, 109)
+[RESIGN] step 2: click RESIGN at (1750, 377)
+[DBG 02_post_resign_click] menu=(12, 11, 9) yes=(246, 220, 134) hud=(141, 129, 75)
+[RESIGN] step 3: click YES at (760, 610) x3
+[DBG 03_post_yes] menu=(80, 75, 38) yes=(60, 47, 33) hud=(214, 196, 109)
+[DBG 04_pre_esc2] menu=(80, 75, 38) yes=(60, 47, 33) hud=(214, 196, 109)
+[RESIGN] step 4: Escape (4-item menu)
+[DBG 05_post_esc2] menu=(125, 48, 20) yes=(60, 47, 33) hud=(214, 196, 109)
+[RESIGN] step 5: click QUIT at (1750, 225) x3
+[DBG 06_post_quit] menu=(34, 22, 10) yes=(106, 77, 49) hud=(17, 11, 6)
+[RESIGN] step 6: ensure_main_menu
+  [civ 01 American Republic] replay diag: 8 AI script(s) loaded (expected ~8; replay=Record Game.age3Yrec, 133,702,317B)
+  [civ 01 American Republic] personality probes: none found (game-over handler may not have fired)
+  [civ 01 American Republic] deep-mode behavioural axes: 0 AIs parsed from match.log (no [LLP v=2] probes captured — was dev mode active?)
+  [civ 01 American Republic] engine_error_free OK: clean match.log
+  [civ 01 American Republic] leaders_initialised: 0 key(s) — []
+  [civ 01 American Republic] vision review queued: 0 scene(s) — reviewer should write vision_verdicts.json to gate this civ's vision_check axis
+  → OK +7opps  duration=369s  in_game=True  resigned=True  probes=0  personality_probes=0  ai_loaded=8  err=-
+=== [2/6] P1=idx=09 Canada + 7 opponents ===
+[RESIGN] step 1: focus + Escape
+[DBG 00_pre] menu=(12, 11, 9) yes=(32, 20, 11) hud=(141, 129, 75)
+[DBG 01_post_esc] menu=(0, 0, 0) yes=(165, 140, 54) hud=(214, 196, 109)
+[RESIGN] step 2: click RESIGN at (1750, 377)
+[DBG 02_post_resign_click] menu=(0, 0, 0) yes=(165, 140, 54) hud=(214, 196, 109)
+[RESIGN] step 3: click YES at (760, 610) x3
+[DBG 03_post_yes] menu=(0, 0, 0) yes=(165, 140, 54) hud=(214, 196, 109)
+[DBG 04_pre_esc2] menu=(0, 0, 0) yes=(165, 140, 54) hud=(214, 196, 109)
+[RESIGN] step 4: Escape (4-item menu)
+[DBG 05_post_esc2] menu=(82, 34, 17) yes=(165, 140, 54) hud=(214, 196, 109)
+[RESIGN] step 5: click QUIT at (1750, 225) x3
+[DBG 06_post_quit] menu=(13, 11, 9) yes=(23, 16, 9) hud=(12, 12, 10)
+[RESIGN] step 6: ensure_main_menu
+  [civ 09 Canada] selecting civ_idx=9
+  [civ 09 Canada] selecting opponents P2..P8: Central America,Chile,China,Egypt,Ethiopia,Finland,France
+  [civ 09 Canada] clicking PLAY
+  [civ 09 Canada] loading-screen capture missed (PrintScreen ignored during load); will rely on in_game capture instead
+  [civ 09 Canada] in-game; setting speed
+  [civ 09 Canada] observe done: max-observe reached (180s)
+  [civ 09 Canada] scoreboard capture missed
+  [civ 09 Canada] resigning
+[RESIGN] step 1: focus + Escape
+[DBG 00_pre] menu=(0, 0, 0) yes=(165, 140, 54) hud=(214, 196, 109)
+[DBG 01_post_esc] menu=(82, 34, 17) yes=(165, 140, 54) hud=(214, 196, 109)
+[RESIGN] step 2: click RESIGN at (1750, 377)
+[DBG 02_post_resign_click] menu=(12, 11, 9) yes=(246, 220, 134) hud=(141, 129, 75)
+[RESIGN] step 3: click YES at (760, 610) x3
+[DBG 03_post_yes] menu=(64, 67, 30) yes=(60, 47, 33) hud=(214, 196, 109)
+[DBG 04_pre_esc2] menu=(64, 67, 30) yes=(60, 47, 33) hud=(214, 196, 109)
+[RESIGN] step 4: Escape (4-item menu)
+[DBG 05_post_esc2] menu=(125, 48, 20) yes=(60, 47, 33) hud=(214, 196, 109)
+[RESIGN] step 5: click QUIT at (1750, 225) x3
+[DBG 06_post_quit] menu=(34, 22, 10) yes=(106, 78, 48) hud=(17, 11, 6)
+[RESIGN] step 6: ensure_main_menu
+  [civ 09 Canada] replay diag: 8 AI script(s) loaded (expected ~8; replay=Record Game.age3Yrec, 133,044,705B)
+  [civ 09 Canada] personality probes: none found (game-over handler may not have fired)
+  [civ 09 Canada] deep-mode behavioural axes: 0 AIs parsed from match.log (no [LLP v=2] probes captured — was dev mode active?)
+  [civ 09 Canada] engine_error_free OK: clean match.log
+  [civ 09 Canada] leaders_initialised: 0 key(s) — []
+  [civ 09 Canada] vision review queued: 0 scene(s) — reviewer should write vision_verdicts.json to gate this civ's vision_check axis
+  → OK +7opps  duration=422s  in_game=True  resigned=True  probes=0  personality_probes=0  ai_loaded=8  err=-
+=== [3/6] P1=idx=17 French Empire + 7 opponents ===
+[RESIGN] step 1: focus + Escape
+[DBG 00_pre] menu=(12, 11, 9) yes=(32, 20, 11) hud=(141, 129, 75)
+[DBG 01_post_esc] menu=(0, 0, 0) yes=(202, 162, 50) hud=(214, 196, 109)
+[RESIGN] step 2: click RESIGN at (1750, 377)
+[DBG 02_post_resign_click] menu=(0, 0, 0) yes=(202, 162, 50) hud=(214, 196, 109)
+[RESIGN] step 3: click YES at (760, 610) x3
+[DBG 03_post_yes] menu=(0, 0, 0) yes=(202, 162, 50) hud=(214, 196, 109)
+[DBG 04_pre_esc2] menu=(0, 0, 0) yes=(202, 162, 50) hud=(214, 196, 109)
+[RESIGN] step 4: Escape (4-item menu)
+[DBG 05_post_esc2] menu=(82, 34, 17) yes=(202, 162, 50) hud=(214, 196, 109)
+[RESIGN] step 5: click QUIT at (1750, 225) x3
+[DBG 06_post_quit] menu=(13, 11, 9) yes=(23, 16, 9) hud=(12, 12, 10)
+[RESIGN] step 6: ensure_main_menu

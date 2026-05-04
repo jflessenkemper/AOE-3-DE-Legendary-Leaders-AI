@@ -1,0 +1,47 @@
+Graceful close timed out after 15s; sending SIGTERM
+SIGTERM did not take; escalating to SIGKILL
+Game closed (SIGKILL).
+Running: rsync -a --checksum --delete --exclude /.* --exclude /age-of-pirates --exclude /age-of-pirates-main --exclude /reference-mods --exclude /tests --exclude /tools /var/home/jflessenkemper/AOE-3-DE-Legendary-Leaders-AI/.claude/worktrees/hungry-banzai-e122dc/ /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI/
+Sync complete: /var/home/jflessenkemper/AOE-3-DE-Legendary-Leaders-AI/.claude/worktrees/hungry-banzai-e122dc -> /home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/mods/local/Legendary Leaders AI
+Dev mode: user.cfg already present (/home/jflessenkemper/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/76561198170207043/Startup/user.cfg)
+Launching via steam -applaunch 933110
+Game window ready at geometry 1920x1080 offset (0, 0)
+Traceback (most recent call last):
+  File "/var/home/jflessenkemper/AOE-3-DE-Legendary-Leaders-AI/.claude/worktrees/hungry-banzai-e122dc/tools/aoe3_automation/matrix_runner.py", line 462, in run_one_civ
+    raise RuntimeError("could not reach clean lobby state")
+RuntimeError: could not reach clean lobby state
+Traceback (most recent call last):
+  File "/var/home/jflessenkemper/AOE-3-DE-Legendary-Leaders-AI/.claude/worktrees/hungry-banzai-e122dc/tools/aoe3_automation/matrix_runner.py", line 466, in run_one_civ
+    lobby.set_civ_by_index(coords, civ_idx)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/var/home/jflessenkemper/AOE-3-DE-Legendary-Leaders-AI/.claude/worktrees/hungry-banzai-e122dc/tools/aoe3_automation/lobby_driver.py", line 269, in set_civ_by_index
+    open_civ_picker(coords)
+    ~~~~~~~~~~~~~~~^^^^^^^^
+  File "/var/home/jflessenkemper/AOE-3-DE-Legendary-Leaders-AI/.claude/worktrees/hungry-banzai-e122dc/tools/aoe3_automation/lobby_driver.py", line 209, in open_civ_picker
+    if is_picker_open(coords):
+       ~~~~~~~~~~~~~~^^^^^^^^
+  File "/var/home/jflessenkemper/AOE-3-DE-Legendary-Leaders-AI/.claude/worktrees/hungry-banzai-e122dc/tools/aoe3_automation/lobby_driver.py", line 190, in is_picker_open
+    d = diff_pixels(CLEAN_LOBBY_REF, p)
+  File "/var/home/jflessenkemper/AOE-3-DE-Legendary-Leaders-AI/.claude/worktrees/hungry-banzai-e122dc/tools/aoe3_automation/lobby_driver.py", line 147, in diff_pixels
+    return int(float(nums[0])) if nums else 0
+               ~~~~~^^^^^^^^^
+ValueError: could not convert string to float: 'e'
+Traceback (most recent call last):
+  File "/var/home/jflessenkemper/AOE-3-DE-Legendary-Leaders-AI/.claude/worktrees/hungry-banzai-e122dc/tools/aoe3_automation/matrix_runner.py", line 470, in run_one_civ
+    lobby.set_opponent_civs(coords, opponent_civ_indices)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/home/jflessenkemper/AOE-3-DE-Legendary-Leaders-AI/.claude/worktrees/hungry-banzai-e122dc/tools/aoe3_automation/lobby_driver.py", line 316, in set_opponent_civs
+    set_opponent_civ_by_index(coords, i, civ_idx)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/var/home/jflessenkemper/AOE-3-DE-Legendary-Leaders-AI/.claude/worktrees/hungry-banzai-e122dc/tools/aoe3_automation/lobby_driver.py", line 302, in set_opponent_civ_by_index
+    open_opponent_picker(coords, slot)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/var/home/jflessenkemper/AOE-3-DE-Legendary-Leaders-AI/.claude/worktrees/hungry-banzai-e122dc/tools/aoe3_automation/lobby_driver.py", line 290, in open_opponent_picker
+    if is_picker_open(coords):
+       ~~~~~~~~~~~~~~^^^^^^^^
+  File "/var/home/jflessenkemper/AOE-3-DE-Legendary-Leaders-AI/.claude/worktrees/hungry-banzai-e122dc/tools/aoe3_automation/lobby_driver.py", line 190, in is_picker_open
+    d = diff_pixels(CLEAN_LOBBY_REF, p)
+  File "/var/home/jflessenkemper/AOE-3-DE-Legendary-Leaders-AI/.claude/worktrees/hungry-banzai-e122dc/tools/aoe3_automation/lobby_driver.py", line 147, in diff_pixels
+    return int(float(nums[0])) if nums else 0
+               ~~~~~^^^^^^^^^
+ValueError: could not convert string to float: 'e'

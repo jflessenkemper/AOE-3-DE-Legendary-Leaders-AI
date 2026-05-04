@@ -1,0 +1,52 @@
+Traceback (most recent call last):
+  File "/var/home/jflessenkemper/AOE-3-DE-Legendary-Leaders-AI/.claude/worktrees/hungry-banzai-e122dc/tools/aoe3_automation/matrix_runner.py", line 488, in run_one_civ
+    lobby.set_opponent_civs(coords, opponent_civ_indices)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/home/jflessenkemper/AOE-3-DE-Legendary-Leaders-AI/.claude/worktrees/hungry-banzai-e122dc/tools/aoe3_automation/lobby_driver.py", line 345, in set_opponent_civs
+    set_opponent_civ_by_index(coords, i, civ_idx)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/var/home/jflessenkemper/AOE-3-DE-Legendary-Leaders-AI/.claude/worktrees/hungry-banzai-e122dc/tools/aoe3_automation/lobby_driver.py", line 331, in set_opponent_civ_by_index
+    open_opponent_picker(coords, slot)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/var/home/jflessenkemper/AOE-3-DE-Legendary-Leaders-AI/.claude/worktrees/hungry-banzai-e122dc/tools/aoe3_automation/lobby_driver.py", line 325, in open_opponent_picker
+    raise RuntimeError(f"Failed to open opponent picker for slot {slot}")
+RuntimeError: Failed to open opponent picker for slot 3
+Traceback (most recent call last):
+  File "/var/home/jflessenkemper/AOE-3-DE-Legendary-Leaders-AI/.claude/worktrees/hungry-banzai-e122dc/tools/aoe3_automation/matrix_runner.py", line 488, in run_one_civ
+    lobby.set_opponent_civs(coords, opponent_civ_indices)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/home/jflessenkemper/AOE-3-DE-Legendary-Leaders-AI/.claude/worktrees/hungry-banzai-e122dc/tools/aoe3_automation/lobby_driver.py", line 345, in set_opponent_civs
+    set_opponent_civ_by_index(coords, i, civ_idx)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/var/home/jflessenkemper/AOE-3-DE-Legendary-Leaders-AI/.claude/worktrees/hungry-banzai-e122dc/tools/aoe3_automation/lobby_driver.py", line 331, in set_opponent_civ_by_index
+    open_opponent_picker(coords, slot)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/var/home/jflessenkemper/AOE-3-DE-Legendary-Leaders-AI/.claude/worktrees/hungry-banzai-e122dc/tools/aoe3_automation/lobby_driver.py", line 325, in open_opponent_picker
+    raise RuntimeError(f"Failed to open opponent picker for slot {slot}")
+RuntimeError: Failed to open opponent picker for slot 3
+Traceback (most recent call last):
+  File "/var/home/jflessenkemper/AOE-3-DE-Legendary-Leaders-AI/.claude/worktrees/hungry-banzai-e122dc/tools/aoe3_automation/matrix_runner.py", line 488, in run_one_civ
+    lobby.set_opponent_civs(coords, opponent_civ_indices)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/home/jflessenkemper/AOE-3-DE-Legendary-Leaders-AI/.claude/worktrees/hungry-banzai-e122dc/tools/aoe3_automation/lobby_driver.py", line 345, in set_opponent_civs
+    set_opponent_civ_by_index(coords, i, civ_idx)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/var/home/jflessenkemper/AOE-3-DE-Legendary-Leaders-AI/.claude/worktrees/hungry-banzai-e122dc/tools/aoe3_automation/lobby_driver.py", line 331, in set_opponent_civ_by_index
+    open_opponent_picker(coords, slot)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/var/home/jflessenkemper/AOE-3-DE-Legendary-Leaders-AI/.claude/worktrees/hungry-banzai-e122dc/tools/aoe3_automation/lobby_driver.py", line 325, in open_opponent_picker
+    raise RuntimeError(f"Failed to open opponent picker for slot {slot}")
+RuntimeError: Failed to open opponent picker for slot 3
+Traceback (most recent call last):
+  File "/var/home/jflessenkemper/AOE-3-DE-Legendary-Leaders-AI/.claude/worktrees/hungry-banzai-e122dc/tools/aoe3_automation/matrix_runner.py", line 488, in run_one_civ
+    lobby.set_opponent_civs(coords, opponent_civ_indices)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/home/jflessenkemper/AOE-3-DE-Legendary-Leaders-AI/.claude/worktrees/hungry-banzai-e122dc/tools/aoe3_automation/lobby_driver.py", line 345, in set_opponent_civs
+    set_opponent_civ_by_index(coords, i, civ_idx)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/var/home/jflessenkemper/AOE-3-DE-Legendary-Leaders-AI/.claude/worktrees/hungry-banzai-e122dc/tools/aoe3_automation/lobby_driver.py", line 331, in set_opponent_civ_by_index
+    open_opponent_picker(coords, slot)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/var/home/jflessenkemper/AOE-3-DE-Legendary-Leaders-AI/.claude/worktrees/hungry-banzai-e122dc/tools/aoe3_automation/lobby_driver.py", line 325, in open_opponent_picker
+    raise RuntimeError(f"Failed to open opponent picker for slot {slot}")
+RuntimeError: Failed to open opponent picker for slot 3

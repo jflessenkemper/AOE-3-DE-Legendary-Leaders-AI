@@ -1,0 +1,33 @@
+Matrix run: 48 civ(s) in 24 match(es) (batch_size=2)
+   1/24: P1=idx=01 American Republic  P2..=Argentina
+   2/24: P1=idx=03 Aztec Empire  P2..=Baja California
+   3/24: P1=idx=05 Barbary States  P2..=Brazil
+   4/24: P1=idx=07 Britain  P2..=California
+   5/24: P1=idx=09 Canada  P2..=Central America
+   6/24: P1=idx=11 Chile  P2..=China
+   7/24: P1=idx=13 Egypt  P2..=Ethiopia
+   8/24: P1=idx=15 Finland  P2..=France
+   9/24: P1=idx=17 French Empire  P2..=French Republic
+  10/24: P1=idx=19 Germany  P2..=Gran Colombia
+  11/24: P1=idx=21 Haiti  P2..=Hungary
+  12/24: P1=idx=23 Inca Empire  P2..=Indonesia
+  13/24: P1=idx=25 Iroquois Confederacy  P2..=Italy
+  14/24: P1=idx=27 Japan  P2..=Lakota
+  15/24: P1=idx=29 Lower Canada  P2..=Malta
+  16/24: P1=idx=31 Maya  P2..=Mexico (Mexico City)
+  17/24: P1=idx=33 Mexico (Ciudad de Mexico)  P2..=Mughal India
+  18/24: P1=idx=35 Netherlands  P2..=Ottoman Empire
+  19/24: P1=idx=37 Peru  P2..=Portugal
+  20/24: P1=idx=39 Rio Grande  P2..=Romania
+  21/24: P1=idx=41 Russia  P2..=Sokoto
+  22/24: P1=idx=43 South Africa  P2..=Spain
+  23/24: P1=idx=45 Sweden  P2..=Texas
+  24/24: P1=idx=47 United States  P2..=Yucatan
+
+=== [1/24] P1=idx=01 American Republic + 1 opponents ===
+  [civ 01 American Republic] selecting civ_idx=1
+  [civ 01 American Republic] selecting opponents P2..P2: Argentina
+  [civ 01 American Republic] clicking PLAY
+[gamescope_detect] AoE3 detected: DISPLAY=:1  GAMESCOPE_WAYLAND_DISPLAY=gamescope-0
+  [civ 01 American Republic] loading-screen capture missed (PrintScreen ignored during load); will rely on in_game capture instead
+  [civ 01 American Republic] in-game; setting speed

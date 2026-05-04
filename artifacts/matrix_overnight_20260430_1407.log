@@ -1,0 +1,228 @@
+Matrix run: 48 civ(s) in 6 match(es) (batch_size=8)
+   1/6: P1=idx=01 American Republic  P2..=Argentina, Aztec Empire, Baja California, Barbary States, Brazil, Britain, California
+   2/6: P1=idx=09 Canada  P2..=Central America, Chile, China, Egypt, Ethiopia, Finland, France
+   3/6: P1=idx=17 French Empire  P2..=French Republic, Germany, Gran Colombia, Haiti, Hungary, Inca Empire, Indonesia
+   4/6: P1=idx=25 Iroquois Confederacy  P2..=Italy, Japan, Lakota, Lower Canada, Malta, Maya, Mexico (Mexico City)
+   5/6: P1=idx=33 Mexico (Ciudad de Mexico)  P2..=Mughal India, Netherlands, Ottoman Empire, Peru, Portugal, Rio Grande, Romania
+   6/6: P1=idx=41 Russia  P2..=Sokoto, South Africa, Spain, Sweden, Texas, United States, Yucatan
+
+=== [1/6] P1=idx=01 American Republic + 7 opponents ===
+  [civ 01 American Republic] selecting civ_idx=1
+  [civ 01 American Republic] selecting opponents P2..P8: Argentina,Aztec Empire,Baja California,Barbary States,Brazil,Britain,California
+  [civ 01 American Republic] clicking PLAY
+[gamescope_detect] AoE3 detected: DISPLAY=:1  GAMESCOPE_WAYLAND_DISPLAY=gamescope-0
+  [civ 01 American Republic] loading-screen capture missed (PrintScreen ignored during load); will rely on in_game capture instead
+  [civ 01 American Republic] in-game; setting speed
+  [civ 01 American Republic] observe done: max-observe reached (180s)
+  [civ 01 American Republic] scoreboard capture missed
+  [civ 01 American Republic] resigning
+[RESIGN] step 1: focus + Escape
+[DBG 00_pre] menu=(0, 0, 0) yes=(229, 247, 247) hud=(214, 196, 109)
+[DBG 01_post_esc] menu=(82, 34, 17) yes=(229, 247, 247) hud=(214, 196, 109)
+[RESIGN] step 2: click RESIGN at (1750, 377)
+[DBG 02_post_resign_click] menu=(12, 11, 9) yes=(246, 220, 134) hud=(141, 129, 75)
+[RESIGN] step 3: click YES at (760, 610) x3
+[DBG 03_post_yes] menu=(0, 0, 0) yes=(229, 247, 247) hud=(214, 196, 109)
+[DBG 04_pre_esc2] menu=(0, 0, 0) yes=(229, 247, 247) hud=(214, 196, 109)
+[RESIGN] step 4: Escape (4-item menu)
+[DBG 05_post_esc2] menu=(82, 34, 17) yes=(229, 247, 247) hud=(214, 196, 109)
+[RESIGN] step 5: click QUIT at (1750, 225) x3
+[DBG 06_post_quit] menu=(12, 11, 9) yes=(23, 16, 9) hud=(12, 11, 9)
+[RESIGN] step 6: ensure_main_menu
+  [civ 01 American Republic] replay diag: 109 AI script(s) loaded (expected ~8; replay=Record Game 2026-04-30 14-13-09.age3Yrec, 149,015,972B)
+  [civ 01 American Republic] personality probes: 7 written to personality_probes.log
+  [civ 01 American Republic] personality probe issue: Montezuma: ll_match_ms=3000 very small — spurious early write?
+  [civ 01 American Republic] personality probe issue: Wellington: ll_match_ms=3000 very small — spurious early write?
+  [civ 01 American Republic] personality probe issue: rvltmodargentines: ll_match_ms=3000 very small — spurious early write?
+  [civ 01 American Republic] personality probe issue: rvltmodbajacalifornians: ll_match_ms=3000 very small — spurious early write?
+  [civ 01 American Republic] personality probe issue: rvltmodbarbary: ll_match_ms=3000 very small — spurious early write?
+  [civ 01 American Republic] personality probe issue: rvltmodbrazil: ll_match_ms=3000 very small — spurious early write?
+  [civ 01 American Republic] personality probe issue: rvltmodcalifornians: ll_match_ms=3000 very small — spurious early write?
+  [civ 01 American Republic] deep-mode behavioural axes: 0 AIs parsed from match.log (no [LLP v=2] probes captured — was dev mode active?)
+  [civ 01 American Republic] engine_error_free OK: clean match.log
+  [civ 01 American Republic] leaders_initialised: 0 key(s) — []
+  [civ 01 American Republic] vision review queued: 0 scene(s) — reviewer should write vision_verdicts.json to gate this civ's vision_check axis
+  → OK +7opps  duration=384s  in_game=True  resigned=True  probes=0  personality_probes=7  ai_loaded=109  err=-
+=== [2/6] P1=idx=09 Canada + 7 opponents ===
+  [civ 09 Canada] selecting civ_idx=9
+  [civ 09 Canada] selecting opponents P2..P8: Central America,Chile,China,Egypt,Ethiopia,Finland,France
+  [civ 09 Canada] clicking PLAY
+  [civ 09 Canada] loading-screen capture missed (PrintScreen ignored during load); will rely on in_game capture instead
+  [civ 09 Canada] in-game; setting speed
+  [civ 09 Canada] observe done: max-observe reached (180s)
+  [civ 09 Canada] scoreboard capture missed
+  [civ 09 Canada] resigning
+[RESIGN] step 1: focus + Escape
+[DBG 00_pre] menu=(0, 0, 0) yes=(219, 245, 247) hud=(214, 196, 109)
+[DBG 01_post_esc] menu=(82, 34, 17) yes=(219, 245, 247) hud=(214, 196, 109)
+[RESIGN] step 2: click RESIGN at (1750, 377)
+[DBG 02_post_resign_click] menu=(12, 11, 9) yes=(246, 220, 134) hud=(141, 129, 75)
+[RESIGN] step 3: click YES at (760, 610) x3
+[DBG 03_post_yes] menu=(99, 112, 115) yes=(60, 47, 33) hud=(214, 196, 109)
+[DBG 04_pre_esc2] menu=(99, 112, 115) yes=(60, 47, 33) hud=(214, 196, 109)
+[RESIGN] step 4: Escape (4-item menu)
+[DBG 05_post_esc2] menu=(126, 49, 20) yes=(60, 47, 33) hud=(214, 196, 109)
+[RESIGN] step 5: click QUIT at (1750, 225) x3
+[DBG 06_post_quit] menu=(34, 22, 10) yes=(106, 78, 49) hud=(17, 11, 6)
+[RESIGN] step 6: ensure_main_menu
+  [civ 09 Canada] replay diag: 112 AI script(s) loaded (expected ~8; replay=Record Game 2026-04-30 14-19-36.age3Yrec, 149,532,435B)
+  [civ 09 Canada] personality probes: 7 written to personality_probes.log
+  [civ 09 Canada] personality probe issue: Kangxi: ll_match_ms=3000 very small — spurious early write?
+  [civ 09 Canada] personality probe issue: Menelik: ll_match_ms=3000 very small — spurious early write?
+  [civ 09 Canada] personality probe issue: Napoleon: ll_match_ms=3000 very small — spurious early write?
+  [civ 09 Canada] personality probe issue: rvltmodcentralamericans: ll_match_ms=3000 very small — spurious early write?
+  [civ 09 Canada] personality probe issue: rvltmodchileans: ll_match_ms=3000 very small — spurious early write?
+  [civ 09 Canada] personality probe issue: rvltmodegyptians: ll_match_ms=3000 very small — spurious early write?
+  [civ 09 Canada] personality probe issue: rvltmodfinnish: ll_match_ms=3000 very small — spurious early write?
+  [civ 09 Canada] deep-mode behavioural axes: 0 AIs parsed from match.log (no [LLP v=2] probes captured — was dev mode active?)
+  [civ 09 Canada] engine_error_free OK: clean match.log
+  [civ 09 Canada] leaders_initialised: 0 key(s) — []
+  [civ 09 Canada] vision review queued: 0 scene(s) — reviewer should write vision_verdicts.json to gate this civ's vision_check axis
+  → OK +7opps  duration=376s  in_game=True  resigned=True  probes=0  personality_probes=7  ai_loaded=112  err=-
+=== [3/6] P1=idx=17 French Empire + 7 opponents ===
+  [civ 17 French Empire] selecting civ_idx=17
+  [civ 17 French Empire] selecting opponents P2..P8: French Republic,Germany,Gran Colombia,Haiti,Hungary,Inca Empire,Indonesia
+  [civ 17 French Empire] clicking PLAY
+  [civ 17 French Empire] loading-screen capture missed (PrintScreen ignored during load); will rely on in_game capture instead
+  [civ 17 French Empire] in-game; setting speed
+  [civ 17 French Empire] observe done: max-observe reached (180s)
+  [civ 17 French Empire] scoreboard capture missed
+  [civ 17 French Empire] resigning
+[RESIGN] step 1: focus + Escape
+[DBG 00_pre] menu=(0, 0, 0) yes=(176, 139, 49) hud=(214, 196, 109)
+[DBG 01_post_esc] menu=(82, 34, 17) yes=(176, 139, 49) hud=(214, 196, 109)
+[RESIGN] step 2: click RESIGN at (1750, 377)
+[DBG 02_post_resign_click] menu=(12, 11, 9) yes=(246, 220, 134) hud=(141, 129, 75)
+[RESIGN] step 3: click YES at (760, 610) x3
+[DBG 03_post_yes] menu=(56, 59, 29) yes=(60, 47, 33) hud=(214, 196, 109)
+[DBG 04_pre_esc2] menu=(56, 59, 29) yes=(60, 47, 33) hud=(214, 196, 109)
+[RESIGN] step 4: Escape (4-item menu)
+[DBG 05_post_esc2] menu=(126, 48, 20) yes=(60, 47, 33) hud=(214, 196, 109)
+[RESIGN] step 5: click QUIT at (1750, 225) x3
+[DBG 06_post_quit] menu=(34, 22, 10) yes=(106, 78, 49) hud=(17, 11, 6)
+[RESIGN] step 6: ensure_main_menu
+  [civ 17 French Empire] replay diag: 111 AI script(s) loaded (expected ~8; replay=Record Game 2026-04-30 14-26-54.age3Yrec, 149,672,131B)
+  [civ 17 French Empire] personality probes: 7 written to personality_probes.log
+  [civ 17 French Empire] personality probe issue: Frederick: ll_match_ms=3000 very small — spurious early write?
+  [civ 17 French Empire] personality probe issue: Pachacuti: ll_match_ms=3000 very small — spurious early write?
+  [civ 17 French Empire] personality probe issue: rvltmodcolumbians: ll_match_ms=3000 very small — spurious early write?
+  [civ 17 French Empire] personality probe issue: rvltmodhaitians: ll_match_ms=3000 very small — spurious early write?
+  [civ 17 French Empire] personality probe issue: rvltmodhungarians: ll_match_ms=3000 very small — spurious early write?
+  [civ 17 French Empire] personality probe issue: rvltmodindonesians: ll_match_ms=3000 very small — spurious early write?
+  [civ 17 French Empire] personality probe issue: rvltmodrevolutionaryfrance: ll_match_ms=3000 very small — spurious early write?
+  [civ 17 French Empire] deep-mode behavioural axes: 0 AIs parsed from match.log (no [LLP v=2] probes captured — was dev mode active?)
+  [civ 17 French Empire] engine_error_free OK: clean match.log
+  [civ 17 French Empire] leaders_initialised: 0 key(s) — []
+  [civ 17 French Empire] vision review queued: 0 scene(s) — reviewer should write vision_verdicts.json to gate this civ's vision_check axis
+  → OK +7opps  duration=428s  in_game=True  resigned=True  probes=0  personality_probes=7  ai_loaded=111  err=-
+=== [4/6] P1=idx=25 Iroquois Confederacy + 7 opponents ===
+  [civ 25 Iroquois Confederacy] selecting civ_idx=25
+  [civ 25 Iroquois Confederacy] selecting opponents P2..P8: Italy,Japan,Lakota,Lower Canada,Malta,Maya,Mexico (Mexico City)
+  [civ 25 Iroquois Confederacy] clicking PLAY
+  [civ 25 Iroquois Confederacy] loading-screen capture missed (PrintScreen ignored during load); will rely on in_game capture instead
+  [civ 25 Iroquois Confederacy] in-game; setting speed
+  [civ 25 Iroquois Confederacy] observe done: max-observe reached (180s)
+  [civ 25 Iroquois Confederacy] scoreboard capture missed
+  [civ 25 Iroquois Confederacy] resigning
+[RESIGN] step 1: focus + Escape
+[DBG 00_pre] menu=(0, 0, 0) yes=(228, 246, 248) hud=(214, 196, 109)
+[DBG 01_post_esc] menu=(82, 34, 17) yes=(228, 246, 248) hud=(214, 196, 109)
+[RESIGN] step 2: click RESIGN at (1750, 377)
+[DBG 02_post_resign_click] menu=(12, 11, 9) yes=(246, 220, 134) hud=(141, 129, 75)
+[RESIGN] step 3: click YES at (760, 610) x3
+[DBG 03_post_yes] menu=(106, 115, 115) yes=(60, 47, 33) hud=(214, 196, 109)
+[DBG 04_pre_esc2] menu=(106, 115, 115) yes=(60, 47, 33) hud=(214, 196, 109)
+[RESIGN] step 4: Escape (4-item menu)
+[DBG 05_post_esc2] menu=(125, 48, 20) yes=(60, 47, 33) hud=(214, 196, 109)
+[RESIGN] step 5: click QUIT at (1750, 225) x3
+[DBG 06_post_quit] menu=(34, 22, 10) yes=(162, 104, 82) hud=(17, 11, 6)
+[RESIGN] step 6: ensure_main_menu
+  [civ 25 Iroquois Confederacy] replay diag: 112 AI script(s) loaded (expected ~8; replay=Record Game 2026-04-30 14-34-39.age3Yrec, 149,715,035B)
+  [civ 25 Iroquois Confederacy] personality probes: 7 written to personality_probes.log
+  [civ 25 Iroquois Confederacy] personality probe issue: Crazyhorse: ll_match_ms=3000 very small — spurious early write?
+  [civ 25 Iroquois Confederacy] personality probe issue: Garibaldi: ll_match_ms=3000 very small — spurious early write?
+  [civ 25 Iroquois Confederacy] personality probe issue: Hidalgo: ll_match_ms=3000 very small — spurious early write?
+  [civ 25 Iroquois Confederacy] personality probe issue: Jean: ll_match_ms=3000 very small — spurious early write?
+  [civ 25 Iroquois Confederacy] personality probe issue: Tokugawa: ll_match_ms=3000 very small — spurious early write?
+  [civ 25 Iroquois Confederacy] personality probe issue: rvltmodfrenchcanadians: ll_match_ms=3000 very small — spurious early write?
+  [civ 25 Iroquois Confederacy] personality probe issue: rvltmodmayans: ll_match_ms=3000 very small — spurious early write?
+  [civ 25 Iroquois Confederacy] deep-mode behavioural axes: 0 AIs parsed from match.log (no [LLP v=2] probes captured — was dev mode active?)
+  [civ 25 Iroquois Confederacy] engine_error_free OK: clean match.log
+  [civ 25 Iroquois Confederacy] leaders_initialised: 0 key(s) — []
+  [civ 25 Iroquois Confederacy] vision review queued: 0 scene(s) — reviewer should write vision_verdicts.json to gate this civ's vision_check axis
+  → OK +7opps  duration=455s  in_game=True  resigned=True  probes=0  personality_probes=7  ai_loaded=112  err=-
+=== [5/6] P1=idx=33 Mexico (Ciudad de Mexico) + 7 opponents ===
+  [civ 33 Mexico (Ciudad de Mexico)] selecting civ_idx=33
+  [civ 33 Mexico (Ciudad de Mexico)] selecting opponents P2..P8: Mughal India,Netherlands,Ottoman Empire,Peru,Portugal,Rio Grande,Romania
+  [civ 33 Mexico (Ciudad de Mexico)] clicking PLAY
+  [civ 33 Mexico (Ciudad de Mexico)] loading-screen capture missed (PrintScreen ignored during load); will rely on in_game capture instead
+  [civ 33 Mexico (Ciudad de Mexico)] in-game; setting speed
+  [civ 33 Mexico (Ciudad de Mexico)] observe done: max-observe reached (180s)
+  [civ 33 Mexico (Ciudad de Mexico)] scoreboard capture missed
+  [civ 33 Mexico (Ciudad de Mexico)] resigning
+[RESIGN] step 1: focus + Escape
+[DBG 00_pre] menu=(0, 0, 0) yes=(208, 238, 246) hud=(208, 190, 101)
+[DBG 01_post_esc] menu=(82, 34, 17) yes=(208, 238, 246) hud=(208, 190, 101)
+[RESIGN] step 2: click RESIGN at (1750, 377)
+[DBG 02_post_resign_click] menu=(12, 11, 9) yes=(246, 220, 134) hud=(137, 125, 70)
+[RESIGN] step 3: click YES at (760, 610) x3
+[DBG 03_post_yes] menu=(103, 114, 115) yes=(60, 47, 33) hud=(208, 190, 101)
+[DBG 04_pre_esc2] menu=(103, 114, 115) yes=(60, 47, 33) hud=(208, 190, 101)
+[RESIGN] step 4: Escape (4-item menu)
+[DBG 05_post_esc2] menu=(125, 48, 20) yes=(60, 47, 33) hud=(208, 190, 101)
+[RESIGN] step 5: click QUIT at (1750, 225) x3
+[DBG 06_post_quit] menu=(34, 22, 10) yes=(73, 65, 86) hud=(17, 11, 6)
+[RESIGN] step 6: ensure_main_menu
+  [civ 33 Mexico (Ciudad de Mexico)] replay diag: 111 AI script(s) loaded (expected ~8; replay=Record Game 2026-04-30 14-43-44.age3Yrec, 148,158,337B)
+  [civ 33 Mexico (Ciudad de Mexico)] personality probes: 7 written to personality_probes.log
+  [civ 33 Mexico (Ciudad de Mexico)] personality probe issue: Henry: ll_match_ms=3000 very small — spurious early write?
+  [civ 33 Mexico (Ciudad de Mexico)] personality probe issue: Maurice: ll_match_ms=3000 very small — spurious early write?
+  [civ 33 Mexico (Ciudad de Mexico)] personality probe issue: Shivaji: ll_match_ms=3000 very small — spurious early write?
+  [civ 33 Mexico (Ciudad de Mexico)] personality probe issue: Suleiman: ll_match_ms=3000 very small — spurious early write?
+  [civ 33 Mexico (Ciudad de Mexico)] personality probe issue: rvltmodperuvians: ll_match_ms=3000 very small — spurious early write?
+  [civ 33 Mexico (Ciudad de Mexico)] personality probe issue: rvltmodriogrande: ll_match_ms=3000 very small — spurious early write?
+  [civ 33 Mexico (Ciudad de Mexico)] personality probe issue: rvltmodromanians: ll_match_ms=3000 very small — spurious early write?
+  [civ 33 Mexico (Ciudad de Mexico)] deep-mode behavioural axes: 0 AIs parsed from match.log (no [LLP v=2] probes captured — was dev mode active?)
+  [civ 33 Mexico (Ciudad de Mexico)] engine_error_free OK: clean match.log
+  [civ 33 Mexico (Ciudad de Mexico)] leaders_initialised: 0 key(s) — []
+  [civ 33 Mexico (Ciudad de Mexico)] vision review queued: 0 scene(s) — reviewer should write vision_verdicts.json to gate this civ's vision_check axis
+  → OK +7opps  duration=534s  in_game=True  resigned=True  probes=0  personality_probes=7  ai_loaded=111  err=-
+=== [6/6] P1=idx=41 Russia + 7 opponents ===
+  [civ 41 Russia] selecting civ_idx=41
+  [civ 41 Russia] selecting opponents P2..P8: Sokoto,South Africa,Spain,Sweden,Texas,United States,Yucatan
+  [civ 41 Russia] clicking PLAY
+  [civ 41 Russia] loading-screen capture missed (PrintScreen ignored during load); will rely on in_game capture instead
+  [civ 41 Russia] in-game; setting speed
+  [civ 41 Russia] observe done: max-observe reached (180s)
+  [civ 41 Russia] scoreboard capture missed
+  [civ 41 Russia] resigning
+[RESIGN] step 1: focus + Escape
+[DBG 00_pre] menu=(0, 0, 0) yes=(217, 244, 246) hud=(214, 196, 109)
+[DBG 01_post_esc] menu=(82, 34, 17) yes=(217, 244, 246) hud=(214, 196, 109)
+[RESIGN] step 2: click RESIGN at (1750, 377)
+[DBG 02_post_resign_click] menu=(12, 11, 9) yes=(246, 220, 134) hud=(141, 129, 75)
+[RESIGN] step 3: click YES at (760, 610) x3
+[DBG 03_post_yes] menu=(100, 110, 114) yes=(60, 47, 33) hud=(214, 196, 109)
+[DBG 04_pre_esc2] menu=(100, 110, 114) yes=(60, 47, 33) hud=(214, 196, 109)
+[RESIGN] step 4: Escape (4-item menu)
+[DBG 05_post_esc2] menu=(127, 49, 20) yes=(60, 47, 33) hud=(214, 196, 109)
+[RESIGN] step 5: click QUIT at (1750, 225) x3
+[DBG 06_post_quit] menu=(34, 22, 10) yes=(79, 76, 43) hud=(17, 11, 6)
+[RESIGN] step 6: ensure_main_menu
+  [civ 41 Russia] replay diag: 111 AI script(s) loaded (expected ~8; replay=Record Game 2026-04-30 14-53-25.age3Yrec, 148,579,805B)
+  [civ 41 Russia] personality probes: 7 written to personality_probes.log
+  [civ 41 Russia] personality probe issue: Gustav: ll_match_ms=3000 very small — spurious early write?
+  [civ 41 Russia] personality probe issue: Isabella: ll_match_ms=3000 very small — spurious early write?
+  [civ 41 Russia] personality probe issue: Usman: ll_match_ms=3000 very small — spurious early write?
+  [civ 41 Russia] personality probe issue: Washington: ll_match_ms=3000 very small — spurious early write?
+  [civ 41 Russia] personality probe issue: rvltmodsouthafricans: ll_match_ms=3000 very small — spurious early write?
+  [civ 41 Russia] personality probe issue: rvltmodtexians: ll_match_ms=3000 very small — spurious early write?
+  [civ 41 Russia] personality probe issue: rvltmodyucatan: ll_match_ms=3000 very small — spurious early write?
+  [civ 41 Russia] deep-mode behavioural axes: 0 AIs parsed from match.log (no [LLP v=2] probes captured — was dev mode active?)
+  [civ 41 Russia] engine_error_free OK: clean match.log
+  [civ 41 Russia] leaders_initialised: 0 key(s) — []
+  [civ 41 Russia] vision review queued: 0 scene(s) — reviewer should write vision_verdicts.json to gate this civ's vision_check axis
+  → OK +7opps  duration=570s  in_game=True  resigned=True  probes=0  personality_probes=7  ai_loaded=111  err=-
+
+Wrote: /var/home/jflessenkemper/AOE-3-DE-Legendary-Leaders-AI/.claude/worktrees/hungry-banzai-e122dc/tools/aoe3_automation/artifacts/matrix_runner/matrix_report.json
+Wrote: /var/home/jflessenkemper/AOE-3-DE-Legendary-Leaders-AI/.claude/worktrees/hungry-banzai-e122dc/tools/aoe3_automation/artifacts/matrix_runner/matrix_report.md
