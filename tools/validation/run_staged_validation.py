@@ -23,6 +23,8 @@ from tools.validation.validate_techtree import validate_techtree
 from tools.validation.validate_terrain_heading import validate_terrain_heading
 from tools.validation.validate_xml_well_formed import validate_xml_well_formed
 from tools.validation.validate_xs_scripts import validate_xs_scripts
+from tools.validation.validate_personality_overrides import validate_personality_overrides
+from tools.validation.validate_art_coverage import validate_art_coverage
 
 
 STAGE_ORDER = ("content", "regression", "packaged", "live", "runtime")
@@ -76,6 +78,8 @@ def build_content_checks(repo_root: Path, strict_display_name_ids: bool = False)
         ValidationCheckResult("XS", validate_xs_scripts(repo_root)),
         ValidationCheckResult("Terrain/Heading Wiring", validate_terrain_heading(repo_root)),
         ValidationCheckResult("Playstyle Modal", validate_playstyle_modal(repo_root)),
+        ValidationCheckResult("Personality Overrides", validate_personality_overrides(repo_root)),
+        ValidationCheckResult("Art Coverage", validate_art_coverage(repo_root)),
     ]
 
 

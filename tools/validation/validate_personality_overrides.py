@@ -41,8 +41,8 @@ def parse_personality(path: Path) -> dict:
     }
 
 
-def load_string_table() -> dict[str, str]:
-    txt = STRINGS.read_text(encoding="utf-8", errors="ignore")
+def load_string_table(path: Path = STRINGS) -> dict[str, str]:
+    txt = path.read_text(encoding="utf-8", errors="ignore")
     table = {}
     # Match both '<String _locID=...>' and '<string _locid=...>' variants
     for m in re.finditer(r"<[Ss]tring\s+_loc[Ii][Dd]=['\"](\d+)['\"][^>]*>([^<]*)</[Ss]tring>", txt):
@@ -50,6 +50,32 @@ def load_string_table() -> dict[str, str]:
         # If an ID appears multiple times, keep the LAST (as the game would)
         table[sid] = val
     return table
+
+
+def validate_personality_overrides(repo_root: Path) -> list[str]:
+    """Return a list of finding strings (empty = all pass)."""
+    ai_dir = repo_root / "game" / "ai"
+    strings_path = repo_root / "data" / "strings" / "english" / "stringmods.xml"
+    if not ai_dir.exists():
+        return [f"game/ai/ directory not found under {repo_root}"]
+    if not strings_path.exists():
+        return [f"stringmods.xml not found at {strings_path}"]
+
+    strings = load_string_table(strings_path)
+    findings: list[str] = []
+    for p in sorted(ai_dir.glob("*.personality")):
+        info = parse_personality(p)
+        name_id = info["nameID"] or ""
+        tt_id = info["tooltipID"] or ""
+        if not name_id:
+            findings.append(f"{p.name}: missing <nameID>")
+        elif not strings.get(name_id):
+            findings.append(f"{p.name}: nameID {name_id} not found or empty in stringmods.xml")
+        if not tt_id:
+            findings.append(f"{p.name}: missing <tooltipID>")
+        elif not strings.get(tt_id):
+            findings.append(f"{p.name}: tooltipID {tt_id} not found or empty in stringmods.xml")
+    return findings
 
 
 def main():
