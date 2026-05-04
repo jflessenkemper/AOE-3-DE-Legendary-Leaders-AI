@@ -8,7 +8,6 @@
    <icon>resources/images/icons/singleplayer/cpai_avatar_americans_jefferson.png</icon>
    <chatset>rvltmodamericans</chatset>
    <playerNames>
-      <nameID>490252</nameID>
-      <civ>RvltModAmericans</civ>
+      <nameID>490252<civ>RvltModAmericans</civ></nameID>
    </playerNames>
 </AI>

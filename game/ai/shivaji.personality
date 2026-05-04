@@ -8,7 +8,6 @@
    <icon>resources/images/icons/singleplayer/cpai_avatar_indians_shivaji.png</icon>
    <chatset>shivaji</chatset>
    <playerNames>
-      <nameID>490210</nameID>
-      <civ>indians</civ>
+      <nameID>490210<civ>indians</civ></nameID>
    </playerNames>
 </AI>

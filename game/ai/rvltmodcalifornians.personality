@@ -8,7 +8,6 @@
    <icon>resources/images/icons/singleplayer/cpai_avatar_californians_vallejo.png</icon>
    <chatset>rvltmodcalifornians</chatset>
    <playerNames>
-      <nameID>490274</nameID>
-      <civ>RvltModCalifornians</civ>
+      <nameID>490274<civ>RvltModCalifornians</civ></nameID>
    </playerNames>
 </AI>

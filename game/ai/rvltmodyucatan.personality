@@ -8,7 +8,6 @@
    <icon>resources/images/icons/singleplayer/cpai_avatar_yucatan_carrillo_puerto.png</icon>
    <chatset>rvltmodyucatan</chatset>
    <playerNames>
-      <nameID>490271</nameID>
-      <civ>RvltModYucatan</civ>
+      <nameID>490271<civ>RvltModYucatan</civ></nameID>
    </playerNames>
 </AI>

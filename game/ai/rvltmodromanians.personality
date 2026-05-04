@@ -8,7 +8,6 @@
    <icon>resources/images/icons/singleplayer/cpai_avatar_romanians_cuza.png</icon>
    <chatset>rvltmodromanians</chatset>
    <playerNames>
-      <nameID>490266</nameID>
-      <civ>RvltModRomanians</civ>
+      <nameID>490266<civ>RvltModRomanians</civ></nameID>
    </playerNames>
 </AI>

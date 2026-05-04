@@ -8,7 +8,6 @@
    <icon>resources/images/icons/singleplayer/cpai_avatar_napoleonic_france.png</icon>
    <chatset>rvltmodnapoleonicfrance</chatset>
    <playerNames>
-      <nameID>490250</nameID>
-      <civ>RvltModNapoleonicFrance</civ>
+      <nameID>490250<civ>RvltModNapoleonicFrance</civ></nameID>
    </playerNames>
 </AI>

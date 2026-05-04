@@ -8,7 +8,6 @@
    <icon>resources/images/icons/singleplayer/cpai_avatar_revolutionary_france.png</icon>
    <chatset>rvltmodrevolutionaryfrance</chatset>
    <playerNames>
-      <nameID>490251</nameID>
-      <civ>RvltModRevolutionaryFrance</civ>
+      <nameID>490251<civ>RvltModRevolutionaryFrance</civ></nameID>
    </playerNames>
 </AI>

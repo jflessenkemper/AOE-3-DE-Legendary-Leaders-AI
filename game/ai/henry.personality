@@ -8,7 +8,6 @@
    <icon>resources/images/icons/singleplayer/cpai_avatar_portuguese_henry.png</icon>
    <chatset>henry</chatset>
    <playerNames>
-      <nameID>490224</nameID>
-      <civ>portuguese</civ>
+      <nameID>490224<civ>portuguese</civ></nameID>
    </playerNames>
 </AI>

@@ -8,7 +8,6 @@
    <icon>resources/images/icons/singleplayer/cpai_avatar_haitians_louverture.png</icon>
    <chatset>rvltmodhaitians</chatset>
    <playerNames>
-      <nameID>490261</nameID>
-      <civ>RvltModHaitians</civ>
+      <nameID>490261<civ>RvltModHaitians</civ></nameID>
    </playerNames>
 </AI>

@@ -9,6 +9,17 @@
 
 **A New World** is a standalone Age of Empires III: Definitive Edition mod that fuses the 22 base civilizations with all 26 playable revolutions into a single 48-nation roster. Every nation gets a historically-accurate leader, a hand-curated 25-card deck, a per-leader AI doctrine, and a real map-placement bias the AI actually obeys.
 
+## 🔧 Installation
+
+1. **Download** the latest release ZIP from the [Releases](../../releases) page.
+2. **Extract** the `Legendary Leaders AI` folder into your mods directory:
+   - **Windows:** `%USERPROFILE%\Games\Age of Empires 3 DE\<steamID>\mods\local\`
+   - **Proton/Linux:** `~/.local/share/Steam/steamapps/compatdata/933110/pfx/drive_c/users/steamuser/Games/Age of Empires 3 DE/<steamID>/mods/local/`
+3. **Enable** the mod in-game: *Home City → Mods → Local Mods → Legendary Leaders AI → Enable*.
+4. **Start a Skirmish** — all 48 nations appear in the civ picker.
+
+> **Multiplayer note:** This is a host-only mod. All players in a lobby must have the mod installed and enabled; joining without it causes a desync at match start.
+
 ## ✨ Features
 
 - **48 distinct civilizations** — 22 base civs + 26 revolution-era civs promoted to top-level pickable nations (Napoleon, Revolutionary France, Americans, Chileans, Texians, Finns, Barbary, Haitians, Yucatec…).

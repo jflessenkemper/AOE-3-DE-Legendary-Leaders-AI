@@ -8,7 +8,6 @@
    <icon>resources/images/icons/singleplayer/cpai_avatar_italians_garibaldi.png</icon>
    <chatset>garibaldi</chatset>
    <playerNames>
-      <nameID>490226</nameID>
-      <civ>DEItalians</civ>
+      <nameID>490226<civ>DEItalians</civ></nameID>
    </playerNames>
 </AI>

@@ -8,7 +8,6 @@
    <icon>resources/images/icons/singleplayer/cpai_avatar_canadians_brock.png</icon>
    <chatset>rvltmodcanadians</chatset>
    <playerNames>
-      <nameID>490254</nameID>
-      <civ>RvltModCanadians</civ>
+      <nameID>490254<civ>RvltModCanadians</civ></nameID>
    </playerNames>
 </AI>

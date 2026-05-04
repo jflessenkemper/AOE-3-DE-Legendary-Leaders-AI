@@ -1,14 +1,13 @@
 <AI>
    <version>2</version>
    <script>aiLoaderStandard</script>
-   <nameID>490218</nameID>
+   <nameID>490250</nameID>
    <tooltipID>490219</tooltipID>
    <forcedciv>french</forcedciv>
    <rushboom>0</rushboom>
    <icon>resources/images/icons/singleplayer/cpai_avatar_french_napoleon.png</icon>
    <chatset>napoleon</chatset>
    <playerNames>
-      <nameID>490218</nameID>
-      <civ>french</civ>
+      <nameID>490250<civ>french</civ></nameID>
    </playerNames>
 </AI>

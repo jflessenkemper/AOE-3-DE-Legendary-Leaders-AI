@@ -8,7 +8,6 @@
    <icon>resources/images/icons/singleplayer/cpai_avatar_finnish_mannerheim.png</icon>
    <chatset>rvltmodfinnish</chatset>
    <playerNames>
-      <nameID>490264</nameID>
-      <civ>RvltModFinnish</civ>
+      <nameID>490264<civ>RvltModFinnish</civ></nameID>
    </playerNames>
 </AI>

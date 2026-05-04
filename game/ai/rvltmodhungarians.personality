@@ -8,7 +8,6 @@
    <icon>resources/images/icons/singleplayer/cpai_avatar_hungarians_kossuth.png</icon>
    <chatset>rvltmodhungarians</chatset>
    <playerNames>
-      <nameID>490265</nameID>
-      <civ>RvltModHungarians</civ>
+      <nameID>490265<civ>RvltModHungarians</civ></nameID>
    </playerNames>
 </AI>
