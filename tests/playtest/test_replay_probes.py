@@ -1,6 +1,7 @@
 """Tests for tools.playtest.replay_probes — runtime probe validator."""
 from __future__ import annotations
 
+import re as _re
 import unittest
 from pathlib import Path
 import sys
@@ -15,6 +16,20 @@ from tools.playtest.replay_probes import coverage_report, parse_probes, validate
 
 def _probe(t: int, p: int, civ: str, ldr: str, tag: str, tail: str = "") -> str:
     return f"[LLP v=2 t={t} p={p} civ={civ} ldr={ldr} tag={tag}] {tail}"
+
+
+def _civ_token(exp) -> str:
+    """Engine-faithful civ token derived from civ_id, not from the
+    decorative CIV_LABELS string. ``kbGetCivName()`` emits the prefix-
+    stripped civ_id (cCivBritish → British, cCivXPSioux → Sioux); rvlt
+    civs arrive as their full RvltMod* string. Mirroring that here keeps
+    test probes parseable as space-separated kv (labels like ``British
+    (Elizabeth I)`` would otherwise blow up the kv split)."""
+    cid = exp.civ_id
+    m = _re.match(r"^cCiv(?:DE|XP)?(.*)$", cid)
+    if m:
+        return m.group(1)
+    return cid
 
 
 class TestProbeParsing(unittest.TestCase):
@@ -54,15 +69,15 @@ class TestProbeParsing(unittest.TestCase):
 class TestValidator(unittest.TestCase):
     def setUp(self) -> None:
         self.expectations = {e.label: e for e in load_expectations()}
-        self.british = self.expectations["British"]
+        self.british = self.expectations["British (Elizabeth I)"]
 
     def _good_pair(self, pid: int, exp) -> str:
         return "\n".join([
-            _probe(30, pid, exp.label, exp.leader_key, "meta.leader_init",
+            _probe(30, pid, _civ_token(exp), exp.leader_key, "meta.leader_init",
                    f"leader={exp.leader_key}"),
-            _probe(60, pid, exp.label, exp.leader_key, "meta.leader_assigned",
-                   f"civ_id=0 civ_name={exp.label} leader={exp.leader_key} chatset={exp.leader_key}"),
-            _probe(120, pid, exp.label, exp.leader_key, "meta.buildstyle",
+            _probe(60, pid, _civ_token(exp), exp.leader_key, "meta.leader_assigned",
+                   f"civ_id=0 civ_name={_civ_token(exp)} leader={exp.leader_key} chatset={exp.leader_key}"),
+            _probe(120, pid, _civ_token(exp), exp.leader_key, "meta.buildstyle",
                    f"style=Test walls=1 "
                    f"terrain_primary={exp.terrain_primary} "
                    f"terrain_secondary={exp.terrain_secondary} "
@@ -167,15 +182,15 @@ class TestComplianceProbes(unittest.TestCase):
 
     def setUp(self) -> None:
         self.expectations = {e.label: e for e in load_expectations()}
-        self.british = self.expectations["British"]
+        self.british = self.expectations["British (Elizabeth I)"]
 
     def _good_pair(self, pid: int, exp) -> str:
         return "\n".join([
-            _probe(30, pid, exp.label, exp.leader_key, "meta.leader_init",
+            _probe(30, pid, _civ_token(exp), exp.leader_key, "meta.leader_init",
                    f"leader={exp.leader_key}"),
-            _probe(60, pid, exp.label, exp.leader_key, "meta.leader_assigned",
-                   f"civ_id=0 civ_name={exp.label} leader={exp.leader_key} chatset={exp.leader_key}"),
-            _probe(120, pid, exp.label, exp.leader_key, "meta.buildstyle",
+            _probe(60, pid, _civ_token(exp), exp.leader_key, "meta.leader_assigned",
+                   f"civ_id=0 civ_name={_civ_token(exp)} leader={exp.leader_key} chatset={exp.leader_key}"),
+            _probe(120, pid, _civ_token(exp), exp.leader_key, "meta.buildstyle",
                    f"style=Test walls=1 "
                    f"terrain_primary={exp.terrain_primary} "
                    f"terrain_secondary={exp.terrain_secondary} "
@@ -298,15 +313,15 @@ class TestExtendedComplianceProbes(unittest.TestCase):
             e for e in self.expectations.values()
             if e.heading_axis == "outward"
         )
-        self.british = self.expectations["British"]
+        self.british = self.expectations["British (Elizabeth I)"]
 
     def _good_pair(self, pid: int, exp) -> str:
         return "\n".join([
-            _probe(30, pid, exp.label, exp.leader_key, "meta.leader_init",
+            _probe(30, pid, _civ_token(exp), exp.leader_key, "meta.leader_init",
                    f"leader={exp.leader_key}"),
-            _probe(60, pid, exp.label, exp.leader_key, "meta.leader_assigned",
-                   f"civ_id=0 civ_name={exp.label} leader={exp.leader_key} chatset={exp.leader_key}"),
-            _probe(120, pid, exp.label, exp.leader_key, "meta.buildstyle",
+            _probe(60, pid, _civ_token(exp), exp.leader_key, "meta.leader_assigned",
+                   f"civ_id=0 civ_name={_civ_token(exp)} leader={exp.leader_key} chatset={exp.leader_key}"),
+            _probe(120, pid, _civ_token(exp), exp.leader_key, "meta.buildstyle",
                    f"style=Test walls=1 "
                    f"terrain_primary={exp.terrain_primary} "
                    f"terrain_secondary={exp.terrain_secondary} "
@@ -320,11 +335,11 @@ class TestExtendedComplianceProbes(unittest.TestCase):
         # Two combat snaps with attackPlans=0 for an outward-heading civ.
         exp = self.outward
         text = self._good_pair(1, exp) + "\n" + "\n".join([
-            _probe(180, 1, exp.label, exp.leader_key, "compliance.combat",
+            _probe(180, 1, _civ_token(exp), exp.leader_key, "compliance.combat",
                    "attackPlans=0 defendPlans=0 reservePlans=0 trainPlans=1 "
                    "researchPlans=0 milPop=0 milDelta=0 atkDelta=0 "
                    "hatedEnemy=2 defenseReflex=-1"),
-            _probe(240, 1, exp.label, exp.leader_key, "compliance.combat",
+            _probe(240, 1, _civ_token(exp), exp.leader_key, "compliance.combat",
                    "attackPlans=0 defendPlans=0 reservePlans=0 trainPlans=1 "
                    "researchPlans=0 milPop=0 milDelta=0 atkDelta=0 "
                    "hatedEnemy=2 defenseReflex=-1"),
@@ -338,7 +353,7 @@ class TestExtendedComplianceProbes(unittest.TestCase):
         # 3 econ snaps each with villsIdle=5.
         exp = self.british
         text = self._good_pair(1, exp) + "\n" + "\n".join([
-            _probe(60 + 60 * n, 1, exp.label, exp.leader_key, "compliance.econ",
+            _probe(60 + 60 * n, 1, _civ_token(exp), exp.leader_key, "compliance.econ",
                    "pctFood=0.5 pctWood=0.3 pctGold=0.2 vills=20 villsIdle=5 "
                    "pop=20 popCap=80 foodValid=2000 woodValid=1500 goldValid=800")
             for n in range(3)
@@ -352,13 +367,13 @@ class TestExtendedComplianceProbes(unittest.TestCase):
         # 2 ticks idle then back to 0 — should not flag.
         exp = self.british
         text = self._good_pair(1, exp) + "\n" + "\n".join([
-            _probe(120, 1, exp.label, exp.leader_key, "compliance.econ",
+            _probe(120, 1, _civ_token(exp), exp.leader_key, "compliance.econ",
                    "pctFood=0.5 pctWood=0.3 pctGold=0.2 vills=20 villsIdle=5 "
                    "pop=20 popCap=80 foodValid=2000 woodValid=1500 goldValid=800"),
-            _probe(180, 1, exp.label, exp.leader_key, "compliance.econ",
+            _probe(180, 1, _civ_token(exp), exp.leader_key, "compliance.econ",
                    "pctFood=0.5 pctWood=0.3 pctGold=0.2 vills=20 villsIdle=5 "
                    "pop=20 popCap=80 foodValid=2000 woodValid=1500 goldValid=800"),
-            _probe(240, 1, exp.label, exp.leader_key, "compliance.econ",
+            _probe(240, 1, _civ_token(exp), exp.leader_key, "compliance.econ",
                    "pctFood=0.5 pctWood=0.3 pctGold=0.2 vills=20 villsIdle=0 "
                    "pop=20 popCap=80 foodValid=2000 woodValid=1500 goldValid=800"),
         ])
@@ -371,7 +386,7 @@ class TestExtendedComplianceProbes(unittest.TestCase):
         # strategy=5 (MobileNoWalls) + segments=12 = compliance failure.
         exp = self.british
         text = self._good_pair(1, exp) + "\n" + _probe(
-            300, 1, exp.label, exp.leader_key, "compliance.wallGeom",
+            300, 1, _civ_token(exp), exp.leader_key, "compliance.wallGeom",
             "segments=12 plans=1 minDist=15.0 maxDist=45.0 avgDist=30.0 strategy=5"
         )
         issues, _ = validate(parse_probes(text.encode()))
@@ -382,7 +397,7 @@ class TestExtendedComplianceProbes(unittest.TestCase):
     def test_mobile_no_walls_with_zero_walls_passes(self) -> None:
         exp = self.british
         text = self._good_pair(1, exp) + "\n" + _probe(
-            300, 1, exp.label, exp.leader_key, "compliance.wallGeom",
+            300, 1, _civ_token(exp), exp.leader_key, "compliance.wallGeom",
             "segments=0 plans=0 minDist=0.0 maxDist=0.0 avgDist=0.0 strategy=5"
         )
         issues, _ = validate(parse_probes(text.encode()))
@@ -393,7 +408,7 @@ class TestExtendedComplianceProbes(unittest.TestCase):
     def test_disabled_probe_rule_flagged(self) -> None:
         exp = self.british
         text = self._good_pair(1, exp) + "\n" + _probe(
-            300, 1, exp.label, exp.leader_key, "compliance.rules",
+            300, 1, _civ_token(exp), exp.leader_key, "compliance.rules",
             "hb=1 planSnap=1 profile=1 combat=0 econ=1 ship=1 "
             "placeDeep=1 wallGeom=1 diplo=1 ageUp=1 wallStall=1"
         )
@@ -405,10 +420,10 @@ class TestExtendedComplianceProbes(unittest.TestCase):
     def test_heroes_zero_late_tactics_flagged(self) -> None:
         exp = self.british
         text = self._good_pair(1, exp) + "\n" + "\n".join([
-            _probe(150_000, 1, exp.label, exp.leader_key, "compliance.tactics",
+            _probe(150_000, 1, _civ_token(exp), exp.leader_key, "compliance.tactics",
                    "treaty=0 treatyEnd=0 bases=2 fwdBase=-1 fwdState=0 "
                    "heroes=0 explorePlans=1"),
-            _probe(210_000, 1, exp.label, exp.leader_key, "compliance.tactics",
+            _probe(210_000, 1, _civ_token(exp), exp.leader_key, "compliance.tactics",
                    "treaty=0 treatyEnd=0 bases=2 fwdBase=-1 fwdState=0 "
                    "heroes=0 explorePlans=1"),
         ])
@@ -420,10 +435,10 @@ class TestExtendedComplianceProbes(unittest.TestCase):
     def test_heroes_present_late_tactics_passes(self) -> None:
         exp = self.british
         text = self._good_pair(1, exp) + "\n" + "\n".join([
-            _probe(150_000, 1, exp.label, exp.leader_key, "compliance.tactics",
+            _probe(150_000, 1, _civ_token(exp), exp.leader_key, "compliance.tactics",
                    "treaty=0 treatyEnd=0 bases=2 fwdBase=-1 fwdState=0 "
                    "heroes=1 explorePlans=1"),
-            _probe(210_000, 1, exp.label, exp.leader_key, "compliance.tactics",
+            _probe(210_000, 1, _civ_token(exp), exp.leader_key, "compliance.tactics",
                    "treaty=0 treatyEnd=0 bases=2 fwdBase=-1 fwdState=0 "
                    "heroes=1 explorePlans=1"),
         ])
@@ -435,9 +450,9 @@ class TestExtendedComplianceProbes(unittest.TestCase):
     def test_event_tags_recognized_in_summary(self) -> None:
         exp = self.british
         text = self._good_pair(1, exp) + "\n" + "\n".join([
-            _probe(60, 1, exp.label, exp.leader_key, "event.delta",
+            _probe(60, 1, _civ_token(exp), exp.leader_key, "event.delta",
                    "tposts=1 bases=2 attacks=3 heroes=1 fwdBase=-1"),
-            _probe(90, 1, exp.label, exp.leader_key, "event.combat.defense_reflex",
+            _probe(90, 1, _civ_token(exp), exp.leader_key, "event.combat.defense_reflex",
                    "loc=(100,200) radius=40 baseID=2 atMs=90000"),
         ])
         _, summary = validate(parse_probes(text.encode()))
@@ -453,15 +468,15 @@ class TestNewEventProbes(unittest.TestCase):
 
     def setUp(self) -> None:
         self.expectations = {e.label: e for e in load_expectations()}
-        self.british = self.expectations["British"]
+        self.british = self.expectations["British (Elizabeth I)"]
 
     def _good_pair(self, pid: int, exp) -> str:
         return "\n".join([
-            _probe(30, pid, exp.label, exp.leader_key, "meta.leader_init",
+            _probe(30, pid, _civ_token(exp), exp.leader_key, "meta.leader_init",
                    f"leader={exp.leader_key}"),
-            _probe(60, pid, exp.label, exp.leader_key, "meta.leader_assigned",
-                   f"civ_id=0 civ_name={exp.label} leader={exp.leader_key} chatset={exp.leader_key}"),
-            _probe(120, pid, exp.label, exp.leader_key, "meta.buildstyle",
+            _probe(60, pid, _civ_token(exp), exp.leader_key, "meta.leader_assigned",
+                   f"civ_id=0 civ_name={_civ_token(exp)} leader={exp.leader_key} chatset={exp.leader_key}"),
+            _probe(120, pid, _civ_token(exp), exp.leader_key, "meta.buildstyle",
                    f"style=Test walls=1 "
                    f"terrain_primary={exp.terrain_primary} "
                    f"terrain_secondary={exp.terrain_secondary} "
@@ -474,7 +489,7 @@ class TestNewEventProbes(unittest.TestCase):
     def test_event_style_applied_parses_clean(self) -> None:
         exp = self.british
         text = self._good_pair(1, exp) + "\n" + _probe(
-            10, 1, exp.label, exp.leader_key, "event.style.applied",
+            10, 1, _civ_token(exp), exp.leader_key, "event.style.applied",
             "style=2 wallLevel=2 earlyWalls=true hMul=1.10 eMul=1.30 "
             "mMul=1.0 tcMul=1.25 towerL=2 fortL=2 fwdTowers=1 preferFwd=false"
         )
@@ -484,7 +499,7 @@ class TestNewEventProbes(unittest.TestCase):
     def test_event_personality_applied_parses_clean(self) -> None:
         exp = self.british
         text = self._good_pair(1, exp) + "\n" + _probe(
-            10, 1, exp.label, exp.leader_key, "event.personality.applied",
+            10, 1, _civ_token(exp), exp.leader_key, "event.personality.applied",
             "kind=balanced rush=0.0 offDef=0.0"
         )
         issues, _ = validate(parse_probes(text.encode()))
@@ -493,7 +508,7 @@ class TestNewEventProbes(unittest.TestCase):
     def test_event_elite_retreat_core_parses_clean(self) -> None:
         exp = self.british
         text = self._good_pair(1, exp) + "\n" + _probe(
-            300, 1, exp.label, exp.leader_key, "event.elite.retreat_core",
+            300, 1, _civ_token(exp), exp.leader_key, "event.elite.retreat_core",
             "anchor=42 radius=36.0 heroes=1 elites=8 loc=(100,200)"
         )
         issues, _ = validate(parse_probes(text.encode()))
@@ -502,7 +517,7 @@ class TestNewEventProbes(unittest.TestCase):
     def test_event_commander_ransom_parses_clean(self) -> None:
         exp = self.british
         text = self._good_pair(1, exp) + "\n" + _probe(
-            400, 1, exp.label, exp.leader_key, "event.commander.ransom_initiated",
+            400, 1, _civ_token(exp), exp.leader_key, "event.commander.ransom_initiated",
             "fallenID=42 tcID=99"
         )
         issues, _ = validate(parse_probes(text.encode()))
@@ -511,7 +526,7 @@ class TestNewEventProbes(unittest.TestCase):
     def test_event_base_influence_parses_clean(self) -> None:
         exp = self.british
         text = self._good_pair(1, exp) + "\n" + _probe(
-            45, 1, exp.label, exp.leader_key, "event.base.influence",
+            45, 1, _civ_token(exp), exp.leader_key, "event.base.influence",
             "plan=12 base=2 puid=85 centerDist=30.0 influDist=100.0 "
             "influVal=200.0 distMul=1.0 anchor=(150,210)"
         )
@@ -526,16 +541,16 @@ class TestHtmlDoctrineContract(unittest.TestCase):
 
     def setUp(self) -> None:
         self.expectations = {e.label: e for e in load_expectations()}
-        self.british = self.expectations["British"]
+        self.british = self.expectations["British (Elizabeth I)"]
         self.aztecs = self.expectations["Aztecs"]
 
     def _good_pair(self, pid: int, exp) -> str:
         return "\n".join([
-            _probe(30, pid, exp.label, exp.leader_key, "meta.leader_init",
+            _probe(30, pid, _civ_token(exp), exp.leader_key, "meta.leader_init",
                    f"leader={exp.leader_key}"),
-            _probe(60, pid, exp.label, exp.leader_key, "meta.leader_assigned",
-                   f"civ_id=0 civ_name={exp.label} leader={exp.leader_key} chatset={exp.leader_key}"),
-            _probe(120, pid, exp.label, exp.leader_key, "meta.buildstyle",
+            _probe(60, pid, _civ_token(exp), exp.leader_key, "meta.leader_assigned",
+                   f"civ_id=0 civ_name={_civ_token(exp)} leader={exp.leader_key} chatset={exp.leader_key}"),
+            _probe(120, pid, _civ_token(exp), exp.leader_key, "meta.buildstyle",
                    f"style=Test walls=1 "
                    f"terrain_primary={exp.terrain_primary} "
                    f"terrain_secondary={exp.terrain_secondary} "
@@ -552,7 +567,7 @@ class TestHtmlDoctrineContract(unittest.TestCase):
         exp = self.aztecs
         text = self._good_pair(1, exp) + "\n" + "\n".join([
             # Need a compliance.* probe to trigger the doctrine cross-check.
-            _probe(300_000, 1, exp.label, exp.leader_key, "compliance.wallGeom",
+            _probe(300_000, 1, _civ_token(exp), exp.leader_key, "compliance.wallGeom",
                    "segments=12 plans=1 minDist=15.0 maxDist=45.0 avgDist=30.0 strategy=1"),
         ])
         issues, _ = validate(parse_probes(text.encode()))
@@ -564,7 +579,7 @@ class TestHtmlDoctrineContract(unittest.TestCase):
     def test_aztec_html_match_passes(self) -> None:
         exp = self.aztecs
         text = self._good_pair(1, exp) + "\n" + "\n".join([
-            _probe(300_000, 1, exp.label, exp.leader_key, "compliance.wallGeom",
+            _probe(300_000, 1, _civ_token(exp), exp.leader_key, "compliance.wallGeom",
                    "segments=0 plans=0 minDist=0.0 maxDist=0.0 avgDist=0.0 strategy=5"),
         ])
         issues, _ = validate(parse_probes(text.encode()))
@@ -577,7 +592,7 @@ class TestHtmlDoctrineContract(unittest.TestCase):
         # Run with compliance probes but ZERO fleet/ship probes → flagged.
         exp = self.british
         text = self._good_pair(1, exp) + "\n" + "\n".join([
-            _probe(60, 1, exp.label, exp.leader_key, "compliance.placement",
+            _probe(60, 1, _civ_token(exp), exp.leader_key, "compliance.placement",
                    "milPlace=0 ts=60"),
         ])
         issues, _ = validate(parse_probes(text.encode()))
