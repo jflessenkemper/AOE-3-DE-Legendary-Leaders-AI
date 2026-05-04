@@ -1,23 +1,34 @@
 //==============================================================================
 /* leader_usman.xs
 
-   Usman dan Fodio - Sokoto Caliphate / Hausa Fulani jihad personality.
+   Muhammadu Kanta of Kebbi - Hausa heartland personality.
 
-   Historical doctrine:
-     - Fulani jihad (1804-1808): a religious revolution carried by mounted
-       light cavalry across the Hausa city-states. Mapped to a strong
-       cavalry bias and a forward, raid-driven army shape.
-     - Lifidi heavy horse: armored Hausa cavalry served as the shock arm
-       under Caliphate banners. Mapped to rising cavalry weight from
-       Fortress on, with Fula Warrior raid pressure underneath.
-     - Trans-Saharan trade: gold, salt, and slave caravans funded the
-       Sokoto state. Mapped to a real Trade Route bias - the army rides
-       on commerce, not on a turtle economy.
+   File-name kept as 'usman' because the engine personality ID (set via
+   gLLLeaderKey in leaderCommon.xs::llAssignLeaderIdentity()) is "usman" and
+   the AI loader indexes rule-set names from this token. All user-visible
+   strings, comments, and lore have been rebranded to Muhammadu Kanta of
+   the Kebbi Kingdom — the actual native Hausa figure (16th-century, the
+   only kingdom to resist Songhai expansion at the Battle of Tabkin Kwatto)
+   rather than the Fulani Sokoto founder Usman dan Fodio, who was a
+   conqueror OF the Hausa rather than one of them. Same XS function and
+   rule names preserve the engine's dispatch graph; only the doctrine
+   narrative has shifted.
+
+   Historical doctrine (Kanta of Kebbi):
+     - Tabkin Kwatto (1517): Kanta's federated Hausa cavalry routed the
+       Songhai imperial army by combining native horse with traditional
+       Hausa archery — mapped here to a balanced infantry/cavalry weight.
+     - Surame fortified capital: Kebbi's stone-walled stronghold housing
+       the royal household and granaries — mapped to the Distributed
+       Economic Network style around a defensible interior anchor.
+     - Trans-Saharan trade lattice: Kebbi sat athwart the Niger-bend
+       caravan routes — gold, salt, kola — funding the army through
+       commerce rather than tribute. btBiasTrade = 0.3 reflects this.
      - Influence economy (Hausa civ unique): Palaces and Influence-gated
-       upgrades reward a sprawling, building-led layout. Mapped to the
-       Distributed Economic Network style.
+       upgrades reward a sprawling, building-led layout. Distributed
+       Economic Network handles the spatial expression.
      - Desert mobility: Desert Archer screens, Raider sweeps, Mortar Crews
-       breaking fortified positions in the Industrial age.
+       cracking fortified positions in the Industrial age.
 */
 //==============================================================================
 
@@ -25,7 +36,7 @@ bool gUsmanRulesEnabled = false;
 
 void initLeaderUsman(void)
 {
-   llVerboseEcho("Legendary Leaders: activating Usman dan Fodio personality.");
+   llVerboseEcho("Legendary Leaders: activating Muhammadu Kanta of Kebbi personality.");
 
    llSetAggressivePersonality();
    btRushBoom = 0.1;              // Light boom; the jihad starts early.
@@ -45,7 +56,8 @@ void initLeaderUsman(void)
    cvMaxArmyPop = 115;
 
    gUsmanRulesEnabled = true;
-   llLogLeaderState("Usman initialized");
+   llLogLeaderState("Kanta initialized");
+   llProbe("meta.leader_init", "leader=usman");
 }
 
 //------------------------------------------------------------------------------

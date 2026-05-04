@@ -1,0 +1,129 @@
+{
+  "notes": [
+    "Parametric per-civ run. Env-var substitution: ${CIV_NAME} and ${LEADER_NAME}.",
+    "Requires the aoe3_ui_automation.py env-var interpolation support (added in matrix_run_all.py).",
+    "Assumes the Skirmish lobby is already open from a prior run or matrix_setup_skirmish.json.",
+    "Opponent is fixed CPU Hard British — set once in matrix_setup_skirmish then left alone.",
+    "Game speed, reveal-map, and handicap are set via the Advanced Settings panel.",
+    "After Victory/Defeat: saves screenshot, clicks Continue, returns to lobby."
+  ],
+  "steps": [
+    {
+      "action": "click_image",
+      "image": "../templates/matrix/player1_civ_dropdown.png",
+      "timeout": 20,
+      "confidence": 0.90
+    },
+    {
+      "action": "click_text",
+      "texts": ["${CIV_NAME}"],
+      "timeout": 15,
+      "confidence": 0.90,
+      "grayscale": true,
+      "partial": true,
+      "psm": 6,
+      "threshold": 160
+    },
+    {
+      "action": "sleep",
+      "seconds": 1
+    },
+    {
+      "action": "click_image",
+      "image": "../templates/matrix/leader_dropdown.png",
+      "timeout": 15,
+      "confidence": 0.88,
+      "optional": true
+    },
+    {
+      "action": "click_text",
+      "texts": ["${LEADER_NAME}"],
+      "timeout": 10,
+      "confidence": 0.88,
+      "grayscale": true,
+      "partial": true,
+      "psm": 6,
+      "threshold": 160,
+      "optional": true
+    },
+    {
+      "action": "click_image",
+      "image": "../templates/matrix/advanced_settings_button.png",
+      "timeout": 15,
+      "confidence": 0.88,
+      "optional": true
+    },
+    {
+      "action": "click_image",
+      "image": "../templates/matrix/game_speed_fastest.png",
+      "timeout": 10,
+      "confidence": 0.88,
+      "optional": true
+    },
+    {
+      "action": "click_image",
+      "image": "../templates/matrix/reveal_map_on.png",
+      "timeout": 10,
+      "confidence": 0.88,
+      "optional": true
+    },
+    {
+      "action": "click_image",
+      "image": "../templates/matrix/advanced_settings_close.png",
+      "timeout": 10,
+      "confidence": 0.88,
+      "optional": true
+    },
+    {
+      "action": "screenshot",
+      "path": "../artifacts/matrix_lobby_${CIV_NAME}.png",
+      "optional": true
+    },
+    {
+      "action": "click_image",
+      "image": "../templates/matrix/start_game_button.png",
+      "timeout": 30,
+      "confidence": 0.90
+    },
+    {
+      "action": "sleep",
+      "seconds": 15
+    },
+    {
+      "action": "wait_text",
+      "texts": ["Victory", "Defeat", "Resigned"],
+      "timeout": 3600,
+      "grayscale": true,
+      "partial": false,
+      "psm": 6,
+      "threshold": 165
+    },
+    {
+      "action": "screenshot",
+      "path": "../artifacts/matrix_result_${CIV_NAME}.png"
+    },
+    {
+      "action": "click_text",
+      "texts": ["Continue", "OK"],
+      "timeout": 60,
+      "grayscale": true,
+      "partial": false,
+      "psm": 6,
+      "threshold": 165
+    },
+    {
+      "action": "click_text",
+      "texts": ["Home City", "Main Menu"],
+      "timeout": 90,
+      "grayscale": true,
+      "partial": false,
+      "psm": 6,
+      "threshold": 165,
+      "optional": true
+    },
+    {
+      "action": "sleep",
+      "seconds": 3
+    }
+  ]
+}

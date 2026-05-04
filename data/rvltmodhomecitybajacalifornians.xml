@@ -7,7 +7,7 @@
   <visual>mexico\mexico_homecity.xml</visual>
   <watervisual>mexico\mexico_homecity_water.xml</watervisual>
   <backgroundvisual>mexico\mexico_background.xml</backgroundvisual>
-  <pathdata>revolution\pathable_area.gr2</pathdata>
+  <pathdata>mexico\pathable_area.gr2</pathdata>
   <camera>mexico\mexico_homecity_camera.cam</camera>
   <widescreencamera>mexico\mexico_homecity_widescreencamera.cam</widescreencamera>
   <transportroundtriptime>1</transportroundtriptime>

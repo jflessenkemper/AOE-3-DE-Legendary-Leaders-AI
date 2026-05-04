@@ -13,11 +13,16 @@ from tools.validation.validate_civ_crossrefs import validate_civ_crossrefs
 from tools.validation.validate_civ_homecities import validate_civ_homecities
 from tools.validation.validate_civmods_ui import validate_civmods_ui
 from tools.validation.validate_homecity_cards import validate_homecity_cards
+from tools.validation.validate_homecity_visuals import validate_homecity_visuals
 from tools.validation.validate_packaged_mod import validate_packaged_mod_with_options
 from tools.validation.validate_live_mod_install import validate_live_mod_install
+from tools.validation.validate_playercolors import validate_playercolors
+from tools.validation.validate_html_reference import validate_html_reference
+from tools.validation.validate_html_vs_mod import validate_html_vs_mod
 from tools.validation.validate_playstyle_modal import validate_playstyle_modal
 from tools.validation.validate_protomods import validate_protomods
 from tools.validation.validate_runtime_logs import DEFAULT_LOG_PATH, validate_runtime_log
+from tools.playtest.coverage_v2 import run_all_checks as _cov2_run_all_checks
 from tools.validation.validate_stringtables import validate_stringtables
 from tools.validation.validate_techtree import validate_techtree
 from tools.validation.validate_terrain_heading import validate_terrain_heading
@@ -70,6 +75,7 @@ def build_content_checks(repo_root: Path, strict_display_name_ids: bool = False)
         ValidationCheckResult("Civ Crossrefs", validate_civ_crossrefs(repo_root, validate_display_name_ids=strict_display_name_ids)),
         ValidationCheckResult("Civ HomeCities", validate_civ_homecities(repo_root)),
         ValidationCheckResult("HomeCity Cards", validate_homecity_cards(repo_root)),
+        ValidationCheckResult("HomeCity Visuals", validate_homecity_visuals(repo_root)),
         ValidationCheckResult("Civ UI", validate_civmods_ui(repo_root)),
         ValidationCheckResult("Proto", validate_protomods(repo_root)),
         ValidationCheckResult("StringTables", validate_stringtables(repo_root)),
@@ -77,9 +83,21 @@ def build_content_checks(repo_root: Path, strict_display_name_ids: bool = False)
         ValidationCheckResult("XML Well-Formedness", validate_xml_well_formed(repo_root)),
         ValidationCheckResult("XS", validate_xs_scripts(repo_root)),
         ValidationCheckResult("Terrain/Heading Wiring", validate_terrain_heading(repo_root)),
-        ValidationCheckResult("Playstyle Modal", validate_playstyle_modal(repo_root)),
+        ValidationCheckResult(
+            "Playstyle Modal",
+            validate_playstyle_modal(
+                repo_root,
+                # Auto-enable imperial-peer enforcement once the data file
+                # has been authored. Until then we only require the base
+                # civ-doctrine fields.
+                require_imperial=(repo_root / "tools" / "playstyle" / "imperial_data.py").is_file(),
+            ),
+        ),
         ValidationCheckResult("Personality Overrides", validate_personality_overrides(repo_root)),
         ValidationCheckResult("Art Coverage", validate_art_coverage(repo_root)),
+        ValidationCheckResult("Player Colors", validate_playercolors(repo_root)),
+        ValidationCheckResult("HTML Reference Structure", validate_html_reference(repo_root)),
+        ValidationCheckResult("HTML vs Mod Consistency", validate_html_vs_mod(repo_root)),
     ]
 
 
@@ -186,7 +204,12 @@ def run_live_stage(repo_root: Path, live_root: Path | None = None) -> StageResul
     )
 
 
-def run_runtime_stage(repo_root: Path, log_path: Path, suite_names: list[str]) -> StageResult:
+_COV2_SUITES = {"pacing_v2", "shipment_order_v2", "escort_v2"}
+_COV2_ALL = sorted(_COV2_SUITES)
+
+
+def run_runtime_stage(repo_root: Path, log_path: Path, suite_names: list[str],
+                      all_runtime_suites: bool = False) -> StageResult:
     if not log_path.exists():
         summary = f"runtime log not found at {repo_relative(log_path, repo_root)}"
         details = [
@@ -199,6 +222,28 @@ def run_runtime_stage(repo_root: Path, log_path: Path, suite_names: list[str]) -
         return StageResult(name="Runtime Log Validation", status="skipped", summary=summary, details=details)
 
     issues = validate_runtime_log(repo_root=repo_root, log_path=log_path, suite_names=suite_names)
+
+    # Run coverage_v2 suites if requested via --all-runtime-suites or explicit
+    # suite names (pacing_v2 / shipment_order_v2 / escort_v2).
+    cov2_suites = [s for s in suite_names if s in _COV2_SUITES]
+    if all_runtime_suites:
+        cov2_suites = _COV2_ALL
+    if cov2_suites:
+        text = log_path.read_text(encoding="utf-8", errors="replace")
+        cov2_errors, cov2_warnings = _cov2_run_all_checks(text)
+        # Filter to requested suites
+        wanted = set(cov2_suites)
+        def _suite_tag(msg: str) -> str:
+            import re as _re
+            m = _re.search(r"\[(\w+_v2)\]", msg)
+            return m.group(1) if m else ""
+        for e in cov2_errors:
+            if not wanted or _suite_tag(e) in wanted:
+                issues.append(e)
+        for w in cov2_warnings:
+            if not wanted or _suite_tag(w) in wanted:
+                issues.append(f"WARN: {w}")
+
     if issues:
         return StageResult(
             name="Runtime Log Validation",
@@ -208,6 +253,8 @@ def run_runtime_stage(repo_root: Path, log_path: Path, suite_names: list[str]) -
         )
 
     suite_summary = ", ".join(suite_names) if suite_names else "all suites"
+    if all_runtime_suites:
+        suite_summary += " + pacing_v2,shipment_order_v2,escort_v2"
     return StageResult(
         name="Runtime Log Validation",
         status="pass",
@@ -248,6 +295,12 @@ def main() -> int:
         help="Runtime suite name to validate during the runtime stage. Repeat to validate multiple suites.",
     )
     parser.add_argument(
+        "--all-runtime-suites",
+        action="store_true",
+        default=False,
+        help="Run all runtime suites including pacing_v2, shipment_order_v2, and escort_v2.",
+    )
+    parser.add_argument(
         "--live-root",
         type=Path,
         help="Explicit active Proton local-mod root for the live stage.",
@@ -283,6 +336,7 @@ def main() -> int:
                     repo_root,
                     log_path=args.runtime_log_path.resolve(),
                     suite_names=args.runtime_suite,
+                    all_runtime_suites=args.all_runtime_suites,
                 )
             )
         else:

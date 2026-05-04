@@ -1785,50 +1785,51 @@
       <String _locID='490275'>Sam Houston</String>  <!-- rvltmodtexians -->
 <!-- MOD-CIV-LEADER-NAMES-END -->
 <!-- BASE-CIV-LEADER-NAMES-START -->
-      <String _locID='490200'>Queen Elizabeth I</String>
-      <String _locID='490201'>British · Tudor privateer navy + Manor mercantile</String>
-      <String _locID='490202'>Usman dan Fodio</String>
-      <String _locID='490203'>Hausa · Sokoto Caliphate jihadist mobilization</String>
-      <String _locID='490204'>Ivan the Terrible</String>
-      <String _locID='490205'>Russian · Oprichnik terror + Streltsy consolidation</String>
-      <String _locID='490206'>Maurice of Nassau</String>
-      <String _locID='490207'>Dutch · mercantile drill + fortification</String>
-      <String _locID='490208'>Menelik II</String>
-      <String _locID='490209'>Ethiopian · Adwa-victorious highland defense</String>
-      <String _locID='490210'>Shivaji Bhonsle</String>
-      <String _locID='490211'>Indian · Maratha hill-fort guerilla</String>
-      <String _locID='490212'>Montezuma</String>
-      <String _locID='490213'>Aztec · tribute empire</String>
-      <String _locID='490214'>Pachacuti</String>
-      <String _locID='490215'>Inca · Andean terrace fortress</String>
-      <String _locID='490216'>Isabella I of Castile</String>
-      <String _locID='490217'>Spanish · conquistador crown</String>
-      <String _locID='490218'>Louis XVIII</String>
-      <String _locID='490219'>French · Bourbon Ancien Régime · Restoration court and gendarmerie</String>
-      <String _locID='490220'>Miguel Hidalgo</String>
-      <String _locID='490221'>Mexican · Grito de Dolores clergy-led revolution</String>
-      <String _locID='490222'>George Washington</String>
-      <String _locID='490223'>American · continental republic</String>
-      <String _locID='490224'>Prince Henry the Navigator</String>
-      <String _locID='490225'>Portuguese · maritime discovery</String>
-      <String _locID='490226'>Giuseppe Garibaldi</String>
-      <String _locID='490227'>Italian · Risorgimento Redshirt levee</String>
-      <String _locID='490228'>Gustavus Adolphus</String>
-      <String _locID='490229'>Swedish · Hakkapelit cavalry + line infantry</String>
-      <String _locID='490230'>Jean de Valette</String>
-      <String _locID='490231'>Maltese · Hospitaller siege endurance</String>
-      <String _locID='490232'>Kangxi Emperor</String>
-      <String _locID='490233'>Chinese · banner-army central planning</String>
-      <String _locID='490234'>Suleiman the Magnificent</String>
-      <String _locID='490235'>Ottoman · Janissary siege modernization</String>
-      <String _locID='490236'>Tokugawa Ieyasu</String>
-      <String _locID='490237'>Japanese · Sakoku consolidated shogunate</String>
-      <String _locID='490238'>Hiawatha</String>
-      <String _locID='490239'>Haudenosaunee · Confederacy council</String>
-      <String _locID='490240'>Chief Gall</String>
-      <String _locID='490241'>Lakota · Little Bighorn envelopment · Plains cavalry wedge</String>
-      <String _locID='490242'>Frederick the Great</String>
-      <String _locID='490243'>German · oblique-order Prussian drill</String>
+      <!-- Even IDs = scoreboard/chat label (nation name). Odd IDs = tooltip tagline. -->
+      <String _locID='490200'>British</String>
+      <String _locID='490201'>British · Tudor privateer navy + Manor mercantile (Wellington)</String>
+      <String _locID='490202'>Hausa</String>
+      <String _locID='490203'>Hausa · Sokoto Caliphate jihadist mobilization (Usman dan Fodio)</String>
+      <String _locID='490204'>Russians</String>
+      <String _locID='490205'>Russian · Oprichnik terror + Streltsy consolidation (Ivan the Terrible)</String>
+      <String _locID='490206'>Dutch</String>
+      <String _locID='490207'>Dutch · mercantile drill + fortification (Maurice of Nassau)</String>
+      <String _locID='490208'>Ethiopians</String>
+      <String _locID='490209'>Ethiopian · Adwa-victorious highland defense (Menelik II)</String>
+      <String _locID='490210'>Indians</String>
+      <String _locID='490211'>Indian · Maratha hill-fort guerilla (Shivaji Bhonsle)</String>
+      <String _locID='490212'>Aztecs</String>
+      <String _locID='490213'>Aztec · tribute empire (Montezuma)</String>
+      <String _locID='490214'>Incas</String>
+      <String _locID='490215'>Inca · Andean terrace fortress (Pachacuti)</String>
+      <String _locID='490216'>Spanish</String>
+      <String _locID='490217'>Spanish · conquistador crown (Isabella I)</String>
+      <String _locID='490218'>French</String>
+      <String _locID='490219'>French · Bourbon Ancien Régime · Restoration court and gendarmerie (Louis XVIII)</String>
+      <String _locID='490220'>Mexicans</String>
+      <String _locID='490221'>Mexican · Grito de Dolores clergy-led revolution (Hidalgo)</String>
+      <String _locID='490222'>Americans</String>
+      <String _locID='490223'>American · continental republic (Washington)</String>
+      <String _locID='490224'>Portuguese</String>
+      <String _locID='490225'>Portuguese · maritime discovery (Prince Henry the Navigator)</String>
+      <String _locID='490226'>Italians</String>
+      <String _locID='490227'>Italian · Risorgimento Redshirt levee (Garibaldi)</String>
+      <String _locID='490228'>Swedes</String>
+      <String _locID='490229'>Swedish · Hakkapelit cavalry + line infantry (Gustavus Adolphus)</String>
+      <String _locID='490230'>Maltese</String>
+      <String _locID='490231'>Maltese · Hospitaller siege endurance (Jean de Valette)</String>
+      <String _locID='490232'>Chinese</String>
+      <String _locID='490233'>Chinese · banner-army central planning (Kangxi Emperor)</String>
+      <String _locID='490234'>Ottomans</String>
+      <String _locID='490235'>Ottoman · Janissary siege modernization (Suleiman the Magnificent)</String>
+      <String _locID='490236'>Japanese</String>
+      <String _locID='490237'>Japanese · Sakoku consolidated shogunate (Tokugawa Ieyasu)</String>
+      <String _locID='490238'>Haudenosaunee</String>
+      <String _locID='490239'>Haudenosaunee · Confederacy council (Hiawatha)</String>
+      <String _locID='490240'>Lakota</String>
+      <String _locID='490241'>Lakota · Little Bighorn envelopment · Plains cavalry wedge (Chief Gall)</String>
+      <String _locID='490242'>Germans</String>
+      <String _locID='490243'>German · oblique-order Prussian drill (Frederick the Great)</String>
 <!-- BASE-CIV-LEADER-NAMES-END -->
       <String _locID='41682'>A New World DLC</String>
       <String _locID='46758'>A New World DLC (%d)</String>
@@ -2122,6 +2123,65 @@
       <String _locID='493362'>A gentleman is down. Pity — and advance.</String>
       <String _locID='493365'>As expected. Brought up the Guards, brought up the Hussars, and that was that.</String>
 <!-- LL-QUOTE-STRINGS-END -->
+<!-- LL-COUNTRY-NAMES: nameplate / loading-screen / score-panel labels.
+     Each revolution civ shows its country/state name (e.g. "Hungary")
+     instead of the demonym ("Hungarians") or the leader's name. -->
+<String _locID='494001'>French Empire</String>
+<String _locID='494002'>French Republic</String>
+<String _locID='494003'>American Republic</String>
+<String _locID='494004'>Mexico</String>
+<String _locID='494005'>Canada</String>
+<String _locID='494006'>Lower Canada</String>
+<String _locID='494007'>Brazil</String>
+<String _locID='494008'>Argentina</String>
+<String _locID='494009'>Chile</String>
+<String _locID='494010'>Peru</String>
+<String _locID='494011'>Gran Colombia</String>
+<String _locID='494012'>Haiti</String>
+<String _locID='494013'>Indonesia</String>
+<String _locID='494014'>South Africa</String>
+<String _locID='494015'>Finland</String>
+<String _locID='494016'>Hungary</String>
+<String _locID='494017'>Romania</String>
+<String _locID='494018'>Barbary States</String>
+<String _locID='494019'>Egypt</String>
+<String _locID='494020'>Central America</String>
+<String _locID='494021'>Baja California</String>
+<String _locID='494022'>Yucatán</String>
+<String _locID='494023'>Rio Grande</String>
+<String _locID='494024'>Maya</String>
+<String _locID='494025'>California</String>
+<String _locID='494026'>Texas</String>
+<!-- LL-COUNTRY-NAMES-END -->
+<!-- LL-BASE-CIV-OVERRIDES: same intent for the 22 base-game civs.
+     Each <String _locID='X'> here re-points an existing base-game string ID
+     to the country/state form. The engine reads stringmods.xml after the
+     base stringtables, so the mod entry wins. Pure cosmetic: only labels
+     change, no civ logic touched.
+     IDs sourced from base civs.xml's <DisplayNameID> per civ.
+     Lakota (43631) and United States (110000) already read as wanted, so
+     no override row is shipped for them. -->
+<String _locID='22861'>Britain</String>              <!-- British      -->
+<String _locID='22862'>France</String>               <!-- French       -->
+<String _locID='22863'>Netherlands</String>          <!-- Dutch        -->
+<String _locID='22864'>Spain</String>                <!-- Spanish      -->
+<String _locID='22865'>Portugal</String>             <!-- Portuguese   -->
+<String _locID='22866'>Germany</String>              <!-- Germans      -->
+<String _locID='22867'>Russia</String>               <!-- Russians     -->
+<String _locID='22868'>Ottoman Empire</String>       <!-- Ottomans     -->
+<String _locID='22872'>Aztec Empire</String>         <!-- Aztecs       -->
+<String _locID='22879'>Iroquois Confederacy</String> <!-- Haudenosaunee -->
+<String _locID='60001'>Japan</String>                <!-- Japanese     -->
+<String _locID='60002'>China</String>                <!-- Chinese      -->
+<String _locID='60003'>Mughal India</String>         <!-- Indians      -->
+<String _locID='80001'>Inca Empire</String>          <!-- Inca         -->
+<String _locID='91500'>Sweden</String>               <!-- Swedes       -->
+<String _locID='101000'>Ethiopia</String>            <!-- Ethiopians   -->
+<String _locID='101010'>Sokoto</String>              <!-- Hausa        -->
+<String _locID='112000'>Mexico</String>              <!-- Mexicans     -->
+<String _locID='122000'>Italy</String>               <!-- Italians     -->
+<String _locID='122010'>Malta</String>               <!-- Maltese      -->
+<!-- LL-BASE-CIV-OVERRIDES-END -->
 </Language>
    </StringTable>
 </stringmods>

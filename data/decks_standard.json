@@ -6,7 +6,6 @@
       "HCXPWarChiefAztec1"
     ],
     "1": [
-      "HCXPCoinCratesAztec3",
       "HCXPShipJaguars2",
       "HCXPShipJaguarsTeam",
       "HCXPShipMacehualtins1",
@@ -19,20 +18,22 @@
       "HCXPShipEagleKnights3",
       "HCXPWarChiefAztec2",
       "DEHCShipMedicineMen3Aztec",
-      "DEHCTeamCoinCratesAztec",
       "HCXPAztecMining",
-      "HCXPCoinCratesAztec4",
+      "HCXPTempleCenteotl",
       "HCXPShipEagleKnights1",
-      "HCXPShipJaguarKnights1",
-      "HCXPShipJaguarKnights3"
+      "HCXPShipJaguarKnights1"
     ],
     "3": [
       "DEHCSkullWall",
       "DEHCMacehualtinCombat",
       "DEHCChichimecaRebellion",
       "DEHCZapotecAlliesTeam",
-      "HCXPCoinCratesAztec5"
-    ]
+      "HCXPChinampa2",
+      "HCXPExtensiveFortificationsAztec",
+      "HCXPGreatTempleHuitzilopochtli",
+      "HCXPShipJaguarKnights3"
+    ],
+    "4": []
   },
   "British": {
     "0": [
@@ -58,16 +59,17 @@
       "HCCavalryCombatBritish",
       "HCImprovedLongbows",
       "HCNavalGunners",
-      "HCShipLongbowmen4",
-      "HCShipLongbowmenRepeat"
+      "HCShipLongbowmen4"
     ],
     "3": [
       "DEHCRuleBritannia",
       "DEHCRangers",
       "DEHCShipRangers2",
       "DEHCShipPikemenBritish",
-      "HCMonitorCombatTeam"
-    ]
+      "HCMonitorCombatTeam",
+      "HCShipLongbowmenRepeat"
+    ],
+    "4": []
   },
   "Chinese": {
     "0": [
@@ -102,7 +104,8 @@
       "YPHCShipShaolinMaster",
       "YPHCWokouChinese2",
       "YPHCWokouChinese3"
-    ]
+    ],
+    "4": []
   },
   "Dutch": {
     "0": [
@@ -137,7 +140,8 @@
       "HCMortarsDamageDutchTeam",
       "HCShipDutchCounterCavForce",
       "HCShipHalberdiers5"
-    ]
+    ],
+    "4": []
   },
   "Ethiopians": {
     "0": [
@@ -172,7 +176,8 @@
       "DEHCMercsAskari",
       "DEHCMercsGatlingCamels",
       "DEHCShipMercWarDhows2"
-    ]
+    ],
+    "4": []
   },
   "French": {
     "0": [
@@ -207,7 +212,8 @@
       "HCShipCuirassiers4",
       "HCShipCuirassiers5",
       "HCShipHussars3"
-    ]
+    ],
+    "4": []
   },
   "Germans": {
     "0": [
@@ -231,9 +237,7 @@
       "DEHCMercsBosniaksGerman",
       "DEHCMercsPandoursGerman",
       "DEHCGermanBattleshipCard",
-      "DEHCGermanChevaulegers",
-      "HCAdvancedArtilleryGerman",
-      "HCShipFalconets1German"
+      "DEHCGermanChevaulegers"
     ],
     "3": [
       "HCShipUhlans3",
@@ -241,8 +245,11 @@
       "DEHCMercsGiantGrenadiersGerman",
       "DEHCHabsburgAllies2",
       "DEHCWettinAlliesGerman2",
-      "HCShipCannons1German"
-    ]
+      "HCShipCannons1German",
+      "HCAdvancedArtilleryGerman",
+      "HCShipFalconets1German"
+    ],
+    "4": []
   },
   "Haudenosaunee": {
     "0": [
@@ -266,18 +273,19 @@
       "HCXPIroquoisMohawkSupport",
       "HCXPIroquoisOneidaSupport",
       "HCXPIroquoisOnondagaSupport",
-      "HCXPIroquoisSenecaSupport",
-      "HCXPIroquoisTuscaroraSupport",
-      "HCXPIroquoisWoodworking",
-      "HCXPShipMantlets1"
+      "HCXPIroquoisSenecaSupport"
     ],
     "3": [
       "HCXPShipTomahawk3",
       "HCXPCavalryCombatIroquois",
       "HCXPOldWaysIroquois",
       "HCXPShipMantlets2",
-      "HCXPShipMantlets4"
-    ]
+      "HCXPShipMantlets4",
+      "HCXPIroquoisTuscaroraSupport",
+      "HCXPIroquoisWoodworking",
+      "HCXPShipMantlets1"
+    ],
+    "4": []
   },
   "Hausa": {
     "0": [
@@ -312,7 +320,8 @@
       "DEHCShipLifidiKnightsRepeat",
       "DEHCShipRaidersRepeat",
       "DEHCSokotoChronicle"
-    ]
+    ],
+    "4": []
   },
   "Inca": {
     "0": [
@@ -347,7 +356,8 @@
       "DEHCShipIncaSpearmen3",
       "DEHCShipVillagersInca",
       "DEHCWarChiefInca2"
-    ]
+    ],
+    "4": []
   },
   "Indians": {
     "0": [
@@ -382,7 +392,8 @@
       "YPHCMercsIndianArmy",
       "YPHCShipFrigateDoubleIndians",
       "YPHCShipMonitorIndians"
-    ]
+    ],
+    "4": []
   },
   "Italians": {
     "0": [
@@ -417,7 +428,8 @@
       "DEHCShipPapalBombards",
       "DEHCShipPapalBombardsRepeat",
       "DEHCShipPavisiers4"
-    ]
+    ],
+    "4": []
   },
   "Japanese": {
     "0": [
@@ -442,17 +454,18 @@
       "YPHCNaginataAntiInfantryDamage",
       "YPHCSamuraiSpeed",
       "YPHCShipAshigaru1",
-      "YPHCShipAshigaru4",
-      "YPHCShipCoveredWagonsJapan",
-      "YPHCShipDaimyoAizu"
+      "YPHCShipAshigaru4"
     ],
     "3": [
       "YPHCMercsJapaneseArmy",
       "YPHCArtilleryCostJapanese",
       "YPHCMorutaruRangeJapanese",
       "YPHCShipAshigaru3",
-      "YPHCShipNaginataRider1"
-    ]
+      "YPHCShipNaginataRider1",
+      "YPHCShipCoveredWagonsJapan",
+      "YPHCShipDaimyoAizu"
+    ],
+    "4": []
   },
   "Lakota": {
     "0": [
@@ -476,18 +489,19 @@
       "HCXPShipAxeRiders2",
       "HCXPShipAxeRiders4",
       "HCXPShipRifleRiders1",
-      "HCXPShipDogSoldiers1",
-      "HCXPShipDogSoldiersTeam1",
-      "HCXPShipWarRifles1",
-      "HCXPSiouxBurntThighSupport"
+      "HCXPShipDogSoldiers1"
     ],
     "3": [
       "HCXPWarChiefSioux3",
       "HCXPShipAxeRiders5",
       "HCXPShipAxeRidersRepeat",
       "HCXPShipRifleRiders2",
-      "HCXPShipRifleRiders4"
-    ]
+      "HCXPShipRifleRiders4",
+      "HCXPShipDogSoldiersTeam1",
+      "HCXPShipWarRifles1",
+      "HCXPSiouxBurntThighSupport"
+    ],
+    "4": []
   },
   "Maltese": {
     "0": [
@@ -522,7 +536,8 @@
       "DEHCMalteseBattleshipCard",
       "DEHCRussianTongue",
       "DEHCShipRollingWoodMalta"
-    ]
+    ],
+    "4": []
   },
   "MexicansStd": {
     "0": [
@@ -557,7 +572,8 @@
       "DEHCIndianFriendshipMexican",
       "DEHCShipInsurgente2",
       "DEHCShipFrigateRepeat"
-    ]
+    ],
+    "4": []
   },
   "Ottomans": {
     "0": [
@@ -592,7 +608,8 @@
       "DEHCHeavyInfHitpointsOttoman",
       "HCShipAbusGuns2",
       "HCShipAbusGuns3"
-    ]
+    ],
+    "4": []
   },
   "Portuguese": {
     "0": [
@@ -627,7 +644,8 @@
       "HCShipOrganGuns2",
       "HCShipOrganGuns3",
       "HCShipPortugueseExpForce"
-    ]
+    ],
+    "4": []
   },
   "Russians": {
     "0": [
@@ -651,8 +669,7 @@
       "HCShipHalberdiersRussian1",
       "HCShipMusketeersRussian2",
       "HCShipOprichniks1",
-      "HCShipOprichniks2",
-      "HCShipStrelets2"
+      "HCShipOprichniks2"
     ],
     "3": [
       "HCShipStrelets3",
@@ -661,8 +678,10 @@
       "HCShipHalberdiersRussian2",
       "HCShipHalberdiersRussian3",
       "HCShipMusketeersRussian3",
-      "HCShipOprichniks3"
-    ]
+      "HCShipOprichniks3",
+      "HCShipStrelets2"
+    ],
+    "4": []
   },
   "Spanish": {
     "0": [
@@ -697,7 +716,8 @@
       "DEHCPeninsularGuerrillas",
       "HCShipLancers4",
       "HCShipLancers5"
-    ]
+    ],
+    "4": []
   },
   "Swedes": {
     "0": [
@@ -732,7 +752,8 @@
       "DEHCGermanMercenaryContracts",
       "DEHCMercsRoyalHorseman",
       "DEHCShipBattleshipRepeat"
-    ]
+    ],
+    "4": []
   },
   "UnitedStates": {
     "0": [
@@ -767,6 +788,7 @@
       "DEHCShipGatlingsTeam1",
       "DEHCShipIroncladsRepeat1",
       "DEHCShipIroncladsSteamers1"
-    ]
+    ],
+    "4": []
   }
 }

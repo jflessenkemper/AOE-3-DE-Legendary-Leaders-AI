@@ -37,8 +37,11 @@ void initLeaderGustavus(void)
    llSetMilitaryFocus(0.7, 0.4, 0.6);  // Infantry-led, real cavalry, very real artillery.
 
    // LL-BUILD-STYLE-BEGIN
-   llUseSiegeTrainConcentrationStyle(1);
-   gLLMilitaryDistanceMultiplier = 0.85;
+   // Spec doctrine = Forward Operational Line. Gustavus pushed forward
+   // operating bases ("Lion of the North"), so the Forward helper fits
+   // better than the static Siege Train doctrine.
+   llUseForwardOperationalLineStyle(1);
+   gLLMilitaryDistanceMultiplier = 1.05;  // forward-skewed barracks/foundries.
    llSetBuildStrongpointProfile(2, 2, 3, true);
    // LL-BUILD-STYLE-END
    llSetLeaderTacticalDoctrine(0.74, 0.26, 2, 4.0);
@@ -49,6 +52,7 @@ void initLeaderGustavus(void)
 
    gGustavusRulesEnabled = true;
    llLogLeaderState("Gustavus initialized");
+   llProbe("meta.leader_init", "leader=gustav");
 }
 
 //------------------------------------------------------------------------------

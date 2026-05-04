@@ -38,7 +38,10 @@ void initLeaderFrederick(void)
    llSetMilitaryFocus(0.6, 0.45, 0.3);  // Inf-cav-art weighted toward cavalry strike.
 
    // LL-BUILD-STYLE-BEGIN
-   llUseSiegeTrainConcentrationStyle(2);
+   // Spec doctrine = Republican Levee (UrbanBarricade walls). Prussian
+   // line-infantry musketeer mass fits the Levee helper better than the
+   // Siege Train one (which is reserved for Suleiman's cannon doctrine).
+   llUseRepublicanLeveeStyle(2);
    gLLMilitaryDistanceMultiplier = 0.85;
    llSetBuildStrongpointProfile(2, 2, 2, true);
    // LL-BUILD-STYLE-END
@@ -50,6 +53,7 @@ void initLeaderFrederick(void)
 
    gFrederickRulesEnabled = true;
    llLogLeaderState("Frederick initialized");
+   llProbe("meta.leader_init", "leader=frederick");
 }
 
 //------------------------------------------------------------------------------

@@ -72,6 +72,9 @@ void llSetLeaderTacticalDoctrine(float protectionOverride = -1.0, float decapita
    gLLDecapitationOverride = decapitationOverride;
    gLLExplorerEscortBonus = escortBonus;
    gLLExplorerRearOffsetBonus = rearOffsetBonus;
+   llProbe("event.elite.doctrine",
+      "protect=" + protectionOverride + " decap=" + decapitationOverride +
+      " escortBonus=" + escortBonus + " rearOffset=" + rearOffsetBonus);
 }
 
 int llGetPlaystyleBucket(void)
@@ -514,6 +517,7 @@ void llDestroyEliteGuardPlan(void)
 
    gLLEliteGuardPlanID = -1;
    gLLEliteGuardAnchorUnitID = -1;
+   llProbe("event.elite.guard_destroyed", "atMs=" + xsGetTime());
 }
 
 void llDestroyEliteSupportPlan(void)
@@ -527,6 +531,7 @@ void llDestroyEliteSupportPlan(void)
    gLLEliteSupportPlanID = -1;
    gLLEliteSupportAttackPlanID = -1;
    gLLEliteSupportLastRefreshTime = -1;
+   llProbe("event.elite.support_destroyed", "atMs=" + xsGetTime());
 }
 
 void llDestroyExplorerEscortPlan(void)
@@ -540,6 +545,7 @@ void llDestroyExplorerEscortPlan(void)
    gLLExplorerEscortPlanID = -1;
    gLLExplorerEscortAttackPlanID = -1;
    gLLExplorerEscortLastRefreshTime = -1;
+   llProbe("event.elite.escort_destroyed", "atMs=" + xsGetTime());
 }
 
 void llResetExplorerControlToBase(void)
@@ -556,6 +562,7 @@ void llResetExplorerControlToBase(void)
    }
 
    aiPlanSetVariableVector(gExplorerControlPlan, cCombatPlanTargetPoint, 0, retreatPoint);
+   llProbe("event.elite.explorer_reset", "loc=" + llFmtVec(retreatPoint));
 }
 
 void llPositionExplorerBehindArmy(vector rearPoint = cInvalidVector)
@@ -564,6 +571,7 @@ void llPositionExplorerBehindArmy(vector rearPoint = cInvalidVector)
    {
       return;
    }
+   llProbe("event.elite.explorer_rear", "loc=" + llFmtVec(rearPoint));
 
    if (gExplorerControlPlan >= 0)
    {
@@ -845,6 +853,10 @@ void llRetreatEliteCore(int anchorUnitID = -1, float radius = 36.0)
    }
 
    debugLegendaryLeaders("elite core around anchor unit " + anchorUnitID + " ordered to retreat to " + retreatPoint + ".");
+   llProbe("event.elite.retreat_core",
+      "anchor=" + anchorUnitID + " radius=" + radius +
+      " heroes=" + heroCount + " elites=" + numberFound +
+      " loc=" + llFmtVec(retreatPoint));
 }
 
 void llRetreatAllEliteUnits(void)
@@ -893,6 +905,9 @@ void llRetreatAllEliteUnits(void)
    llResetExplorerControlToBase();
    debugLegendaryLeaders("all elite units were ordered to retreat after the explorer fell.");
    llSendLegendaryLeaderRetreatLine(cPlayerRelationEnemyNotGaia, 180000);
+   llProbe("event.elite.retreat_all",
+      "heroes=" + heroCount + " elites=" + numberFound +
+      " loc=" + llFmtVec(retreatPoint));
 }
 
 void llTryRansomExplorer(void)
@@ -1140,6 +1155,37 @@ minInterval 5
    int attackPlanID = llGetPrimaryLandAttackPlanID();
    if (attackPlanID >= 0)
    {
+      // mil.escort_check — emitted every monitor tick while an attack plan
+      // is active. Records how far the leader/explorer unit is from the
+      // nearest friendly land-military unit so the offline validator can
+      // assert the leader stays within 30 m of the army during attacks.
+      int explorerID = llGetPrimaryExplorerID();
+      vector explorerPos = cInvalidVector;
+      float nearestDist = -1.0;
+      if (explorerID >= 0)
+      {
+         explorerPos = kbUnitGetPosition(explorerID);
+      }
+      if (explorerPos != cInvalidVector)
+      {
+         int milQueryID = createSimpleUnitQuery(cUnitTypeLogicalTypeLandMilitary, cMyID, cUnitStateAlive,
+            explorerPos, 60.0);
+         int milCount = kbUnitQueryExecute(milQueryID);
+         for (mi = 0; < milCount)
+         {
+            int milUnit = kbUnitQueryGetResult(milQueryID, mi);
+            float d = distance(explorerPos, kbUnitGetPosition(milUnit));
+            if ((nearestDist < 0.0) || (d < nearestDist))
+            {
+               nearestDist = d;
+            }
+         }
+      }
+      llProbe("mil.escort_check",
+         "attack_active=1" +
+         " leader_dist=" + nearestDist +
+         " explorerID=" + explorerID +
+         " attackPlan=" + attackPlanID);
       llDestroyEliteGuardPlan();
       if (llHandleEliteAssaultFormation(attackPlanID) == true)
       {

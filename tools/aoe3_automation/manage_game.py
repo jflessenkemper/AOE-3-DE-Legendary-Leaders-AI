@@ -12,6 +12,31 @@ Usage (from repo root):
     python3 tools/aoe3_automation/manage_game.py cycle
     python3 tools/aoe3_automation/manage_game.py close
     python3 tools/aoe3_automation/manage_game.py open --timeout 90
+    python3 tools/aoe3_automation/manage_game.py open --no-dev-mode  # production launch
+
+Developer mode
+--------------
+By default, ``open`` (and ``cycle``) place a ``user.cfg`` file containing the
+bare token ``developer`` in the game's user Startup directory:
+
+    ~/.local/share/.../76561198170207043/Startup/user.cfg
+
+This activates the AoE3 DE engine's developer mode, which routes ``aiEcho()``
+output from XS AI scripts to ``Age3Log.txt``.  Without this flag ``aiEcho()``
+calls are silently dropped, so the ``[LLP v=2 ...]`` probe lines emitted by
+the Legendary Leaders AI hooks never appear in the log — rendering the entire
+probe-validation pipeline inoperative.
+
+Mechanism (approach 3 — config file flag):
+  AoE3 DE processes ``*.cfg`` files from two Startup directories on launch:
+    1. <game_install>/Startup/game.cfg  — base config (has ``//developer``
+       commented out by default in the production install).
+    2. <user_gamedir>/<steamid>/Startup/*.cfg — personal overrides.
+  Adding ``developer`` to a file in location 2 enables developer mode the
+  same way as uncommenting it in game.cfg, but without touching the install.
+
+Use ``--no-dev-mode`` for production (tournament / Safe-for-MP) launches
+where the extra debug overhead is unwanted.
 """
 from __future__ import annotations
 
@@ -62,15 +87,52 @@ def game_pids() -> list[int]:
 
 
 def game_window() -> tuple[str, int, int, int, int] | None:
-    """Return (window_id, x, y, w, h) for the game window, or None."""
-    res = run(["wmctrl", "-lG"], check=False)
-    if res.returncode != 0:
-        return None
-    for line in res.stdout.splitlines():
-        if WINDOW_TITLE_SUBSTR in line:
-            parts = line.split(None, 7)
-            if len(parts) >= 6:
-                return parts[0], int(parts[2]), int(parts[3]), int(parts[4]), int(parts[5])
+    """Return (window_id, x, y, w, h) for the game window, or None.
+
+    The Bazzite/gamescope rig nests each game under a fresh Xwayland on a
+    new DISPLAY (`:0` is the desktop, `:1`/`:2`/... are gamescope children).
+    `wmctrl` defaults to whatever `$DISPLAY` is set to, so we sweep every
+    `/tmp/.X<N>-lock` displayed by the kernel, and merge the first hit."""
+    import glob
+
+    candidates: list[str] = []
+    for lock in sorted(glob.glob("/tmp/.X*-lock")):
+        # /tmp/.X1-lock → :1
+        n = lock.removeprefix("/tmp/.X").removesuffix("-lock")
+        if n.isdigit():
+            candidates.append(f":{n}")
+    # Always probe the inherited DISPLAY too, in case nothing showed up.
+    if os.environ.get("DISPLAY") and os.environ["DISPLAY"] not in candidates:
+        candidates.insert(0, os.environ["DISPLAY"])
+
+    # gamescope's nested Xwayland servers don't implement EWMH, so wmctrl
+    # fails on them with "Cannot get client list properties". Fall back to
+    # `xwininfo -root -tree`, which only needs core X11 protocol.
+    xwininfo_re = re.compile(
+        r'^\s*(0x[0-9a-fA-F]+)\s+"([^"]*)":\s*\([^)]*\)\s+(\d+)x(\d+)\+(-?\d+)\+(-?\d+)'
+    )
+    for display in candidates:
+        env = {**os.environ, "DISPLAY": display}
+        res = subprocess.run(["wmctrl", "-lG"], env=env,
+                             capture_output=True, text=True)
+        if res.returncode == 0:
+            for line in res.stdout.splitlines():
+                if WINDOW_TITLE_SUBSTR in line:
+                    parts = line.split(None, 7)
+                    if len(parts) >= 6:
+                        return parts[0], int(parts[2]), int(parts[3]), int(parts[4]), int(parts[5])
+        # wmctrl failed or had no match → try xwininfo on this display.
+        res2 = subprocess.run(["xwininfo", "-root", "-tree"], env=env,
+                              capture_output=True, text=True)
+        if res2.returncode != 0:
+            continue
+        for line in res2.stdout.splitlines():
+            if WINDOW_TITLE_SUBSTR not in line:
+                continue
+            m = xwininfo_re.match(line)
+            if m:
+                wid, _title, w, h, x, y = m.groups()
+                return wid, int(x), int(y), int(w), int(h)
     return None
 
 
@@ -90,11 +152,31 @@ def cmd_close(args: argparse.Namespace) -> int:
         print("Game not running.")
         return 0
 
-    # 1) Graceful WM close via window ID.
+    # 1) Graceful WM close via window ID. wmctrl needs EWMH, which gamescope's
+    # nested Xwayland lacks — fall back to xdotool windowclose, which uses
+    # core X11 only. We ask both, on whatever display the window lives on.
     win = game_window()
     if win is not None:
         print(f"Sending WM_DELETE to window {win[0]}")
-        run(["wmctrl", "-i", "-c", win[0]], check=False)
+        # Find which display the window is on by re-sweeping and matching wid.
+        import glob as _glob
+        target_display = os.environ.get("DISPLAY", ":0")
+        for lock in sorted(_glob.glob("/tmp/.X*-lock")):
+            n = lock.removeprefix("/tmp/.X").removesuffix("-lock")
+            if not n.isdigit():
+                continue
+            d = f":{n}"
+            env = {**os.environ, "DISPLAY": d}
+            r = subprocess.run(["xwininfo", "-id", win[0]], env=env,
+                               capture_output=True, text=True)
+            if r.returncode == 0:
+                target_display = d
+                break
+        env = {**os.environ, "DISPLAY": target_display}
+        subprocess.run(["wmctrl", "-i", "-c", win[0]], env=env, check=False,
+                       capture_output=True)
+        subprocess.run(["xdotool", "windowclose", win[0]], env=env, check=False,
+                       capture_output=True)
 
     deadline = time.time() + args.graceful_timeout
     while time.time() < deadline:
@@ -164,6 +246,31 @@ def cmd_open(args: argparse.Namespace) -> int:
         print("ERROR: steam binary not on PATH", file=sys.stderr)
         return 2
 
+    # Dev-mode: write/remove the user.cfg that activates aiEcho() → Age3Log.txt.
+    no_dev = getattr(args, "no_dev_mode", False)
+    try:
+        # log_capture.py lives next to this file. Add this script's parent
+        # to sys.path so the import works regardless of CWD.
+        _here = str(Path(__file__).resolve().parent)
+        if _here not in sys.path:
+            sys.path.insert(0, _here)
+        from log_capture import ensure_dev_mode, remove_dev_mode, USER_CFG_PATH
+        if no_dev:
+            removed = remove_dev_mode()
+            if removed:
+                print("Dev mode: removed user.cfg (production launch)")
+            else:
+                print("Dev mode: user.cfg already absent (production launch)")
+        else:
+            existed = ensure_dev_mode()
+            if existed:
+                print(f"Dev mode: user.cfg already present ({USER_CFG_PATH})")
+            else:
+                print(f"Dev mode: created user.cfg ({USER_CFG_PATH})")
+    except ImportError:
+        if not no_dev:
+            print("WARN: log_capture module not found; dev mode not configured", file=sys.stderr)
+
     # `steam -applaunch <id>` asks the already-running Steam client to launch
     # the game. The `steam steam://rungameid/<id>` URI form is sometimes a
     # no-op after a recent game exit (observed on Bazzite/KDE), so prefer
@@ -223,12 +330,17 @@ def main(argv: list[str] | None = None) -> int:
                         help="Seconds to wait for the main menu window (default 90)")
     p_open.add_argument("--post-menu-wait", type=int, default=5,
                         help="Seconds to wait after window appears so the engine settles (default 5)")
+    p_open.add_argument("--no-dev-mode", action="store_true",
+                        help="Remove developer user.cfg before launching (production launch; "
+                             "disables aiEcho probe capture)")
 
     p_cycle = sub.add_parser("cycle", help="close + sync + open — one-shot mod-iterate")
     p_cycle.add_argument("--graceful-timeout", type=int, default=15)
     p_cycle.add_argument("--timeout", type=int, default=90)
     p_cycle.add_argument("--post-menu-wait", type=int, default=5)
     p_cycle.add_argument("--dry-run", action="store_true")
+    p_cycle.add_argument("--no-dev-mode", action="store_true",
+                         help="Remove developer user.cfg before launching (production launch)")
 
     args = p.parse_args(argv)
     return {

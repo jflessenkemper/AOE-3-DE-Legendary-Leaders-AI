@@ -49,6 +49,7 @@ void initLeaderGaribaldi(void)
 
    gGaribaldiRulesEnabled = true;
    llLogLeaderState("Garibaldi initialized");
+   llProbe("meta.leader_init", "leader=garibaldi");
 }
 
 //------------------------------------------------------------------------------

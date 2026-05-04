@@ -30,6 +30,20 @@ def _good_entry(nation: str = "British", leader: str = "Queen Elizabeth I") -> d
         "ecoBullets": ["plants forward fishing fleet"],
         "militaryBullets": ["balanced infantry line"],
         "defenseBullets": ["coastal batteries — moderate stone wall ring"],
+        # Imperial-peer doctrine fields.
+        "imperialPsTitle": "Tudor Maritime Empire",
+        "imperialBsProse": "Royal Navy + chartered companies project the realm overseas.",
+        "imperialCombatDoctrine": "Combined — naval projection with militia core.",
+        "imperialAges": {
+            "Discovery": "Charters trade companies (Muscovy, Levant).",
+            "Colonial": "Plantation outposts on contested coasts.",
+            "Fortress": "Galleon fleet plus trained-bands militia.",
+            "Industrial": "Privateer Sea Dog squadron harasses flanks.",
+            "Imperial": "Tudor Armada at full strength; trained bands defend the realm.",
+        },
+        "imperialEcoBullets": ["chartered company trade-route monopolies"],
+        "imperialMilitaryBullets": ["heavy galleon and privateer mass"],
+        "imperialDefenseBullets": ["coastal forts with deep harbour"],
     }
 
 
@@ -130,6 +144,54 @@ class ValidatePlaystyleModalTests(unittest.TestCase):
         self.assertTrue(
             any("jargon leak" in i and "level 3/5" in i.lower() for i in issues),
             f"expected jargon-leak finding, got {issues!r}",
+        )
+
+
+    def test_reports_missing_imperial_field(self) -> None:
+        entry = _good_entry()
+        del entry["imperialPsTitle"]
+        html = _build_html(["British Elizabeth"], {"British Elizabeth": entry})
+        issues = validate_playstyle_modal(self.make_repo(html))
+        self.assertIn(
+            "British Elizabeth: missing or empty imperial-peer field 'imperialPsTitle'",
+            issues,
+        )
+
+    def test_reports_missing_imperial_age(self) -> None:
+        entry = _good_entry()
+        del entry["imperialAges"]["Imperial"]
+        html = _build_html(["British Elizabeth"], {"British Elizabeth": entry})
+        issues = validate_playstyle_modal(self.make_repo(html))
+        self.assertIn(
+            "British Elizabeth: imperialAges['Imperial'] missing or empty",
+            issues,
+        )
+
+    def test_reports_empty_imperial_bullet_section(self) -> None:
+        entry = _good_entry()
+        entry["imperialEcoBullets"] = []
+        html = _build_html(["British Elizabeth"], {"British Elizabeth": entry})
+        issues = validate_playstyle_modal(self.make_repo(html))
+        self.assertIn(
+            "British Elizabeth: 'imperialEcoBullets' must not be empty",
+            issues,
+        )
+
+    def test_imperial_enforcement_can_be_disabled(self) -> None:
+        # Until tools/playstyle/imperial_data.py is authored, the staged
+        # validator passes require_imperial=False. Confirm the kwarg
+        # bypass actually skips the new fields.
+        entry = _good_entry()
+        for f in (
+            "imperialPsTitle", "imperialBsProse", "imperialCombatDoctrine",
+            "imperialAges", "imperialEcoBullets",
+            "imperialMilitaryBullets", "imperialDefenseBullets",
+        ):
+            entry.pop(f, None)
+        html = _build_html(["British Elizabeth"], {"British Elizabeth": entry})
+        self.assertEqual(
+            validate_playstyle_modal(self.make_repo(html), require_imperial=False),
+            [],
         )
 
 

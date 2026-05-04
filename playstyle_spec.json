@@ -2,27 +2,6 @@
   "schema_version": 1,
   "source": "LEGENDARY_LEADERS_TREE.html",
   "civs": {
-    "Americans Jefferson Revolution": {
-      "civ_label": "Americans",
-      "leader_label": "Jefferson Revolution",
-      "data_name": "Americans Jefferson Revolution",
-      "doctrine_label": "Republican Levee",
-      "doctrine_summary": "Continental Army Fabian-to-Yorktown",
-      "portrait_path": "resources/images/icons/singleplayer/cpai_avatar_americans_jefferson.png",
-      "doctrine_prose": "Mass-produces cheap line infantry from many barracks and trains General units to inspire them. Civic-style layout \u2014 production hugs the Town Center, Outposts call up militia, and shipments favor more of the same line over elite alternatives.",
-      "claims": {
-        "wall_strategy": 4,
-        "first_military_building": "barracks_or_stable",
-        "expects_infantry": true,
-        "first_barracks_before_ms": 360000,
-        "first_wall_before_ms": 900000,
-        "military_distance_band": [
-          0.8,
-          1.1
-        ]
-      },
-      "prose_overrides": []
-    },
     "Argentines San Martin Revolution": {
       "civ_label": "Argentines",
       "leader_label": "San Martin Revolution",
@@ -53,23 +32,23 @@
       "portrait_path": "resources/images/icons/singleplayer/cpai_avatar_aztecs_montezuma.png",
       "doctrine_prose": "Hugs natural chokes \u2014 cliffs, jungle, river bends \u2014 and substitutes War Huts and causeways for walls. Stages quick, repeated infantry strikes from forward warbands and refuses to fight in the open.",
       "claims": {
-        "wall_strategy": 5,
+        "wall_strategy": 1,
         "first_military_building": "barracks_or_stable",
         "expects_forward": true,
         "first_barracks_before_ms": 420000,
         "military_distance_band": [
-          0.95,
+          1.0,
           1.3
         ]
       },
       "prose_overrides": []
     },
-    "Baja Californians Alvarado Revolution": {
+    "Baja Californians Pineda Revolution": {
       "civ_label": "Baja Californians",
-      "leader_label": "Alvarado Revolution",
-      "data_name": "Baja Californians Alvarado Revolution",
+      "leader_label": "Pineda Revolution",
+      "data_name": "Baja Californians Pineda Revolution",
       "doctrine_label": "Mobile Frontier Scatter",
-      "doctrine_summary": "Californio frontier horse raid",
+      "doctrine_summary": "Californio defence of La Paz and San Jos&eacute; del Cabo",
       "portrait_path": "resources/images/icons/singleplayer/cpai_avatar_baja_californians_alvarado.png",
       "doctrine_prose": "Spreads buildings far and wide, plants extra Town Centers and Trading Posts on the map perimeter, and skips walls almost entirely. Built for raid-economy and map control rather than turtling.",
       "claims": {
@@ -116,7 +95,7 @@
         "first_military_building": "trading_post_or_market",
         "expects_treaty": true,
         "military_distance_band": [
-          1.0,
+          1.1,
           1.3
         ]
       },
@@ -155,7 +134,7 @@
         "first_military_building": "trading_post_or_market",
         "expects_treaty": true,
         "military_distance_band": [
-          1.0,
+          1.1,
           1.3
         ]
       },
@@ -192,7 +171,7 @@
         "first_military_building": "trading_post_or_market",
         "expects_treaty": true,
         "military_distance_band": [
-          1.0,
+          1.1,
           1.3
         ]
       },
@@ -379,14 +358,16 @@
       "civ_label": "Germans",
       "leader_label": "Frederick Great",
       "data_name": "Germans Frederick Great",
-      "doctrine_label": "Siege Train Concentration",
+      "doctrine_label": "Republican Levee",
       "doctrine_summary": "Hohenzollern oblique-order shock",
       "portrait_path": "resources/images/icons/singleplayer/cpai_avatar_germans_frederick.png",
-      "doctrine_prose": "Over-builds Artillery Foundries and stockpiles cannons. Every push is a slow siege column with infantry escort, and walls are stone-and-forward to give the guns a safe staging line.",
+      "doctrine_prose": "Mass-produces cheap line infantry from many barracks and trains General units to inspire them. Civic-style layout \u2014 production hugs the Town Center, Outposts call up militia, and shipments favor more of the same line over elite alternatives.",
       "claims": {
-        "wall_strategy": 0,
+        "wall_strategy": 4,
         "first_military_building": "barracks_or_stable",
-        "expects_artillery": true,
+        "expects_infantry": true,
+        "first_barracks_before_ms": 360000,
+        "first_wall_before_ms": 900000,
         "military_distance_band": [
           0.8,
           1.1
@@ -403,12 +384,12 @@
       "portrait_path": "resources/images/icons/singleplayer/cpai_avatar_haitians_louverture.png",
       "doctrine_prose": "Hugs natural chokes \u2014 cliffs, jungle, river bends \u2014 and substitutes War Huts and causeways for walls. Stages quick, repeated infantry strikes from forward warbands and refuses to fight in the open.",
       "claims": {
-        "wall_strategy": 5,
+        "wall_strategy": 1,
         "first_military_building": "barracks_or_stable",
         "expects_forward": true,
         "first_barracks_before_ms": 420000,
         "military_distance_band": [
-          0.95,
+          1.0,
           1.3
         ]
       },
@@ -426,25 +407,25 @@
         "first_military_building": "trading_post_or_market",
         "expects_treaty": true,
         "military_distance_band": [
-          0.95,
+          1.0,
           1.3
         ]
       },
       "prose_overrides": []
     },
-    "Hausa Usman dan Fodio": {
+    "Hausa Muhammadu Kanta": {
       "civ_label": "Hausa",
-      "leader_label": "Usman dan Fodio",
-      "data_name": "Hausa Usman dan Fodio",
+      "leader_label": "Muhammadu Kanta",
+      "data_name": "Hausa Muhammadu Kanta",
       "doctrine_label": "Distributed Economic Network",
-      "doctrine_summary": "Sokoto jihad cavalry",
+      "doctrine_summary": "Surame fortress and trans-Saharan caravan lattice",
       "portrait_path": "resources/images/icons/singleplayer/cpai_avatar_hausa_usman.png",
       "doctrine_prose": "Scatters Mills, Plantations, and Markets across multiple resource patches so production never bottlenecks on one site. Light walling, heavy investment in Market upgrades, and a constant villager trickle to the most under-worked node.",
       "claims": {
         "first_military_building": "trading_post_or_market",
         "expects_treaty": true,
         "military_distance_band": [
-          1.0,
+          1.1,
           1.3
         ]
       },
@@ -493,16 +474,18 @@
       "civ_label": "Indians",
       "leader_label": "Shivaji Maharaj Maratha",
       "data_name": "Indians Shivaji Maharaj Maratha",
-      "doctrine_label": "Shrine or Trade Node Spread",
+      "doctrine_label": "Highland Citadel",
       "doctrine_summary": "Maratha Ganimi Kava raid",
       "portrait_path": "resources/images/icons/singleplayer/cpai_avatar_indians_shivaji.png",
-      "doctrine_prose": "Plants shrines, Trading Posts, or fishing posts the moment the route is found, then defends them with isolated towers and fast cavalry response. The XP and resource trickle from these structures funds everything else.",
+      "doctrine_prose": "Fortifies a single high-ground position with stone walls, layered towers, and a fort. Slow to expand and slow to push, but extremely hard to dislodge once entrenched. Builds wide only after the citadel is unbreakable.",
       "claims": {
-        "first_military_building": "trading_post_or_market",
-        "expects_treaty": true,
+        "wall_strategy": 0,
+        "first_military_building": "barracks_or_stable",
+        "expects_artillery": true,
+        "first_wall_before_ms": 720000,
         "military_distance_band": [
-          0.95,
-          1.3
+          0.7,
+          1.0
         ]
       },
       "prose_overrides": []
@@ -511,15 +494,17 @@
       "civ_label": "Indonesians",
       "leader_label": "Diponegoro Revolution",
       "data_name": "Indonesians Diponegoro Revolution",
-      "doctrine_label": "Shrine or Trade Node Spread",
+      "doctrine_label": "Jungle Guerrilla Network",
       "doctrine_summary": "Java War guerrilla and kraton fort",
       "portrait_path": "resources/images/icons/singleplayer/cpai_avatar_indonesians_diponegoro.png",
-      "doctrine_prose": "Plants shrines, Trading Posts, or fishing posts the moment the route is found, then defends them with isolated towers and fast cavalry response. The XP and resource trickle from these structures funds everything else.",
+      "doctrine_prose": "Hugs natural chokes &mdash; cliffs, jungle, river bends &mdash; and substitutes War Huts and causeways for walls. Stages quick, repeated infantry strikes from forward warbands and refuses to fight in the open.",
       "claims": {
-        "first_military_building": "trading_post_or_market",
-        "expects_treaty": true,
+        "wall_strategy": 1,
+        "first_military_building": "barracks_or_stable",
+        "expects_forward": true,
+        "first_barracks_before_ms": 420000,
         "military_distance_band": [
-          0.95,
+          1.0,
           1.3
         ]
       },
@@ -558,7 +543,7 @@
         "first_military_building": "trading_post_or_market",
         "expects_treaty": true,
         "military_distance_band": [
-          0.95,
+          1.0,
           1.3
         ]
       },
@@ -613,34 +598,13 @@
       "portrait_path": "resources/images/icons/singleplayer/cpai_avatar_mayans_canek.png",
       "doctrine_prose": "Hugs natural chokes \u2014 cliffs, jungle, river bends \u2014 and substitutes War Huts and causeways for walls. Stages quick, repeated infantry strikes from forward warbands and refuses to fight in the open.",
       "claims": {
-        "wall_strategy": 5,
+        "wall_strategy": 1,
         "first_military_building": "barracks_or_stable",
         "expects_forward": true,
         "first_barracks_before_ms": 420000,
         "military_distance_band": [
-          0.95,
+          1.0,
           1.3
-        ]
-      },
-      "prose_overrides": []
-    },
-    "Mexicans Hidalgo Revolution": {
-      "civ_label": "Mexicans",
-      "leader_label": "Hidalgo Revolution",
-      "data_name": "Mexicans Hidalgo Revolution",
-      "doctrine_label": "Republican Levee",
-      "doctrine_summary": "Grito de Dolores lev\u00e9e",
-      "portrait_path": "resources/images/icons/singleplayer/cpai_avatar_mexicans_hidalgo.png",
-      "doctrine_prose": "Mass-produces cheap line infantry from many barracks and trains General units to inspire them. Civic-style layout \u2014 production hugs the Town Center, Outposts call up militia, and shipments favor more of the same line over elite alternatives.",
-      "claims": {
-        "wall_strategy": 4,
-        "first_military_building": "barracks_or_stable",
-        "expects_infantry": true,
-        "first_barracks_before_ms": 360000,
-        "first_wall_before_ms": 900000,
-        "military_distance_band": [
-          0.8,
-          1.1
         ]
       },
       "prose_overrides": []
@@ -874,17 +838,19 @@
       "civ_label": "Swedes",
       "leader_label": "Gustavus Adolphus Swedish",
       "data_name": "Swedes Gustavus Adolphus Swedish",
-      "doctrine_label": "Siege Train Concentration",
+      "doctrine_label": "Forward Operational Line",
       "doctrine_summary": "Lion of the North combined arms",
       "portrait_path": "resources/images/icons/singleplayer/cpai_avatar_swedes_gustavus.png",
-      "doctrine_prose": "Over-builds Artillery Foundries and stockpiles cannons. Every push is a slow siege column with infantry escort, and walls are stone-and-forward to give the guns a safe staging line.",
+      "doctrine_prose": "Pushes barracks, stables, and outposts up toward the map&#x27;s contested edge, leaving the home base lightly fortified. Sustained pressure is the doctrine: shipments rally to the forward base, and lost ground is re-walled rather than abandoned.",
       "claims": {
-        "wall_strategy": 0,
+        "wall_strategy": 5,
         "first_military_building": "barracks_or_stable",
-        "expects_artillery": true,
+        "expects_forward": true,
+        "first_barracks_before_ms": 360000,
+        "first_wall_before_ms": 720000,
         "military_distance_band": [
-          0.8,
-          1.1
+          0.85,
+          1.3
         ]
       },
       "prose_overrides": []
@@ -931,21 +897,21 @@
       },
       "prose_overrides": []
     },
-    "Yucatan Carrillo Puerto Revolution": {
+    "Yucatan Pat Revolution": {
       "civ_label": "Yucatan",
-      "leader_label": "Carrillo Puerto Revolution",
-      "data_name": "Yucatan Carrillo Puerto Revolution",
+      "leader_label": "Pat Revolution",
+      "data_name": "Yucatan Pat Revolution",
       "doctrine_label": "Jungle Guerrilla Network",
-      "doctrine_summary": "Maya levy uprising",
+      "doctrine_summary": "Caste War Maya levy uprising",
       "portrait_path": "resources/images/icons/singleplayer/cpai_avatar_yucatan_carrillo_puerto.png",
       "doctrine_prose": "Hugs natural chokes \u2014 cliffs, jungle, river bends \u2014 and substitutes War Huts and causeways for walls. Stages quick, repeated infantry strikes from forward warbands and refuses to fight in the open.",
       "claims": {
-        "wall_strategy": 5,
+        "wall_strategy": 1,
         "first_military_building": "barracks_or_stable",
         "expects_forward": true,
         "first_barracks_before_ms": 420000,
         "military_distance_band": [
-          0.95,
+          1.0,
           1.3
         ]
       },

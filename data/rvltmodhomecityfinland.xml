@@ -7,7 +7,7 @@
   <visual>russian\russian_homecity.xml</visual>
   <watervisual>russian\russian_homecity_water.xml</watervisual>
   <backgroundvisual>russian\russian_background.xml</backgroundvisual>
-  <pathdata>revolution\pathable_area.gr2</pathdata>
+  <pathdata>russian\pathable_area_object.gr2</pathdata>
   <camera>russian\russian_homecity_camera.cam</camera>
   <widescreencamera>russian\russian_homecity_widescreencamera.cam</widescreencamera>
   <transportroundtriptime>1</transportroundtriptime>

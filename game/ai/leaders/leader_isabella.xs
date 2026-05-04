@@ -49,6 +49,7 @@ void initLeaderIsabella(void)
 
    gIsabellaRulesEnabled = true;
    llLogLeaderState("Isabella initialized");
+   llProbe("meta.leader_init", "leader=isabella");
 }
 
 //------------------------------------------------------------------------------

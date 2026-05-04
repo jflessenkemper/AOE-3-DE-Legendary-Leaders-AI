@@ -65,6 +65,7 @@ void initLeaderWellington(void)
 
    gWellingtonRulesEnabled = true;
    llLogLeaderState("Elizabeth I initialized");
+   llProbe("meta.leader_init", "leader=wellington");
 }
 
 //------------------------------------------------------------------------------

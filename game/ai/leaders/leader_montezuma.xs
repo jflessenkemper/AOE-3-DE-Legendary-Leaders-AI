@@ -42,6 +42,7 @@ void initLeaderMontezuma(void)
 
    gMontezumaRulesEnabled = true;
    llLogLeaderState("Montezuma initialized");
+   llProbe("meta.leader_init", "leader=montezuma");
 }
 
 //------------------------------------------------------------------------------

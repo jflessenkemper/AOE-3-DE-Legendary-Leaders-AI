@@ -398,7 +398,11 @@ void initLegendaryRevolutionCommander(void)
    }
    else if (rvltName == "RvltModBajaCalifornians")
    {
-      llVerboseEcho("Legendary Leaders: activating Juan Bautista Alvarado personality.");
+      // Manuel Pineda Muñoz — Mexican commander of the Baja garrisons during
+      // the U.S. invasion of 1846-48 (defence of La Paz, San José del Cabo,
+      // Mulegé). Coastal-presidio doctrine with mounted Californio militia
+      // sweeping the peninsula's narrow corridor.
+      llVerboseEcho("Legendary Leaders: activating Manuel Pineda Munoz personality.");
       llSetAggressivePersonality();
       btRushBoom = 0.05;
       btOffenseDefense = 0.6;
@@ -418,7 +422,10 @@ void initLegendaryRevolutionCommander(void)
    }
    else if (rvltName == "RvltModYucatan")
    {
-      llVerboseEcho("Legendary Leaders: activating Felipe Carrillo Puerto personality.");
+      // Jacinto Pat — Maya batab and co-leader of the Caste War (Guerra de
+      // Castas, 1847). Jungle guerrilla operating from the cenote-fed
+      // limestone shelf, lifting Maya milicianos into the Yucatec interior.
+      llVerboseEcho("Legendary Leaders: activating Jacinto Pat personality.");
       llSetBalancedPersonality();
       btRushBoom = -0.05;
       btOffenseDefense = 0.45;
@@ -526,6 +533,10 @@ void initLegendaryRevolutionCommander(void)
    debugLegendaryLeaders("revolution commander initialized for " + rvltName + " (civId " + gRvltCivId + ")");
    gLegendaryRevolutionCommanderEnabled = true;
    llLogLeaderState("revolution commander initialized for " + rvltName);
+   // Replay probe: confirms which revolution commander block ran. The civ
+   // name is the only stable key here (gLLLeaderKey is set later by
+   // llAssignLeaderIdentity). gRvltCivId is the per-block ordinal.
+   llProbe("meta.leader_init", "leader=rvlt_" + rvltName + " rvltCivId=" + gRvltCivId);
 }
 
 //------------------------------------------------------------------------------

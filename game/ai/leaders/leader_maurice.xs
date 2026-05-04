@@ -47,6 +47,7 @@ void initLeaderMaurice(void)
 
    gMauriceRulesEnabled = true;
    llLogLeaderState("Maurice initialized");
+   llProbe("meta.leader_init", "leader=maurice");
 }
 
 //------------------------------------------------------------------------------

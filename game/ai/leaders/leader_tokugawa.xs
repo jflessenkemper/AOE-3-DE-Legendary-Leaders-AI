@@ -46,6 +46,7 @@ void initLeaderTokugawa(void)
 
    gTokugawaRulesEnabled = true;
    llLogLeaderState("Tokugawa initialized");
+   llProbe("meta.leader_init", "leader=tokugawa");
 }
 
 //------------------------------------------------------------------------------

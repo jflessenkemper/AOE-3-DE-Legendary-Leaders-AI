@@ -44,6 +44,7 @@ void initLeaderHiawatha(void)
 
    gHiawathaRulesEnabled = true;
    llLogLeaderState("Hiawatha initialized");
+   llProbe("meta.leader_init", "leader=hiawatha");
 }
 
 //------------------------------------------------------------------------------

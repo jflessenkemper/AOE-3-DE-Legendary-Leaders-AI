@@ -116,14 +116,11 @@ DOCTRINE_CLAIMS: dict[str, dict[str, Any]] = {
         "military_distance_band": [0.85, 1.3],
     },
     "Jungle Guerrilla Network": {
-        # llUseJungleGuerrillaNetworkStyle sets MobileNoWalls and militaryDist
-        # 0.95 — the doctrine is "no perimeter wall, infiltration warbands
-        # from the inner core", not segmented chokepoint walls.
-        "wall_strategy": WALL_MOBILE_NO_WALLS,
+        "wall_strategy": WALL_CHOKEPOINT_SEGMENTS,
         "first_military_building": "barracks_or_stable",
         "expects_forward": True,
         "first_barracks_before_ms": 420_000,
-        "military_distance_band": [0.95, 1.3],
+        "military_distance_band": [1.0, 1.3],
     },
     "Republican Levee": {
         "wall_strategy": WALL_URBAN_BARRICADE,
@@ -149,9 +146,7 @@ DOCTRINE_CLAIMS: dict[str, dict[str, Any]] = {
     "Distributed Economic Network": {
         "first_military_building": "trading_post_or_market",
         "expects_treaty": True,
-        # llUseDistributedEconomicNetworkStyle sets militaryDist=1.0; the
-        # "distributed" part is economic node spread, not forward military.
-        "military_distance_band": [1.0, 1.3],
+        "military_distance_band": [1.1, 1.3],
     },
     "Andean Terrace Fortress": {
         # llUseAndeanTerraceFortressStyle sets ChokepointSegments — terraces
@@ -164,10 +159,7 @@ DOCTRINE_CLAIMS: dict[str, dict[str, Any]] = {
     "Shrine or Trade Node Spread": {
         "first_military_building": "trading_post_or_market",
         "expects_treaty": True,
-        # llUseShrineTradeNodeSpreadStyle sets militaryDist=0.95; the
-        # "spread" is shrine/trade-node placement, military stays close
-        # to the inner economic core.
-        "military_distance_band": [0.95, 1.3],
+        "military_distance_band": [1.0, 1.3],
     },
     "Mobile Frontier Scatter": {
         "wall_strategy": WALL_MOBILE_NO_WALLS,

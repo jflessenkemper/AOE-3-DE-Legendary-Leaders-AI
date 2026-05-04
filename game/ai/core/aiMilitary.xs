@@ -16,8 +16,10 @@ void llDestroyCommanderRecoveryPlan(void)
       return;
    }
 
+   int destroyedID = gCommanderRecoveryPlanID;
    aiPlanDestroy(gCommanderRecoveryPlanID);
    gCommanderRecoveryPlanID = -1;
+   llProbe("event.commander.recovery_destroyed", "plan=" + destroyedID + " atMs=" + xsGetTime());
 }
 
 bool llIsCommanderAvailableForMajorAttack(void)
@@ -146,6 +148,7 @@ bool llEnsureBaseWallsBeforeMajorAttack(int mainBaseID = -1)
 void llCancelCommanderlessMajorAttacks(void)
 {
    int numPlans = aiPlanGetActiveCount();
+   int cancelled = 0;
    int i = 0;
    for (i = 0; < numPlans)
    {
@@ -173,6 +176,7 @@ void llCancelCommanderlessMajorAttacks(void)
       }
 
       aiPlanDestroy(planID);
+      cancelled = cancelled + 1;
    }
 
    if (gIslandAssaultTransportPlanID >= 0)
@@ -198,6 +202,7 @@ void llCancelCommanderlessMajorAttacks(void)
       aiPlanDestroy(gIslandSearchPlanID);
       gIslandSearchPlanID = -1;
    }
+   llProbe("event.commander.cancel_attacks", "cancelled=" + cancelled + " atMs=" + xsGetTime());
 }
 
 bool llEnsureCommanderRecovery(void)
@@ -218,6 +223,7 @@ bool llEnsureCommanderRecovery(void)
          createProtoUnitCommandResearchPlan(cProtoUnitCommandRansomExplorer, tcID, cMilitaryEscrowID, 95, 95);
          debugMilitary("Creating commander ransom plan");
          llDestroyCommanderRecoveryPlan();
+         llProbe("event.commander.ransom_initiated", "fallenID=" + fallenExplorerID + " tcID=" + tcID);
          return (true);
       }
    }
@@ -2830,6 +2836,14 @@ void moveDefenseReflex(vector location = cInvalidVector, float radius = -1.0, in
    {
       radius = cvDefenseReflexRadiusActive;
    }
+   // Probe entry: lets analysers correlate "defense reflex fired"
+   // events with army composition / pressure events. Single-call-site
+   // hook (only this function moves the reflex).
+   llProbe("event.combat.defense_reflex",
+      "loc=" + llFmtVec(location) +
+      " radius=" + radius +
+      " baseID=" + baseID +
+      " atMs=" + xsGetTime());
    if (location != cInvalidVector)
    {
       float desiredRadius = radius;

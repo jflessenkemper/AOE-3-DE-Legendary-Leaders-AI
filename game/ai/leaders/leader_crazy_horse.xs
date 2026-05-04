@@ -53,6 +53,7 @@ void initLeaderCrazyHorse(void)
 
    gCrazyHorseRulesEnabled = true;
    llLogLeaderState("Chief Gall initialized");
+   llProbe("meta.leader_init", "leader=crazyhorse");
 }
 
 //------------------------------------------------------------------------------

@@ -53,6 +53,21 @@ REQUIRED_BULLET_FIELDS = (
 )
 REQUIRED_AGE_KEYS = ("Discovery", "Colonial", "Fortress", "Industrial", "Imperial")
 
+# Imperial peer doctrine — one second-tier playstyle per civ, anchored on
+# the civ's historical leader. Authored in tools/playstyle/imperial_data.py
+# and injected into the HTML by tools/playstyle/inject_imperial.py.
+REQUIRED_IMPERIAL_STRING_FIELDS = (
+    "imperialPsTitle",
+    "imperialBsProse",
+    "imperialCombatDoctrine",
+)
+REQUIRED_IMPERIAL_BULLET_FIELDS = (
+    "imperialEcoBullets",
+    "imperialMilitaryBullets",
+    "imperialDefenseBullets",
+)
+REQUIRED_IMPERIAL_AGE_KEYS = REQUIRED_AGE_KEYS
+
 NODE_RE = re.compile(
     r'<details[^>]*class="nation-node"[^>]*data-name="([^"]+)"',
 )
@@ -88,7 +103,7 @@ def _extract_playstyle_data(html_text: str) -> dict | None:
         return None
 
 
-def _check_entry(key: str, entry: dict) -> list[str]:
+def _check_entry(key: str, entry: dict, *, require_imperial: bool = True) -> list[str]:
     issues: list[str] = []
 
     for field in REQUIRED_STRING_FIELDS:
@@ -104,6 +119,32 @@ def _check_entry(key: str, entry: dict) -> list[str]:
             text = ages.get(age_key)
             if not isinstance(text, str) or not text.strip():
                 issues.append(f"{key}: ages['{age_key}'] missing or empty")
+
+    if require_imperial:
+        for field in REQUIRED_IMPERIAL_STRING_FIELDS:
+            value = entry.get(field)
+            if not isinstance(value, str) or not value.strip():
+                issues.append(f"{key}: missing or empty imperial-peer field '{field}'")
+
+        imperial_ages = entry.get("imperialAges")
+        if not isinstance(imperial_ages, dict):
+            issues.append(f"{key}: 'imperialAges' must be an object (peer imperial doctrine)")
+        else:
+            for age_key in REQUIRED_IMPERIAL_AGE_KEYS:
+                text = imperial_ages.get(age_key)
+                if not isinstance(text, str) or not text.strip():
+                    issues.append(f"{key}: imperialAges['{age_key}'] missing or empty")
+
+        for field in REQUIRED_IMPERIAL_BULLET_FIELDS:
+            bullets = entry.get(field)
+            if not isinstance(bullets, list):
+                issues.append(f"{key}: '{field}' must be an array")
+                continue
+            if not bullets:
+                issues.append(f"{key}: '{field}' must not be empty")
+            for i, bullet in enumerate(bullets):
+                if not isinstance(bullet, str) or not bullet.strip():
+                    issues.append(f"{key}: '{field}'[{i}] is not a non-empty string")
 
     populated_bullet_fields = 0
     for field in REQUIRED_BULLET_FIELDS:
@@ -150,7 +191,11 @@ def _scan_jargon(issues: list[str], entry_key: str, field_label: str, text: str)
             )
 
 
-def validate_playstyle_modal(repo_root: Path = REPO_ROOT) -> list[str]:
+def validate_playstyle_modal(
+    repo_root: Path = REPO_ROOT,
+    *,
+    require_imperial: bool = True,
+) -> list[str]:
     html_path = repo_root / HTML_REL
     if not html_path.exists():
         return [f"{repo_relative(html_path, repo_root)}: file not found"]
@@ -180,7 +225,7 @@ def validate_playstyle_modal(repo_root: Path = REPO_ROOT) -> list[str]:
         issues.append(f"{key}: NATION_PLAYSTYLE entry has no matching nation-node")
 
     for key in sorted(nodes_set & keys_set):
-        issues.extend(_check_entry(key, data[key]))
+        issues.extend(_check_entry(key, data[key], require_imperial=require_imperial))
 
     return issues
 
@@ -189,9 +234,14 @@ def main() -> int:
     parser = build_repo_root_parser(
         "Validate the v2 Playstyle modal data in LEGENDARY_LEADERS_TREE.html."
     )
+    parser.add_argument(
+        "--no-imperial",
+        action="store_true",
+        help="Skip enforcement of the imperial-peer doctrine fields.",
+    )
     args = parser.parse_args()
     repo_root = args.repo_root.resolve()
-    issues = validate_playstyle_modal(repo_root)
+    issues = validate_playstyle_modal(repo_root, require_imperial=not args.no_imperial)
 
     if issues:
         print(f"Found {len(issues)} playstyle modal issues:")

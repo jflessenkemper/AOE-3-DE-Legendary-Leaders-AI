@@ -336,14 +336,92 @@ float llGetBuildStyleDistanceMultiplier(int puid = -1)
 //   FollowTradeRoute                → gForwardBaseLocation mid-strength
 //   Defensive                       → baseLocation pulled in tight
 //==============================================================================
+// Average position of up to N nearest Gaia trees within `radius` of origin.
+// Returns cInvalidVector if no trees found. Used so ForestEdge/Jungle civs
+// (Iroquois, Sioux, Maya, Brazilian, Indonesian, Finnish taiga) bias their
+// build cluster toward dense woods rather than the water center like the
+// coastal civs. AoE3 XS exposes trees as cUnitTypeTree owned by player 0.
+vector llFindForestClusterVector(vector origin = cInvalidVector, float radius = 80.0)
+{
+   if (origin == cInvalidVector) { return (cInvalidVector); }
+   int q = kbUnitQueryCreate("llForestQuery");
+   if (q < 0) { return (cInvalidVector); }
+   kbUnitQuerySetPlayerID(q, 0);
+   kbUnitQuerySetUnitType(q, cUnitTypeTree);
+   kbUnitQuerySetState(q, cUnitStateAlive);
+   kbUnitQuerySetPosition(q, origin);
+   kbUnitQuerySetMaximumDistance(q, radius);
+   int n = kbUnitQueryExecute(q);
+   if (n <= 0) { kbUnitQueryDestroy(q); return (cInvalidVector); }
+   float ax = 0.0; float az = 0.0;
+   int sample = n; if (sample > 32) { sample = 32; }
+   for (i = 0; < sample)
+   {
+      vector p = kbUnitGetPosition(kbUnitQueryGetResult(q, i));
+      ax = ax + xsVectorGetX(p);
+      az = az + xsVectorGetZ(p);
+   }
+   kbUnitQueryDestroy(q);
+   return (xsVectorSet(ax / (1.0 * sample), xsVectorGetY(origin), az / (1.0 * sample)));
+}
+
+// Average position of nearby Gaia gold mines / treasure-likely sites.
+// Used for civs whose doctrine implies mining cluster (Spanish Reconquista,
+// Mexican insurgent, Californian gold camps, German silver towns).
+vector llFindGoldClusterVector(vector origin = cInvalidVector, float radius = 80.0)
+{
+   if (origin == cInvalidVector) { return (cInvalidVector); }
+   int q = kbUnitQueryCreate("llGoldQuery");
+   if (q < 0) { return (cInvalidVector); }
+   kbUnitQuerySetPlayerID(q, 0);
+   kbUnitQuerySetUnitType(q, cUnitTypeAbstractMine);
+   kbUnitQuerySetState(q, cUnitStateAlive);
+   kbUnitQuerySetPosition(q, origin);
+   kbUnitQuerySetMaximumDistance(q, radius);
+   int n = kbUnitQueryExecute(q);
+   if (n <= 0) { kbUnitQueryDestroy(q); return (cInvalidVector); }
+   float ax = 0.0; float az = 0.0;
+   int sample = n; if (sample > 6) { sample = 6; }
+   for (i = 0; < sample)
+   {
+      vector p = kbUnitGetPosition(kbUnitQueryGetResult(q, i));
+      ax = ax + xsVectorGetX(p);
+      az = az + xsVectorGetZ(p);
+   }
+   kbUnitQueryDestroy(q);
+   return (xsVectorSet(ax / (1.0 * sample), xsVectorGetY(origin), az / (1.0 * sample)));
+}
+
 vector llGetTerrainFeatureVector(int terrain = 0, vector baseLocation = cInvalidVector)
 {
+   // Coast / Wetland: pure shoreline cluster — anchor on the water center.
    if (terrain == cLLTerrainCoast) { return (gNavyVec); }
    if (terrain == cLLTerrainWetland) { return (gNavyVec); }
+   // River: shoreline-adjacent but inland. Half-blend against base so we
+   // don't plaster docks like a coastal civ — caller's strength is already
+   // half on secondary, so returning gNavyVec is the right primitive here.
    if (terrain == cLLTerrainRiver) { return (gNavyVec); }
-   if (terrain == cLLTerrainJungle) { return (gNavyVec); }
-   if (terrain == cLLTerrainForestEdge) { return (gNavyVec); }
-   // Plain / Highland / DesertOasis / Any — no external feature; anchor on base.
+   // ForestEdge / Jungle: bias toward a dense tree patch, NOT water. Falls
+   // back to base center if no Gaia trees within 80m (e.g., late-game when
+   // forests are exhausted, or treeless maps).
+   if ((terrain == cLLTerrainForestEdge) || (terrain == cLLTerrainJungle))
+   {
+      vector forest = llFindForestClusterVector(baseLocation, 80.0);
+      if (forest != cInvalidVector) { return (forest); }
+      return (baseLocation);
+   }
+   // DesertOasis: gold/mine cluster as oasis proxy (mines and treasures
+   // tend to anchor real oases on RM scripts). Base fallback if none found.
+   if (terrain == cLLTerrainDesertOasis)
+   {
+      vector mines = llFindGoldClusterVector(baseLocation, 90.0);
+      if (mines != cInvalidVector) { return (mines); }
+      return (baseLocation);
+   }
+   // Plain / Highland / Any — no external feature; anchor on base.
+   // (Highland would want elevation but XS Y-axis is decorative — we
+   // compensate behaviourally via tighter strongpoint profile / smaller
+   // wall radius set by llUseHighlandCitadelStyle.)
    return (baseLocation);
 }
 
@@ -417,6 +495,8 @@ vector llGetPlacementBiasedCenter(vector baseLocation = cInvalidVector, int puid
    return (center);
 }
 
+extern int gLLBaseInfluenceProbeBudget = 8;
+
 void llApplyLegendaryBaseInfluence(int planID = -1, int baseID = -1, int puid = -1,
    float defaultCenterDistance = 30.0, float defaultInfluenceDistance = 100.0, float defaultInfluenceValue = 200.0)
 {
@@ -470,6 +550,17 @@ void llApplyLegendaryBaseInfluence(int planID = -1, int baseID = -1, int puid = 
    aiPlanSetVariableFloat(planID, cBuildPlanInfluencePositionValue, 0, influenceValue);
    aiPlanSetVariableInt(planID, cBuildPlanInfluencePositionFalloff, 0, cBPIFalloffLinear);
    aiPlanSetBaseID(planID, baseID);
+   if (gLLBaseInfluenceProbeBudget > 0)
+   {
+      gLLBaseInfluenceProbeBudget = gLLBaseInfluenceProbeBudget - 1;
+      llProbe("event.base.influence",
+         "plan=" + planID + " base=" + baseID + " puid=" + puid +
+         " centerDist=" + centerDistance +
+         " influDist=" + influenceDistance +
+         " influVal=" + influenceValue +
+         " distMul=" + distanceMultiplier +
+         " anchor=" + llFmtVec(anchor));
+   }
 }
 
 void selectClosestBuildPlanPosition(int planID = -1, int baseID = -1, int puid = -1)
@@ -1493,8 +1584,16 @@ bool selectBuildPlanPosition(int planID = -1, int puid = -1, int baseID = -1)
             {
                continue;
             }
-            // This is a military building, randomize placement.
-            aiPlanSetVariableInt(planID, cBuildPlanLocationPreference, 0, aiRandInt(4));
+            // Doctrine-aware placement: each LL build-style sets its own
+            // cardinal preference (Front for forward/expansionist, Back for
+            // tight-core/citadel, -1 to keep legacy random for genuinely
+            // dispersed doctrines). Set in leaderCommon.xs::llUseXxxStyle.
+            int placementPref = gLLMilitaryPlacementPreference;
+            if (placementPref < 0)
+            {
+               placementPref = aiRandInt(4);  // legacy fallback
+            }
+            aiPlanSetVariableInt(planID, cBuildPlanLocationPreference, 0, placementPref);
             break;
          }
          llApplyLegendaryBaseInfluence(planID, baseID, puid);
@@ -3063,12 +3162,21 @@ minInterval 5
             }
          }
 
+         // Forward-base trigger. Engine default: Expert difficulty AND
+         // 20-min mark. LL doctrines that historically expand (Forward
+         // Operational Line, Siege Train Concentration, Cossack Voisko,
+         // Republican Levee, Civic Militia, Distributed Economic Network,
+         // Steppe Cavalry Wedge, Jungle Guerrilla Network) lower the gate
+         // via gLLForwardBaseEarliestMs / gLLForwardBaseAnyDifficulty so
+         // they actually expand inside a normal-length match.
+         bool difficultyOk = (cDifficultyCurrent >= gDifficultyExpert) || (gLLForwardBaseAnyDifficulty == true);
+         int  earliestMs   = gLLForwardBaseEarliestMs;
          buildForward = (gForwardBaseID >= 0 && getUnitCountByLocation(cUnitTypeLogicalTypeLandMilitary,
                         cPlayerRelationEnemyNotGaia, cUnitStateAlive, gForwardBaseLocation, 50.0) <= 2) ||
-                        (time - lastForwardBaseCheckTime >= 30000 && cDifficultyCurrent >= gDifficultyExpert &&
-                         aiTreatyActive() == false && gForwardBaseState == cForwardBaseStateNone &&
-                        (time - gForwardBaseUpTime) >= 600000) &&
-                        (time >= 1200000);
+                        ((time - lastForwardBaseCheckTime >= 30000) && (difficultyOk == true) &&
+                         (aiTreatyActive() == false) && (gForwardBaseState == cForwardBaseStateNone) &&
+                        ((time - gForwardBaseUpTime) >= 600000) &&
+                        (time >= earliestMs));
 
          // We need at least a building to research upgrades.
          if (numberBuildings >= numberTotalBuildingsWanted &&
