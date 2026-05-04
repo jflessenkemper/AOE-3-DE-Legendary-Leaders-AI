@@ -31,6 +31,11 @@ void initLeaderMontezuma(void)
    btBiasNative = 0.7;         // Tlaxcalan, Zapotec, Otomi auxiliaries.
    llSetMilitaryFocus(0.85, 0.05, -0.9);  // All-infantry doctrine, no artillery investment.
 
+   // LL-BUILD-STYLE-BEGIN
+   llUseJungleGuerrillaNetworkStyle(0);   // War Huts + chokes; no perimeter wall.
+   // LL-BUILD-STYLE-END
+   llSetLeaderTacticalDoctrine(0.7, 0.3, 1, 3.0);
+
    cvMaxTowers = 3;            // The causeways are the wall.
    cvOkToBuildForts = false;   // Aztecs cannot build forts; safety guard.
    cvMaxArmyPop = 110;         // Will scale with age in rules below.

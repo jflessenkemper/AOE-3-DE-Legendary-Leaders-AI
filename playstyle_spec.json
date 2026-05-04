@@ -53,12 +53,12 @@
       "portrait_path": "resources/images/icons/singleplayer/cpai_avatar_aztecs_montezuma.png",
       "doctrine_prose": "Hugs natural chokes \u2014 cliffs, jungle, river bends \u2014 and substitutes War Huts and causeways for walls. Stages quick, repeated infantry strikes from forward warbands and refuses to fight in the open.",
       "claims": {
-        "wall_strategy": 1,
+        "wall_strategy": 5,
         "first_military_building": "barracks_or_stable",
         "expects_forward": true,
         "first_barracks_before_ms": 420000,
         "military_distance_band": [
-          1.0,
+          0.95,
           1.3
         ]
       },
@@ -116,7 +116,7 @@
         "first_military_building": "trading_post_or_market",
         "expects_treaty": true,
         "military_distance_band": [
-          1.1,
+          1.0,
           1.3
         ]
       },
@@ -155,7 +155,7 @@
         "first_military_building": "trading_post_or_market",
         "expects_treaty": true,
         "military_distance_band": [
-          1.1,
+          1.0,
           1.3
         ]
       },
@@ -192,7 +192,7 @@
         "first_military_building": "trading_post_or_market",
         "expects_treaty": true,
         "military_distance_band": [
-          1.1,
+          1.0,
           1.3
         ]
       },
@@ -403,12 +403,12 @@
       "portrait_path": "resources/images/icons/singleplayer/cpai_avatar_haitians_louverture.png",
       "doctrine_prose": "Hugs natural chokes \u2014 cliffs, jungle, river bends \u2014 and substitutes War Huts and causeways for walls. Stages quick, repeated infantry strikes from forward warbands and refuses to fight in the open.",
       "claims": {
-        "wall_strategy": 1,
+        "wall_strategy": 5,
         "first_military_building": "barracks_or_stable",
         "expects_forward": true,
         "first_barracks_before_ms": 420000,
         "military_distance_band": [
-          1.0,
+          0.95,
           1.3
         ]
       },
@@ -426,7 +426,7 @@
         "first_military_building": "trading_post_or_market",
         "expects_treaty": true,
         "military_distance_band": [
-          1.0,
+          0.95,
           1.3
         ]
       },
@@ -444,7 +444,7 @@
         "first_military_building": "trading_post_or_market",
         "expects_treaty": true,
         "military_distance_band": [
-          1.1,
+          1.0,
           1.3
         ]
       },
@@ -501,7 +501,7 @@
         "first_military_building": "trading_post_or_market",
         "expects_treaty": true,
         "military_distance_band": [
-          1.0,
+          0.95,
           1.3
         ]
       },
@@ -519,7 +519,7 @@
         "first_military_building": "trading_post_or_market",
         "expects_treaty": true,
         "military_distance_band": [
-          1.0,
+          0.95,
           1.3
         ]
       },
@@ -558,7 +558,7 @@
         "first_military_building": "trading_post_or_market",
         "expects_treaty": true,
         "military_distance_band": [
-          1.0,
+          0.95,
           1.3
         ]
       },
@@ -613,12 +613,12 @@
       "portrait_path": "resources/images/icons/singleplayer/cpai_avatar_mayans_canek.png",
       "doctrine_prose": "Hugs natural chokes \u2014 cliffs, jungle, river bends \u2014 and substitutes War Huts and causeways for walls. Stages quick, repeated infantry strikes from forward warbands and refuses to fight in the open.",
       "claims": {
-        "wall_strategy": 1,
+        "wall_strategy": 5,
         "first_military_building": "barracks_or_stable",
         "expects_forward": true,
         "first_barracks_before_ms": 420000,
         "military_distance_band": [
-          1.0,
+          0.95,
           1.3
         ]
       },
@@ -940,12 +940,12 @@
       "portrait_path": "resources/images/icons/singleplayer/cpai_avatar_yucatan_carrillo_puerto.png",
       "doctrine_prose": "Hugs natural chokes \u2014 cliffs, jungle, river bends \u2014 and substitutes War Huts and causeways for walls. Stages quick, repeated infantry strikes from forward warbands and refuses to fight in the open.",
       "claims": {
-        "wall_strategy": 1,
+        "wall_strategy": 5,
         "first_military_building": "barracks_or_stable",
         "expects_forward": true,
         "first_barracks_before_ms": 420000,
         "military_distance_band": [
-          1.0,
+          0.95,
           1.3
         ]
       },

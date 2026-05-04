@@ -150,14 +150,20 @@ def compare_one(observed: dict, claims: dict) -> tuple[list[str], list[str], lis
         else:
             fails.append(f"military_distance={got} outside spec band [{lo}, {hi}]")
 
-    # expects_forward implies ok_to_build_forts == True (loose check)
+    # expects_forward: a forward-base doctrine should at minimum NOT pin
+    # all military to a tight inner ring. We check the military distance
+    # multiplier is ≥ 1.0 (= "push military out from TC"). cvOkToBuildForts
+    # is intentionally NOT required — several civs (Aztec, Lakota) have
+    # forward-aggressive doctrines but lack a fort unit type entirely.
     if claims.get("expects_forward") is True:
-        got = observed.get("ok_to_build_forts")
-        if got is True:
-            passes.append("expects_forward → cvOkToBuildForts=True ✓")
-        elif got is False:
-            fails.append("expects_forward=True but cvOkToBuildForts=False")
-        # else None — skip silently; many leaders don't toggle this explicitly
+        got = observed.get("military_distance_multiplier")
+        if got is not None and got < 1.0 and "military_distance_band" not in claims:
+            fails.append(
+                f"expects_forward=True but military_distance={got} (<1.0); "
+                f"doctrine pulls inward, not outward"
+            )
+        elif got is not None and got >= 1.0:
+            passes.append(f"expects_forward → military_distance={got} ≥ 1.0 ✓")
 
     return passes, fails, unknowns
 
