@@ -21,6 +21,17 @@ NATION_OPEN = re.compile(
     r'<details class="nation-node"([^>]*)>',
 )
 
+# Skip generated `<!-- DEV-START name="X" --> ... <!-- DEV-END name="X" -->`
+# regions when extracting search terms. The Development subtree contains
+# asset paths, stringIDs, and a deck rendering that would otherwise (a)
+# pollute `data-search` with low-signal tokens and (b) shift the trailing
+# paragraph that `tools/playtest/html_reference._extract_doctrine_prose`
+# treats as the doctrine narrative.
+DEV_BLOCK_RX = re.compile(
+    r'<!--\s*DEV-START\s+name="[^"]+"\s*-->.*?<!--\s*DEV-END\s+name="[^"]+"\s*-->',
+    re.DOTALL,
+)
+
 
 def extract_terms(body: str) -> list[str]:
     terms: list[str] = []
@@ -97,7 +108,38 @@ def extract_terms(body: str) -> list[str]:
     return out
 
 
+def _build_bsprose_index(text: str) -> dict[str, str]:
+    """Map data-name → bsProse string by parsing the inline
+    `window.NATION_PLAYSTYLE = { "Aztecs Montezuma": { ..., "bsProse": "..." }, ... }`
+    object. The doctrine narrative lives ONLY in this JS data (no per-nation
+    HTML element holds it), so we hop into it to keep `data-search` in sync
+    with what `tools.playtest.html_reference._extract_doctrine_prose` expects
+    (the trailing `·` segment must be the doctrine narrative).
+    """
+    out: dict[str, str] = {}
+    pattern = re.compile(
+        r'"([^"]+)"\s*:\s*\{[^{}]*?"bsProse"\s*:\s*"([^"\\]*(?:\\.[^"\\]*)*)"',
+        re.DOTALL,
+    )
+    for m in pattern.finditer(text):
+        key = m.group(1)
+        if " " not in key:
+            continue
+        prose_raw = m.group(2)
+        prose = (
+            prose_raw
+            .replace('\\"', '"')
+            .replace('\\n', ' ')
+            .replace('\\t', ' ')
+        )
+        prose = html.unescape(prose)
+        prose = re.sub(r"\s+", " ", prose).strip()
+        out[key] = prose
+    return out
+
+
 def annotate(text: str) -> tuple[str, int]:
+    bsprose_by_name = _build_bsprose_index(text)
     out_parts: list[str] = []
     cursor = 0
     annotated = 0
@@ -127,8 +169,19 @@ def annotate(text: str) -> tuple[str, int]:
 
         # Strip any existing data-search
         attrs = re.sub(r'\s+data-search="[^"]*"', "", m.group(1))
+        # Pull the data-name to look up doctrine prose from NATION_PLAYSTYLE.
+        name_match = re.search(r'\bdata-name="([^"]+)"', attrs)
+        data_name = name_match.group(1) if name_match else ""
 
-        terms = extract_terms(body)
+        # Strip the generated Dev subtree before term extraction (see DEV_BLOCK_RX).
+        scan_body = DEV_BLOCK_RX.sub("", body)
+        terms = extract_terms(scan_body)
+        # Append doctrine prose LAST so `_extract_doctrine_prose` (which treats
+        # the trailing `·` segment as the doctrine narrative) keeps working —
+        # the prose lives only in the JS data object, not in the nation-node body.
+        prose = bsprose_by_name.get(data_name, "")
+        if prose:
+            terms.append(prose)
         search_blob = " · ".join(terms)
         search_attr = ' data-search="' + html.escape(search_blob, quote=True) + '"'
 

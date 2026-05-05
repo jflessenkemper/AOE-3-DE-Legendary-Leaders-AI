@@ -35,6 +35,9 @@ jobs:
           python tools/validation/validate_art_coverage.py
           python tools/validation/validate_terrain_heading.py
           python tools/validation/validate_playstyle_modal.py
+          python tools/validation/validate_dev_subtrees.py
+      - name: Verify dev subtrees in sync (drift gate)
+        run: python tools/cardextract/refresh_dev_subtrees.py --check
       - name: Publish packaged validation summary
         if: always()
         run: |

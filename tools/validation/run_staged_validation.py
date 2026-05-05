@@ -30,6 +30,7 @@ from tools.validation.validate_xml_well_formed import validate_xml_well_formed
 from tools.validation.validate_xs_scripts import validate_xs_scripts
 from tools.validation.validate_personality_overrides import validate_personality_overrides
 from tools.validation.validate_art_coverage import validate_art_coverage
+from tools.validation.validate_dev_subtrees import validate_dev_subtrees
 
 
 STAGE_ORDER = ("content", "regression", "packaged", "live", "runtime")
@@ -98,6 +99,7 @@ def build_content_checks(repo_root: Path, strict_display_name_ids: bool = False)
         ValidationCheckResult("Player Colors", validate_playercolors(repo_root)),
         ValidationCheckResult("HTML Reference Structure", validate_html_reference(repo_root)),
         ValidationCheckResult("HTML vs Mod Consistency", validate_html_vs_mod(repo_root)),
+        ValidationCheckResult("Dev Subtrees", validate_dev_subtrees(repo_root)),
     ]
 
 
