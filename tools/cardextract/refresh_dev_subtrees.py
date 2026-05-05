@@ -70,6 +70,16 @@ try:
 except Exception:  # noqa: BLE001
     load_vanilla_data = None  # type: ignore[assignment]
 
+# ANW civ blurbs — short, consistent flag-hover blurbs for all 48 civs.
+# Loaded once at module level (small JSON, no I/O cost). Replaces the
+# inconsistent vanilla rollover text with structured player-relevant info.
+ANW_BLURBS_PATH = Path(__file__).resolve().parents[2] / "data" / "anw_civ_blurbs.json"
+try:
+    _ANW_BLURBS = json.loads(ANW_BLURBS_PATH.read_text(encoding="utf-8")) \
+        if ANW_BLURBS_PATH.is_file() else {}
+except Exception:  # noqa: BLE001
+    _ANW_BLURBS = {}
+
 HTML_PATH = REPO / "a_new_world.html"
 CIVMODS = REPO / "data" / "civmods.xml"
 STRINGS = REPO / "data" / "strings" / "english" / "stringmods.xml"
@@ -639,6 +649,47 @@ def _section_head(text: str) -> str:
     return f'<tr><th colspan="2" class="dev-section">{html.escape(text)}</th></tr>'
 
 
+def _render_anw_blurb(slug: str) -> str | None:
+    """Render the consistent ANW flag-hover blurb for the given civ slug,
+    or None if the civ has no entry in `data/anw_civ_blurbs.json`.
+
+    Output format (per civ): a structured 5-line block with parchment
+    label headers — civ bonus, unique units, unique buildings, playstyle,
+    age up. Replaces the inconsistent vanilla rollover prose.
+    """
+    if not _ANW_BLURBS or _anw_by_slug is None:
+        return None
+    try:
+        anw = _anw_by_slug(slug)
+    except KeyError:
+        return None
+    entry = _ANW_BLURBS.get(anw.anw_token)
+    if not entry:
+        return None
+
+    def _line(label: str, value: str) -> str:
+        return (
+            f'<div class="dev-blurb-line">'
+            f'<span class="dev-blurb-label">{html.escape(label)}</span> '
+            f'{html.escape(value)}'
+            f'</div>'
+        )
+
+    lines: list[str] = []
+    if entry.get("civ_bonus"):
+        lines.append(_line("Civ bonus:", entry["civ_bonus"]))
+    if entry.get("unique_units"):
+        lines.append(_line("Unique units:", ", ".join(entry["unique_units"])))
+    bldgs = entry.get("unique_buildings") or []
+    lines.append(_line("Unique buildings:", ", ".join(bldgs) if bldgs else "(none)"))
+    if entry.get("playstyle"):
+        lines.append(_line("Playstyle:", entry["playstyle"]))
+    if entry.get("age_up"):
+        lines.append(_line("Age up:", entry["age_up"]))
+
+    return f'<div class="dev-blurb-anw">{"".join(lines)}</div>'
+
+
 def render_dev_table(civ: CivAssets) -> str:
     deck_chips_by_age: list[str] = []
     icon_dir = "resources/images/icons/cards"
@@ -686,8 +737,12 @@ def render_dev_table(civ: CivAssets) -> str:
              context="Civ Selection screen → civ list"),
         _row("AI slot name", civ.ai_lobby_name.render_html(),
              context="Lobby → player slot (AI)"),
-        _row("Flag-hover blurb", civ.flag_hover_blurb.render_html(),
-             context="Lobby → hover over civ flag"),
+        _row(
+            "Flag-hover blurb",
+            (_render_anw_blurb(civ.slug)
+             or civ.flag_hover_blurb.render_html()),
+            context="Lobby → hover over civ flag",
+        ),
         _row("Portrait", civ.lobby_portrait.render_html(img_class="dev-thumb"),
              context="Lobby → AI player portrait"),
 
@@ -852,6 +907,10 @@ CSS_BLOCK = """
 .dev-thumb-flag{width:52px;height:34px;object-fit:cover;border-radius:2px;border:1px solid rgba(110,79,36,0.6);background:#1a0e04;display:block}
 .dev-ctx{display:block;font-size:10px;color:var(--dim,#a8946a);font-style:italic;margin-top:3px;font-family:'EB Garamond',Georgia,serif}
 .dev-engine-asset{color:var(--dim,#a8946a);font-size:11px;font-style:italic}
+.dev-blurb-anw{font-family:'EB Garamond',Georgia,serif;font-size:13.5px;line-height:1.55;background:rgba(20,12,4,0.7);color:var(--text,#e8d9b3);padding:10px 14px;margin:0;border-left:3px solid var(--accent,#e9c971);border-radius:2px;text-shadow:0 1px 0 rgba(0,0,0,0.5)}
+.dev-blurb-line{margin:0 0 4px 0}
+.dev-blurb-line:last-child{margin-bottom:0}
+.dev-blurb-label{color:var(--accent,#e9c971);font-weight:600;letter-spacing:.02em;margin-right:4px}
 .dev-str{font-family:'EB Garamond',Georgia,serif;font-size:14px;color:var(--text,#e8d9b3)}
 .dev-base{color:var(--dim,#a8946a);font-size:12px}
 """
