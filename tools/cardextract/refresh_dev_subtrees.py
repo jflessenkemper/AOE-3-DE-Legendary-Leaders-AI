@@ -173,20 +173,17 @@ class StringRef:
         if self.value:
             if self.rich:
                 val_html = _render_aoe_text(self.value)
+                return val_html + f' <code class="dev-id">#{sid_html}</code>'
             else:
                 val_html = html.escape(self.value)
+                return f'<strong class="dev-str">{val_html}</strong> <code class="dev-id">#{sid_html}</code>'
         else:
             # Heuristic: mod IDs are 400000+; lower IDs come from base-game stringtable.
             base_game = self.string_id.isdigit() and int(self.string_id) < 400000
             if base_game:
-                val_html = '<em>(base-game stringtable_x.xml — not in mod repo)</em>'
+                return f'<em class="dev-base">base-game string #{sid_html}</em>'
             else:
-                val_html = '<em>(empty / not resolved)</em>'
-        prefix = f"{val_html}"
-        suffix = f' <code class="dev-id">_locID={sid_html}</code>'
-        if self.note:
-            suffix += f' <span class="dev-note">— {html.escape(self.note)}</span>'
-        return prefix + suffix
+                return f'<em class="dev-base">(empty / not resolved) #{sid_html}</em>'
 
 
 @dataclass
@@ -200,16 +197,39 @@ class AssetRef:
     def populated(self) -> bool:
         return bool(self.path)
 
-    def render_html(self) -> str:
+    def _is_image_path(self) -> bool:
+        p = self.path.lower()
+        return p.endswith(".png") or p.endswith(".jpg")
+
+    def render_html(self, img_class: str = "") -> str:
         if not self.path:
             return f'<em>{html.escape(self.note or "(unset)")}</em>'
-        path_html = html.escape(self.path)
-        exists = (REPO / self.path).is_file()
+        p = self.path.replace("\\", "/").lstrip("/")
+        # Engine-only assets (inside .bar archives)
+        if p.startswith("ui/") or p.startswith("objects/"):
+            return '<span class="dev-engine-asset">engine asset (inside .bar archive)</span>'
+        # .personality references — plain text
+        if p.endswith(".personality"):
+            return f'<code class="dev-path">{html.escape(p)}</code>'
+        if self._is_image_path():
+            exists = (REPO / p).is_file()
+            if not exists:
+                fname = html.escape(p.rsplit("/", 1)[-1])
+                return f'<span class="dev-warn">⚠ missing: {fname}</span>'
+            src = html.escape(p, quote=True)
+            # Pick CSS class
+            if img_class:
+                css = img_class
+            elif "flag" in p.lower():
+                css = "dev-thumb-flag"
+            else:
+                css = "dev-thumb"
+            return f'<img class="{css}" src="{src}" alt="">'
+        # Fallback: plain path
+        path_html = html.escape(p)
+        exists = (REPO / p).is_file()
         marker = "" if exists else ' <span class="dev-warn">(missing)</span>'
-        suffix = ""
-        if self.note:
-            suffix = f' <span class="dev-note">— {html.escape(self.note)}</span>'
-        return f'<code class="dev-path">{path_html}</code>{marker}{suffix}'
+        return f'<code class="dev-path">{path_html}</code>{marker}'
 
 
 @dataclass
@@ -501,8 +521,11 @@ def collect_civ(slug: str, *, civmods_index: dict[str, ET.Element], strings: dic
 # ─── Renderer ─────────────────────────────────────────────────────────────────
 
 
-def _row(label: str, body_html: str) -> str:
-    return f'<tr><td class="dev-cell-label">{html.escape(label)}</td><td>{body_html}</td></tr>'
+def _row(label: str, body_html: str, context: str = "") -> str:
+    label_html = html.escape(label)
+    if context:
+        label_html += f'<span class="dev-ctx">{html.escape(context)}</span>'
+    return f'<tr><td class="dev-cell-label">{label_html}</td><td>{body_html}</td></tr>'
 
 
 def _section_head(text: str) -> str:
@@ -552,39 +575,53 @@ def render_dev_table(civ: CivAssets) -> str:
 
     rows: list[str] = [
         _section_head("Lobby"),
-        _row("Civ-picker name", civ.civ_picker_name.render_html()),
-        _row("AI slot name", civ.ai_lobby_name.render_html()),
-        _row("Flag-hover blurb", civ.flag_hover_blurb.render_html()),
-        _row("Lobby portrait", civ.lobby_portrait.render_html()),
+        _row("Civ-picker name", civ.civ_picker_name.render_html(),
+             context="Civ Selection screen → civ list"),
+        _row("AI slot name", civ.ai_lobby_name.render_html(),
+             context="Lobby → player slot (AI)"),
+        _row("Flag-hover blurb", civ.flag_hover_blurb.render_html(),
+             context="Lobby → hover over civ flag"),
+        _row("Portrait", civ.lobby_portrait.render_html(img_class="dev-thumb"),
+             context="Lobby → AI player portrait"),
 
-        _section_head("Deck Builder (when civ picked by human)"),
-        _row("Deck source", deck_source_label),
-        _row("Cards (Age I…IV)", deck_html),
+        _section_head("Deck Builder"),
+        _row("Deck", deck_source_label,
+             context="Home City → deck builder"),
+        _row("Cards", deck_html,
+             context="Home City → deck builder cards"),
 
         _section_head("In-Match HUD"),
-        _row("Scoreboard flag", civ.scoreboard_flag.render_html()),
-        _row("Scoreboard name", civ.scoreboard_name.render_html()),
-        _row("HC button flag", civ.hud_hc_button.render_html()),
-        _row("Player Summary flag", civ.player_summary_flag.render_html()),
-        _row("Player Summary HC", hc_block),
+        _row("Scoreboard flag", civ.scoreboard_flag.render_html(img_class="dev-thumb-flag"),
+             context="Tab → Scoreboard → flag column"),
+        _row("Scoreboard name", civ.scoreboard_name.render_html(),
+             context="Tab → Scoreboard → player name"),
+        _row("HC button flag", civ.hud_hc_button.render_html(img_class="dev-thumb-flag"),
+             context="HUD → Home City button"),
+        _row("Player Summary flag", civ.player_summary_flag.render_html(img_class="dev-thumb-flag"),
+             context="End-game → Player Summary → flag"),
+        _row("Player Summary HC", hc_block,
+             context="End-game → Player Summary → city name"),
         _row("Player Summary deck", deck_source_label
-             + ' <span class="dev-note">— same 25 cards as Deck Builder; if empty in-game see Known gaps</span>'),
+             + ' <span class="dev-note">— same 25 cards as Deck Builder; if empty in-game see Known gaps</span>',
+             context="End-game → Player Summary → deck tab"),
 
-        _section_head("Diplomacy (F4)"),
-        _row("Portrait", civ.diplomacy_portrait.render_html()),
-        _row("Tooltip name", civ.scoreboard_name.render_html()),
+        _section_head("Diplomacy"),
+        _row("Portrait", civ.diplomacy_portrait.render_html(img_class="dev-thumb"),
+             context="F4 Diplomacy panel → portrait"),
+        _row("Name", civ.scoreboard_name.render_html(),
+             context="F4 Diplomacy panel → hover tooltip"),
 
-        _section_head("Chat (taunts / ally chat)"),
-        _row("Chatset", f'<code class="dev-id">game/ai/chatsetsmods.xml: name="{html.escape(civ.chatset_name)}"</code>'
-             if civ.chatset_name else "<em>(no chatset)</em>"),
-        _row("Speaker portrait", civ.speaker_portrait.render_html()),
-        _row("Speaker name", civ.scoreboard_name.render_html()),
+        _section_head("Chat"),
+        _row("Portrait", civ.speaker_portrait.render_html(img_class="dev-thumb"),
+             context="Ally/taunt chat → speaker portrait"),
+        _row("Name", civ.scoreboard_name.render_html(),
+             context="Ally/taunt chat → speaker name"),
 
-        _section_head("End-Game Screens"),
-        _row("Total-score flag", civ.endgame_total_flag.render_html()),
-        _row("Other-tabs flag", civ.endgame_total_flag.render_html()
-             + ' <span class="dev-note">— engine reuses one PostgameFlagTexture</span>'),
-        _row("End-game civ name", civ.endgame_civ_name.render_html()),
+        _section_head("End-Game"),
+        _row("Score screen flag", civ.endgame_total_flag.render_html(img_class="dev-thumb-flag"),
+             context="Score screen → flag"),
+        _row("Civ name", civ.endgame_civ_name.render_html(),
+             context="Score screen → civ label"),
     ]
 
     rows.append(_section_head("Provenance"))
@@ -666,12 +703,18 @@ CSS_BLOCK = """
 .dev-table{width:100%;border-collapse:collapse;font-size:13px;margin:6px 0;background:rgba(28,18,8,0.55);border:1px solid var(--border,#6e4f24);border-radius:3px}
 .dev-table td,.dev-table th{padding:5px 9px;border:1px solid rgba(110,79,36,0.45);vertical-align:top;color:var(--text,#e8d9b3)}
 .dev-section{background:rgba(58,38,22,0.85);color:var(--accent,#e9c971);font-family:'Cinzel','Trajan Pro',serif;font-weight:600;letter-spacing:.05em;text-align:left;text-transform:uppercase;font-size:11px}
-.dev-cell-label{width:24%;color:var(--accent,#e9c971);font-weight:600;white-space:nowrap;font-family:'EB Garamond',Georgia,serif}
+.dev-cell-label{width:22%;color:var(--accent,#e9c971);font-weight:600;white-space:nowrap;font-family:'EB Garamond',Georgia,serif;line-height:1.4}
 .dev-id{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11px;color:var(--dim,#a8946a);background:rgba(0,0,0,0.35);padding:1px 5px;border-radius:2px;border:1px solid rgba(110,79,36,0.4)}
 .dev-path{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;color:var(--text,#e8d9b3);background:rgba(0,0,0,0.35);padding:1px 5px;border-radius:2px;border:1px solid rgba(110,79,36,0.4);word-break:break-all}
 .dev-note{color:var(--dim,#a8946a);font-size:11px;font-style:italic}
 .dev-warn{color:#f5a37a;font-weight:600}
 .dev-blurb{font-family:'EB Garamond',Georgia,serif;font-size:13.5px;line-height:1.5;background:rgba(20,12,4,0.7);color:var(--text,#e8d9b3);padding:10px 14px;margin:0 0 4px 0;white-space:pre-wrap;border-left:3px solid var(--accent,#e9c971);border-radius:2px;text-shadow:0 1px 0 rgba(0,0,0,0.5)}
+.dev-thumb{width:48px;height:48px;object-fit:cover;border-radius:3px;border:1px solid rgba(110,79,36,0.6);background:#1a0e04;display:block}
+.dev-thumb-flag{width:52px;height:34px;object-fit:cover;border-radius:2px;border:1px solid rgba(110,79,36,0.6);background:#1a0e04;display:block}
+.dev-ctx{display:block;font-size:10px;color:var(--dim,#a8946a);font-style:italic;margin-top:3px;font-family:'EB Garamond',Georgia,serif}
+.dev-engine-asset{color:var(--dim,#a8946a);font-size:11px;font-style:italic}
+.dev-str{font-family:'EB Garamond',Georgia,serif;font-size:14px;color:var(--text,#e8d9b3)}
+.dev-base{color:var(--dim,#a8946a);font-size:12px}
 """
 
 
