@@ -185,21 +185,18 @@ class StringRef:
     def render_html(self) -> str:
         if not self.string_id:
             return f'<em>{html.escape(self.note or "(unset)")}</em>'
-        sid_html = html.escape(self.string_id)
         if self.value:
             if self.rich:
-                val_html = _render_aoe_text(self.value)
-                return val_html + f' <code class="dev-id">#{sid_html}</code>'
-            else:
-                val_html = html.escape(self.value)
-                return f'<strong class="dev-str">{val_html}</strong> <code class="dev-id">#{sid_html}</code>'
-        else:
-            # Heuristic: mod IDs are 400000+; lower IDs come from base-game stringtable.
-            base_game = self.string_id.isdigit() and int(self.string_id) < 400000
-            if base_game:
-                return f'<em class="dev-base">base-game string #{sid_html}</em>'
-            else:
-                return f'<em class="dev-base">(empty / not resolved) #{sid_html}</em>'
+                return _render_aoe_text(self.value)
+            return f'<strong class="dev-str">{html.escape(self.value)}</strong>'
+        # No resolved value — heuristic: mod IDs are 400000+, lower IDs come
+        # from base-game stringtable. The locID is included here only because
+        # there's nothing else to show; once the string resolves it disappears.
+        sid_html = html.escape(self.string_id)
+        base_game = self.string_id.isdigit() and int(self.string_id) < 400000
+        if base_game:
+            return f'<em class="dev-base">(unresolved base-game string {sid_html})</em>'
+        return f'<em class="dev-base">(unresolved {sid_html})</em>'
 
 
 @dataclass
