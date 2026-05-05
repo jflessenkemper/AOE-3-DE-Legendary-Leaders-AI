@@ -182,11 +182,9 @@ def emit_base_civ_stubs() -> tuple[str, list[str]]:
 
     header = (
         "\n\t<!-- ────────────────────────────────────────────────────────\n"
-        "\t     ANW base-civ blocks (22). Stubs emitted by\n"
-        "\t     tools/migration/build_anw_civmods.py — engine-specific\n"
-        "\t     fields (AgeTechs, StatsID, starting units, flag textures)\n"
-        "\t     marked TODO-ANW-VANILLA inline; fill them in after running\n"
-        "\t     extract_vanilla_civs.py against the user's game install.\n"
+        "\t     ANW base-civ blocks (22). Initially emitted as stubs by\n"
+        "\t     tools/migration/build_anw_civmods.py, then populated with\n"
+        "\t     vanilla civ data via tools/migration/extract_vanilla_civs.py.\n"
         "\t     ──────────────────────────────────────────────────────── -->\n\n"
     )
     return header + "\n".join(blocks), tokens

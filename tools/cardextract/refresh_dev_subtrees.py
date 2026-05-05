@@ -54,6 +54,14 @@ from tools.validation.validate_personality_overrides import (  # noqa: E402
     parse_personality,
 )
 
+# ANW migration token map (added during the v1.0 ANW namespace migration).
+# Used to surface the post-migration token names in each civ's Development
+# subtree so reviewers can spot-check the future state alongside the live one.
+try:
+    from tools.migration.anw_token_map import by_slug as _anw_by_slug  # noqa: E402
+except Exception:  # noqa: BLE001
+    _anw_by_slug = None  # type: ignore[assignment]
+
 HTML_PATH = REPO / "a_new_world.html"
 CIVMODS = REPO / "data" / "civmods.xml"
 STRINGS = REPO / "data" / "strings" / "english" / "stringmods.xml"
@@ -625,8 +633,40 @@ def render_dev_table(civ: CivAssets) -> str:
     ]
 
     rows.append(_section_head("Provenance"))
-    rows.append(_row("Personality file",
-                     f'<code class="dev-path">game/ai/{html.escape(civ.leader_personality)}</code>'))
+    if _anw_by_slug is not None:
+        try:
+            anw = _anw_by_slug(civ.slug)
+        except KeyError:
+            anw = None
+        if anw is not None:
+            rows.append(_row(
+                "Civ token",
+                f'<code class="dev-id">{html.escape(anw.anw_token)}</code>',
+                context="civmods.xml &lt;Civ&gt;&lt;Name&gt; + .personality &lt;forcedciv&gt;",
+            ))
+            rows.append(_row(
+                "Personality file",
+                f'<code class="dev-path">game/ai/{html.escape(anw.new_personality_filename)}</code>',
+            ))
+            rows.append(_row(
+                "Homecity file",
+                f'<code class="dev-path">data/{html.escape(anw.new_homecity_filename)}</code>',
+            ))
+            rows.append(_row(
+                "Chatset",
+                f'<code class="dev-id">{html.escape(anw.chatset_new)}</code>',
+                context="game/ai/chatsetsmods.xml",
+            ))
+            rows.append(_row(
+                "Deck key",
+                f'<code class="dev-id">data/decks_anw.json[&quot;{html.escape(anw.anw_token)}&quot;]</code>',
+            ))
+        else:
+            rows.append(_row("Personality file",
+                             f'<code class="dev-path">game/ai/{html.escape(civ.leader_personality)}</code>'))
+    else:
+        rows.append(_row("Personality file",
+                         f'<code class="dev-path">game/ai/{html.escape(civ.leader_personality)}</code>'))
 
     return f'<table class="dev-table"><tbody>{"".join(rows)}</tbody></table>'
 
