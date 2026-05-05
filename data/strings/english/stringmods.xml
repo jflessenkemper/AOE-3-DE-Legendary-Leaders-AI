@@ -1784,51 +1784,80 @@
       <String _locID='490274'>Mariano Vallejo</String>  <!-- rvltmodcalifornians -->
       <String _locID='490275'>Sam Houston</String>  <!-- rvltmodtexians -->
 <!-- MOD-CIV-LEADER-NAMES-END -->
+<!-- MOD-CIV-NATION-NAMES-START -->
+      <!-- Scoreboard/chat nation labels for revolution-derived civs (paired 1:1 with 490250-490275 leader strings). -->
+      <String _locID='490300'>Napoleonic French</String>  <!-- rvltmodnapoleonicfrance -->
+      <String _locID='490301'>Revolutionary French</String>  <!-- rvltmodrevolutionaryfrance -->
+      <String _locID='490302'>Americans</String>  <!-- rvltmodamericans -->
+      <String _locID='490303'>Mexicans</String>  <!-- rvltmodmexicans -->
+      <String _locID='490304'>Canadians</String>  <!-- rvltmodcanadians -->
+      <String _locID='490305'>French Canadians</String>  <!-- rvltmodfrenchcanadians -->
+      <String _locID='490306'>Brazilians</String>  <!-- rvltmodbrazil -->
+      <String _locID='490307'>Argentines</String>  <!-- rvltmodargentines -->
+      <String _locID='490308'>Chileans</String>  <!-- rvltmodchileans -->
+      <String _locID='490309'>Peruvians</String>  <!-- rvltmodperuvians -->
+      <String _locID='490310'>Colombians</String>  <!-- rvltmodcolumbians -->
+      <String _locID='490311'>Haitians</String>  <!-- rvltmodhaitians -->
+      <String _locID='490312'>Indonesians</String>  <!-- rvltmodindonesians -->
+      <String _locID='490313'>South Africans</String>  <!-- rvltmodsouthafricans -->
+      <String _locID='490314'>Finnish</String>  <!-- rvltmodfinnish -->
+      <String _locID='490315'>Hungarians</String>  <!-- rvltmodhungarians -->
+      <String _locID='490316'>Romanians</String>  <!-- rvltmodromanians -->
+      <String _locID='490317'>Barbary</String>  <!-- rvltmodbarbary -->
+      <String _locID='490318'>Egyptians</String>  <!-- rvltmodegyptians -->
+      <String _locID='490319'>Central Americans</String>  <!-- rvltmodcentralamericans -->
+      <String _locID='490320'>Baja Californians</String>  <!-- rvltmodbajacalifornians -->
+      <String _locID='490321'>Yucatecans</String>  <!-- rvltmodyucatan -->
+      <String _locID='490322'>Rio Grandeans</String>  <!-- rvltmodriogrande -->
+      <String _locID='490323'>Mayans</String>  <!-- rvltmodmayans -->
+      <String _locID='490324'>Californians</String>  <!-- rvltmodcalifornians -->
+      <String _locID='490325'>Texians</String>  <!-- rvltmodtexians -->
+<!-- MOD-CIV-NATION-NAMES-END -->
 <!-- BASE-CIV-LEADER-NAMES-START -->
       <!-- Even IDs = scoreboard/chat label (nation name). Odd IDs = tooltip tagline. -->
-      <String _locID='490200'>British</String>
-      <String _locID='490201'>British · Tudor privateer navy + Manor mercantile (Wellington)</String>
-      <String _locID='490202'>Hausa</String>
+      <String _locID='490200'>Queen Elizabeth I</String>
+      <String _locID='490201'>British · Tudor privateer navy + Manor mercantile (Queen Elizabeth I)</String>
+      <String _locID='490202'>Muhammadu Kanta of Kebbi</String>
       <String _locID='490203'>Hausa · Sokoto Caliphate jihadist mobilization (Usman dan Fodio)</String>
-      <String _locID='490204'>Russians</String>
+      <String _locID='490204'>Ivan the Terrible</String>
       <String _locID='490205'>Russian · Oprichnik terror + Streltsy consolidation (Ivan the Terrible)</String>
-      <String _locID='490206'>Dutch</String>
+      <String _locID='490206'>Maurice of Nassau</String>
       <String _locID='490207'>Dutch · mercantile drill + fortification (Maurice of Nassau)</String>
-      <String _locID='490208'>Ethiopians</String>
+      <String _locID='490208'>Menelik II</String>
       <String _locID='490209'>Ethiopian · Adwa-victorious highland defense (Menelik II)</String>
-      <String _locID='490210'>Indians</String>
+      <String _locID='490210'>Shivaji Maharaj</String>
       <String _locID='490211'>Indian · Maratha hill-fort guerilla (Shivaji Bhonsle)</String>
-      <String _locID='490212'>Aztecs</String>
+      <String _locID='490212'>Montezuma II</String>
       <String _locID='490213'>Aztec · tribute empire (Montezuma)</String>
-      <String _locID='490214'>Incas</String>
+      <String _locID='490214'>Pachacuti</String>
       <String _locID='490215'>Inca · Andean terrace fortress (Pachacuti)</String>
-      <String _locID='490216'>Spanish</String>
+      <String _locID='490216'>Isabella I of Castile</String>
       <String _locID='490217'>Spanish · conquistador crown (Isabella I)</String>
-      <String _locID='490218'>French</String>
+      <String _locID='490218'>Louis XVIII</String>
       <String _locID='490219'>French · Bourbon Ancien Régime · Restoration court and gendarmerie (Louis XVIII)</String>
-      <String _locID='490220'>Mexicans</String>
+      <String _locID='490220'>Miguel Hidalgo y Costilla</String>
       <String _locID='490221'>Mexican · Grito de Dolores clergy-led revolution (Hidalgo)</String>
-      <String _locID='490222'>Americans</String>
+      <String _locID='490222'>George Washington</String>
       <String _locID='490223'>American · continental republic (Washington)</String>
-      <String _locID='490224'>Portuguese</String>
+      <String _locID='490224'>Prince Henry the Navigator</String>
       <String _locID='490225'>Portuguese · maritime discovery (Prince Henry the Navigator)</String>
-      <String _locID='490226'>Italians</String>
+      <String _locID='490226'>Giuseppe Garibaldi</String>
       <String _locID='490227'>Italian · Risorgimento Redshirt levee (Garibaldi)</String>
-      <String _locID='490228'>Swedes</String>
+      <String _locID='490228'>Gustavus Adolphus</String>
       <String _locID='490229'>Swedish · Hakkapelit cavalry + line infantry (Gustavus Adolphus)</String>
-      <String _locID='490230'>Maltese</String>
+      <String _locID='490230'>Jean Parisot de Valette</String>
       <String _locID='490231'>Maltese · Hospitaller siege endurance (Jean de Valette)</String>
-      <String _locID='490232'>Chinese</String>
+      <String _locID='490232'>Kangxi Emperor</String>
       <String _locID='490233'>Chinese · banner-army central planning (Kangxi Emperor)</String>
-      <String _locID='490234'>Ottomans</String>
+      <String _locID='490234'>Suleiman the Magnificent</String>
       <String _locID='490235'>Ottoman · Janissary siege modernization (Suleiman the Magnificent)</String>
-      <String _locID='490236'>Japanese</String>
+      <String _locID='490236'>Tokugawa Ieyasu</String>
       <String _locID='490237'>Japanese · Sakoku consolidated shogunate (Tokugawa Ieyasu)</String>
-      <String _locID='490238'>Haudenosaunee</String>
+      <String _locID='490238'>Hiawatha</String>
       <String _locID='490239'>Haudenosaunee · Confederacy council (Hiawatha)</String>
-      <String _locID='490240'>Lakota</String>
+      <String _locID='490240'>Chief Gall</String>
       <String _locID='490241'>Lakota · Little Bighorn envelopment · Plains cavalry wedge (Chief Gall)</String>
-      <String _locID='490242'>Germans</String>
+      <String _locID='490242'>Frederick the Great</String>
       <String _locID='490243'>German · oblique-order Prussian drill (Frederick the Great)</String>
 <!-- BASE-CIV-LEADER-NAMES-END -->
       <String _locID='41682'>A New World DLC</String>
@@ -1852,12 +1881,12 @@
       <String _locID='491109'>He hides as a weak brother would. The Confederacy does not hide.</String>
       <String _locID='491112'>A warrior has gone to the Great Peace. We sing his name tonight.</String>
       <String _locID='491115'>The circle closes. The Great Law is older than this war.</String>
-      <String _locID='491150'>Reason and the scepter, my friend. We advance together.</String>
-      <String _locID='491151'>The Empire of the Rus does not negotiate with disorder.</String>
-      <String _locID='491158'>Stone walls, like laws, hold the Empire in place.</String>
-      <String _locID='491159'>He hides. Even Frederick dared meet me on the field.</String>
-      <String _locID='491162'>A faithful servant is lost. I shall have his estate carved in his memory.</String>
-      <String _locID='491165'>Order has imposed itself upon chaos. As reason demanded.</String>
+      <String _locID='491150'>Stand with the Tsar. The Oprichnina does not forget loyalty.</String>
+      <String _locID='491151'>Traitor — Moscow tolerates no rival. Your lands shall be ash.</String>
+      <String _locID='491158'>The Kremlin&apos;s walls rise. Let them dash themselves upon stone.</String>
+      <String _locID='491159'>He cowers. Even cowards must answer to the rod.</String>
+      <String _locID='491162'>A faithful servant slain. His killers will be hunted to the steppes.</String>
+      <String _locID='491165'>God&apos;s will. The earth bows to Moscow as it must.</String>
       <String _locID='491200'>A good day to ride together. Hoka hey.</String>
       <String _locID='491201'>You have come to the Paha Sapa. You will not leave.</String>
       <String _locID='491208'>The Lakota do not wall. The camp moves.</String>
@@ -2116,12 +2145,12 @@
       <String _locID='493309'>Let him sit behind walls. The Continental Army has time.</String>
       <String _locID='493312'>A patriot fallen. His family will be cared for by the Republic.</String>
       <String _locID='493315'>As at Yorktown — patience, line of supply, final stroke. Liberty&apos;s logic.</String>
-      <String _locID='493350'>Hold the line, sir. The rest is arithmetic.</String>
-      <String _locID='493351'>I have seen your kind at Vitoria. Discipline will decide this.</String>
-      <String _locID='493358'>The lines are up. Let them come.</String>
-      <String _locID='493359'>He hides behind stone. A near-run thing favours the prepared.</String>
-      <String _locID='493362'>A gentleman is down. Pity — and advance.</String>
-      <String _locID='493365'>As expected. Brought up the Guards, brought up the Hussars, and that was that.</String>
+      <String _locID='493350'>Stand fast with us. England&apos;s purse and powder are at thy side.</String>
+      <String _locID='493351'>Pretender — thou shalt find our sea-dogs at thy throat ere long.</String>
+      <String _locID='493358'>Our walls are raised; our cannon primed. Let them dare.</String>
+      <String _locID='493359'>He cowers behind stone. We shall starve him of trade and of hope.</String>
+      <String _locID='493362'>A loyal servant is fallen. England remembers her own.</String>
+      <String _locID='493365'>As we foretold — God blew, and they were scattered. Long live England.</String>
 <!-- LL-QUOTE-STRINGS-END -->
 <!-- LL-COUNTRY-NAMES: nameplate / loading-screen / score-panel labels.
      Each revolution civ shows its country/state name (e.g. "Hungary")
@@ -2153,6 +2182,9 @@
 <String _locID='494025'>California</String>
 <String _locID='494026'>Texas</String>
 <!-- LL-COUNTRY-NAMES-END -->
+<!-- LL-LEADER-NAMES-PROBE: single-civ verification entry. If "Ivan the Terrible"
+     appears in the scoreboard + chat for the Russians AI, the pattern is proven
+     and we'll add the other 46 leaders here. -->
 <!-- LL-BASE-CIV-OVERRIDES: same intent for the 22 base-game civs.
      Each <String _locID='X'> here re-points an existing base-game string ID
      to the country/state form. The engine reads stringmods.xml after the
@@ -2167,7 +2199,7 @@
 <String _locID='22864'>Spain</String>                <!-- Spanish      -->
 <String _locID='22865'>Portugal</String>             <!-- Portuguese   -->
 <String _locID='22866'>Germany</String>              <!-- Germans      -->
-<String _locID='22867'>Russia</String>               <!-- Russians     -->
+<String _locID='22867'>Russia</String>              <!-- Russians     -->
 <String _locID='22868'>Ottoman Empire</String>       <!-- Ottomans     -->
 <String _locID='22872'>Aztec Empire</String>         <!-- Aztecs       -->
 <String _locID='22879'>Iroquois Confederacy</String> <!-- Haudenosaunee -->
