@@ -1,4 +1,4 @@
-"""Parse LEGENDARY_LEADERS_TREE.html into structured per-civ doctrine
+"""Parse a_new_world.html into structured per-civ doctrine
 contracts so the replay validator can cross-check that runtime probes match
 what the public reference tree advertises.
 
@@ -32,7 +32,7 @@ Numeric mapping must match cLLWallStrategy* constants in aiHeader.xs
 
 Usage:
     from tools.playtest.html_reference import load_doctrine_contracts
-    contracts = load_doctrine_contracts(Path("LEGENDARY_LEADERS_TREE.html"))
+    contracts = load_doctrine_contracts(Path("a_new_world.html"))
     contracts["British"]  # → DoctrineContract(...)
 """
 from __future__ import annotations
@@ -183,7 +183,7 @@ def _civ_label_for(full_name: str) -> tuple[str, str]:
 
 
 def load_doctrine_contracts(html_path: Path) -> dict[str, DoctrineContract]:
-    """Read LEGENDARY_LEADERS_TREE.html and return contracts keyed by civ
+    """Read a_new_world.html and return contracts keyed by civ
     label. Single-token for unique civs ('British', 'Aztecs'), two-token
     for revolutions whose root collides with a base civ ('French Louis',
     'Napoleonic France', 'South Africans')."""
@@ -218,7 +218,7 @@ if __name__ == "__main__":
     from pathlib import Path as _P
 
     repo_root = _P(__file__).resolve().parents[2]
-    html = repo_root / "LEGENDARY_LEADERS_TREE.html"
+    html = repo_root / "a_new_world.html"
     if not html.exists():
         print(f"missing {html}", file=sys.stderr)
         raise SystemExit(2)

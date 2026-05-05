@@ -1,6 +1,6 @@
 """Comprehensive HTML reference structural validator.
 
-Cross-checks `LEGENDARY_LEADERS_TREE.html` against itself + civmods so
+Cross-checks `a_new_world.html` against itself + civmods so
 every civ that ships in the mod has a complete, consistently-labelled
 section in the reference site.
 
@@ -115,9 +115,9 @@ def _has_block_for(labels: set[str], civ_slug: str) -> bool:
 
 
 def validate_html_reference(repo_root: Path) -> list[str]:
-    html_path = repo_root / "LEGENDARY_LEADERS_TREE.html"
+    html_path = repo_root / "a_new_world.html"
     if not html_path.is_file():
-        return [f"missing LEGENDARY_LEADERS_TREE.html at {html_path}"]
+        return [f"missing a_new_world.html at {html_path}"]
     text = html_path.read_text(encoding="utf-8")
 
     sections = _section_bounds(text)

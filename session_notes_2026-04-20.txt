@@ -39,7 +39,7 @@ Files and areas investigated
 - game/ai/leaders/leader_revolution_support.xs
 - game/ai/leaders/leader_revolution_commanders.xs
 - game/ai/aiLoaderStandard.xs
-- LEGENDARY_LEADERS_TREE.html
+- a_new_world.html
 - /home/jflessenkemper/.local/share/Steam/steamapps/common/AoE3DE/Game/UI/UIResources1.bar
 - /home/jflessenkemper/.local/share/Steam/steamapps/common/AoE3DE/Game/UI/UIResources4.bar
 

@@ -5,7 +5,7 @@
 **Repo:** `jflessenkemper/AOE-3-DE-A-New-World-DLC`
 **Branch everything is on:** `claude/hungry-banzai-e122dc` (the active worktree branch; merge / FF to `main` to publish)
 **GitHub Pages live URL for the reference site:**
-<https://jflessenkemper.github.io/AOE-3-DE-A-New-World-DLC/LEGENDARY_LEADERS_TREE.html>
+<https://jflessenkemper.github.io/AOE-3-DE-A-New-World-DLC/a_new_world.html>
 
 ---
 
@@ -43,7 +43,7 @@ This session shipped a **v2 Playstyle modal** on top of `a695a53` that:
 | Terrain/heading constants | `game/ai/aiHeader.xs` |
 | Per-nation wiring | `game/ai/leaders/leaderCommon.xs` → `llApplyBuildStyleForActiveCiv()` |
 | Placement math | `game/ai/core/aiBuildings.xs` → `llGetTerrainFeatureVector`, `llGetHeadingFeatureVector`, `llGetPlacementBiasedCenter`, `llApplyLegendaryBaseInfluence`, `selectTCBuildPlanPosition` |
-| Reference site | `LEGENDARY_LEADERS_TREE.html` (modal block marked `<!-- PLAYSTYLE-MODAL-START -->` / `<!-- PLAYSTYLE-MODAL-END -->`) |
+| Reference site | `a_new_world.html` (modal block marked `<!-- PLAYSTYLE-MODAL-START -->` / `<!-- PLAYSTYLE-MODAL-END -->`) |
 | Playstyle data | inside modal block — `window.NATION_PLAYSTYLE` literal, keyed by `data-name` |
 | Historical guide | `docs/design/map-placement-historical-guide.md` |
 | Terrain system doc | `docs/design/terrain-character-system.md` |

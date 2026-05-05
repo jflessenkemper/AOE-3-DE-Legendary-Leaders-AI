@@ -1,4 +1,4 @@
-"""Cross-check LEGENDARY_LEADERS_TREE.html against the actual mod data so
+"""Cross-check a_new_world.html against the actual mod data so
 the reference site never drifts from what the AI actually loads.
 
 For every civ section in the HTML we verify, against the file on disk:
@@ -23,7 +23,7 @@ import sys
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[2]
-HTML = REPO / "LEGENDARY_LEADERS_TREE.html"
+HTML = REPO / "a_new_world.html"
 DATA = REPO / "data"
 
 # Map civ slug used as a section header → home-city basename + summary key
@@ -143,7 +143,7 @@ _DEFERRED_HTML_SECTION: set[str] = {"Americans", "Mexicans (Revolution)"}
 def validate_html_vs_mod(repo_root: Path | None = None) -> list[str]:
     """Library-friendly entrypoint. Returns the issue list (empty = OK)."""
     repo = Path(repo_root) if repo_root else REPO
-    html_path = repo / "LEGENDARY_LEADERS_TREE.html"
+    html_path = repo / "a_new_world.html"
     data = repo / "data"
     text = html_path.read_text(encoding="utf-8")
     leg = json.loads((data / "decks_legendary.json").read_text())

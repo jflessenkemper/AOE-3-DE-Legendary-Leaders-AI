@@ -26,7 +26,7 @@ from __future__ import annotations
 import re
 from pathlib import Path
 
-HTML = Path(__file__).resolve().parents[2] / "LEGENDARY_LEADERS_TREE.html"
+HTML = Path(__file__).resolve().parents[2] / "a_new_world.html"
 
 PROSE: dict[str, str] = {
     "Compact Fortified Core":

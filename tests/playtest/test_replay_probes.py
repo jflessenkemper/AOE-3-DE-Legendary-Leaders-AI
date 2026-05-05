@@ -536,7 +536,7 @@ class TestNewEventProbes(unittest.TestCase):
 
 class TestHtmlDoctrineContract(unittest.TestCase):
     """The validator cross-checks runtime probes against
-    LEGENDARY_LEADERS_TREE.html doctrine claims (when the HTML promises
+    a_new_world.html doctrine claims (when the HTML promises
     something specific and at least one compliance.* probe fired)."""
 
     def setUp(self) -> None:

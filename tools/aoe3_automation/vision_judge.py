@@ -3,7 +3,7 @@
 Closes the only gap pHash/OCR couldn't honestly cover: "does this screenshot
 *look like* the right civ playing the right doctrine?"  We send each captured
 PNG to the Anthropic Messages API with a context-aware prompt that bakes in
-the civ's expected doctrine from ``LEGENDARY_LEADERS_TREE.html``, and Opus
+the civ's expected doctrine from ``a_new_world.html``, and Opus
 returns a structured pass/fail with reasoning.
 
 Stdlib only — no ``anthropic`` SDK dep — so the matrix stays self-contained.

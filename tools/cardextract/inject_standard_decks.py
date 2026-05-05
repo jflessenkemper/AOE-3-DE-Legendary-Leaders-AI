@@ -1,5 +1,5 @@
 """Render the Legendary Leaders deck inside each STANDARD-civ Card Deck
-<details> block in LEGENDARY_LEADERS_TREE.html.
+<details> block in a_new_world.html.
 
 Reads:
   - data/cards.json            {card_name: {name, desc, icon}}
@@ -25,7 +25,7 @@ import re
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[2]
-HTML_PATH = REPO / "LEGENDARY_LEADERS_TREE.html"
+HTML_PATH = REPO / "a_new_world.html"
 CARDS_PATH = REPO / "data" / "cards.json"
 DECKS_STD_PATH = REPO / "data" / "decks_standard.json"
 

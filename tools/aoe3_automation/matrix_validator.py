@@ -97,7 +97,7 @@ AXES_BASE: tuple[str, ...] = (
 # corresponding probes never fire and would force every axis to red.
 #
 # `html_doctrine` is the spine: derived from replay_probes.validate(), which
-# cross-references runtime probes against LEGENDARY_LEADERS_TREE.html via
+# cross-references runtime probes against a_new_world.html via
 # the DoctrineContract loader. A green here means the AI played the civ the
 # way the public reference promises it should play.
 AXES_DEEP: tuple[str, ...] = (
@@ -183,7 +183,7 @@ def _expectation_for_civ(civ_name: str):
 # --- HTML card-deck data-completeness lookup -------------------------------
 #
 # tools/playtest/html_card_decks.json is the harvested deck-grid extract from
-# LEGENDARY_LEADERS_TREE.html — one ordered list of card display names per
+# a_new_world.html — one ordered list of card display names per
 # leader_key. The deck_declared axis flips green for any civ whose
 # expectations.py leader_key has a non-empty deck entry. This is a
 # data-completeness axis: it proves the doctrinal card sequence is encoded

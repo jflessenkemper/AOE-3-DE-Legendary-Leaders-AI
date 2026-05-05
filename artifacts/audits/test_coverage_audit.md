@@ -41,7 +41,7 @@ No tests are `@skip`-marked or `xfail` — `grep -r "skip" tests/` returns zero.
 ### XS playstyles
 - Note: there is **no `game/ai/playstyles/` directory** in this worktree.
   "Playstyle" is a UI/HTML concept, encoded as bullets in
-  `LEGENDARY_LEADERS_TREE.html` and surfaced through
+  `a_new_world.html` and surfaced through
   `validate_playstyle_modal.py`. The XS implementation lives in the leader
   files plus `game/ai/core/`.
 - Tested: modal⇄data⇄string-id consistency (`test_validate_playstyle_modal.py`).
@@ -50,7 +50,7 @@ No tests are `@skip`-marked or `xfail` — `grep -r "skip" tests/` returns zero.
   every leader. Today only Aztec and British have explicit HTML-vs-replay
   assertions (`test_replay_probes.py:548,564,575`).
 - 100% = one HTML-promise → replay-violation test per playstyle tag, driven
-  off the bullet list parsed from `LEGENDARY_LEADERS_TREE.html`.
+  off the bullet list parsed from `a_new_world.html`.
 
 ### XS leaders
 - 26 leader files in `game/ai/leaders/leader_*.xs` plus `leaderCommon.xs`,
@@ -96,7 +96,7 @@ No tests are `@skip`-marked or `xfail` — `grep -r "skip" tests/` returns zero.
   `<widescreencamera>` all agree, plus a parametrised test running it across
   all `rvltmodhomecity*.xml`.
 
-### Doctrine HTML reference (`LEGENDARY_LEADERS_TREE.html`)
+### Doctrine HTML reference (`a_new_world.html`)
 - Helper module exists: `tools/playtest/html_reference.py` and
   `tools/validation/validate_html_vs_mod.py`.
 - Tested indirectly: `test_replay_probes.py:548-589` reads HTML promises for

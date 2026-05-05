@@ -5,7 +5,7 @@
 Why: each leader file invokes one of the `llUseXStyle()` helpers in
 `leaderCommon.xs`, which locks down `gLLWallStrategy`,
 `gLLBuildStyle`, and a default military-distance multiplier. The
-playstyle_spec.json (extracted from LEGENDARY_LEADERS_TREE.html)
+playstyle_spec.json (extracted from a_new_world.html)
 asserts what each civ *should* be doing. If a leader file's selected
 style doesn't agree with the spec, the AI will play the wrong
 doctrine — and the only signal today is a failed doctrine-compliance

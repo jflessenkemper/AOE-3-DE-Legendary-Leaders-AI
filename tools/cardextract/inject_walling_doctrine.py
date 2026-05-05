@@ -1,4 +1,4 @@
-"""Inject a per-civ "Walling Doctrine" block into LEGENDARY_LEADERS_TREE.html.
+"""Inject a per-civ "Walling Doctrine" block into a_new_world.html.
 
 Maps each civ to one of six historical archetypes plus a short historical
 citation. Appears between <!-- WALLING-START <civ> --> / <!-- WALLING-END
@@ -14,7 +14,7 @@ import re
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[2]
-HTML_PATH = REPO / "LEGENDARY_LEADERS_TREE.html"
+HTML_PATH = REPO / "a_new_world.html"
 
 # (civ_display_name, strategy_short, historical_citation)
 # 48 civs

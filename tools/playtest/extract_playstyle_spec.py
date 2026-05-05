@@ -1,5 +1,5 @@
 """Extract structured per-civ playstyle assertions from
-LEGENDARY_LEADERS_TREE.html and emit `playstyle_spec.json`.
+a_new_world.html and emit `playstyle_spec.json`.
 
 The spec is consumed by `tools/validation/validate_doctrine_compliance.py`
 to cross-check runtime probes against what the public reference tree
@@ -46,7 +46,7 @@ Wall-strategy ints match `cLLWallStrategy*` in aiGlobals.xs:
 
 Usage:
     python3 tools/playtest/extract_playstyle_spec.py
-    # writes playstyle_spec.json next to LEGENDARY_LEADERS_TREE.html
+    # writes playstyle_spec.json next to a_new_world.html
 
 The `--print-stats` flag dumps per-claim coverage so we can see, e.g.,
 how many civs assert `expects_naval=true` (sanity check vs. our 5
@@ -342,7 +342,7 @@ def _print_stats(specs: dict[str, CivPlaystyleSpec]) -> None:
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     ap.add_argument("--html", type=Path, default=None,
-                    help="path to LEGENDARY_LEADERS_TREE.html (default: repo root)")
+                    help="path to a_new_world.html (default: repo root)")
     ap.add_argument("--out", type=Path, default=None,
                     help="output JSON path (default: <repo>/playstyle_spec.json)")
     ap.add_argument("--print-stats", action="store_true",
@@ -350,7 +350,7 @@ def main() -> int:
     args = ap.parse_args()
 
     repo_root = Path(__file__).resolve().parents[2]
-    html = args.html or (repo_root / "LEGENDARY_LEADERS_TREE.html")
+    html = args.html or (repo_root / "a_new_world.html")
     out  = args.out  or (repo_root / "playstyle_spec.json")
 
     if not html.exists():

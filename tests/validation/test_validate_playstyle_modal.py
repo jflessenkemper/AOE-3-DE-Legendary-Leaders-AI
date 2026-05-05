@@ -69,7 +69,7 @@ class ValidatePlaystyleModalTests(unittest.TestCase):
         tmp = tempfile.TemporaryDirectory()
         self.addCleanup(tmp.cleanup)
         root = Path(tmp.name)
-        (root / "LEGENDARY_LEADERS_TREE.html").write_text(html, encoding="utf-8")
+        (root / "a_new_world.html").write_text(html, encoding="utf-8")
         return root
 
     def test_accepts_complete_data(self) -> None:

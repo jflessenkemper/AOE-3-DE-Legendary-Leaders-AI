@@ -13,7 +13,7 @@ For each civ we render the EXACT set of cards inside that civ's default deck
 age is looked up from `decks.json` (the full available pool); cards not found
 in the pool are bucketed as Discovery.
 
-Edits LEGENDARY_LEADERS_TREE.html in place:
+Edits a_new_world.html in place:
   - Replaces (or inserts) a marker block <!-- DECK-START civ -->...<!-- DECK-END --> immediately
     after each `<code>rvltmodhomecity<key>.xml</code>` paragraph in the 26 revolution
     nation blocks.
@@ -30,7 +30,7 @@ import re
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[2]
-HTML_PATH = REPO / "LEGENDARY_LEADERS_TREE.html"
+HTML_PATH = REPO / "a_new_world.html"
 CARDS_PATH = REPO / "data" / "cards.json"
 DECKS_PATH = REPO / "data" / "decks.json"
 

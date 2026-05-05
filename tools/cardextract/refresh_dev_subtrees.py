@@ -1,4 +1,4 @@
-"""Refresh the per-nation Development subtree in LEGENDARY_LEADERS_TREE.html.
+"""Refresh the per-nation Development subtree in a_new_world.html.
 
 Inserts a fifth `<details>` block under each nation-node summarising the 17
 in-game identity surfaces (lobby name + portrait + blurb, deck-builder cards,
@@ -17,7 +17,7 @@ Reads:
   - tools/validation/validate_html_vs_mod.CIV_TO_HOMECITY  (canonical 48 slugs)
 
 Writes:
-  - LEGENDARY_LEADERS_TREE.html
+  - a_new_world.html
         Idempotently rewrites the block bounded by
         `<!-- DEV-START name="<slug>" -->` ... `<!-- DEV-END name="<slug>" -->`
         inside each nation-node. Inserts the markers (and the wrapping
@@ -54,7 +54,7 @@ from tools.validation.validate_personality_overrides import (  # noqa: E402
     parse_personality,
 )
 
-HTML_PATH = REPO / "LEGENDARY_LEADERS_TREE.html"
+HTML_PATH = REPO / "a_new_world.html"
 CIVMODS = REPO / "data" / "civmods.xml"
 STRINGS = REPO / "data" / "strings" / "english" / "stringmods.xml"
 CARDS = REPO / "data" / "cards.json"

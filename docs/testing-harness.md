@@ -43,7 +43,7 @@ every validator under `tools/validation/`:
 | XML Well-Formedness | Every `*.xml` / `*.tactics` / `*.material` / `*.dmg` in the repo parses. |
 | XS | Every `*.xs` script uses only the documented stock AoE3 XS surface (allowlist-based). |
 | Terrain/Heading Wiring | Every of the 48 civs has a branch in `llApplyBuildStyleForActiveCiv()` that calls `llSetPreferredTerrain` + `llSetExpansionHeading` with valid constants and in-range strengths. |
-| Playstyle Modal | Every `.nation-node[data-name]` in `LEGENDARY_LEADERS_TREE.html` has a `window.NATION_PLAYSTYLE` entry with all required base-doctrine and **imperial-peer doctrine** fields populated (each civ now carries an `imperialPsTitle` + `imperialAges{Discovery..Imperial}` + imperial bullet sets, anchored on its historical leader from `data/playercolors.xml`). No internal jargon (multipliers, level n/N, raw `gLL*` / `cLL*` constants) may leak into end-user prose. |
+| Playstyle Modal | Every `.nation-node[data-name]` in `a_new_world.html` has a `window.NATION_PLAYSTYLE` entry with all required base-doctrine and **imperial-peer doctrine** fields populated (each civ now carries an `imperialPsTitle` + `imperialAges{Discovery..Imperial}` + imperial bullet sets, anchored on its historical leader from `data/playercolors.xml`). No internal jargon (multipliers, level n/N, raw `gLL*` / `cLL*` constants) may leak into end-user prose. |
 | Player Colors | `data/playercolors.xml` is well-formed, has unique civ + leader entries with valid 0..255 RGB channels, and binds every revolution civ declared in `civmods.xml`. |
 
 ### 2. Validator regression tests (Python unittest)
@@ -125,4 +125,4 @@ Their reports go under `.claude/session_*-artifacts/`.
 | `civmods-ui-validation.yml` | Just the civmods UI asset check. |
 | `terrain-heading-validation.yml` | Just the terrain/heading wiring check (new). |
 | `playstyle-modal-validation.yml` | Just the v2 playstyle modal check (new). |
-| `pages-deploy.yml` | Deploys `LEGENDARY_LEADERS_TREE.html` + reference site to GitHub Pages from `main`. |
+| `pages-deploy.yml` | Deploys `a_new_world.html` + reference site to GitHub Pages from `main`. |

@@ -3,13 +3,13 @@ name: Playstyle Modal Validation
 on:
   push:
     paths:
-      - "LEGENDARY_LEADERS_TREE.html"
+      - "a_new_world.html"
       - "tools/validation/validate_playstyle_modal.py"
       - "tests/validation/test_validate_playstyle_modal.py"
       - ".github/workflows/playstyle-modal-validation.yml"
   pull_request:
     paths:
-      - "LEGENDARY_LEADERS_TREE.html"
+      - "a_new_world.html"
       - "tools/validation/validate_playstyle_modal.py"
       - "tests/validation/test_validate_playstyle_modal.py"
       - ".github/workflows/playstyle-modal-validation.yml"

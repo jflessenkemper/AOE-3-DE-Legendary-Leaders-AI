@@ -1,5 +1,5 @@
 """Strip legacy double-deck content from each Card Deck <details> block in
-LEGENDARY_LEADERS_TREE.html so every nation shows ONLY the curated icon
+a_new_world.html so every nation shows ONLY the curated icon
 deck the AI actually plays.
 
 Three legacy patterns being removed:
@@ -35,7 +35,7 @@ from __future__ import annotations
 import re
 from pathlib import Path
 
-HTML = Path(__file__).resolve().parents[2] / "LEGENDARY_LEADERS_TREE.html"
+HTML = Path(__file__).resolve().parents[2] / "a_new_world.html"
 
 # Match a Card Deck details block. The cat-label may have a colon-suffix
 # like "Card Deck: Flower War & Tribute (25 cards, curated)" — we'll

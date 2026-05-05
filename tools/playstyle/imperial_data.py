@@ -1,7 +1,7 @@
 """Imperial-doctrine peer playstyle data for every civ.
 
 Authored from artifacts/audits/imperial_playstyle_design_brief.md §4.
-Injected into LEGENDARY_LEADERS_TREE.html by tools/playstyle/inject_imperial.py.
+Injected into a_new_world.html by tools/playstyle/inject_imperial.py.
 """
 from __future__ import annotations
 

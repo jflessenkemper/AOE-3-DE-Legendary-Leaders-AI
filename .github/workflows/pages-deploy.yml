@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
     paths:
-      - "LEGENDARY_LEADERS_TREE.html"
+      - "a_new_world.html"
       - "map_3d.html"
       - "resources/images/icons/**"
       - "resources/3d/**"
@@ -28,10 +28,12 @@ jobs:
 
       - name: Stage site
         run: |
-          mkdir -p _site/resources/images/icons
-          cp LEGENDARY_LEADERS_TREE.html _site/index.html
-          # Also keep the original filename so existing links keep working.
-          cp LEGENDARY_LEADERS_TREE.html _site/LEGENDARY_LEADERS_TREE.html
+          mkdir -p _site/resources/images/icons _site/resources/images/textures
+          cp a_new_world.html _site/index.html
+          cp a_new_world.html _site/a_new_world.html
+          # Legacy URL alias — keep the old filename serving so external
+          # links to /LEGENDARY_LEADERS_TREE.html don't 404.
+          cp a_new_world.html _site/LEGENDARY_LEADERS_TREE.html
           # 3D viewer
           if [ -f map_3d.html ]; then
             cp map_3d.html _site/map_3d.html
@@ -47,6 +49,10 @@ jobs:
               cp -r "resources/images/icons/$d" "_site/resources/images/icons/$d"
             fi
           done
+          # Page background (Poly Haven CC0 wood panel) — referenced by a_new_world.html.
+          if [ -d resources/images/textures ]; then
+            cp -r resources/images/textures/. _site/resources/images/textures/
+          fi
           # A tiny .nojekyll so Pages doesn't try to process the tree.
           touch _site/.nojekyll
           du -sh _site

@@ -1,4 +1,4 @@
-"""Inject imperial-doctrine peer playstyle data into LEGENDARY_LEADERS_TREE.html.
+"""Inject imperial-doctrine peer playstyle data into a_new_world.html.
 
 Reads ``IMPERIAL_PLAYSTYLE_DATA`` from ``tools.playstyle.imperial_data``
 and merges each entry's keys into the matching ``window.NATION_PLAYSTYLE``
@@ -21,7 +21,7 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
-HTML_REL = Path("LEGENDARY_LEADERS_TREE.html")
+HTML_REL = Path("a_new_world.html")
 
 PLAYSTYLE_OBJECT_RE = re.compile(
     r"(window\.NATION_PLAYSTYLE\s*=\s*)(\{.*?\})(;)",

@@ -1334,7 +1334,7 @@ def main() -> int:
                     help="Path to playstyle_spec.json consumed by "
                          "--validate-doctrine. Default: <repo>/playstyle_spec.json. "
                          "Regenerate via tools/playtest/extract_playstyle_spec.py "
-                         "whenever LEGENDARY_LEADERS_TREE.html changes.")
+                         "whenever a_new_world.html changes.")
     ap.add_argument("--deep", action="store_true",
                     help="Deep behavioural-axis mode. Raises observe-seconds "
                          "(if left at the default 10) to 300 so compliance.* / "

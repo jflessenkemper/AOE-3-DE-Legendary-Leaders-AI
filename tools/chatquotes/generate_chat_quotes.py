@@ -8,7 +8,7 @@ Outputs:
   - game/ai/chatsetsmods.xml       — per-leader <Chatset> with <Tag> + <Sentence>
   - data/strings/english/stringmods.xml
                                    — <String _locID> entries per quote
-  - LEGENDARY_LEADERS_TREE.html    — per-civ Quotes block refreshed
+  - a_new_world.html    — per-civ Quotes block refreshed
   - game/ai/*.personality          — each personality's <chatset> updated to the leader name
 
 Idempotent via markers.
@@ -24,7 +24,7 @@ REPO = Path(__file__).resolve().parents[2]
 QUOTES_JSON = REPO / "tools" / "chatquotes" / "quotes.json"
 CHATSETS_PATH = REPO / "game" / "ai" / "chatsetsmods.xml"
 STRINGS_PATH = REPO / "data" / "strings" / "english" / "stringmods.xml"
-HTML_PATH = REPO / "LEGENDARY_LEADERS_TREE.html"
+HTML_PATH = REPO / "a_new_world.html"
 AI_DIR = REPO / "game" / "ai"
 
 CHAT_START = "<!-- LL-LEADER-QUOTES-START -->"

@@ -12,7 +12,7 @@ import html
 import re
 from pathlib import Path
 
-HTML = Path(__file__).resolve().parents[2] / "LEGENDARY_LEADERS_TREE.html"
+HTML = Path(__file__).resolve().parents[2] / "a_new_world.html"
 
 # Each block we annotate looks like:
 #   <details class="nation-node" data-name="…" [data-search="…"]>...</details>

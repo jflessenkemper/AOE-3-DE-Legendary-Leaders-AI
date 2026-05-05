@@ -3,12 +3,12 @@
 validate_probes_vs_spec.py
 Post-hoc validator: reads per-civ match.log slices (from matrix_runner artifacts),
 parses [LLP v=2 ...] probe stream, and validates against the NATION_PLAYSTYLE spec
-embedded in LEGENDARY_LEADERS_TREE.html.
+embedded in a_new_world.html.
 
 CLI:
     python3 tools/validation/validate_probes_vs_spec.py \
         --matrix-dir tools/aoe3_automation/artifacts/matrix_runner \
-        [--html LEGENDARY_LEADERS_TREE.html] \
+        [--html a_new_world.html] \
         [--out report.md] [--json report.json]
 """
 
@@ -559,8 +559,8 @@ def main():
     )
     parser.add_argument(
         "--html",
-        default="LEGENDARY_LEADERS_TREE.html",
-        help="Path to LEGENDARY_LEADERS_TREE.html",
+        default="a_new_world.html",
+        help="Path to a_new_world.html",
     )
     parser.add_argument("--out", default=None, help="Output Markdown file path")
     parser.add_argument("--json", default=None, help="Output JSON file path")

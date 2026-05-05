@@ -199,7 +199,7 @@ def _doctrine_index() -> dict[str, DoctrineContract]:
     """Lazy load — the HTML is 700KB, parse once per process."""
     global _DOCTRINE_CACHE
     if _DOCTRINE_CACHE is None:
-        html = REPO_ROOT / "LEGENDARY_LEADERS_TREE.html"
+        html = REPO_ROOT / "a_new_world.html"
         if html.exists():
             _DOCTRINE_CACHE = load_doctrine_contracts(html)
         else:

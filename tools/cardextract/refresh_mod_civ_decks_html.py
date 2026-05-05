@@ -1,13 +1,13 @@
 """Refresh the Legendary Leaders deck block between
 <!-- DECK-START <civ> --> and <!-- DECK-END <civ> --> markers in
-LEGENDARY_LEADERS_TREE.html for each of the 26 mod revolution civs.
+a_new_world.html for each of the 26 mod revolution civs.
 
 Reads:
   - data/rvltmodhomecity*.xml  (the authoritative in-game deck the AI uses)
   - data/cards.json            (card_name → {name, desc, icon})
 
 Writes:
-  - LEGENDARY_LEADERS_TREE.html  (between DECK-START/DECK-END markers)
+  - a_new_world.html  (between DECK-START/DECK-END markers)
 
 Each card rendered as <span class="card-chip"><img class="card-icon" title="Name — Desc"></span>.
 Cards grouped by age using the existing <dl class="deck-grid"> structure.
@@ -21,7 +21,7 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[2]
-HTML = REPO / "LEGENDARY_LEADERS_TREE.html"
+HTML = REPO / "a_new_world.html"
 CARDS = REPO / "data" / "cards.json"
 DATA = REPO / "data"
 

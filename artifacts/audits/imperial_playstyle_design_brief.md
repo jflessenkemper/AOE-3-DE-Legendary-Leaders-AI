@@ -27,7 +27,7 @@ word "Imperial". The closest near-misses are:
 
 | psTitle | Civ | File line | Comment |
 |---|---|---|---|
-| `"Sublime Porte gunpowder empire"` | Ottomans / Suleiman | `LEGENDARY_LEADERS_TREE.html:3373` | "empire" not "imperial" |
+| `"Sublime Porte gunpowder empire"` | Ottomans / Suleiman | `a_new_world.html:3373` | "empire" not "imperial" |
 | `"Sagres carrack-and-padrao empire"` | Portuguese / Henry | `:3404` | ditto |
 | `"Grande Armée Grand Battery empire"` | Napoleonic France / Napoleon | `:4076` | ditto |
 | `"Imperial line and Hessian reserve"` | Brazil / Pedro I | `:3654` | the only `psTitle` containing the literal word "Imperial" — refers to the unit *Imperial Musketeer* line, not an imperial doctrine |
@@ -44,7 +44,7 @@ selectable per civ.
 
 ### 1a. Civ-doctrine playstyles (46 — one per nation)
 
-Source: `LEGENDARY_LEADERS_TREE.html` lines 2854–4327 (`window.NATION_PLAYSTYLE = {…}` literal).
+Source: `a_new_world.html` lines 2854–4327 (`window.NATION_PLAYSTYLE = {…}` literal).
 Validator: `tools/validation/validate_playstyle_modal.py`.
 Test: `tests/validation/test_validate_playstyle_modal.py`.
 
@@ -841,7 +841,7 @@ must be wired:
 ### Reference docs
 - `LEGENDARY_LEADERS_NATION_REFERENCE.txt` — add per-nation imperial
   block (current `Expected playstyle:` line is the obvious target).
-- `LEGENDARY_LEADERS_TREE.html` — extend `window.NATION_PLAYSTYLE`
+- `a_new_world.html` — extend `window.NATION_PLAYSTYLE`
   entries; modal renderer (`renderPlaystyle` line 4339).
 - `README.md` — playstyle section.
 - `docs/testing-harness.md` — note new validator hooks.

@@ -28,7 +28,7 @@
 <div id="fps">— fps</div>
 <div id="picker">
   <select id="nationSelect"></select>
-  <a href="LEGENDARY_LEADERS_TREE.html" id="back">← Back</a>
+  <a href="a_new_world.html" id="back">← Back</a>
 </div>
 
 <script type="importmap">
@@ -51,7 +51,7 @@ import { Water } from 'three/addons/objects/Water.js';
    World coordinates mirror the 2D modal exactly: 600x600 unit canvas.
    2D (x, y) maps to 3D (x - 300, _, y - 300) with Y as up.
    This keeps the placement math (terrainAnchor / headingAnchor / blend)
-   bit-identical to LEGENDARY_LEADERS_TREE.html so all 48 profiles render
+   bit-identical to a_new_world.html so all 48 profiles render
    in the same positions in 3D as they do in the 2D modal.
 ==================================================================== */
 
@@ -270,7 +270,7 @@ const terrainGeom = new THREE.PlaneGeometry(TERRAIN_EXTENT, TERRAIN_EXTENT, TERR
 terrainGeom.rotateX(-Math.PI/2);
 
 function biomeHeight(wx, wz){
-  // Bayou layout: 2D-space coords match LEGENDARY_LEADERS_TREE.html exactly.
+  // Bayou layout: 2D-space coords match a_new_world.html exactly.
   const x = wx + HALF, z = wz + HALF;
   // Outside central 600x600: just plain (no biome features extend to the
   // expanded terrain ring used to hide the map edge).
@@ -764,7 +764,7 @@ function placeHeadingArrow(modX, modY, ang){
   buildingGroup.add(head);
 }
 
-/* === Placement math — bit-identical to LEGENDARY_LEADERS_TREE.html === */
+/* === Placement math — bit-identical to a_new_world.html === */
 const SPAWN_TC = { x: 300, y: 300 };
 const FEATURE = {
   coast:    { x: 300, y:  35 },
@@ -971,7 +971,7 @@ function renderProfile(profile){
 
 /* === Profile data — fetch from main HTML === */
 async function loadProfiles(){
-  const res = await fetch('LEGENDARY_LEADERS_TREE.html', { cache: 'no-cache' });
+  const res = await fetch('a_new_world.html', { cache: 'no-cache' });
   const txt = await res.text();
   const start = txt.indexOf('window.NATION_PROFILES');
   const end = txt.indexOf('})();', start) + 5;

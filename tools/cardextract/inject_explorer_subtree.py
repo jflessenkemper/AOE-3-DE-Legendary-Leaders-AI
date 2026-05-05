@@ -1,4 +1,4 @@
-"""Inject per-civ "Explorer" sub-section into LEGENDARY_LEADERS_TREE.html.
+"""Inject per-civ "Explorer" sub-section into a_new_world.html.
 
 Shows, for each nation, the conceptual hero (leader portrait + name + brief
 note) that defines the civ's AI explorer identity. Does not alter in-engine
@@ -20,7 +20,7 @@ import re
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[2]
-HTML_PATH = REPO / "LEGENDARY_LEADERS_TREE.html"
+HTML_PATH = REPO / "a_new_world.html"
 
 # (section-data-name-substring, portrait-file, leader-name, blurb, explorer-note)
 # - portrait-file is relative to art/ui/leaders/ (mod's own leader portraits)

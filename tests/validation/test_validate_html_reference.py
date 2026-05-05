@@ -39,7 +39,7 @@ class _Repo:
         tmp = tempfile.TemporaryDirectory()
         tc.addCleanup(tmp.cleanup)
         self.root = Path(tmp.name)
-        (self.root / "LEGENDARY_LEADERS_TREE.html").write_text(html, encoding="utf-8")
+        (self.root / "a_new_world.html").write_text(html, encoding="utf-8")
         for rel in files:
             p = self.root / rel
             p.parent.mkdir(parents=True, exist_ok=True)

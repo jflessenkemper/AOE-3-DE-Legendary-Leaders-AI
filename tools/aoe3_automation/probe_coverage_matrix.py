@@ -23,11 +23,11 @@ Why this exists
 The XS-side instrumentation now covers every state-mutating mod hook
 (buildstyle/personality/elite/commander/influence + 17 compliance.* and
 event.* periodic snapshots). To prove every civ's playstyle and
-buildstyle line up with the public reference (LEGENDARY_LEADERS_TREE.html),
+buildstyle line up with the public reference (a_new_world.html),
 we need real matches that emit the wire-format probes and a validator pass
 over the captured log slices.
 
-Nine test packs cover every doctrine claim in LEGENDARY_LEADERS_TREE.html:
+Nine test packs cover every doctrine claim in a_new_world.html:
 
     1. terrain_forest     — TempForest map, forest-bias civs (British/French/Iro/Swede)
     2. terrain_water      — Caribbean,    naval civs (Dutch/Portuguese/Italians/Maltese)

@@ -1,7 +1,7 @@
 """Update each civ block's `Buildstyle: <NAME>` heading in the HTML to match
 the new bespoke archetype assignment in leaderCommon.xs.
 
-Each civ block in LEGENDARY_LEADERS_TREE.html is anchored by a
+Each civ block in a_new_world.html is anchored by a
 `<!-- ──────────── <CIV> ──────────── -->` section comment. We rewrite the
 FIRST `Buildstyle: ...` label that follows that comment to its bespoke name.
 The descriptive `<dl class="buildparam">` knob values are left untouched —
@@ -12,7 +12,7 @@ from __future__ import annotations
 import re
 from pathlib import Path
 
-HTML = Path(__file__).resolve().parents[2] / "LEGENDARY_LEADERS_TREE.html"
+HTML = Path(__file__).resolve().parents[2] / "a_new_world.html"
 
 # civ-comment slug (between the box-drawing dashes) → bespoke archetype label
 LABEL = {

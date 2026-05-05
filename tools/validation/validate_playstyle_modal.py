@@ -1,4 +1,4 @@
-"""Validate the v2 Playstyle modal in `LEGENDARY_LEADERS_TREE.html`.
+"""Validate the v2 Playstyle modal in `a_new_world.html`.
 
 For every `<details class="nation-node" data-name="...">` we expect:
 
@@ -33,7 +33,7 @@ if __package__ is None or __package__ == "":
 from tools.validation.common import REPO_ROOT, build_repo_root_parser, repo_relative
 
 
-HTML_REL = Path("LEGENDARY_LEADERS_TREE.html")
+HTML_REL = Path("a_new_world.html")
 
 REQUIRED_STRING_FIELDS = (
     "nation",
@@ -232,7 +232,7 @@ def validate_playstyle_modal(
 
 def main() -> int:
     parser = build_repo_root_parser(
-        "Validate the v2 Playstyle modal data in LEGENDARY_LEADERS_TREE.html."
+        "Validate the v2 Playstyle modal data in a_new_world.html."
     )
     parser.add_argument(
         "--no-imperial",
