@@ -3,14 +3,56 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AOE 3 DE - A New World DLC</title>
+<title>A New World</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=EB+Garamond:wght@400;500;600&display=swap">
 <style>
-:root{--bg:#121212;--card:#1e1e1e;--accent:#00e5ff;--accent2:#2c2c2c;--text:#eee;--dim:#999;--border:#333;--elite:#ffd700;--tag-bg:#2c2c2c;--tag-text:#80cbc4}
+/* AOE 3 DE menu palette: dark walnut wood panel, antique-gold titles,
+   parchment-cream body. The wood texture is Poly Haven's Dark Wooden
+   Planks (CC0) — see resources/images/textures/ATTRIBUTION.md. */
+:root{
+  --bg:#241608;
+  --bg-tex:url("resources/images/textures/wood_panel_dark.jpg");
+  --card:rgba(38,24,12,0.78);
+  --accent:#e9c971;
+  --accent-bright:#ffce5c;
+  --accent2:#3a2616;
+  --text:#e8d9b3;
+  --dim:#a8946a;
+  --border:#6e4f24;
+  --elite:#ffd700;
+  --tag-bg:rgba(60,38,18,0.85);
+  --tag-text:#d6c896;
+  --fg:var(--text);
+}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);padding:20px;max-width:1200px;line-height:1.5}
+body{
+  font-family:'EB Garamond','Georgia','Iowan Old Style','Palatino Linotype',serif;
+  background:var(--bg-tex), var(--bg);
+  background-repeat:repeat;
+  background-size:520px auto;
+  background-attachment:fixed;
+  color:var(--text);
+  padding:20px;
+  max-width:1200px;
+  margin:0 auto;
+  line-height:1.55;
+  text-shadow:0 1px 0 rgba(0,0,0,0.45);
+}
+/* Subtle dark vignette so long blocks of card chips and dev tables stay
+   readable over the bright sections of the wood grain. */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:-1;
+  background:radial-gradient(ellipse at top,rgba(0,0,0,0.18) 0%,rgba(0,0,0,0.55) 100%);
+}
 .page-header{margin-bottom:18px}
 .title-row{display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-bottom:6px}
-h1{font-size:1.8rem;color:var(--accent)}
+h1{font-family:'Cinzel','Trajan Pro','Palatino Linotype',serif;font-size:2.6rem;font-weight:600;letter-spacing:.06em;color:var(--accent);text-shadow:0 2px 0 rgba(0,0,0,0.55),0 0 22px rgba(233,201,113,0.18)}
 .subtitle{color:var(--dim);font-size:.9rem}
 .toolbar{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;align-items:center}
 .toolbar button{background:var(--accent2);color:var(--text);border:1px solid var(--border);padding:6px 16px;border-radius:4px;cursor:pointer;font-size:.85rem}
@@ -22,8 +64,8 @@ h1{font-size:1.8rem;color:var(--accent)}
 .section-head.is-empty{display:none}
 
 /* GitHub button — diagonal shine sweep */
-.gh-beam{--gh-radius:12px;--gh-bg:#161616;position:relative;display:inline-flex;align-items:center;gap:10px;padding:14px 24px;border-radius:var(--gh-radius);background:var(--gh-bg);color:var(--text);font-size:1.05rem;font-weight:600;text-decoration:none;letter-spacing:.2px;overflow:hidden;isolation:isolate;flex:0 0 auto;transition:transform .25s ease,background .25s ease;box-shadow:0 0 0 1px rgba(255,255,255,.06),0 4px 14px rgba(0,0,0,.35)}
-.gh-beam:hover{background:#1c1c1c;transform:translateY(-1px)}
+.gh-beam{--gh-radius:6px;--gh-bg:#3a2616;position:relative;display:inline-flex;align-items:center;gap:10px;padding:12px 22px;border-radius:var(--gh-radius);background:var(--gh-bg);color:var(--accent);font-family:'Cinzel','Trajan Pro',serif;font-size:.95rem;font-weight:500;letter-spacing:.06em;text-decoration:none;overflow:hidden;isolation:isolate;flex:0 0 auto;transition:transform .25s ease,background .25s ease;border:1px solid var(--border);box-shadow:0 0 0 1px rgba(0,0,0,.4),0 4px 14px rgba(0,0,0,.45)}
+.gh-beam:hover{background:#4a3220;transform:translateY(-1px);color:var(--accent-bright)}
 .gh-beam svg{width:24px;height:24px;fill:currentColor;position:relative;z-index:2;transition:transform .35s ease}
 .gh-beam:hover svg{transform:rotate(8deg) scale(1.05)}
 .gh-beam>span{position:relative;z-index:2}
@@ -40,12 +82,12 @@ summary{cursor:pointer;list-style:none;position:relative;padding:3px 0;user-sele
 summary::-webkit-details-marker{display:none}
 summary::before{content:'+';display:inline-block;width:18px;font-weight:bold;color:var(--accent);font-family:monospace;font-size:1rem}
 details[open]>summary::before{content:'\2212'}
-.nation-header{display:inline-flex;align-items:center;gap:8px;font-size:1.05rem;font-weight:600}
+.nation-header{display:inline-flex;align-items:center;gap:8px;font-family:'Cinzel','Trajan Pro','Palatino Linotype',serif;font-size:1.15rem;font-weight:500;letter-spacing:.04em;color:var(--accent)}
 .nation-header img{border-radius:3px;vertical-align:middle;object-fit:contain}
 .flag-img{height:24px;width:auto;border:1px solid var(--border)}
 .portrait-img{height:48px;width:auto;border:1px solid var(--border);border-radius:50%}
 .base-flag{display:inline-block;background:var(--tag-bg);color:var(--tag-text);font-size:.7rem;padding:1px 6px;border-radius:3px;vertical-align:middle}
-.section-head>summary{font-size:1.3rem;font-weight:700;color:var(--accent);padding:10px 0}
+.section-head>summary{font-family:'Cinzel','Trajan Pro','Palatino Linotype',serif;font-size:1.4rem;font-weight:600;letter-spacing:.05em;color:var(--accent);padding:10px 0}
 .section-head{margin-left:0;border-left:none;padding-left:0;margin-bottom:12px}
 .cat-label{font-weight:600;color:var(--tag-text)}
 .elite{color:var(--elite);font-weight:600}
@@ -77,13 +119,15 @@ li{list-style:none;padding:1px 0}
 /* BS-PROSE-CSS-END */
 /* PRELOADER-CSS-START */
 html.is-loading body>:not(#preloader){visibility:hidden}
-#preloader{position:fixed;inset:0;z-index:9999;background:var(--bg,#0d1117);
+#preloader{position:fixed;inset:0;z-index:9999;
+  background:var(--bg-tex), var(--bg);
+  background-size:520px auto;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:18px;font-family:inherit;color:var(--text,#e6edf3);
+  gap:18px;font-family:'EB Garamond',Georgia,serif;color:var(--text);
   transition:opacity .35s ease}
 #preloader.is-done{opacity:0;pointer-events:none}
-#preloader .pl-title{font-size:1.1rem;letter-spacing:.05em;text-transform:uppercase;
-  color:var(--accent,#7ee787)}
+#preloader .pl-title{font-family:'Cinzel','Trajan Pro','Palatino Linotype',serif;font-size:1.6rem;font-weight:600;letter-spacing:.08em;
+  color:var(--accent);text-shadow:0 2px 0 rgba(0,0,0,0.55)}
 #preloader .pl-sub{font-size:.85rem;color:var(--dim,#8b949e);max-width:380px;text-align:center;line-height:1.4}
 #preloader .pl-bar{width:min(380px,72vw);height:6px;border-radius:3px;
   background:rgba(255,255,255,.08);overflow:hidden}
@@ -99,17 +143,16 @@ html.is-loading body>:not(#preloader){visibility:hidden}
 .explorer-block .explorer-name{font-weight:700;display:block;margin-bottom:2px}
 .explorer-block .explorer-cosmetic{font-style:italic;opacity:.85;font-size:.85rem;display:block;margin-top:4px}
 
-
-/* dev-subtree styles (refresh_dev_subtrees.py) */
-.dev-table{width:100%;border-collapse:collapse;font-size:13px;margin:6px 0}
-.dev-table td,.dev-table th{padding:4px 8px;border:1px solid #2a2a2a;vertical-align:top}
-.dev-section{background:#222;color:#dcd6a8;font-weight:600;text-align:left}
-.dev-cell-label{width:24%;color:#a8b3c4;font-weight:600;white-space:nowrap}
-.dev-id{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11px;color:#9aa1ac;background:#1a1a1a;padding:1px 4px;border-radius:2px}
-.dev-path{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;color:#cdd5e0;background:#1a1a1a;padding:1px 4px;border-radius:2px;word-break:break-all}
-.dev-note{color:#9aa1ac;font-size:11px}
-.dev-warn{color:#ff8888;font-weight:600}
-.dev-blurb{font-family:Georgia,serif;font-size:13px;line-height:1.45;background:#1f1c12;color:#cdc6a8;padding:8px 12px;margin:0 0 4px 0;white-space:pre-wrap;border-left:3px solid #6b5a2a;border-radius:2px}
+/* dev-subtree styles (refresh_dev_subtrees.py) — AOE 3 DE menu palette */
+.dev-table{width:100%;border-collapse:collapse;font-size:13px;margin:6px 0;background:rgba(28,18,8,0.55);border:1px solid var(--border,#6e4f24);border-radius:3px}
+.dev-table td,.dev-table th{padding:5px 9px;border:1px solid rgba(110,79,36,0.45);vertical-align:top;color:var(--text,#e8d9b3)}
+.dev-section{background:rgba(58,38,22,0.85);color:var(--accent,#e9c971);font-family:'Cinzel','Trajan Pro',serif;font-weight:600;letter-spacing:.05em;text-align:left;text-transform:uppercase;font-size:11px}
+.dev-cell-label{width:24%;color:var(--accent,#e9c971);font-weight:600;white-space:nowrap;font-family:'EB Garamond',Georgia,serif}
+.dev-id{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11px;color:var(--dim,#a8946a);background:rgba(0,0,0,0.35);padding:1px 5px;border-radius:2px;border:1px solid rgba(110,79,36,0.4)}
+.dev-path{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;color:var(--text,#e8d9b3);background:rgba(0,0,0,0.35);padding:1px 5px;border-radius:2px;border:1px solid rgba(110,79,36,0.4);word-break:break-all}
+.dev-note{color:var(--dim,#a8946a);font-size:11px;font-style:italic}
+.dev-warn{color:#f5a37a;font-weight:600}
+.dev-blurb{font-family:'EB Garamond',Georgia,serif;font-size:13.5px;line-height:1.5;background:rgba(20,12,4,0.7);color:var(--text,#e8d9b3);padding:10px 14px;margin:0 0 4px 0;white-space:pre-wrap;border-left:3px solid var(--accent,#e9c971);border-radius:2px;text-shadow:0 1px 0 rgba(0,0,0,0.5)}
 
 </style>
 <script>document.documentElement.classList.add("is-loading");</script>
@@ -117,7 +160,7 @@ html.is-loading body>:not(#preloader){visibility:hidden}
 <body>
 <!-- PRELOADER-START -->
 <div id="preloader" role="status" aria-live="polite">
-  <div class="pl-title">AOE 3 DE - A New World DLC</div>
+  <div class="pl-title">A New World</div>
   <div class="pl-sub">Caching unit, card, and flag art so the page doesn't pop in as you scroll&hellip;</div>
   <div class="pl-bar"><div class="pl-fill" id="pl-fill"></div></div>
   <div class="pl-count" id="pl-count">0 / 0</div>
@@ -125,7 +168,7 @@ html.is-loading body>:not(#preloader){visibility:hidden}
 <!-- PRELOADER-END -->
 <header class="page-header">
   <div class="title-row">
-    <h1>AOE 3 DE - A New World DLC</h1>
+    <h1>A New World</h1>
     <a class="gh-beam" href="https://github.com/jflessenkemper/AOE-3-DE-A-New-World-DLC" target="_blank" rel="noopener" aria-label="View source on GitHub">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5C5.73.5.79 5.44.79 11.71c0 4.95 3.21 9.14 7.66 10.62.56.1.77-.24.77-.54v-1.9c-3.12.68-3.78-1.5-3.78-1.5-.51-1.3-1.25-1.65-1.25-1.65-1.02-.7.08-.69.08-.69 1.13.08 1.72 1.16 1.72 1.16 1 1.72 2.63 1.22 3.27.93.1-.73.39-1.22.71-1.5-2.49-.28-5.11-1.25-5.11-5.55 0-1.23.44-2.23 1.16-3.02-.12-.28-.5-1.43.11-2.98 0 0 .94-.3 3.08 1.15.89-.25 1.85-.37 2.8-.38.95.01 1.91.13 2.8.38 2.13-1.45 3.07-1.15 3.07-1.15.61 1.55.23 2.7.11 2.98.72.79 1.16 1.79 1.16 3.02 0 4.31-2.63 5.27-5.13 5.55.4.34.76 1.02.76 2.06v3.06c0 .3.2.65.78.54 4.44-1.48 7.65-5.67 7.65-10.62C23.21 5.44 18.27.5 12 .5z"/></svg>
       <span>GitHub</span>
@@ -160,7 +203,7 @@ html.is-loading body>:not(#preloader){visibility:hidden}
 
 <details><summary><span class="cat-label">Card Deck</span></summary>
 <!-- STD-DECK-START Aztecs -->
-<p style="margin:6px 0 4px;font-size:.85rem;color:var(--dim)">A New World DLC deck (override) &mdash; 25 cards across 4 ages. Hover any card for its description.</p>
+<p style="margin:6px 0 4px;font-size:.85rem;color:var(--dim)">A New World deck (override) &mdash; 25 cards across 4 ages. Hover any card for its description.</p>
 <dl class="deck-grid">
 <dt><span class="age-chip age-1" title="Discovery Age">I</span></dt>
 <dd><span class="card-chip" title="Calendar Ceremony — Ships 1 Warrior Priest. Enables the new Calendar Ceremony at the Community Plaza, which reduces the cost of your next Age-up over time."><img class="card-icon" src="resources/images/icons/cards/calendar_ceremony.png" alt="Calendar Ceremony"></span><span class="card-chip" title="Calmecac — The next Council Member you research, or are researching, will age-up twice as fast."><img class="card-icon" src="resources/images/icons/cards/calmecac.png" alt="Calmecac"></span><span class="card-chip" title="High Priest of Ixtlilton — Improves your War Chief in combat. Warrior Priests are more effective at the Community Plaza."><img class="card-icon" src="resources/images/icons/cards/high_priest_ixil.png" alt="High Priest of Ixtlilton"></span></dd>
@@ -213,7 +256,7 @@ html.is-loading body>:not(#preloader){visibility:hidden}
 </details>
 <details><summary><span class="cat-label">Card Deck</span></summary>
 <!-- STD-DECK-START British -->
-<p style="margin:6px 0 4px;font-size:.85rem;color:var(--dim)">A New World DLC deck (override) &mdash; 25 cards across 4 ages. Hover any card for its description.</p>
+<p style="margin:6px 0 4px;font-size:.85rem;color:var(--dim)">A New World deck (override) &mdash; 25 cards across 4 ages. Hover any card for its description.</p>
 <dl class="deck-grid">
 <dt><span class="age-chip age-1" title="Discovery Age">I</span></dt>
 <dd><span class="card-chip" title="TEAM Whale Oil — New methods of rendering Whale oil at sea allow your Fishing Boats to gather from Whales significantly faster."><img class="card-icon" src="resources/images/icons/cards/team_whaling.png" alt="TEAM Whale Oil"></span><span class="card-chip" title="Greenwich Time — Arrives fast! Ships 1 Trading Post Wagon. Each of your Trading Posts improve Politician and Technology research time by -20%."><img class="card-icon" src="resources/images/icons/cards/greenwich_time.png" alt="Greenwich Time"></span><span class="card-chip" title="Marion&#x27;s Diversions — Ships 2 Quaker Guns, decoy units which deal no damage but can look like any artillery unit. Enables them at the Artillery Foundry. Artillery moves slightly faster."><img class="card-icon" src="resources/images/icons/cards/sc_marions_diversions.png" alt="Marion&#x27;s Diversions"></span><span class="card-chip" title="TEAM Great Lakes — TEAM Docks and Dock upgrades are 30% cheaper. Naval Big Button upgrades are 50% cheaper."><img class="card-icon" src="resources/images/icons/cards/hc_team_cheap_docks.png" alt="TEAM Great Lakes"></span></dd>
@@ -265,7 +308,7 @@ html.is-loading body>:not(#preloader){visibility:hidden}
 </details>
 <details><summary><span class="cat-label">Card Deck</span></summary>
 <!-- STD-DECK-START Chinese -->
-<p style="margin:6px 0 4px;font-size:.85rem;color:var(--dim)">A New World DLC deck (override) &mdash; 25 cards across 4 ages. Hover any card for its description.</p>
+<p style="margin:6px 0 4px;font-size:.85rem;color:var(--dim)">A New World deck (override) &mdash; 25 cards across 4 ages. Hover any card for its description.</p>
 <dl class="deck-grid">
 <dt><span class="age-chip age-1" title="Discovery Age">I</span></dt>
 <dd><span class="card-chip" title="Advanced Wonders — Wonders have more hitpoints and are built faster."><img class="card-icon" src="resources/images/icons/cards/hc_advanced_wonders.png" alt="Advanced Wonders"></span><span class="card-chip" title="Rural Village — Ships 1 Village Rickshaw and increases Village limit by 1."><img class="card-icon" src="resources/images/icons/cards/hc_nomadic_settlement.png" alt="Rural Village"></span></dd>
@@ -317,7 +360,7 @@ html.is-loading body>:not(#preloader){visibility:hidden}
 </details>
 <details><summary><span class="cat-label">Card Deck</span></summary>
 <!-- STD-DECK-START Dutch -->
-<p style="margin:6px 0 4px;font-size:.85rem;color:var(--dim)">A New World DLC deck (override) &mdash; 25 cards across 4 ages. Hover any card for its description.</p>
+<p style="margin:6px 0 4px;font-size:.85rem;color:var(--dim)">A New World deck (override) &mdash; 25 cards across 4 ages. Hover any card for its description.</p>
 <dl class="deck-grid">
 <dt><span class="age-chip age-1" title="Discovery Age">I</span></dt>
 <dd><span class="card-chip" title="Dutch Paintings — Every time you order a Dutch painting from your home city all your Coin is exchanged for an equal amount of Food, so that the artist may finally eat."><img class="card-icon" src="resources/images/icons/cards/dutch_paintings.png" alt="Dutch Paintings"></span><span class="card-chip" title="3 Merchants — Dutch villager that costs coin but also gathers coin faster than a Settler."><img class="card-icon" src="resources/images/icons/cards/hc_villager_dutch_icon.png" alt="3 Merchants"></span><span class="card-chip" title="2 Merchants — Dutch villager that costs coin but also gathers coin faster than a Settler."><img class="card-icon" src="resources/images/icons/cards/infinite_villager_dutch.png" alt="2 Merchants"></span><span class="card-chip" title="Peace of Münster — Ships 2 Envoys. Allows your Envoy to build Trading Posts and military production buildings."><img class="card-icon" src="resources/images/icons/cards/peaceofmuenster.png" alt="Peace of Münster"></span></dd>
@@ -369,7 +412,7 @@ html.is-loading body>:not(#preloader){visibility:hidden}
 </details>
 <details><summary><span class="cat-label">Card Deck</span></summary>
 <!-- STD-DECK-START Ethiopians -->
-<p style="margin:6px 0 4px;font-size:.85rem;color:var(--dim)">A New World DLC deck (override) &mdash; 25 cards across 4 ages. Hover any card for its description.</p>
+<p style="margin:6px 0 4px;font-size:.85rem;color:var(--dim)">A New World deck (override) &mdash; 25 cards across 4 ages. Hover any card for its description.</p>
 <dl class="deck-grid">
 <dt><span class="age-chip age-1" title="Discovery Age">I</span></dt>
 <dd><span class="card-chip" title="Indian Spice Trade — Trade Routes supply more resources and Native Settlements trickle more Influence."><img class="card-icon" src="resources/images/icons/cards/indian_spice_trade.png" alt="Indian Spice Trade"></span><span class="card-chip" title="Establish Ironmonger — Villagers gather Coin from Mines faster."><img class="card-icon" src="resources/images/icons/cards/hc_iron_monger.png" alt="Establish Ironmonger"></span></dd>
@@ -554,7 +597,7 @@ html.is-loading body>:not(#preloader){visibility:hidden}
 </details>
 <details><summary><span class="cat-label">Card Deck</span></summary>
 <!-- STD-DECK-START French -->
-<p style="margin:6px 0 4px;font-size:.85rem;color:var(--dim)">A New World DLC deck (override) &mdash; 25 cards across 4 ages. Hover any card for its description.</p>
+<p style="margin:6px 0 4px;font-size:.85rem;color:var(--dim)">A New World deck (override) &mdash; 25 cards across 4 ages. Hover any card for its description.</p>
 <dl class="deck-grid">
 <dt><span class="age-chip age-1" title="Discovery Age">I</span></dt>
 <dd><span class="card-chip" title="TEAM House of Bonaparte — TEAM Skirmishers can be trained in the Commerce Age. Also benefits Cassadors, Wakina Riflemen, Forest Prowlers, Sharpshooters, Neftenyas and the &#x27;Imperial&#x27; and &#x27;Territorial&#x27; Chinese Banner Armies. For Russian, British, Aztec, Indian, Japanese, Inca and Swedish allies, it makes Streltsy, Longbowmen, Otontin Slingers, Gurkha, Yumi Archers, Jungle Bowmen, Fulani Archers, Desert Archers, Leather Cannons and Jaegers train slightly faster."><img class="card-icon" src="resources/images/icons/cards/team_bonaparte.png" alt="TEAM House of Bonaparte"></span><span class="card-chip" title="2 Coureurs"><img class="card-icon" src="resources/images/icons/cards/infinite_coureur.png" alt="2 Coureurs"></span></dd>
@@ -603,7 +646,7 @@ html.is-loading body>:not(#preloader){visibility:hidden}
 <ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/dopplesoldner_icon.png" alt="">Doppelsoldner</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_war_wagon_icon.png" alt="">War Wagon</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hungarian_hussar_icon.png" alt="">Hussar</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_crossbow_icon.png" alt="">Crossbowman</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/cannon_icon.png" alt="">Artillery</span></li></ul></details>
 <details><summary><span class="cat-label">Card Deck</span></summary>
 <!-- STD-DECK-START Germans -->
-<p style="margin:6px 0 4px;font-size:.85rem;color:var(--dim)">A New World DLC deck (override) &mdash; 25 cards across 4 ages. Hover any card for its description.</p>
+<p style="margin:6px 0 4px;font-size:.85rem;color:var(--dim)">A New World deck (override) &mdash; 25 cards across 4 ages. Hover any card for its description.</p>
 <dl class="deck-grid">
 <dt><span class="age-chip age-1" title="Discovery Age">I</span></dt>
 <dd><span class="card-chip" title="Buergermeister — Improves your German Explorer in combat, lets him build Trading Posts and Town Centers faster, and gives him a powerful canine companion."><img class="card-icon" src="resources/images/icons/cards/hc_explorer_german.png" alt="Buergermeister"></span><span class="card-chip" title="1 Settler Wagon"><img class="card-icon" src="resources/images/icons/cards/infinite_settler_wagon.png" alt="1 Settler Wagon"></span></dd>
@@ -644,7 +687,7 @@ html.is-loading body>:not(#preloader){visibility:hidden}
 <ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/iro_aenna_icon.png" alt="">Aenna</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/mantlet_icon.png" alt="">Mantlet</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/iro_forrest_runner_icon.png" alt="">Forest Prowler</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/iro_musket_rider_icon.png" alt="">Musket Rider</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/sx_light_cannon_icon.png" alt="">Light Cannon</span></li></ul></details>
 <details><summary><span class="cat-label">Card Deck</span></summary>
 <!-- STD-DECK-START Haudenosaunee -->
-<p style="margin:6px 0 4px;font-size:.85rem;color:var(--dim)">A New World DLC deck (override) &mdash; 25 cards across 4 ages. Hover any card for its description.</p>
+<p style="margin:6px 0 4px;font-size:.85rem;color:var(--dim)">A New World deck (override) &mdash; 25 cards across 4 ages. Hover any card for its description.</p>
 <dl class="deck-grid">
 <dt><span class="age-chip age-1" title="Discovery Age">I</span></dt>
 <dd><span class="card-chip" title="High Chief — Your War Chief is better in combat and at organizing defences. His aura now also slightly increases building hitpoints."><img class="card-icon" src="resources/images/icons/cards/high_chief_iro.png" alt="High Chief"></span><span class="card-chip" title="Forest Mother — 9 Deer"><img class="card-icon" src="resources/images/icons/cards/deer_icon_64x64.png" alt="Forest Mother"></span></dd>
@@ -685,7 +728,7 @@ html.is-loading body>:not(#preloader){visibility:hidden}
 <ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/bodyguard_icon.png" alt="">Maigadi</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/knight_icon.png" alt="">Lifidi Knight</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/desert_archer_icon.png" alt="">Desert Archer</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/cannon_icon.png" alt="">Cannon Crews</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/sebastopol_mortar_icon.png" alt="">Mortar Crews</span></li></ul></details>
 <details><summary><span class="cat-label">Card Deck</span></summary>
 <!-- STD-DECK-START Hausa -->
-<p style="margin:6px 0 4px;font-size:.85rem;color:var(--dim)">A New World DLC deck (override) &mdash; 25 cards across 4 ages. Hover any card for its description.</p>
+<p style="margin:6px 0 4px;font-size:.85rem;color:var(--dim)">A New World deck (override) &mdash; 25 cards across 4 ages. Hover any card for its description.</p>
 <dl class="deck-grid">
 <dt><span class="age-chip age-1" title="Discovery Age">I</span></dt>
 <dd><span class="card-chip" title="Hausa Kingdom — Ships all of the following Builders up until the reached age:\n • Exploration Age: 1 University Builder \n • Commerce Age: 1 Trade Builder\n • Fortress Age: 1 Palace Builder\n • Industrial Age: 1 Town Center Builder\n • Imperial Age: 5 Camp Builders"><img class="card-icon" src="resources/images/icons/cards/university_icon.png" alt="Hausa Kingdom"></span><span class="card-chip" title="Emir of Katsina"><img class="card-icon" src="resources/images/icons/cards/emir_katsina.png" alt="Emir of Katsina"></span></dd>
@@ -726,7 +769,7 @@ html.is-loading body>:not(#preloader){visibility:hidden}
 <ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/slinger_icon.png" alt="">Huaraca</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/runner_icon.png" alt="">Chimu Runner</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/maceman_icon.png" alt="">Maceman</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/spearman_icon.png" alt="">Spearmen</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/villager_icon.png" alt="">Support Infantry</span></li></ul></details>
 <details><summary><span class="cat-label">Card Deck</span></summary>
 <!-- STD-DECK-START Inca -->
-<p style="margin:6px 0 4px;font-size:.85rem;color:var(--dim)">A New World DLC deck (override) &mdash; 25 cards across 4 ages. Hover any card for its description.</p>
+<p style="margin:6px 0 4px;font-size:.85rem;color:var(--dim)">A New World deck (override) &mdash; 25 cards across 4 ages. Hover any card for its description.</p>
 <dl class="deck-grid">
 <dt><span class="age-chip age-1" title="Discovery Age">I</span></dt>
 <dd><span class="card-chip" title="Advanced Tambos — Tambos are cheaper and stronger. +1 Chasqui"><img class="card-icon" src="resources/images/icons/cards/advanced_tambos.png" alt="Advanced Tambos"></span><span class="card-chip" title="TEAM Inca Walls — Walls get double hitpoints."><img class="card-icon" src="resources/images/icons/cards/team_inca_walls.png" alt="TEAM Inca Walls"></span></dd>
@@ -767,7 +810,7 @@ html.is-loading body>:not(#preloader){visibility:hidden}
 <ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_gurkha_icon.png" alt="">Gurkha</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_rajput_icon.png" alt="">Rajput</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_zamburak_icon.png" alt="">Zamburak</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_musketeer_icon.png" alt="">Howdah</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_lancer_icon.png" alt="">Mahout</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_urumi_icon.png" alt="">Urumi</span></li></ul></details>
 <details><summary><span class="cat-label">Card Deck</span></summary>
 <!-- STD-DECK-START Indians -->
-<p style="margin:6px 0 4px;font-size:.85rem;color:var(--dim)">A New World DLC deck (override) &mdash; 25 cards across 4 ages. Hover any card for its description.</p>
+<p style="margin:6px 0 4px;font-size:.85rem;color:var(--dim)">A New World deck (override) &mdash; 25 cards across 4 ages. Hover any card for its description.</p>
 <dl class="deck-grid">
 <dt><span class="age-chip age-1" title="Discovery Age">I</span></dt>
 <dd><span class="card-chip" title="Good Faith Agreements — Consulate armies and improvements arrive 50% faster. Improvements cost less, and brigade Shipments receive a moderate discount, +1 Villager."><img class="card-icon" src="resources/images/icons/cards/advanced_consulate.png" alt="Good Faith Agreements"></span><span class="card-chip" title="Advanced Wonders — Wonders have more hitpoints and are built faster, +1 Villager."><img class="card-icon" src="resources/images/icons/cards/hc_advanced_wonders.png" alt="Advanced Wonders"></span><span class="card-chip" title="Favorable Karma — Monk attack and hitpoints increased. Allows Indian Monks to train Tigers, +1 Villager."><img class="card-icon" src="resources/images/icons/cards/hc_indian_monk_combat_icon_64.png" alt="Favorable Karma"></span><span class="card-chip" title="Holy Refuge — Monastery improvements cheaper and ships a Monastery Rickshaw, +1 Villager."><img class="card-icon" src="resources/images/icons/cards/hc_expanded_monastery.png" alt="Holy Refuge"></span><span class="card-chip" title="Trade Empire — You get a Trading Post Rickshaw, and Trading Posts are cheaper and stronger, +1 Villager."><img class="card-icon" src="resources/images/icons/cards/hc_trade_empire.png" alt="Trade Empire"></span></dd>
@@ -808,7 +851,7 @@ html.is-loading body>:not(#preloader){visibility:hidden}
 <ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/schiavone_icon.png" alt="">Schiavone</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/papal_zouave_icon.png" alt="">Papal Zouave</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/mounted_infantry_icon.png" alt="">Mounted Infantry</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/minuteman_icon.png" alt="">Militia</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/cannon_icon.png" alt="">Artillery</span></li></ul></details>
 <details><summary><span class="cat-label">Card Deck</span></summary>
 <!-- STD-DECK-START Italians -->
-<p style="margin:6px 0 4px;font-size:.85rem;color:var(--dim)">A New World DLC deck (override) &mdash; 25 cards across 4 ages. Hover any card for its description.</p>
+<p style="margin:6px 0 4px;font-size:.85rem;color:var(--dim)">A New World deck (override) &mdash; 25 cards across 4 ages. Hover any card for its description.</p>
 <dl class="deck-grid">
 <dt><span class="age-chip age-1" title="Discovery Age">I</span></dt>
 <dd><span class="card-chip" title="Machiavellianism — Arrives fast! Improves your Italian Explorer in combat, enables him to pick up Treasures nearly instantly and gives him a powerful canine companion."><img class="card-icon" src="resources/images/icons/cards/machiavellianism.png" alt="Machiavellianism"></span><span class="card-chip" title="TEAM Lombardy — TEAM Ships 1 Lombard Wagon that can transform into a Lombard, an investment building which converts deposited resources."><img class="card-icon" src="resources/images/icons/cards/team_lombardy.png" alt="TEAM Lombardy"></span><span class="card-chip" title="Florentine Football — Italian Settler hitpoints, movement speed, and melee damage are increased by this rough type of play."><img class="card-icon" src="resources/images/icons/cards/florentine_football.png" alt="Florentine Football"></span></dd>
@@ -849,7 +892,7 @@ html.is-loading body>:not(#preloader){visibility:hidden}
 <ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_bowman_icon.png" alt="">Yumi</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/samurai_icon.png" alt="">Samurai</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/yabusame_icon.png" alt="">Yabusame</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_cav_archer_icon.png" alt="">Naginata Rider</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_arquebusier_icon.png" alt="">Flaming Arrow</span></li></ul></details>
 <details><summary><span class="cat-label">Card Deck</span></summary>
 <!-- STD-DECK-START Japanese -->
-<p style="margin:6px 0 4px;font-size:.85rem;color:var(--dim)">A New World DLC deck (override) &mdash; 25 cards across 4 ages. Hover any card for its description.</p>
+<p style="margin:6px 0 4px;font-size:.85rem;color:var(--dim)">A New World deck (override) &mdash; 25 cards across 4 ages. Hover any card for its description.</p>
 <dl class="deck-grid">
 <dt><span class="age-chip age-1" title="Discovery Age">I</span></dt>
 <dd><span class="card-chip" title="Good Faith Agreements — Consulate armies and improvements arrive 50% faster. Improvements cost less, and brigade Shipments receive a moderate discount."><img class="card-icon" src="resources/images/icons/cards/advanced_consulate.png" alt="Good Faith Agreements"></span><span class="card-chip" title="2 Shrine Wagons"><img class="card-icon" src="resources/images/icons/cards/hc_2x_shrine_wagon_shipment_icon_64.png" alt="2 Shrine Wagons"></span><span class="card-chip" title="Seven Lucky Gods — Unlocks experience point generation from Shrines. Increases build bounty for constructing Shrines."><img class="card-icon" src="resources/images/icons/cards/hc_seven_lucky_gods.png" alt="Seven Lucky Gods"></span></dd>
@@ -890,7 +933,7 @@ html.is-loading body>:not(#preloader){visibility:hidden}
 <ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/sx_bow_rider_icon.png" alt="">Bow Rider</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/sx_warrifle_icon.png" alt="">Wakina Rifle</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/sx_tokala_icon.png" alt="">Tashunke Prowler</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/sx_warclub_icon.png" alt="">Club Warrior</span></li></ul></details>
 <details><summary><span class="cat-label">Card Deck</span></summary>
 <!-- STD-DECK-START Lakota -->
-<p style="margin:6px 0 4px;font-size:.85rem;color:var(--dim)">A New World DLC deck (override) &mdash; 25 cards across 4 ages. Hover any card for its description.</p>
+<p style="margin:6px 0 4px;font-size:.85rem;color:var(--dim)">A New World deck (override) &mdash; 25 cards across 4 ages. Hover any card for its description.</p>
 <dl class="deck-grid">
 <dt><span class="age-chip age-1" title="Discovery Age">I</span></dt>
 <dd><span class="card-chip" title="Ogle Tanka Un — Makes your War Chief deadlier in combat. His aura now also improves your units’ siege attack damage."><img class="card-icon" src="resources/images/icons/cards/high_chief.png" alt="Ogle Tanka Un"></span><span class="card-chip" title="9 Bison"><img class="card-icon" src="resources/images/icons/cards/bison_icon_64.png" alt="9 Bison"></span></dd>
@@ -931,7 +974,7 @@ html.is-loading body>:not(#preloader){visibility:hidden}
 <ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_crossbow_icon.png" alt="">Crossbowman</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/pikeman_icon.png" alt="">Pikeman</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_arquebusier_icon.png" alt="">Fire Thrower</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/sentinel_icon.png" alt="">Sentinel</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/cannon_icon.png" alt="">Artillery</span></li></ul></details>
 <details><summary><span class="cat-label">Card Deck</span></summary>
 <!-- STD-DECK-START Maltese -->
-<p style="margin:6px 0 4px;font-size:.85rem;color:var(--dim)">A New World DLC deck (override) &mdash; 25 cards across 4 ages. Hover any card for its description.</p>
+<p style="margin:6px 0 4px;font-size:.85rem;color:var(--dim)">A New World deck (override) &mdash; 25 cards across 4 ages. Hover any card for its description.</p>
 <dl class="deck-grid">
 <dt><span class="age-chip age-1" title="Discovery Age">I</span></dt>
 <dd><span class="card-chip" title="German Tongue — Ships a Commandery Wagon and a number of Settler Wagons. Enables Commanderies to recruit them."><img class="card-icon" src="resources/images/icons/cards/tongue_german.png" alt="German Tongue"></span><span class="card-chip" title="Bailiff — Improves your Grand Master in combat, enables him to boost nearby building construction speed, and gives him a powerful caprine companion."><img class="card-icon" src="resources/images/icons/cards/bailiff.png" alt="Bailiff"></span><span class="card-chip" title="TEAM Knights of the Round Table — The Knights of the Round Table ship 1 Hospitaller to each TEAM member for each Town Center they have on the map. Also grants +2% hitpoints to all Units on your team, unlike your other TEAM cards."><img class="card-icon" src="resources/images/icons/cards/team_knights_round_table.png" alt="TEAM Knights of the Round Table"></span></dd>
@@ -1189,7 +1232,7 @@ html.is-loading body>:not(#preloader){visibility:hidden}
 <ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/insurgente_icon.png" alt="">Insurgente</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/emboscador_icon.png" alt="">Salteador</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/cowboy_icon.png" alt="">Cuatrero</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/lancer_icon.png" alt="">Lancero</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/cannon_icon.png" alt="">Artillery</span></li></ul></details>
 <details><summary><span class="cat-label">Card Deck</span></summary>
 <!-- STD-DECK-START MexicansStd -->
-<p style="margin:6px 0 4px;font-size:.85rem;color:var(--dim)">A New World DLC deck (override) &mdash; 25 cards across 4 ages. Hover any card for its description.</p>
+<p style="margin:6px 0 4px;font-size:.85rem;color:var(--dim)">A New World deck (override) &mdash; 25 cards across 4 ages. Hover any card for its description.</p>
 <dl class="deck-grid">
 <dt><span class="age-chip age-1" title="Discovery Age">I</span></dt>
 <dd><span class="card-chip" title="Alhóndiga de Granaditas — Ships 1 Hacienda Wagon and 2 Settlers."><img class="card-icon" src="resources/images/icons/cards/alhondiga_de_granaditas.png" alt="Alhóndiga de Granaditas"></span><span class="card-chip" title="Barbacoa — Haciendas fatten Livestock faster and will automatically harvest them when fully-fattened."><img class="card-icon" src="resources/images/icons/cards/barbacoa.png" alt="Barbacoa"></span><span class="card-chip" title="Comandante — Improves your Mexican General and Padre in combat. Enables their Saber Strike charged ability early."><img class="card-icon" src="resources/images/icons/cards/comandante.png" alt="Comandante"></span><span class="card-chip" title="Cathedral Construction — Ships 1 Cathedral Wagon. Cathedrals train units and research technologies significantly faster."><img class="card-icon" src="resources/images/icons/cards/cathedral_construction.png" alt="Cathedral Construction"></span></dd>
@@ -1230,7 +1273,7 @@ html.is-loading body>:not(#preloader){visibility:hidden}
 <ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_janissary_icon.png" alt="">Janissary</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/abus_gun_icon.png" alt="">Abus Gun</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/nizam_icon.png" alt="">Nizam Fusilier</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/spahi_icon.png" alt="">Spahi</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/cannon_icon.png" alt="">Artillery</span></li></ul></details>
 <details><summary><span class="cat-label">Card Deck</span></summary>
 <!-- STD-DECK-START Ottomans -->
-<p style="margin:6px 0 4px;font-size:.85rem;color:var(--dim)">A New World DLC deck (override) &mdash; 25 cards across 4 ages. Hover any card for its description.</p>
+<p style="margin:6px 0 4px;font-size:.85rem;color:var(--dim)">A New World deck (override) &mdash; 25 cards across 4 ages. Hover any card for its description.</p>
 <dl class="deck-grid">
 <dt><span class="age-chip age-1" title="Discovery Age">I</span></dt>
 <dd><span class="card-chip" title="Agha — Improves your Ottoman Explorer in combat, increases his movement rate, and gives him a powerful canine companion."><img class="card-icon" src="resources/images/icons/cards/hc_ottoman_explorer.png" alt="Agha"></span><span class="card-chip" title="City Defense — Town Center attack increased, and you can call out Bashibozuks a second time."><img class="card-icon" src="resources/images/icons/cards/levy_ottoman.png" alt="City Defense"></span><span class="card-chip" title="3 Yörüks — Villager that constructs buildings and gathers resources."><img class="card-icon" src="resources/images/icons/cards/hc_villager_ottoman_icon.png" alt="3 Yörüks"></span><span class="card-chip" title="2 Yörüks — Villager that constructs buildings and gathers resources."><img class="card-icon" src="resources/images/icons/cards/infinite_villager_ottoman.png" alt="2 Yörüks"></span></dd>
@@ -1271,7 +1314,7 @@ html.is-loading body>:not(#preloader){visibility:hidden}
 <ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_cacadore_icon.png" alt="">Cassador</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hungarian_hussar_icon.png" alt="">Hussar</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_arquebusier_icon.png" alt="">Organ Gun</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/pikeman_icon.png" alt="">Pikeman</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_crossbow_icon.png" alt="">Crossbowman</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/cannon_icon.png" alt="">Artillery</span></li></ul></details>
 <details><summary><span class="cat-label">Card Deck</span></summary>
 <!-- STD-DECK-START Portuguese -->
-<p style="margin:6px 0 4px;font-size:.85rem;color:var(--dim)">A New World DLC deck (override) &mdash; 25 cards across 4 ages. Hover any card for its description.</p>
+<p style="margin:6px 0 4px;font-size:.85rem;color:var(--dim)">A New World deck (override) &mdash; 25 cards across 4 ages. Hover any card for its description.</p>
 <dl class="deck-grid">
 <dt><span class="age-chip age-1" title="Discovery Age">I</span></dt>
 <dd><span class="card-chip" title="Feitorias — Your Town Centers now slowly trickle all resources."><img class="card-icon" src="resources/images/icons/cards/house_braganca.png" alt="Feitorias"></span><span class="card-chip" title="Navigator — Improves your Portuguese Explorer in combat and gives him a powerful canine companion."><img class="card-icon" src="resources/images/icons/cards/hc_explorer_portuguese.png" alt="Navigator"></span><span class="card-chip" title="Naval Infantry — Enables Portuguese Warships to train Infantry."><img class="card-icon" src="resources/images/icons/cards/naval_infantry.png" alt="Naval Infantry"></span></dd>
@@ -1312,7 +1355,7 @@ html.is-loading body>:not(#preloader){visibility:hidden}
 <ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_strelet_icon.png" alt="">Streltsy</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/cossack_icon.png" alt="">Cossack</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/oprichnik_icon.png" alt="">Oprichnik</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_musketeer_icon.png" alt="">Musketeer</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/cannon_icon.png" alt="">Artillery</span></li></ul></details>
 <details><summary><span class="cat-label">Card Deck</span></summary>
 <!-- STD-DECK-START Russians -->
-<p style="margin:6px 0 4px;font-size:.85rem;color:var(--dim)">A New World DLC deck (override) &mdash; 25 cards across 4 ages. Hover any card for its description.</p>
+<p style="margin:6px 0 4px;font-size:.85rem;color:var(--dim)">A New World deck (override) &mdash; 25 cards across 4 ages. Hover any card for its description.</p>
 <dl class="deck-grid">
 <dt><span class="age-chip age-1" title="Discovery Age">I</span></dt>
 <dd><span class="card-chip" title="Polar Explorer — Improves your Russian Explorer in combat, improves his damage against guardians, and gives him a powerful canine companion."><img class="card-icon" src="resources/images/icons/cards/hc_explorer_russian.png" alt="Polar Explorer"></span><span class="card-chip" title="Landed Gentry — Enables Cavalry Archers to be trained in the Commerce Age and replaces their coin costs with slightly reduced wood costs."><img class="card-icon" src="resources/images/icons/cards/landed_gentry.png" alt="Landed Gentry"></span></dd>
@@ -1353,7 +1396,7 @@ html.is-loading body>:not(#preloader){visibility:hidden}
 <ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/pikeman_icon.png" alt="">Pikeman</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_crossbow_icon.png" alt="">Crossbowman</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_musketeer_icon.png" alt="">Musketeer</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_dragoon_icon.png" alt="">Dragoon</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hungarian_hussar_icon.png" alt="">Hussar</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/cannon_icon.png" alt="">Artillery</span></li></ul></details>
 <details><summary><span class="cat-label">Card Deck</span></summary>
 <!-- STD-DECK-START Spanish -->
-<p style="margin:6px 0 4px;font-size:.85rem;color:var(--dim)">A New World DLC deck (override) &mdash; 25 cards across 4 ages. Hover any card for its description.</p>
+<p style="margin:6px 0 4px;font-size:.85rem;color:var(--dim)">A New World deck (override) &mdash; 25 cards across 4 ages. Hover any card for its description.</p>
 <dl class="deck-grid">
 <dt><span class="age-chip age-1" title="Discovery Age">I</span></dt>
 <dd><span class="card-chip" title="Conquistador — Improves your Spanish Explorer and his war dogs in combat."><img class="card-icon" src="resources/images/icons/cards/hc_explorer_spanish.png" alt="Conquistador"></span><span class="card-chip" title="Alpaca Wool — Villager hitpoints and armor increased."><img class="card-icon" src="resources/images/icons/cards/alpaca_wool.png" alt="Alpaca Wool"></span></dd>
@@ -1394,7 +1437,7 @@ html.is-loading body>:not(#preloader){visibility:hidden}
 <ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/carolean_icon.png" alt="">Carolean</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hakkapelit_icon.png" alt="">Hakkapelit</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/leather_cannon_icon.png" alt="">Leather Cannon</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hungarian_hussar_icon.png" alt="">Hussar</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/cannon_icon.png" alt="">Artillery</span></li></ul></details>
 <details><summary><span class="cat-label">Card Deck</span></summary>
 <!-- STD-DECK-START Swedes -->
-<p style="margin:6px 0 4px;font-size:.85rem;color:var(--dim)">A New World DLC deck (override) &mdash; 25 cards across 4 ages. Hover any card for its description.</p>
+<p style="margin:6px 0 4px;font-size:.85rem;color:var(--dim)">A New World deck (override) &mdash; 25 cards across 4 ages. Hover any card for its description.</p>
 <dl class="deck-grid">
 <dt><span class="age-chip age-1" title="Discovery Age">I</span></dt>
 <dd><span class="card-chip" title="Duelist — Improves your Swedish Explorer in combat, gives him a powerful Heavy Strike attack and a canine companion."><img class="card-icon" src="resources/images/icons/cards/duelist.png" alt="Duelist"></span><span class="card-chip" title="TEAM New Sweden — Ships 1 Torp to the entire team to support the settlement efforts in New Sweden."><img class="card-icon" src="resources/images/icons/cards/team_torp.png" alt="TEAM New Sweden"></span></dd>
@@ -1435,7 +1478,7 @@ html.is-loading body>:not(#preloader){visibility:hidden}
 <ul><li><span class="unit"><img class="unit-icon" src="resources/images/icons/units/us_regular_icon.png" alt="">Regular</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/state_militia_icon.png" alt="">State Militia</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_rifleman_icon.png" alt="">Sharpshooter</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/hc_mounted_rifleman_icon.png" alt="">Carbine Cavalry</span> <span class="unit"><img class="unit-icon" src="resources/images/icons/units/cannon_icon.png" alt="">Artillery</span></li></ul></details>
 <details><summary><span class="cat-label">Card Deck</span></summary>
 <!-- STD-DECK-START UnitedStates -->
-<p style="margin:6px 0 4px;font-size:.85rem;color:var(--dim)">A New World DLC deck (override) &mdash; 25 cards across 4 ages. Hover any card for its description.</p>
+<p style="margin:6px 0 4px;font-size:.85rem;color:var(--dim)">A New World deck (override) &mdash; 25 cards across 4 ages. Hover any card for its description.</p>
 <dl class="deck-grid">
 <dt><span class="age-chip age-1" title="Discovery Age">I</span></dt>
 <dd><span class="card-chip" title="Pioneers — Villager hitpoints greatly increased."><img class="card-icon" src="resources/images/icons/cards/hc_pioneers.png" alt="Pioneers"></span><span class="card-chip" title="Advanced Saloon — Saloons now support population and can be constructed in the Exploration Age. The Saloon&#x27;s Build Limit is increased."><img class="card-icon" src="resources/images/icons/cards/advanced_saloon.png" alt="Advanced Saloon"></span></dd>

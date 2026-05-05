@@ -662,28 +662,45 @@ def _replace_dev_block(html_text: str, slug: str, body_html: str) -> tuple[str, 
 
 
 CSS_BLOCK = """
-/* dev-subtree styles (refresh_dev_subtrees.py) */
-.dev-table{width:100%;border-collapse:collapse;font-size:13px;margin:6px 0}
-.dev-table td,.dev-table th{padding:4px 8px;border:1px solid #2a2a2a;vertical-align:top}
-.dev-section{background:#222;color:#dcd6a8;font-weight:600;text-align:left}
-.dev-cell-label{width:24%;color:#a8b3c4;font-weight:600;white-space:nowrap}
-.dev-id{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11px;color:#9aa1ac;background:#1a1a1a;padding:1px 4px;border-radius:2px}
-.dev-path{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;color:#cdd5e0;background:#1a1a1a;padding:1px 4px;border-radius:2px;word-break:break-all}
-.dev-note{color:#9aa1ac;font-size:11px}
-.dev-warn{color:#ff8888;font-weight:600}
-.dev-blurb{font-family:Georgia,serif;font-size:13px;line-height:1.45;background:#1f1c12;color:#cdc6a8;padding:8px 12px;margin:0 0 4px 0;white-space:pre-wrap;border-left:3px solid #6b5a2a;border-radius:2px}
+/* dev-subtree styles (refresh_dev_subtrees.py) — AOE 3 DE menu palette */
+.dev-table{width:100%;border-collapse:collapse;font-size:13px;margin:6px 0;background:rgba(28,18,8,0.55);border:1px solid var(--border,#6e4f24);border-radius:3px}
+.dev-table td,.dev-table th{padding:5px 9px;border:1px solid rgba(110,79,36,0.45);vertical-align:top;color:var(--text,#e8d9b3)}
+.dev-section{background:rgba(58,38,22,0.85);color:var(--accent,#e9c971);font-family:'Cinzel','Trajan Pro',serif;font-weight:600;letter-spacing:.05em;text-align:left;text-transform:uppercase;font-size:11px}
+.dev-cell-label{width:24%;color:var(--accent,#e9c971);font-weight:600;white-space:nowrap;font-family:'EB Garamond',Georgia,serif}
+.dev-id{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11px;color:var(--dim,#a8946a);background:rgba(0,0,0,0.35);padding:1px 5px;border-radius:2px;border:1px solid rgba(110,79,36,0.4)}
+.dev-path{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;color:var(--text,#e8d9b3);background:rgba(0,0,0,0.35);padding:1px 5px;border-radius:2px;border:1px solid rgba(110,79,36,0.4);word-break:break-all}
+.dev-note{color:var(--dim,#a8946a);font-size:11px;font-style:italic}
+.dev-warn{color:#f5a37a;font-weight:600}
+.dev-blurb{font-family:'EB Garamond',Georgia,serif;font-size:13.5px;line-height:1.5;background:rgba(20,12,4,0.7);color:var(--text,#e8d9b3);padding:10px 14px;margin:0 0 4px 0;white-space:pre-wrap;border-left:3px solid var(--accent,#e9c971);border-radius:2px;text-shadow:0 1px 0 rgba(0,0,0,0.5)}
 """
 
 
+# A dev-subtree CSS block is "/* dev-subtree styles ... */" followed by a
+# contiguous run of `.dev-...{...}` rules (one per line, the format CSS_BLOCK
+# emits). This regex strips every such block so re-injection is idempotent
+# even when an earlier buggy run left a stale or duplicate block behind.
+_CSS_BLOCK_RE = re.compile(
+    r"\n*/\* dev-subtree styles[^\n]*\n(?:\.dev-[^\n]+\n)+",
+)
+
+
 def _ensure_css(html_text: str) -> tuple[str, bool]:
-    if "/* dev-subtree styles" in html_text:
+    """Inject/refresh the dev-subtree CSS block immediately before </style>.
+
+    Idempotent: strips any prior (stale or duplicated) dev-subtree CSS blocks
+    in the inline <style> and reinserts the canonical CSS_BLOCK. Any drift
+    between the generator template and the inline copy is healed on every run.
+    """
+    style_close = re.search(r"</style>", html_text)
+    if not style_close:
         return html_text, False
-    # Inject before closing </style>.
-    m = re.search(r"</style>", html_text)
-    if not m:
-        return html_text, False
-    insertion = CSS_BLOCK + "\n"
-    return html_text[:m.start()] + insertion + html_text[m.start():], True
+
+    head = html_text[:style_close.start()]
+    tail = html_text[style_close.start():]
+    cleaned_head = _CSS_BLOCK_RE.sub("\n", head)
+    new_head = cleaned_head.rstrip() + "\n\n" + CSS_BLOCK.strip() + "\n\n"
+    new_text = new_head + tail
+    return new_text, new_text != html_text
 
 
 # ─── Entry point ──────────────────────────────────────────────────────────────

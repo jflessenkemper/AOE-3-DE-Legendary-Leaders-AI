@@ -384,9 +384,9 @@ def main(argv: list[str] | None = None) -> int:
 
     html_doc = (
         '<!doctype html>\n<html lang="en"><head><meta charset="utf-8">'
-        '<title>A New World DLC — Development Reference</title>'
+        '<title>A New World — Development Reference</title>'
         f'<style>{CSS}</style></head><body>'
-        '<h1>A New World DLC — Development Reference</h1>'
+        '<h1>A New World — Development Reference</h1>'
         '<p class="lede">Per-civ asset coverage map. For each civilisation, '
         'every place its identity surfaces in the game (lobby, scoreboard, '
         'loading screen, in-game HUD, diplomacy, postgame). Spot-check rows '
