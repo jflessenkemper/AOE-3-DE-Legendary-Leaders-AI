@@ -1,5 +1,5 @@
 <p align="center">
-	<img src="resources/images/a_new_world_banner.png" alt="A New World" width="100%">
+	<img src="resources/images/a_new_world_banner.png" alt="AOE 3 DE - A New World" width="100%">
 </p>
 
 <p align="center">

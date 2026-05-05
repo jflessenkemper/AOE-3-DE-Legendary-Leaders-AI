@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to **A New World** are recorded here.
+All notable changes to **AOE 3 DE - A New World** are recorded here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 

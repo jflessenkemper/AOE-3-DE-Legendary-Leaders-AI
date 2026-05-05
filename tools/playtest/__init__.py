@@ -1,4 +1,4 @@
-"""In-engine spot-check harness for A New World.
+"""In-engine spot-check harness for AOE 3 DE - A New World.
 
 The static validators under `tools/validation/` prove the data is
 internally consistent. This package proves it actually plays correctly:

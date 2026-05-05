@@ -1,7 +1,7 @@
 """Rename every deck slot in `data/rvltmodhomecity*.xml` to its country name.
 
 Each revolution civ ships 6 identical deck slots (Beginner / Land / Naval /
-Tycoon / TreatyNoNat / TreatyNative) all carrying the same A New World
+Tycoon / TreatyNoNat / TreatyNative) all carrying the same AOE 3 DE - A New World
 25-card list. The user wants the deck name in the in-game Deck Builder to
 read as the country itself rather than the stock stringtable labels.
 

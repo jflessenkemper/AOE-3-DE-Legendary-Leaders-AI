@@ -1,4 +1,4 @@
-"""Build the README banner for A New World.
+"""Build the README banner for AOE 3 DE - A New World.
 
 Tiles all 48 nation flags into a darkened mosaic background and stamps
 "A NEW WORLD" in serif black across the center, with a thin subtitle.
