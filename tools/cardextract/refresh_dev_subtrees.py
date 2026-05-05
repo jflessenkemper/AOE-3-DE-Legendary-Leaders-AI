@@ -62,6 +62,14 @@ try:
 except Exception:  # noqa: BLE001
     _anw_by_slug = None  # type: ignore[assignment]
 
+# Vanilla civ data + string table — extracted from {AOE3DE}/Game/Data/Data.bar.
+# Used to fill in actual values (not "(base-game default)" placeholders) for
+# the 22 base civs whose civmods.xml entry is intentionally absent.
+try:
+    from tools.migration.vanilla_data import load_vanilla_data  # noqa: E402
+except Exception:  # noqa: BLE001
+    load_vanilla_data = None  # type: ignore[assignment]
+
 HTML_PATH = REPO / "a_new_world.html"
 CIVMODS = REPO / "data" / "civmods.xml"
 STRINGS = REPO / "data" / "strings" / "english" / "stringmods.xml"
@@ -352,6 +360,29 @@ def load_chatset_for_personality(personality_chatset: str) -> str:
     return personality_chatset  # name retained even if not found; validator can flag
 
 
+# Vanilla data is loaded once per `refresh_dev_subtrees.py` run (parses 45k
+# strings + 126 civs from the Data.bar archive — ~0.3s). Reused for every
+# base civ.
+_VANILLA_CACHE = None
+_VANILLA_TRIED = False
+
+
+def _vanilla_data_or_none():
+    """Return cached VanillaData (or None if AoE3DE install isn't reachable)."""
+    global _VANILLA_CACHE, _VANILLA_TRIED
+    if _VANILLA_TRIED:
+        return _VANILLA_CACHE
+    _VANILLA_TRIED = True
+    if load_vanilla_data is None:
+        return None
+    try:
+        _VANILLA_CACHE = load_vanilla_data()
+    except Exception as exc:  # noqa: BLE001
+        print(f"  (vanilla data unavailable: {exc})", file=sys.stderr)
+        _VANILLA_CACHE = None
+    return _VANILLA_CACHE
+
+
 def load_decks() -> tuple[dict, dict, dict]:
     return (
         json.loads(DECKS_LEG.read_text(encoding="utf-8")),
@@ -481,15 +512,86 @@ def collect_civ(slug: str, *, civmods_index: dict[str, ET.Element], strings: dic
             note="same as civ-picker name",
         )
     else:
-        # Base civ — civmods has no override; everything is base-game default.
-        note_base = "(base-game default — mod does not override)"
-        civ.civ_picker_name = StringRef(note=note_base)
-        civ.flag_hover_blurb = StringRef(note=note_base)
-        civ.scoreboard_flag = AssetRef(note=note_base)
-        civ.hud_hc_button = AssetRef(note=note_base)
-        civ.player_summary_flag = AssetRef(note=note_base)
-        civ.endgame_total_flag = AssetRef(note=note_base)
-        civ.endgame_civ_name = StringRef(note=note_base)
+        # Base civ — civmods has no override. Pull from vanilla civs.xml +
+        # vanilla stringtable (extracted from {AOE3DE}/Game/Data/Data.bar) so
+        # reviewers see the actual text + art the engine displays, not a
+        # placeholder. Falls back to the placeholder only if the AoE3DE
+        # install isn't reachable.
+        van = _vanilla_data_or_none()
+        van_civ = van.civs.get(forcedciv.lower()) if van is not None else None
+
+        if van_civ is not None:
+            v_display_id = van_civ.findtext("displaynameid") or ""
+            v_rollover_id = van_civ.findtext("rollovernameid") or ""
+            v_flag_icon = (
+                van_civ.findtext("homecityflagiconwpf")
+                or van_civ.findtext("postgameflagiconwpf")
+                or ""
+            ).replace("\\", "/")
+            v_flag_button = (van_civ.findtext("homecityflagbuttonwpf") or "").replace("\\", "/")
+            v_postgame_tex = (van_civ.findtext("postgameflagtexture") or "").replace("\\", "/")
+            v_homecity_preview = (van_civ.findtext("homecitypreviewwpf") or "").replace("\\", "/")
+            mm = van_civ.find("matchmakingtextures")
+            v_small_portrait = (
+                (mm.findtext("smallportraittexturewpf") if mm is not None else "")
+                or ""
+            ).replace("\\", "/")
+
+            civ.civ_picker_name = StringRef(
+                string_id=v_display_id,
+                value=van.resolve(v_display_id),
+                note="vanilla civs.xml <DisplayNameID>",
+            )
+            civ.flag_hover_blurb = StringRef(
+                string_id=v_rollover_id,
+                value=van.resolve(v_rollover_id),
+                note="vanilla civs.xml <RolloverNameID>",
+                rich=True,
+            )
+            if not civ.lobby_portrait.populated and v_homecity_preview:
+                civ.lobby_portrait = AssetRef(
+                    path=v_homecity_preview,
+                    note="vanilla civs.xml <HomeCityPreviewWPF>",
+                )
+            if not civ.diplomacy_portrait.populated and v_small_portrait:
+                civ.diplomacy_portrait = AssetRef(
+                    path=v_small_portrait,
+                    note="vanilla civs.xml <SmallPortraitTextureWPF>",
+                )
+            if v_flag_icon:
+                civ.scoreboard_flag = AssetRef(
+                    path=v_flag_icon,
+                    note="vanilla civs.xml <HomeCityFlagIconWPF>",
+                )
+                civ.player_summary_flag = AssetRef(
+                    path=v_flag_icon,
+                    note="vanilla civs.xml <HomeCityFlagIconWPF>",
+                )
+            if v_flag_button:
+                civ.hud_hc_button = AssetRef(
+                    path=v_flag_button,
+                    note="vanilla civs.xml <HomeCityFlagButtonWPF>",
+                )
+            if v_postgame_tex:
+                civ.endgame_total_flag = AssetRef(
+                    path=v_postgame_tex,
+                    note="vanilla civs.xml <PostgameFlagTexture> (engine asset)",
+                )
+            civ.endgame_civ_name = StringRef(
+                string_id=v_display_id,
+                value=van.resolve(v_display_id),
+                note="same as civ-picker name",
+            )
+        else:
+            # Vanilla data unreachable — keep the placeholder as before.
+            note_base = "(base-game default — mod does not override)"
+            civ.civ_picker_name = StringRef(note=note_base)
+            civ.flag_hover_blurb = StringRef(note=note_base)
+            civ.scoreboard_flag = AssetRef(note=note_base)
+            civ.hud_hc_button = AssetRef(note=note_base)
+            civ.player_summary_flag = AssetRef(note=note_base)
+            civ.endgame_total_flag = AssetRef(note=note_base)
+            civ.endgame_civ_name = StringRef(note=note_base)
 
     # ── Surface 13: Player Summary HC + flag + name ────────────────────────────
     hc_name_ref, hc_civ, hc_flag = load_homecity_meta(homecity_basename)
