@@ -1,0 +1,338 @@
+{
+  "Aztecs": {
+    "history": "The Aztec Empire dominated Mesoamerica through military conquest and sophisticated urban planning. Even after Spanish conquest, Aztec descendants preserved their cultural identity and military traditions.",
+    "playstyle": "Aggressive early game with strong Eagle Warriors; focus on building strong defensive perimeter with unique units.",
+    "units": "War Dog, Eagle Warrior, Jaguar Warrior, Puma Spearman",
+    "bonus": "Priests can build shrines to generate experience; strong eagle warrior line",
+    "ageup": "Eagle warrior shipments and native alliance cards"
+  },
+  "British": {
+    "history": "Queen Elizabeth I's England established naval dominance and expanded colonial holdings globally through merchant ventures and trading posts. Britain pioneered industrial advancement and built a maritime empire.",
+    "playstyle": "Economy-focused with strong navy advantage. Manor-spawned settlers enable aggressive booming. Wall harbor early, then push naval and Musketeer lines.",
+    "units": "Longbowman, Congreve Rocket, Ranger, Musketeer",
+    "bonus": "Manors spawn Settlers automatically; strong shipping and naval economy",
+    "ageup": "Wagon politicians (Trading Post, Bank, Manor shipments)"
+  },
+  "Chinese": {
+    "history": "The Kangxi Emperor presided over the Qing Dynasty's expansion and prosperity, establishing China as a dominant continental and maritime power. Confucian traditions guided governance and military affairs.",
+    "playstyle": "Defensive, village-based economy with strong gunpowder units. Use multiple town centers and cohesive unit formations for disciplined warfare.",
+    "units": "Qiang Pikeman, Chu Ko Nu, Mongol Horse Archer, Fire Lance Cavalry",
+    "bonus": "Multiple towncenters for economic advantage; monastery generates XP",
+    "ageup": "Imperial age shipments and technology research"
+  },
+  "Dutch": {
+    "history": "Maurice of Nassau revolutionized military tactics and led the Dutch Revolt against Spanish dominance. Amsterdam became the center of a mercantile empire controlling global trade routes.",
+    "playstyle": "Economic power through trade and banking. Strong cavalry and merchant fleet; focus on sea control and defensive fortifications.",
+    "units": "Ruyter, Halberdier, Skirmisher, Fluyt",
+    "bonus": "Banks and merchants generate gold passively; strong traders and navy",
+    "ageup": "Trade-focused shipments and banking cards"
+  },
+  "Ethiopians": {
+    "history": "Menelik II defeated Italian colonial forces at Adwa, securing Ethiopian independence and modernizing the kingdom. Ethiopia maintained its sovereignty while other African nations fell to European colonization.",
+    "playstyle": "Strong elite units and defensive play. Limited but high-quality military with focus on well-coordinated formations.",
+    "units": "Shotel Warrior, Archers, War Elephant, Mounted Archer",
+    "bonus": "Elite warriors with bonus defensive stats; can build unique religious structures",
+    "ageup": "War elephant and elite warrior shipments"
+  },
+  "French": {
+    "history": "Louis XVIII restored the Bourbon monarchy after Napoleon's fall, stabilizing France through cautious diplomacy. France remained a cultural and diplomatic powerhouse despite post-Napoleonic instability.",
+    "playstyle": "Elegant and flexible military with strong cavalry. Effective at both offense and defense through balanced unit composition.",
+    "units": "Cuirassier, Dragoon, Pikeman, Musketeers",
+    "bonus": "Home City Shipments arrive faster; cavalry units more effective",
+    "ageup": "Cuirassier and wagon politician shipments"
+  },
+  "Germans": {
+    "history": "Frederick the Great transformed Prussia into a military superpower through disciplined tactics and artillery innovation. German military culture emphasized precision, formation discipline, and rapid mobilization.",
+    "playstyle": "Mass production of disciplined line infantry and artillery. Effective at breaking enemy lines through concentrated firepower and formation tactics.",
+    "units": "Uhlan, Skirmisher, Doppelsoldner, Artillery, Grenadier",
+    "bonus": "Mass-produce cheap line infantry; Guard upgrades available earlier",
+    "ageup": "Line infantry and artillery shipments"
+  },
+  "Haudenosaunee": {
+    "history": "Hiawatha unified the Six Nations Confederacy, establishing a sophisticated governance system based on consensus and mutual defense. The Haudenosaunee maintained their independence through strategic alliances and superior tactics.",
+    "playstyle": "Mobile and aggressive with strong scouting and raiding capabilities. Build through settlements and alliances with other native tribes.",
+    "units": "Tomahawk, Travois, War Canoe, Iroquois Warrior",
+    "bonus": "Native allies provide bonuses; settlements and lodges generate experience",
+    "ageup": "Native alliance and warrior shipments"
+  },
+  "Hausa": {
+    "history": "Muhammadu Kanta expanded the Kebbi kingdom through military prowess and established dominance over Hausa lands. Hausa cities became centers of Islamic learning and trans-Saharan trade.",
+    "playstyle": "Cavalry-focused warfare using superior mounted archers and warriors. Control territory through fast-moving mounted units and defensive fortifications.",
+    "units": "Cavalry Archer, War Elephant, Musketeers, Royal Guard",
+    "bonus": "Cavalry units are faster and more effective; trade routes generate gold",
+    "ageup": "War elephant and cavalry shipments"
+  },
+  "Inca": {
+    "history": "Pachacuti transformed the Inca Empire into the largest pre-Columbian state in the Americas through military conquest and administrative innovation. Terrace farming and road networks unified vast mountain territories.",
+    "playstyle": "Strong economy through tribute and terraced farming. Build extensively but defend carefully; specialized units for mountain warfare.",
+    "units": "Inca Warrior, War Chief, Slinger, Llama Herds",
+    "bonus": "Terraces provide food; road network enables faster movement",
+    "ageup": "War chief and warrior shipments"
+  },
+  "Indians": {
+    "history": "Shivaji Maharaj founded the Maratha Empire, resisting Mughal dominance and establishing Hindu sovereignty. His guerrilla tactics and naval power challenged the largest empire in India.",
+    "playstyle": "Versatile and adaptive military strategy. Strong in both open field and defensive play with effective cavalry and elephant units.",
+    "units": "Horseman, Spearman, War Elephant, Cannon",
+    "bonus": "Villagers gather resources faster; elephants are strong assault units",
+    "ageup": "War elephant and cavalry shipments"
+  },
+  "Italians": {
+    "history": "Garibaldi unified Italy through military campaigns and popular revolution, ending centuries of fragmentation. Italy emerged as a modern nation-state with growing industrial and naval power.",
+    "playstyle": "Balanced military with strong artillery and cavalry. Italian discipline and tactical flexibility enable both aggressive and defensive strategies.",
+    "units": "Horseman, Skirmisher, Cannon, Infantry",
+    "bonus": "Artillery and cavalry receive combat bonuses; defensive structures stronger",
+    "ageup": "Artillery and cavalry shipments"
+  },
+  "Japanese": {
+    "history": "Tokugawa Ieyasu established the Tokugawa Shogunate, bringing peace and stability to feudal Japan. Bushido culture and military discipline defined Japanese society for centuries.",
+    "playstyle": "Disciplined and honorable warfare with strong melee units and archers. Excel at defensive play and controlling terrain through fortifications.",
+    "units": "Samurai, Ashigaru Musketeer, Naginata Rider, War Monk",
+    "bonus": "Samurai and melee units extremely strong; temples generate XP",
+    "ageup": "Samurai and honor-based shipments"
+  },
+  "Lakota": {
+    "history": "Gall led the Lakota people during the era of Great Plains warfare and cultural resistance. The Lakota became renowned for their exceptional horsemanship and warrior traditions.",
+    "playstyle": "Lightning-fast cavalry raids with strong scouting and harassment. Effective at hit-and-run tactics and controlling open plains terrain.",
+    "units": "Mounted Archer, Travois, Dog Soldier, Sioux Commando",
+    "bonus": "Mounted units faster and harder to hit; hunting for extra food",
+    "ageup": "War horse and cavalry shipments"
+  },
+  "Maltese": {
+    "history": "Jean de Valette defended Malta against Ottoman siege, establishing the island as a Christian stronghold in the Mediterranean. Malta became a center of naval power and religious authority.",
+    "playstyle": "Strong defensive and naval play with excellent fortifications. Control the sea and defend positions; strong mercenary and naval shipments.",
+    "units": "Knight, Heavy Cavalry, Crossbowman, Galley",
+    "bonus": "Fortifications stronger; mercenary access enhanced",
+    "ageup": "Knight and galley shipments"
+  },
+  "Mexicans (Standard)": {
+    "history": "Hidalgo launched the Mexican Independence War, sparking revolutionary fervor across Latin America. Mexico emerged as an independent nation with rich cultural traditions and strategic territory.",
+    "playstyle": "Flexible and revolutionary with strong priest and mounted units. Haciendas provide economic advantage; cavalry and mercenaries form the backbone.",
+    "units": "Padre, Chinaco, Soldado, Vaquero",
+    "bonus": "Haciendas generate extra resources; cathedral for unique improvements",
+    "ageup": "Revolutionary and cavalry shipments"
+  },
+  "Ottomans": {
+    "history": "Suleiman the Magnificent ruled the Ottoman Empire at its apex, dominating three continents through military innovation and administrative genius. Ottoman culture blended Islamic, Persian, and Byzantine influences.",
+    "playstyle": "Powerful gunpowder-focused military with excellent siege capability. Janissaries and Abus Gunners provide firepower; flexible and adaptable.",
+    "units": "Janissary, Abus Gunner, Sipahi, Deli",
+    "bonus": "Gunpowder units strong; mosques generate XP and research bonuses",
+    "ageup": "Janissary and gunpowder shipments"
+  },
+  "Portuguese": {
+    "history": "Henry the Navigator pioneered global exploration, establishing Portuguese dominance of oceanic trade routes and African commerce. Portugal built the first truly global maritime empire.",
+    "playstyle": "Naval-focused with strong mercantile advantage and early gunpowder units. Control sea lanes and establish trading posts for economic dominance.",
+    "units": "Caravel, Musketeer, Pikeman, Cassador",
+    "bonus": "Naval units strong; trading posts provide economic advantage",
+    "ageup": "Naval and trading post shipments"
+  },
+  "Russians": {
+    "history": "Ivan the Terrible expanded Moscow into a vast empire, establishing Russia as a major European power. Russian military strength and vast territory defined the emerging superpower.",
+    "playstyle": "Powerful and resilient with strong mounted archers and streltsy. Economic resilience through Cossacks and vast resources; defensive depth.",
+    "units": "Streltsy, Cossack, Mounted Archer, Heavy Cannon",
+    "bonus": "Siege powerful buildings effectively; cavalry and archers strong",
+    "ageup": "Cossack and streltsy shipments"
+  },
+  "Spanish": {
+    "history": "Isabella of Castile sponsored Columbus's voyage and unified Spain through the Reconquista. Spain became a global superpower through conquest and exploration in the New World.",
+    "playstyle": "Conquistador-focused with strong priests and explorers. Build missions for influence; use crossbowmen and pikemen for disciplined formations.",
+    "units": "Conquistador, Pikeman, Crossbowman, Cannon",
+    "bonus": "Missionaries convert natives; conquistadors very strong",
+    "ageup": "Conquistador and missionary shipments"
+  },
+  "Swedes": {
+    "history": "Gustavus Adolphus revolutionized military science and made Sweden a great power through disciplined tactics and innovation. Swedish military dominance shaped 17th-century European conflicts.",
+    "playstyle": "Disciplined and innovative military tactics with mobile artillery and strong cavalry. Effective at breaking lines through concentrated force.",
+    "units": "Uhlan, Musketeer, Pikeman, Field Cannon",
+    "bonus": "Artillery very mobile and accurate; cavalry discipline and damage high",
+    "ageup": "Artillery and cavalry shipments"
+  },
+  "United States": {
+    "history": "George Washington led the American Revolution against British rule, establishing the United States as an independent nation dedicated to liberty and democratic principles.",
+    "playstyle": "Militiamen and minutemen provide flexible defense and rapid mobilization. Strong irregular warfare and defensive capabilities with economic resilience.",
+    "units": "Minuteman, Regular, Sharpshooter, Field Artillery",
+    "bonus": "Militia rapidly rebuilt; strong defensive economy",
+    "ageup": "Militia and independence shipments"
+  },
+  "Americans": {
+    "history": "Thomas Jefferson expanded America westward and established democratic ideals. Post-revolutionary America pursued expansion, technological innovation, and industrial development.",
+    "playstyle": "Industrial and expansionist with strong settlers and economic output. Build settlements and railroads; mechanized army focused on artillery.",
+    "units": "Regular, Sharpshooter, Field Artillery, Rifleman",
+    "bonus": "Settlers fast; industrial bonuses for production",
+    "ageup": "Industrial and expansion shipments"
+  },
+  "Argentines": {
+    "history": "Jos\u00e9 de San Mart\u00edn liberated Argentina and neighboring territories from Spanish colonial rule. Argentina emerged as a prosperous nation with vast agricultural lands and European immigration.",
+    "playstyle": "Agricultural focus with strong cavalry and revolvers. Use open plains for cavalry dominance; economic advantage through estancias.",
+    "units": "Gaucho, Rodelero, Lancer, War Dog",
+    "bonus": "Cavalry and gauchos very strong; estancia bonuses",
+    "ageup": "Cavalry and gaucho shipments"
+  },
+  "Baja Californians": {
+    "history": "Manuel Pineda Mu\u00f1oz led Baja California's resistance against filibuster invasions and internal disorder. The region struggled for stability while maintaining its distinct identity.",
+    "playstyle": "Flexible and adaptable with strong settlers and ranching economy. Use saloons and mercenaries; cavalry-focused military.",
+    "units": "Vaquero, Soldado, Ranchero, Padre",
+    "bonus": "Saloons enable mercenary training; ranching economy",
+    "ageup": "Ranching and mercenary shipments"
+  },
+  "Barbary": {
+    "history": "Hayreddin Barbarossa and his successors built a pirate empire dominating Mediterranean trade. Barbary States challenged European naval supremacy for centuries.",
+    "playstyle": "Naval corsairs and pirates with strong privateers. Control sea lanes and raid merchant shipping; naval warfare and privateer economy.",
+    "units": "Corsair Marksman, Tribal Horseman, Barbary Warrior, Galley",
+    "bonus": "Privateers raid shipping; naval units very strong",
+    "ageup": "Corsair and pirate shipments"
+  },
+  "Brazil": {
+    "history": "Pedro I declared Brazilian independence from Portugal and established a stable empire. Brazil developed as the largest and most economically powerful nation in South America.",
+    "playstyle": "Strong economy through plantations and African units. Flexible military with revolutionaries and strong artillery.",
+    "units": "Voluntario da Patria, Lancer, Rodelero, War Dog",
+    "bonus": "Plantations and slavery economy; strong unit multiplier",
+    "ageup": "Agricultural and military shipments"
+  },
+  "Californians": {
+    "history": "Mariano Guadalupe Vallejo led California through Mexican independence and American conquest. Californios became legendary horsemen and frontier leaders.",
+    "playstyle": "Cavalry-dominated with vaqueros and rancheros. Use open terrain for mounted advantage; saloons and ranching economy.",
+    "units": "Vaquero, Ranchero, Soldado, Californio",
+    "bonus": "Vaqueros extremely fast; ranching economy strong",
+    "ageup": "Cavalry and ranching shipments"
+  },
+  "Canadians": {
+    "history": "Isaac Brock defended Canada against American invasion, earning military renown. Canada developed as a frontier power balancing British loyalty and continental independence.",
+    "playstyle": "Frontier defense with strong villagers and local alliances. Trappers and voyageurs provide economic advantage; ranged units effective.",
+    "units": "Ranger, Trapper, Voyageur, Musketeer",
+    "bonus": "Trappers generate furs; frontier defense strong",
+    "ageup": "Frontier and ranger shipments"
+  },
+  "Central Americans": {
+    "history": "Francisco Moraz\u00e1n championed Central American federation and independence from Spanish colonial rule. The region struggled with fragmentation while maintaining distinct identity.",
+    "playstyle": "Flexible and adaptive with strong artillery and defense. Use terrain and fortifications effectively.",
+    "units": "Soldado, Chinaco, Padre, Field Cannon",
+    "bonus": "Defensive structures strong; artillery effective",
+    "ageup": "Military and artillery shipments"
+  },
+  "Chileans": {
+    "history": "Bernardo O'Higgins led Chilean independence and established a stable republic. Chile developed as a disciplined military power with strong institutions.",
+    "playstyle": "Disciplined military with strong cavalry and infantry. Effective at both offensive and defensive play through tactical excellence.",
+    "units": "Lancer, Rodelero, Pikeman, Hussar",
+    "bonus": "Cavalry discipline exceptional; military training fast",
+    "ageup": "Cavalry and military shipments"
+  },
+  "Columbians": {
+    "history": "Sim\u00f3n Bol\u00edvar liberated Colombia and surrounding territories, envisioning Gran Colombia. Colombia became the center of Bol\u00edvar's revolutionary empire in South America.",
+    "playstyle": "Revolutionary and aggressive with strong mounted units. Use cavalry for rapid strikes and mountain terrain for defense.",
+    "units": "Lancer, Rodelero, War Dog, Missionary",
+    "bonus": "Cavalry strong; revolutionary units effective",
+    "ageup": "Revolutionary and cavalry shipments"
+  },
+  "Egyptians": {
+    "history": "Muhammad Ali Pasha established Egyptian independence within the Ottoman sphere, modernizing the nation and establishing a dynasty. Egypt became the most powerful Arab state.",
+    "playstyle": "Strong military through mamluke traditions and modernization. Cavalry and mamelukes form elite striking force.",
+    "units": "Mameluke, Khevite Fusilier, Stradiot, Sipahi",
+    "bonus": "Mamelukes very strong; military training enhanced",
+    "ageup": "Mameluke and cavalry shipments"
+  },
+  "Finnish": {
+    "history": "Carl Gustaf Emil Mannerheim defended Finnish independence against Soviet invasion. Finland emerged as a proud Nordic nation maintaining its sovereignty through military strength.",
+    "playstyle": "Defensive and disciplined with strong blockhouses and jaegers. Forest and snowy terrain favor Finnish tactics.",
+    "units": "Karelian Jaeger, Carolean, Hakkapelit, Blockhouse",
+    "bonus": "Blockhouses combine barracks and outpost; jaeger training fast",
+    "ageup": "Jaeger and defensive shipments"
+  },
+  "French Canadians": {
+    "history": "Louis-Joseph Papineau championed French-Canadian identity and autonomy within British North America. French Canadian culture persisted and thrived despite English dominance.",
+    "playstyle": "Voyageur-focused economy with strong coureurs and mounted units. Use forests and waterways effectively.",
+    "units": "Coureur, Voyageur, Musketeer, Cuirassier",
+    "bonus": "Voyageurs gather resources and move fast; fur trade economy",
+    "ageup": "Voyageur and trapper shipments"
+  },
+  "Haitians": {
+    "history": "Toussaint Louverture led the Haitian Revolution, establishing the first Black republic. Haiti's independence shocked the colonial world and inspired liberation movements.",
+    "playstyle": "Revolutionary and defiant with strong maroons and pirates. Irregular warfare and naval attacks; guerrilla tactics effective.",
+    "units": "Maroon, Privateer, Pirate, Musketeer",
+    "bonus": "Maroons and pirates strong; irregular warfare effective",
+    "ageup": "Revolutionary and pirate shipments"
+  },
+  "Hungarians": {
+    "history": "Lajos Kossuth led the Hungarian Revolution against Habsburg dominance, establishing Hungarian nationalism. Hungary emerged seeking greater autonomy and cultural recognition.",
+    "playstyle": "Aristocratic and cavalry-focused with strong hussars and grenadiers. Use cavalry charges and well-coordinated assaults.",
+    "units": "Hussar, Grenadier, Grenzer, Pandour",
+    "bonus": "Hussar very strong; noble cavalry traditions provide bonuses",
+    "ageup": "Hussar and grenadier shipments"
+  },
+  "Indonesians": {
+    "history": "Diponegoro led Indonesian resistance against Dutch colonialism, becoming a legendary military hero. Indonesia fought for independence and cultural preservation.",
+    "playstyle": "Jungle-focused with strong irregular units and naval strength. Use terrain advantage and localized uprisings.",
+    "units": "Native Fighter, War Elephant, Cetbang, Canoe",
+    "bonus": "Jungle units effective; local uprising capabilities strong",
+    "ageup": "Resistance and jungle warrior shipments"
+  },
+  "Mayans": {
+    "history": "Jacinto Canek led Mayan resistance during the Caste War, establishing an independent Maya state. Mayans maintained their culture and independence in the Yucatan.",
+    "playstyle": "Native alliance-focused with strong holcan and ceremonial units. Use cenotes and native advantages.",
+    "units": "Holcan, Native Villager, Yucateco Insurgente, Chaac Canoe",
+    "bonus": "Native embassy provides bonuses; holcan javelineers strong",
+    "ageup": "Native alliance and warrior shipments"
+  },
+  "Mexicans (Revolution)": {
+    "history": "Benito Ju\u00e1rez led Mexico's liberal reforms and defended against French intervention, establishing secular republic. Mexico emerged with renewed national pride.",
+    "playstyle": "Revolutionary with strong insurgentes and priests. Use rural uprisings and defensive fortifications.",
+    "units": "Insurgente, Chinaco, Padre, Soldado",
+    "bonus": "Rural uprising capabilities; priest conversion effective",
+    "ageup": "Revolutionary and insurgent shipments"
+  },
+  "Napoleonic France": {
+    "history": "Napoleon Bonaparte dominated Europe through military genius and imperial ambition. Napoleonic warfare revolutionized military tactics and reshaped European boundaries.",
+    "playstyle": "Aggressive and dominating with elite cuirassiers and coordinated assaults. Napoleon's strategic brilliance translates to powerful military maneuvers.",
+    "units": "Cuirassier, Gendarme, Voltigeur, Horse Artillery",
+    "bonus": "Elite cavalry devastating; coordinated assaults extremely powerful",
+    "ageup": "Elite cavalry and artillery shipments"
+  },
+  "Peruvians": {
+    "history": "Andr\u00e9s de Santa Cruz united Peru and Bolivia briefly before dissolution, establishing a powerful Andean confederation. Peru emerged as a key South American power.",
+    "playstyle": "Andean warrior traditions with strong mountain units and cavalry. Effective in high-altitude combat.",
+    "units": "Rodelero, Lancer, War Dog, Missionary",
+    "bonus": "Mountain warfare effective; cavalry strong",
+    "ageup": "Cavalry and mountain warrior shipments"
+  },
+  "Revolutionary France": {
+    "history": "Maximilien Robespierre embodied the French Revolution's radical phase, executing The Terror and attempting to remake French society. Revolutionary fervor spread across Europe.",
+    "playstyle": "Revolutionary and zealous with sans-culottes and popular uprising. Use mass mobilization and passionate infantry.",
+    "units": "Sans Culottes, Voltigeur, Cuirassier, Field Cannon",
+    "bonus": "Revolutionary units strong; popular uprising rapid",
+    "ageup": "Revolutionary and citizen shipments"
+  },
+  "Rio Grande": {
+    "history": "Antonio Canales Rosillo led the Rio Grande Republic's brief independence from Mexico. The region's unique culture and strategic location made it a contested frontier.",
+    "playstyle": "Frontier raiding with strong cavalry and mercenaries. Use terrain advantages and fast-moving units.",
+    "units": "Chinaco, Vaquero, Soldado, Padre",
+    "bonus": "Cavalry fast and effective; frontier economy",
+    "ageup": "Cavalry and frontier shipments"
+  },
+  "Romanians": {
+    "history": "Alexandru Ioan Cuza unified Wallachia and Moldavia, establishing modern Romania and pursuing reform. Romania emerged as a Balkan power seeking independence from Ottoman control.",
+    "playstyle": "Balanced military with strong cavalry and dragoons. Effective at defensive positions and mounted assaults.",
+    "units": "Dragoon, Rosior, Dorabant, Pandour",
+    "bonus": "Dragoon and cavalry effective; outpost units strong",
+    "ageup": "Cavalry and dragoon shipments"
+  },
+  "South Africans": {
+    "history": "Paul Kruger led Boer resistance against British colonialism, fighting to preserve Afrikaner independence. South Africa emerged from colonial conflicts seeking self-determination.",
+    "playstyle": "Resilient and adaptive with strong cavalry and settler economy. Use trek wagons and fast-moving mounted units.",
+    "units": "Trek Wagon, Cavalry, Rifleman, Outpost",
+    "bonus": "Trek wagon generates resources; defensive economy strong",
+    "ageup": "Settler and cavalry shipments"
+  },
+  "Texians": {
+    "history": "Sam Houston led Texas independence from Mexico and negotiated annexation into the United States. Texas became a frontier power balancing independence and integration.",
+    "playstyle": "Frontier militia with strong minutemen and mercenaries. Rapid defense and irregular warfare effective.",
+    "units": "Minuteman, Regular, Mercenary, Militia",
+    "bonus": "Militia rapidly rebuilt; frontier defense strong",
+    "ageup": "Militia and frontier shipments"
+  },
+  "Yucatan": {
+    "history": "Felipe Carrillo Puerto championed Yucatan independence and indigenous rights. The Yucatan pursued autonomy while maintaining cultural traditions and Maya heritage.",
+    "playstyle": "Maya-focused with indigenous units and defensive strength. Use cenotes and local uprisings for advantage.",
+    "units": "Yucateco Insurgente, Cruzob Avenger, Padre, Chaac Canoe",
+    "bonus": "Indigenous uprising powerful; religious influence strong",
+    "ageup": "Indigenous warrior and uprising shipments"
+  }
+}
