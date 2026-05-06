@@ -1,10 +1,10 @@
 """Refresh the Legendary Leaders deck block between
 <!-- DECK-START <civ> --> and <!-- DECK-END <civ> --> markers in
-a_new_world.html for each of the 26 mod revolution civs.
+a_new_world.html for all 48 ANW civs.
 
 Reads:
-  - data/rvltmodhomecity*.xml  (the authoritative in-game deck the AI uses)
-  - data/cards.json            (card_name → {name, desc, icon})
+  - data/anwhomecity*.xml  (the authoritative in-game deck the AI uses)
+  - data/cards.json        (card_name → {name, desc, icon})
 
 Writes:
   - a_new_world.html  (between DECK-START/DECK-END markers)
@@ -17,43 +17,19 @@ from __future__ import annotations
 import html
 import json
 import re
+import sys
 import xml.etree.ElementTree as ET
 from pathlib import Path
+
+if __package__ is None or __package__ == "":
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+
+from tools.migration.anw_mapping import ANW_CIVS_BY_SLUG, ANW_HOMECITY_MAP
 
 REPO = Path(__file__).resolve().parents[2]
 HTML = REPO / "a_new_world.html"
 CARDS = REPO / "data" / "cards.json"
 DATA = REPO / "data"
-
-# HTML DECK-START anchor tag → mod homecity filename stem
-CIV_FILES = {
-    "Americans":         "rvltmodhomecityamericans",
-    "Argentines":        "rvltmodhomecityargentina",
-    "BajaCalifornians":  "rvltmodhomecitybajacalifornians",
-    "Barbary":           "rvltmodhomecitybarbary",
-    "Brazilians":        "rvltmodhomecitybrazil",
-    "Californians":      "rvltmodhomecitycalifornia",
-    "Canadians":         "rvltmodhomecitycanada",
-    "CentralAmericans":  "rvltmodhomecitycentralamericans",
-    "Chileans":          "rvltmodhomecitychile",
-    "Colombians":        "rvltmodhomecitycolumbia",
-    "Egyptians":         "rvltmodhomecityegypt",
-    "Finns":             "rvltmodhomecityfinland",
-    "FrenchCanadians":   "rvltmodhomecityfrenchcanada",
-    "Haitians":          "rvltmodhomecityhaiti",
-    "Hungarians":        "rvltmodhomecityhungary",
-    "Indonesians":       "rvltmodhomecityindonesians",
-    "Mayans":            "rvltmodhomecitymaya",
-    "Mexicans":          "rvltmodhomecitymexicans",
-    "NapoleonicFrance":  "rvltmodhomecitynapoleon",
-    "Peruvians":         "rvltmodhomecityperu",
-    "RevolutionaryFr":   "rvltmodhomecityrevolutionaryfrance",
-    "RioGrande":         "rvltmodhomecityriogrande",
-    "Romanians":         "rvltmodhomecityromania",
-    "SouthAfricans":     "rvltmodhomecitysouthafricans",
-    "Texians":           "rvltmodhomecitytexas",
-    "Yucatans":          "rvltmodhomecityyucatan",
-}
 
 AGE_NAMES = ["Discovery", "Colonial", "Fortress", "Industrial", "Imperial"]
 ICON_DIR = "resources/images/icons/cards"
@@ -78,8 +54,9 @@ def age_bucket_for(card_name: str, cards_meta: dict) -> int:
     return 2  # Fortress default
 
 
-def render_deck(civ: str, stem: str, cards_meta: dict) -> str:
-    path = DATA / f"{stem}.xml"
+def render_deck(civ: str, anw_stem: str, cards_meta: dict) -> str:
+    homecity_filename = ANW_HOMECITY_MAP[anw_stem]
+    path = DATA / homecity_filename
     tree = ET.parse(path)
     card_names = [c.text for c in tree.getroot().findall(".//deck/cards/card") if c.text]
 
@@ -121,24 +98,33 @@ def main():
     html_text = HTML.read_text(encoding="utf-8")
 
     ok = miss = 0
-    for civ, stem in CIV_FILES.items():
-        block = render_deck(civ, stem, cards_meta)
+    for anw_civ in ANW_CIVS_BY_SLUG.values():
+        homecity_filename = ANW_HOMECITY_MAP[anw_civ.anw_stem]
+        path = DATA / homecity_filename
+
+        # Skip if homecity file doesn't exist
+        if not path.is_file():
+            print(f"  SKIP {anw_civ.slug}: homecity file not found")
+            miss += 1
+            continue
+
+        block = render_deck(anw_civ.slug, anw_civ.anw_stem, cards_meta)
         # Replace between markers
-        start_marker = f"<!-- DECK-START {civ} -->"
-        end_marker = f"<!-- DECK-END {civ} -->"
+        start_marker = f"<!-- DECK-START {anw_civ.slug} -->"
+        end_marker = f"<!-- DECK-END {anw_civ.slug} -->"
         pattern = re.compile(
             re.escape(start_marker) + r".*?" + re.escape(end_marker),
             re.DOTALL,
         )
         m = pattern.search(html_text)
         if not m:
-            print(f"  SKIP {civ}: markers not found")
+            print(f"  SKIP {anw_civ.slug}: markers not found")
             miss += 1
             continue
         replacement = f"{start_marker}\n{block}\n{end_marker}"
         html_text = html_text[:m.start()] + replacement + html_text[m.end():]
         ok += 1
-        print(f"  ok   {civ}: refreshed deck (25 cards)")
+        print(f"  ok   {anw_civ.slug}: refreshed deck")
 
     HTML.write_text(html_text, encoding="utf-8")
     print(f"\nrefreshed: {ok}  skipped: {miss}")

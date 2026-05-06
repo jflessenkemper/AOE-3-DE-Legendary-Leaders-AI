@@ -1,5 +1,5 @@
 <techtreemods>
-	<Tech name ='RvltModAge0RevolutionaryFrench' type ='Normal'>
+	<Tech name ='ANWAge0RevolutionaryFrench' type ='Normal'>
 		<DBID>30001</DBID>
 		<Status>UNOBTAINABLE</Status>
 		<Flag>Shadow</Flag>
@@ -135,7 +135,7 @@
 			<Effect type ='Data' amount ='-1.00' subtype ='AllowedAge' relativity ='Absolute'>
 				<Target type ='ProtoUnit'>deRevolutionaryScout</Target></Effect>
 				
-			<Effect type ='TechStatus' status ='obtainable'>RvltModHCInfantryDamageFrenchTeamExtra</Effect>
+			<Effect type ='TechStatus' status ='obtainable'>ANWHCInfantryDamageFrenchTeamExtra</Effect>
 			
 			<Effect type ='TechStatus' status ='active'>AAStandardStartingTechs</Effect>
 			<Effect type ='TechStatus' status ='active'>DEEuropeanStandardTechs</Effect>
@@ -225,8 +225,8 @@
 			<Effect type ='TechStatus' status ='obtainable'>DERevolutionaryNerfShadowColonial</Effect>
 			<Effect type ='TechStatus' status ='obtainable'>DERevolutionaryNerfShadowFortress</Effect>
 			<Effect type ='TechStatus' status ='obtainable'>DERevolutionaryNerfShadowIndustrialize</Effect>
-			<Effect type ='TechStatus' status ='obtainable'>RvltModImperialRevolutionaries</Effect>
-			<Effect type ='CommandAdd' tech ='RvltModImperialRevolutionaries' page='1' column='5'>
+			<Effect type ='TechStatus' status ='obtainable'>ANWImperialRevolutionaries</Effect>
+			<Effect type ='CommandAdd' tech ='ANWImperialRevolutionaries' page='1' column='5'>
 				<Target type ='ProtoUnit'>Barracks</Target></Effect>
 			
 			<Effect type ='TechStatus' status ='obtainable'>ImperialHussars</Effect>
@@ -312,7 +312,7 @@
 				<Target type ='ProtoUnit'>deIconFemaleExplorerFRMarianne</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModAge0NapoleonicFrench' type ='Normal'>
+	<Tech name ='ANWAge0NapoleonicFrench' type ='Normal'>
 		<DBID>30221</DBID>
 		<Status>UNOBTAINABLE</Status>
 		<Flag>Shadow</Flag>
@@ -332,7 +332,7 @@
 
 			<Effect type ='Data' amount ='1.00' subtype ='Enable' relativity ='Absolute'>
 				<Target type ='ProtoUnit'>Coureur</Target></Effect>
-			<Effect type ='TechStatus' status ='obtainable'>RvltModHCInfantryDamageFrenchTeamExtra</Effect>
+			<Effect type ='TechStatus' status ='obtainable'>ANWHCInfantryDamageFrenchTeamExtra</Effect>
 
 			<Effect type ='TechStatus' status ='active'>AAStandardStartingTechs</Effect>
 			<Effect type ='TechStatus' status ='active'>DEEuropeanStandardTechs</Effect>
@@ -506,7 +506,7 @@
 				<Target type ='ProtoUnit'>deIconFemaleExplorerFRMarianne</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModImperialRevolutionaries' type ='Normal'>
+	<Tech name ='ANWImperialRevolutionaries' type ='Normal'>
 		<DBID>30002</DBID>
 		<DisplayNameID>400027</DisplayNameID>
 		<Cost resourcetype ='Wood'>1500.0000</Cost>
@@ -528,7 +528,7 @@
 				<Target type ='ProtoUnit'>xpColonialMilitia</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModColonializeNapoleon' type ='Normal'>
+	<Tech name ='ANWColonializeNapoleon' type ='Normal'>
 		<DBID>30003</DBID>
 		<Status>UNOBTAINABLE</Status>
 		<Icon>resources\images\icons\post_game\time_line_age_2.png</Icon>
@@ -538,14 +538,14 @@
 				<Target type ='Player'></Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModNapoleonAncienShadow' type ='Normal'>
+	<Tech name ='ANWNapoleonAncienShadow' type ='Normal'>
 		<DBID>30004</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>Imperialize</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0NapoleonicFrench</TechStatus>
+			<TechStatus status ='Active'>ANWAge0NapoleonicFrench</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='Data' action ='RifleAttack' amount ='8.00' subtype ='Damage' relativity ='Absolute'>
@@ -589,7 +589,7 @@
 				<Target type ='ProtoUnit'>deIconNatMercHorseCarabinier</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModAge0Americans' type ='Normal'>
+	<Tech name ='ANWAge0Americans' type ='Normal'>
 		<DBID>30005</DBID>
 		<Status>UNOBTAINABLE</Status>
 		<Flag>Shadow</Flag>
@@ -615,8 +615,8 @@
 			<Effect type ='TechStatus' status ='obtainable'>DERevolutionaryNerfShadowColonial</Effect>
 			<Effect type ='TechStatus' status ='obtainable'>DERevolutionaryNerfShadowFortress</Effect>
 			<Effect type ='TechStatus' status ='obtainable'>DERevolutionaryNerfShadowIndustrialize</Effect>
-			<Effect type ='TechStatus' status ='obtainable'>RvltModImperialRevolutionaries</Effect>
-			<Effect type ='CommandAdd' tech ='RvltModImperialRevolutionaries' page='1' column='6'>
+			<Effect type ='TechStatus' status ='obtainable'>ANWImperialRevolutionaries</Effect>
+			<Effect type ='CommandAdd' tech ='ANWImperialRevolutionaries' page='1' column='6'>
 				<Target type ='ProtoUnit'>Barracks</Target></Effect>
 			
 			<Effect type ='CommandRemove' proto ='xpColonialMilitia'>
@@ -653,8 +653,8 @@
 			
 			<Effect type ='TechStatus' status ='obtainable'>Bayonet</Effect>
 			<Effect type ='TechStatus' status ='obtainable'>deREVLegionCarbinesShadow</Effect>
-			<Effect type ='TechStatus' status ='obtainable'>RvltModHCInfantryHitpointsDutchTeamExtra</Effect>
-			<Effect type ='TechStatus' status ='obtainable'>RvltModHCInfantryDamageFrenchTeamExtra</Effect>
+			<Effect type ='TechStatus' status ='obtainable'>ANWHCInfantryHitpointsDutchTeamExtra</Effect>
+			<Effect type ='TechStatus' status ='obtainable'>ANWHCInfantryDamageFrenchTeamExtra</Effect>
 			
 			<Effect type ='Data' amount ='1.00' subtype ='Enable' relativity ='Absolute'>
 				<Target type ='ProtoUnit'>Musketeer</Target></Effect>
@@ -822,7 +822,7 @@
 			<Effect type ='TechStatus' status ='obtainable'>DEPoliticianRoyalistItalian</Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModFortressizeAmericans' type ='Normal'>
+	<Tech name ='ANWFortressizeAmericans' type ='Normal'>
 		<DBID>30006</DBID>
 		<Status>UNOBTAINABLE</Status>
 		<Icon>resources\images\icons\post_game\time_line_age_3.png</Icon>
@@ -834,14 +834,14 @@
 			<Effect type ='TechStatus' status ='active'>FortressizeBritish</Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModLegionUhlanShadow' type ='Normal'>
+	<Tech name ='ANWLegionUhlanShadow' type ='Normal'>
 		<DBID>30007</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>DEHCREVLegionUhlans</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0Americans</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Americans</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='Data' amount ='0.50' subtype ='Cost' resource ='Wood' relativity ='BasePercent'>
@@ -850,14 +850,14 @@
 				<Target type ='Tech'>ImperialHussars</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModLegionCarbineShadow' type ='Normal'>
+	<Tech name ='ANWLegionCarbineShadow' type ='Normal'>
 		<DBID>30008</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>DEHCREVLegionCarbines</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0Americans</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Americans</TechStatus>
 		</Prereqs>
 		<Effects>
             <Effect type ='TechStatus' status ='active'>DEVeteranUSCavalryShadow</Effect>
@@ -865,14 +865,14 @@
 			<Effect type ='TechStatus' status ='obtainable'>DEImperialUSCavalry</Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModLegionRegularShadow' type ='Normal'>
+	<Tech name ='ANWLegionRegularShadow' type ='Normal'>
 		<DBID>30009</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>DEHCREVLegionRegulars</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0Americans</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Americans</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='TechStatus' status ='active'>DEVeteranUSRegulars</Effect>
@@ -880,14 +880,14 @@
 			<Effect type ='TechStatus' status ='obtainable'>DEImperialUSRegulars</Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModLegionMilitiaShadow' type ='Normal'>
+	<Tech name ='ANWLegionMilitiaShadow' type ='Normal'>
 		<DBID>30010</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>DEHCREVLegionMilitia</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0Americans</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Americans</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='CommandRemove' tech ='DEGuardStateMilitia'>
@@ -896,7 +896,7 @@
 			<Effect type ='TechStatus' status ='obtainable'>DEImperialVolunteers</Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModAge0Mexicans' type ='Normal'>
+	<Tech name ='ANWAge0Mexicans' type ='Normal'>
 		<DBID>30011</DBID>
 		<Status>UNOBTAINABLE</Status>
 		<Flag>Shadow</Flag>
@@ -1128,14 +1128,14 @@
 			<Effect type ='TechStatus' status ='obtainable'>DEPoliticianKnight</Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModMexicoNewSpainShadow' type ='Normal'>
+	<Tech name ='ANWMexicoNewSpainShadow' type ='Normal'>
 		<DBID>30012</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>DEHCNewSpainViceroyalty</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0Mexicans</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Mexicans</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='Data' amount ='0.00' subtype ='Enable' relativity ='Absolute'>
@@ -1162,7 +1162,7 @@
 				<Target type ='ProtoUnit'>Barracks</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModAge0Canadians' type ='Normal'>
+	<Tech name ='ANWAge0Canadians' type ='Normal'>
 		<DBID>30013</DBID>
 		<Status>UNOBTAINABLE</Status>
 		<Flag>Shadow</Flag>
@@ -1430,7 +1430,7 @@
 			<Effect type ='TechStatus' status ='obtainable'>DEPoliticianBlackDukeBritish</Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModColonializeCanadians' type ='Normal'>
+	<Tech name ='ANWColonializeCanadians' type ='Normal'>
 		<DBID>30014</DBID>
 		<Status>UNOBTAINABLE</Status>
 		<Icon>resources\images\icons\post_game\time_line_age_2.png</Icon>
@@ -1444,7 +1444,7 @@
 				<Target type ='ProtoUnit'>AbstractVillager</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModFortressizeCanadians' type ='Normal'>
+	<Tech name ='ANWFortressizeCanadians' type ='Normal'>
 		<DBID>30015</DBID>
 		<Status>UNOBTAINABLE</Status>
 		<Icon>resources\images\icons\post_game\time_line_age_3.png</Icon>
@@ -1459,7 +1459,7 @@
 				<Target type ='ProtoUnit'>AbstractVillager</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModIndustrializeCanadians' type ='Normal'>
+	<Tech name ='ANWIndustrializeCanadians' type ='Normal'>
 		<DBID>30016</DBID>
 		<Status>UNOBTAINABLE</Status>
 		<Icon>resources\images\icons\post_game\time_line_age_4.png</Icon>
@@ -1474,7 +1474,7 @@
 				<Target type ='ProtoUnit'>AbstractVillager</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModHCMetis' type ='Normal'>
+	<Tech name ='ANWHCMetis' type ='Normal'>
 		<DBID>30017</DBID>
 		<DisplayNameID>80860</DisplayNameID>
 		<Cost resourcetype ='Ships'>1.0000</Cost>
@@ -1488,7 +1488,7 @@
 				<Target type ='Player'></Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModAge0FrenchCanadians' type ='Normal'>
+	<Tech name ='ANWAge0FrenchCanadians' type ='Normal'>
 		<DBID>30018</DBID>
 		<Status>UNOBTAINABLE</Status>
 		<Flag>Shadow</Flag>
@@ -1715,7 +1715,7 @@
 				<Target type ='ProtoUnit'>deIconFemaleExplorerFRMarianne</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModColonializeFrenchCanadians' type ='Normal'>
+	<Tech name ='ANWColonializeFrenchCanadians' type ='Normal'>
 		<DBID>30019</DBID>
 		<Status>UNOBTAINABLE</Status>
 		<Icon>resources\images\icons\post_game\time_line_age_2.png</Icon>
@@ -1729,7 +1729,7 @@
 				<Target type ='ProtoUnit'>AbstractVillager</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModFortressizeFrenchCanadians' type ='Normal'>
+	<Tech name ='ANWFortressizeFrenchCanadians' type ='Normal'>
 		<DBID>30020</DBID>
 		<Status>UNOBTAINABLE</Status>
 		<Icon>resources\images\icons\post_game\time_line_age_3.png</Icon>
@@ -1744,7 +1744,7 @@
 				<Target type ='ProtoUnit'>AbstractVillager</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModIndustrializeFrenchCanadians' type ='Normal'>
+	<Tech name ='ANWIndustrializeFrenchCanadians' type ='Normal'>
 		<DBID>30021</DBID>
 		<Status>UNOBTAINABLE</Status>
 		<Icon>resources\images\icons\post_game\time_line_age_4.png</Icon>
@@ -1759,7 +1759,7 @@
 				<Target type ='ProtoUnit'>AbstractVillager</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModHCMetisFrench' type ='Normal'>
+	<Tech name ='ANWHCMetisFrench' type ='Normal'>
 		<DBID>30022</DBID>
 		<DisplayNameID>80979</DisplayNameID>
 		<Cost resourcetype ='Ships'>1.0000</Cost>
@@ -1773,7 +1773,7 @@
 				<Target type ='Player'></Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModAge0Brazilians' type ='Normal'>
+	<Tech name ='ANWAge0Brazilians' type ='Normal'>
 		<DBID>30023</DBID>
 		<Status>UNOBTAINABLE</Status>
 		<Flag>Shadow</Flag>
@@ -1815,8 +1815,8 @@
 			<Effect type ='TechStatus' status ='obtainable'>DERevolutionaryNerfShadowFortress</Effect>
 			<Effect type ='TechStatus' status ='obtainable'>DERevolutionaryNerfShadowIndustrialize</Effect>
 				
-			<Effect type ='TechStatus' status ='obtainable'>RvltModRGHonorGuard</Effect>
-			<Effect type ='CommandAdd' tech ='RvltModRGHonorGuard' page='1' column='1'>
+			<Effect type ='TechStatus' status ='obtainable'>ANWRGHonorGuard</Effect>
+			<Effect type ='CommandAdd' tech ='ANWRGHonorGuard' page='1' column='1'>
 				<Target type ='ProtoUnit'>Stable</Target></Effect>
 				
 			<Effect type ='Data' amount ='4.00' subtype ='BuildLimit' relativity ='Assign'>
@@ -1840,14 +1840,14 @@
 				<Target type ='ProtoUnit'>deREVJagunco</Target></Effect>
 			<Effect type ='Data' amount ='18.00' subtype ='KillBounty' relativity ='Assign'>
 				<Target type ='ProtoUnit'>deREVJagunco</Target></Effect>
-			<Effect type ='TechStatus' status ='obtainable'>RvltModVeteranJagunco</Effect>
-			<Effect type ='CommandAdd' tech ='RvltModVeteranJagunco' page='1' column='3'>
+			<Effect type ='TechStatus' status ='obtainable'>ANWVeteranJagunco</Effect>
+			<Effect type ='CommandAdd' tech ='ANWVeteranJagunco' page='1' column='3'>
 				<Target type ='ProtoUnit'>Stable</Target></Effect>
-			<Effect type ='TechStatus' status ='obtainable'>RvltModGuardJagunco</Effect>
-			<Effect type ='CommandAdd' tech ='RvltModGuardJagunco' page='1' column='3'>
+			<Effect type ='TechStatus' status ='obtainable'>ANWGuardJagunco</Effect>
+			<Effect type ='CommandAdd' tech ='ANWGuardJagunco' page='1' column='3'>
 				<Target type ='ProtoUnit'>Stable</Target></Effect>
-			<Effect type ='TechStatus' status ='obtainable'>RvltModImperialJagunco</Effect>
-			<Effect type ='CommandAdd' tech ='RvltModImperialJagunco' page='1' column='3'>
+			<Effect type ='TechStatus' status ='obtainable'>ANWImperialJagunco</Effect>
+			<Effect type ='CommandAdd' tech ='ANWImperialJagunco' page='1' column='3'>
 				<Target type ='ProtoUnit'>Stable</Target></Effect>
 				
 			<Effect type ='Data' amount ='1.00' subtype ='Enable' relativity ='Absolute'>
@@ -2014,14 +2014,14 @@
 			<!-- <Effect type ='TechStatus' status ='obtainable'>VeteranCacadoreShadow</Effect> -->
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModBrazilCaribShadow' type ='Normal'>
+	<Tech name ='ANWBrazilCaribShadow' type ='Normal'>
 		<DBID>30024</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>HCXPCaribAlliesRepeat</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0Brazilians</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Brazilians</TechStatus>
 		</Prereqs>
 		<Effects>
 				
@@ -2035,27 +2035,27 @@
 				<Target type ='ProtoUnit'>Galleon</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModBrazilSpyglassShadow' type ='Normal'>
+	<Tech name ='ANWBrazilSpyglassShadow' type ='Normal'>
 		<DBID>30025</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>HCExplorerPortuguese</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0Brazilians</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Brazilians</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='TechStatus' status ='active'>DESpyglassEnableShadow</Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModBrazilRevolutionaryShadow' type ='Normal'>
+	<Tech name ='ANWBrazilRevolutionaryShadow' type ='Normal'>
 		<DBID>30026</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>Imperialize</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0Brazilians</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Brazilians</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='Data' amount ='1.25' subtype ='Hitpoints' relativity ='BasePercent'>
@@ -2066,7 +2066,7 @@
 				<Target type ='ProtoUnit'>deREVVoluntarioBatch</Target></Effect> 
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModAge0Argentines' type ='Normal'>
+	<Tech name ='ANWAge0Argentines' type ='Normal'>
 		<DBID>30027</DBID>
 		<Status>UNOBTAINABLE</Status>
 		<Flag>Shadow</Flag>
@@ -2092,8 +2092,8 @@
 			<Effect type ='TechStatus' status ='obtainable'>DERevolutionaryNerfShadowColonial</Effect>
 			<Effect type ='TechStatus' status ='obtainable'>DERevolutionaryNerfShadowFortress</Effect>
 			<Effect type ='TechStatus' status ='obtainable'>DERevolutionaryNerfShadowIndustrialize</Effect>
-			<Effect type ='TechStatus' status ='obtainable'>RvltModImperialRevolutionaries</Effect>
-			<Effect type ='CommandAdd' tech ='RvltModImperialRevolutionaries' page='1' column='5'>
+			<Effect type ='TechStatus' status ='obtainable'>ANWImperialRevolutionaries</Effect>
+			<Effect type ='CommandAdd' tech ='ANWImperialRevolutionaries' page='1' column='5'>
 				<Target type ='ProtoUnit'>Barracks</Target></Effect>
 				
 			<Effect type ='Data' amount ='4.00' subtype ='BuildLimit' relativity ='Assign'>
@@ -2169,14 +2169,14 @@
 				<Target type ='ProtoUnit'>deREVGranadero</Target></Effect>
 			<Effect type ='Data' amount ='23.00' subtype ='KillBounty' relativity ='Assign'>
 				<Target type ='ProtoUnit'>deREVGranadero</Target></Effect>
-			<Effect type ='TechStatus' status ='obtainable'>RvltModVeteranGranadero</Effect>
-			<Effect type ='CommandAdd' tech ='RvltModVeteranGranadero' page='1' column='3'>
+			<Effect type ='TechStatus' status ='obtainable'>ANWVeteranGranadero</Effect>
+			<Effect type ='CommandAdd' tech ='ANWVeteranGranadero' page='1' column='3'>
 				<Target type ='ProtoUnit'>Stable</Target></Effect>
-			<Effect type ='TechStatus' status ='obtainable'>RvltModGuardGranadero</Effect>
-			<Effect type ='CommandAdd' tech ='RvltModGuardGranadero' page='1' column='3'>
+			<Effect type ='TechStatus' status ='obtainable'>ANWGuardGranadero</Effect>
+			<Effect type ='CommandAdd' tech ='ANWGuardGranadero' page='1' column='3'>
 				<Target type ='ProtoUnit'>Stable</Target></Effect>
-			<Effect type ='TechStatus' status ='obtainable'>RvltModImperialGranadero</Effect>
-			<Effect type ='CommandAdd' tech ='RvltModImperialGranadero' page='1' column='3'>
+			<Effect type ='TechStatus' status ='obtainable'>ANWImperialGranadero</Effect>
+			<Effect type ='CommandAdd' tech ='ANWImperialGranadero' page='1' column='3'>
 				<Target type ='ProtoUnit'>Stable</Target></Effect>
 				
 			<Effect type ='TechStatus' status ='obtainable'>IncendiaryGrenades</Effect>
@@ -2360,7 +2360,7 @@
 			<Effect type ='TechStatus' status ='obtainable'>DEPoliticianKnight</Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModAge0Chileans' type ='Normal'>
+	<Tech name ='ANWAge0Chileans' type ='Normal'>
 		<DBID>30028</DBID>
 		<Status>UNOBTAINABLE</Status>
 		<Flag>Shadow</Flag>
@@ -2386,17 +2386,17 @@
 			<Effect type ='TechStatus' status ='obtainable'>DERevolutionaryNerfShadowColonial</Effect>
 			<Effect type ='TechStatus' status ='obtainable'>DERevolutionaryNerfShadowFortress</Effect>
 			<Effect type ='TechStatus' status ='obtainable'>DERevolutionaryNerfShadowIndustrialize</Effect>
-			<Effect type ='TechStatus' status ='obtainable'>RvltModImperialRevolutionaries</Effect>
-			<Effect type ='CommandAdd' tech ='RvltModImperialRevolutionaries' page='1' column='5'>
+			<Effect type ='TechStatus' status ='obtainable'>ANWImperialRevolutionaries</Effect>
+			<Effect type ='CommandAdd' tech ='ANWImperialRevolutionaries' page='1' column='5'>
 				<Target type ='ProtoUnit'>Barracks</Target></Effect>
 				
 			<Effect type ='Data' amount ='1.00' subtype ='Enable' relativity ='Absolute'>
 				<Target type ='ProtoUnit'>Hussar</Target></Effect>
-			<Effect type ='TechStatus' status ='obtainable'>RvltModDeathHussars</Effect>
-			<Effect type ='CommandAdd' tech ='RvltModDeathHussars' page='1' column='0'>
+			<Effect type ='TechStatus' status ='obtainable'>ANWDeathHussars</Effect>
+			<Effect type ='CommandAdd' tech ='ANWDeathHussars' page='1' column='0'>
 				<Target type ='ProtoUnit'>Stable</Target></Effect>
-			<Effect type ='TechStatus' status ='obtainable'>RvltModImperialDeathHussar</Effect>
-			<Effect type ='CommandAdd' tech ='RvltModImperialDeathHussar' page='1' column='0'>
+			<Effect type ='TechStatus' status ='obtainable'>ANWImperialDeathHussar</Effect>
+			<Effect type ='CommandAdd' tech ='ANWImperialDeathHussar' page='1' column='0'>
 				<Target type ='ProtoUnit'>Stable</Target></Effect>
 				
 			<Effect type ='Data' amount ='11.00' subtype ='BuildLimit' relativity ='Absolute'>
@@ -2573,7 +2573,7 @@
 			<Effect type ='TechStatus' status ='obtainable'>DEPoliticianKnight</Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModDeathHussars' type ='Normal'>
+	<Tech name ='ANWDeathHussars' type ='Normal'>
 		<DBID>30029</DBID>
 		<DisplayNameID>80935</DisplayNameID>
 		<Cost resourcetype ='Wood'>850.0000</Cost>
@@ -2599,7 +2599,7 @@
 				<Target type ='ProtoUnit'>deIconREVChileanHussar</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModImperialDeathHussar' type ='Normal'>
+	<Tech name ='ANWImperialDeathHussar' type ='Normal'>
 		<DBID>30030</DBID>
 		<DisplayNameID>400030</DisplayNameID>
 		<Cost resourcetype ='Wood'>1500.0000</Cost>
@@ -2613,7 +2613,7 @@
 		<Prereqs>
 			<TechStatus status ='Active'>Imperialize</TechStatus>
 			<TechStatus status ='Active'>GuardHussars</TechStatus>
-			<TechStatus status ='Active'>RvltModDeathHussars</TechStatus>
+			<TechStatus status ='Active'>ANWDeathHussars</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='Data' amount ='1.50' subtype ='Hitpoints' relativity ='BasePercent'>
@@ -2625,14 +2625,14 @@
 			<Effect type ='SetName' proto ='Hussar' culture ='none' newName ='400030'></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModChileMapucheShadow' type ='Normal'>
+	<Tech name ='ANWChileMapucheShadow' type ='Normal'>
 		<DBID>30031</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>DEHCMapucheAlliesRepeat1</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0Chileans</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Chileans</TechStatus>
 		</Prereqs>
 		<Effects>
 				
@@ -2646,7 +2646,7 @@
 				<Target type ='ProtoUnit'>Galleon</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModAge0Columbians' type ='Normal'>
+	<Tech name ='ANWAge0Columbians' type ='Normal'>
 		<DBID>30032</DBID>
 		<Status>UNOBTAINABLE</Status>
 		<Flag>Shadow</Flag>
@@ -2711,14 +2711,14 @@
 				<Target type ='ProtoUnit'>deREVLlanero</Target></Effect>
 			<Effect type ='Data' amount ='0.10' subtype ='ArmorSpecific' newType='Ranged' relativity ='Assign'>
 				<Target type ='ProtoUnit'>deREVLlanero</Target></Effect>
-			<Effect type ='TechStatus' status ='obtainable'>RvltModVeteranLlaneros</Effect>
-			<Effect type ='CommandAdd' tech ='RvltModVeteranLlaneros' page='1' column='3'>
+			<Effect type ='TechStatus' status ='obtainable'>ANWVeteranLlaneros</Effect>
+			<Effect type ='CommandAdd' tech ='ANWVeteranLlaneros' page='1' column='3'>
 				<Target type ='ProtoUnit'>Stable</Target></Effect>
-			<Effect type ='TechStatus' status ='obtainable'>RvltModGuardLlaneros</Effect>
-			<Effect type ='CommandAdd' tech ='RvltModGuardLlaneros' page='1' column='3'>
+			<Effect type ='TechStatus' status ='obtainable'>ANWGuardLlaneros</Effect>
+			<Effect type ='CommandAdd' tech ='ANWGuardLlaneros' page='1' column='3'>
 				<Target type ='ProtoUnit'>Stable</Target></Effect>
-			<Effect type ='TechStatus' status ='obtainable'>RvltModImperialLlaneros</Effect>
-			<Effect type ='CommandAdd' tech ='RvltModImperialLlaneros' page='1' column='3'>
+			<Effect type ='TechStatus' status ='obtainable'>ANWImperialLlaneros</Effect>
+			<Effect type ='CommandAdd' tech ='ANWImperialLlaneros' page='1' column='3'>
 				<Target type ='ProtoUnit'>Stable</Target></Effect>
 				
 			<Effect type ='Data' amount ='1.00' subtype ='Enable' relativity ='Absolute'>
@@ -2888,7 +2888,7 @@
 			<Effect type ='TechStatus' status ='obtainable'>DEPoliticianKnight</Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModColonializeColumbians' type ='Normal'>
+	<Tech name ='ANWColonializeColumbians' type ='Normal'>
 		<DBID>30033</DBID>
 		<Status>UNOBTAINABLE</Status>
 		<Icon>resources\images\icons\post_game\time_line_age_2.png</Icon>
@@ -2907,7 +2907,7 @@
 				<Target type ='ProtoUnit'>deREVBolivar</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModFortressizeColumbians' type ='Normal'>
+	<Tech name ='ANWFortressizeColumbians' type ='Normal'>
 		<DBID>30034</DBID>
 		<Status>UNOBTAINABLE</Status>
 		<Icon>resources\images\icons\post_game\time_line_age_3.png</Icon>
@@ -2927,7 +2927,7 @@
 				<Target type ='ProtoUnit'>deREVBolivar</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModIndustrializeColumbians' type ='Normal'>
+	<Tech name ='ANWIndustrializeColumbians' type ='Normal'>
 		<DBID>30035</DBID>
 		<Status>UNOBTAINABLE</Status>
 		<Icon>resources\images\icons\post_game\time_line_age_4.png</Icon>
@@ -2947,7 +2947,7 @@
 				<Target type ='ProtoUnit'>deREVBolivar</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModImperializeColumbians' type ='Normal'>
+	<Tech name ='ANWImperializeColumbians' type ='Normal'>
 		<DBID>30036</DBID>
 		<Status>UNOBTAINABLE</Status>
 		<Icon>resources\images\icons\post_game\time_line_age_5.png</Icon>
@@ -2962,46 +2962,46 @@
 				<Target type ='ProtoUnit'>Musketeer</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModVetMuskColumbiaShadow' type ='Normal'>
+	<Tech name ='ANWVetMuskColumbiaShadow' type ='Normal'>
 		<DBID>30037</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>VeteranMusketeers</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0Columbians</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Columbians</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='SetName' proto ='Musketeer' culture ='none' newName ='80965'></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModGuardMuskColumbiaShadow' type ='Normal'>
+	<Tech name ='ANWGuardMuskColumbiaShadow' type ='Normal'>
 		<DBID>30038</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>GuardMusketeers</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0Columbians</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Columbians</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='SetName' proto ='Musketeer' culture ='none' newName ='80965'></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModImpMuskColumbiaShadow' type ='Normal'>
+	<Tech name ='ANWImpMuskColumbiaShadow' type ='Normal'>
 		<DBID>30039</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>ImperialMusketeers</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0Columbians</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Columbians</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='SetName' proto ='Musketeer' culture ='none' newName ='126962'></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModAge0Peruvians' type ='Normal'>
+	<Tech name ='ANWAge0Peruvians' type ='Normal'>
 		<DBID>30040</DBID>
 		<Status>UNOBTAINABLE</Status>
 		<Flag>Shadow</Flag>
@@ -3027,8 +3027,8 @@
 			<Effect type ='TechStatus' status ='obtainable'>DERevolutionaryNerfShadowColonial</Effect>
 			<Effect type ='TechStatus' status ='obtainable'>DERevolutionaryNerfShadowFortress</Effect>
 			<Effect type ='TechStatus' status ='obtainable'>DERevolutionaryNerfShadowIndustrialize</Effect>
-			<Effect type ='TechStatus' status ='obtainable'>RvltModImperialRevolutionaries</Effect>
-			<Effect type ='CommandAdd' tech ='RvltModImperialRevolutionaries' page='1' column='5'>
+			<Effect type ='TechStatus' status ='obtainable'>ANWImperialRevolutionaries</Effect>
+			<Effect type ='CommandAdd' tech ='ANWImperialRevolutionaries' page='1' column='5'>
 				<Target type ='ProtoUnit'>Barracks</Target></Effect>
 			
 			<Effect type ='SetName' tech ='DEHCREVCowboys' newName ='80944' newRollover ='80943'></Effect>
@@ -3219,7 +3219,7 @@
 			<Effect type ='TechStatus' status ='obtainable'>DEPoliticianKnight</Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModFortressizePeruvians' type ='Normal'>
+	<Tech name ='ANWFortressizePeruvians' type ='Normal'>
 		<DBID>30041</DBID>
 		<Status>UNOBTAINABLE</Status>
 		<Icon>resources\images\icons\post_game\time_line_age_3.png</Icon>
@@ -3236,7 +3236,7 @@
       <effect type="TechStatus" status="active">DEEliteRunners</effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModIndustrializePeruvians' type ='Normal'>
+	<Tech name ='ANWIndustrializePeruvians' type ='Normal'>
 		<DBID>30042</DBID>
 		<Status>UNOBTAINABLE</Status>
 		<Icon>resources\images\icons\post_game\time_line_age_4.png</Icon>
@@ -3256,14 +3256,14 @@
 				<Target type ='ProtoUnit'>Barracks</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModPeruMancoIncaShadow' type ='Normal'>
+	<Tech name ='ANWPeruMancoIncaShadow' type ='Normal'>
 		<DBID>30043</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>DEHCREVMancoInca</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0Peruvians</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Peruvians</TechStatus>
 		</Prereqs>
 		<Effects>
       <effect type="Data" amount="2.00" subtype="Damage" allactions="1" relativity="BasePercent">
@@ -3274,7 +3274,7 @@
       </effect>
 		</Effects>
 	</Tech>
-  <tech name="RvltModHCREVCuzco" type="Normal">
+  <tech name="ANWHCREVCuzco" type="Normal">
     <dbid>30044</dbid>
     <displaynameid>80003</displaynameid>
     <cost resourcetype="Wood">1000.0000</cost>
@@ -3314,14 +3314,14 @@
       <effect type="TextOutputTechName">110130</effect>
     </effects>
   </tech>
-	<Tech name ='RvltModMachuPicchuShadow' type ='Normal'>
+	<Tech name ='ANWMachuPicchuShadow' type ='Normal'>
 		<DBID>30045</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>DEHCMachuPicchu</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0Peruvians</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Peruvians</TechStatus>
 		</Prereqs>
 		<Effects>
       <effect type="Data" amount="1.00" subtype="Enable" relativity="Absolute">
@@ -3353,14 +3353,14 @@
       </effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModPeruIncaShadow' type ='Normal'>
+	<Tech name ='ANWPeruIncaShadow' type ='Normal'>
 		<DBID>30046</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>Imperialize</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0Peruvians</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Peruvians</TechStatus>
 		</Prereqs>
 		<Effects>
       <effect type="TechStatus" status="active">DEImpLegendarySpearmen</effect>
@@ -3370,7 +3370,7 @@
       <effect type="TechStatus" status="active">DEImpLegendaryMacemen</effect>
 		</Effects>
 	</Tech>
-  <tech name="RvltModHCBuenosAires" type="Normal">
+  <tech name="ANWHCBuenosAires" type="Normal">
     <dbid>30047</dbid>
     <displaynameid>80850</displaynameid>
     <cost resourcetype="Ships">1.0000</cost>
@@ -3394,7 +3394,7 @@
       <effect type="TextOutputTechName">110130</effect>
     </effects>
   </tech>
-	<Tech name ='RvltModAge0Haitians' type ='Normal'>
+	<Tech name ='ANWAge0Haitians' type ='Normal'>
 		<DBID>30048</DBID>
 		<Status>UNOBTAINABLE</Status>
 		<Flag>Shadow</Flag>
@@ -3412,8 +3412,8 @@
 			<Effect type ='TechStatus' status ='obtainable'>DERevolutionaryNerfShadowColonial</Effect>
 			<Effect type ='TechStatus' status ='obtainable'>DERevolutionaryNerfShadowFortress</Effect>
 			<Effect type ='TechStatus' status ='obtainable'>DERevolutionaryNerfShadowIndustrialize</Effect>
-			<Effect type ='TechStatus' status ='obtainable'>RvltModImperialRevolutionaries</Effect>
-			<Effect type ='CommandAdd' tech ='RvltModImperialRevolutionaries' page='1' column='5'>
+			<Effect type ='TechStatus' status ='obtainable'>ANWImperialRevolutionaries</Effect>
+			<Effect type ='CommandAdd' tech ='ANWImperialRevolutionaries' page='1' column='5'>
 				<Target type ='ProtoUnit'>Barracks</Target></Effect>
 				
 			<Effect type ='Data' amount ='-2.00' subtype ='PopulationCount' relativity ='Absolute'>
@@ -3470,7 +3470,7 @@
 			<Effect type ='Data' amount ='0.00' subtype ='UpdateVisual' unittype ='xpColonialMilitia' relativity ='Absolute'>
 				<Target type ='Player'></Target></Effect>
 				
-			<Effect type ='TechStatus' status ='obtainable'>RvltModHCInfantryDamageFrenchTeamExtra</Effect>
+			<Effect type ='TechStatus' status ='obtainable'>ANWHCInfantryDamageFrenchTeamExtra</Effect>
 			
 			<Effect type ='Data' amount ='4.00' subtype ='BuildLimit' relativity ='Assign'>
 				<Target type ='ProtoUnit'>xpIronclad</Target></Effect>
@@ -3629,7 +3629,7 @@
 				<Target type ='ProtoUnit'>deIconFemaleExplorerFRMarianne</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModColonializeHaitians' type ='Normal'>
+	<Tech name ='ANWColonializeHaitians' type ='Normal'>
 		<DBID>30049</DBID>
 		<Status>UNOBTAINABLE</Status>
 		<Icon>resources\images\icons\post_game\time_line_age_2.png</Icon>
@@ -3638,14 +3638,14 @@
 				<Target type ='ProtoUnit'>deREVPirateBatch</Target></Effect> 
 			<Effect type ='TechStatus' status ='active'>Colonialize</Effect></Effects>
 	</Tech>
-	<Tech name ='RvltModHaitiCaribShadow' type ='Normal'>
+	<Tech name ='ANWHaitiCaribShadow' type ='Normal'>
 		<DBID>30050</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>HCXPCaribAlliesRepeat</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0Haitians</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Haitians</TechStatus>
 		</Prereqs>
 		<Effects>
 				
@@ -3659,20 +3659,20 @@
 				<Target type ='ProtoUnit'>Galleon</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModHaitiPikemenShadow' type ='Normal'>
+	<Tech name ='ANWHaitiPikemenShadow' type ='Normal'>
 		<DBID>30051</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>ImperialPikemen</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0Haitians</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Haitians</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='SetName' proto ='Pikeman' culture ='none' newName ='126816'></Effect>
 		</Effects>
 	</Tech>
-	<Tech name='RvltModHCInfantryDamageFrenchTeamExtra' type="Normal">
+	<Tech name='ANWHCInfantryDamageFrenchTeamExtra' type="Normal">
 		<DBID>30052</DBID>
 		<DisplayNameID>71152</DisplayNameID>
 		<ResearchPoints>0.0000</ResearchPoints>
@@ -3686,7 +3686,7 @@
 				<Target type ='ProtoUnit'>AbstractRangedInfantry</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModAge0SouthAfricans' type ='Normal'>
+	<Tech name ='ANWAge0SouthAfricans' type ='Normal'>
 		<DBID>30053</DBID>
 		<Status>UNOBTAINABLE</Status>
 		<Flag>Shadow</Flag>
@@ -3743,7 +3743,7 @@
 			<Effect type ='Data' action ='AutoGatherXPAfricanNative' amount ='1.10' subtype ='WorkRate' unittype ='XP' relativity ='BasePercent'>
 				<Target type ='ProtoUnit'>TradingPost</Target></Effect>
 				
-			<Effect type ='TechStatus' status ='obtainable'>RvltModOresundSAShadow</Effect>
+			<Effect type ='TechStatus' status ='obtainable'>ANWOresundSAShadow</Effect>
 				
 			<Effect type ='CommandAdd' proto ='NativeEmbassy' page ='6' column ='-1'>
 				<Target type ='ProtoUnit'>Explorer</Target></Effect>
@@ -3759,10 +3759,10 @@
 			<Effect type ='CommandAdd' proto ='deREVStarTrekWagon' page ='0' column ='1'>
 				<Target type ='ProtoUnit'>TownCenter</Target></Effect>
 				
-			<Effect type ='TechStatus' status ='obtainable'>RvltModHCInfantryHitpointsDutchTeamExtra</Effect>
-			<Effect type ='TechStatus' status ='obtainable'>RvltModShipMilitaryWagonsShadow</Effect>
-			<Effect type ='TechStatus' status ='obtainable'>RvltModShipHomesteadWagonsShadow</Effect>
-			<Effect type ='TechStatus' status ='obtainable'>RvltModShipOutpostWagonsSAShadow</Effect>
+			<Effect type ='TechStatus' status ='obtainable'>ANWHCInfantryHitpointsDutchTeamExtra</Effect>
+			<Effect type ='TechStatus' status ='obtainable'>ANWShipMilitaryWagonsShadow</Effect>
+			<Effect type ='TechStatus' status ='obtainable'>ANWShipHomesteadWagonsShadow</Effect>
+			<Effect type ='TechStatus' status ='obtainable'>ANWShipOutpostWagonsSAShadow</Effect>
 				
 			<Effect type ='Data' amount ='1.00' subtype ='Enable' relativity ='Absolute'>
 				<Target type ='ProtoUnit'>Caravel</Target></Effect>
@@ -3927,7 +3927,7 @@
 			
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModColonializeSouthAfricans' type ='Normal'>
+	<Tech name ='ANWColonializeSouthAfricans' type ='Normal'>
 		<DBID>30054</DBID>
 		<Status>UNOBTAINABLE</Status>
 		<Icon>resources\images\icons\post_game\time_line_age_2.png</Icon>
@@ -3937,7 +3937,7 @@
 				<Target type ='Player'></Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModFortressizeSouthAfricans' type ='Normal'>
+	<Tech name ='ANWFortressizeSouthAfricans' type ='Normal'>
 		<DBID>30055</DBID>
 		<Status>UNOBTAINABLE</Status>
 		<Icon>resources\images\icons\post_game\time_line_age_3.png</Icon>
@@ -3949,7 +3949,7 @@
 
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModIndustrializeSouthAfricans' type ='Normal'>
+	<Tech name ='ANWIndustrializeSouthAfricans' type ='Normal'>
 		<DBID>30056</DBID>
 		<Status>UNOBTAINABLE</Status>
 		<Icon>resources\images\icons\post_game\time_line_age_4.png</Icon>
@@ -3960,7 +3960,7 @@
 				<Target type ='Player'></Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name='RvltModShipMilitaryWagonsSAShadow' type="Normal">
+	<Tech name='ANWShipMilitaryWagonsSAShadow' type="Normal">
 		<DBID>30057</DBID>
 		<DisplayNameID>71152</DisplayNameID>
 		<ResearchPoints>0.0000</ResearchPoints>
@@ -3968,14 +3968,14 @@
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>DEHCREVShipMilitaryWagons</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0SouthAfricans</TechStatus>
+			<TechStatus status ='Active'>ANWAge0SouthAfricans</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='Data' amount ='2.00' subtype ='FreeHomeCityUnit' unittype ='deREVStarTrekWagon' relativity ='Absolute'>
 				<Target type ='Player'></Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name='RvltModShipHomesteadWagonsSAShadow' type="Normal">
+	<Tech name='ANWShipHomesteadWagonsSAShadow' type="Normal">
 		<DBID>30058</DBID>
 		<DisplayNameID>71152</DisplayNameID>
 		<ResearchPoints>0.0000</ResearchPoints>
@@ -3983,14 +3983,14 @@
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>DEHCREVShipHomesteadWagons</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0SouthAfricans</TechStatus>
+			<TechStatus status ='Active'>ANWAge0SouthAfricans</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='Data' amount ='2.00' subtype ='FreeHomeCityUnit' unittype ='deREVStarTrekWagon' relativity ='Absolute'>
 				<Target type ='Player'></Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name='RvltModShipOutpostWagonsSAShadow' type="Normal">
+	<Tech name='ANWShipOutpostWagonsSAShadow' type="Normal">
 		<DBID>30059</DBID>
 		<DisplayNameID>71152</DisplayNameID>
 		<ResearchPoints>0.0000</ResearchPoints>
@@ -3998,14 +3998,14 @@
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>DEHCREVShipOutpostWagons</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0SouthAfricans</TechStatus>
+			<TechStatus status ='Active'>ANWAge0SouthAfricans</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='Data' amount ='2.00' subtype ='FreeHomeCityUnit' unittype ='deREVStarTrekWagon' relativity ='Absolute'>
 				<Target type ='Player'></Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModAge0Indonesians' type ='Normal'>
+	<Tech name ='ANWAge0Indonesians' type ='Normal'>
 		<DBID>30060</DBID>
 		<Status>UNOBTAINABLE</Status>
 		<Flag>Shadow</Flag>
@@ -4023,8 +4023,8 @@
 			<Effect type ='TechStatus' status ='obtainable'>DERevolutionaryNerfShadowColonial</Effect>
 			<Effect type ='TechStatus' status ='obtainable'>DERevolutionaryNerfShadowFortress</Effect>
 			<Effect type ='TechStatus' status ='obtainable'>DERevolutionaryNerfShadowIndustrialize</Effect>
-			<Effect type ='TechStatus' status ='obtainable'>RvltModImperialRevolutionaries</Effect>
-			<Effect type ='CommandAdd' tech ='RvltModImperialRevolutionaries' page='1' column='5'>
+			<Effect type ='TechStatus' status ='obtainable'>ANWImperialRevolutionaries</Effect>
+			<Effect type ='CommandAdd' tech ='ANWImperialRevolutionaries' page='1' column='5'>
 				<Target type ='ProtoUnit'>Barracks</Target></Effect>
 				
 			<Effect type ='Data' amount ='1.00' subtype ='Enable' relativity ='Absolute'>
@@ -4043,11 +4043,11 @@
 				<Target type ='ProtoUnit'>Galleon</Target></Effect>
 			<Effect type ='Data' amount ='1.00' subtype ='AddTrain' unittype ='deREVJavaSpearman' relativity ='Absolute'>
 				<Target type ='ProtoUnit'>ypWokouJunk</Target></Effect>
-			<Effect type ='TechStatus' status ='obtainable'>RvltModJavaNerfShadowColonial</Effect>
-			<Effect type ='TechStatus' status ='obtainable'>RvltModJavaNerfShadowFortress</Effect>
-			<Effect type ='TechStatus' status ='obtainable'>RvltModJavaNerfShadowIndustrialize</Effect>
-			<Effect type ='TechStatus' status ='obtainable'>RvltModImperialJavaSpearmen</Effect>
-			<Effect type ='CommandAdd' tech ='RvltModImperialJavaSpearmen' page='1' column='6'>
+			<Effect type ='TechStatus' status ='obtainable'>ANWJavaNerfShadowColonial</Effect>
+			<Effect type ='TechStatus' status ='obtainable'>ANWJavaNerfShadowFortress</Effect>
+			<Effect type ='TechStatus' status ='obtainable'>ANWJavaNerfShadowIndustrialize</Effect>
+			<Effect type ='TechStatus' status ='obtainable'>ANWImperialJavaSpearmen</Effect>
+			<Effect type ='CommandAdd' tech ='ANWImperialJavaSpearmen' page='1' column='6'>
 				<Target type ='ProtoUnit'>Barracks</Target></Effect>
 				
 			<Effect type ='Data' amount ='1.00' subtype ='Enable' relativity ='Absolute'>
@@ -4060,14 +4060,14 @@
 				<Target type ='ProtoUnit'>FortFrontier</Target></Effect>
 			<Effect type ='Data' amount ='1.00' subtype ='AddTrain' unittype ='deREVCetbang' relativity ='Absolute'>
 				<Target type ='ProtoUnit'>Galleon</Target></Effect>
-			<Effect type ='TechStatus' status ='obtainable'>RvltModCetbangNerfShadowColonial</Effect>
-			<Effect type ='TechStatus' status ='obtainable'>RvltModCetbangNerfShadowFortress</Effect>
-			<Effect type ='TechStatus' status ='obtainable'>RvltModCetbangNerfShadowIndustrialize</Effect>
-			<Effect type ='TechStatus' status ='obtainable'>RvltModHeavyCetbang</Effect>
-			<Effect type ='TechStatus' status ='obtainable'>RvltModImperialCetbang</Effect>
-			<Effect type ='CommandAdd' tech ='RvltModHeavyCetbang' page='1' column='-1'>
+			<Effect type ='TechStatus' status ='obtainable'>ANWCetbangNerfShadowColonial</Effect>
+			<Effect type ='TechStatus' status ='obtainable'>ANWCetbangNerfShadowFortress</Effect>
+			<Effect type ='TechStatus' status ='obtainable'>ANWCetbangNerfShadowIndustrialize</Effect>
+			<Effect type ='TechStatus' status ='obtainable'>ANWHeavyCetbang</Effect>
+			<Effect type ='TechStatus' status ='obtainable'>ANWImperialCetbang</Effect>
+			<Effect type ='CommandAdd' tech ='ANWHeavyCetbang' page='1' column='-1'>
 				<Target type ='ProtoUnit'>ArtilleryDepot</Target></Effect>
-			<Effect type ='CommandAdd' tech ='RvltModImperialCetbang' page='1' column='-1'>
+			<Effect type ='CommandAdd' tech ='ANWImperialCetbang' page='1' column='-1'>
 				<Target type ='ProtoUnit'>ArtilleryDepot</Target></Effect>				
 				
 			<Effect type ='Data' amount ='1.00' subtype ='Enable' relativity ='Absolute'>
@@ -4099,7 +4099,7 @@
 				<Target type ='ProtoUnit'>xpIronclad</Target></Effect>
 				
 			<Effect type ='TechStatus' status ='obtainable'>Bayonet</Effect>
-			<Effect type ='TechStatus' status ='obtainable'>RvltModHCInfantryHitpointsDutchTeamExtra</Effect>
+			<Effect type ='TechStatus' status ='obtainable'>ANWHCInfantryHitpointsDutchTeamExtra</Effect>
 			<Effect type ='Data' amount ='1.00' subtype ='Enable' relativity ='Absolute'>
 				<Target type ='ProtoUnit'>ypBankAsian</Target></Effect>
 			
@@ -4259,7 +4259,7 @@
 			
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModHeavyCetbang' type ='Normal'>
+	<Tech name ='ANWHeavyCetbang' type ='Normal'>
 		<DBID>30061</DBID>
 		<DisplayNameID>400031</DisplayNameID>
 		<Cost resourcetype ='Food'>250.0000</Cost>
@@ -4283,7 +4283,7 @@
 			<Effect type ='SetName' proto ='deREVCetbang' culture ='none' newName ='400031'></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModImperialCetbang' type ='Normal'>
+	<Tech name ='ANWImperialCetbang' type ='Normal'>
 		<DBID>30062</DBID>
 		<DisplayNameID>400033</DisplayNameID>
 		<Cost resourcetype ='Wood'>1500.0000</Cost>
@@ -4295,7 +4295,7 @@
 		<Flag>CountsTowardMilitaryScore</Flag>
 		<Flag>UpgradeTech</Flag>
 		<Prereqs>
-			<TechStatus status ='Active'>RvltModHeavyCetbang</TechStatus>
+			<TechStatus status ='Active'>ANWHeavyCetbang</TechStatus>
 			<TechStatus status ='Active'>Imperialize</TechStatus>
 		</Prereqs>
 		<Effects>
@@ -4308,7 +4308,7 @@
 			<Effect type ='SetName' proto ='deREVCetbang' culture ='none' newName ='400033'></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModHCShipWarElephant' type ='Normal'>
+	<Tech name ='ANWHCShipWarElephant' type ='Normal'>
 		<DBID>30063</DBID>
 		<DisplayNameID>80874</DisplayNameID>
 		<Cost resourcetype ='Ships'>1.0000</Cost>
@@ -4320,16 +4320,16 @@
 		<Flag>HomeCity</Flag>
 		<Flag>YPIgnorePopCostBuildLimitFreeHCUnitIfTechObtainable</Flag>
 		<Effects>
-			<Effect type ='SetOnShipmentSentTech' amount ='1.00'>RvltModShipWarElephant</Effect>
-			<Effect type ='TechStatus' status ='active'>RvltModWarElephantShadow</Effect>
-			<Effect type ='TechStatus' status ='active'>RvltModWarElephantShipShadowInf</Effect>
+			<Effect type ='SetOnShipmentSentTech' amount ='1.00'>ANWShipWarElephant</Effect>
+			<Effect type ='TechStatus' status ='active'>ANWWarElephantShadow</Effect>
+			<Effect type ='TechStatus' status ='active'>ANWWarElephantShipShadowInf</Effect>
 			<Effect type ='Data' amount ='1.00' subtype ='BuildLimit' relativity ='Absolute'>
 				<Target type ='ProtoUnit'>ypNatMercWarElephant</Target></Effect>
 			<Effect type ='Data' amount ='50.00' subtype ='Cost' resource ='Food' relativity ='Absolute'>
-				<Target type ='Tech'>RvltModHCShipWarElephant</Target></Effect>
+				<Target type ='Tech'>ANWHCShipWarElephant</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModWarElephantShadow' type ='Normal'>
+	<Tech name ='ANWWarElephantShadow' type ='Normal'>
 		<DBID>30064</DBID>
 		<Status>UNOBTAINABLE</Status>
 		<Flag>Shadow</Flag>
@@ -4354,7 +4354,7 @@
 				<Target type ='ProtoUnit'>ypNatMercWarElephant</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModShipWarElephant' type ='Normal'>
+	<Tech name ='ANWShipWarElephant' type ='Normal'>
 		<DBID>30065</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>UNOBTAINABLE</Status>
@@ -4362,17 +4362,17 @@
 		<Flag>CheckLandHCGatherPoint</Flag>
 		<Flag>YPIgnorePopCostBuildLimitFreeHCUnitIfTechObtainable</Flag>
 		<Effects>
-			<Effect tech ='RvltModWarElephantShipShadowInf' type ='Data' amount ='1.00' subtype ='FreeHomeCityUnitByTechActiveCount' unittype ='ypNatMercWarElephant' relativity ='Absolute'>
+			<Effect tech ='ANWWarElephantShipShadowInf' type ='Data' amount ='1.00' subtype ='FreeHomeCityUnitByTechActiveCount' unittype ='ypNatMercWarElephant' relativity ='Absolute'>
 				<Target type ='Player'></Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModWarElephantShipShadowInf' type ='Normal'>
+	<Tech name ='ANWWarElephantShipShadowInf' type ='Normal'>
 		<DBID>30066</DBID>
 		<Status>UNOBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Flag>YPInfiniteTech</Flag>
 	</Tech>
-	<Tech name='RvltModHCInfantryHitpointsDutchTeamExtra' type="Normal">
+	<Tech name='ANWHCInfantryHitpointsDutchTeamExtra' type="Normal">
 		<DBID>30067</DBID>
 		<DisplayNameID>71152</DisplayNameID>
 		<ResearchPoints>0.0000</ResearchPoints>
@@ -4387,7 +4387,7 @@
 			<Effect type ='TextOutput'>71153</Effect>
 		</Effects>
 	</Tech>
-	<!-- <Tech name='RvltModHCInfantryDamageIndonesianExtra' type="Normal">
+	<!-- <Tech name='ANWHCInfantryDamageIndonesianExtra' type="Normal">
 		<DBID>30068</DBID>
 		<DisplayNameID>71152</DisplayNameID>
 		<ResearchPoints>0.0000</ResearchPoints>
@@ -4395,14 +4395,14 @@
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>HCInfantryDamageDutch</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0Indonesians</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Indonesians</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='Data' amount ='1.15' subtype ='Damage' allactions ='1' relativity ='BasePercent'>
 				<Target type ='ProtoUnit'>deREVJavaSpearman</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name='RvltModHCInfantryCombatIndonesianExtra' type="Normal">
+	<Tech name='ANWHCInfantryCombatIndonesianExtra' type="Normal">
 		<DBID>30069</DBID>
 		<DisplayNameID>71152</DisplayNameID>
 		<ResearchPoints>0.0000</ResearchPoints>
@@ -4410,7 +4410,7 @@
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>HCInfantryCombatDutch</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0Indonesians</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Indonesians</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='Data' amount ='1.15' subtype ='Damage' allactions ='1' relativity ='BasePercent'>
@@ -4419,7 +4419,7 @@
 				<Target type ='ProtoUnit'>deREVJavaSpearman</Target></Effect>
 		</Effects>
 	</Tech> -->
-	<Tech name ='RvltModImperialJavaSpearmen' type ='Normal'>
+	<Tech name ='ANWImperialJavaSpearmen' type ='Normal'>
 		<DBID>30070</DBID>
 		<DisplayNameID>400035</DisplayNameID>
 		<Cost resourcetype ='Wood'>1500.0000</Cost>
@@ -4447,7 +4447,7 @@
 				<Target type ='ProtoUnit'>deREVJavaSpearman</Target></Effect>	
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModAge0Finnish' type ='Normal'>
+	<Tech name ='ANWAge0Finnish' type ='Normal'>
 		<DBID>30071</DBID>
 		<Status>UNOBTAINABLE</Status>
 		<Flag>Shadow</Flag>
@@ -4736,7 +4736,7 @@
 				<Target type ='ProtoUnit'>deIconExplorerSWThor</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModHCTurkuAcademy' type ='Normal'>
+	<Tech name ='ANWHCTurkuAcademy' type ='Normal'>
 		<DBID>30072</DBID>
 		<DisplayNameID>80893</DisplayNameID>
 		<Cost resourcetype ='Ships'>1.0000</Cost>
@@ -4759,14 +4759,14 @@
 				<Target type ='ProtoUnit'>Explorer</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModVetSkirmFinnShadow' type ='Normal'>
+	<Tech name ='ANWVetSkirmFinnShadow' type ='Normal'>
 		<DBID>30073</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>VeteranSkirmishersShadow</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0Finnish</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Finnish</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='SetName' proto ='Skirmisher' culture ='none' newName ='80890' newRollover ='80889'></Effect>
@@ -4781,14 +4781,14 @@
 				<Target type ='ProtoUnit'>Skirmisher</Target></Effect> -->
 		</Effects> 
 	</Tech>
-	<Tech name ='RvltModGuardSkirmFinnShadow' type ='Normal'>
+	<Tech name ='ANWGuardSkirmFinnShadow' type ='Normal'>
 		<DBID>30074</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>GuardSkirmishers</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0Finnish</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Finnish</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='SetName' proto ='Skirmisher' culture ='none' newName ='80890' newRollover ='80889'></Effect>
@@ -4803,14 +4803,14 @@
 				<Target type ='ProtoUnit'>Skirmisher</Target></Effect> -->
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModImpSkirmFinnShadow' type ='Normal'>
+	<Tech name ='ANWImpSkirmFinnShadow' type ='Normal'>
 		<DBID>30075</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>ImperialSkirmishers</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0Finnish</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Finnish</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='SetName' proto ='Skirmisher' culture ='none' newName ='80890' newRollover ='80889'></Effect>
@@ -4825,7 +4825,7 @@
 				<Target type ='ProtoUnit'>Skirmisher</Target></Effect> -->
 		</Effects>
 	</Tech>
-	<Tech name='RvltModCounterAmryShadow' type="Normal">
+	<Tech name='ANWCounterAmryShadow' type="Normal">
 		<DBID>30076</DBID>
 		<DisplayNameID>71152</DisplayNameID>
 		<ResearchPoints>0.0000</ResearchPoints>
@@ -4833,60 +4833,60 @@
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>DEHCREVFinnishCounterArmy</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0Finnish</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Finnish</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='TechStatus' status ='obtainable'>GuardDragoons</Effect>
 			<Effect type ='TechStatus' status ='obtainable'>ImperialDragoons</Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModVetDragoonFinnShadow' type ='Normal'>
+	<Tech name ='ANWVetDragoonFinnShadow' type ='Normal'>
 		<DBID>30077</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>VeteranDragoonsShadow</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0Finnish</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Finnish</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='SetName' proto ='Dragoon' culture ='none' newName ='126848'></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModGuardDragoonFinnShadow' type ='Normal'>
+	<Tech name ='ANWGuardDragoonFinnShadow' type ='Normal'>
 		<DBID>30078</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>GuardDragoons</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0Finnish</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Finnish</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='SetName' proto ='Dragoon' culture ='none' newName ='126848'></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModImpDragoonFinnShadow' type ='Normal'>
+	<Tech name ='ANWImpDragoonFinnShadow' type ='Normal'>
 		<DBID>30079</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>ImperialDragoons</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0Finnish</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Finnish</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='SetName' proto ='Dragoon' culture ='none' newName ='126848'></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModFortressizeFinnShadow' type ='Normal'>
+	<Tech name ='ANWFortressizeFinnShadow' type ='Normal'>
 		<DBID>30080</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>Fortressize</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0Finnish</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Finnish</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='Data' amount ='3.00' subtype ='BuildLimit' relativity ='Absolute'>
@@ -4896,14 +4896,14 @@
 				<Target type ='ProtoUnit'>Blockhouse</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModIndustrializeFinnShadow' type ='Normal'>
+	<Tech name ='ANWIndustrializeFinnShadow' type ='Normal'>
 		<DBID>30081</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>Industrialize</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0Finnish</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Finnish</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='Data' amount ='5.00' subtype ='BuildLimit' relativity ='Absolute'>
@@ -4913,7 +4913,7 @@
 				<Target type ='ProtoUnit'>Blockhouse</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModImperializeFinnish' type ='Normal'>
+	<Tech name ='ANWImperializeFinnish' type ='Normal'>
 		<DBID>30082</DBID>
 		<Status>UNOBTAINABLE</Status>
 		<Icon>resources\images\icons\post_game\time_line_age_5.png</Icon>
@@ -4931,7 +4931,7 @@
 				<Target type ='ProtoUnit'>deNMPandour</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name='RvltModImpCounterJaegerShadow' type="Normal">
+	<Tech name='ANWImpCounterJaegerShadow' type="Normal">
 		<DBID>30083</DBID>
 		<DisplayNameID>71152</DisplayNameID>
 		<ResearchPoints>0.0000</ResearchPoints>
@@ -4939,13 +4939,13 @@
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>DEHCREVFinnishCounterArmy</TechStatus>
-			<TechStatus status ='Active'>RvltModImperializeFinnish</TechStatus>
+			<TechStatus status ='Active'>ANWImperializeFinnish</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='TechStatus' status ='obtainable'>DEImperialCounterJaegers</Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModAge0Hungarians' type ='Normal'>
+	<Tech name ='ANWAge0Hungarians' type ='Normal'>
 		<DBID>30084</DBID>
 		<Status>UNOBTAINABLE</Status>
 		<Flag>Shadow</Flag>
@@ -4982,8 +4982,8 @@
 			<Effect type ='TechStatus' status ='obtainable'>DERevolutionaryNerfShadowColonial</Effect>
 			<Effect type ='TechStatus' status ='obtainable'>DERevolutionaryNerfShadowFortress</Effect>
 			<Effect type ='TechStatus' status ='obtainable'>DERevolutionaryNerfShadowIndustrialize</Effect>
-			<Effect type ='TechStatus' status ='obtainable'>RvltModImperialRevolutionaries</Effect>
-			<Effect type ='CommandAdd' tech ='RvltModImperialRevolutionaries' page='1' column='5'>
+			<Effect type ='TechStatus' status ='obtainable'>ANWImperialRevolutionaries</Effect>
+			<Effect type ='CommandAdd' tech ='ANWImperialRevolutionaries' page='1' column='5'>
 				<Target type ='ProtoUnit'>Barracks</Target></Effect>
 				
 			<Effect type ='Data' amount ='3.00' subtype ='DamageBonus' unittype ='Guardian' allactions ='1' relativity ='Assign'>
@@ -5038,11 +5038,11 @@
 			<Effect type ='Data' amount ='1.00' subtype ='Enable' relativity ='Absolute'>
 				<Target type ='ProtoUnit'>Hussar</Target></Effect>
 			<Effect type ='TechStatus' status ='obtainable'>VeteranHussars</Effect>
-			<Effect type ='TechStatus' status ='obtainable'>RvltModMagyarHussars</Effect>
-			<Effect type ='TechStatus' status ='obtainable'>RvltModImperialMagyarHussar</Effect>
-			<Effect type ='CommandAdd' tech ='RvltModMagyarHussars' page='1' column='0'>
+			<Effect type ='TechStatus' status ='obtainable'>ANWMagyarHussars</Effect>
+			<Effect type ='TechStatus' status ='obtainable'>ANWImperialMagyarHussar</Effect>
+			<Effect type ='CommandAdd' tech ='ANWMagyarHussars' page='1' column='0'>
 				<Target type ='ProtoUnit'>Stable</Target></Effect>
-			<Effect type ='CommandAdd' tech ='RvltModImperialMagyarHussar' page='1' column='0'>
+			<Effect type ='CommandAdd' tech ='ANWImperialMagyarHussar' page='1' column='0'>
 				<Target type ='ProtoUnit'>Stable</Target></Effect>
 			
 			<Effect type ='Data' amount ='1.00' subtype ='Enable' relativity ='Absolute'>
@@ -5178,7 +5178,7 @@
 			<Effect type ='TechStatus' status ='obtainable'>DEPoliticianKnight</Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModMagyarHussars' type ='Normal'>
+	<Tech name ='ANWMagyarHussars' type ='Normal'>
 		<DBID>30085</DBID>
 		<DisplayNameID>80904</DisplayNameID>
 		<Cost resourcetype ='Wood'>850.0000</Cost>
@@ -5204,7 +5204,7 @@
 				<Target type ='ProtoUnit'>deIconREVHungarianHussar</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModImperialMagyarHussar' type ='Normal'>
+	<Tech name ='ANWImperialMagyarHussar' type ='Normal'>
 		<DBID>30086</DBID>
 		<DisplayNameID>400039</DisplayNameID>
 		<Cost resourcetype ='Wood'>1500.0000</Cost>
@@ -5218,7 +5218,7 @@
 		<Prereqs>
 			<TechStatus status ='Active'>Imperialize</TechStatus>
 			<TechStatus status ='Active'>GuardHussars</TechStatus>
-			<TechStatus status ='Active'>RvltModMagyarHussars</TechStatus>
+			<TechStatus status ='Active'>ANWMagyarHussars</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='Data' amount ='1.50' subtype ='Hitpoints' relativity ='BasePercent'>
@@ -5229,70 +5229,70 @@
 				<Target type ='Player'></Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModVetGrenHungaryShadow' type ='Normal'>
+	<Tech name ='ANWVetGrenHungaryShadow' type ='Normal'>
 		<DBID>30087</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>VeteranGrenadiers</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0Hungarians</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Hungarians</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='SetName' proto ='Grenadier' culture ='none' newName ='400040'></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModGuardGrenHungaryShadow' type ='Normal'>
+	<Tech name ='ANWGuardGrenHungaryShadow' type ='Normal'>
 		<DBID>30088</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>GuardGrenadiers</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0Hungarians</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Hungarians</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='SetName' proto ='Grenadier' culture ='none' newName ='400041'></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModImpGrenHungaryShadow' type ='Normal'>
+	<Tech name ='ANWImpGrenHungaryShadow' type ='Normal'>
 		<DBID>30089</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>ImperialGrenadiers</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0Hungarians</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Hungarians</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='SetName' proto ='Grenadier' culture ='none' newName ='400042'></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModColonializeHungarianShadow' type ='Normal'>
+	<Tech name ='ANWColonializeHungarianShadow' type ='Normal'>
 		<DBID>30090</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>Colonialize</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0Hungarians</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Hungarians</TechStatus>
 		</Prereqs>
 		<Effects>
-			<Effect type ='SetOnShipmentSentTech' amount ='1.00'>RvltModShipOutpostShadow</Effect>
+			<Effect type ='SetOnShipmentSentTech' amount ='1.00'>ANWShipOutpostShadow</Effect>
 			<Effect type ='Data' action ='SpawnHajduk' amount ='0.00' subtype ='ActionEnable' relativity ='Absolute'>
 				<Target type ='ProtoUnit'>Outpost</Target></Effect>
 			<Effect type ='Data' action ='SpawnMagyarGrenadier' amount ='1.00' subtype ='ActionEnable' relativity ='Absolute'>
 				<Target type ='ProtoUnit'>Outpost</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModFortressizeHungarianShadow' type ='Normal'>
+	<Tech name ='ANWFortressizeHungarianShadow' type ='Normal'>
 		<DBID>30091</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>Fortressize</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0Hungarians</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Hungarians</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='Data' action ='SpawnMagyarGrenadier' amount ='0.00' subtype ='ActionEnable' relativity ='Absolute'>
@@ -5301,14 +5301,14 @@
 				<Target type ='ProtoUnit'>Outpost</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModIndustrializeHungarianShadow' type ='Normal'>
+	<Tech name ='ANWIndustrializeHungarianShadow' type ='Normal'>
 		<DBID>30092</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>Industrialize</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0Hungarians</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Hungarians</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='Data' action ='SpawnPandour' amount ='0.00' subtype ='ActionEnable' relativity ='Absolute'>
@@ -5317,7 +5317,7 @@
 				<Target type ='ProtoUnit'>Outpost</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModShipOutpostShadow' type ='Normal'>
+	<Tech name ='ANWShipOutpostShadow' type ='Normal'>
 		<DBID>30093</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>UNOBTAINABLE</Status>
@@ -5329,7 +5329,7 @@
 				<Target type ='Player'></Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModHCMilitaryFrontier' type ='Normal'>
+	<Tech name ='ANWHCMilitaryFrontier' type ='Normal'>
 		<DBID>30094</DBID>
 		<DisplayNameID>80921</DisplayNameID>
 		<Cost resourcetype ='Ships'>1.0000</Cost>
@@ -5349,7 +5349,7 @@
 				<Target type ='ProtoUnit'>Outpost</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModHCMagyarGrenadiers' type ='Normal'>
+	<Tech name ='ANWHCMagyarGrenadiers' type ='Normal'>
 		<DBID>30095</DBID>
 		<DisplayNameID>80912</DisplayNameID>
 		<Cost resourcetype ='Ships'>1.0000</Cost>
@@ -5366,7 +5366,7 @@
 				<Target type ='Player'></Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModHCHajduks' type ='Normal'>
+	<Tech name ='ANWHCHajduks' type ='Normal'>
 		<DBID>30096</DBID>
 		<DisplayNameID>80910</DisplayNameID>
 		<Cost resourcetype ='Ships'>1.0000</Cost>
@@ -5384,7 +5384,7 @@
             <Effect type ='TechStatus' status ='active'>DEREVHajduk</Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModHCMagyarHussarsAlt' type ='Normal'>
+	<Tech name ='ANWHCMagyarHussarsAlt' type ='Normal'>
 		<DBID>30097</DBID>
 		<DisplayNameID>80917</DisplayNameID>
 		<Cost resourcetype ='Ships'>1.0000</Cost>
@@ -5401,7 +5401,7 @@
 				<Target type ='Player'></Target></Effect>
 		</Effects>
 	</Tech>
-  <tech name="RvltModHCLegionHungarian" type="Normal">
+  <tech name="ANWHCLegionHungarian" type="Normal">
     <dbid>30098</dbid>
     <displaynameid>110432</displaynameid>
     <cost resourcetype="Ships">1.0000</cost>
@@ -5415,14 +5415,14 @@
     <effects>
       <effect type="TextOutputTechName">110130</effect>
 			<Effect type ='TechStatus' status ='active'>VeteranHussars</Effect>
-			<Effect type ='TechStatus' status ='active'>RvltModMagyarHussars</Effect>
+			<Effect type ='TechStatus' status ='active'>ANWMagyarHussars</Effect>
       <effect type="Data" amount="1.15" subtype="Hitpoints" relativity="BasePercent">
         <target type="ProtoUnit">Hussar</target></effect>
       <effect type="Data" amount="15.00" subtype="FreeHomeCityUnit" unittype="Hussar" relativity="Absolute">
         <target type="Player"></target></effect>
     </effects>
   </tech>
-	<Tech name ='RvltModHCCrabats' type ='Normal'>
+	<Tech name ='ANWHCCrabats' type ='Normal'>
 		<DBID>30099</DBID>
 		<DisplayNameID>80914</DisplayNameID>
 		<Cost resourcetype ='Ships'>1.0000</Cost>
@@ -5438,7 +5438,7 @@
 			<Effect type ='TechStatus' status ='active'>DEREVCrabat</Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModHCPandours' type ='Normal'>
+	<Tech name ='ANWHCPandours' type ='Normal'>
 		<DBID>30100</DBID>
 		<DisplayNameID>80916</DisplayNameID>
 		<Cost resourcetype ='Ships'>1.0000</Cost>
@@ -5454,7 +5454,7 @@
 			<Effect type ='TechStatus' status ='active'>DEREVPandour</Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModHCShipEuropeanFleet' type ='Normal'>
+	<Tech name ='ANWHCShipEuropeanFleet' type ='Normal'>
 		<DBID>30101</DBID>
 		<DisplayNameID>80919</DisplayNameID>
 		<Cost resourcetype ='Ships'>1.0000</Cost>
@@ -5469,7 +5469,7 @@
 				<Target type ='Player'></Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModHCShipFortWagonOutpost' type ='Normal'>
+	<Tech name ='ANWHCShipFortWagonOutpost' type ='Normal'>
 		<DBID>30102</DBID>
 		<DisplayNameID>80974</DisplayNameID>
 		<Cost resourcetype ='Ships'>1.0000</Cost>
@@ -5488,7 +5488,7 @@
 				<Target type ='ProtoUnit'>Outpost</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModAge0Romanians' type ='Normal'>
+	<Tech name ='ANWAge0Romanians' type ='Normal'>
 		<DBID>30103</DBID>
 		<Status>UNOBTAINABLE</Status>
 		<Flag>Shadow</Flag>
@@ -5527,8 +5527,8 @@
 			<Effect type ='TechStatus' status ='obtainable'>DERevolutionaryNerfShadowColonial</Effect>
 			<Effect type ='TechStatus' status ='obtainable'>DERevolutionaryNerfShadowFortress</Effect>
 			<Effect type ='TechStatus' status ='obtainable'>DERevolutionaryNerfShadowIndustrialize</Effect>
-			<Effect type ='TechStatus' status ='obtainable'>RvltModImperialRevolutionaries</Effect>
-			<Effect type ='CommandAdd' tech ='RvltModImperialRevolutionaries' page='1' column='5'>
+			<Effect type ='TechStatus' status ='obtainable'>ANWImperialRevolutionaries</Effect>
+			<Effect type ='CommandAdd' tech ='ANWImperialRevolutionaries' page='1' column='5'>
 				<Target type ='ProtoUnit'>Barracks</Target></Effect>
 				
 			<Effect type ='Data' amount ='1.15' subtype ='Hitpoints' relativity ='BasePercent'>
@@ -5546,7 +5546,7 @@
 			<Effect type ='Data' amount ='11.00' subtype ='KillBounty' relativity ='Assign'>
 				<Target type ='ProtoUnit'>xpColonialMilitia</Target></Effect> 
 			<Effect type ='SetName' proto ='xpColonialMilitia' culture ='none' newName ='90353' newRollover='90352'></Effect>
-			<Effect type ='SetName' tech ='RvltModHCMilitaryFrontier' newName ='80921' newRollover ='80924'></Effect>
+			<Effect type ='SetName' tech ='ANWHCMilitaryFrontier' newName ='80921' newRollover ='80924'></Effect>
 			<Effect type ='Data' amount ='0.00' subtype ='CopyUnitPortraitAndIcon' unittype ='xpColonialMilitia' relativity ='Absolute'>
 				<Target type ='ProtoUnit'>deIconREVDorobant</Target></Effect>
 			
@@ -5697,66 +5697,66 @@
 			<Effect type ='TechStatus' status ='obtainable'>DEPoliticianKnight</Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModVetWallachianShadow' type ='Normal'>
+	<Tech name ='ANWVetWallachianShadow' type ='Normal'>
 		<DBID>30104</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>VeteranCavalryArchersShadow</TechStatus>
-			<TechStatus status ='Active'>RvltModHCWallachianArchers</TechStatus>
+			<TechStatus status ='Active'>ANWHCWallachianArchers</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='SetName' proto ='CavalryArcher' culture ='none' newName ='80928'></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModGuardWallachianShadow' type ='Normal'>
+	<Tech name ='ANWGuardWallachianShadow' type ='Normal'>
 		<DBID>30105</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>GuardCavalryArchers</TechStatus>
-			<TechStatus status ='Active'>RvltModHCWallachianArchers</TechStatus>
+			<TechStatus status ='Active'>ANWHCWallachianArchers</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='SetName' proto ='CavalryArcher' culture ='none' newName ='80928'></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModImpWallachianShadow' type ='Normal'>
+	<Tech name ='ANWImpWallachianShadow' type ='Normal'>
 		<DBID>30106</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>ImperialCavalryArchers</TechStatus>
-			<TechStatus status ='Active'>RvltModHCWallachianArchers</TechStatus>
+			<TechStatus status ='Active'>ANWHCWallachianArchers</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='SetName' proto ='CavalryArcher' culture ='none' newName ='80928'></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModColonializeRomanianShadow' type ='Normal'>
+	<Tech name ='ANWColonializeRomanianShadow' type ='Normal'>
 		<DBID>30107</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>Colonialize</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0Romanians</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Romanians</TechStatus>
 		</Prereqs>
 		<Effects>
-			<Effect type ='SetOnShipmentSentTech' amount ='1.00'>RvltModShipOutpostShadow</Effect>
+			<Effect type ='SetOnShipmentSentTech' amount ='1.00'>ANWShipOutpostShadow</Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModIndustrializeRomanianShadow' type ='Normal'>
+	<Tech name ='ANWIndustrializeRomanianShadow' type ='Normal'>
 		<DBID>30108</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>Industrialize</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0Romanians</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Romanians</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='TechStatus' status ='active'>GuardDragoons</Effect>
@@ -5764,14 +5764,14 @@
 				<Target type ='ProtoUnit'>Stable</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModImperializeRomanianShadow' type ='Normal'>
+	<Tech name ='ANWImperializeRomanianShadow' type ='Normal'>
 		<DBID>30109</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>Imperialize</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0Romanians</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Romanians</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='TechStatus' status ='active'>ImperialDragoons</Effect>
@@ -5779,46 +5779,46 @@
 				<Target type ='ProtoUnit'>Stable</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModVetDragoonRomanianShadow' type ='Normal'>
+	<Tech name ='ANWVetDragoonRomanianShadow' type ='Normal'>
 		<DBID>30110</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>VeteranDragoonsShadow</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0Romanians</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Romanians</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='SetName' proto ='Dragoon' culture ='none' newName ='80927'></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModGuardDragoonRomanianShadow' type ='Normal'>
+	<Tech name ='ANWGuardDragoonRomanianShadow' type ='Normal'>
 		<DBID>30111</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>GuardDragoons</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0Romanians</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Romanians</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='SetName' proto ='Dragoon' culture ='none' newName ='80927'></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModImpDragoonRomanianShadow' type ='Normal'>
+	<Tech name ='ANWImpDragoonRomanianShadow' type ='Normal'>
 		<DBID>30112</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>ImperialDragoons</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0Romanians</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Romanians</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='SetName' proto ='Dragoon' culture ='none' newName ='80927'></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModHCWallachianArchers' type ='Normal'>
+	<Tech name ='ANWHCWallachianArchers' type ='Normal'>
 		<DBID>30113</DBID>
 		<DisplayNameID>80930</DisplayNameID>
 		<Cost resourcetype ='Ships'>1.0000</Cost>
@@ -5855,7 +5855,7 @@
 				<Target type ='ProtoUnit'>deIconREVWallachianHorseArcher</Target></Effect>
 		</Effects>
 	</Tech>
-  <tech name="RvltModHCShipCavArchers" type="Normal">
+  <tech name="ANWHCShipCavArchers" type="Normal">
     <dbid>30114</dbid>
     <displaynameid>35868</displaynameid>
     <cost resourcetype="Ships">1.0000</cost>
@@ -5869,7 +5869,7 @@
         <target type="Player"></target></effect>
     </effects>
   </tech>
-  <tech name="RvltModHCPhanariotes" type="Normal">
+  <tech name="ANWHCPhanariotes" type="Normal">
     <dbid>30115</dbid>
     <displaynameid>126784</displaynameid>
     <researchpoints>5.0000</researchpoints>
@@ -5928,7 +5928,7 @@
         <target type="ProtoUnit">NativeEmbassy</target></effect>
     </effects>
   </tech>
-	<Tech name ='RvltModHCRoshiorDragoons' type ='Normal'>
+	<Tech name ='ANWHCRoshiorDragoons' type ='Normal'>
 		<DBID>30116</DBID>
 		<DisplayNameID>90355</DisplayNameID>
 		<Cost resourcetype ='Ships'>1.0000</Cost>
@@ -5949,7 +5949,7 @@
 			<Effect type ='CommandRemove' proto ='Dragoon'><Target type ='ProtoUnit'>Galleon</Target></Effect>
 		</Effects>
 	</Tech>
-  <tech name="RvltModHCRussianExpArmy" type="Normal">
+  <tech name="ANWHCRussianExpArmy" type="Normal">
     <dbid>30117</dbid>
     <displaynameid>65830</displaynameid>
     <cost resourcetype="Ships">1.0000</cost>
@@ -5968,7 +5968,7 @@
       <effect type="TextOutputTechName">110130</effect>
     </effects>
   </tech>
-	<Tech name ='RvltModAge0Barbary' type ='Normal'>
+	<Tech name ='ANWAge0Barbary' type ='Normal'>
 		<DBID>30118</DBID>
 		<Status>UNOBTAINABLE</Status>
 		<Flag>Shadow</Flag>
@@ -6080,11 +6080,11 @@
 				<Target type ='ProtoUnit'>Barracks</Target></Effect>
 			<Effect type ='Data' amount ='-2.00' subtype ='AllowedAge' relativity ='Absolute'>
 				<Target type ='ProtoUnit'>deREVBarbaryWarrior</Target></Effect>
-			<Effect type ='TechStatus' status ='obtainable'>RvltModBarbWarriorNerfShadowColonial</Effect>
-			<Effect type ='TechStatus' status ='obtainable'>RvltModBarbWarriorNerfShadowFortress</Effect>
-			<Effect type ='TechStatus' status ='obtainable'>RvltModBarbWarriorNerfShadowIndustrialize</Effect>
-			<Effect type ='TechStatus' status ='obtainable'>RvltModImperialBarbaryWarrior</Effect>
-			<Effect type ='CommandAdd' tech ='RvltModImperialBarbaryWarrior' page='1' column='0'>
+			<Effect type ='TechStatus' status ='obtainable'>ANWBarbWarriorNerfShadowColonial</Effect>
+			<Effect type ='TechStatus' status ='obtainable'>ANWBarbWarriorNerfShadowFortress</Effect>
+			<Effect type ='TechStatus' status ='obtainable'>ANWBarbWarriorNerfShadowIndustrialize</Effect>
+			<Effect type ='TechStatus' status ='obtainable'>ANWImperialBarbaryWarrior</Effect>
+			<Effect type ='CommandAdd' tech ='ANWImperialBarbaryWarrior' page='1' column='0'>
 				<Target type ='ProtoUnit'>Barracks</Target></Effect>
 			<Effect type ='Data' amount ='-1.00' subtype ='PopulationCount' relativity ='Absolute'>
 				<Target type ='ProtoUnit'>deAllegianceBarbaryMarksman</Target></Effect>
@@ -6097,15 +6097,15 @@
 				<Target type ='ProtoUnit'>deBarbaryCavalry</Target></Effect>
 			<Effect type ='TechStatus' status ='obtainable'>DEVeteranBarbaryCavalry</Effect>
 			<Effect type ='TechStatus' status ='obtainable'>DEGuardBarbaryCavalry</Effect>
-			<Effect type ='TechStatus' status ='obtainable'>RvltModImperialBarbaryCavalry</Effect>
-			<Effect type ='CommandAdd' tech ='RvltModImperialBarbaryCavalry' page='1' column='0'>
+			<Effect type ='TechStatus' status ='obtainable'>ANWImperialBarbaryCavalry</Effect>
+			<Effect type ='CommandAdd' tech ='ANWImperialBarbaryCavalry' page='1' column='0'>
 				<Target type ='ProtoUnit'>Stable</Target></Effect>
 			<Effect type ='Data' amount ='1.00' subtype ='Enable' relativity ='Absolute'>
 				<Target type ='ProtoUnit'>deBedouinHorseArcher</Target></Effect>
-			<Effect type ='TechStatus' status ='obtainable'>RvltModVeteranBedouinHorseArchersShadow</Effect>
+			<Effect type ='TechStatus' status ='obtainable'>ANWVeteranBedouinHorseArchersShadow</Effect>
 			<Effect type ='TechStatus' status ='obtainable'>DEGuardBedouinHorseArcher</Effect>
-			<Effect type ='TechStatus' status ='obtainable'>RvltModImperialBedouinHorseArcher</Effect>
-			<Effect type ='CommandAdd' tech ='RvltModImperialBedouinHorseArcher' page='1' column='1'>
+			<Effect type ='TechStatus' status ='obtainable'>ANWImperialBedouinHorseArcher</Effect>
+			<Effect type ='CommandAdd' tech ='ANWImperialBedouinHorseArcher' page='1' column='1'>
 				<Target type ='ProtoUnit'>Stable</Target></Effect>
 			
 			<Effect type ='Data' amount ='1.00' subtype ='Enable' relativity ='Absolute'>
@@ -6212,7 +6212,7 @@
 				<Target type ='ProtoUnit'>IGCSahin</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name='RvltModBarbWarriorNerfShadowColonial' type='Normal'>
+	<Tech name='ANWBarbWarriorNerfShadowColonial' type='Normal'>
 		<DBID>30119</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>UNOBTAINABLE</Status>
@@ -6238,7 +6238,7 @@
 				<Target type ='ProtoUnit'>deREVBarbaryWarrior</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name='RvltModBarbWarriorNerfShadowFortress' type='Normal'>
+	<Tech name='ANWBarbWarriorNerfShadowFortress' type='Normal'>
 		<DBID>30120</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>UNOBTAINABLE</Status>
@@ -6253,7 +6253,7 @@
 				<Target type ='ProtoUnit'>deREVBarbaryWarrior</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name='RvltModBarbWarriorNerfShadowIndustrialize' type='Normal'>
+	<Tech name='ANWBarbWarriorNerfShadowIndustrialize' type='Normal'>
 		<DBID>30121</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>UNOBTAINABLE</Status>
@@ -6268,7 +6268,7 @@
 				<Target type ='ProtoUnit'>deREVBarbaryWarrior</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModImperialBarbaryWarrior' type ='Normal'>
+	<Tech name ='ANWImperialBarbaryWarrior' type ='Normal'>
 		<DBID>30122</DBID>
 		<DisplayNameID>400043</DisplayNameID>
 		<Cost resourcetype ='Wood'>1500.0000</Cost>
@@ -6289,14 +6289,14 @@
 				<Target type ='ProtoUnit'>deREVBarbaryWarrior</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModBarbaryUnknownMoroccanCavShadow' type ='Normal'>
+	<Tech name ='ANWBarbaryUnknownMoroccanCavShadow' type ='Normal'>
 		<DBID>30123</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>DEUnknownMoroccanAlliance</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0Barbary</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Barbary</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='Data' amount ='1.00' subtype ='PopulationCount' relativity ='Assign'>
@@ -6322,7 +6322,7 @@
 				<Target type ='ProtoUnit'>NativeEmbassy</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModImperialBarbaryCavalry' type ='Normal'>
+	<Tech name ='ANWImperialBarbaryCavalry' type ='Normal'>
 		<DBID>30124</DBID>
 		<DisplayNameID>400045</DisplayNameID>
 		<Cost resourcetype ='Wood'>1500.0000</Cost>
@@ -6345,7 +6345,7 @@
 			<Effect type ='SetName' proto ='deBarbaryCavalry' culture ='none' newName ='400047'></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModVeteranBedouinHorseArchersShadow' type ='Normal'>
+	<Tech name ='ANWVeteranBedouinHorseArchersShadow' type ='Normal'>
 		<DBID>30125</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>UNOBTAINABLE</Status>
@@ -6359,7 +6359,7 @@
 				<Target type ='ProtoUnit'>deBedouinHorseArcher</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModImperialBedouinHorseArcher' type ='Normal'>
+	<Tech name ='ANWImperialBedouinHorseArcher' type ='Normal'>
 		<DBID>30126</DBID>
 		<DisplayNameID>400048</DisplayNameID>
 		<Cost resourcetype ='Wood'>1500.0000</Cost>
@@ -6382,34 +6382,34 @@
 			<Effect type ='SetName' proto ='deBedouinHorseArcher' culture ='none' newName ='400050'></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModEarlyDragoonsShadow' type ='Normal'>
+	<Tech name ='ANWEarlyDragoonsShadow' type ='Normal'>
 		<DBID>30127</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>HCEarlyDragoonsTeam</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0Barbary</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Barbary</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='Data' amount ='-1.00' subtype ='AllowedAge' relativity ='Assign'>
 				<Target type ='ProtoUnit'>deBedouinHorseArcher</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModLoyalWarriorsShadow' type ='Normal'>
+	<Tech name ='ANWLoyalWarriorsShadow' type ='Normal'>
 		<DBID>30128</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>DEHCREVLoyalWarriors</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0Barbary</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Barbary</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='TechStatus' status ='active'>HCMercenaryLoyalty</Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModAge0Egypt' type ='Normal'>
+	<Tech name ='ANWAge0Egypt' type ='Normal'>
 		<DBID>30129</DBID>
 		<Status>UNOBTAINABLE</Status>
 		<Flag>Shadow</Flag>
@@ -6437,8 +6437,8 @@
 			<Effect type ='TechStatus' status ='obtainable'>DERevolutionaryNerfShadowColonial</Effect>
 			<Effect type ='TechStatus' status ='obtainable'>DERevolutionaryNerfShadowFortress</Effect>
 			<Effect type ='TechStatus' status ='obtainable'>DERevolutionaryNerfShadowIndustrialize</Effect>
-			<Effect type ='TechStatus' status ='obtainable'>RvltModImperialRevolutionaries</Effect>
-			<Effect type ='CommandAdd' tech ='RvltModImperialRevolutionaries' page='1' column='5'>
+			<Effect type ='TechStatus' status ='obtainable'>ANWImperialRevolutionaries</Effect>
+			<Effect type ='CommandAdd' tech ='ANWImperialRevolutionaries' page='1' column='5'>
 				<Target type ='ProtoUnit'>Barracks</Target></Effect>
 			<Effect type ='TechStatus' status ='active'>DEREVEgyptianFusilier</Effect>
 			
@@ -6625,7 +6625,7 @@
 				<Target type ='ProtoUnit'>IGCSahin</Target></Effect>
 		</Effects>
 	</Tech>
-	<!-- <Tech name ='RvltModHCMercsMamelukes' type ='Normal'>
+	<!-- <Tech name ='ANWHCMercsMamelukes' type ='Normal'>
 		<DBID>30130</DBID>
 		<DisplayNameID>400051</DisplayNameID>
 		<Cost resourcetype ='Ships'>1.0000</Cost>
@@ -6635,10 +6635,10 @@
 		<RolloverTextID>400052</RolloverTextID>
 		<Flag>HomeCity</Flag>
 		<Effects>
-			<Effect type ='SetOnShipmentSentTech' amount ='1.00'>RvltModShipMameluke</Effect>
+			<Effect type ='SetOnShipmentSentTech' amount ='1.00'>ANWShipMameluke</Effect>
 		</Effects>
 	</Tech> -->
-	<Tech name ='RvltModShipMameluke' type ='Normal'>
+	<Tech name ='ANWShipMameluke' type ='Normal'>
 		<DBID>30131</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>UNOBTAINABLE</Status>
@@ -6649,7 +6649,7 @@
 				<Target type ='Player'></Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModAge0CentralAmericans' type ='Normal'>
+	<Tech name ='ANWAge0CentralAmericans' type ='Normal'>
 		<DBID>30132</DBID>
 		<Status>UNOBTAINABLE</Status>
 		<Flag>Shadow</Flag>
@@ -6662,8 +6662,8 @@
 				<Target type ='ProtoUnit'>deSteamer</Target></Effect>
 			<Effect type ='Data' amount ='1.00' subtype ='AddTrain' unittype ='xpColonialMilitia' relativity ='Absolute'>
 				<Target type ='ProtoUnit'>FortFrontier</Target></Effect>
-			<Effect type ='TechStatus' status ='obtainable'>RvltModImperialRevolutionaries</Effect>
-			<Effect type ='CommandAdd' tech ='RvltModImperialRevolutionaries' page='1' column='5'>
+			<Effect type ='TechStatus' status ='obtainable'>ANWImperialRevolutionaries</Effect>
+			<Effect type ='CommandAdd' tech ='ANWImperialRevolutionaries' page='1' column='5'>
 				<Target type ='ProtoUnit'>Barracks</Target></Effect>
 			<Effect type ='Data' amount ='0.75' subtype ='Damage' allactions ='1' relativity ='BasePercent'>
 				<Target type ='ProtoUnit'>xpPetard</Target></Effect>
@@ -6937,13 +6937,13 @@
 
 		</Effects>
 	</Tech>	 
-	<Tech name ='RvltModAddCACardsToDeck' type ='Normal'>
+	<Tech name ='ANWAddCACardsToDeck' type ='Normal'>
 		<DBID>30133</DBID>
 		<Status>OBTAINABLE</Status>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Flag>Shadow</Flag>
 		<Prereqs>
-			<TechStatus status ='Active'>RvltModAge0CentralAmericans</TechStatus>
+			<TechStatus status ='Active'>ANWAge0CentralAmericans</TechStatus>
 			<TechStatus status ='Active'>DEColonializeMexicans</TechStatus>
 		</Prereqs>
 		<Effects>
@@ -6951,13 +6951,13 @@
 			<Effect type ='AddHomeCityCard' tech ='DEHCREVFedMXCatrachos' maxCount ='1' agePrereq='1' unitCount='0' infiniteInLastAge='0'></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModCentralAmericansGeneralShadow' type ='Normal'>
+	<Tech name ='ANWCentralAmericansGeneralShadow' type ='Normal'>
 		<DBID>30134</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
-			<TechStatus status ='Active'>RvltModAge0CentralAmericans</TechStatus>
+			<TechStatus status ='Active'>ANWAge0CentralAmericans</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='Data' amount ='0.00' subtype ='UseRandomNames' randomNameType ='2' relativity ='Assign'>
@@ -6979,7 +6979,7 @@
 				<Target type ='Player'></Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModFortressizeCentralAmericans' type ='Normal'>
+	<Tech name ='ANWFortressizeCentralAmericans' type ='Normal'>
 		<DBID>30135</DBID>
 		<Status>UNOBTAINABLE</Status>
 		<Icon>resources\images\icons\post_game\time_line_age_3.png</Icon>
@@ -6995,7 +6995,7 @@
 				<Target type ='ProtoUnit'>xpPetard</Target></Effect>
 		</Effects>
 	</Tech>	
-	<Tech name ='RvltModAge0BajaCalifornia' type ='Normal'>
+	<Tech name ='ANWAge0BajaCalifornia' type ='Normal'>
 		<DBID>30136</DBID>
 		<Status>UNOBTAINABLE</Status>
 		<Flag>Shadow</Flag>
@@ -7052,8 +7052,8 @@
 			<Effect type ='Data' action ='Discover' amount ='1.00' subtype ='ActionEnable' relativity ='Absolute'>
 				<Target type ='ProtoUnit'>deREVFilibuster</Target></Effect>
 		
-			<Effect type ='TechStatus' status ='obtainable'>RvltModPlanAyutlaShadow</Effect>
-			<Effect type ='TechStatus' status ='obtainable'>RvltModMXRobberBarons2EnableShadow</Effect>
+			<Effect type ='TechStatus' status ='obtainable'>ANWPlanAyutlaShadow</Effect>
+			<Effect type ='TechStatus' status ='obtainable'>ANWMXRobberBarons2EnableShadow</Effect>
 			
 			<Effect type ='Data' amount ='1.00' subtype ='Enable' relativity ='Absolute'>
 				<Target type ='ProtoUnit'>TownCenter</Target></Effect>
@@ -7283,13 +7283,13 @@
 
 		</Effects>
 	</Tech>	 
-	<Tech name ='RvltModAddBajaCardsToDeck' type ='Normal'>
+	<Tech name ='ANWAddBajaCardsToDeck' type ='Normal'>
 		<DBID>30137</DBID>
 		<Status>OBTAINABLE</Status>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Flag>Shadow</Flag>
 		<Prereqs>
-			<TechStatus status ='Active'>RvltModAge0BajaCalifornia</TechStatus>
+			<TechStatus status ='Active'>ANWAge0BajaCalifornia</TechStatus>
 			<TechStatus status ='Active'>DEColonializeMexicans</TechStatus>
 		</Prereqs>
 		<Effects>
@@ -7297,13 +7297,13 @@
 			<Effect type ='AddHomeCityCard' tech ='DEHCREVFedMXWalkerLand' maxCount ='1' agePrereq='1' unitCount='0' infiniteInLastAge='0'></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModBajaGeneralShadow' type ='Normal'>
+	<Tech name ='ANWBajaGeneralShadow' type ='Normal'>
 		<DBID>30138</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
-			<TechStatus status ='Active'>RvltModAge0BajaCalifornia</TechStatus>
+			<TechStatus status ='Active'>ANWAge0BajaCalifornia</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='Data' amount ='1.00' subtype ='PowerDataOverride' fromProtoPower ='deAbilityInspiringFlag' toProtoPower='deFlagBajaCaliforniaData' relativity ='Percent'>
@@ -7336,7 +7336,7 @@
 				<Target type ='ProtoUnit'>deIconREVGeneral</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name='RvltModPlanAyutlaShadow' type='Normal'>
+	<Tech name='ANWPlanAyutlaShadow' type='Normal'>
 		<DBID>30139</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>UNOBTAINABLE</Status>
@@ -7351,12 +7351,12 @@
 				<Target type ='ProtoUnit'>FortFrontier</Target></Effect>
 			<Effect type ='Data' amount ='1.00' subtype ='AddTrain' unittype ='xpColonialMilitia' relativity ='Absolute'>
 				<Target type ='ProtoUnit'>deSteamer</Target></Effect>
-			<Effect type ='TechStatus' status ='obtainable'>RvltModImperialRevolutionaries</Effect>
-			<Effect type ='CommandAdd' tech ='RvltModImperialRevolutionaries' page='1' column='5'>
+			<Effect type ='TechStatus' status ='obtainable'>ANWImperialRevolutionaries</Effect>
+			<Effect type ='CommandAdd' tech ='ANWImperialRevolutionaries' page='1' column='5'>
 				<Target type ='ProtoUnit'>Barracks</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModAge0Yucatan' type ='Normal'>
+	<Tech name ='ANWAge0Yucatan' type ='Normal'>
 		<DBID>30140</DBID>
 		<Status>UNOBTAINABLE</Status>
 		<Flag>Shadow</Flag>
@@ -7371,8 +7371,8 @@
 				<Target type ='ProtoUnit'>deSteamer</Target></Effect>
 			<Effect type ='Data' amount ='1.00' subtype ='AddTrain' unittype ='xpColonialMilitia' relativity ='Absolute'>
 				<Target type ='ProtoUnit'>FortFrontier</Target></Effect>
-			<Effect type ='TechStatus' status ='obtainable'>RvltModImperialRevolutionaries</Effect>
-			<Effect type ='CommandAdd' tech ='RvltModImperialRevolutionaries' page='1' column='5'>
+			<Effect type ='TechStatus' status ='obtainable'>ANWImperialRevolutionaries</Effect>
+			<Effect type ='CommandAdd' tech ='ANWImperialRevolutionaries' page='1' column='5'>
 				<Target type ='ProtoUnit'>Barracks</Target></Effect>
 				
 			<Effect type ='Data' amount ='1.00' subtype ='PowerDataOverride' fromProtoPower ='deAbilityInspiringFlag' toProtoPower='deFlagYucatanData' relativity ='Percent'>
@@ -7662,13 +7662,13 @@
 
 		</Effects>
 	</Tech>	 
-	<Tech name ='RvltModAddYucatecoCardsToDeck' type ='Normal'>
+	<Tech name ='ANWAddYucatecoCardsToDeck' type ='Normal'>
 		<DBID>30141</DBID>
 		<Status>OBTAINABLE</Status>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Flag>Shadow</Flag>
 		<Prereqs>
-			<TechStatus status ='Active'>RvltModAge0Yucatan</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Yucatan</TechStatus>
 			<TechStatus status ='Active'>DEFortressizeMexicans</TechStatus>
 		</Prereqs>
 		<Effects>
@@ -7676,13 +7676,13 @@
 			<Effect type ='AddHomeCityCard' tech ='DEHCREVFedMXHenequenIndustry' maxCount ='1' agePrereq='2' unitCount='0' infiniteInLastAge='0'></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModYucatanGeneralShadow' type ='Normal'>
+	<Tech name ='ANWYucatanGeneralShadow' type ='Normal'>
 		<DBID>30142</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
-			<TechStatus status ='Active'>RvltModAge0Yucatan</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Yucatan</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='Data' amount ='1.00' subtype ='PowerDataOverride' fromProtoPower ='deAbilityInspiringFlag' toProtoPower='deFlagYucatanData' relativity ='Percent'>
@@ -7709,14 +7709,14 @@
 				<Target type ='Player'></Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModYucatanInsurgentVeteranShadow' type ='Normal'>
+	<Tech name ='ANWYucatanInsurgentVeteranShadow' type ='Normal'>
 		<DBID>30143</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>DEVeteranInsurgentes</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0Yucatan</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Yucatan</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='TechStatus' status ='active'>DEVeteranInsurgentesShadow</Effect>
@@ -7724,27 +7724,27 @@
 				<Target type ='ProtoUnit'>Barracks</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModYucatanInsurgentGuardShadow' type ='Normal'>
+	<Tech name ='ANWYucatanInsurgentGuardShadow' type ='Normal'>
 		<DBID>30144</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>DEGuardInsurgentes</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0Yucatan</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Yucatan</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='SetName' proto ='deInsurgente' culture ='none' newName ='112861'></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModYucatanInsurgentImperialShadow' type ='Normal'>
+	<Tech name ='ANWYucatanInsurgentImperialShadow' type ='Normal'>
 		<DBID>30145</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>DEImperialInsurgentes</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0Yucatan</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Yucatan</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='SetName' proto ='deInsurgente' culture ='none' newName ='112862'></Effect>
@@ -7752,7 +7752,7 @@
 				<Target type ='ProtoUnit'>Barracks</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModAge0RioGrande' type ='Normal'>
+	<Tech name ='ANWAge0RioGrande' type ='Normal'>
 		<DBID>30146</DBID>
 		<Status>UNOBTAINABLE</Status>
 		<Flag>Shadow</Flag>
@@ -7767,8 +7767,8 @@
 				<Target type ='ProtoUnit'>deSteamer</Target></Effect>
 			<Effect type ='Data' amount ='1.00' subtype ='AddTrain' unittype ='xpColonialMilitia' relativity ='Absolute'>
 				<Target type ='ProtoUnit'>FortFrontier</Target></Effect>
-			<Effect type ='TechStatus' status ='obtainable'>RvltModImperialRevolutionaries</Effect>
-			<Effect type ='CommandAdd' tech ='RvltModImperialRevolutionaries' page='1' column='5'>
+			<Effect type ='TechStatus' status ='obtainable'>ANWImperialRevolutionaries</Effect>
+			<Effect type ='CommandAdd' tech ='ANWImperialRevolutionaries' page='1' column='5'>
 				<Target type ='ProtoUnit'>Barracks</Target></Effect>
 				
 			<Effect type ='Data' amount ='4.00' subtype ='BuildLimit' relativity ='Assign'>
@@ -8051,13 +8051,13 @@
 
 		</Effects>
 	</Tech>	 
-	<Tech name ='RvltModAddRioGrandeCardsToDeck' type ='Normal'>
+	<Tech name ='ANWAddRioGrandeCardsToDeck' type ='Normal'>
 		<DBID>30147</DBID>
 		<Status>OBTAINABLE</Status>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Flag>Shadow</Flag>
 		<Prereqs>
-			<TechStatus status ='Active'>RvltModAge0RioGrande</TechStatus>
+			<TechStatus status ='Active'>ANWAge0RioGrande</TechStatus>
 			<TechStatus status ='Active'>DEFortressizeMexicans</TechStatus>
 		</Prereqs>
 		<Effects>
@@ -8065,20 +8065,20 @@
 			<Effect type ='AddHomeCityCard' tech ='DEHCREVFedMXPlanMonterrey' maxCount ='1' agePrereq='2' unitCount='0' infiniteInLastAge='0'></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModRioGrandeGuardShadow' type ='Normal'>
+	<Tech name ='ANWRioGrandeGuardShadow' type ='Normal'>
 		<DBID>30148</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>DEFortressizeMexicans</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0RioGrande</TechStatus>
+			<TechStatus status ='Active'>ANWAge0RioGrande</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='TechStatus' status ='active'>DEMilitaryIndustrialAgeEnable</Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModAge0Maya' type ='Normal'>
+	<Tech name ='ANWAge0Maya' type ='Normal'>
 		<DBID>30149</DBID>
 		<Status>UNOBTAINABLE</Status>
 		<Flag>Shadow</Flag>
@@ -8098,11 +8098,11 @@
 				<Target type ='ProtoUnit'>Barracks</Target></Effect>
 			<Effect type ='CommandAdd' proto ='deREVCruzobInfantry' page ='0' column ='1'>
 				<Target type ='ProtoUnit'>FortFrontier</Target></Effect>
-			<Effect type ='TechStatus' status ='obtainable'>RvltModCruzobInfantryNerfShadowColonial</Effect>
-			<Effect type ='TechStatus' status ='obtainable'>RvltModCruzobInfantryNerfShadowFortress</Effect>
-			<Effect type ='TechStatus' status ='obtainable'>RvltModCruzobInfantryNerfShadowIndustrialize</Effect>
-			<Effect type ='TechStatus' status ='obtainable'>RvltModImperialCruzobInfantry</Effect>
-			<Effect type ='CommandAdd' tech ='RvltModImperialCruzobInfantry' page ='1' column ='1'>
+			<Effect type ='TechStatus' status ='obtainable'>ANWCruzobInfantryNerfShadowColonial</Effect>
+			<Effect type ='TechStatus' status ='obtainable'>ANWCruzobInfantryNerfShadowFortress</Effect>
+			<Effect type ='TechStatus' status ='obtainable'>ANWCruzobInfantryNerfShadowIndustrialize</Effect>
+			<Effect type ='TechStatus' status ='obtainable'>ANWImperialCruzobInfantry</Effect>
+			<Effect type ='CommandAdd' tech ='ANWImperialCruzobInfantry' page ='1' column ='1'>
 				<Target type ='ProtoUnit'>Barracks</Target></Effect>
 				
 			<Effect type ='CommandRemove' proto ='deSoldado'>
@@ -8126,7 +8126,7 @@
 				<Target type ='ProtoUnit'>WarHut</Target></Effect>
 			<Effect type ='CommandAdd' tech ='DEImperialInsurgentes' page ='1' column ='0'>
 				<Target type ='ProtoUnit'>WarHut</Target></Effect>
-			<Effect type ='CommandAdd' tech ='RvltModImperialCruzobInfantry' page ='1' column ='1'>
+			<Effect type ='CommandAdd' tech ='ANWImperialCruzobInfantry' page ='1' column ='1'>
 				<Target type ='ProtoUnit'>WarHut</Target></Effect>
 			<Effect type ='CommandAdd' tech ='DEVeteranEmboscadors' page ='1' column ='2'>
 				<Target type ='ProtoUnit'>WarHut</Target></Effect>
@@ -8516,13 +8516,13 @@
 
 		</Effects>
 	</Tech>	 
-	<Tech name ='RvltModAddMayaCardsToDeck' type ='Normal'>
+	<Tech name ='ANWAddMayaCardsToDeck' type ='Normal'>
 		<DBID>30150</DBID>
 		<Status>OBTAINABLE</Status>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Flag>Shadow</Flag>
 		<Prereqs>
-			<TechStatus status ='Active'>RvltModAge0Maya</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Maya</TechStatus>
 			<TechStatus status ='Active'>DEImperializeMexicans</TechStatus>
 		</Prereqs>
 		<Effects>
@@ -8530,13 +8530,13 @@
 			<Effect type ='AddHomeCityCard' tech ='DEHCREVMXTalkingCross' maxCount ='1' agePrereq='4' unitCount='0' infiniteInLastAge='0'></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModMayaGeneralShadow' type ='Normal'>
+	<Tech name ='ANWMayaGeneralShadow' type ='Normal'>
 		<DBID>30151</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
-			<TechStatus status ='Active'>RvltModAge0Maya</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Maya</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='Data' amount ='1.00' subtype ='PowerDataOverride' fromProtoPower ='deAbilityInspiringFlag' toProtoPower='deFlagMayaData' relativity ='Percent'>
@@ -8564,14 +8564,14 @@
 				<Target type ='ProtoUnit'>deGeneral2</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModMayaInsurgentVeteranShadow' type ='Normal'>
+	<Tech name ='ANWMayaInsurgentVeteranShadow' type ='Normal'>
 		<DBID>30152</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>DEVeteranInsurgentes</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0Maya</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Maya</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='TechStatus' status ='active'>DEVeteranInsurgentesShadow</Effect>
@@ -8581,27 +8581,27 @@
 				<Target type ='ProtoUnit'>WarHut</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModMayaInsurgentGuardShadow' type ='Normal'>
+	<Tech name ='ANWMayaInsurgentGuardShadow' type ='Normal'>
 		<DBID>30153</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>DEGuardInsurgentes</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0Maya</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Maya</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='SetName' proto ='deInsurgente' culture ='none' newName ='112861'></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModMayaInsurgentImperialShadow' type ='Normal'>
+	<Tech name ='ANWMayaInsurgentImperialShadow' type ='Normal'>
 		<DBID>30154</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>DEImperialInsurgentes</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0Maya</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Maya</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='SetName' proto ='deInsurgente' culture ='none' newName ='112862'></Effect>
@@ -8611,46 +8611,46 @@
 				<Target type ='ProtoUnit'>WarHut</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModMayaAvengerVeteranShadow' type ='Normal'>
+	<Tech name ='ANWMayaAvengerVeteranShadow' type ='Normal'>
 		<DBID>30155</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>DEVeteranEmboscadors</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0Maya</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Maya</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='SetName' proto ='deEmboscador' culture ='none' newName ='112997'></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModMayaAvengerGuardShadow' type ='Normal'>
+	<Tech name ='ANWMayaAvengerGuardShadow' type ='Normal'>
 		<DBID>30156</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>DEVigilantes</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0Maya</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Maya</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='SetName' proto ='deEmboscador' culture ='none' newName ='112997'></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModMayaAvengerImperialShadow' type ='Normal'>
+	<Tech name ='ANWMayaAvengerImperialShadow' type ='Normal'>
 		<DBID>30157</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>DEImperialVigilantes</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0Maya</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Maya</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='SetName' proto ='deEmboscador' culture ='none' newName ='112996'></Effect>
 		</Effects>
 	</Tech>
-	<Tech name='RvltModCruzobInfantryNerfShadowColonial' type='Normal'>
+	<Tech name='ANWCruzobInfantryNerfShadowColonial' type='Normal'>
 		<DBID>30158</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>UNOBTAINABLE</Status>
@@ -8670,7 +8670,7 @@
 				<Target type ='ProtoUnit'>deREVCruzobInfantry</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name='RvltModCruzobInfantryNerfShadowFortress' type='Normal'>
+	<Tech name='ANWCruzobInfantryNerfShadowFortress' type='Normal'>
 		<DBID>30159</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>UNOBTAINABLE</Status>
@@ -8691,7 +8691,7 @@
 				<Target type ='ProtoUnit'>deREVCruzobInfantry</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name='RvltModCruzobInfantryNerfShadowIndustrialize' type='Normal'>
+	<Tech name='ANWCruzobInfantryNerfShadowIndustrialize' type='Normal'>
 		<DBID>30160</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>UNOBTAINABLE</Status>
@@ -8713,7 +8713,7 @@
 			<Effect type ='SetName' proto ='deREVCruzobInfantry' culture ='none' newName ='112993'></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModImperialCruzobInfantry' type ='Normal'>
+	<Tech name ='ANWImperialCruzobInfantry' type ='Normal'>
 		<DBID>30161</DBID>
 		<DisplayNameID>112991</DisplayNameID>
 		<Cost resourcetype ='Wood'>1500.0000</Cost>
@@ -8731,7 +8731,7 @@
 			<Effect type ='TechStatus' status ='active'>DEREVImperialCruzobInfantry</Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModAge0California' type ='Normal'>
+	<Tech name ='ANWAge0California' type ='Normal'>
 		<DBID>30162</DBID>
 		<Status>UNOBTAINABLE</Status>
 		<Flag>Shadow</Flag>
@@ -8747,14 +8747,14 @@
 			<Effect type ='Data' amount ='1.00' subtype ='AddTrain' unittype ='deREVCalifornio' relativity ='Absolute'>
 				<Target type ='ProtoUnit'>FortFrontier</Target></Effect>
 			
-			<Effect type ='TechStatus' status ='obtainable'>RvltModCalifornioNerfShadowColonial</Effect>
-			<Effect type ='TechStatus' status ='obtainable'>RvltModCalifornioNerfShadowFortress</Effect>
-			<Effect type ='TechStatus' status ='obtainable'>RvltModCalifornioNerfShadowIndustrialize</Effect>
-			<Effect type ='TechStatus' status ='obtainable'>RvltModImperialCalifornios</Effect>
-			<Effect type ='CommandAdd' tech ='RvltModImperialCalifornios' page='1' column='2'>
+			<Effect type ='TechStatus' status ='obtainable'>ANWCalifornioNerfShadowColonial</Effect>
+			<Effect type ='TechStatus' status ='obtainable'>ANWCalifornioNerfShadowFortress</Effect>
+			<Effect type ='TechStatus' status ='obtainable'>ANWCalifornioNerfShadowIndustrialize</Effect>
+			<Effect type ='TechStatus' status ='obtainable'>ANWImperialCalifornios</Effect>
+			<Effect type ='CommandAdd' tech ='ANWImperialCalifornios' page='1' column='2'>
 				<Target type ='ProtoUnit'>Stable</Target></Effect>
 				
-			<Effect type ='TechStatus' status ='obtainable'>RvltModPlanAyutlaShadowCalifornia</Effect>
+			<Effect type ='TechStatus' status ='obtainable'>ANWPlanAyutlaShadowCalifornia</Effect>
 			
 			<Effect type ='SetName' tech ='DEHCFedMXRanching' newName ='113105' newRollover ='104611'></Effect>
 			
@@ -9026,13 +9026,13 @@
 
 		</Effects>
 	</Tech>	 
-	<Tech name ='RvltModAddCaliforniaCardsToDeck' type ='Normal'>
+	<Tech name ='ANWAddCaliforniaCardsToDeck' type ='Normal'>
 		<DBID>30163</DBID>
 		<Status>OBTAINABLE</Status>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Flag>Shadow</Flag>
 		<Prereqs>
-			<TechStatus status ='Active'>RvltModAge0California</TechStatus>
+			<TechStatus status ='Active'>ANWAge0California</TechStatus>
 			<TechStatus status ='Active'>DEIndustrializeMexicans</TechStatus>
 		</Prereqs>
 		<Effects>
@@ -9040,13 +9040,13 @@
 			<Effect type ='AddHomeCityCard' tech ='DEHCREVFedMXBearFlagRevolt' maxCount ='1' agePrereq='3' unitCount='0' infiniteInLastAge='0'></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModCaliforniaGeneralShadow' type ='Normal'>
+	<Tech name ='ANWCaliforniaGeneralShadow' type ='Normal'>
 		<DBID>30164</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
-			<TechStatus status ='Active'>RvltModAge0California</TechStatus>
+			<TechStatus status ='Active'>ANWAge0California</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='Data' amount ='1.00' subtype ='PowerDataOverride' fromProtoPower ='deAbilityInspiringFlag' toProtoPower='deFlagCaliforniaData' relativity ='Percent'>
@@ -9077,7 +9077,7 @@
 				<Target type ='ProtoUnit'>deIconREVGeneral</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name='RvltModCalifornioNerfShadowColonial' type='Normal'>
+	<Tech name='ANWCalifornioNerfShadowColonial' type='Normal'>
 		<DBID>30165</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>UNOBTAINABLE</Status>
@@ -9091,7 +9091,7 @@
 				<Target type ='ProtoUnit'>deREVCalifornio</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name='RvltModCalifornioNerfShadowFortress' type='Normal'>
+	<Tech name='ANWCalifornioNerfShadowFortress' type='Normal'>
 		<DBID>30166</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>UNOBTAINABLE</Status>
@@ -9106,7 +9106,7 @@
 				<Target type ='ProtoUnit'>deREVCalifornio</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name='RvltModCalifornioNerfShadowIndustrialize' type='Normal'>
+	<Tech name='ANWCalifornioNerfShadowIndustrialize' type='Normal'>
 		<DBID>30167</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>UNOBTAINABLE</Status>
@@ -9121,7 +9121,7 @@
 				<Target type ='ProtoUnit'>deREVCalifornio</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModHCREVMXCaliforniaStatehood' type ='Normal'>
+	<Tech name ='ANWHCREVMXCaliforniaStatehood' type ='Normal'>
 		<DBID>30168</DBID>
 		<DisplayNameID>112929</DisplayNameID>
 		<Cost resourcetype ='Ships'>1.0000</Cost>
@@ -9149,7 +9149,7 @@
 			<Effect type ='TextOutputTechName'>110130</Effect>
 		</Effects>
 	</Tech>
-	<Tech name='RvltModPlanAyutlaShadowCalifornia' type='Normal'>
+	<Tech name='ANWPlanAyutlaShadowCalifornia' type='Normal'>
 		<DBID>30169</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>UNOBTAINABLE</Status>
@@ -9162,12 +9162,12 @@
 				<Target type ='ProtoUnit'>Barracks</Target></Effect>
 			<Effect type ='Data' amount ='1.00' subtype ='AddTrain' unittype ='xpColonialMilitia' relativity ='Absolute'>
 				<Target type ='ProtoUnit'>FortFrontier</Target></Effect>
-			<Effect type ='TechStatus' status ='obtainable'>RvltModImperialRevolutionaries</Effect>
-			<Effect type ='CommandAdd' tech ='RvltModImperialRevolutionaries' page='1' column='5'>
+			<Effect type ='TechStatus' status ='obtainable'>ANWImperialRevolutionaries</Effect>
+			<Effect type ='CommandAdd' tech ='ANWImperialRevolutionaries' page='1' column='5'>
 				<Target type ='ProtoUnit'>Barracks</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModImperialCalifornios' type ='Normal'>
+	<Tech name ='ANWImperialCalifornios' type ='Normal'>
 		<DBID>30170</DBID>
 		<DisplayNameID>400053</DisplayNameID>
 		<Cost resourcetype ='Wood'>1500.0000</Cost>
@@ -9188,23 +9188,23 @@
 				<Target type ='ProtoUnit'>deREVCalifornio</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name='RvltModLancerShadowCalifornia' type='Normal'>
+	<Tech name='ANWLancerShadowCalifornia' type='Normal'>
 		<DBID>30171</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>DEHCREVMXCaliforniaLancers</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0California</TechStatus>
+			<TechStatus status ='Active'>ANWAge0California</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='Data' amount ='0.00' subtype ='Cost' resource ='Wood' relativity ='Assign'>
-				<Target type ='Tech'>RvltModImperialCalifornios</Target></Effect>
+				<Target type ='Tech'>ANWImperialCalifornios</Target></Effect>
 			<Effect type ='Data' amount ='0.00' subtype ='Cost' resource ='Gold' relativity ='Assign'>
-				<Target type ='Tech'>RvltModImperialCalifornios</Target></Effect>
+				<Target type ='Tech'>ANWImperialCalifornios</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModAge0Texas' type ='Normal'>
+	<Tech name ='ANWAge0Texas' type ='Normal'>
 		<DBID>30172</DBID>
 		<Status>UNOBTAINABLE</Status>
 		<Flag>Shadow</Flag>
@@ -9223,8 +9223,8 @@
 			<Effect type ='TechStatus' status ='obtainable'>DEGuardUSMinutemen</Effect>
 			<Effect type ='TechStatus' status ='obtainable'>DEImperialUSMinutemen</Effect>
 				
-			<Effect type ='TechStatus' status ='obtainable'>RvltModPlanAyutlaShadowCalifornia</Effect>
-			<Effect type ='TechStatus' status ='obtainable'>RvltModMXRobberBarons2EnableShadow</Effect>
+			<Effect type ='TechStatus' status ='obtainable'>ANWPlanAyutlaShadowCalifornia</Effect>
+			<Effect type ='TechStatus' status ='obtainable'>ANWMXRobberBarons2EnableShadow</Effect>
 			
 			<Effect type ='Data' amount ='1.00' subtype ='Enable' relativity ='Absolute'>
 				<Target type ='ProtoUnit'>deRegular</Target></Effect>
@@ -9488,13 +9488,13 @@
 
 		</Effects>
 	</Tech>	 
-	<Tech name ='RvltModAddTexasCardsToDeck' type ='Normal'>
+	<Tech name ='ANWAddTexasCardsToDeck' type ='Normal'>
 		<DBID>30173</DBID>
 		<Status>OBTAINABLE</Status>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Flag>Shadow</Flag>
 		<Prereqs>
-			<TechStatus status ='Active'>RvltModAge0Texas</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Texas</TechStatus>
 			<TechStatus status ='Active'>DEIndustrializeMexicans</TechStatus>
 		</Prereqs>
 		<Effects>
@@ -9502,13 +9502,13 @@
 			<Effect type ='AddHomeCityCard' tech ='DEHCFedAlamo' maxCount ='1' agePrereq='3' unitCount='16' infiniteInLastAge='0'></Effect>
 		</Effects>
 	</Tech> 
-	<Tech name ='RvltModTexasGeneralShadow' type ='Normal'>
+	<Tech name ='ANWTexasGeneralShadow' type ='Normal'>
 		<DBID>30174</DBID>
 		<Status>OBTAINABLE</Status>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Flag>Shadow</Flag>
 		<Prereqs>
-			<TechStatus status ='Active'>RvltModAge0Texas</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Texas</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='Data' amount ='1.00' subtype ='PowerDataOverride' fromProtoPower ='deAbilityInspiringFlag' toProtoPower='deFlagTexasData' relativity ='Percent'>
@@ -9537,13 +9537,13 @@
 				<Target type ='ProtoUnit'>deIconREVGeneral</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModRefurbishedFirearmsTexasShadow' type ='Normal'>
+	<Tech name ='ANWRefurbishedFirearmsTexasShadow' type ='Normal'>
 		<DBID>30175</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
-			<TechStatus status ='Active'>RvltModAge0Texas</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Texas</TechStatus>
 			<TechStatus status ='Active'>DEHCRefurbishedFirearms</TechStatus>
 		</Prereqs>
 		<Effects>
@@ -9557,7 +9557,7 @@
 				<Target type ='ProtoUnit'>deRegular</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModHCREVMXTexasMarines' type ='Normal'>
+	<Tech name ='ANWHCREVMXTexasMarines' type ='Normal'>
 		<DBID>30176</DBID>
 		<DisplayNameID>112948</DisplayNameID>
 		<Cost resourcetype ='Ships'>1.0000</Cost>
@@ -9574,7 +9574,7 @@
 			<Effect type ='TextOutputTechName'>110130</Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModHCREVMXTexasStatehood' type ='Normal'>
+	<Tech name ='ANWHCREVMXTexasStatehood' type ='Normal'>
 		<DBID>30177</DBID>
 		<DisplayNameID>112931</DisplayNameID>
 		<Cost resourcetype ='Ships'>1.0000</Cost>
@@ -9602,14 +9602,14 @@
 			<Effect type ='TextOutputTechName'>110130</Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModMXREVTexanFortsShadow' type ='Normal'>
+	<Tech name ='ANWMXREVTexanFortsShadow' type ='Normal'>
 		<DBID>30178</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>DEHCFedTexanForts</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0Texas</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Texas</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='CommandRemove' proto ='deChinaco'>
@@ -9621,14 +9621,14 @@
 			<Effect type ='TextOutputTechName'>110130</Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModObserversTexasShadow' type ='Normal'>
+	<Tech name ='ANWObserversTexasShadow' type ='Normal'>
 		<DBID>30179</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>DEHCObservers</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0Texas</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Texas</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='Data' action ='DefendRangedAttack' amount ='2.00' subtype ='MaximumRange' relativity ='Absolute'>
@@ -9643,27 +9643,27 @@
 				<Target type ='ProtoUnit'>deStateMilitia</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModTabascanGuerrillasTexasShadow' type ='Normal'>
+	<Tech name ='ANWTabascanGuerrillasTexasShadow' type ='Normal'>
 		<DBID>30180</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
-			<TechStatus status ='Active'>RvltModAge0Texas</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Texas</TechStatus>
 			<TechStatus status ='Active'>DEHCFedMXTabascanGuerrillas</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='TechStatus' status ='active'>DETabascanGuerrillasTexasShadow</Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModHCFedMXBustamanteTexasShadow' type ='Normal'>
+	<Tech name ='ANWHCFedMXBustamanteTexasShadow' type ='Normal'>
 		<DBID>30181</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>DEHCFedMXBustamante</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0Texas</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Texas</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='CommandRemove' proto ='deSoldado'>
@@ -9672,14 +9672,14 @@
 				<Target type ='ProtoUnit'>FieldHospital</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModNapoleonCarabinierShadow' type ='Normal'>
+	<Tech name ='ANWNapoleonCarabinierShadow' type ='Normal'>
 		<DBID>30182</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>ImpLegendaryNativesShadow</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0NapoleonicFrench</TechStatus>
+			<TechStatus status ='Active'>ANWAge0NapoleonicFrench</TechStatus>
 		</Prereqs>
 		<Effects>
             <Effect type ='SetName' proto ='deNatRoyalMusketeer' culture ='none' newName ='126580' newRollover ='126581'/>
@@ -9688,29 +9688,29 @@
             <Effect type ='SetName' proto ='deNatMercRoyalDragoon' culture ='none' newName ='126582' newRollover ='126583'/>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModFortressizeEgyptiansShadow' type ='Normal'>
+	<Tech name ='ANWFortressizeEgyptiansShadow' type ='Normal'>
 		<DBID>30183</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>Fortressize</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0Egypt</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Egypt</TechStatus>
 		</Prereqs>
 		<Effects>
-			<Effect type ='SetOnShipmentSentTech' amount ='1.00'>RvltModShipMameluke</Effect>
+			<Effect type ='SetOnShipmentSentTech' amount ='1.00'>ANWShipMameluke</Effect>
 			<Effect type ='Data' amount ='-0.75' subtype ='ResourceTrickleRate' resource ='XP' relativity ='Absolute'>
 				<Target type ='Player'></Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModIndustrializeRioGrandeShadow' type ='Normal'>
+	<Tech name ='ANWIndustrializeRioGrandeShadow' type ='Normal'>
 		<DBID>30184</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>Industrialize</TechStatus>
-			<TechStatus status ='Active'>RvltModAge0RioGrande</TechStatus>
+			<TechStatus status ='Active'>ANWAge0RioGrande</TechStatus>
 		</Prereqs>
 		<Effects>
       <effect type="Data" amount="0.67" subtype="ResearchPoints" relativity="Percent">
@@ -9731,7 +9731,7 @@
         <target type="Tech">HeavyHorseArtillery</target></effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModFinnishRoyalDecreeRussianShadow' type ='Normal'>
+	<Tech name ='ANWFinnishRoyalDecreeRussianShadow' type ='Normal'>
 		<DBID>30185</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
@@ -9744,7 +9744,7 @@
 			<Effect type ='TechStatus' status ='active'>HCRoyalDecreeRussian</Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModHCREVWagonWarfare' type ='Normal'>
+	<Tech name ='ANWHCREVWagonWarfare' type ='Normal'>
 		<DBID>30186</DBID>
 		<DisplayNameID>126782</DisplayNameID>
 		<Cost resourcetype ='Ships'>1.0000</Cost>
@@ -9775,7 +9775,7 @@
 			<Effect type ='CommandRemove' proto ='Ruyter'><Target type ='ProtoUnit'>Fluyt</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name='RvltModCetbangNerfShadowColonial' type='Normal'>
+	<Tech name='ANWCetbangNerfShadowColonial' type='Normal'>
 		<DBID>30187</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>UNOBTAINABLE</Status>
@@ -9791,7 +9791,7 @@
 				<Target type ='ProtoUnit'>deREVCetbang</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name='RvltModCetbangNerfShadowFortress' type='Normal'>
+	<Tech name='ANWCetbangNerfShadowFortress' type='Normal'>
 		<DBID>30188</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>UNOBTAINABLE</Status>
@@ -9808,7 +9808,7 @@
 				<Target type ='ProtoUnit'>deREVCetbang</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name='RvltModCetbangNerfShadowIndustrialize' type='Normal'>
+	<Tech name='ANWCetbangNerfShadowIndustrialize' type='Normal'>
 		<DBID>30189</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>UNOBTAINABLE</Status>
@@ -9825,7 +9825,7 @@
 				<Target type ='ProtoUnit'>deREVCetbang</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name='RvltModJavaNerfShadowColonial' type='Normal'>
+	<Tech name='ANWJavaNerfShadowColonial' type='Normal'>
 		<DBID>30190</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>UNOBTAINABLE</Status>
@@ -9839,7 +9839,7 @@
 				<Target type ='ProtoUnit'>deREVJavaSpearman</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name='RvltModJavaNerfShadowFortress' type='Normal'>
+	<Tech name='ANWJavaNerfShadowFortress' type='Normal'>
 		<DBID>30191</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>UNOBTAINABLE</Status>
@@ -9854,7 +9854,7 @@
 				<Target type ='ProtoUnit'>deREVJavaSpearman</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name='RvltModJavaNerfShadowIndustrialize' type='Normal'>
+	<Tech name='ANWJavaNerfShadowIndustrialize' type='Normal'>
 		<DBID>30192</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>UNOBTAINABLE</Status>
@@ -9926,7 +9926,7 @@
       <effect type="TextOutputTechName">110130</effect>
     </effects>
   </tech>
-	<Tech name ='RvltModImperialPicketShadow' type ='Normal'>
+	<Tech name ='ANWImperialPicketShadow' type ='Normal'>
 		<DBID>30193</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
@@ -9939,7 +9939,7 @@
 			<Effect type ='SetName' proto ='Pikeman' culture ='none' newName ='400055'></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModHCFlightArcheryRomanians' type ='Normal'>
+	<Tech name ='ANWHCFlightArcheryRomanians' type ='Normal'>
 		<DBID>30194</DBID>
 		<DisplayNameID>125342</DisplayNameID>
 		<Cost resourcetype ='Ships'>1.0000</Cost>
@@ -9958,7 +9958,7 @@
 			<Effect type ='TextOutputTechName'>110130</Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModRGHonorGuard' type ='Normal'>
+	<Tech name ='ANWRGHonorGuard' type ='Normal'>
 		<DBID>30195</DBID>
 		<DisplayNameID>90337</DisplayNameID>
 		<Cost resourcetype ='Wood'>850.0000</Cost>
@@ -9981,7 +9981,7 @@
 			<Effect type ='TechStatus' status ='active'>DEHCREVHonorGuard</Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModImpHonorGuardShadow' type ='Normal'>
+	<Tech name ='ANWImpHonorGuardShadow' type ='Normal'>
 		<DBID>30196</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
@@ -9994,7 +9994,7 @@
 			<Effect type ='SetName' proto ='Dragoon' culture ='none' newName ='400056'></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModImpFencibleEnable' type ='Normal'>
+	<Tech name ='ANWImpFencibleEnable' type ='Normal'>
 		<DBID>30197</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
@@ -10005,13 +10005,13 @@
 			<TechStatus status ='Active'>ImperialMusketeers</TechStatus>
 		</Prereqs>
 	</Tech>
-	<Tech name ='RvltModImpFencibleShadow' type ='Normal'>
+	<Tech name ='ANWImpFencibleShadow' type ='Normal'>
 		<DBID>30198</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
-			<TechStatus status ='Active'>RvltModImpFencibleEnable</TechStatus>
+			<TechStatus status ='Active'>ANWImpFencibleEnable</TechStatus>
 			<TechStatus status ='Active'>DEHCREVFencibles</TechStatus>
 		</Prereqs>
 		<Effects>
@@ -10084,7 +10084,7 @@
       <effect type="TextOutputTechName">110130</effect>
     </effects>
   </tech>
-	<Tech name ='RvltModHCUffizi' type ='Normal'>
+	<Tech name ='ANWHCUffizi' type ='Normal'>
 		<DBID>30199</DBID>
 		<DisplayNameID>122398</DisplayNameID>
 		<ResearchPoints>30.0000</ResearchPoints>
@@ -10112,7 +10112,7 @@
       </effect>
 		</Effects>
 	</Tech>	
-	<Tech name ='RvltModMXRobberBarons2EnableShadow' type ='Normal'>
+	<Tech name ='ANWMXRobberBarons2EnableShadow' type ='Normal'>
 		<DBID>30200</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>UNOBTAINABLE</Status>
@@ -10126,7 +10126,7 @@
 				<Target type ='ProtoUnit'>Factory</Target></Effect>
 		</Effects>		
 	</Tech>
-	<Tech name ='RvltModOresundSAShadow' type ='Normal'>
+	<Tech name ='ANWOresundSAShadow' type ='Normal'>
 		<DBID>30201</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>UNOBTAINABLE</Status>
@@ -10193,7 +10193,7 @@
 				<Target type ='ProtoUnit'>deCommandery</Target></Effect>
 		</Effects>		
 	</Tech>
-	<Tech name ='RvltModImpTexianLancerShadow' type ='Normal'>
+	<Tech name ='ANWImpTexianLancerShadow' type ='Normal'>
 		<DBID>30202</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
@@ -10206,7 +10206,7 @@
 			<Effect type ='SetName' proto ='deChinaco' culture ='none' newName ='400057'></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModHCSovnyaRomanian' type ='Normal'>
+	<Tech name ='ANWHCSovnyaRomanian' type ='Normal'>
 		<DBID>30203</DBID>
 		<DisplayNameID>125206</DisplayNameID>
 		<ResearchPoints>40.0000</ResearchPoints>
@@ -10383,7 +10383,7 @@
 				<Target type ='ProtoUnit'>deInspiringFlagHanover</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModHCLlaneros' type ='Normal'>
+	<Tech name ='ANWHCLlaneros' type ='Normal'>
 		<DBID>30204</DBID>
 		<DisplayNameID>80971</DisplayNameID>
 		<Cost resourcetype ='Ships'>1.0000</Cost>
@@ -10419,7 +10419,7 @@
 				<Target type ='Player'></Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModHCJaguncos' type ='Normal'>
+	<Tech name ='ANWHCJaguncos' type ='Normal'>
 		<DBID>30205</DBID>
 		<DisplayNameID>90332</DisplayNameID>
 		<Cost resourcetype ='Ships'>1.0000</Cost>
@@ -10455,7 +10455,7 @@
 				<Target type ='ProtoUnit'>deREVJagunco</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModHCGranaderos' type ='Normal'>
+	<Tech name ='ANWHCGranaderos' type ='Normal'>
 		<DBID>30206</DBID>
 		<DisplayNameID>80963</DisplayNameID>
 		<Cost resourcetype ='Ships'>1.0000</Cost>
@@ -10479,7 +10479,7 @@
 				<Target type ='Player'></Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModVeteranLlaneros' type ='Normal'>
+	<Tech name ='ANWVeteranLlaneros' type ='Normal'>
 		<DBID>30207</DBID>
 		<DisplayNameID>400060</DisplayNameID>
 		<Cost resourcetype ='Wood'>200.0000</Cost>
@@ -10500,7 +10500,7 @@
 			<Effect type ='SetName' proto ='deREVLlanero' culture ='none' newName ='400078'></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModGuardLlaneros' type ='Normal'>
+	<Tech name ='ANWGuardLlaneros' type ='Normal'>
 		<DBID>30208</DBID>
 		<DisplayNameID>400062</DisplayNameID>
 		<Cost resourcetype ='Wood'>600.0000</Cost>
@@ -10512,7 +10512,7 @@
 		<Flag>CountsTowardMilitaryScore</Flag>
 		<Flag>UpgradeTech</Flag>
 		<Prereqs>
-			<TechStatus status ='Active'>RvltModVeteranLlaneros</TechStatus>
+			<TechStatus status ='Active'>ANWVeteranLlaneros</TechStatus>
 			<TechStatus status ='Active'>Industrialize</TechStatus>
 		</Prereqs>
 		<Effects>
@@ -10523,7 +10523,7 @@
 			<Effect type ='SetName' proto ='deREVLlanero' culture ='none' newName ='400079'></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModImperialLlaneros' type ='Normal'>
+	<Tech name ='ANWImperialLlaneros' type ='Normal'>
 		<DBID>30209</DBID>
 		<DisplayNameID>400064</DisplayNameID>
 		<Cost resourcetype ='Wood'>1500.0000</Cost>
@@ -10536,7 +10536,7 @@
 		<Flag>CountsTowardMilitaryScore</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>Imperialize</TechStatus>
-			<TechStatus status ='Active'>RvltModGuardLlaneros</TechStatus>
+			<TechStatus status ='Active'>ANWGuardLlaneros</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='Data' amount ='1.50' subtype ='Hitpoints' relativity ='BasePercent'>
@@ -10546,7 +10546,7 @@
 			<Effect type ='SetName' proto ='deREVLlanero' culture ='none' newName ='400080'></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModVeteranJagunco' type ='Normal'>
+	<Tech name ='ANWVeteranJagunco' type ='Normal'>
 		<DBID>30210</DBID>
 		<DisplayNameID>400066</DisplayNameID>
 		<Cost resourcetype ='Wood'>200.0000</Cost>
@@ -10567,7 +10567,7 @@
 			<Effect type ='SetName' proto ='deREVJagunco' culture ='none' newName ='400081'></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModGuardJagunco' type ='Normal'>
+	<Tech name ='ANWGuardJagunco' type ='Normal'>
 		<DBID>30211</DBID>
 		<DisplayNameID>400068</DisplayNameID>
 		<Cost resourcetype ='Wood'>600.0000</Cost>
@@ -10579,7 +10579,7 @@
 		<Flag>CountsTowardMilitaryScore</Flag>
 		<Flag>UpgradeTech</Flag>
 		<Prereqs>
-			<TechStatus status ='Active'>RvltModVeteranJagunco</TechStatus>
+			<TechStatus status ='Active'>ANWVeteranJagunco</TechStatus>
 			<TechStatus status ='Active'>Industrialize</TechStatus>
 		</Prereqs>
 		<Effects>
@@ -10590,7 +10590,7 @@
 			<Effect type ='SetName' proto ='deREVJagunco' culture ='none' newName ='400082'></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModImperialJagunco' type ='Normal'>
+	<Tech name ='ANWImperialJagunco' type ='Normal'>
 		<DBID>30212</DBID>
 		<DisplayNameID>400070</DisplayNameID>
 		<Cost resourcetype ='Wood'>1500.0000</Cost>
@@ -10603,7 +10603,7 @@
 		<Flag>CountsTowardMilitaryScore</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>Imperialize</TechStatus>
-			<TechStatus status ='Active'>RvltModGuardJagunco</TechStatus>
+			<TechStatus status ='Active'>ANWGuardJagunco</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='Data' amount ='1.50' subtype ='Hitpoints' relativity ='BasePercent'>
@@ -10613,7 +10613,7 @@
 			<Effect type ='SetName' proto ='deREVJagunco' culture ='none' newName ='400083'></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModVeteranGranadero' type ='Normal'>
+	<Tech name ='ANWVeteranGranadero' type ='Normal'>
 		<DBID>30213</DBID>
 		<DisplayNameID>400072</DisplayNameID>
 		<Cost resourcetype ='Wood'>200.0000</Cost>
@@ -10634,7 +10634,7 @@
 			<Effect type ='SetName' proto ='deREVGranadero' culture ='none' newName ='400084'></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModGuardGranadero' type ='Normal'>
+	<Tech name ='ANWGuardGranadero' type ='Normal'>
 		<DBID>30214</DBID>
 		<DisplayNameID>400074</DisplayNameID>
 		<Cost resourcetype ='Wood'>600.0000</Cost>
@@ -10646,7 +10646,7 @@
 		<Flag>CountsTowardMilitaryScore</Flag>
 		<Flag>UpgradeTech</Flag>
 		<Prereqs>
-			<TechStatus status ='Active'>RvltModVeteranGranadero</TechStatus>
+			<TechStatus status ='Active'>ANWVeteranGranadero</TechStatus>
 			<TechStatus status ='Active'>Industrialize</TechStatus>
 		</Prereqs>
 		<Effects>
@@ -10657,7 +10657,7 @@
 			<Effect type ='SetName' proto ='deREVGranadero' culture ='none' newName ='400085'></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModImperialGranadero' type ='Normal'>
+	<Tech name ='ANWImperialGranadero' type ='Normal'>
 		<DBID>30215</DBID>
 		<DisplayNameID>400076</DisplayNameID>
 		<Cost resourcetype ='Wood'>1500.0000</Cost>
@@ -10670,7 +10670,7 @@
 		<Flag>CountsTowardMilitaryScore</Flag>
 		<Prereqs>
 			<TechStatus status ='Active'>Imperialize</TechStatus>
-			<TechStatus status ='Active'>RvltModGuardGranadero</TechStatus>
+			<TechStatus status ='Active'>ANWGuardGranadero</TechStatus>
 		</Prereqs>
 		<Effects>
 			<Effect type ='Data' amount ='1.50' subtype ='Hitpoints' relativity ='BasePercent'>
@@ -10680,13 +10680,13 @@
 			<Effect type ='SetName' proto ='deREVGranadero' culture ='none' newName ='400086'></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModNapoleonXPShadow' type ='Normal'>
+	<Tech name ='ANWNapoleonXPShadow' type ='Normal'>
 		<DBID>30216</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
-			<TechStatus status ='Active'>RvltModAge0NapoleonicFrench</TechStatus>
+			<TechStatus status ='Active'>ANWAge0NapoleonicFrench</TechStatus>
 			<TechStatus status ='Active'>DEHCREVNapoleonicWarfare</TechStatus>
 		</Prereqs>
 		<Effects>
@@ -10698,13 +10698,13 @@
 				<Target type ='Player'></Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModSevitesShadow' type ='Normal'>
+	<Tech name ='ANWSevitesShadow' type ='Normal'>
 		<DBID>30217</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
-			<TechStatus status ='Active'>RvltModAge0Haitians</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Haitians</TechStatus>
 			<TechStatus status ='Active'>DEHCREVSevites</TechStatus>
 		</Prereqs>
 		<Effects>
@@ -10712,13 +10712,13 @@
 				<Target type ='ProtoUnit'>SaloonPirate</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModCitizenshipHaitiShadow' type ='Normal'>
+	<Tech name ='ANWCitizenshipHaitiShadow' type ='Normal'>
 		<DBID>30223</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
 		<Flag>Shadow</Flag>
 		<Prereqs>
-			<TechStatus status ='Active'>RvltModAge0Haitians</TechStatus>
+			<TechStatus status ='Active'>ANWAge0Haitians</TechStatus>
 			<TechStatus status ='Active'>DEHCREVCitizenshipHaiti</TechStatus>
 		</Prereqs>
 		<Effects>
@@ -10728,7 +10728,7 @@
 				<Target type ='ProtoUnit'>SaloonPirate</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModTrainTimeUSShadow' type ='Normal'>
+	<Tech name ='ANWTrainTimeUSShadow' type ='Normal'>
 		<DBID>30224</DBID>
 		<ResearchPoints>0.0000</ResearchPoints>
 		<Status>OBTAINABLE</Status>
@@ -10738,12 +10738,12 @@
 		</Prereqs>
 		<Effects>
 			<Effect type='Data' amount='0.75' subtype='ResearchPoints' relativity='Percent'>
-				<Target type='Tech'>RvltModHCLegionMilitia</Target></Effect>
+				<Target type='Tech'>ANWHCLegionMilitia</Target></Effect>
 			<Effect type='Data' amount='0.75' subtype='ResearchPoints' relativity='Percent'>
-				<Target type='Tech'>RvltModHCConscription</Target></Effect>
+				<Target type='Tech'>ANWHCConscription</Target></Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModHCLegionMilitia' type ='Normal'>
+	<Tech name ='ANWHCLegionMilitia' type ='Normal'>
 		<DBID>30219</DBID>
 		<DisplayNameID>126555</DisplayNameID>
 		<Cost resourcetype ='Ships'>1.0000</Cost>
@@ -10831,7 +10831,7 @@
 			<Effect type ='TextOutputTechName'>110130</Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModHCConscription' type ='Normal'>
+	<Tech name ='ANWHCConscription' type ='Normal'>
 		<DBID>30220</DBID>
 		<DisplayNameID>126549</DisplayNameID>
 		<Cost resourcetype ='Ships'>1.0000</Cost>
@@ -10960,7 +10960,7 @@
 			<Effect type ='TextOutputTechName'>110130</Effect>
 		</Effects>
 	</Tech>
-	<Tech name ='RvltModHCCowboysPeru' type ='Normal'>
+	<Tech name ='ANWHCCowboysPeru' type ='Normal'>
 		<DBID>6456</DBID>
 		<DisplayNameID>80879</DisplayNameID>
 		<Cost resourcetype ='Ships'>1.0000</Cost>

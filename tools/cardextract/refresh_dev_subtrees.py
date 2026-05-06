@@ -8,13 +8,13 @@ asset path or string ID that backs each surface. Lets a reviewer scan one
 panel per civ and audit visual consistency without grepping the codebase.
 
 Reads:
-  - data/civmods.xml                                 (rev-civ UI fields)
+  - data/civmods.xml                                 (all 48 ANW civ UI fields)
   - data/strings/english/stringmods.xml              (mod string overrides)
   - game/ai/*.personality                            (per-leader nameID, icon, chatset)
   - game/ai/chatsetsmods.xml                         (chatset → leader)
-  - data/decks_legendary.json + data/decks_standard.json + data/cards.json
-  - data/homecity*.xml + data/rvltmodhomecity*.xml   (HC name/civ/flag)
-  - tools/validation/validate_html_vs_mod.CIV_TO_HOMECITY  (canonical 48 slugs)
+  - data/decks_anw.json + data/cards.json
+  - data/anwhomecity*.xml                            (HC name/civ/flag)
+  - tools/migration.anw_mapping.ANW_CIVS_BY_SLUG     (canonical 48 ANW civs)
 
 Writes:
   - a_new_world.html
@@ -48,7 +48,11 @@ from tools.validation.common import (  # noqa: E402
     get_child_text,
     local_name,
 )
-from tools.validation.validate_html_vs_mod import CIV_TO_HOMECITY  # noqa: E402
+from tools.migration.anw_mapping import (  # noqa: E402
+    ANW_CIVS_BY_SLUG,
+    ANW_DEFERRED_SLUGS,
+    ANW_HOMECITY_MAP,
+)
 from tools.validation.validate_personality_overrides import (  # noqa: E402
     load_string_table,
     parse_personality,
@@ -62,13 +66,6 @@ try:
 except Exception:  # noqa: BLE001
     _anw_by_slug = None  # type: ignore[assignment]
 
-# Vanilla civ data + string table — extracted from {AOE3DE}/Game/Data/Data.bar.
-# Used to fill in actual values (not "(base-game default)" placeholders) for
-# the 22 base civs whose civmods.xml entry is intentionally absent.
-try:
-    from tools.migration.vanilla_data import load_vanilla_data  # noqa: E402
-except Exception:  # noqa: BLE001
-    load_vanilla_data = None  # type: ignore[assignment]
 
 # ANW civ blurbs — short, consistent flag-hover blurbs for all 48 civs.
 # Loaded once at module level (small JSON, no I/O cost). Replaces the
@@ -84,71 +81,11 @@ HTML_PATH = REPO / "a_new_world.html"
 CIVMODS = REPO / "data" / "civmods.xml"
 STRINGS = REPO / "data" / "strings" / "english" / "stringmods.xml"
 CARDS = REPO / "data" / "cards.json"
-DECKS_LEG = REPO / "data" / "decks_legendary.json"
-DECKS_STD = REPO / "data" / "decks_standard.json"
+DECKS_ANW = REPO / "data" / "decks_anw.json"
 AI_DIR = REPO / "game" / "ai"
 CHATSETS = AI_DIR / "chatsetsmods.xml"
 
 AGE_NAMES = ["Discovery", "Colonial", "Fortress", "Industrial", "Imperial"]
-
-# slug (CIV_TO_HOMECITY key) → (engine civ-token used in <forcedciv>, personality file stem)
-# Built from forcedciv values empirically + manual aliases. Skipped slugs (Americans /
-# Mexicans (Revolution)) are deferred sections without HTML nation-nodes — see
-# validate_html_reference._DEFERRED_SECTION.
-SLUG_TO_LEADER: dict[str, tuple[str, str]] = {
-    # Base civs
-    "Aztecs":             ("XPAztec",        "montezuma"),
-    "British":            ("british",        "wellington"),
-    "Chinese":            ("chinese",        "kangxi"),
-    "Dutch":              ("dutch",          "maurice"),
-    "Ethiopians":         ("DEEthiopians",   "menelik"),
-    "French":             ("french",         "napoleon"),
-    "Germans":            ("germans",        "Frederick"),
-    "Haudenosaunee":      ("XPIroquois",     "Hiawatha"),
-    "Hausa":              ("DEHausa",        "usman"),
-    "Inca":               ("DEInca",         "pachacuti"),
-    "Indians":            ("indians",        "shivaji"),
-    "Italians":           ("DEItalians",     "garibaldi"),
-    "Japanese":           ("japanese",       "tokugawa"),
-    "Lakota":             ("XPSioux",        "crazyhorse"),
-    "Maltese":            ("DEMaltese",      "jean"),
-    "Mexicans (Standard)": ("demexicans",    "hidalgo"),
-    "Ottomans":           ("ottomans",       "Suleiman"),
-    "Portuguese":         ("portuguese",     "henry"),
-    "Russians":           ("russians",       "catherine"),
-    "Spanish":            ("spanish",        "isabella"),
-    "Swedes":             ("deswedish",      "Gustav"),
-    "United States":      ("deamericans",    "washington"),
-    # Revolution civs (slug → RvltMod canonical Name + personality stem)
-    "Argentines":         ("RvltModArgentines",         "rvltmodargentines"),
-    "Baja Californians":  ("RvltModBajaCalifornians",   "rvltmodbajacalifornians"),
-    "Barbary":            ("RvltModBarbary",            "rvltmodbarbary"),
-    "Brazil":             ("RvltModBrazil",             "rvltmodbrazil"),
-    "Californians":       ("RvltModCalifornians",       "rvltmodcalifornians"),
-    "Canadians":          ("RvltModCanadians",          "rvltmodcanadians"),
-    "Central Americans":  ("RvltModCentralAmericans",   "rvltmodcentralamericans"),
-    "Chileans":           ("RvltModChileans",           "rvltmodchileans"),
-    "Columbians":         ("RvltModColumbians",         "rvltmodcolumbians"),
-    "Egyptians":          ("RvltModEgyptians",          "rvltmodegyptians"),
-    "Finnish":            ("RvltModFinnish",            "rvltmodfinnish"),
-    "French Canadians":   ("RvltModFrenchCanadians",    "rvltmodfrenchcanadians"),
-    "Haitians":           ("RvltModHaitians",           "rvltmodhaitians"),
-    "Hungarians":         ("RvltModHungarians",         "rvltmodhungarians"),
-    "Indonesians":        ("RvltModIndonesians",        "rvltmodindonesians"),
-    "Mayans":             ("RvltModMayans",             "rvltmodmayans"),
-    "Napoleonic France":  ("RvltModNapoleonicFrance",   "rvltmodnapoleonicfrance"),
-    "Peruvians":          ("RvltModPeruvians",          "rvltmodperuvians"),
-    "Revolutionary France": ("RvltModRevolutionaryFrance", "rvltmodrevolutionaryfrance"),
-    "Rio Grande":         ("RvltModRioGrande",          "rvltmodriogrande"),
-    "Romanians":          ("RvltModRomanians",          "rvltmodromanians"),
-    "South Africans":     ("RvltModSouthAfricans",      "rvltmodsouthafricans"),
-    "Texians":            ("RvltModTexians",            "rvltmodtexians"),
-    "Yucatan":            ("RvltModYucatan",            "rvltmodyucatan"),
-}
-
-# Slugs whose section is deferred — skip them silently (mirrors
-# validate_html_reference._DEFERRED_SECTION).
-DEFERRED_SLUGS = {"Americans", "Mexicans (Revolution)"}
 
 
 # ─── Data classes ─────────────────────────────────────────────────────────────
@@ -258,7 +195,6 @@ class AssetRef:
 @dataclass
 class CivAssets:
     slug: str
-    is_revolution: bool
     leader_personality: str  # personality file stem
     chatset_name: str = ""
 
@@ -390,10 +326,9 @@ def _vanilla_data_or_none():
     return _VANILLA_CACHE
 
 
-def load_decks() -> tuple[dict, dict, dict]:
+def load_decks() -> tuple[dict, dict]:
     return (
-        json.loads(DECKS_LEG.read_text(encoding="utf-8")),
-        json.loads(DECKS_STD.read_text(encoding="utf-8")),
+        json.loads(DECKS_ANW.read_text(encoding="utf-8")),
         json.loads(CARDS.read_text(encoding="utf-8")),
     )
 
@@ -402,20 +337,20 @@ def load_decks() -> tuple[dict, dict, dict]:
 
 
 def collect_civ(slug: str, *, civmods_index: dict[str, ET.Element], strings: dict[str, str],
-                 decks_leg: dict, decks_std: dict, cards: dict) -> CivAssets:
-    forcedciv, leader_stem = SLUG_TO_LEADER[slug]
-    homecity_basename, std_key = CIV_TO_HOMECITY[slug]
-    is_revolution = std_key is None
+                 decks_anw: dict, cards: dict) -> CivAssets:
+    # Unified ANW lookup (all 48 civs)
+    anw_civ = ANW_CIVS_BY_SLUG.get(slug)
+    if anw_civ is None:
+        raise ValueError(f"slug {slug!r} not in ANW_CIVS_BY_SLUG")
 
-    # Personality
-    personality_path = AI_DIR / f"{leader_stem}.personality"
+    # Personality file — use the new ANW-migrated name
+    personality_path = AI_DIR / f"{anw_civ.anw_stem}.personality"
     pinfo = parse_personality(personality_path) if personality_path.is_file() else {
         "nameID": None, "tooltipID": None, "forcedciv": None, "icon": None, "chatset": None,
     }
 
     civ = CivAssets(
         slug=slug,
-        is_revolution=is_revolution,
         leader_personality=personality_path.name,
         chatset_name=load_chatset_for_personality(pinfo.get("chatset") or ""),
     )
@@ -443,177 +378,94 @@ def collect_civ(slug: str, *, civmods_index: dict[str, ET.Element], strings: dic
         note="same as AI lobby name",
     )
 
-    # ── civmods.xml fields (revolution civs only — base civs use base game) ───
-    civ_el = civmods_index.get(forcedciv)
-    if civ_el is None and is_revolution:
-        # Should not happen for rev civs.
-        civ_el = civmods_index.get(forcedciv.replace(" ", ""))
+    # ── civmods.xml fields (all 48 civs have entries post-apply) ─────────────────
+    civ_el = civmods_index.get(anw_civ.anw_token)
 
-    if civ_el is not None:
-        # Surface 1: civ-picker name
-        display_id = get_civmod_field(civ_el, "DisplayNameID")
-        civ.civ_picker_name = StringRef(
-            string_id=display_id,
-            value=strings.get(display_id, ""),
-            note="civmods.xml <DisplayNameID>",
+    if civ_el is None:
+        raise ValueError(f"ANW civ {anw_civ.anw_token!r} has no civmods.xml entry")
+
+    # Surface 1: civ-picker name
+    display_id = get_civmod_field(civ_el, "DisplayNameID")
+    civ.civ_picker_name = StringRef(
+        string_id=display_id,
+        value=strings.get(display_id, ""),
+        note="civmods.xml <DisplayNameID>",
+    )
+
+    # Surface 3: lobby flag-hover blurb (multi-line, with AOE color markup)
+    rollover_id = get_civmod_field(civ_el, "RolloverNameID")
+    civ.flag_hover_blurb = StringRef(
+        string_id=rollover_id,
+        value=strings.get(rollover_id, ""),
+        note="civmods.xml <RolloverNameID>",
+        rich=True,
+    )
+
+    # Surface 4 fallback: lobby portrait via HomeCityPreviewWPF if personality has none
+    if not civ.lobby_portrait.populated:
+        preview = get_civmod_field(civ_el, "HomeCityPreviewWPF")
+        if preview:
+            civ.lobby_portrait = AssetRef(
+                path=preview,
+                note="civmods.xml <HomeCityPreviewWPF>",
+            )
+    # Lobby small portrait too
+    small = get_matchmaking_portrait(civ_el)
+    if small and not civ.diplomacy_portrait.populated:
+        civ.diplomacy_portrait = AssetRef(
+            path=small,
+            note="civmods.xml <MatchmakingTextures><SmallPortraitTextureWPF>",
         )
 
-        # Surface 3: lobby flag-hover blurb (multi-line, with AOE color markup)
-        rollover_id = get_civmod_field(civ_el, "RolloverNameID")
-        civ.flag_hover_blurb = StringRef(
-            string_id=rollover_id,
-            value=strings.get(rollover_id, ""),
-            note="civmods.xml <RolloverNameID>",
-            rich=True,
+    # Surface 6 / 8 / 9 / 15-17: in-match flags
+    flag_icon = get_civmod_field(civ_el, "HomeCityFlagIconWPF") or get_civmod_field(civ_el, "PostgameFlagIconWPF")
+    flag_button = get_civmod_field(civ_el, "HomeCityFlagButtonWPF")
+    postgame_tex = get_civmod_field(civ_el, "PostgameFlagTexture")
+    portrait_tex = get_civmod_field(civ_el, "Portrait")
+
+    # Scoreboard flag (uses HomeCityFlagIconWPF / PostgameFlagIconWPF — same png in DE).
+    if flag_icon:
+        civ.scoreboard_flag = AssetRef(
+            path=flag_icon,
+            note="civmods.xml <HomeCityFlagIconWPF>",
+        )
+    elif portrait_tex:
+        civ.scoreboard_flag = AssetRef(
+            path=portrait_tex.replace("\\", "/"),
+            note="civmods.xml <Portrait> (engine asset, not WPF)",
         )
 
-        # Surface 4 fallback: lobby portrait via HomeCityPreviewWPF if personality has none
-        if not civ.lobby_portrait.populated:
-            preview = get_civmod_field(civ_el, "HomeCityPreviewWPF")
-            if preview:
-                civ.lobby_portrait = AssetRef(
-                    path=preview,
-                    note="civmods.xml <HomeCityPreviewWPF>",
-                )
-        # Lobby small portrait too
-        small = get_matchmaking_portrait(civ_el)
-        if small and not civ.diplomacy_portrait.populated:
-            civ.diplomacy_portrait = AssetRef(
-                path=small,
-                note="civmods.xml <MatchmakingTextures><SmallPortraitTextureWPF>",
-            )
-
-        # Surface 6 / 8 / 9 / 15-17: in-match flags
-        flag_icon = get_civmod_field(civ_el, "HomeCityFlagIconWPF") or get_civmod_field(civ_el, "PostgameFlagIconWPF")
-        flag_button = get_civmod_field(civ_el, "HomeCityFlagButtonWPF")
-        postgame_tex = get_civmod_field(civ_el, "PostgameFlagTexture")
-        portrait_tex = get_civmod_field(civ_el, "Portrait")
-
-        # Scoreboard flag (uses HomeCityFlagIconWPF / PostgameFlagIconWPF — same png in DE).
-        if flag_icon:
-            civ.scoreboard_flag = AssetRef(
-                path=flag_icon,
-                note="civmods.xml <HomeCityFlagIconWPF>",
-            )
-        elif portrait_tex:
-            civ.scoreboard_flag = AssetRef(
-                path=portrait_tex.replace("\\", "/"),
-                note="civmods.xml <Portrait> (engine asset, not WPF)",
-            )
-
-        if flag_button:
-            civ.hud_hc_button = AssetRef(path=flag_button, note="civmods.xml <HomeCityFlagButtonWPF>")
-        if flag_icon:
-            civ.player_summary_flag = AssetRef(path=flag_icon, note="civmods.xml <HomeCityFlagIconWPF>")
-        # End-game total flag — DE uses PostgameFlagTexture (engine asset).
-        if postgame_tex:
-            civ.endgame_total_flag = AssetRef(
-                path=postgame_tex.replace("\\", "/"),
-                note="civmods.xml <PostgameFlagTexture> (engine asset, not WPF)",
-            )
-
-        # End-game civ name == civ-picker name (same DisplayNameID).
-        civ.endgame_civ_name = StringRef(
-            string_id=display_id,
-            value=strings.get(display_id, ""),
-            note="same as civ-picker name",
+    if flag_button:
+        civ.hud_hc_button = AssetRef(path=flag_button, note="civmods.xml <HomeCityFlagButtonWPF>")
+    if flag_icon:
+        civ.player_summary_flag = AssetRef(path=flag_icon, note="civmods.xml <HomeCityFlagIconWPF>")
+    # End-game total flag — DE uses PostgameFlagTexture (engine asset).
+    if postgame_tex:
+        civ.endgame_total_flag = AssetRef(
+            path=postgame_tex.replace("\\", "/"),
+            note="civmods.xml <PostgameFlagTexture> (engine asset, not WPF)",
         )
-    else:
-        # Base civ — civmods has no override. Pull from vanilla civs.xml +
-        # vanilla stringtable (extracted from {AOE3DE}/Game/Data/Data.bar) so
-        # reviewers see the actual text + art the engine displays, not a
-        # placeholder. Falls back to the placeholder only if the AoE3DE
-        # install isn't reachable.
-        van = _vanilla_data_or_none()
-        van_civ = van.civs.get(forcedciv.lower()) if van is not None else None
 
-        if van_civ is not None:
-            v_display_id = van_civ.findtext("displaynameid") or ""
-            v_rollover_id = van_civ.findtext("rollovernameid") or ""
-            v_flag_icon = (
-                van_civ.findtext("homecityflagiconwpf")
-                or van_civ.findtext("postgameflagiconwpf")
-                or ""
-            ).replace("\\", "/")
-            v_flag_button = (van_civ.findtext("homecityflagbuttonwpf") or "").replace("\\", "/")
-            v_postgame_tex = (van_civ.findtext("postgameflagtexture") or "").replace("\\", "/")
-            v_homecity_preview = (van_civ.findtext("homecitypreviewwpf") or "").replace("\\", "/")
-            mm = van_civ.find("matchmakingtextures")
-            v_small_portrait = (
-                (mm.findtext("smallportraittexturewpf") if mm is not None else "")
-                or ""
-            ).replace("\\", "/")
-
-            civ.civ_picker_name = StringRef(
-                string_id=v_display_id,
-                value=van.resolve(v_display_id),
-                note="vanilla civs.xml <DisplayNameID>",
-            )
-            civ.flag_hover_blurb = StringRef(
-                string_id=v_rollover_id,
-                value=van.resolve(v_rollover_id),
-                note="vanilla civs.xml <RolloverNameID>",
-                rich=True,
-            )
-            if not civ.lobby_portrait.populated and v_homecity_preview:
-                civ.lobby_portrait = AssetRef(
-                    path=v_homecity_preview,
-                    note="vanilla civs.xml <HomeCityPreviewWPF>",
-                )
-            if not civ.diplomacy_portrait.populated and v_small_portrait:
-                civ.diplomacy_portrait = AssetRef(
-                    path=v_small_portrait,
-                    note="vanilla civs.xml <SmallPortraitTextureWPF>",
-                )
-            if v_flag_icon:
-                civ.scoreboard_flag = AssetRef(
-                    path=v_flag_icon,
-                    note="vanilla civs.xml <HomeCityFlagIconWPF>",
-                )
-                civ.player_summary_flag = AssetRef(
-                    path=v_flag_icon,
-                    note="vanilla civs.xml <HomeCityFlagIconWPF>",
-                )
-            if v_flag_button:
-                civ.hud_hc_button = AssetRef(
-                    path=v_flag_button,
-                    note="vanilla civs.xml <HomeCityFlagButtonWPF>",
-                )
-            if v_postgame_tex:
-                civ.endgame_total_flag = AssetRef(
-                    path=v_postgame_tex,
-                    note="vanilla civs.xml <PostgameFlagTexture> (engine asset)",
-                )
-            civ.endgame_civ_name = StringRef(
-                string_id=v_display_id,
-                value=van.resolve(v_display_id),
-                note="same as civ-picker name",
-            )
-        else:
-            # Vanilla data unreachable — keep the placeholder as before.
-            note_base = "(base-game default — mod does not override)"
-            civ.civ_picker_name = StringRef(note=note_base)
-            civ.flag_hover_blurb = StringRef(note=note_base)
-            civ.scoreboard_flag = AssetRef(note=note_base)
-            civ.hud_hc_button = AssetRef(note=note_base)
-            civ.player_summary_flag = AssetRef(note=note_base)
-            civ.endgame_total_flag = AssetRef(note=note_base)
-            civ.endgame_civ_name = StringRef(note=note_base)
+    # End-game civ name == civ-picker name (same DisplayNameID).
+    civ.endgame_civ_name = StringRef(
+        string_id=display_id,
+        value=strings.get(display_id, ""),
+        note="same as civ-picker name",
+    )
 
     # ── Surface 13: Player Summary HC + flag + name ────────────────────────────
-    hc_name_ref, hc_civ, hc_flag = load_homecity_meta(homecity_basename)
+    # Use ANW-migrated homecity filename
+    hc_basename = anw_civ.new_homecity_filename.replace(".xml", "")
+    hc_name_ref, hc_civ, hc_flag = load_homecity_meta(hc_basename)
     if hc_name_ref.string_id and not hc_name_ref.value:
         hc_name_ref.value = strings.get(hc_name_ref.string_id, "")
     civ.player_summary_hc_name = hc_name_ref
     civ.player_summary_hc_civ = hc_civ
 
     # ── Surface 5 / 14: deck (Deck Builder = Player Summary deck) ──────────────
-    if std_key:  # base civ → decks_standard.json
-        deck = decks_std.get(std_key, {})
-        civ.deck_source = f"data/decks_standard.json[{std_key!r}]"
-    else:  # rev civ → decks_legendary.json
-        deck = decks_leg.get(homecity_basename, {})
-        civ.deck_source = f"data/decks_legendary.json[{homecity_basename!r}]"
+    # All 48 civs use decks_anw.json with ANW token as key
+    deck = decks_anw.get(anw_civ.anw_token, {})
+    civ.deck_source = f"data/decks_anw.json[{anw_civ.anw_token!r}]"
 
     civ.deck_name = '"A New World"'
     cards_by_age: list[list[tuple[str, str, str]]] = [[], [], [], [], []]
@@ -951,7 +803,7 @@ def run(check_only: bool = False) -> int:
     print(f"Loading data sources from {REPO}", file=sys.stderr)
     strings = load_string_table(STRINGS)
     civmods_index = load_civmods_index()
-    decks_leg, decks_std, cards = load_decks()
+    decks_anw, cards = load_decks()
 
     html_text = HTML_PATH.read_text(encoding="utf-8")
     original = html_text
@@ -959,16 +811,13 @@ def run(check_only: bool = False) -> int:
 
     refreshed = 0
     skipped: list[str] = []
-    for slug in CIV_TO_HOMECITY:
-        if slug in DEFERRED_SLUGS:
-            continue
-        if slug not in SLUG_TO_LEADER:
-            print(f"  SKIP {slug}: no SLUG_TO_LEADER entry", file=sys.stderr)
-            skipped.append(slug)
+    for slug in ANW_CIVS_BY_SLUG:
+        # Skip deferred civs (Americans, Mexicans (Revolution)) — they have no HTML sections
+        if slug in ANW_DEFERRED_SLUGS:
             continue
         try:
             civ = collect_civ(slug, civmods_index=civmods_index, strings=strings,
-                              decks_leg=decks_leg, decks_std=decks_std, cards=cards)
+                              decks_anw=decks_anw, cards=cards)
         except Exception as exc:  # noqa: BLE001 — surface the error and continue
             print(f"  ERR  {slug}: {exc}", file=sys.stderr)
             skipped.append(slug)

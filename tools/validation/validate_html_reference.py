@@ -4,7 +4,7 @@ Cross-checks `a_new_world.html` against itself + civmods so
 every civ that ships in the mod has a complete, consistently-labelled
 section in the reference site.
 
-Per civ in `CIV_TO_HOMECITY` (the canonical 48), verify:
+Per civ in `ANW_CIVS_BY_SLUG` (the canonical 48), verify:
 
   1. Section header  `<!-- ─── {civ} ─── -->` exists.
   2. `<span class="nation-header">` exists with both flag-img + portrait-img.
@@ -23,9 +23,13 @@ Lean: single regex pass, no BS4. Exits 1 with a per-civ report.
 from __future__ import annotations
 
 import re
+import sys
 from pathlib import Path
 
-from tools.validation.validate_html_vs_mod import CIV_TO_HOMECITY
+if __package__ is None or __package__ == "":
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+
+from tools.migration.anw_mapping import ANW_CIVS_BY_SLUG  # noqa: E402
 
 REPO = Path(__file__).resolve().parents[2]
 
@@ -127,7 +131,7 @@ def validate_html_reference(repo_root: Path) -> list[str]:
 
     issues: list[str] = []
 
-    for civ_slug in CIV_TO_HOMECITY:
+    for civ_slug in ANW_CIVS_BY_SLUG:
         if civ_slug not in sections:
             if civ_slug in _DEFERRED_SECTION:
                 continue
@@ -176,7 +180,7 @@ def validate_html_reference(repo_root: Path) -> list[str]:
 
 def main() -> int:
     issues = validate_html_reference(REPO)
-    print(f"checked {len(CIV_TO_HOMECITY)} civs against HTML reference")
+    print(f"checked {len(ANW_CIVS_BY_SLUG)} civs against HTML reference")
     if issues:
         print(f"\n{len(issues)} issue(s):\n")
         for i in issues:

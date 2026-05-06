@@ -16,67 +16,22 @@ Exits 1 with a per-civ report on any mismatch.
 """
 from __future__ import annotations
 
+from __future__ import annotations
+
 import html
 import json
 import re
 import sys
 from pathlib import Path
 
+if __package__ is None or __package__ == "":
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+
+from tools.migration.anw_mapping import ANW_CIVS_BY_SLUG, ANW_DEFERRED_SLUGS  # noqa: E402
+
 REPO = Path(__file__).resolve().parents[2]
 HTML = REPO / "a_new_world.html"
 DATA = REPO / "data"
-
-# Map civ slug used as a section header → home-city basename + summary key
-CIV_TO_HOMECITY = {
-    "Aztecs":               ("homecityxpaztec",                 "Aztecs"),
-    "British":              ("homecitybritish",                 "British"),
-    "Chinese":              ("homecitychinese",                 "Chinese"),
-    "Dutch":                ("homecitydutch",                   "Dutch"),
-    "Ethiopians":           ("homecityethiopians",              "Ethiopians"),
-    "French":               ("homecityfrench",                  "French"),
-    "Germans":              ("homecitygerman",                  "Germans"),
-    "Haudenosaunee":        ("homecityxpiroquois",              "Haudenosaunee"),
-    "Hausa":                ("homecityhausa",                   "Hausa"),
-    "Inca":                 ("homecitydeinca",                  "Inca"),
-    "Indians":              ("homecityindians",                 "Indians"),
-    "Italians":             ("homecityitalians",                "Italians"),
-    "Japanese":             ("homecityjapanese",                "Japanese"),
-    "Lakota":               ("homecityxpsioux",                 "Lakota"),
-    "Maltese":              ("homecitymaltese",                 "Maltese"),
-    "Mexicans (Standard)":  ("homecitymexicans",                "MexicansStd"),
-    "Ottomans":             ("homecityottomans",                "Ottomans"),
-    "Portuguese":           ("homecityportuguese",              "Portuguese"),
-    "Russians":             ("homecityrussians",                "Russians"),
-    "Spanish":              ("homecityspanish",                 "Spanish"),
-    "Swedes":               ("homecityswedish",                 "Swedes"),
-    "United States":        ("homecityamericans",               "UnitedStates"),
-    "Americans":            ("rvltmodhomecityamericans",        None),
-    "Argentines":           ("rvltmodhomecityargentina",        None),
-    "Baja Californians":    ("rvltmodhomecitybajacalifornians", None),
-    "Barbary":              ("rvltmodhomecitybarbary",          None),
-    "Brazil":               ("rvltmodhomecitybrazil",           None),
-    "Californians":         ("rvltmodhomecitycalifornia",       None),
-    "Canadians":            ("rvltmodhomecitycanada",           None),
-    "Central Americans":    ("rvltmodhomecitycentralamericans", None),
-    "Chileans":             ("rvltmodhomecitychile",            None),
-    "Columbians":           ("rvltmodhomecitycolumbia",         None),
-    "Egyptians":            ("rvltmodhomecityegypt",            None),
-    "Finnish":              ("rvltmodhomecityfinland",          None),
-    "French Canadians":     ("rvltmodhomecityfrenchcanada",     None),
-    "Haitians":             ("rvltmodhomecityhaiti",            None),
-    "Hungarians":           ("rvltmodhomecityhungary",          None),
-    "Indonesians":          ("rvltmodhomecityindonesians",      None),
-    "Mayans":               ("rvltmodhomecitymaya",             None),
-    "Mexicans (Revolution)":("rvltmodhomecitymexicans",         None),
-    "Napoleonic France":    ("rvltmodhomecitynapoleon",         None),
-    "Peruvians":            ("rvltmodhomecityperu",             None),
-    "Revolutionary France": ("rvltmodhomecityrevolutionaryfrance", None),
-    "Rio Grande":           ("rvltmodhomecityriogrande",        None),
-    "Romanians":            ("rvltmodhomecityromania",          None),
-    "South Africans":       ("rvltmodhomecitysouthafricans",    None),
-    "Texians":              ("rvltmodhomecitytexas",            None),
-    "Yucatan":              ("rvltmodhomecityyucatan",          None),
-}
 
 SECTION_RE = re.compile(r"<!--\s*[─\-]+\s*([^─\-][^<]*?)\s*[─\-]+\s*-->")
 DECK_BLOCK_RE = re.compile(
@@ -134,10 +89,6 @@ def deck_summary_cards(summary: dict, civ_key: str) -> list[str] | None:
     return cards
 
 
-# Civs whose HTML section is intentionally deferred (revolution civs
-# that share parent-civ XML and have no dedicated HTML section yet).
-# Tracked in tools/validation/validate_html_reference.py:_DEFERRED_SECTION.
-_DEFERRED_HTML_SECTION: set[str] = {"Americans", "Mexicans (Revolution)"}
 
 
 def validate_html_vs_mod(repo_root: Path | None = None) -> list[str]:
@@ -146,8 +97,7 @@ def validate_html_vs_mod(repo_root: Path | None = None) -> list[str]:
     html_path = repo / "a_new_world.html"
     data = repo / "data"
     text = html_path.read_text(encoding="utf-8")
-    leg = json.loads((data / "decks_legendary.json").read_text())
-    std = json.loads((data / "decks_standard.json").read_text())
+    decks = json.loads((data / "decks_anw.json").read_text())
     cards_meta = json.loads((data / "cards.json").read_text())
 
     name_to_id: dict[str, list[str]] = {}
@@ -160,28 +110,18 @@ def validate_html_vs_mod(repo_root: Path | None = None) -> list[str]:
     html_assets = html_assets_per_civ(text)
 
     errors: list[str] = []
-    for slug, (basename, std_key) in CIV_TO_HOMECITY.items():
-        if slug in _DEFERRED_HTML_SECTION:
+    for slug, anw_civ in ANW_CIVS_BY_SLUG.items():
+        xml = data / anw_civ.new_homecity_filename
+        if not xml.exists():
+            errors.append(f"{slug}: missing home-city XML at data/{anw_civ.new_homecity_filename}")
+            continue
+        if slug in ANW_DEFERRED_SLUGS:
             # HTML section not authored yet; skip chip-count check but
             # still verify the home-city XML exists.
-            xml = data / f"{basename}.xml"
-            if not xml.exists():
-                errors.append(f"{slug}: missing home-city XML at data/{basename}.xml")
             continue
-        xml = data / f"{basename}.xml"
-        if not xml.exists():
-            errors.append(f"{slug}: missing home-city XML at data/{basename}.xml")
-            continue
-        if std_key:
-            summary_cards = deck_summary_cards(std, std_key)
-            src = "decks_standard.json"
-            key = std_key
-        else:
-            summary_cards = deck_summary_cards(leg, basename)
-            src = "decks_legendary.json"
-            key = basename
+        summary_cards = deck_summary_cards(decks, anw_civ.anw_token)
         if summary_cards is None:
-            errors.append(f"{slug}: no entry '{key}' in {src}")
+            errors.append(f"{slug}: no entry '{anw_civ.anw_token}' in decks_anw.json")
             continue
         rendered = html_decks.get(slug, [])
         if len(rendered) != len(summary_cards):
@@ -202,8 +142,7 @@ def validate_html_vs_mod(repo_root: Path | None = None) -> list[str]:
 
 def main() -> int:
     text = HTML.read_text(encoding="utf-8")
-    leg = json.loads((DATA / "decks_legendary.json").read_text())
-    std = json.loads((DATA / "decks_standard.json").read_text())
+    decks = json.loads((DATA / "decks_anw.json").read_text())
     cards_meta = json.loads((DATA / "cards.json").read_text())
 
     name_to_id: dict[str, list[str]] = {}
@@ -218,24 +157,20 @@ def main() -> int:
     errors: list[str] = []
     checked = 0
 
-    for slug, (basename, std_key) in CIV_TO_HOMECITY.items():
+    for slug, anw_civ in ANW_CIVS_BY_SLUG.items():
         checked += 1
         # 1. Home-city XML on disk
-        xml = DATA / f"{basename}.xml"
+        xml = DATA / anw_civ.new_homecity_filename
         if not xml.exists():
-            errors.append(f"{slug}: missing home-city XML at data/{basename}.xml")
+            errors.append(f"{slug}: missing home-city XML at data/{anw_civ.new_homecity_filename}")
+            continue
+        if slug in ANW_DEFERRED_SLUGS:
+            # HTML section not authored yet; skip chip validation
             continue
         # 2. Deck summary present
-        if std_key:
-            summary_cards = deck_summary_cards(std, std_key)
-            src = "decks_standard.json"
-            key = std_key
-        else:
-            summary_cards = deck_summary_cards(leg, basename)
-            src = "decks_legendary.json"
-            key = basename
+        summary_cards = deck_summary_cards(decks, anw_civ.anw_token)
         if summary_cards is None:
-            errors.append(f"{slug}: no entry '{key}' in {src}")
+            errors.append(f"{slug}: no entry '{anw_civ.anw_token}' in decks_anw.json")
             continue
         # 3. Chip count matches summary count
         rendered = html_decks.get(slug, [])

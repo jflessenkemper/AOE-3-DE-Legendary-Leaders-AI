@@ -1,6 +1,6 @@
 <civmods>
 	<Civ>
-		<Name>RvltModNapoleonicFrance</Name>
+		<Name>ANWNapoleonicFrance</Name>
 		<Main>1</Main>
 		<StatsID>FR</StatsID>
 		<Portrait>objects\flags\french</Portrait>
@@ -13,11 +13,11 @@
 		<UnAlliedID>26444</UnAlliedID>
 		<AgeTech>
 			<Age>Age0</Age>
-			<Tech>RvltModAge0NapoleonicFrench</Tech>
+			<Tech>ANWAge0NapoleonicFrench</Tech>
 		</AgeTech>
 		<AgeTech>
 			<Age>Age1</Age>
-			<Tech>RvltModColonializeNapoleon</Tech>
+			<Tech>ANWColonializeNapoleon</Tech>
 		</AgeTech>
 		<AgeTech>
 			<Age>Age2</Age>
@@ -90,7 +90,7 @@
 			<Age4>1.00</Age4>
 		</EmpireWarsAgeUpRates>
 		<RandomStartingUnits>0</RandomStartingUnits>
-		<HomeCityFilename>rvltmodhomecitynapoleon.xml</HomeCityFilename>
+		<HomeCityFilename>anwhomecitynapoleonicfrance.xml</HomeCityFilename>
 		<HomeCityFlagTexture>objects\flags\french_revolution_ne</HomeCityFlagTexture>
 		<HomeCityFlagButtonSet>frenchFlagBtn</HomeCityFlagButtonSet>
 		<HomeCityFlagButtonSetLarge>frenchFlagBtnLarge</HomeCityFlagButtonSetLarge>
@@ -267,7 +267,7 @@
 		</MultipleBlockTrain>
 	</Civ>
 	<Civ>
-		<Name>RvltModRevolutionaryFrance</Name>
+		<Name>ANWRevFrance</Name>
 		<Main>1</Main>
 		<StatsID>RF</StatsID>
 		<Portrait>objects\flags/french</Portrait>
@@ -280,11 +280,11 @@
 		<UnAlliedID>26444</UnAlliedID>
 		<AgeTech>
 			<Age>Age0</Age>
-			<Tech>RvltModAge0RevolutionaryFrench</Tech>
+			<Tech>ANWAge0RevolutionaryFrench</Tech>
 		</AgeTech>
 		<AgeTech>
 			<Age>Age1</Age>
-			<Tech>RvltModColonializeNapoleon</Tech>
+			<Tech>ANWColonializeNapoleon</Tech>
 		</AgeTech>
 		<AgeTech>
 			<Age>Age2</Age>
@@ -357,7 +357,7 @@
 			<Age4>1.00</Age4>
 		</EmpireWarsAgeUpRates>
 		<RandomStartingUnits>0</RandomStartingUnits>
-		<HomeCityFilename>rvltmodhomecityrevolutionaryfrance.xml</HomeCityFilename>
+		<HomeCityFilename>anwhomecityrevfrance.xml</HomeCityFilename>
 		<HomeCityFlagTexture>objects\flags/revolutionary_france</HomeCityFlagTexture>
 		<HomeCityFlagButtonSet>frenchFlagBtn</HomeCityFlagButtonSet>
 		<HomeCityFlagButtonSetLarge>frenchFlagBtnLarge</HomeCityFlagButtonSetLarge>
@@ -534,7 +534,7 @@
 		</MultipleBlockTrain>
 	</Civ>
 	<Civ>
-		<Name>RvltModAmericans</Name>
+		<Name>ANWAmericansRev</Name>
 		<Main>1</Main>
 		<StatsID>BR</StatsID>
 		<Portrait>objects\flags\british</Portrait>
@@ -547,7 +547,7 @@
 		<UnAlliedID>26444</UnAlliedID>
 		<AgeTech>
 			<Age>Age0</Age>
-			<Tech>RvltModAge0Americans</Tech>
+			<Tech>ANWAge0Americans</Tech>
 		</AgeTech>
 		<AgeTech>
 			<Age>Age1</Age>
@@ -555,7 +555,7 @@
 		</AgeTech>
 		<AgeTech>
 			<Age>Age2</Age>
-			<Tech>RvltModFortressizeAmericans</Tech>
+			<Tech>ANWFortressizeAmericans</Tech>
 		</AgeTech>
 		<AgeTech>
 			<Age>Age3</Age>
@@ -627,7 +627,7 @@
 			<Age4>1.00</Age4>
 		</EmpireWarsAgeUpRates>
 		<RandomStartingUnits>0</RandomStartingUnits>
-		<HomeCityFilename>rvltmodhomecityamericans.xml</HomeCityFilename>
+		<HomeCityFilename>anwhomecityamericansrev.xml</HomeCityFilename>
 		<HomeCityFlagTexture>objects\flags\USA</HomeCityFlagTexture>
 		<HomeCityFlagButtonSet>washingtonFlagBtn</HomeCityFlagButtonSet>
 		<HomeCityFlagButtonSetLarge>washingtonFlagBtnLarge</HomeCityFlagButtonSetLarge>
@@ -804,7 +804,7 @@
 		</MultipleBlockTrain>
 	</Civ>
 	<Civ>
-		<Name>RvltModMexicans</Name>
+		<Name>ANWMexicansRev</Name>
 		<Main>1</Main>
 		<StatsID>SP</StatsID>
 		<Portrait>objects\flags\spanish</Portrait>
@@ -818,7 +818,7 @@
 		<HCShipmentModifier>0.88</HCShipmentModifier>
 		<AgeTech>
 			<Age>Age0</Age>
-			<Tech>RvltModAge0Mexicans</Tech>
+			<Tech>ANWAge0Mexicans</Tech>
 		</AgeTech>
 		<AgeTech>
 			<Age>Age1</Age>
@@ -898,7 +898,7 @@
 			<Age4>1.00</Age4>
 		</EmpireWarsAgeUpRates>
 		<RandomStartingUnits>0</RandomStartingUnits>
-		<HomeCityFilename>rvltmodhomecitymexicans.xml</HomeCityFilename>
+		<HomeCityFilename>anwhomecitymexicansrev.xml</HomeCityFilename>
 		<HomeCityFlagTexture>objects\flags\mexican_rev</HomeCityFlagTexture>
 		<HomeCityFlagButtonSet>hidalgoFlagBtn</HomeCityFlagButtonSet>
 		<HomeCityFlagButtonSetLarge>hidalgoFlagBtnLarge</HomeCityFlagButtonSetLarge>
@@ -1060,7 +1060,7 @@
 		</MultipleBlockTrain>
 	</Civ>
 	<Civ>
-		<Name>RvltModCanadians</Name>
+		<Name>ANWCanadians</Name>
 		<Main>1</Main>
 		<StatsID>BR</StatsID>
 		<Portrait>objects\flags\british</Portrait>
@@ -1073,19 +1073,19 @@
 		<UnAlliedID>26444</UnAlliedID>
 		<AgeTech>
 			<Age>Age0</Age>
-			<Tech>RvltModAge0Canadians</Tech>
+			<Tech>ANWAge0Canadians</Tech>
 		</AgeTech>
 		<AgeTech>
 			<Age>Age1</Age>
-			<Tech>RvltModColonializeCanadians</Tech>
+			<Tech>ANWColonializeCanadians</Tech>
 		</AgeTech>
 		<AgeTech>
 			<Age>Age2</Age>
-			<Tech>RvltModFortressizeCanadians</Tech>
+			<Tech>ANWFortressizeCanadians</Tech>
 		</AgeTech>
 		<AgeTech>
 			<Age>Age3</Age>
-			<Tech>RvltModIndustrializeCanadians</Tech>
+			<Tech>ANWIndustrializeCanadians</Tech>
 		</AgeTech>
 		<AgeTech>
 			<Age>Age4</Age>
@@ -1153,7 +1153,7 @@
 			<Age4>1.00</Age4>
 		</EmpireWarsAgeUpRates>
 		<RandomStartingUnits>0</RandomStartingUnits>
-		<HomeCityFilename>rvltmodhomecitycanada.xml</HomeCityFilename>
+		<HomeCityFilename>anwhomecitycanadians.xml</HomeCityFilename>
 		<HomeCityFlagTexture>objects\flags\canadian</HomeCityFlagTexture>
 		<HomeCityFlagButtonSet>britishFlagBtn</HomeCityFlagButtonSet>
 		<HomeCityFlagButtonSetLarge>britishFlagBtnLarge</HomeCityFlagButtonSetLarge>
@@ -1330,7 +1330,7 @@
 		</MultipleBlockTrain>
 	</Civ>
 	<Civ>
-		<Name>RvltModFrenchCanadians</Name>
+		<Name>ANWFrenchCanadians</Name>
 		<Main>1</Main>
 		<StatsID>FR</StatsID>
 		<Portrait>objects\flags\spc_canadians</Portrait>
@@ -1343,19 +1343,19 @@
 		<UnAlliedID>26444</UnAlliedID>
 		<AgeTech>
 			<Age>Age0</Age>
-			<Tech>RvltModAge0FrenchCanadians</Tech>
+			<Tech>ANWAge0FrenchCanadians</Tech>
 		</AgeTech>
 		<AgeTech>
 			<Age>Age1</Age>
-			<Tech>RvltModColonializeFrenchCanadians</Tech>
+			<Tech>ANWColonializeFrenchCanadians</Tech>
 		</AgeTech>
 		<AgeTech>
 			<Age>Age2</Age>
-			<Tech>RvltModFortressizeFrenchCanadians</Tech>
+			<Tech>ANWFortressizeFrenchCanadians</Tech>
 		</AgeTech>
 		<AgeTech>
 			<Age>Age3</Age>
-			<Tech>RvltModIndustrializeFrenchCanadians</Tech>
+			<Tech>ANWIndustrializeFrenchCanadians</Tech>
 		</AgeTech>
 		<AgeTech>
 			<Age>Age4</Age>
@@ -1420,7 +1420,7 @@
 			<Age4>1.00</Age4>
 		</EmpireWarsAgeUpRates>
 		<RandomStartingUnits>0</RandomStartingUnits>
-		<HomeCityFilename>rvltmodhomecityfrenchcanada.xml</HomeCityFilename>
+		<HomeCityFilename>anwhomecityfrenchcanadians.xml</HomeCityFilename>
 		<HomeCityFlagTexture>objects\flags\spc_canadians</HomeCityFlagTexture>
 		<HomeCityFlagIconWPF>resources/images/icons/flags/Flag_SPC_Canadian.png</HomeCityFlagIconWPF>
 		<HomeCityPreviewWPF>resources/images/icons/singleplayer/cpai_avatar_french_canadians_papineau.png</HomeCityPreviewWPF>
@@ -1597,7 +1597,7 @@
 		</MultipleBlockTrain>
 	</Civ>
 	<Civ>
-		<Name>RvltModBrazil</Name>
+		<Name>ANWBrazil</Name>
 		<Main>1</Main>
 		<StatsID>PT</StatsID>
 		<Portrait>objects\flags\portuguese</Portrait>
@@ -1610,7 +1610,7 @@
 		<UnAlliedID>26444</UnAlliedID>
 		<AgeTech>
 			<Age>Age0</Age>
-			<Tech>RvltModAge0Brazilians</Tech>
+			<Tech>ANWAge0Brazilians</Tech>
 		</AgeTech>
 		<AgeTech>
 			<Age>Age1</Age>
@@ -1692,7 +1692,7 @@
 			<Age4>1.00</Age4>
 		</EmpireWarsAgeUpRates>
 		<RandomStartingUnits>0</RandomStartingUnits>
-		<HomeCityFilename>rvltmodhomecitybrazil.xml</HomeCityFilename>
+		<HomeCityFilename>anwhomecitybrazil.xml</HomeCityFilename>
 		<HomeCityFlagTexture>objects\flags\brazilian</HomeCityFlagTexture>
 		<HomeCityFlagButtonSet>bonifacioFlagBtn</HomeCityFlagButtonSet>
 		<HomeCityFlagButtonSetLarge>bonifacioFlagBtnLarge</HomeCityFlagButtonSetLarge>
@@ -1869,7 +1869,7 @@
 		</MultipleBlockTrain>
 	</Civ>
 	<Civ>
-		<Name>RvltModArgentines</Name>
+		<Name>ANWArgentines</Name>
 		<Main>1</Main>
 		<StatsID>SP</StatsID>
 		<Portrait>objects\flags\spanish</Portrait>
@@ -1883,7 +1883,7 @@
 		<HCShipmentModifier>0.88</HCShipmentModifier>
 		<AgeTech>
 			<Age>Age0</Age>
-			<Tech>RvltModAge0Argentines</Tech>
+			<Tech>ANWAge0Argentines</Tech>
 		</AgeTech>
 		<AgeTech>
 			<Age>Age1</Age>
@@ -1963,7 +1963,7 @@
 			<Age4>1.00</Age4>
 		</EmpireWarsAgeUpRates>
 		<RandomStartingUnits>0</RandomStartingUnits>
-		<HomeCityFilename>rvltmodhomecityargentina.xml</HomeCityFilename>
+		<HomeCityFilename>anwhomecityargentines.xml</HomeCityFilename>
 		<HomeCityFlagTexture>objects\flags\argentinian</HomeCityFlagTexture>
 		<HomeCityFlagButtonSet>sanMartinFlagBtn</HomeCityFlagButtonSet>
 		<HomeCityFlagButtonSetLarge>sanMartinFlagBtnLarge</HomeCityFlagButtonSetLarge>
@@ -2125,7 +2125,7 @@
 		</MultipleBlockTrain>
 	</Civ>
 	<Civ>
-		<Name>RvltModChileans</Name>
+		<Name>ANWChileans</Name>
 		<Main>1</Main>
 		<StatsID>SP</StatsID>
 		<Portrait>objects\flags\spanish</Portrait>
@@ -2139,7 +2139,7 @@
 		<HCShipmentModifier>0.88</HCShipmentModifier>
 		<AgeTech>
 			<Age>Age0</Age>
-			<Tech>RvltModAge0Chileans</Tech>
+			<Tech>ANWAge0Chileans</Tech>
 		</AgeTech>
 		<AgeTech>
 			<Age>Age1</Age>
@@ -2219,7 +2219,7 @@
 			<Age4>1.00</Age4>
 		</EmpireWarsAgeUpRates>
 		<RandomStartingUnits>0</RandomStartingUnits>
-		<HomeCityFilename>rvltmodhomecitychile.xml</HomeCityFilename>
+		<HomeCityFilename>anwhomecitychileans.xml</HomeCityFilename>
 		<HomeCityFlagTexture>objects\flags\chilean</HomeCityFlagTexture>
 		<HomeCityFlagButtonSet>oHigginsFlagBtn</HomeCityFlagButtonSet>
 		<HomeCityFlagButtonSetLarge>oHigginsFlagBtnLarge</HomeCityFlagButtonSetLarge>
@@ -2381,7 +2381,7 @@
 		</MultipleBlockTrain>
 	</Civ>
 	<Civ>
-		<Name>RvltModPeruvians</Name>
+		<Name>ANWPeruvians</Name>
 		<Main>1</Main>
 		<StatsID>SP</StatsID>
 		<Portrait>objects\flags\spanish</Portrait>
@@ -2395,7 +2395,7 @@
 		<HCShipmentModifier>0.88</HCShipmentModifier>
 		<AgeTech>
 			<Age>Age0</Age>
-			<Tech>RvltModAge0Peruvians</Tech>
+			<Tech>ANWAge0Peruvians</Tech>
 		</AgeTech>
 		<AgeTech>
 			<Age>Age1</Age>
@@ -2403,11 +2403,11 @@
 		</AgeTech>
 		<AgeTech>
 			<Age>Age2</Age>
-			<Tech>RvltModFortressizePeruvians</Tech>
+			<Tech>ANWFortressizePeruvians</Tech>
 		</AgeTech>
 		<AgeTech>
 			<Age>Age3</Age>
-			<Tech>RvltModIndustrializePeruvians</Tech>
+			<Tech>ANWIndustrializePeruvians</Tech>
 		</AgeTech>
 		<AgeTech>
 			<Age>Age4</Age>
@@ -2475,7 +2475,7 @@
 			<Age4>1.00</Age4>
 		</EmpireWarsAgeUpRates>
 		<RandomStartingUnits>0</RandomStartingUnits>
-		<HomeCityFilename>rvltmodhomecityperu.xml</HomeCityFilename>
+		<HomeCityFilename>anwhomecityperuvians.xml</HomeCityFilename>
 		<HomeCityFlagTexture>objects\flags\peruvian</HomeCityFlagTexture>
 		<HomeCityFlagButtonSet>bolivarFlagBtn</HomeCityFlagButtonSet>
 		<HomeCityFlagButtonSetLarge>bolivarFlagBtnLarge</HomeCityFlagButtonSetLarge>
@@ -2643,7 +2643,7 @@
 		</MultipleBlockTrain>
 	</Civ>
 	<Civ>
-		<Name>RvltModColumbians</Name>
+		<Name>ANWColumbians</Name>
 		<Main>1</Main>
 		<StatsID>SP</StatsID>
 		<Portrait>objects\flags\spanish</Portrait>
@@ -2657,23 +2657,23 @@
 		<HCShipmentModifier>0.88</HCShipmentModifier>
 		<AgeTech>
 			<Age>Age0</Age>
-			<Tech>RvltModAge0Columbians</Tech>
+			<Tech>ANWAge0Columbians</Tech>
 		</AgeTech>
 		<AgeTech>
 			<Age>Age1</Age>
-			<Tech>RvltModColonializeColumbians</Tech>
+			<Tech>ANWColonializeColumbians</Tech>
 		</AgeTech>
 		<AgeTech>
 			<Age>Age2</Age>
-			<Tech>RvltModFortressizeColumbians</Tech>
+			<Tech>ANWFortressizeColumbians</Tech>
 		</AgeTech>
 		<AgeTech>
 			<Age>Age3</Age>
-			<Tech>RvltModIndustrializeColumbians</Tech>
+			<Tech>ANWIndustrializeColumbians</Tech>
 		</AgeTech>
 		<AgeTech>
 			<Age>Age4</Age>
-			<Tech>RvltModImperializeColumbians</Tech>
+			<Tech>ANWImperializeColumbians</Tech>
 		</AgeTech>
 		<PostIndustrialTech>PostIndustrialSpanish</PostIndustrialTech>
 		<PostImperialTech>PostImperialSpanish</PostImperialTech>
@@ -2737,7 +2737,7 @@
 			<Age4>1.00</Age4>
 		</EmpireWarsAgeUpRates>
 		<RandomStartingUnits>0</RandomStartingUnits>
-		<HomeCityFilename>rvltmodhomecitycolumbia.xml</HomeCityFilename>
+		<HomeCityFilename>anwhomecitycolumbians.xml</HomeCityFilename>
 		<HomeCityFlagTexture>objects\flags\colombian</HomeCityFlagTexture>
 		<HomeCityFlagButtonSet>santanderFlagBtn</HomeCityFlagButtonSet>
 		<HomeCityFlagButtonSetLarge>santanderFlagBtnLarge</HomeCityFlagButtonSetLarge>
@@ -2899,7 +2899,7 @@
 		</MultipleBlockTrain>
 	</Civ>
 	<Civ>
-		<Name>RvltModHaitians</Name>
+		<Name>ANWHaitians</Name>
 		<Main>1</Main>
 		<StatsID>BR</StatsID>
 		<Portrait>objects\flags\british</Portrait>
@@ -2912,11 +2912,11 @@
 		<UnAlliedID>26444</UnAlliedID>
 		<AgeTech>
 			<Age>Age0</Age>
-			<Tech>RvltModAge0Haitians</Tech>
+			<Tech>ANWAge0Haitians</Tech>
 		</AgeTech>
 		<AgeTech>
 			<Age>Age1</Age>
-			<Tech>RvltModColonializeHaitians</Tech>
+			<Tech>ANWColonializeHaitians</Tech>
 		</AgeTech>
 		<AgeTech>
 			<Age>Age2</Age>
@@ -2994,7 +2994,7 @@
 			<Age4>1.00</Age4>
 		</EmpireWarsAgeUpRates>
 		<RandomStartingUnits>0</RandomStartingUnits>
-		<HomeCityFilename>rvltmodhomecityhaiti.xml</HomeCityFilename>
+		<HomeCityFilename>anwhomecityhaitians.xml</HomeCityFilename>
 		<HomeCityFlagTexture>objects\flags\haitian</HomeCityFlagTexture>
 		<HomeCityFlagButtonSet>louvertureFlagBtn</HomeCityFlagButtonSet>
 		<HomeCityFlagButtonSetLarge>louvertureFlagBtnLarge</HomeCityFlagButtonSetLarge>
@@ -3181,7 +3181,7 @@
 		</MultipleBlockTrain>
 	</Civ>
 	<Civ>
-		<Name>RvltModIndonesians</Name>
+		<Name>ANWIndonesians</Name>
 		<Main>1</Main>
 		<StatsID>BR</StatsID>
 		<Portrait>objects\flags\british</Portrait>
@@ -3194,7 +3194,7 @@
 		<UnAlliedID>26444</UnAlliedID>
 		<AgeTech>
 			<Age>Age0</Age>
-			<Tech>RvltModAge0Indonesians</Tech>
+			<Tech>ANWAge0Indonesians</Tech>
 		</AgeTech>
 		<AgeTech>
 			<Age>Age1</Age>
@@ -3274,7 +3274,7 @@
 			<Age4>1.00</Age4>
 		</EmpireWarsAgeUpRates>
 		<RandomStartingUnits>0</RandomStartingUnits>
-		<HomeCityFilename>rvltmodhomecityindonesians.xml</HomeCityFilename>
+		<HomeCityFilename>anwhomecityindonesians.xml</HomeCityFilename>
 		<HomeCityFlagTexture>objects\flags\indonesian</HomeCityFlagTexture>
 		<HomeCityFlagButtonSet>britishFlagBtn</HomeCityFlagButtonSet>
 		<HomeCityFlagButtonSetLarge>britishFlagBtnLarge</HomeCityFlagButtonSetLarge>
@@ -3451,7 +3451,7 @@
 		</MultipleBlockTrain>
 	</Civ>
 	<Civ>
-		<Name>RvltModSouthAfricans</Name>
+		<Name>ANWSouthAfricans</Name>
 		<Main>1</Main>
 		<StatsID>BR</StatsID>
 		<Portrait>objects\flags\british</Portrait>
@@ -3464,19 +3464,19 @@
 		<UnAlliedID>26444</UnAlliedID>
 		<AgeTech>
 			<Age>Age0</Age>
-			<Tech>RvltModAge0SouthAfricans</Tech>
+			<Tech>ANWAge0SouthAfricans</Tech>
 		</AgeTech>
 		<AgeTech>
 			<Age>Age1</Age>
-			<Tech>RvltModColonializeSouthAfricans</Tech>
+			<Tech>ANWColonializeSouthAfricans</Tech>
 		</AgeTech>
 		<AgeTech>
 			<Age>Age2</Age>
-			<Tech>RvltModFortressizeSouthAfricans</Tech>
+			<Tech>ANWFortressizeSouthAfricans</Tech>
 		</AgeTech>
 		<AgeTech>
 			<Age>Age3</Age>
-			<Tech>RvltModIndustrializeSouthAfricans</Tech>
+			<Tech>ANWIndustrializeSouthAfricans</Tech>
 		</AgeTech>
 		<AgeTech>
 			<Age>Age4</Age>
@@ -3543,7 +3543,7 @@
 			<Age4>1.00</Age4>
 		</EmpireWarsAgeUpRates>
 		<RandomStartingUnits>0</RandomStartingUnits>
-		<HomeCityFilename>rvltmodhomecitysouthafricans.xml</HomeCityFilename>
+		<HomeCityFilename>anwhomecitysouthafricans.xml</HomeCityFilename>
 		<HomeCityFlagTexture>objects\flags\south_african</HomeCityFlagTexture>
 		<HomeCityFlagButtonSet>britishFlagBtn</HomeCityFlagButtonSet>
 		<HomeCityFlagButtonSetLarge>britishFlagBtnLarge</HomeCityFlagButtonSetLarge>
@@ -3720,7 +3720,7 @@
 		</MultipleBlockTrain>
 	</Civ>
 	<Civ>
-		<Name>RvltModFinnish</Name>
+		<Name>ANWFinnish</Name>
 		<Main>1</Main>
 		<StatsID>SW</StatsID>
 		<Portrait>objects\flags\swedish</Portrait>
@@ -3733,7 +3733,7 @@
 		<UnAlliedID>26444</UnAlliedID>
 		<AgeTech>
 			<Age>Age0</Age>
-			<Tech>RvltModAge0Finnish</Tech>
+			<Tech>ANWAge0Finnish</Tech>
 		</AgeTech>
 		<AgeTech>
 			<Age>Age1</Age>
@@ -3749,7 +3749,7 @@
 		</AgeTech>
 		<AgeTech>
 			<Age>Age4</Age>
-			<Tech>RvltModImperializeFinnish</Tech>
+			<Tech>ANWImperializeFinnish</Tech>
 		</AgeTech>
 		<PostIndustrialTech>DEPostIndustrialSwedish</PostIndustrialTech>
 		<PostImperialTech>DEPostImperialSwedish</PostImperialTech>
@@ -3812,7 +3812,7 @@
 			<Age4>1.00</Age4>
 		</EmpireWarsAgeUpRates>
 		<RandomStartingUnits>0</RandomStartingUnits>
-		<HomeCityFilename>rvltmodhomecityfinland.xml</HomeCityFilename>
+		<HomeCityFilename>anwhomecityfinnish.xml</HomeCityFilename>
 		<HomeCityFlagTexture>objects\flags\finnish</HomeCityFlagTexture>
 		<HomeCityFlagButtonSet>swedishFlagBtn</HomeCityFlagButtonSet>
 		<HomeCityFlagButtonSetLarge>swedishFlagBtnLarge</HomeCityFlagButtonSetLarge>
@@ -3979,7 +3979,7 @@
 		</MultipleBlockTrain>
 	</Civ>
 	<Civ>
-		<Name>RvltModHungarians</Name>
+		<Name>ANWHungarians</Name>
 		<Main>1</Main>
 		<StatsID>SW</StatsID>
 		<Portrait>objects\flags\swedish</Portrait>
@@ -3993,7 +3993,7 @@
 		<HCShipmentModifier>1.07</HCShipmentModifier>
 		<AgeTech>
 			<Age>Age0</Age>
-			<Tech>RvltModAge0Hungarians</Tech>
+			<Tech>ANWAge0Hungarians</Tech>
 		</AgeTech>
 		<AgeTech>
 			<Age>Age1</Age>
@@ -4072,7 +4072,7 @@
 			<Age4>1.00</Age4>
 		</EmpireWarsAgeUpRates>
 		<RandomStartingUnits>0</RandomStartingUnits>
-		<HomeCityFilename>rvltmodhomecityhungary.xml</HomeCityFilename>
+		<HomeCityFilename>anwhomecityhungarians.xml</HomeCityFilename>
 		<HomeCityFlagTexture>objects\flags\hungarian</HomeCityFlagTexture>
 		<HomeCityFlagButtonSet>swedishFlagBtn</HomeCityFlagButtonSet>
 		<HomeCityFlagButtonSetLarge>swedishFlagBtnLarge</HomeCityFlagButtonSetLarge>
@@ -4239,7 +4239,7 @@
 		</MultipleBlockTrain>
 	</Civ>
 	<Civ>
-		<Name>RvltModRomanians</Name>
+		<Name>ANWRomanians</Name>
 		<Main>1</Main>
 		<StatsID>SW</StatsID>
 		<Portrait>objects\flags\swedish</Portrait>
@@ -4253,7 +4253,7 @@
 		<HCShipmentModifier>1.07</HCShipmentModifier>
 		<AgeTech>
 			<Age>Age0</Age>
-			<Tech>RvltModAge0Romanians</Tech>
+			<Tech>ANWAge0Romanians</Tech>
 		</AgeTech>
 		<AgeTech>
 			<Age>Age1</Age>
@@ -4332,7 +4332,7 @@
 			<Age4>1.00</Age4>
 		</EmpireWarsAgeUpRates>
 		<RandomStartingUnits>0</RandomStartingUnits>
-		<HomeCityFilename>rvltmodhomecityromania.xml</HomeCityFilename>
+		<HomeCityFilename>anwhomecityromanians.xml</HomeCityFilename>
 		<HomeCityFlagTexture>objects\flags\romanian</HomeCityFlagTexture>
 		<HomeCityFlagButtonSet>swedishFlagBtn</HomeCityFlagButtonSet>
 		<HomeCityFlagButtonSetLarge>swedishFlagBtnLarge</HomeCityFlagButtonSetLarge>
@@ -4499,7 +4499,7 @@
 		</MultipleBlockTrain>
 	</Civ>
 	<Civ>
-		<Name>RvltModBarbary</Name>
+		<Name>ANWBarbary</Name>
 		<Main>1</Main>
 		<StatsID>OT</StatsID>
 		<Portrait>objects\flags\ottomans</Portrait>
@@ -4512,7 +4512,7 @@
 		<UnAlliedID>26444</UnAlliedID>
 		<AgeTech>
 			<Age>Age0</Age>
-			<Tech>RvltModAge0Barbary</Tech>
+			<Tech>ANWAge0Barbary</Tech>
 		</AgeTech>
 		<AgeTech>
 			<Age>Age1</Age>
@@ -4588,7 +4588,7 @@
 			<Age4>1.00</Age4>
 		</EmpireWarsAgeUpRates>
 		<RandomStartingUnits>0</RandomStartingUnits>
-		<HomeCityFilename>rvltmodhomecitybarbary.xml</HomeCityFilename>
+		<HomeCityFilename>anwhomecitybarbary.xml</HomeCityFilename>
 		<HomeCityFlagTexture>objects\flags\spc_barbary</HomeCityFlagTexture>
 		<HomeCityFlagButtonSet>ottomanFlagBtn</HomeCityFlagButtonSet>
 		<HomeCityFlagButtonSetLarge>ottomanFlagBtnLarge</HomeCityFlagButtonSetLarge>
@@ -4745,7 +4745,7 @@
 		</MultipleBlockTrain>
 	</Civ>
 	<Civ>
-		<Name>RvltModEgyptians</Name>
+		<Name>ANWEgyptians</Name>
 		<Main>1</Main>
 		<StatsID>OT</StatsID>
 		<Portrait>objects\flags\ottomans</Portrait>
@@ -4759,7 +4759,7 @@
 		<HCShipmentModifier>1.015</HCShipmentModifier>
 		<AgeTech>
 			<Age>Age0</Age>
-			<Tech>RvltModAge0Egypt</Tech>
+			<Tech>ANWAge0Egypt</Tech>
 		</AgeTech>
 		<AgeTech>
 			<Age>Age1</Age>
@@ -4835,7 +4835,7 @@
 			<Age4>1.00</Age4>
 		</EmpireWarsAgeUpRates>
 		<RandomStartingUnits>0</RandomStartingUnits>
-		<HomeCityFilename>rvltmodhomecityegypt.xml</HomeCityFilename>
+		<HomeCityFilename>anwhomecityegyptians.xml</HomeCityFilename>
 		<HomeCityFlagTexture>objects\flags\egyptian</HomeCityFlagTexture>
 		<HomeCityFlagButtonSet>ottomanFlagBtn</HomeCityFlagButtonSet>
 		<HomeCityFlagButtonSetLarge>ottomanFlagBtnLarge</HomeCityFlagButtonSetLarge>
@@ -4992,7 +4992,7 @@
 		</MultipleBlockTrain>
 	</Civ>
 	<Civ>
-		<Name>RvltModCentralAmericans</Name>
+		<Name>ANWCentralAmericans</Name>
 		<Main>1</Main>
 		<StatsID>MX</StatsID>
 		<CivType>7</CivType>
@@ -5006,7 +5006,7 @@
 		<UnAlliedID>26444</UnAlliedID>
 		<AgeTech>
 			<Age>Age0</Age>
-			<Tech>RvltModAge0CentralAmericans</Tech>
+			<Tech>ANWAge0CentralAmericans</Tech>
 		</AgeTech>
 		<AgeTech>
 			<Age>Age1</Age>
@@ -5014,7 +5014,7 @@
 		</AgeTech>
 		<AgeTech>
 			<Age>Age2</Age>
-			<Tech>RvltModFortressizeCentralAmericans</Tech>
+			<Tech>ANWFortressizeCentralAmericans</Tech>
 		</AgeTech>
 		<AgeTech>
 			<Age>Age3</Age>
@@ -5091,7 +5091,7 @@
 		</EmpireWarsAgeUpRates>
 		<RandomStartingUnits>0</RandomStartingUnits>
         <Partisans>1</Partisans>
-		<HomeCityFilename>rvltmodhomecitycentralamericans.xml</HomeCityFilename>
+		<HomeCityFilename>anwhomecitycentralamericans.xml</HomeCityFilename>
 		<UseTwoHeroNames />
 		<SecondHeroHCLabelID>112249</SecondHeroHCLabelID>
 		<UseExtendedDeckUI />
@@ -5445,7 +5445,7 @@
 		</MultipleBlockTrain>
 	</Civ>
 	<Civ>
-		<Name>RvltModBajaCalifornians</Name>
+		<Name>ANWBajaCalifornians</Name>
 		<Main>1</Main>
 		<StatsID>MX</StatsID>
 		<CivType>7</CivType>
@@ -5459,7 +5459,7 @@
 		<UnAlliedID>26444</UnAlliedID>
 		<AgeTech>
 			<Age>Age0</Age>
-			<Tech>RvltModAge0BajaCalifornia</Tech>
+			<Tech>ANWAge0BajaCalifornia</Tech>
 		</AgeTech>
 		<AgeTech>
 			<Age>Age1</Age>
@@ -5544,7 +5544,7 @@
 		</EmpireWarsAgeUpRates>
 		<RandomStartingUnits>0</RandomStartingUnits>
         <Partisans>1</Partisans>
-		<HomeCityFilename>rvltmodhomecitybajacalifornians.xml</HomeCityFilename>
+		<HomeCityFilename>anwhomecitybajacalifornians.xml</HomeCityFilename>
 		<UseTwoHeroNames />
 		<SecondHeroHCLabelID>112249</SecondHeroHCLabelID>
 		<UseExtendedDeckUI />
@@ -5898,7 +5898,7 @@
 		</MultipleBlockTrain>
 	</Civ>
 	<Civ>
-		<Name>RvltModYucatan</Name>
+		<Name>ANWYucatan</Name>
 		<Main>1</Main>
 		<StatsID>MX</StatsID>
 		<CivType>7</CivType>
@@ -5912,7 +5912,7 @@
 		<UnAlliedID>26444</UnAlliedID>
 		<AgeTech>
 			<Age>Age0</Age>
-			<Tech>RvltModAge0Yucatan</Tech>
+			<Tech>ANWAge0Yucatan</Tech>
 		</AgeTech>
 		<AgeTech>
 			<Age>Age1</Age>
@@ -5997,7 +5997,7 @@
 		</EmpireWarsAgeUpRates>
 		<RandomStartingUnits>0</RandomStartingUnits>
         <Partisans>1</Partisans>
-		<HomeCityFilename>rvltmodhomecityyucatan.xml</HomeCityFilename>
+		<HomeCityFilename>anwhomecityyucatan.xml</HomeCityFilename>
 		<UseTwoHeroNames />
 		<SecondHeroHCLabelID>112249</SecondHeroHCLabelID>
 		<UseExtendedDeckUI />
@@ -6351,7 +6351,7 @@
 		</MultipleBlockTrain>
 	</Civ>
 	<Civ>
-		<Name>RvltModRioGrande</Name>
+		<Name>ANWRioGrande</Name>
 		<Main>1</Main>
 		<StatsID>MX</StatsID>
 		<CivType>7</CivType>
@@ -6365,7 +6365,7 @@
 		<UnAlliedID>26444</UnAlliedID>
 		<AgeTech>
 			<Age>Age0</Age>
-			<Tech>RvltModAge0RioGrande</Tech>
+			<Tech>ANWAge0RioGrande</Tech>
 		</AgeTech>
 		<AgeTech>
 			<Age>Age1</Age>
@@ -6450,7 +6450,7 @@
 		</EmpireWarsAgeUpRates>
 		<RandomStartingUnits>0</RandomStartingUnits>
         <Partisans>1</Partisans>
-		<HomeCityFilename>rvltmodhomecityriogrande.xml</HomeCityFilename>
+		<HomeCityFilename>anwhomecityriogrande.xml</HomeCityFilename>
 		<UseTwoHeroNames />
 		<SecondHeroHCLabelID>112249</SecondHeroHCLabelID>
 		<UseExtendedDeckUI />
@@ -6804,7 +6804,7 @@
 		</MultipleBlockTrain>
 	</Civ>
 	<Civ>
-		<Name>RvltModMayans</Name>
+		<Name>ANWMayans</Name>
 		<Main>1</Main>
 		<StatsID>MX</StatsID>
 		<CivType>7</CivType>
@@ -6818,7 +6818,7 @@
 		<UnAlliedID>26444</UnAlliedID>
 		<AgeTech>
 			<Age>Age0</Age>
-			<Tech>RvltModAge0Maya</Tech>
+			<Tech>ANWAge0Maya</Tech>
 		</AgeTech>
 		<AgeTech>
 			<Age>Age1</Age>
@@ -6903,7 +6903,7 @@
 		</EmpireWarsAgeUpRates>
 		<RandomStartingUnits>0</RandomStartingUnits>
         <Partisans>1</Partisans>
-		<HomeCityFilename>rvltmodhomecitymaya.xml</HomeCityFilename>
+		<HomeCityFilename>anwhomecitymayans.xml</HomeCityFilename>
 		<UseTwoHeroNames />
 		<SecondHeroHCLabelID>112249</SecondHeroHCLabelID>
 		<UseExtendedDeckUI />
@@ -7257,7 +7257,7 @@
 		</MultipleBlockTrain>
 	</Civ>
 	<Civ>
-		<Name>RvltModCalifornians</Name>
+		<Name>ANWCalifornians</Name>
 		<Main>1</Main>
 		<StatsID>MX</StatsID>
 		<CivType>7</CivType>
@@ -7271,7 +7271,7 @@
 		<UnAlliedID>26444</UnAlliedID>
 		<AgeTech>
 			<Age>Age0</Age>
-			<Tech>RvltModAge0California</Tech>
+			<Tech>ANWAge0California</Tech>
 		</AgeTech>
 		<AgeTech>
 			<Age>Age1</Age>
@@ -7356,7 +7356,7 @@
 		</EmpireWarsAgeUpRates>
 		<RandomStartingUnits>0</RandomStartingUnits>
         <Partisans>1</Partisans>
-		<HomeCityFilename>rvltmodhomecitycalifornia.xml</HomeCityFilename>
+		<HomeCityFilename>anwhomecitycalifornians.xml</HomeCityFilename>
 		<UseTwoHeroNames />
 		<SecondHeroHCLabelID>112249</SecondHeroHCLabelID>
 		<UseExtendedDeckUI />
@@ -7710,7 +7710,7 @@
 		</MultipleBlockTrain>
 	</Civ>
 	<Civ>
-		<Name>RvltModTexians</Name>
+		<Name>ANWTexians</Name>
 		<Main>1</Main>
 		<StatsID>MX</StatsID>
 		<CivType>7</CivType>
@@ -7724,7 +7724,7 @@
 		<UnAlliedID>26444</UnAlliedID>
 		<AgeTech>
 			<Age>Age0</Age>
-			<Tech>RvltModAge0Texas</Tech>
+			<Tech>ANWAge0Texas</Tech>
 		</AgeTech>
 		<AgeTech>
 			<Age>Age1</Age>
@@ -7809,7 +7809,7 @@
 		</EmpireWarsAgeUpRates>
 		<RandomStartingUnits>0</RandomStartingUnits>
         <Partisans>1</Partisans>
-		<HomeCityFilename>rvltmodhomecitytexas.xml</HomeCityFilename>
+		<HomeCityFilename>anwhomecitytexians.xml</HomeCityFilename>
 		<UseTwoHeroNames />
 		<SecondHeroHCLabelID>112249</SecondHeroHCLabelID>
 		<UseExtendedDeckUI />
@@ -8162,4 +8162,385 @@
 			</UnitCounts>
 		</MultipleBlockTrain>
 	</Civ>
+
+	<!-- ────────────────────────────────────────────────────────
+	     ANW base-civ blocks (22). Initially emitted as stubs by
+	     tools/migration/build_anw_civmods.py, then populated with
+	     vanilla civ data via tools/migration/extract_vanilla_civs.py.
+	     ──────────────────────────────────────────────────────── -->
+
+	<Civ>
+		<Name>ANWAztecs</Name>
+		<Main>1</Main>
+		<!-- TODO-ANW-VANILLA: StatsID, AgeTechs (Age0-Age4 + Post),
+		     BuildingEfficiency, FreeBuildingEfficiency, starting units,
+		     EmpireWars params, MultipleBlockTrain entries.
+		     Source: vanilla civs.xml (inside engine .bar archive). -->
+		<DisplayNameID>410000</DisplayNameID>
+		<RolloverNameID>410500</RolloverNameID>
+		<HomeCityFilename>anwhomecityaztecs.xml</HomeCityFilename>
+		<HomeCityPreviewWPF>resources/images/icons/singleplayer/cpai_avatar_aztecs_montezuma.png</HomeCityPreviewWPF>
+		<!-- TODO-ANW-VANILLA: HomeCityFlagTexture, PostgameFlagTexture,
+		     HomeCityFlagButtonSet, HomeCityFlagButtonSetLarge,
+		     PostgameFlagIconWPF, HomeCityFlagIconWPF, HomeCityFlagButtonWPF,
+		     MatchmakingTextures sub-block. Source: vanilla civs.xml. -->
+	</Civ>
+
+	<Civ>
+		<Name>ANWBritish</Name>
+		<Main>1</Main>
+		<!-- TODO-ANW-VANILLA: StatsID, AgeTechs (Age0-Age4 + Post),
+		     BuildingEfficiency, FreeBuildingEfficiency, starting units,
+		     EmpireWars params, MultipleBlockTrain entries.
+		     Source: vanilla civs.xml (inside engine .bar archive). -->
+		<DisplayNameID>410001</DisplayNameID>
+		<RolloverNameID>410501</RolloverNameID>
+		<HomeCityFilename>anwhomecitybritish.xml</HomeCityFilename>
+		<HomeCityPreviewWPF>resources/images/icons/singleplayer/cpai_avatar_british_wellington.png</HomeCityPreviewWPF>
+		<!-- TODO-ANW-VANILLA: HomeCityFlagTexture, PostgameFlagTexture,
+		     HomeCityFlagButtonSet, HomeCityFlagButtonSetLarge,
+		     PostgameFlagIconWPF, HomeCityFlagIconWPF, HomeCityFlagButtonWPF,
+		     MatchmakingTextures sub-block. Source: vanilla civs.xml. -->
+	</Civ>
+
+	<Civ>
+		<Name>ANWChinese</Name>
+		<Main>1</Main>
+		<!-- TODO-ANW-VANILLA: StatsID, AgeTechs (Age0-Age4 + Post),
+		     BuildingEfficiency, FreeBuildingEfficiency, starting units,
+		     EmpireWars params, MultipleBlockTrain entries.
+		     Source: vanilla civs.xml (inside engine .bar archive). -->
+		<DisplayNameID>410002</DisplayNameID>
+		<RolloverNameID>410502</RolloverNameID>
+		<HomeCityFilename>anwhomecitychinese.xml</HomeCityFilename>
+		<HomeCityPreviewWPF>resources/images/icons/singleplayer/cpai_avatar_chinese_kangxi.png</HomeCityPreviewWPF>
+		<!-- TODO-ANW-VANILLA: HomeCityFlagTexture, PostgameFlagTexture,
+		     HomeCityFlagButtonSet, HomeCityFlagButtonSetLarge,
+		     PostgameFlagIconWPF, HomeCityFlagIconWPF, HomeCityFlagButtonWPF,
+		     MatchmakingTextures sub-block. Source: vanilla civs.xml. -->
+	</Civ>
+
+	<Civ>
+		<Name>ANWDutch</Name>
+		<Main>1</Main>
+		<!-- TODO-ANW-VANILLA: StatsID, AgeTechs (Age0-Age4 + Post),
+		     BuildingEfficiency, FreeBuildingEfficiency, starting units,
+		     EmpireWars params, MultipleBlockTrain entries.
+		     Source: vanilla civs.xml (inside engine .bar archive). -->
+		<DisplayNameID>410003</DisplayNameID>
+		<RolloverNameID>410503</RolloverNameID>
+		<HomeCityFilename>anwhomecitydutch.xml</HomeCityFilename>
+		<HomeCityPreviewWPF>resources/images/icons/singleplayer/cpai_avatar_dutch_maurice.png</HomeCityPreviewWPF>
+		<!-- TODO-ANW-VANILLA: HomeCityFlagTexture, PostgameFlagTexture,
+		     HomeCityFlagButtonSet, HomeCityFlagButtonSetLarge,
+		     PostgameFlagIconWPF, HomeCityFlagIconWPF, HomeCityFlagButtonWPF,
+		     MatchmakingTextures sub-block. Source: vanilla civs.xml. -->
+	</Civ>
+
+	<Civ>
+		<Name>ANWEthiopians</Name>
+		<Main>1</Main>
+		<!-- TODO-ANW-VANILLA: StatsID, AgeTechs (Age0-Age4 + Post),
+		     BuildingEfficiency, FreeBuildingEfficiency, starting units,
+		     EmpireWars params, MultipleBlockTrain entries.
+		     Source: vanilla civs.xml (inside engine .bar archive). -->
+		<DisplayNameID>410004</DisplayNameID>
+		<RolloverNameID>410504</RolloverNameID>
+		<HomeCityFilename>anwhomecityethiopians.xml</HomeCityFilename>
+		<HomeCityPreviewWPF>resources/images/icons/singleplayer/cpai_avatar_ethiopians_menelik.png</HomeCityPreviewWPF>
+		<!-- TODO-ANW-VANILLA: HomeCityFlagTexture, PostgameFlagTexture,
+		     HomeCityFlagButtonSet, HomeCityFlagButtonSetLarge,
+		     PostgameFlagIconWPF, HomeCityFlagIconWPF, HomeCityFlagButtonWPF,
+		     MatchmakingTextures sub-block. Source: vanilla civs.xml. -->
+	</Civ>
+
+	<Civ>
+		<Name>ANWFrench</Name>
+		<Main>1</Main>
+		<!-- TODO-ANW-VANILLA: StatsID, AgeTechs (Age0-Age4 + Post),
+		     BuildingEfficiency, FreeBuildingEfficiency, starting units,
+		     EmpireWars params, MultipleBlockTrain entries.
+		     Source: vanilla civs.xml (inside engine .bar archive). -->
+		<DisplayNameID>410005</DisplayNameID>
+		<RolloverNameID>410505</RolloverNameID>
+		<HomeCityFilename>anwhomecityfrench.xml</HomeCityFilename>
+		<HomeCityPreviewWPF>resources/images/icons/singleplayer/cpai_avatar_french_napoleon.png</HomeCityPreviewWPF>
+		<!-- TODO-ANW-VANILLA: HomeCityFlagTexture, PostgameFlagTexture,
+		     HomeCityFlagButtonSet, HomeCityFlagButtonSetLarge,
+		     PostgameFlagIconWPF, HomeCityFlagIconWPF, HomeCityFlagButtonWPF,
+		     MatchmakingTextures sub-block. Source: vanilla civs.xml. -->
+	</Civ>
+
+	<Civ>
+		<Name>ANWGermans</Name>
+		<Main>1</Main>
+		<!-- TODO-ANW-VANILLA: StatsID, AgeTechs (Age0-Age4 + Post),
+		     BuildingEfficiency, FreeBuildingEfficiency, starting units,
+		     EmpireWars params, MultipleBlockTrain entries.
+		     Source: vanilla civs.xml (inside engine .bar archive). -->
+		<DisplayNameID>410006</DisplayNameID>
+		<RolloverNameID>410506</RolloverNameID>
+		<HomeCityFilename>anwhomecitygermans.xml</HomeCityFilename>
+		<HomeCityPreviewWPF>resources/images/icons/singleplayer/cpai_avatar_germans_frederick.png</HomeCityPreviewWPF>
+		<!-- TODO-ANW-VANILLA: HomeCityFlagTexture, PostgameFlagTexture,
+		     HomeCityFlagButtonSet, HomeCityFlagButtonSetLarge,
+		     PostgameFlagIconWPF, HomeCityFlagIconWPF, HomeCityFlagButtonWPF,
+		     MatchmakingTextures sub-block. Source: vanilla civs.xml. -->
+	</Civ>
+
+	<Civ>
+		<Name>ANWHaudenosaunee</Name>
+		<Main>1</Main>
+		<!-- TODO-ANW-VANILLA: StatsID, AgeTechs (Age0-Age4 + Post),
+		     BuildingEfficiency, FreeBuildingEfficiency, starting units,
+		     EmpireWars params, MultipleBlockTrain entries.
+		     Source: vanilla civs.xml (inside engine .bar archive). -->
+		<DisplayNameID>410007</DisplayNameID>
+		<RolloverNameID>410507</RolloverNameID>
+		<HomeCityFilename>anwhomecityhaudenosaunee.xml</HomeCityFilename>
+		<HomeCityPreviewWPF>resources/images/icons/singleplayer/cpai_avatar_haudenosaunee_hiawatha.png</HomeCityPreviewWPF>
+		<!-- TODO-ANW-VANILLA: HomeCityFlagTexture, PostgameFlagTexture,
+		     HomeCityFlagButtonSet, HomeCityFlagButtonSetLarge,
+		     PostgameFlagIconWPF, HomeCityFlagIconWPF, HomeCityFlagButtonWPF,
+		     MatchmakingTextures sub-block. Source: vanilla civs.xml. -->
+	</Civ>
+
+	<Civ>
+		<Name>ANWHausa</Name>
+		<Main>1</Main>
+		<!-- TODO-ANW-VANILLA: StatsID, AgeTechs (Age0-Age4 + Post),
+		     BuildingEfficiency, FreeBuildingEfficiency, starting units,
+		     EmpireWars params, MultipleBlockTrain entries.
+		     Source: vanilla civs.xml (inside engine .bar archive). -->
+		<DisplayNameID>410008</DisplayNameID>
+		<RolloverNameID>410508</RolloverNameID>
+		<HomeCityFilename>anwhomecityhausa.xml</HomeCityFilename>
+		<HomeCityPreviewWPF>resources/images/icons/singleplayer/cpai_avatar_hausa_usman.png</HomeCityPreviewWPF>
+		<!-- TODO-ANW-VANILLA: HomeCityFlagTexture, PostgameFlagTexture,
+		     HomeCityFlagButtonSet, HomeCityFlagButtonSetLarge,
+		     PostgameFlagIconWPF, HomeCityFlagIconWPF, HomeCityFlagButtonWPF,
+		     MatchmakingTextures sub-block. Source: vanilla civs.xml. -->
+	</Civ>
+
+	<Civ>
+		<Name>ANWInca</Name>
+		<Main>1</Main>
+		<!-- TODO-ANW-VANILLA: StatsID, AgeTechs (Age0-Age4 + Post),
+		     BuildingEfficiency, FreeBuildingEfficiency, starting units,
+		     EmpireWars params, MultipleBlockTrain entries.
+		     Source: vanilla civs.xml (inside engine .bar archive). -->
+		<DisplayNameID>410009</DisplayNameID>
+		<RolloverNameID>410509</RolloverNameID>
+		<HomeCityFilename>anwhomecityinca.xml</HomeCityFilename>
+		<HomeCityPreviewWPF>resources/images/icons/singleplayer/cpai_avatar_inca_pachacuti.png</HomeCityPreviewWPF>
+		<!-- TODO-ANW-VANILLA: HomeCityFlagTexture, PostgameFlagTexture,
+		     HomeCityFlagButtonSet, HomeCityFlagButtonSetLarge,
+		     PostgameFlagIconWPF, HomeCityFlagIconWPF, HomeCityFlagButtonWPF,
+		     MatchmakingTextures sub-block. Source: vanilla civs.xml. -->
+	</Civ>
+
+	<Civ>
+		<Name>ANWIndians</Name>
+		<Main>1</Main>
+		<!-- TODO-ANW-VANILLA: StatsID, AgeTechs (Age0-Age4 + Post),
+		     BuildingEfficiency, FreeBuildingEfficiency, starting units,
+		     EmpireWars params, MultipleBlockTrain entries.
+		     Source: vanilla civs.xml (inside engine .bar archive). -->
+		<DisplayNameID>410010</DisplayNameID>
+		<RolloverNameID>410510</RolloverNameID>
+		<HomeCityFilename>anwhomecityindians.xml</HomeCityFilename>
+		<HomeCityPreviewWPF>resources/images/icons/singleplayer/cpai_avatar_indians_shivaji.png</HomeCityPreviewWPF>
+		<!-- TODO-ANW-VANILLA: HomeCityFlagTexture, PostgameFlagTexture,
+		     HomeCityFlagButtonSet, HomeCityFlagButtonSetLarge,
+		     PostgameFlagIconWPF, HomeCityFlagIconWPF, HomeCityFlagButtonWPF,
+		     MatchmakingTextures sub-block. Source: vanilla civs.xml. -->
+	</Civ>
+
+	<Civ>
+		<Name>ANWItalians</Name>
+		<Main>1</Main>
+		<!-- TODO-ANW-VANILLA: StatsID, AgeTechs (Age0-Age4 + Post),
+		     BuildingEfficiency, FreeBuildingEfficiency, starting units,
+		     EmpireWars params, MultipleBlockTrain entries.
+		     Source: vanilla civs.xml (inside engine .bar archive). -->
+		<DisplayNameID>410011</DisplayNameID>
+		<RolloverNameID>410511</RolloverNameID>
+		<HomeCityFilename>anwhomecityitalians.xml</HomeCityFilename>
+		<HomeCityPreviewWPF>resources/images/icons/singleplayer/cpai_avatar_italians_garibaldi.png</HomeCityPreviewWPF>
+		<!-- TODO-ANW-VANILLA: HomeCityFlagTexture, PostgameFlagTexture,
+		     HomeCityFlagButtonSet, HomeCityFlagButtonSetLarge,
+		     PostgameFlagIconWPF, HomeCityFlagIconWPF, HomeCityFlagButtonWPF,
+		     MatchmakingTextures sub-block. Source: vanilla civs.xml. -->
+	</Civ>
+
+	<Civ>
+		<Name>ANWJapanese</Name>
+		<Main>1</Main>
+		<!-- TODO-ANW-VANILLA: StatsID, AgeTechs (Age0-Age4 + Post),
+		     BuildingEfficiency, FreeBuildingEfficiency, starting units,
+		     EmpireWars params, MultipleBlockTrain entries.
+		     Source: vanilla civs.xml (inside engine .bar archive). -->
+		<DisplayNameID>410012</DisplayNameID>
+		<RolloverNameID>410512</RolloverNameID>
+		<HomeCityFilename>anwhomecityjapanese.xml</HomeCityFilename>
+		<HomeCityPreviewWPF>resources/images/icons/singleplayer/cpai_avatar_japanese_tokugawa.png</HomeCityPreviewWPF>
+		<!-- TODO-ANW-VANILLA: HomeCityFlagTexture, PostgameFlagTexture,
+		     HomeCityFlagButtonSet, HomeCityFlagButtonSetLarge,
+		     PostgameFlagIconWPF, HomeCityFlagIconWPF, HomeCityFlagButtonWPF,
+		     MatchmakingTextures sub-block. Source: vanilla civs.xml. -->
+	</Civ>
+
+	<Civ>
+		<Name>ANWLakota</Name>
+		<Main>1</Main>
+		<!-- TODO-ANW-VANILLA: StatsID, AgeTechs (Age0-Age4 + Post),
+		     BuildingEfficiency, FreeBuildingEfficiency, starting units,
+		     EmpireWars params, MultipleBlockTrain entries.
+		     Source: vanilla civs.xml (inside engine .bar archive). -->
+		<DisplayNameID>410013</DisplayNameID>
+		<RolloverNameID>410513</RolloverNameID>
+		<HomeCityFilename>anwhomecitylakota.xml</HomeCityFilename>
+		<HomeCityPreviewWPF>resources/images/icons/singleplayer/cpai_avatar_lakota_crazyhorse.png</HomeCityPreviewWPF>
+		<!-- TODO-ANW-VANILLA: HomeCityFlagTexture, PostgameFlagTexture,
+		     HomeCityFlagButtonSet, HomeCityFlagButtonSetLarge,
+		     PostgameFlagIconWPF, HomeCityFlagIconWPF, HomeCityFlagButtonWPF,
+		     MatchmakingTextures sub-block. Source: vanilla civs.xml. -->
+	</Civ>
+
+	<Civ>
+		<Name>ANWMaltese</Name>
+		<Main>1</Main>
+		<!-- TODO-ANW-VANILLA: StatsID, AgeTechs (Age0-Age4 + Post),
+		     BuildingEfficiency, FreeBuildingEfficiency, starting units,
+		     EmpireWars params, MultipleBlockTrain entries.
+		     Source: vanilla civs.xml (inside engine .bar archive). -->
+		<DisplayNameID>410014</DisplayNameID>
+		<RolloverNameID>410514</RolloverNameID>
+		<HomeCityFilename>anwhomecitymaltese.xml</HomeCityFilename>
+		<HomeCityPreviewWPF>resources/images/icons/singleplayer/cpai_avatar_maltese_jean.png</HomeCityPreviewWPF>
+		<!-- TODO-ANW-VANILLA: HomeCityFlagTexture, PostgameFlagTexture,
+		     HomeCityFlagButtonSet, HomeCityFlagButtonSetLarge,
+		     PostgameFlagIconWPF, HomeCityFlagIconWPF, HomeCityFlagButtonWPF,
+		     MatchmakingTextures sub-block. Source: vanilla civs.xml. -->
+	</Civ>
+
+	<Civ>
+		<Name>ANWMexicans</Name>
+		<Main>1</Main>
+		<!-- TODO-ANW-VANILLA: StatsID, AgeTechs (Age0-Age4 + Post),
+		     BuildingEfficiency, FreeBuildingEfficiency, starting units,
+		     EmpireWars params, MultipleBlockTrain entries.
+		     Source: vanilla civs.xml (inside engine .bar archive). -->
+		<DisplayNameID>410015</DisplayNameID>
+		<RolloverNameID>410515</RolloverNameID>
+		<HomeCityFilename>anwhomecitymexicans.xml</HomeCityFilename>
+		<HomeCityPreviewWPF>resources/images/icons/singleplayer/cpai_avatar_mexicans_hidalgo.png</HomeCityPreviewWPF>
+		<!-- TODO-ANW-VANILLA: HomeCityFlagTexture, PostgameFlagTexture,
+		     HomeCityFlagButtonSet, HomeCityFlagButtonSetLarge,
+		     PostgameFlagIconWPF, HomeCityFlagIconWPF, HomeCityFlagButtonWPF,
+		     MatchmakingTextures sub-block. Source: vanilla civs.xml. -->
+	</Civ>
+
+	<Civ>
+		<Name>ANWOttomans</Name>
+		<Main>1</Main>
+		<!-- TODO-ANW-VANILLA: StatsID, AgeTechs (Age0-Age4 + Post),
+		     BuildingEfficiency, FreeBuildingEfficiency, starting units,
+		     EmpireWars params, MultipleBlockTrain entries.
+		     Source: vanilla civs.xml (inside engine .bar archive). -->
+		<DisplayNameID>410016</DisplayNameID>
+		<RolloverNameID>410516</RolloverNameID>
+		<HomeCityFilename>anwhomecityottomans.xml</HomeCityFilename>
+		<HomeCityPreviewWPF>resources/images/icons/singleplayer/cpai_avatar_ottomans_suleiman.png</HomeCityPreviewWPF>
+		<!-- TODO-ANW-VANILLA: HomeCityFlagTexture, PostgameFlagTexture,
+		     HomeCityFlagButtonSet, HomeCityFlagButtonSetLarge,
+		     PostgameFlagIconWPF, HomeCityFlagIconWPF, HomeCityFlagButtonWPF,
+		     MatchmakingTextures sub-block. Source: vanilla civs.xml. -->
+	</Civ>
+
+	<Civ>
+		<Name>ANWPortuguese</Name>
+		<Main>1</Main>
+		<!-- TODO-ANW-VANILLA: StatsID, AgeTechs (Age0-Age4 + Post),
+		     BuildingEfficiency, FreeBuildingEfficiency, starting units,
+		     EmpireWars params, MultipleBlockTrain entries.
+		     Source: vanilla civs.xml (inside engine .bar archive). -->
+		<DisplayNameID>410017</DisplayNameID>
+		<RolloverNameID>410517</RolloverNameID>
+		<HomeCityFilename>anwhomecityportuguese.xml</HomeCityFilename>
+		<HomeCityPreviewWPF>resources/images/icons/singleplayer/cpai_avatar_portuguese_henry.png</HomeCityPreviewWPF>
+		<!-- TODO-ANW-VANILLA: HomeCityFlagTexture, PostgameFlagTexture,
+		     HomeCityFlagButtonSet, HomeCityFlagButtonSetLarge,
+		     PostgameFlagIconWPF, HomeCityFlagIconWPF, HomeCityFlagButtonWPF,
+		     MatchmakingTextures sub-block. Source: vanilla civs.xml. -->
+	</Civ>
+
+	<Civ>
+		<Name>ANWRussians</Name>
+		<Main>1</Main>
+		<!-- TODO-ANW-VANILLA: StatsID, AgeTechs (Age0-Age4 + Post),
+		     BuildingEfficiency, FreeBuildingEfficiency, starting units,
+		     EmpireWars params, MultipleBlockTrain entries.
+		     Source: vanilla civs.xml (inside engine .bar archive). -->
+		<DisplayNameID>410018</DisplayNameID>
+		<RolloverNameID>410518</RolloverNameID>
+		<HomeCityFilename>anwhomecityrussians.xml</HomeCityFilename>
+		<HomeCityPreviewWPF>resources/images/icons/singleplayer/cpai_avatar_russians_catherine.png</HomeCityPreviewWPF>
+		<!-- TODO-ANW-VANILLA: HomeCityFlagTexture, PostgameFlagTexture,
+		     HomeCityFlagButtonSet, HomeCityFlagButtonSetLarge,
+		     PostgameFlagIconWPF, HomeCityFlagIconWPF, HomeCityFlagButtonWPF,
+		     MatchmakingTextures sub-block. Source: vanilla civs.xml. -->
+	</Civ>
+
+	<Civ>
+		<Name>ANWSpanish</Name>
+		<Main>1</Main>
+		<!-- TODO-ANW-VANILLA: StatsID, AgeTechs (Age0-Age4 + Post),
+		     BuildingEfficiency, FreeBuildingEfficiency, starting units,
+		     EmpireWars params, MultipleBlockTrain entries.
+		     Source: vanilla civs.xml (inside engine .bar archive). -->
+		<DisplayNameID>410019</DisplayNameID>
+		<RolloverNameID>410519</RolloverNameID>
+		<HomeCityFilename>anwhomecityspanish.xml</HomeCityFilename>
+		<HomeCityPreviewWPF>resources/images/icons/singleplayer/cpai_avatar_spanish_isabella.png</HomeCityPreviewWPF>
+		<!-- TODO-ANW-VANILLA: HomeCityFlagTexture, PostgameFlagTexture,
+		     HomeCityFlagButtonSet, HomeCityFlagButtonSetLarge,
+		     PostgameFlagIconWPF, HomeCityFlagIconWPF, HomeCityFlagButtonWPF,
+		     MatchmakingTextures sub-block. Source: vanilla civs.xml. -->
+	</Civ>
+
+	<Civ>
+		<Name>ANWSwedes</Name>
+		<Main>1</Main>
+		<!-- TODO-ANW-VANILLA: StatsID, AgeTechs (Age0-Age4 + Post),
+		     BuildingEfficiency, FreeBuildingEfficiency, starting units,
+		     EmpireWars params, MultipleBlockTrain entries.
+		     Source: vanilla civs.xml (inside engine .bar archive). -->
+		<DisplayNameID>410020</DisplayNameID>
+		<RolloverNameID>410520</RolloverNameID>
+		<HomeCityFilename>anwhomecityswedes.xml</HomeCityFilename>
+		<HomeCityPreviewWPF>resources/images/icons/singleplayer/cpai_avatar_swedes_gustav.png</HomeCityPreviewWPF>
+		<!-- TODO-ANW-VANILLA: HomeCityFlagTexture, PostgameFlagTexture,
+		     HomeCityFlagButtonSet, HomeCityFlagButtonSetLarge,
+		     PostgameFlagIconWPF, HomeCityFlagIconWPF, HomeCityFlagButtonWPF,
+		     MatchmakingTextures sub-block. Source: vanilla civs.xml. -->
+	</Civ>
+
+	<Civ>
+		<Name>ANWUSA</Name>
+		<Main>1</Main>
+		<!-- TODO-ANW-VANILLA: StatsID, AgeTechs (Age0-Age4 + Post),
+		     BuildingEfficiency, FreeBuildingEfficiency, starting units,
+		     EmpireWars params, MultipleBlockTrain entries.
+		     Source: vanilla civs.xml (inside engine .bar archive). -->
+		<DisplayNameID>410021</DisplayNameID>
+		<RolloverNameID>410521</RolloverNameID>
+		<HomeCityFilename>anwhomecityusa.xml</HomeCityFilename>
+		<HomeCityPreviewWPF>resources/images/icons/singleplayer/cpai_avatar_usa_washington.png</HomeCityPreviewWPF>
+		<!-- TODO-ANW-VANILLA: HomeCityFlagTexture, PostgameFlagTexture,
+		     HomeCityFlagButtonSet, HomeCityFlagButtonSetLarge,
+		     PostgameFlagIconWPF, HomeCityFlagIconWPF, HomeCityFlagButtonWPF,
+		     MatchmakingTextures sub-block. Source: vanilla civs.xml. -->
+	</Civ>
+
 </civmods>

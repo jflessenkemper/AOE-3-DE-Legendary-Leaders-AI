@@ -5,8 +5,8 @@ We parse the same files the static validators read (`leaderCommon.xs`,
 that downstream verifiers compare against the actual game state.
 
 Each `CivExpectation` carries:
-  * civ_id           — the constant the engine uses (`cCivBritish`, or
-                       a `RvltMod*` string for revolutions).
+  * civ_id           — the ANW token (e.g., `ANWBritish`,
+                       `ANWAmericansRev` for revolutions).
   * label            — human-readable display label ("British",
                        "Napoleonic France").
   * leader_key       — the `gLLLeaderKey` string the leader portrait /
@@ -45,6 +45,8 @@ from tools.validation.validate_terrain_heading import (  # noqa: E402
     _extract_apply_body,
     _split_branches,
 )
+from tools.migration.anw_mapping import ANW_HOMECITY_MAP  # noqa: E402
+from tools.migration.anw_token_map import ANW_CIVS, by_slug  # noqa: E402
 
 LEADER_COMMON = REPO_ROOT / "game/ai/leaders/leaderCommon.xs"
 CIVMODS = REPO_ROOT / "data/civmods.xml"
@@ -77,58 +79,9 @@ HEADING_AXIS = {
     "cLLHeadingAny": "none",
 }
 
-# Civ-id → display label. Base-civ ids match `cCiv*` constants; rvlt ids
-# match the rvltName string keys used in leaderCommon.xs.
-CIV_LABELS = {
-    "cCivBritish": "British (Elizabeth I)",
-    "cCivChinese": "Chinese",
-    "cCivDEAmericans": "Americans",
-    "cCivDEEthiopians": "Ethiopians",
-    "cCivDEHausa": "Hausa",
-    "cCivDEInca": "Inca",
-    "cCivDEItalians": "Italians",
-    "cCivDEMaltese": "Maltese",
-    "cCivDEMexicans": "Mexicans",
-    "cCivDESwedish": "Swedish",
-    "cCivDutch": "Dutch",
-    "cCivFrench": "French (Louis XVIII)",
-    "cCivGermans": "Germans",
-    "cCivIndians": "Indians",
-    "cCivJapanese": "Japanese",
-    "cCivOttomans": "Ottomans",
-    "cCivPortuguese": "Portuguese",
-    "cCivRussians": "Russians (Ivan IV)",
-    "cCivSpanish": "Spanish",
-    "cCivXPAztec": "Aztecs",
-    "cCivXPIroquois": "Iroquois (Haudenosaunee)",
-    "cCivXPSioux": "Lakota (Chief Gall)",
-    "RvltModAmericans": "Americans (Revolution)",
-    "RvltModArgentines": "Argentina",
-    "RvltModBajaCalifornians": "Baja California",
-    "RvltModBarbary": "Barbary States",
-    "RvltModBrazil": "Brazil",
-    "RvltModCalifornians": "California",
-    "RvltModCanadians": "Canada",
-    "RvltModCentralAmericans": "Central America",
-    "RvltModChileans": "Chile",
-    "RvltModColumbians": "Colombia",
-    "RvltModEgyptians": "Egypt",
-    "RvltModFinnish": "Finland",
-    "RvltModFrenchCanadians": "French Canada",
-    "RvltModHaitians": "Haiti",
-    "RvltModHungarians": "Hungary",
-    "RvltModIndonesians": "Indonesia",
-    "RvltModMayans": "Maya",
-    "RvltModMexicans": "Mexico (Revolution)",
-    "RvltModNapoleonicFrance": "Napoleonic France",
-    "RvltModPeruvians": "Peru",
-    "RvltModRevolutionaryFrance": "Revolutionary France",
-    "RvltModRioGrande": "Rio Grande",
-    "RvltModRomanians": "Romania",
-    "RvltModSouthAfricans": "South Africa",
-    "RvltModTexians": "Texas",
-    "RvltModYucatan": "Yucatán",
-}
+# ANW token → display label. Built from ANW_CIVS to ensure all 48 civs
+# are consistently labeled across the ANW namespace (Phase 6).
+CIV_LABELS = {c.anw_token: c.leader_display for c in ANW_CIVS}
 
 
 @dataclass(frozen=True)
@@ -161,7 +114,11 @@ class CivExpectation:
 
     @property
     def is_revolution(self) -> bool:
-        return self.civ_id.startswith("RvltMod")
+        # Look up the ANW civ to determine if it's a revolution.
+        for civ in ANW_CIVS:
+            if civ.anw_token == self.civ_id:
+                return civ.is_revolution
+        return False
 
 
 # --- parsing -----------------------------------------------------------------
@@ -249,68 +206,84 @@ def _parse_deck_name(homecity_path: Path) -> str:
     return inner.group("name").strip()
 
 
-# civmods.xml only registers the 26 revolution civs (base civs use
-# stock packed homecity data). For base civs we map directly to the
-# `data/homecity<slug>.xml` file the mod ships alongside.
-_BASE_CIV_HOMECITY = {
-    "cCivBritish": "homecitybritish.xml",
-    "cCivChinese": "homecitychinese.xml",
-    "cCivDEAmericans": "homecityamericans.xml",
-    "cCivDEEthiopians": "homecityethiopians.xml",
-    "cCivDEHausa": "homecityhausa.xml",
-    "cCivDEInca": "homecitydeinca.xml",
-    "cCivDEItalians": "homecityitalians.xml",
-    "cCivDEMaltese": "homecitymaltese.xml",
-    "cCivDEMexicans": "homecitymexicans.xml",
-    "cCivDESwedish": "homecityswedish.xml",
-    "cCivDutch": "homecitydutch.xml",
-    "cCivFrench": "homecityfrench.xml",
-    "cCivGermans": "homecitygerman.xml",
-    "cCivIndians": "homecityindians.xml",
-    "cCivJapanese": "homecityjapanese.xml",
-    "cCivOttomans": "homecityottomans.xml",
-    "cCivPortuguese": "homecityportuguese.xml",
-    "cCivRussians": "homecityrussians.xml",
-    "cCivSpanish": "homecityspanish.xml",
-    "cCivXPAztec": "homecityxpaztec.xml",
-    "cCivXPIroquois": "homecityxpiroquois.xml",
-    "cCivXPSioux": "homecityxpsioux.xml",
-}
+# Post-Phase 6: ANW_HOMECITY_MAP (from anw_mapping) is the single source
+# of truth for all 48 civs' homecity filenames, keyed by anw_stem.
 
 
-def _resolve_homecity_filename(
-    civ_id: str, civmods_map: dict[str, str]
-) -> Path | None:
-    if civ_id.startswith("RvltMod"):
-        # Revolution civs: civmods <Name> matches the rvlt id directly.
-        fname = civmods_map.get(civ_id)
-    else:
-        fname = _BASE_CIV_HOMECITY.get(civ_id)
-    if not fname:
+def _resolve_homecity_filename(anw_token: str) -> Path | None:
+    """Resolve homecity path from ANW token using ANW_HOMECITY_MAP.
+
+    ANW_HOMECITY_MAP is keyed by anw_stem (e.g., 'anwbritish'),
+    so we need to look up the ANW civ and extract its stem.
+    """
+    try:
+        # Find the ANW civ by token to get its stem
+        for civ in ANW_CIVS:
+            if civ.anw_token == anw_token:
+                fname = ANW_HOMECITY_MAP.get(civ.anw_stem)
+                if fname:
+                    return DATA_DIR / fname
+                return None
+    except (KeyError, AttributeError):
         return None
-    return DATA_DIR / fname
+    return None
+
+
+def _build_civ_const_to_anw_map() -> dict[str, str]:
+    """Build mapping from BASE_CIVS constants to ANW tokens.
+
+    BASE_CIVS has cCiv* constants that are keys in leaderCommon.xs;
+    ANW_CIVS has old_civ_token fields that sometimes differ (e.g., lowercase).
+    This helper finds the matching ANW civ for each constant.
+    """
+    const_to_anw = {}
+    for const in BASE_CIVS:
+        const_slug = const.replace("cCiv", "").lower()
+        for civ in ANW_CIVS:
+            if civ.is_revolution:
+                continue
+            # Direct old_civ_token match (case-insensitive for non-XP civs)
+            if civ.old_civ_token.lower() == const_slug:
+                const_to_anw[const] = civ.anw_token
+                break
+            # Handle case-sensitive XP prefixes (XPAztec, XPIroquois, XPSioux)
+            if civ.old_civ_token == const.replace("cCiv", ""):
+                const_to_anw[const] = civ.anw_token
+                break
+    return const_to_anw
 
 
 def load_expectations(repo_root: Path = REPO_ROOT) -> list[CivExpectation]:
     leader_text = (repo_root / "game/ai/leaders/leaderCommon.xs").read_text(encoding="utf-8")
-    civmods_text = (repo_root / "data/civmods.xml").read_text(encoding="utf-8")
 
     apply_branches = _parse_apply_branches(leader_text)
     leader_keys = _parse_leader_keys(leader_text)
-    civmods_map = _parse_homecity_for_civ(civmods_text)
+
+    # Map BASE_CIVS cCiv* constants to ANW tokens
+    const_to_anw_token = _build_civ_const_to_anw_map()
+    # Map RvltMod* strings directly to ANW tokens
+    rvlt_to_anw_token = {civ.old_civ_token: civ.anw_token for civ in ANW_CIVS if civ.is_revolution}
 
     out: list[CivExpectation] = []
-    for civ_id in (*BASE_CIVS, *REVOLUTION_CIVS):
-        if civ_id not in apply_branches:
+    # Phase 6: Iterate using old token lists (still in leaderCommon.xs),
+    # but store results using ANW tokens.
+    for old_civ_id in (*BASE_CIVS, *REVOLUTION_CIVS):
+        if old_civ_id not in apply_branches:
             continue
-        b = apply_branches[civ_id]
-        hc_path = _resolve_homecity_filename(civ_id, civmods_map)
+
+        # Map old civ ID to ANW token
+        anw_token = const_to_anw_token.get(old_civ_id) or rvlt_to_anw_token.get(old_civ_id)
+        if not anw_token:
+            continue
+
+        b = apply_branches[old_civ_id]
+        hc_path = _resolve_homecity_filename(anw_token)
         deck_name = _parse_deck_name(hc_path) if hc_path else "<no homecity mapping>"
         out.append(
             CivExpectation(
-                civ_id=civ_id,
-                label=CIV_LABELS.get(civ_id, civ_id),
-                leader_key=leader_keys.get(civ_id, "<unmapped>"),
+                civ_id=anw_token,
+                label=CIV_LABELS.get(anw_token, anw_token),
+                leader_key=leader_keys.get(old_civ_id, "<unmapped>"),
                 deck_name=deck_name,
                 terrain_primary=b["terrain_primary"],
                 terrain_secondary=b["terrain_secondary"],

@@ -28,7 +28,7 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(REPO))
 
-from tools.validation.validate_html_vs_mod import CIV_TO_HOMECITY  # noqa: E402
+from tools.migration.anw_mapping import ANW_CIVS_BY_SLUG, ANW_DEFERRED_SLUGS  # noqa: E402
 from tools.validation.validate_personality_overrides import load_string_table  # noqa: E402
 
 HTML_PATH = REPO / "a_new_world.html"
@@ -36,11 +36,11 @@ STRINGS = REPO / "data" / "strings" / "english" / "stringmods.xml"
 GENERATOR = REPO / "tools" / "cardextract" / "refresh_dev_subtrees.py"
 
 # Mirrors refresh_dev_subtrees.DEFERRED_SLUGS — sections without HTML nation-nodes.
-DEFERRED_SLUGS = {"Americans", "Mexicans (Revolution)"}
+DEFERRED_SLUGS = ANW_DEFERRED_SLUGS
 
 
 def _expected_slugs() -> list[str]:
-    return [s for s in CIV_TO_HOMECITY if s not in DEFERRED_SLUGS]
+    return [s for s in ANW_CIVS_BY_SLUG if s not in DEFERRED_SLUGS]
 
 
 def _find_dev_blocks(text: str) -> dict[str, str]:

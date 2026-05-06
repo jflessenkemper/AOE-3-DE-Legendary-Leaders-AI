@@ -6,15 +6,19 @@ notice any regression.
 """
 from __future__ import annotations
 
+import sys
 import tempfile
 import unittest
 from pathlib import Path
+
+if __package__ is None or __package__ == "":
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 from tools.validation.validate_html_reference import (
     REPO,
     validate_html_reference,
 )
-from tools.validation.validate_html_vs_mod import CIV_TO_HOMECITY
+from tools.migration.anw_mapping import ANW_CIVS_BY_SLUG  # noqa: E402
 
 
 def _section(slug: str, leader: str = "Leader X", flag: str = "f.png", portrait: str = "p.png") -> str:
@@ -47,9 +51,9 @@ class _Repo:
 
 
 def _full_html(extra: str = "") -> str:
-    """Build a doc with one section per civ in CIV_TO_HOMECITY (so the
+    """Build a doc with one section per civ in ANW_CIVS_BY_SLUG (so the
     'every civ' loop is satisfied for civs not under test)."""
-    parts = [_section(slug) for slug in CIV_TO_HOMECITY]
+    parts = [_section(slug) for slug in ANW_CIVS_BY_SLUG]
     return "<html><body>" + "\n".join(parts) + extra + "</body></html>"
 
 
@@ -65,7 +69,7 @@ class ValidateHtmlReferenceTests(unittest.TestCase):
 
     def test_missing_section_header_reported(self) -> None:
         # Drop British's section entirely.
-        parts = [_section(s) for s in CIV_TO_HOMECITY if s != "British"]
+        parts = [_section(s) for s in ANW_CIVS_BY_SLUG if s != "British"]
         html = "<html><body>" + "\n".join(parts) + "</body></html>"
         issues = validate_html_reference(self._repo(html))
         self.assertTrue(any("British: missing section header" in i for i in issues), issues)
@@ -81,7 +85,7 @@ class ValidateHtmlReferenceTests(unittest.TestCase):
 <!-- WALLING-START Argentines -->
 </details>
 """
-        parts = [_section(s) for s in CIV_TO_HOMECITY if s != "Argentines"]
+        parts = [_section(s) for s in ANW_CIVS_BY_SLUG if s != "Argentines"]
         html = "<html><body>" + "\n".join(parts) + broken + "</body></html>"
         issues = validate_html_reference(self._repo(html))
         self.assertTrue(any("Argentines: no `<!-- EXPLORER-START" in i for i in issues), issues)
@@ -96,7 +100,7 @@ class ValidateHtmlReferenceTests(unittest.TestCase):
         # Strip Americans + Mexicans (Revolution) sections; validator
         # tolerates them because they are in the deferred-section set.
         parts = [
-            _section(s) for s in CIV_TO_HOMECITY
+            _section(s) for s in ANW_CIVS_BY_SLUG
             if s not in {"Americans", "Mexicans (Revolution)"}
         ]
         html = "<html><body>" + "\n".join(parts) + "</body></html>"
