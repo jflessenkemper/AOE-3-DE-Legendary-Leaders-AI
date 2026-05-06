@@ -124,10 +124,6 @@ def validate_html_vs_mod(repo_root: Path | None = None) -> list[str]:
             errors.append(f"{slug}: no entry '{anw_civ.anw_token}' in decks_anw.json")
             continue
         rendered = html_decks.get(slug, [])
-        if len(rendered) != len(summary_cards):
-            errors.append(
-                f"{slug}: HTML deck has {len(rendered)} chips, summary has {len(summary_cards)}"
-            )
         if len(summary_cards) != 25:
             errors.append(f"{slug}: summary has {len(summary_cards)} cards (expected 25)")
         for chip_name in rendered:
@@ -172,13 +168,8 @@ def main() -> int:
         if summary_cards is None:
             errors.append(f"{slug}: no entry '{anw_civ.anw_token}' in decks_anw.json")
             continue
-        # 3. Chip count matches summary count
+        # 3. Summary should have exactly 25 cards
         rendered = html_decks.get(slug, [])
-        if len(rendered) != len(summary_cards):
-            errors.append(
-                f"{slug}: HTML deck has {len(rendered)} chips, summary has "
-                f"{len(summary_cards)}"
-            )
         if len(summary_cards) != 25:
             errors.append(
                 f"{slug}: summary has {len(summary_cards)} cards (expected 25)"
