@@ -22,3 +22,4 @@ tools/aoe3_automation/templates/matrix/_raw/
 # Compiled local binaries
 tools/aoe3_automation/ei_inject
 
+logs/
