@@ -160,15 +160,16 @@ class ScenarioTriggerBuilderV2:
 
         # Strategy: Replace specific known strings with safe lengths
 
-        # 1. Replace "Ignore" (7 bytes) with trigger label (pad to 7)
-        label = trigger_def['label'][:6]  # Truncate to fit in 7 bytes with null
+        # 1. Replace "Hide Score" (10 bytes with null) with trigger label
+        # The template contains "Hide Score" which we'll replace with our label
+        label = trigger_def['label'][:9]  # Truncate to fit in "Hide Score" space
         modified = ScenarioTriggerBuilderV2.find_and_replace_length_prefixed(
-            modified, 'Ignore', label
+            modified, 'Hide Score', label
         )
 
         # 2. Replace script function
-        # Look for the long script and replace carefully
-        old_script = 'trSoundPlayDialogue("%StringID%", %EventID%, %Ignore%, %Seconds%);'
+        # The template has trUIFadeToColor, replace with our trOutput script
+        old_script = 'trUIFadeToColor(%R%,%G%,%B%,%Duration%,%Delay%,%Fade%,%EventID%);'
         new_script = trigger_def['script']
 
         if len(new_script) <= len(old_script):
@@ -220,8 +221,11 @@ def main():
     print(f"\n[3/5] Creating backup...")
 
     backup_path = ANEWWORLD_BACKUP
-    shutil.copy2(load_path, backup_path)
-    print(f"✓ Backup: {backup_path}")
+    if not backup_path.exists() or backup_path != load_path:
+        shutil.copy2(load_path, backup_path)
+        print(f"✓ Backup: {backup_path}")
+    else:
+        print(f"✓ Backup already exists: {backup_path}")
 
     # Step 4: Clone and prepare triggers
     print(f"\n[4/5] Cloning and modifying triggers with proper encoding...")

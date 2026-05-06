@@ -1,0 +1,155 @@
+{
+  "notes": [
+    "Simplified ANEWWORLD scenario test using only text matching (OCR).",
+    "No template images required — uses click_text to navigate menus.",
+    "Launches AOE3, navigates to custom scenario, loads ANEWWORLD.",
+    "Runs until game end (Victory/Defeat) or 10 minute timeout.",
+    "Env vars: ${CIV_NAME} for player civilization selection."
+  ],
+  "steps": [
+    {
+      "action": "launch",
+      "command": "steam -forcesteamruntime run 933110"
+    },
+    {
+      "action": "sleep",
+      "seconds": 10
+    },
+    {
+      "action": "screenshot",
+      "path": "../artifacts/anewworld_01_main_menu.png"
+    },
+    {
+      "action": "click_text",
+      "texts": ["Single Player"],
+      "timeout": 60,
+      "grayscale": true,
+      "partial": true,
+      "psm": 6,
+      "threshold": 155
+    },
+    {
+      "action": "sleep",
+      "seconds": 3
+    },
+    {
+      "action": "screenshot",
+      "path": "../artifacts/anewworld_02_single_player.png"
+    },
+    {
+      "action": "click_text",
+      "texts": ["Custom Scenario", "Scenario", "Load Map"],
+      "timeout": 45,
+      "grayscale": true,
+      "partial": true,
+      "psm": 6,
+      "threshold": 155,
+      "optional": true
+    },
+    {
+      "action": "sleep",
+      "seconds": 2
+    },
+    {
+      "action": "screenshot",
+      "path": "../artifacts/anewworld_03_scenario_menu.png"
+    },
+    {
+      "action": "click_text",
+      "texts": ["ANEWWORLD"],
+      "timeout": 45,
+      "grayscale": true,
+      "partial": true,
+      "psm": 6,
+      "threshold": 155
+    },
+    {
+      "action": "sleep",
+      "seconds": 3
+    },
+    {
+      "action": "screenshot",
+      "path": "../artifacts/anewworld_04_scenario_loaded.png"
+    },
+    {
+      "action": "click_text",
+      "texts": ["${CIV_NAME}"],
+      "timeout": 30,
+      "grayscale": true,
+      "partial": true,
+      "psm": 6,
+      "threshold": 155,
+      "optional": true
+    },
+    {
+      "action": "sleep",
+      "seconds": 2
+    },
+    {
+      "action": "screenshot",
+      "path": "../artifacts/anewworld_05_civ_selected.png"
+    },
+    {
+      "action": "click_text",
+      "texts": ["Start Game", "Play", "Begin"],
+      "timeout": 30,
+      "grayscale": true,
+      "partial": false,
+      "psm": 6,
+      "threshold": 160
+    },
+    {
+      "action": "sleep",
+      "seconds": 15
+    },
+    {
+      "action": "screenshot",
+      "path": "../artifacts/anewworld_06_game_loading.png"
+    },
+    {
+      "action": "wait_text",
+      "texts": ["Victory", "Defeat", "Resignation", "Game Over"],
+      "timeout": 610,
+      "grayscale": true,
+      "partial": false,
+      "psm": 6,
+      "threshold": 165
+    },
+    {
+      "action": "sleep",
+      "seconds": 3
+    },
+    {
+      "action": "screenshot",
+      "path": "../artifacts/anewworld_07_game_result.png"
+    },
+    {
+      "action": "click_text",
+      "texts": ["Continue", "OK", "Close"],
+      "timeout": 45,
+      "grayscale": true,
+      "partial": false,
+      "psm": 6,
+      "threshold": 160,
+      "optional": true
+    },
+    {
+      "action": "sleep",
+      "seconds": 2
+    },
+    {
+      "action": "click_text",
+      "texts": ["Main Menu", "Home City", "Quit"],
+      "timeout": 45,
+      "grayscale": true,
+      "partial": true,
+      "psm": 6,
+      "threshold": 160,
+      "optional": true
+    },
+    {
+      "action": "sleep",
+      "seconds": 3
+    }
+  ]
+}

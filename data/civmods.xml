@@ -7,7 +7,7 @@
 		<Culture>WesternEurope</Culture>
 		<SettlerProtoName>Settler</SettlerProtoName>
 		<DisplayNameID>494001</DisplayNameID>
-		<RolloverNameID>490002</RolloverNameID>
+		<RolloverNameID>490240</RolloverNameID>
 		<AlliedID>26446</AlliedID>
 		<AlliedOtherID>26445</AlliedOtherID>
 		<UnAlliedID>26444</UnAlliedID>
@@ -274,7 +274,7 @@
 		<Culture>WesternEurope</Culture>
 		<SettlerProtoName>Settler</SettlerProtoName>
 		<DisplayNameID>494002</DisplayNameID>
-		<RolloverNameID>400020</RolloverNameID>
+		<RolloverNameID>490242</RolloverNameID>
 		<AlliedID>26446</AlliedID>
 		<AlliedOtherID>26445</AlliedOtherID>
 		<UnAlliedID>26444</UnAlliedID>
@@ -541,7 +541,7 @@
 		<Culture>WesternEurope</Culture>
 		<SettlerProtoName>Settler</SettlerProtoName>
 		<DisplayNameID>494003</DisplayNameID>
-		<RolloverNameID>400019</RolloverNameID>
+		<RolloverNameID>490222</RolloverNameID>
 		<AlliedID>26446</AlliedID>
 		<AlliedOtherID>26445</AlliedOtherID>
 		<UnAlliedID>26444</UnAlliedID>
@@ -811,7 +811,7 @@
 		<Culture>Mediterranean</Culture>
 		<SettlerProtoName>Settler</SettlerProtoName>
 		<DisplayNameID>494004</DisplayNameID>
-		<RolloverNameID>400021</RolloverNameID>
+		<RolloverNameID>490239</RolloverNameID>
 		<AlliedID>26446</AlliedID>
 		<AlliedOtherID>26445</AlliedOtherID>
 		<UnAlliedID>26444</UnAlliedID>
@@ -1067,7 +1067,7 @@
 		<Culture>WesternEurope</Culture>
 		<SettlerProtoName>Settler</SettlerProtoName>
 		<DisplayNameID>494005</DisplayNameID>
-		<RolloverNameID>400005</RolloverNameID>
+		<RolloverNameID>490228</RolloverNameID>
 		<AlliedID>26446</AlliedID>
 		<AlliedOtherID>26445</AlliedOtherID>
 		<UnAlliedID>26444</UnAlliedID>
@@ -1337,7 +1337,7 @@
 		<Culture>WesternEurope</Culture>
 		<SettlerProtoName>Settler</SettlerProtoName>
 		<DisplayNameID>494006</DisplayNameID>
-		<RolloverNameID>400012</RolloverNameID>
+		<RolloverNameID>490234</RolloverNameID>
 		<AlliedID>26446</AlliedID>
 		<AlliedOtherID>26445</AlliedOtherID>
 		<UnAlliedID>26444</UnAlliedID>
@@ -1604,7 +1604,7 @@
 		<Culture>Mediterranean</Culture>
 		<SettlerProtoName>Settler</SettlerProtoName>
 		<DisplayNameID>494007</DisplayNameID>
-		<RolloverNameID>400003</RolloverNameID>
+		<RolloverNameID>490226</RolloverNameID>
 		<AlliedID>26446</AlliedID>
 		<AlliedOtherID>26445</AlliedOtherID>
 		<UnAlliedID>26444</UnAlliedID>
@@ -1876,7 +1876,7 @@
 		<Culture>Mediterranean</Culture>
 		<SettlerProtoName>Settler</SettlerProtoName>
 		<DisplayNameID>494008</DisplayNameID>
-		<RolloverNameID>400001</RolloverNameID>
+		<RolloverNameID>490223</RolloverNameID>
 		<AlliedID>26446</AlliedID>
 		<AlliedOtherID>26445</AlliedOtherID>
 		<UnAlliedID>26444</UnAlliedID>
@@ -2132,7 +2132,7 @@
 		<Culture>Mediterranean</Culture>
 		<SettlerProtoName>Settler</SettlerProtoName>
 		<DisplayNameID>494009</DisplayNameID>
-		<RolloverNameID>400007</RolloverNameID>
+		<RolloverNameID>490230</RolloverNameID>
 		<AlliedID>26446</AlliedID>
 		<AlliedOtherID>26445</AlliedOtherID>
 		<UnAlliedID>26444</UnAlliedID>
@@ -2388,7 +2388,7 @@
 		<Culture>Mediterranean</Culture>
 		<SettlerProtoName>Settler</SettlerProtoName>
 		<DisplayNameID>494010</DisplayNameID>
-		<RolloverNameID>400018</RolloverNameID>
+		<RolloverNameID>490241</RolloverNameID>
 		<AlliedID>26446</AlliedID>
 		<AlliedOtherID>26445</AlliedOtherID>
 		<UnAlliedID>26444</UnAlliedID>
@@ -2650,7 +2650,7 @@
 		<Culture>Mediterranean</Culture>
 		<SettlerProtoName>Settler</SettlerProtoName>
 		<DisplayNameID>494011</DisplayNameID>
-		<RolloverNameID>400008</RolloverNameID>
+		<RolloverNameID>490231</RolloverNameID>
 		<AlliedID>26446</AlliedID>
 		<AlliedOtherID>26445</AlliedOtherID>
 		<UnAlliedID>26444</UnAlliedID>
@@ -2906,7 +2906,7 @@
 		<Culture>WesternEurope</Culture>
 		<SettlerProtoName>Settler</SettlerProtoName>
 		<DisplayNameID>494012</DisplayNameID>
-		<RolloverNameID>400014</RolloverNameID>
+		<RolloverNameID>490235</RolloverNameID>
 		<AlliedID>26446</AlliedID>
 		<AlliedOtherID>26445</AlliedOtherID>
 		<UnAlliedID>26444</UnAlliedID>
@@ -3188,7 +3188,7 @@
 		<Culture>WesternEurope</Culture>
 		<SettlerProtoName>Settler</SettlerProtoName>
 		<DisplayNameID>494013</DisplayNameID>
-		<RolloverNameID>400016</RolloverNameID>
+		<RolloverNameID>490237</RolloverNameID>
 		<AlliedID>26446</AlliedID>
 		<AlliedOtherID>26445</AlliedOtherID>
 		<UnAlliedID>26444</UnAlliedID>
@@ -3458,7 +3458,7 @@
 		<Culture>WesternEurope</Culture>
 		<SettlerProtoName>Settler</SettlerProtoName>
 		<DisplayNameID>494014</DisplayNameID>
-		<RolloverNameID>400024</RolloverNameID>
+		<RolloverNameID>490245</RolloverNameID>
 		<AlliedID>26446</AlliedID>
 		<AlliedOtherID>26445</AlliedOtherID>
 		<UnAlliedID>26444</UnAlliedID>
@@ -3727,7 +3727,7 @@
 		<Culture>EasternEurope</Culture>
 		<SettlerProtoName>Settler</SettlerProtoName>
 		<DisplayNameID>494015</DisplayNameID>
-		<RolloverNameID>400011</RolloverNameID>
+		<RolloverNameID>490233</RolloverNameID>
 		<AlliedID>26446</AlliedID>
 		<AlliedOtherID>26445</AlliedOtherID>
 		<UnAlliedID>26444</UnAlliedID>
@@ -3986,7 +3986,7 @@
 		<Culture>EasternEurope</Culture>
 		<SettlerProtoName>Settler</SettlerProtoName>
 		<DisplayNameID>494016</DisplayNameID>
-		<RolloverNameID>400015</RolloverNameID>
+		<RolloverNameID>490236</RolloverNameID>
 		<AlliedID>26446</AlliedID>
 		<AlliedOtherID>26445</AlliedOtherID>
 		<UnAlliedID>26444</UnAlliedID>
@@ -4246,7 +4246,7 @@
 		<Culture>EasternEurope</Culture>
 		<SettlerProtoName>Settler</SettlerProtoName>
 		<DisplayNameID>494017</DisplayNameID>
-		<RolloverNameID>400023</RolloverNameID>
+		<RolloverNameID>490244</RolloverNameID>
 		<AlliedID>26446</AlliedID>
 		<AlliedOtherID>26445</AlliedOtherID>
 		<UnAlliedID>26444</UnAlliedID>
@@ -4506,7 +4506,7 @@
 		<Culture>Mediterranean</Culture>
 		<SettlerProtoName>Settler</SettlerProtoName>
 		<DisplayNameID>494018</DisplayNameID>
-		<RolloverNameID>400002</RolloverNameID>
+		<RolloverNameID>490225</RolloverNameID>
 		<AlliedID>26446</AlliedID>
 		<AlliedOtherID>26445</AlliedOtherID>
 		<UnAlliedID>26444</UnAlliedID>
@@ -4752,7 +4752,7 @@
 		<Culture>Mediterranean</Culture>
 		<SettlerProtoName>Settler</SettlerProtoName>
 		<DisplayNameID>494019</DisplayNameID>
-		<RolloverNameID>400009</RolloverNameID>
+		<RolloverNameID>490232</RolloverNameID>
 		<AlliedID>26446</AlliedID>
 		<AlliedOtherID>26445</AlliedOtherID>
 		<UnAlliedID>26444</UnAlliedID>
@@ -5000,7 +5000,7 @@
 		<Culture>Mediterranean</Culture>
 		<SettlerProtoName>Settler</SettlerProtoName>
 		<DisplayNameID>494020</DisplayNameID>
-		<RolloverNameID>400006</RolloverNameID>
+		<RolloverNameID>490229</RolloverNameID>
 		<AlliedID>26446</AlliedID>
 		<AlliedOtherID>26445</AlliedOtherID>
 		<UnAlliedID>26444</UnAlliedID>
@@ -5453,7 +5453,7 @@
 		<Culture>Mediterranean</Culture>
 		<SettlerProtoName>Settler</SettlerProtoName>
 		<DisplayNameID>494021</DisplayNameID>
-		<RolloverNameID>400010</RolloverNameID>
+		<RolloverNameID>490224</RolloverNameID>
 		<AlliedID>26446</AlliedID>
 		<AlliedOtherID>26445</AlliedOtherID>
 		<UnAlliedID>26444</UnAlliedID>
@@ -5906,7 +5906,7 @@
 		<Culture>Mediterranean</Culture>
 		<SettlerProtoName>Settler</SettlerProtoName>
 		<DisplayNameID>494022</DisplayNameID>
-		<RolloverNameID>400026</RolloverNameID>
+		<RolloverNameID>490247</RolloverNameID>
 		<AlliedID>26446</AlliedID>
 		<AlliedOtherID>26445</AlliedOtherID>
 		<UnAlliedID>26444</UnAlliedID>
@@ -6359,7 +6359,7 @@
 		<Culture>Mediterranean</Culture>
 		<SettlerProtoName>Settler</SettlerProtoName>
 		<DisplayNameID>494023</DisplayNameID>
-		<RolloverNameID>400022</RolloverNameID>
+		<RolloverNameID>490243</RolloverNameID>
 		<AlliedID>26446</AlliedID>
 		<AlliedOtherID>26445</AlliedOtherID>
 		<UnAlliedID>26444</UnAlliedID>
@@ -6812,7 +6812,7 @@
 		<Culture>Mediterranean</Culture>
 		<SettlerProtoName>Settler</SettlerProtoName>
 		<DisplayNameID>494024</DisplayNameID>
-		<RolloverNameID>400017</RolloverNameID>
+		<RolloverNameID>490238</RolloverNameID>
 		<AlliedID>26446</AlliedID>
 		<AlliedOtherID>26445</AlliedOtherID>
 		<UnAlliedID>26444</UnAlliedID>
@@ -7265,7 +7265,7 @@
 		<Culture>Mediterranean</Culture>
 		<SettlerProtoName>Settler</SettlerProtoName>
 		<DisplayNameID>494025</DisplayNameID>
-		<RolloverNameID>400004</RolloverNameID>
+		<RolloverNameID>490227</RolloverNameID>
 		<AlliedID>26446</AlliedID>
 		<AlliedOtherID>26445</AlliedOtherID>
 		<UnAlliedID>26444</UnAlliedID>
@@ -7718,7 +7718,7 @@
 		<Culture>Mediterranean</Culture>
 		<SettlerProtoName>Settler</SettlerProtoName>
 		<DisplayNameID>494026</DisplayNameID>
-		<RolloverNameID>400025</RolloverNameID>
+		<RolloverNameID>490246</RolloverNameID>
 		<AlliedID>26446</AlliedID>
 		<AlliedOtherID>26445</AlliedOtherID>
 		<UnAlliedID>26444</UnAlliedID>
@@ -8177,7 +8177,7 @@
 		     EmpireWars params, MultipleBlockTrain entries.
 		     Source: vanilla civs.xml (inside engine .bar archive). -->
 		<DisplayNameID>410000</DisplayNameID>
-		<RolloverNameID>410500</RolloverNameID>
+		<RolloverNameID>490200</RolloverNameID>
 		<HomeCityFilename>anwhomecityaztecs.xml</HomeCityFilename>
 		<HomeCityPreviewWPF>resources/images/icons/singleplayer/cpai_avatar_aztecs_montezuma.png</HomeCityPreviewWPF>
 		<!-- TODO-ANW-VANILLA: HomeCityFlagTexture, PostgameFlagTexture,
@@ -8194,7 +8194,7 @@
 		     EmpireWars params, MultipleBlockTrain entries.
 		     Source: vanilla civs.xml (inside engine .bar archive). -->
 		<DisplayNameID>410001</DisplayNameID>
-		<RolloverNameID>410501</RolloverNameID>
+		<RolloverNameID>490201</RolloverNameID>
 		<HomeCityFilename>anwhomecitybritish.xml</HomeCityFilename>
 		<HomeCityPreviewWPF>resources/images/icons/singleplayer/cpai_avatar_british_wellington.png</HomeCityPreviewWPF>
 		<!-- TODO-ANW-VANILLA: HomeCityFlagTexture, PostgameFlagTexture,
@@ -8211,7 +8211,7 @@
 		     EmpireWars params, MultipleBlockTrain entries.
 		     Source: vanilla civs.xml (inside engine .bar archive). -->
 		<DisplayNameID>410002</DisplayNameID>
-		<RolloverNameID>410502</RolloverNameID>
+		<RolloverNameID>490202</RolloverNameID>
 		<HomeCityFilename>anwhomecitychinese.xml</HomeCityFilename>
 		<HomeCityPreviewWPF>resources/images/icons/singleplayer/cpai_avatar_chinese_kangxi.png</HomeCityPreviewWPF>
 		<!-- TODO-ANW-VANILLA: HomeCityFlagTexture, PostgameFlagTexture,
@@ -8228,7 +8228,7 @@
 		     EmpireWars params, MultipleBlockTrain entries.
 		     Source: vanilla civs.xml (inside engine .bar archive). -->
 		<DisplayNameID>410003</DisplayNameID>
-		<RolloverNameID>410503</RolloverNameID>
+		<RolloverNameID>490203</RolloverNameID>
 		<HomeCityFilename>anwhomecitydutch.xml</HomeCityFilename>
 		<HomeCityPreviewWPF>resources/images/icons/singleplayer/cpai_avatar_dutch_maurice.png</HomeCityPreviewWPF>
 		<!-- TODO-ANW-VANILLA: HomeCityFlagTexture, PostgameFlagTexture,
@@ -8245,7 +8245,7 @@
 		     EmpireWars params, MultipleBlockTrain entries.
 		     Source: vanilla civs.xml (inside engine .bar archive). -->
 		<DisplayNameID>410004</DisplayNameID>
-		<RolloverNameID>410504</RolloverNameID>
+		<RolloverNameID>490204</RolloverNameID>
 		<HomeCityFilename>anwhomecityethiopians.xml</HomeCityFilename>
 		<HomeCityPreviewWPF>resources/images/icons/singleplayer/cpai_avatar_ethiopians_menelik.png</HomeCityPreviewWPF>
 		<!-- TODO-ANW-VANILLA: HomeCityFlagTexture, PostgameFlagTexture,
@@ -8262,7 +8262,7 @@
 		     EmpireWars params, MultipleBlockTrain entries.
 		     Source: vanilla civs.xml (inside engine .bar archive). -->
 		<DisplayNameID>410005</DisplayNameID>
-		<RolloverNameID>410505</RolloverNameID>
+		<RolloverNameID>490205</RolloverNameID>
 		<HomeCityFilename>anwhomecityfrench.xml</HomeCityFilename>
 		<HomeCityPreviewWPF>resources/images/icons/singleplayer/cpai_avatar_french_napoleon.png</HomeCityPreviewWPF>
 		<!-- TODO-ANW-VANILLA: HomeCityFlagTexture, PostgameFlagTexture,
@@ -8279,7 +8279,7 @@
 		     EmpireWars params, MultipleBlockTrain entries.
 		     Source: vanilla civs.xml (inside engine .bar archive). -->
 		<DisplayNameID>410006</DisplayNameID>
-		<RolloverNameID>410506</RolloverNameID>
+		<RolloverNameID>490206</RolloverNameID>
 		<HomeCityFilename>anwhomecitygermans.xml</HomeCityFilename>
 		<HomeCityPreviewWPF>resources/images/icons/singleplayer/cpai_avatar_germans_frederick.png</HomeCityPreviewWPF>
 		<!-- TODO-ANW-VANILLA: HomeCityFlagTexture, PostgameFlagTexture,
@@ -8296,7 +8296,7 @@
 		     EmpireWars params, MultipleBlockTrain entries.
 		     Source: vanilla civs.xml (inside engine .bar archive). -->
 		<DisplayNameID>410007</DisplayNameID>
-		<RolloverNameID>410507</RolloverNameID>
+		<RolloverNameID>490207</RolloverNameID>
 		<HomeCityFilename>anwhomecityhaudenosaunee.xml</HomeCityFilename>
 		<HomeCityPreviewWPF>resources/images/icons/singleplayer/cpai_avatar_haudenosaunee_hiawatha.png</HomeCityPreviewWPF>
 		<!-- TODO-ANW-VANILLA: HomeCityFlagTexture, PostgameFlagTexture,
@@ -8313,7 +8313,7 @@
 		     EmpireWars params, MultipleBlockTrain entries.
 		     Source: vanilla civs.xml (inside engine .bar archive). -->
 		<DisplayNameID>410008</DisplayNameID>
-		<RolloverNameID>410508</RolloverNameID>
+		<RolloverNameID>490208</RolloverNameID>
 		<HomeCityFilename>anwhomecityhausa.xml</HomeCityFilename>
 		<HomeCityPreviewWPF>resources/images/icons/singleplayer/cpai_avatar_hausa_usman.png</HomeCityPreviewWPF>
 		<!-- TODO-ANW-VANILLA: HomeCityFlagTexture, PostgameFlagTexture,
@@ -8330,7 +8330,7 @@
 		     EmpireWars params, MultipleBlockTrain entries.
 		     Source: vanilla civs.xml (inside engine .bar archive). -->
 		<DisplayNameID>410009</DisplayNameID>
-		<RolloverNameID>410509</RolloverNameID>
+		<RolloverNameID>490209</RolloverNameID>
 		<HomeCityFilename>anwhomecityinca.xml</HomeCityFilename>
 		<HomeCityPreviewWPF>resources/images/icons/singleplayer/cpai_avatar_inca_pachacuti.png</HomeCityPreviewWPF>
 		<!-- TODO-ANW-VANILLA: HomeCityFlagTexture, PostgameFlagTexture,
@@ -8347,7 +8347,7 @@
 		     EmpireWars params, MultipleBlockTrain entries.
 		     Source: vanilla civs.xml (inside engine .bar archive). -->
 		<DisplayNameID>410010</DisplayNameID>
-		<RolloverNameID>410510</RolloverNameID>
+		<RolloverNameID>490210</RolloverNameID>
 		<HomeCityFilename>anwhomecityindians.xml</HomeCityFilename>
 		<HomeCityPreviewWPF>resources/images/icons/singleplayer/cpai_avatar_indians_shivaji.png</HomeCityPreviewWPF>
 		<!-- TODO-ANW-VANILLA: HomeCityFlagTexture, PostgameFlagTexture,
@@ -8364,7 +8364,7 @@
 		     EmpireWars params, MultipleBlockTrain entries.
 		     Source: vanilla civs.xml (inside engine .bar archive). -->
 		<DisplayNameID>410011</DisplayNameID>
-		<RolloverNameID>410511</RolloverNameID>
+		<RolloverNameID>490211</RolloverNameID>
 		<HomeCityFilename>anwhomecityitalians.xml</HomeCityFilename>
 		<HomeCityPreviewWPF>resources/images/icons/singleplayer/cpai_avatar_italians_garibaldi.png</HomeCityPreviewWPF>
 		<!-- TODO-ANW-VANILLA: HomeCityFlagTexture, PostgameFlagTexture,
@@ -8381,7 +8381,7 @@
 		     EmpireWars params, MultipleBlockTrain entries.
 		     Source: vanilla civs.xml (inside engine .bar archive). -->
 		<DisplayNameID>410012</DisplayNameID>
-		<RolloverNameID>410512</RolloverNameID>
+		<RolloverNameID>490212</RolloverNameID>
 		<HomeCityFilename>anwhomecityjapanese.xml</HomeCityFilename>
 		<HomeCityPreviewWPF>resources/images/icons/singleplayer/cpai_avatar_japanese_tokugawa.png</HomeCityPreviewWPF>
 		<!-- TODO-ANW-VANILLA: HomeCityFlagTexture, PostgameFlagTexture,
@@ -8398,7 +8398,7 @@
 		     EmpireWars params, MultipleBlockTrain entries.
 		     Source: vanilla civs.xml (inside engine .bar archive). -->
 		<DisplayNameID>410013</DisplayNameID>
-		<RolloverNameID>410513</RolloverNameID>
+		<RolloverNameID>490213</RolloverNameID>
 		<HomeCityFilename>anwhomecitylakota.xml</HomeCityFilename>
 		<HomeCityPreviewWPF>resources/images/icons/singleplayer/cpai_avatar_lakota_crazyhorse.png</HomeCityPreviewWPF>
 		<!-- TODO-ANW-VANILLA: HomeCityFlagTexture, PostgameFlagTexture,
@@ -8415,7 +8415,7 @@
 		     EmpireWars params, MultipleBlockTrain entries.
 		     Source: vanilla civs.xml (inside engine .bar archive). -->
 		<DisplayNameID>410014</DisplayNameID>
-		<RolloverNameID>410514</RolloverNameID>
+		<RolloverNameID>490214</RolloverNameID>
 		<HomeCityFilename>anwhomecitymaltese.xml</HomeCityFilename>
 		<HomeCityPreviewWPF>resources/images/icons/singleplayer/cpai_avatar_maltese_jean.png</HomeCityPreviewWPF>
 		<!-- TODO-ANW-VANILLA: HomeCityFlagTexture, PostgameFlagTexture,
@@ -8432,7 +8432,7 @@
 		     EmpireWars params, MultipleBlockTrain entries.
 		     Source: vanilla civs.xml (inside engine .bar archive). -->
 		<DisplayNameID>410015</DisplayNameID>
-		<RolloverNameID>410515</RolloverNameID>
+		<RolloverNameID>490215</RolloverNameID>
 		<HomeCityFilename>anwhomecitymexicans.xml</HomeCityFilename>
 		<HomeCityPreviewWPF>resources/images/icons/singleplayer/cpai_avatar_mexicans_hidalgo.png</HomeCityPreviewWPF>
 		<!-- TODO-ANW-VANILLA: HomeCityFlagTexture, PostgameFlagTexture,
@@ -8449,7 +8449,7 @@
 		     EmpireWars params, MultipleBlockTrain entries.
 		     Source: vanilla civs.xml (inside engine .bar archive). -->
 		<DisplayNameID>410016</DisplayNameID>
-		<RolloverNameID>410516</RolloverNameID>
+		<RolloverNameID>490216</RolloverNameID>
 		<HomeCityFilename>anwhomecityottomans.xml</HomeCityFilename>
 		<HomeCityPreviewWPF>resources/images/icons/singleplayer/cpai_avatar_ottomans_suleiman.png</HomeCityPreviewWPF>
 		<!-- TODO-ANW-VANILLA: HomeCityFlagTexture, PostgameFlagTexture,
@@ -8466,7 +8466,7 @@
 		     EmpireWars params, MultipleBlockTrain entries.
 		     Source: vanilla civs.xml (inside engine .bar archive). -->
 		<DisplayNameID>410017</DisplayNameID>
-		<RolloverNameID>410517</RolloverNameID>
+		<RolloverNameID>490217</RolloverNameID>
 		<HomeCityFilename>anwhomecityportuguese.xml</HomeCityFilename>
 		<HomeCityPreviewWPF>resources/images/icons/singleplayer/cpai_avatar_portuguese_henry.png</HomeCityPreviewWPF>
 		<!-- TODO-ANW-VANILLA: HomeCityFlagTexture, PostgameFlagTexture,
@@ -8483,7 +8483,7 @@
 		     EmpireWars params, MultipleBlockTrain entries.
 		     Source: vanilla civs.xml (inside engine .bar archive). -->
 		<DisplayNameID>410018</DisplayNameID>
-		<RolloverNameID>410518</RolloverNameID>
+		<RolloverNameID>490218</RolloverNameID>
 		<HomeCityFilename>anwhomecityrussians.xml</HomeCityFilename>
 		<HomeCityPreviewWPF>resources/images/icons/singleplayer/cpai_avatar_russians_catherine.png</HomeCityPreviewWPF>
 		<!-- TODO-ANW-VANILLA: HomeCityFlagTexture, PostgameFlagTexture,
@@ -8500,7 +8500,7 @@
 		     EmpireWars params, MultipleBlockTrain entries.
 		     Source: vanilla civs.xml (inside engine .bar archive). -->
 		<DisplayNameID>410019</DisplayNameID>
-		<RolloverNameID>410519</RolloverNameID>
+		<RolloverNameID>490219</RolloverNameID>
 		<HomeCityFilename>anwhomecityspanish.xml</HomeCityFilename>
 		<HomeCityPreviewWPF>resources/images/icons/singleplayer/cpai_avatar_spanish_isabella.png</HomeCityPreviewWPF>
 		<!-- TODO-ANW-VANILLA: HomeCityFlagTexture, PostgameFlagTexture,
@@ -8517,7 +8517,7 @@
 		     EmpireWars params, MultipleBlockTrain entries.
 		     Source: vanilla civs.xml (inside engine .bar archive). -->
 		<DisplayNameID>410020</DisplayNameID>
-		<RolloverNameID>410520</RolloverNameID>
+		<RolloverNameID>490220</RolloverNameID>
 		<HomeCityFilename>anwhomecityswedes.xml</HomeCityFilename>
 		<HomeCityPreviewWPF>resources/images/icons/singleplayer/cpai_avatar_swedes_gustav.png</HomeCityPreviewWPF>
 		<!-- TODO-ANW-VANILLA: HomeCityFlagTexture, PostgameFlagTexture,
@@ -8534,7 +8534,7 @@
 		     EmpireWars params, MultipleBlockTrain entries.
 		     Source: vanilla civs.xml (inside engine .bar archive). -->
 		<DisplayNameID>410021</DisplayNameID>
-		<RolloverNameID>410521</RolloverNameID>
+		<RolloverNameID>490221</RolloverNameID>
 		<HomeCityFilename>anwhomecityusa.xml</HomeCityFilename>
 		<HomeCityPreviewWPF>resources/images/icons/singleplayer/cpai_avatar_usa_washington.png</HomeCityPreviewWPF>
 		<!-- TODO-ANW-VANILLA: HomeCityFlagTexture, PostgameFlagTexture,

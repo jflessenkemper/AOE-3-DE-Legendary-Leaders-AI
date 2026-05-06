@@ -1,0 +1,155 @@
+{
+  "notes": [
+    "ANEWWORLD scenario test flow for AI behavior validation.",
+    "Loads the custom ANEWWORLD.age3Yscn scenario containing 6 injected triggers.",
+    "Runs for 10 minutes or until game ends (Victory/Defeat).",
+    "Captures trigger output logs from Age3Log.txt.",
+    "Environment variables: ${CIV_NAME} (player civ), ${SCENARIO_PATH} (path to .age3Yscn file).",
+    "Triggers test: Age-Up, Units, Buildings, Cards, Trade Routes, Game End markers.",
+    "Logs are written with prefixes: [AGEUP], [UNITS_TRAINED], [BUILDINGS], [CARDS], [TRADE_ROUTES], [GAME_END]."
+  ],
+  "steps": [
+    {
+      "action": "launch",
+      "command": "xdg-open steam://run/933110"
+    },
+    {
+      "action": "sleep",
+      "seconds": 8
+    },
+    {
+      "action": "screenshot",
+      "path": "../artifacts/anewworld_main_menu.png"
+    },
+    {
+      "action": "click_image",
+      "image": "../templates/anewworld/single_player_button.png",
+      "timeout": 60,
+      "confidence": 0.9
+    },
+    {
+      "action": "sleep",
+      "seconds": 2
+    },
+    {
+      "action": "screenshot",
+      "path": "../artifacts/anewworld_single_player_menu.png"
+    },
+    {
+      "action": "click_text",
+      "texts": ["Campaign", "Custom Scenario", "Load Scenario"],
+      "timeout": 30,
+      "grayscale": true,
+      "partial": true,
+      "psm": 6,
+      "threshold": 160,
+      "optional": true
+    },
+    {
+      "action": "sleep",
+      "seconds": 2
+    },
+    {
+      "action": "screenshot",
+      "path": "../artifacts/anewworld_campaign_menu.png"
+    },
+    {
+      "action": "click_text",
+      "texts": ["ANEWWORLD", "Custom Scenario", "Load Scenario"],
+      "timeout": 30,
+      "grayscale": true,
+      "partial": true,
+      "psm": 6,
+      "threshold": 160
+    },
+    {
+      "action": "sleep",
+      "seconds": 3
+    },
+    {
+      "action": "screenshot",
+      "path": "../artifacts/anewworld_scenario_select.png"
+    },
+    {
+      "action": "click_image",
+      "image": "../templates/anewworld/player_civ_dropdown.png",
+      "timeout": 30,
+      "confidence": 0.90,
+      "optional": true
+    },
+    {
+      "action": "sleep",
+      "seconds": 1
+    },
+    {
+      "action": "click_text",
+      "texts": ["${CIV_NAME}"],
+      "timeout": 15,
+      "grayscale": true,
+      "partial": true,
+      "psm": 6,
+      "threshold": 160,
+      "optional": true
+    },
+    {
+      "action": "sleep",
+      "seconds": 1
+    },
+    {
+      "action": "screenshot",
+      "path": "../artifacts/anewworld_lobby_${CIV_NAME}.png"
+    },
+    {
+      "action": "click_image",
+      "image": "../templates/anewworld/start_game_button.png",
+      "timeout": 30,
+      "confidence": 0.90
+    },
+    {
+      "action": "sleep",
+      "seconds": 15
+    },
+    {
+      "action": "screenshot",
+      "path": "../artifacts/anewworld_game_loading_${CIV_NAME}.png"
+    },
+    {
+      "action": "wait_text",
+      "texts": ["Victory", "Defeat", "Resignation"],
+      "timeout": 600,
+      "grayscale": true,
+      "partial": false,
+      "psm": 6,
+      "threshold": 165,
+      "optional": true
+    },
+    {
+      "action": "screenshot",
+      "path": "../artifacts/anewworld_game_result_${CIV_NAME}.png"
+    },
+    {
+      "action": "click_text",
+      "texts": ["Continue", "OK"],
+      "timeout": 60,
+      "grayscale": true,
+      "partial": false,
+      "psm": 6,
+      "threshold": 165,
+      "optional": true
+    },
+    {
+      "action": "click_text",
+      "texts": ["Home City", "Main Menu", "Exit"],
+      "timeout": 90,
+      "grayscale": true,
+      "partial": false,
+      "psm": 6,
+      "threshold": 165,
+      "optional": true
+    },
+    {
+      "action": "sleep",
+      "seconds": 3
+    }
+  ]
+}
