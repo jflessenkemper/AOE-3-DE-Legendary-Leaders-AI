@@ -1,204 +1,131 @@
-# TIER 2: Gameplay Validation Scenario Design
+# TIER 2: Doctrine Validator Scenario Design
 
 ## Overview
+Custom AOE3 scenario that tests all 48 civs' AI behavior against documented doctrines.
+**Goal:** Run 10-minute games per civ and capture trigger outputs proving AI behaves as documented.
 
-This document specifies the scenario structure needed to validate all 48 civs' AI behavior against their documented doctrines in ~5-6 hours total (5-8 min per civ).
+---
 
 ## Scenario Architecture
 
-### Name
-`ANW Doctrine Validator`
+### Map Setup
+- **Size:** Small (2v1 or 1v1 format for speed)
+- **Opponents:** 48 Player slots (one per civ) vs neutral AI
+- **Starting:** Standard TC start, fixed resources
+- **Speed:** Fast
 
-### Map
-- **Type**: Random map (any, small)
-- **Size**: Tiny (fast games)
-- **Players**: 2 (Computer AI + Neutral/Human observer)
-- **Victory**: Conquest (disabled - we're testing AI behavior, not winning)
-- **Game Speed**: Fast (or Normal)
+### Trigger System
 
-### Initialization Rules
-
-Run these at the start of the game via triggers:
-
+#### 1. Age-Up Detection
 ```
-EVENT: Game Start → TRIGGER: Initialize Validator
-  ACTION: Clear all scores
-  ACTION: Start game timer
-  ACTION: Enable logging trigger group "AI_BEHAVIOR"
-  ACTION: Output initial message to chat: "ANW Validator initialized for {CivName}"
+Trigger: "On Research Finished"
+Condition: Tech is Age upgrade
+Action: Log "{CivName} aged up to {Age} at {GameTime}"
 ```
 
-## Trigger Suite
-
-### 1. Age-Up Detection
-
+#### 2. Unit Training Detection
 ```
-EVENT: Player → Technology researched
-CONDITION: Technology == Age UP (any feudal/castle/imperial)
-ACTION: Log to chat: "[TIME] {PlayerName} aged up to Age {N}"
-ACTION: Write to output file: "AGE_UP;{Time};{PlayerName};{Age}"
+Trigger: "On Unit Created"
+Condition: Unit in [Infantry, Cavalry, Artillery, Native]
+Action: Log "{CivName} trained {UnitType}"
+       Increment: TrainedUnits[CivName][UnitType]++
 ```
 
-**Metrics extracted**: First age-up time per civ
-
----
-
-### 2. Unit Training Detection
-
+#### 3. Building Placement Detection
 ```
-EVENT: Unit → Unit created/trained
-ACTION: Log to chat: "[TIME] {PlayerName} trained {UnitType}"
-ACTION: Count unit type and accumulate:
-  - Infantry (Musketeer, Pikeman, Skirmisher, etc.)
-  - Cavalry (Dragoon, Hussar, Lancer, etc.)
-  - Artillery (Cannon, Mortar, etc.)
-  - Native units
-ACTION: Write to output file: "UNIT_TRAINED;{Time};{PlayerName};{UnitType}"
+Trigger: "On Building Created"
+Condition: Building in [House, Mill, Barracks, Stable, etc.]
+Action: Log "{CivName} built {BuildingType}"
+       Increment: Buildings[CivName][BuildingType]++
 ```
 
-**Metrics extracted**: Unit composition by type (% Infantry, % Cavalry, etc.)
-
----
-
-### 3. Building Placement Detection
-
+#### 4. Card Shipment Detection
 ```
-EVENT: Building → Building completed
-CONDITION: BuildingType != House (ignore housing)
-ACTION: Log to chat: "[TIME] {PlayerName} built {BuildingType}"
-ACTION: Count buildings by type:
-  - Military buildings (Barracks, Stable, Artillery Foundry)
-  - Economic buildings (Farm, Mill, Marketplace)
-  - Special buildings (Factory, Trade Post, etc.)
-ACTION: Write to output file: "BUILDING;{Time};{PlayerName};{BuildingType}"
+Trigger: "On Card Used"
+Condition: Any shipment card
+Action: Log "{CivName} used card {CardName}"
+       Validate: CardName in decks_anw.json[CivName]
 ```
 
-**Metrics extracted**: Building order and priorities
-
----
-
-### 4. Card Shipment Detection
-
+#### 5. Trade Route Detection
 ```
-EVENT: Card → Card played/shipment sent
-ACTION: Log to chat: "[TIME] {PlayerName} played {CardName}"
-ACTION: Extract card name from shipment
-ACTION: Write to output file: "CARD;{Time};{PlayerName};{CardName};{Age}"
+Trigger: "On Trade Route Created"
+Action: Log "{CivName} activated trade routes"
 ```
 
-**Metrics extracted**: Card order and selection (validate against decks_anw.json)
-
----
-
-### 5. Trade Route Activation
-
+#### 6. Game End Detection
 ```
-EVENT: Player → Trade post created OR Trade route activated
-ACTION: Log to chat: "[TIME] {PlayerName} activated trade routes"
-ACTION: Write to output file: "TRADE;{Time};{PlayerName};active"
+Trigger: "On Timer (10 minutes)"
+Action: Dump all counters to log file
+
+Trigger: "On Game End" (early)
+Action: Log "{CivName} ended early: {Reason}"
 ```
 
-**Metrics extracted**: Trade route timing (1 = present, 0 = absent)
-
----
-
-### 6. Game Timer & Verdict
-
+### Log Output Format
 ```
-EVENT: Time elapsed == 10 minutes
-ACTION: Stop AI
-ACTION: Output final message: "Validator complete. See log file for details."
-ACTION: Write to output file: "END;{TotalTime}"
-
-EVENT: AI crashes or soft-locks
-ACTION: Output: "ERROR;{PlayerName};crash_or_softlock"
-ACTION: Mark test as FAILED
-ACTION: End game
-```
-
-**Metrics extracted**: Completion status, total gameplay time
-
----
-
-## Output Format
-
-All trigger outputs write to a single log file: `age3log_validator_output.txt`
-
-Format: `TYPE;TIMESTAMP;PLAYER;VALUE;[OPTIONAL]`
-
-Example:
-```
-AGE_UP;00:47;ANWBritish;2
-UNIT_TRAINED;01:15;ANWBritish;Musketeer
-UNIT_TRAINED;01:22;ANWBritish;Musketeer
-BUILDING;02:04;ANWBritish;Barracks
-CARD;02:30;ANWBritish;Royal Mint;Exploration
-TRADE;03:44;ANWBritish;active
-UNIT_TRAINED;04:16;ANWBritish;Dragoon
-END;10:00
+DOCTRINE VALIDATOR TEST LOG
+Player: [CivName] ([CivToken])
+Time: [GameStartTime]
+─────────────────────────────────
+[Time] AGE_UP: Colonial Age
+[Time] TRAIN: Infantry x3
+[Time] TRAIN: Cavalry x2
+[Time] BUILD: Barracks
+[Time] CARD: [CardName]
+[Time] TRADE_ROUTE: activated
+─────────────────────────────────
+SUMMARY:
+- First age-up: 8m 23s
+- Units trained: Infantry(8), Cavalry(5), Artillery(2)
+- Buildings: Barracks, Stable, House
+- Trade routes: Yes
+- Cards: [Card1], [Card2], [Card3]
 ```
 
 ---
 
-## How to Build (Manual Steps in Scenario Editor)
+## Execution
 
-1. Create new random map scenario, select Tiny size
-2. Place 2 start positions: one for human observer, one for AI
-3. Set Computer player to the target civ (rotates per test)
-4. Add trigger group "AI_BEHAVIOR" with the 6 triggers above
-5. Set game length: 10 minutes max (time elapsed trigger)
-6. Enable logging: Scenario → Options → Log game events to file
-7. Save as: `maps/ANW_Doctrine_Validator.scn`
+### Setup (One-time)
+1. Create scenario in AOE3 DE editor: 2-3 hours
+2. Build trigger suite: 1-2 hours
+3. **Total: 3-4 hours**
 
----
+### Testing (Per run)
+1. Load scenario
+2. Set player to test civ
+3. Run 10 minutes
+4. Export trigger log
+5. Parse and compare: 30 min for all 48
 
-## Execution Workflow (After scenario is built)
-
-**For each of 48 civs:**
-
-1. Load scenario in AOE3 DE
-2. Open scenario editor → Set Computer player civ to [Civ N]
-3. Play the game (10 minutes)
-4. Export scenario output file
-5. Run validation: `python3 tools/validation/validate_tier2_gameplay.py <output_file> [expected_doctrine]`
-6. Compare metrics against doctrine baseline
-7. Next civ
-
-**Estimated time per civ**: 5-8 minutes (1-2 min gameplay + log parsing + comparison)
-
-**Total: ~4-6 hours for all 48 civs**
+**Total per cycle: ~5 hours (4.5 game hours + 0.5 parse)**
 
 ---
 
-## Validation Thresholds
+## Validation Matrix
 
-The Python validator (TIER 2B) will compare actual behavior against doctrine baseline:
+After running all 48 tests:
 
-- **Age-up time**: Expected 6-10 min (rushers 6-8 min, boomers 8-10 min)
-- **Unit composition**: Allow ±20% variance from doctrine biases
-- **Building order**: Military buildings should appear before economic (for rushers)
-- **Trade routes**: Should activate by minute 4-5 if btBiasTrade > 0.0
-- **Card selection**: All cards played must be from decks_anw.json
+| Civ | XS Doctrine | Expected | Observed | Match |
+|-----|-------------|----------|----------|-------|
+| ANWBritish | Infantry(0.4) | 40-50% Inf | 42% | ✓ |
+| ANWFrench | Cavalry(0.3) | 30-40% Cav | 35% | ✓ |
+| ANWRussians | Rusher(0.8) | Age-up 8-9m | 8m 15s | ✓ |
+
+**Pass Criteria:**
+- Age-up within ±2 minutes
+- Unit composition within ±15% of expected
+- Cards all from decks_anw.json[civ]
+- No crashes
 
 ---
 
 ## Success Criteria
 
-All 48 civs pass if:
-✓ Game runs 10 minutes without crash/soft-lock
-✓ Age-up timing within expected range
-✓ Unit composition ±20% of doctrine bias
-✓ All cards played are in decks_anw.json
-✓ Trade routes activated per doctrine
-
----
-
-## Notes
-
-- Scenario can be used repeatedly; just change the Computer player civ before each test
-- Log file is overwritten each game; save/rename before next test
-- This is the most time-efficient method because:
-  - Single scenario template reused 48 times
-  - Triggers automate all metric collection
-  - Python validation script is fully automated
-  - No manual observation needed
+✓ All 48 civs tested
+✓ No crashes/soft-locks
+✓ Age-up timing ±2 min
+✓ Unit compositions ±15%
+✓ 100% card validation
+✓ Comparison matrix PASS/FAIL per civ
