@@ -1749,6 +1749,10 @@
     <string _locid="151624" comment="proto-FortFrontier civ-ANWYucatan type-title">Bastion San Pedro</string>
     <string _locid="151625" comment="proto-FortFrontier civ-ANWYucatan type-title">Bastion San Francisco</string>	
     <string _locid="151626" comment="proto-deGeneral civ-ANWYucatan type-title">Santiago Imán</string>
+      <String _locID='410100'>British</String>
+      <String _locID='410101'>Queen Elizabeth I</String>
+      <String _locID='410102'>British · Tudor privateer navy + Manor mercantile (Queen Elizabeth I)</String>
+      <String _locID='410103'>London</String>
       <String _locID='490100'>A New World</String>
       <String _locID='490101'>Flat 2v2 test arena for A New World AI behavior, including AI rout, elite support, elite retreat, and coordinated team fights.</String>
       <String _locID='490102'>Open west-vs-east Texas-style test field with three land lanes and two naval lanes for fast AI validation.</String>
@@ -1815,8 +1819,6 @@
 <!-- MOD-CIV-NATION-NAMES-END -->
 <!-- BASE-CIV-LEADER-NAMES-START -->
       <!-- Even IDs = scoreboard/chat label (nation name). Odd IDs = tooltip tagline. -->
-      <String _locID='490200'>Queen Elizabeth I</String>
-      <String _locID='490201'>British · Tudor privateer navy + Manor mercantile (Queen Elizabeth I)</String>
       <String _locID='490202'>Muhammadu Kanta of Kebbi</String>
       <String _locID='490203'>Hausa · Sokoto Caliphate jihadist mobilization (Usman dan Fodio)</String>
       <String _locID='490204'>Ivan the Terrible</String>
@@ -2216,7 +2218,16 @@
 <!-- LL-BASE-CIV-OVERRIDES-END -->
 <!-- ANW-CIV-HOVER-BLURBS-START (Same as stringmods.xml) -->
       <String _locID="490200">The Aztec Empire dominated Mesoamerica through military conquest and sophisticated urban planning. Even after Spanish conquest, Aztec descendants preserved their cultural identity and military traditions.\n\nAggressive early game with strong Eagle Warriors; focus on building strong defensive perimeter with unique units.\n\nKey units: War Dog, Eagle Warrior, Jaguar Warrior, Puma Spearman\nKey bonus: Priests can build shrines to generate experience; strong eagle warrior line\nAge up: Eagle warrior shipments and native alliance cards</String>
-      <String _locID="490201">Queen Elizabeth I's England established naval dominance and expanded colonial holdings globally through merchant ventures and trading posts. Britain pioneered industrial advancement and built a maritime empire.\n\nEconomy-focused with strong navy advantage. Manor-spawned settlers enable aggressive booming. Wall harbor early, then push naval and Musketeer lines.\n\nKey units: Longbowman, Congreve Rocket, Ranger, Musketeer\nKey bonus: Manors spawn Settlers automatically; strong shipping and naval economy\nAge up: Wagon politicians (Trading Post, Bank, Manor shipments)</String>
+      <String _locID="490201">Queen Elizabeth I's England established naval dominance and expanded colonial holdings globally through merchant ventures and trading posts.
+Britain pioneered industrial advancement and built a maritime empire.
+
+Economy-focused with strong navy advantage.
+Manor-spawned settlers enable aggressive booming.
+Wall harbor early, then push naval and Musketeer lines.
+
+Key units: Longbowman, Congreve Rocket, Ranger, Musketeer
+Key bonus: Manors spawn Settlers automatically; strong shipping and naval economy
+Age up: Wagon politicians (Trading Post, Bank, Manor shipments)</String>
       <String _locID="490202">The Kangxi Emperor presided over the Qing Dynasty's expansion and prosperity, establishing China as a dominant continental and maritime power. Confucian traditions guided governance and military affairs.\n\nDefensive, village-based economy with strong gunpowder units. Use multiple town centers and cohesive unit formations for disciplined warfare.\n\nKey units: Qiang Pikeman, Chu Ko Nu, Mongol Horse Archer, Fire Lance Cavalry\nKey bonus: Multiple towncenters for economic advantage; monastery generates XP\nAge up: Imperial age shipments and technology research</String>
       <String _locID="490203">Maurice of Nassau revolutionized military tactics and led the Dutch Revolt against Spanish dominance. Amsterdam became the center of a mercantile empire controlling global trade routes.\n\nEconomic power through trade and banking. Strong cavalry and merchant fleet; focus on sea control and defensive fortifications.\n\nKey units: Ruyter, Halberdier, Skirmisher, Fluyt\nKey bonus: Banks and merchants generate gold passively; strong traders and navy\nAge up: Trade-focused shipments and banking cards</String>
       <String _locID="490204">Menelik II defeated Italian colonial forces at Adwa, securing Ethiopian independence and modernizing the kingdom. Ethiopia maintained its sovereignty while other African nations fell to European colonization.\n\nStrong elite units and defensive play. Limited but high-quality military with focus on well-coordinated formations.\n\nKey units: Shotel Warrior, Archers, War Elephant, Mounted Archer\nKey bonus: Elite warriors with bonus defensive stats; can build unique religious structures\nAge up: War elephant and elite warrior shipments</String>

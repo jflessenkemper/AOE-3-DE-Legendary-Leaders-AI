@@ -8435,8 +8435,8 @@
 		<Portrait>objects\flags\british</Portrait>
 		<Culture>WesternEurope</Culture>
 		<SettlerProtoName>Settler</SettlerProtoName>
-		<DisplayNameID>410001</DisplayNameID>
-		<RolloverNameID>410501</RolloverNameID>
+		<DisplayNameID>410100</DisplayNameID>
+		<RolloverNameID>490201</RolloverNameID>
 		<AlliedID>26446</AlliedID>
 		<AlliedOtherID>26445</AlliedOtherID>
 		<UnAlliedID>26444</UnAlliedID>

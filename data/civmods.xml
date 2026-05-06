@@ -8193,10 +8193,10 @@
 		     BuildingEfficiency, FreeBuildingEfficiency, starting units,
 		     EmpireWars params, MultipleBlockTrain entries.
 		     Source: vanilla civs.xml (inside engine .bar archive). -->
-		<DisplayNameID>410001</DisplayNameID>
+		<DisplayNameID>410100</DisplayNameID>
 		<RolloverNameID>490201</RolloverNameID>
 		<HomeCityFilename>anwhomecitybritish.xml</HomeCityFilename>
-		<HomeCityPreviewWPF>resources/images/icons/singleplayer/cpai_avatar_british_wellington.png</HomeCityPreviewWPF>
+		<HomeCityPreviewWPF>resources/images/icons/singleplayer/cpai_avatar_british.png</HomeCityPreviewWPF>
 		<!-- TODO-ANW-VANILLA: HomeCityFlagTexture, PostgameFlagTexture,
 		     HomeCityFlagButtonSet, HomeCityFlagButtonSetLarge,
 		     PostgameFlagIconWPF, HomeCityFlagIconWPF, HomeCityFlagButtonWPF,
