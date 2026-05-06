@@ -192,6 +192,7 @@ html.is-loading body>:not(#preloader){visibility:hidden}
 <div class="toolbar">
 <button onclick="document.querySelectorAll('details').forEach(d=>d.open=true)">Expand All</button>
 <button onclick="document.querySelectorAll('details').forEach(d=>d.open=false)">Collapse All</button>
+<button onclick="(()=>{document.querySelectorAll('.nation-node details').forEach(d=>{const isDevSection=d.querySelector('summary .cat-label')?.textContent.trim()==='Development';d.open=isDevSection})})()">Dev Trees Only</button>
 <input type="search" class="search" id="nation-search" placeholder="Search nations, leaders, units, cards…" autocomplete="off"
        oninput="(()=&gt;{const q=this.value.trim().toLowerCase();const tokens=q.split(/\s+/).filter(Boolean);const nodes=document.querySelectorAll(&#x27;.nation-node&#x27;);nodes.forEach(n=&gt;{const blob=(n.dataset.search||n.dataset.name||&#x27;&#x27;).toLowerCase();const hit=!tokens.length||tokens.every(t=&gt;blob.includes(t));n.classList.toggle(&#x27;is-hidden&#x27;,!hit);if(q&amp;&amp;hit)n.open=true});document.querySelectorAll(&#x27;.section-head&#x27;).forEach(s=&gt;{const visible=s.querySelectorAll(&#x27;.nation-node:not(.is-hidden)&#x27;).length;s.classList.toggle(&#x27;is-empty&#x27;,q&amp;&amp;visible===0)})}).call(this)">
 </div>
