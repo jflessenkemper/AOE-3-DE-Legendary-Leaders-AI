@@ -8184,6 +8184,9 @@
 		     HomeCityFlagButtonSet, HomeCityFlagButtonSetLarge,
 		     PostgameFlagIconWPF, HomeCityFlagIconWPF, HomeCityFlagButtonWPF,
 		     MatchmakingTextures sub-block. Source: vanilla civs.xml. -->
+		<MatchmakingTextures>
+			<SmallPortraitTextureWPF>resources/images/icons/singleplayer/cpai_avatar_anwaztecs.png</SmallPortraitTextureWPF>
+		</MatchmakingTextures>
 	</Civ>
 
 	<Civ>
@@ -8201,6 +8204,9 @@
 		     HomeCityFlagButtonSet, HomeCityFlagButtonSetLarge,
 		     PostgameFlagIconWPF, HomeCityFlagIconWPF, HomeCityFlagButtonWPF,
 		     MatchmakingTextures sub-block. Source: vanilla civs.xml. -->
+		<MatchmakingTextures>
+			<SmallPortraitTextureWPF>resources/images/icons/singleplayer/cpai_avatar_british_elizabeth.png</SmallPortraitTextureWPF>
+		</MatchmakingTextures>
 	</Civ>
 
 	<Civ>
@@ -8218,6 +8224,9 @@
 		     HomeCityFlagButtonSet, HomeCityFlagButtonSetLarge,
 		     PostgameFlagIconWPF, HomeCityFlagIconWPF, HomeCityFlagButtonWPF,
 		     MatchmakingTextures sub-block. Source: vanilla civs.xml. -->
+		<MatchmakingTextures>
+			<SmallPortraitTextureWPF>resources/images/icons/singleplayer/cpai_avatar_anwchinese.png</SmallPortraitTextureWPF>
+		</MatchmakingTextures>
 	</Civ>
 
 	<Civ>
@@ -8235,6 +8244,9 @@
 		     HomeCityFlagButtonSet, HomeCityFlagButtonSetLarge,
 		     PostgameFlagIconWPF, HomeCityFlagIconWPF, HomeCityFlagButtonWPF,
 		     MatchmakingTextures sub-block. Source: vanilla civs.xml. -->
+		<MatchmakingTextures>
+			<SmallPortraitTextureWPF>resources/images/icons/singleplayer/cpai_avatar_dutch_maurice.png</SmallPortraitTextureWPF>
+		</MatchmakingTextures>
 	</Civ>
 
 	<Civ>
@@ -8252,6 +8264,9 @@
 		     HomeCityFlagButtonSet, HomeCityFlagButtonSetLarge,
 		     PostgameFlagIconWPF, HomeCityFlagIconWPF, HomeCityFlagButtonWPF,
 		     MatchmakingTextures sub-block. Source: vanilla civs.xml. -->
+		<MatchmakingTextures>
+			<SmallPortraitTextureWPF>resources/images/icons/singleplayer/cpai_avatar_anwethiopians.png</SmallPortraitTextureWPF>
+		</MatchmakingTextures>
 	</Civ>
 
 	<Civ>
@@ -8269,6 +8284,9 @@
 		     HomeCityFlagButtonSet, HomeCityFlagButtonSetLarge,
 		     PostgameFlagIconWPF, HomeCityFlagIconWPF, HomeCityFlagButtonWPF,
 		     MatchmakingTextures sub-block. Source: vanilla civs.xml. -->
+		<MatchmakingTextures>
+			<SmallPortraitTextureWPF>resources/images/icons/singleplayer/cpai_avatar_anwfrench.png</SmallPortraitTextureWPF>
+		</MatchmakingTextures>
 	</Civ>
 
 	<Civ>
@@ -8286,6 +8304,9 @@
 		     HomeCityFlagButtonSet, HomeCityFlagButtonSetLarge,
 		     PostgameFlagIconWPF, HomeCityFlagIconWPF, HomeCityFlagButtonWPF,
 		     MatchmakingTextures sub-block. Source: vanilla civs.xml. -->
+		<MatchmakingTextures>
+			<SmallPortraitTextureWPF>resources/images/icons/singleplayer/cpai_avatar_anwgermans.png</SmallPortraitTextureWPF>
+		</MatchmakingTextures>
 	</Civ>
 
 	<Civ>
@@ -8303,6 +8324,9 @@
 		     HomeCityFlagButtonSet, HomeCityFlagButtonSetLarge,
 		     PostgameFlagIconWPF, HomeCityFlagIconWPF, HomeCityFlagButtonWPF,
 		     MatchmakingTextures sub-block. Source: vanilla civs.xml. -->
+		<MatchmakingTextures>
+			<SmallPortraitTextureWPF>resources/images/icons/singleplayer/cpai_avatar_anwhaudenosaunee.png</SmallPortraitTextureWPF>
+		</MatchmakingTextures>
 	</Civ>
 
 	<Civ>
@@ -8320,6 +8344,9 @@
 		     HomeCityFlagButtonSet, HomeCityFlagButtonSetLarge,
 		     PostgameFlagIconWPF, HomeCityFlagIconWPF, HomeCityFlagButtonWPF,
 		     MatchmakingTextures sub-block. Source: vanilla civs.xml. -->
+		<MatchmakingTextures>
+			<SmallPortraitTextureWPF>resources/images/icons/singleplayer/cpai_avatar_anwhausa.png</SmallPortraitTextureWPF>
+		</MatchmakingTextures>
 	</Civ>
 
 	<Civ>
@@ -8337,6 +8364,9 @@
 		     HomeCityFlagButtonSet, HomeCityFlagButtonSetLarge,
 		     PostgameFlagIconWPF, HomeCityFlagIconWPF, HomeCityFlagButtonWPF,
 		     MatchmakingTextures sub-block. Source: vanilla civs.xml. -->
+		<MatchmakingTextures>
+			<SmallPortraitTextureWPF>resources/images/icons/singleplayer/cpai_avatar_anwinca.png</SmallPortraitTextureWPF>
+		</MatchmakingTextures>
 	</Civ>
 
 	<Civ>
@@ -8354,6 +8384,9 @@
 		     HomeCityFlagButtonSet, HomeCityFlagButtonSetLarge,
 		     PostgameFlagIconWPF, HomeCityFlagIconWPF, HomeCityFlagButtonWPF,
 		     MatchmakingTextures sub-block. Source: vanilla civs.xml. -->
+		<MatchmakingTextures>
+			<SmallPortraitTextureWPF>resources/images/icons/singleplayer/cpai_avatar_anwindians.png</SmallPortraitTextureWPF>
+		</MatchmakingTextures>
 	</Civ>
 
 	<Civ>
@@ -8371,6 +8404,9 @@
 		     HomeCityFlagButtonSet, HomeCityFlagButtonSetLarge,
 		     PostgameFlagIconWPF, HomeCityFlagIconWPF, HomeCityFlagButtonWPF,
 		     MatchmakingTextures sub-block. Source: vanilla civs.xml. -->
+		<MatchmakingTextures>
+			<SmallPortraitTextureWPF>resources/images/icons/singleplayer/cpai_avatar_anwitalians.png</SmallPortraitTextureWPF>
+		</MatchmakingTextures>
 	</Civ>
 
 	<Civ>
@@ -8388,6 +8424,9 @@
 		     HomeCityFlagButtonSet, HomeCityFlagButtonSetLarge,
 		     PostgameFlagIconWPF, HomeCityFlagIconWPF, HomeCityFlagButtonWPF,
 		     MatchmakingTextures sub-block. Source: vanilla civs.xml. -->
+		<MatchmakingTextures>
+			<SmallPortraitTextureWPF>resources/images/icons/singleplayer/cpai_avatar_anwjapanese.png</SmallPortraitTextureWPF>
+		</MatchmakingTextures>
 	</Civ>
 
 	<Civ>
@@ -8405,6 +8444,9 @@
 		     HomeCityFlagButtonSet, HomeCityFlagButtonSetLarge,
 		     PostgameFlagIconWPF, HomeCityFlagIconWPF, HomeCityFlagButtonWPF,
 		     MatchmakingTextures sub-block. Source: vanilla civs.xml. -->
+		<MatchmakingTextures>
+			<SmallPortraitTextureWPF>resources/images/icons/singleplayer/cpai_avatar_anwlakota.png</SmallPortraitTextureWPF>
+		</MatchmakingTextures>
 	</Civ>
 
 	<Civ>
@@ -8422,6 +8464,9 @@
 		     HomeCityFlagButtonSet, HomeCityFlagButtonSetLarge,
 		     PostgameFlagIconWPF, HomeCityFlagIconWPF, HomeCityFlagButtonWPF,
 		     MatchmakingTextures sub-block. Source: vanilla civs.xml. -->
+		<MatchmakingTextures>
+			<SmallPortraitTextureWPF>resources/images/icons/singleplayer/cpai_avatar_anwmaltese.png</SmallPortraitTextureWPF>
+		</MatchmakingTextures>
 	</Civ>
 
 	<Civ>
@@ -8439,6 +8484,9 @@
 		     HomeCityFlagButtonSet, HomeCityFlagButtonSetLarge,
 		     PostgameFlagIconWPF, HomeCityFlagIconWPF, HomeCityFlagButtonWPF,
 		     MatchmakingTextures sub-block. Source: vanilla civs.xml. -->
+		<MatchmakingTextures>
+			<SmallPortraitTextureWPF>resources/images/icons/singleplayer/cpai_avatar_anwmexicans.png</SmallPortraitTextureWPF>
+		</MatchmakingTextures>
 	</Civ>
 
 	<Civ>
@@ -8456,6 +8504,9 @@
 		     HomeCityFlagButtonSet, HomeCityFlagButtonSetLarge,
 		     PostgameFlagIconWPF, HomeCityFlagIconWPF, HomeCityFlagButtonWPF,
 		     MatchmakingTextures sub-block. Source: vanilla civs.xml. -->
+		<MatchmakingTextures>
+			<SmallPortraitTextureWPF>resources/images/icons/singleplayer/cpai_avatar_anwottomans.png</SmallPortraitTextureWPF>
+		</MatchmakingTextures>
 	</Civ>
 
 	<Civ>
@@ -8473,6 +8524,9 @@
 		     HomeCityFlagButtonSet, HomeCityFlagButtonSetLarge,
 		     PostgameFlagIconWPF, HomeCityFlagIconWPF, HomeCityFlagButtonWPF,
 		     MatchmakingTextures sub-block. Source: vanilla civs.xml. -->
+		<MatchmakingTextures>
+			<SmallPortraitTextureWPF>resources/images/icons/singleplayer/cpai_avatar_anwportuguese.png</SmallPortraitTextureWPF>
+		</MatchmakingTextures>
 	</Civ>
 
 	<Civ>
@@ -8490,6 +8544,9 @@
 		     HomeCityFlagButtonSet, HomeCityFlagButtonSetLarge,
 		     PostgameFlagIconWPF, HomeCityFlagIconWPF, HomeCityFlagButtonWPF,
 		     MatchmakingTextures sub-block. Source: vanilla civs.xml. -->
+		<MatchmakingTextures>
+			<SmallPortraitTextureWPF>resources/images/icons/singleplayer/cpai_avatar_anwrussians.png</SmallPortraitTextureWPF>
+		</MatchmakingTextures>
 	</Civ>
 
 	<Civ>
@@ -8507,6 +8564,9 @@
 		     HomeCityFlagButtonSet, HomeCityFlagButtonSetLarge,
 		     PostgameFlagIconWPF, HomeCityFlagIconWPF, HomeCityFlagButtonWPF,
 		     MatchmakingTextures sub-block. Source: vanilla civs.xml. -->
+		<MatchmakingTextures>
+			<SmallPortraitTextureWPF>resources/images/icons/singleplayer/cpai_avatar_anwspanish.png</SmallPortraitTextureWPF>
+		</MatchmakingTextures>
 	</Civ>
 
 	<Civ>
@@ -8524,6 +8584,9 @@
 		     HomeCityFlagButtonSet, HomeCityFlagButtonSetLarge,
 		     PostgameFlagIconWPF, HomeCityFlagIconWPF, HomeCityFlagButtonWPF,
 		     MatchmakingTextures sub-block. Source: vanilla civs.xml. -->
+		<MatchmakingTextures>
+			<SmallPortraitTextureWPF>resources/images/icons/singleplayer/cpai_avatar_anwswedes.png</SmallPortraitTextureWPF>
+		</MatchmakingTextures>
 	</Civ>
 
 	<Civ>
@@ -8541,6 +8604,9 @@
 		     HomeCityFlagButtonSet, HomeCityFlagButtonSetLarge,
 		     PostgameFlagIconWPF, HomeCityFlagIconWPF, HomeCityFlagButtonWPF,
 		     MatchmakingTextures sub-block. Source: vanilla civs.xml. -->
+		<MatchmakingTextures>
+			<SmallPortraitTextureWPF>resources/images/icons/singleplayer/cpai_avatar_anwusa.png</SmallPortraitTextureWPF>
+		</MatchmakingTextures>
 	</Civ>
 
 </civmods>
